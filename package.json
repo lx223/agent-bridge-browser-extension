@@ -1,0 +1,24 @@
+{
+  "name": "agent-browser-bridge",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "packages/protocol",
+    "packages/server",
+    "packages/extension"
+  ],
+  "scripts": {
+    "build": "npm run build -w agent-browser-bridge-mcp -w agent-browser-bridge-extension",
+    "dev:extension": "npm run dev -w agent-browser-bridge-extension",
+    "dev:server": "npm run dev -w agent-browser-bridge-mcp",
+    "typecheck": "tsc -p packages/protocol && tsc -p packages/server && tsc -p packages/extension",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.5",
+    "typescript": "^5.9.3",
+    "vite": "^7.3.8",
+    "vitest": "^4.1.12"
+  }
+}
