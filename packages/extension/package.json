@@ -2,6 +2,7 @@
   "name": "agent-browser-bridge-extension",
   "version": "0.1.0",
   "private": true,
+  "license": "Apache-2.0",
   "type": "module",
   "description": "Chrome extension that exposes browser APIs to AI agents over MCP.",
   "scripts": {

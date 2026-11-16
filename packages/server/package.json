@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "MCP server that lets AI agents read and organise your browser tabs through the Agent Browser Bridge extension.",
   "type": "module",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "bin": {
     "agent-browser-bridge-mcp": "dist/index.js"
   },
@@ -15,6 +15,7 @@
   },
   "scripts": {
     "build": "vite build",
+    "prepack": "cp ../../LICENSE .",
     "dev": "vite build --watch"
   },
   "dependencies": {

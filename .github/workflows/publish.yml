@@ -39,7 +39,7 @@ jobs:
       - run: npm run build
 
       - name: Zip extension
-        run: cd packages/extension/dist && zip -r "$GITHUB_WORKSPACE/agent-browser-bridge-${{ steps.version.outputs.extension }}.zip" .
+        run: cp LICENSE packages/extension/dist/ && cd packages/extension/dist && zip -r "$GITHUB_WORKSPACE/agent-browser-bridge-${{ steps.version.outputs.extension }}.zip" .
 
       - name: Publish MCP server to npm (skipped if this version is already published)
         working-directory: packages/server

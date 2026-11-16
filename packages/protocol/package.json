@@ -2,6 +2,7 @@
   "name": "@agent-browser-bridge/protocol",
   "version": "0.0.0",
   "private": true,
+  "license": "Apache-2.0",
   "type": "module",
   "description": "Shared message and tool schemas for the Agent Browser Bridge extension and MCP server. Source-only; bundled into both.",
   "exports": {
