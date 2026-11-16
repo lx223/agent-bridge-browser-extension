@@ -1,13 +1,13 @@
 name: Publish Release
 
-# Manually triggered. Releases the extension zip to GitHub and the MCP server to npm,
-# using the version in packages/extension/package.json and packages/server/package.json.
+# Manually triggered. Releases the extension zip to GitHub using the version in
+# packages/extension/package.json. MCP server publishing is paused for now.
 on:
   workflow_dispatch:
 
 permissions:
   contents: write
-  id-token: write # npm provenance
+  # id-token: write # Re-enable for npm provenance when MCP server publishing resumes.
 
 jobs:
   release:
@@ -41,16 +41,17 @@ jobs:
       - name: Zip extension
         run: cp LICENSE packages/extension/dist/ && cd packages/extension/dist && zip -r "$GITHUB_WORKSPACE/agent-browser-bridge-${{ steps.version.outputs.extension }}.zip" .
 
-      - name: Publish MCP server to npm (skipped if this version is already published)
-        working-directory: packages/server
-        run: |
-          if npm view "agent-browser-bridge-mcp@${{ steps.version.outputs.server }}" version >/dev/null 2>&1; then
-            echo "Server ${{ steps.version.outputs.server }} already on npm; skipping"
-          else
-            npm publish --provenance --access public
-          fi
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      # MCP server publishing is paused while we focus on the extension release.
+      # - name: Publish MCP server to npm (skipped if this version is already published)
+      #   working-directory: packages/server
+      #   run: |
+      #     if npm view "agent-browser-bridge-mcp@${{ steps.version.outputs.server }}" version >/dev/null 2>&1; then
+      #       echo "Server ${{ steps.version.outputs.server }} already on npm; skipping"
+      #     else
+      #       npm publish --provenance --access public
+      #     fi
+      #   env:
+      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - uses: softprops/action-gh-release@v2
         with:
