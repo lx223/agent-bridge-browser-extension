@@ -1,92 +1,54 @@
 # Agent Browser Bridge
 
-A Chrome extension that lets AI agents use your real browser over [MCP](https://modelcontextprotocol.io).
-The first use case is tab organisation: ask your agent to "group my tabs by topic" and it can.
+Let your AI agent organise the browser you actually use.
 
-```
-Agent ──stdio MCP──▶ agent-browser-bridge-mcp (Node) ◀──WebSocket 127.0.0.1:17373──▶ extension service worker ──▶ chrome.tabs / chrome.tabGroups
-```
+Ask Claude, Cursor or any MCP-capable agent to *"group my tabs by topic"* and it reads your open tabs,
+proposes groups, and applies them in your everyday Chrome window: no separate automation profile, no
+copy-pasting URLs. Changed your mind? Ask it to undo.
 
-The agent launches the MCP server (`npx -y agent-browser-bridge-mcp`). The extension keeps trying to
-connect to it on localhost and serves requests once connected. Unlike Chrome DevTools MCP (which drives
-Chrome over the DevTools Protocol), this works on your everyday profile and can use extension-only APIs
-such as tab groups.
+- **Works on your real browser.** Your windows, tabs and tab groups, not a fresh test profile.
+- **Tab groups built in.** Create, rename, recolour, collapse and reorder groups, which page-automation tools can't reach.
+- **Preview and undo.** The agent can show its plan before applying it, and restore your previous layout afterwards.
+- **Stays on your machine.** The extension only talks to a server your agent runs locally.
 
-## Tools
+## How to use
 
-| Tool | Does |
-| --- | --- |
-| `get_bridge_status` | Whether the extension is connected |
-| `list_windows`, `list_tabs`, `list_tab_groups` | Read the current layout |
-| `group_tabs`, `update_tab_group`, `ungroup_tabs` | Create and edit groups |
-| `move_tabs`, `move_tab_group` | Reorder |
-| `close_tabs` | Close (not undoable) |
-| `apply_tab_plan` | Apply a whole grouping in one call, with `dryRun` preview |
-| `undo_last_plan` | Restore the layout from before the last plan |
+### 1. Install the extension
 
-## Layout
+1. Download the latest zip from the [Releases page](https://github.com/lx223/agent-bridge-browser-extension/releases) and unzip it.
+2. Open `chrome://extensions`, turn on **Developer mode**, click **Load unpacked**, and pick the unzipped folder.
 
-```
-packages/
-  protocol/   shared zod schemas: bridge messages + one entry per tool (source-only, bundled into both)
-  server/     the MCP server, published to npm as agent-browser-bridge-mcp
-  extension/  MV3 extension: background service worker + welcome/setup page
-```
+A setup page opens. You can reopen it any time from the extension's toolbar icon.
 
-To add an API, add an entry to `packages/protocol/src/tools.ts` and a handler in
-`packages/extension/src/background/handlers.ts`. The server registers tools from the protocol table
-automatically.
+### 2. Connect your agent
 
-## Development
+The setup page has one-click buttons for **Cursor** and **VS Code**. For other agents:
 
-Requires Node 26 (`.nvmrc`), which ships npm 11. The published MCP server itself still runs on Node 20+
-so agents on older Node versions can launch it.
+**Claude Code**
 
 ```bash
-npm ci
-npm run typecheck
-npm test
-npm run build
+claude mcp add agent-browser-bridge -- npx -y agent-browser-bridge-mcp
 ```
 
-Load the extension: `chrome://extensions` → Developer mode → Load unpacked → `packages/extension/dist`.
-A setup page opens on install; click the toolbar icon to reopen it.
+**Claude Desktop and other agents**: add this to the agent's MCP config, then restart it.
 
-Point your agent at the local server build instead of npm:
-
-```bash
-claude mcp add agent-browser-bridge -- node /absolute/path/to/packages/server/dist/index.js
+```json
+{
+  "mcpServers": {
+    "agent-browser-bridge": { "command": "npx", "args": ["-y", "agent-browser-bridge-mcp"] }
+  }
+}
 ```
 
-`npm run dev:extension` and `npm run dev:server` rebuild on change.
+The status on the setup page turns green when your agent is connected.
 
-### Configuration
+### 3. Ask
 
-| Env var (server) | Default | |
-| --- | --- | --- |
-| `AGENT_BROWSER_BRIDGE_PORT` | `17373` | The extension currently always uses the default |
-| `AGENT_BROWSER_BRIDGE_EXTENSION_ID` | unset | Only accept this extension id (otherwise any `chrome-extension://` origin) |
+> Organise my open tabs into groups by topic. Show me the plan first.
 
-## Security model
+> Collapse every group except the one I'm working in.
 
-- The server listens only on `127.0.0.1` and rejects WebSocket connections whose `Origin` is not a
-  `chrome-extension://` URL, so web pages cannot connect. Pin `AGENT_BROWSER_BRIDGE_EXTENSION_ID` to
-  also exclude other extensions.
-- The agent can read titles and URLs of all tabs and rearrange or close them. Nothing leaves the machine
-  via this extension.
-
-## Known limitations
-
-- One agent session at a time: a second server finds the port in use and reports it via `get_bridge_status`.
-- When no agent is running, the service worker retries every 30s (alarm), so connecting can take up to ~30s
-  after an agent starts. Opening the setup page reconnects immediately.
-- No icons yet (Chrome shows a default letter icon).
-
-## Releasing
-
-Run the **Publish Release** workflow manually. It uses `packages/extension/package.json`'s version for the
-GitHub release tag and zip, and publishes `packages/server` to npm if that version isn't there yet
-(needs an `NPM_TOKEN` repository secret).
+> Undo that.
 
 ## License
 
