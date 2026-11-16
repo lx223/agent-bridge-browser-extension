@@ -1,17 +1,6 @@
 # Agent Browser Bridge
 
-Let your AI agent organise the browser you actually use.
-
-Ask Claude, Cursor or any MCP-capable agent to *"group my tabs by topic"* and it reads your open tabs,
-proposes groups, and applies them in your everyday Chrome window: no separate automation profile, no
-copy-pasting URLs. Changed your mind? Ask it to undo.
-
-- **Works on your real browser.** Your windows, tabs and tab groups, not a fresh test profile.
-- **Tab groups built in.** Create, rename, recolour, collapse and reorder groups, which page-automation tools can't reach.
-- **Preview and undo.** The agent can show its plan before applying it, and restore your previous layout afterwards.
-- **Stays on your machine.** The extension only talks to a server your agent runs locally.
-
-## How to use
+## Installation
 
 ### 1. Install the extension
 
@@ -41,15 +30,3 @@ claude mcp add agent-browser-bridge -- npx -y agent-browser-bridge-mcp
 ```
 
 The status on the setup page turns green when your agent is connected.
-
-### 3. Ask
-
-> Organise my open tabs into groups by topic. Show me the plan first.
-
-> Collapse every group except the one I'm working in.
-
-> Undo that.
-
-## License
-
-MIT
