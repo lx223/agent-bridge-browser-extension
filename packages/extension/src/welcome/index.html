@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Agent Browser Bridge</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>Agent Browser Bridge</h1>
+        <p class="lede">Let your AI agent see and organise your tabs and tab groups.</p>
+        <div id="status" class="status" data-state="disconnected">
+          <span class="dot"></span>
+          <span id="status-text">Checking connection…</span>
+        </div>
+      </header>
+
+      <section>
+        <h2>1. Add it to your agent</h2>
+        <p class="hint">Your agent starts a small local server (<code>npx -y <span data-pkg></span></code>) that this extension connects to. Pick your agent:</p>
+
+        <div class="cards">
+          <article class="card">
+            <h3>Claude Code</h3>
+            <p>Run once in a terminal:</p>
+            <div class="snippet"><code id="claude-code-cmd"></code><button data-copy="claude-code-cmd">Copy</button></div>
+          </article>
+
+          <article class="card">
+            <h3>Cursor</h3>
+            <p>Opens Cursor and asks you to confirm.</p>
+            <a id="cursor-link" class="button">Add to Cursor</a>
+          </article>
+
+          <article class="card">
+            <h3>VS Code</h3>
+            <p>Opens VS Code and asks you to confirm.</p>
+            <a id="vscode-link" class="button">Add to VS Code</a>
+          </article>
+
+          <article class="card wide">
+            <h3>Claude Desktop and other agents</h3>
+            <p>Add this to the agent's MCP config (for Claude Desktop: Settings → Developer → Edit Config), then restart it.</p>
+            <div class="snippet block"><pre id="json-config"></pre><button data-copy="json-config">Copy</button></div>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>2. Try it</h2>
+        <p>With Chrome open, ask your agent:</p>
+        <blockquote>Organise my open tabs into groups by topic. Show me the plan first.</blockquote>
+        <p class="hint">The status above turns green once your agent's server is running. Changes made with <code>apply_tab_plan</code> can be reverted by asking the agent to undo.</p>
+      </section>
+
+      <section>
+        <h2>Privacy</h2>
+        <p class="hint">
+          Everything stays on your computer: the extension only talks to <code>127.0.0.1</code>. Your agent can read tab titles and URLs and
+          rearrange, group or close tabs when you ask it to. Nothing is sent anywhere else by this extension.
+        </p>
+      </section>
+    </main>
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>

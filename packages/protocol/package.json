@@ -1,0 +1,13 @@
+{
+  "name": "@agent-browser-bridge/protocol",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Shared message and tool schemas for the Agent Browser Bridge extension and MCP server. Source-only; bundled into both.",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "zod": "^4.6.7"
+  }
+}

@@ -1,0 +1,60 @@
+name: Publish Release
+
+# Manually triggered. Releases the extension zip to GitHub and the MCP server to npm,
+# using the version in packages/extension/package.json and packages/server/package.json.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  id-token: write # npm provenance
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'npm'
+          registry-url: 'https://registry.npmjs.org'
+
+      - run: npm ci
+
+      - name: Read versions
+        id: version
+        run: |
+          EXT=$(node -p "require('./packages/extension/package.json').version")
+          SRV=$(node -p "require('./packages/server/package.json').version")
+          echo "extension=$EXT" >> "$GITHUB_OUTPUT"
+          echo "server=$SRV" >> "$GITHUB_OUTPUT"
+          if git ls-remote --exit-code --tags origin "refs/tags/v$EXT" >/dev/null; then
+            echo "Tag v$EXT already exists; bump packages/extension/package.json" && exit 1
+          fi
+
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
+
+      - name: Zip extension
+        run: cd packages/extension/dist && zip -r "$GITHUB_WORKSPACE/agent-browser-bridge-${{ steps.version.outputs.extension }}.zip" .
+
+      - name: Publish MCP server to npm (skipped if this version is already published)
+        working-directory: packages/server
+        run: |
+          if npm view "agent-browser-bridge-mcp@${{ steps.version.outputs.server }}" version >/dev/null 2>&1; then
+            echo "Server ${{ steps.version.outputs.server }} already on npm; skipping"
+          else
+            npm publish --provenance --access public
+          fi
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ steps.version.outputs.extension }}
+          name: Release v${{ steps.version.outputs.extension }}
+          files: agent-browser-bridge-${{ steps.version.outputs.extension }}.zip
+          generate_release_notes: true
