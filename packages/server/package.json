@@ -26,5 +26,10 @@
   "devDependencies": {
     "@agent-browser-bridge/protocol": "*",
     "@types/ws": "^8.18.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lx223/agent-bridge-browser-extension.git",
+    "directory": "packages/server"
   }
 }
