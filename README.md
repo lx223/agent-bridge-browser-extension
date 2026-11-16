@@ -9,14 +9,23 @@
 
 A setup page opens. You can reopen it any time from the extension's toolbar icon.
 
-### 2. Connect your agent
+### 2. Point npm at GitHub Packages (once)
+
+The MCP server is published to GitHub Packages, which needs a GitHub token even to install. Create a [classic personal access token](https://github.com/settings/tokens/new?scopes=read:packages) with the `read:packages` scope, then add it to `~/.npmrc`:
+
+```bash
+echo "@lx223:registry=https://npm.pkg.github.com" >> ~/.npmrc
+echo "//npm.pkg.github.com/:_authToken=YOUR_TOKEN" >> ~/.npmrc
+```
+
+### 3. Connect your agent
 
 The setup page has one-click buttons for **Cursor** and **VS Code**. For other agents:
 
 **Claude Code**
 
 ```bash
-claude mcp add agent-browser-bridge -- npx -y agent-browser-bridge-mcp
+claude mcp add agent-browser-bridge -- npx -y @lx223/agent-browser-bridge-mcp
 ```
 
 **Claude Desktop and other agents**: add this to the agent's MCP config, then restart it.
@@ -24,7 +33,7 @@ claude mcp add agent-browser-bridge -- npx -y agent-browser-bridge-mcp
 ```json
 {
   "mcpServers": {
-    "agent-browser-bridge": { "command": "npx", "args": ["-y", "agent-browser-bridge-mcp"] }
+    "agent-browser-bridge": { "command": "npx", "args": ["-y", "@lx223/agent-browser-bridge-mcp"] }
   }
 }
 ```

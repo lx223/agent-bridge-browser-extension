@@ -1,9 +1,17 @@
 {
-  "name": "agent-browser-bridge-mcp",
+  "name": "@lx223/agent-browser-bridge-mcp",
   "version": "0.1.0",
   "description": "MCP server that lets AI agents read and organise your browser tabs through the Agent Browser Bridge extension.",
   "type": "module",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lx223/agent-bridge-browser-extension.git",
+    "directory": "packages/server"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "bin": {
     "agent-browser-bridge-mcp": "dist/index.js"
   },

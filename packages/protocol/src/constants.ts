@@ -1,5 +1,5 @@
 /** Name of the MCP server on npm; the welcome page builds install commands from it. */
-export const SERVER_PACKAGE = 'agent-browser-bridge-mcp';
+export const SERVER_PACKAGE = '@lx223/agent-browser-bridge-mcp';
 
 /** Name agents register the MCP server under. */
 export const SERVER_NAME = 'agent-browser-bridge';
