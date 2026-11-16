@@ -39,8 +39,8 @@ automatically.
 
 ## Development
 
-Requires Node 22 (`.nvmrc`). Use npm 11 for a fresh `npm install` (npm 10 hits an installer bug on this
-dependency tree); `npm ci` works with either.
+Requires Node 26 (`.nvmrc`), which ships npm 11. The published MCP server itself still runs on Node 20+
+so agents on older Node versions can launch it.
 
 ```bash
 npm ci
