@@ -57,7 +57,7 @@ export async function send<T = Record<string, unknown>>(tabId: number, method: s
 }
 
 export function listenForDetach() {
-  chrome.debugger.onDetach.addListener((source) => {
+  chrome.debugger?.onDetach.addListener((source) => {
     if (source.tabId !== undefined) forget(source.tabId);
   });
   chrome.tabs.onRemoved.addListener((tabId) => forget(tabId));
