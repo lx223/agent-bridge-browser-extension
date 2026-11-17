@@ -21,13 +21,41 @@ describe('page tools', () => {
     expect(commands[0]!.params).toEqual({ backendNodeId: 7 });
   });
 
-  it('explains stale refs', async () => {
+  it.each([
+    ['DOM.scrollIntoViewIfNeeded', 'No node with given id found'],
+    ['DOM.scrollIntoViewIfNeeded', '{"code":-32000,"message":"No node found for given backend id"}'],
+    ['DOM.scrollIntoViewIfNeeded', '{"code":-32000,"message":"Node is detached from document"}'],
+    ['DOM.scrollIntoViewIfNeeded', '{"code":-32000,"message":"Node does not have a layout object"}'],
+    ['DOM.getContentQuads', '{"code":-32000,"message":"Could not find node with given id"}'],
+  ])('explains stale refs when %s fails with %s', async (method, message) => {
     installFakeDebugger({
-      'DOM.scrollIntoViewIfNeeded': () => {
-        throw new Error('No node with given id found');
+      [method]: () => {
+        throw new Error(message);
       },
     });
-    await expect(call('page.hover', { tabId: 2, ref: 'e9' })).rejects.toThrow('Element e9 no longer exists');
+    const hint = 'Element e9 no longer exists; take a new chrome_snapshot_page.';
+    await expect(call('page.hover', { tabId: 2, ref: 'e9' })).rejects.toThrow(hint);
+    await expect(call('page.click', { tabId: 2, ref: 'e9' })).rejects.toThrow(hint);
+    await expect(call('page.scroll', { tabId: 2, ref: 'e9', deltaY: 100 })).rejects.toThrow(hint);
+  });
+
+  it.each(['Node is detached from document', 'Node does not have a layout object'])('explains stale refs when typing fails with %s', async (message) => {
+    installFakeDebugger({
+      'DOM.focus': () => {
+        throw new Error(JSON.stringify({ code: -32000, message }));
+      },
+    });
+    await expect(call('page.type', { tabId: 2, ref: 'e9', text: 'hello' })).rejects.toThrow('Element e9 no longer exists; take a new chrome_snapshot_page.');
+  });
+
+  it('leaves unrelated debugger errors untouched', async () => {
+    const message = '{"code":-32000,"message":"Cannot find context with specified id"}';
+    installFakeDebugger({
+      'DOM.scrollIntoViewIfNeeded': () => {
+        throw new Error(message);
+      },
+    });
+    await expect(call('page.hover', { tabId: 2, ref: 'e9' })).rejects.toThrow(message);
   });
 
   it('focuses, clears, inserts text and submits', async () => {
