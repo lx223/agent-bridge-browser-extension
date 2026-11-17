@@ -12,7 +12,6 @@ const bridge = new ExtensionBridge({ port, extensionId: process.env.AGENT_BROWSE
 
 try {
   await bridge.start();
-  log(`Waiting for the browser extension on ws://127.0.0.1:${port}`);
 } catch (err) {
   // Keep serving MCP so the agent can surface the problem via get_bridge_status.
   log(err instanceof Error ? err.message : String(err));
