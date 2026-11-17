@@ -33,10 +33,23 @@ Files that only wire things to the browser are excluded from the unit coverage n
 The files are:
 
 - `e2e/tabs.test.ts`: connection status, listing, grouping, moving, closing, tab plans with undo, error reporting, and a second agent session relaying through the first.
-- `e2e/page.test.ts`: snapshots, click, hover, typing, keys, scrolling, screenshots, waiting, evaluate, navigation, raw CDP and detaching.
+- `e2e/page.test.ts`: snapshots, click, hover, typing, keys, scrolling, screenshots, waiting, evaluate, navigation, raw CDP, detaching, and the stale ref hint.
 - `e2e/extension.test.ts`: the built manifest and its files, the welcome and options pages, and reconnecting to a new server session.
 
 `e2e/harness.ts` holds the shared setup. Add fixtures as plain HTML files in `e2e/fixtures/`.
+
+### Stale element refs
+
+A ref from `chrome_snapshot_page` stops working once its element leaves the page. `chrome.debugger.sendCommand` rejects with an `Error` whose message is the CDP error as a JSON string, and `withStaleRefHint` in `packages/extension/src/background/page.ts` matches on that text to replace it with `Element eN no longer exists; take a new chrome_snapshot_page.` These are the messages Chromium returns:
+
+| Situation | Message |
+| --- | --- |
+| Element removed from the DOM | `{"code":-32000,"message":"Node is detached from document"}` |
+| Tab reloaded or navigated to another page | `{"code":-32000,"message":"Node does not have a layout object"}` |
+| Element still attached but hidden with `display: none` | `{"code":-32000,"message":"Node does not have a layout object"}` |
+| Node already discarded by the browser | `No node found for given backend id` and similar |
+
+A hidden element gets the same hint as a removed one. It is absent from a new snapshot, so the advice still holds. The end-to-end suite covers the first two rows against real Chromium, and the unit tests cover every pattern with the JSON-shaped messages.
 
 ### Things to know
 

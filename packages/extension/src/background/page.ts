@@ -25,12 +25,14 @@ interface EvaluateResult {
   exceptionDetails?: { text: string; exception?: { description?: string } };
 }
 
+const STALE_REF_ERROR = /no node|could not find node|node with given id|node is detached from document|node does not have a layout object/i;
+
 async function withStaleRefHint<T>(ref: string, run: () => Promise<T>): Promise<T> {
   try {
     return await run();
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
-    if (/no node|could not find node|node with given id/i.test(message)) {
+    if (STALE_REF_ERROR.test(message)) {
       throw new Error(`Element ${ref} no longer exists; take a new chrome_snapshot_page.`);
     }
     throw err;
