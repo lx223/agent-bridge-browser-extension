@@ -30,3 +30,25 @@ claude mcp add agent-browser-bridge -- npx -y agent-browser-bridge-mcp
 ```
 
 The status on the setup page turns green when your agent is connected.
+
+## What your agent can do
+
+**Tabs and windows** use Chrome's extension APIs: `list_windows`, `list_tabs`, `list_tab_groups`, `group_tabs`, `update_tab_group`, `ungroup_tabs`, `move_tabs`, `move_tab_group`, `close_tabs`, `apply_tab_plan`, `undo_last_plan`, `open_tab` and `navigate`.
+
+**Page control** uses the Chrome DevTools Protocol through the extension's `debugger` permission:
+
+| Tool | What it does |
+|---|---|
+| `snapshot_page` | Returns the page's accessibility tree. Elements carry refs such as `[ref=e42]`. |
+| `click`, `hover` | Sends real mouse events to an element ref or to x/y coordinates. |
+| `type_text`, `press_key` | Inserts text and sends real key events, e.g. `Enter` or `Control+a`. |
+| `scroll` | Sends mouse-wheel events over an element or the viewport. |
+| `screenshot` | Captures the viewport or the full page as PNG or JPEG. |
+| `wait_for` | Waits for text to appear or disappear. |
+| `evaluate` | Runs a JavaScript expression in the page. |
+| `cdp_send` | Sends any raw DevTools Protocol command. |
+| `detach_debugger` | Detaches from a tab and removes Chrome's debugging banner. |
+
+A typical loop is `open_tab` or `navigate`, then `snapshot_page`, act on a ref, and snapshot again.
+
+While a page tool is in use, Chrome shows a banner saying Agent Browser Bridge started debugging the browser. The extension detaches from a tab after five minutes without page commands, or when `detach_debugger` is called. Chrome does not let extensions debug `chrome://` pages, other extensions' pages, DevTools or the Chrome Web Store, so page tools fail there.

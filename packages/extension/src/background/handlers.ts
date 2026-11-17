@@ -1,5 +1,19 @@
 import { toolDefinitions, type GroupColor, type Method, type ParamsOf } from '@agent-browser-bridge/protocol';
 import { toChromeColor } from './color.ts';
+import { navigateTab, openTab } from './navigation.ts';
+import {
+  cdpDetach,
+  cdpSend,
+  click,
+  evaluateHandler,
+  hover,
+  pressKeyHandler,
+  screenshot,
+  scroll,
+  snapshot,
+  typeText,
+  waitFor,
+} from './page.ts';
 import { applyPlan, undoLastPlan } from './plan.ts';
 import { serializeGroup, serializeTab, serializeWindow } from './serialize.ts';
 
@@ -60,6 +74,20 @@ export const handlers: Handlers = {
 
   'plan.apply': applyPlan,
   'plan.undo': undoLastPlan,
+
+  'tabs.create': openTab,
+  'tabs.navigate': navigateTab,
+  'page.snapshot': snapshot,
+  'page.click': click,
+  'page.hover': hover,
+  'page.type': typeText,
+  'page.pressKey': pressKeyHandler,
+  'page.scroll': scroll,
+  'page.screenshot': screenshot,
+  'page.waitFor': waitFor,
+  'page.evaluate': evaluateHandler,
+  'cdp.send': cdpSend,
+  'cdp.detach': cdpDetach,
 };
 
 /** Validates params against the shared schema, then runs the handler. */

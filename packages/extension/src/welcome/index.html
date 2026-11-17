@@ -10,7 +10,7 @@
     <main>
       <header>
         <h1>Agent Browser Bridge</h1>
-        <p class="lede">Let your AI agent see and organise your tabs and tab groups.</p>
+        <p class="lede">Let your AI agent organise your tabs and operate web pages.</p>
         <div id="status" class="status" data-state="disconnected">
           <span class="dot"></span>
           <span id="status-text">Checking connection…</span>
@@ -52,14 +52,16 @@
         <h2>2. Try it</h2>
         <p>With Chrome open, ask your agent:</p>
         <blockquote>Organise my open tabs into groups by topic. Show me the plan first.</blockquote>
+        <blockquote>Open the Chrome release notes and summarise what changed in the latest version.</blockquote>
         <p class="hint">The status above turns green once your agent's server is running. Changes made with <code>apply_tab_plan</code> can be reverted by asking the agent to undo.</p>
       </section>
 
       <section>
         <h2>Privacy</h2>
         <p class="hint">
-          Everything stays on your computer: the extension only talks to <code>127.0.0.1</code>. Your agent can read tab titles and URLs and
-          rearrange, group or close tabs when you ask it to. Nothing is sent anywhere else by this extension.
+          Everything stays on your computer: the extension only talks to <code>127.0.0.1</code>. Your agent can read tab titles and URLs,
+          rearrange, group or close tabs, and read and act in web pages when you ask it to. Chrome shows a debugging banner while it
+          works in a page. Nothing is sent anywhere else by this extension.
         </p>
       </section>
     </main>
