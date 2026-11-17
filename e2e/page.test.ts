@@ -148,6 +148,40 @@ describe('page control through the built server and extension', () => {
     expect(forward.text).toContain('Cannot go forward: the tab is on the last page of its history.');
   });
 
+  it('asks for a new snapshot when a ref points at an element removed from the page', async () => {
+    const tree = await snapshot();
+    const attempts = [
+      { tool: 'chrome_click', ref: refOf(tree, /button "Press me"/), args: {} },
+      { tool: 'chrome_hover', ref: refOf(tree, /button "Hover target"/), args: {} },
+      { tool: 'chrome_scroll', ref: refOf(tree, /button "Press me"/), args: { deltaY: 100 } },
+      { tool: 'chrome_type_text', ref: refOf(tree, /textbox "Name"/), args: { text: 'Ada' } },
+    ];
+    await evaluate(`document.querySelectorAll('button, input').forEach((element) => element.remove())`);
+    for (const { tool, ref, args } of attempts) {
+      const result = await harness.agent.raw(tool, { tabId, ref, ...args });
+      expect(result.isError, tool).toBe(true);
+      expect(result.text, tool).toBe(`Element ${ref} no longer exists; take a new chrome_snapshot_page.`);
+    }
+  });
+
+  it.each([
+    ['reloaded', () => 'reload'],
+    ['navigated to another page', () => harness.fixture('second.html')],
+  ])('asks for a new snapshot when a ref is used after the tab %s', async (_change, destination) => {
+    const tree = await snapshot();
+    const attempts = [
+      { tool: 'chrome_click', ref: refOf(tree, /button "Press me"/), args: {} },
+      { tool: 'chrome_hover', ref: refOf(tree, /button "Hover target"/), args: {} },
+      { tool: 'chrome_type_text', ref: refOf(tree, /textbox "Name"/), args: { text: 'Ada', clear: true } },
+    ];
+    await harness.agent.call('chrome_navigate', { tabId, to: destination() });
+    for (const { tool, ref, args } of attempts) {
+      const result = await harness.agent.raw(tool, { tabId, ref, ...args });
+      expect(result.isError, tool).toBe(true);
+      expect(result.text, tool).toBe(`Element ${ref} no longer exists; take a new chrome_snapshot_page.`);
+    }
+  });
+
   it('sends raw CDP commands and detaches the debugger', async () => {
     const result = await harness.agent.call<{ result: { value: number } }>('chrome_cdp_send', {
       tabId,
