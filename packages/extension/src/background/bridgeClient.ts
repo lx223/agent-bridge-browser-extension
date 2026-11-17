@@ -1,4 +1,4 @@
-import { PROTOCOL_VERSION, serverToExtension, type ExtensionToServer } from '@agent-browser-bridge/protocol';
+import { PROTOCOL_VERSION, serverToExtension, type AgentInfo, type ExtensionToServer } from '@agent-browser-bridge/protocol';
 
 export type ConnectionState = 'connecting' | 'connected' | 'disconnected';
 
@@ -26,6 +26,7 @@ export class BridgeClient {
     private readonly url: string,
     private readonly dispatch: (method: string, params: unknown) => Promise<unknown>,
     private readonly onStatus: (status: ConnectionStatus) => void = () => {},
+    private readonly onAgent: (agent: AgentInfo) => void = () => {},
   ) {
     this._status = { state: 'disconnected', url, since: Date.now() };
   }
@@ -70,6 +71,10 @@ export class BridgeClient {
     try {
       msg = serverToExtension.parse(JSON.parse(String(raw)));
     } catch {
+      return;
+    }
+    if (msg.type === 'welcome') {
+      this.onAgent({ serverVersion: msg.serverVersion, client: msg.client });
       return;
     }
     if (msg.type !== 'request') return;

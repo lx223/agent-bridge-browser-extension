@@ -59,8 +59,12 @@
         <h2>Privacy</h2>
         <p class="hint">
           Everything stays on your computer: the extension only talks to <code>127.0.0.1</code>. Your agent can read tab titles and URLs and
-          rearrange, group or close tabs when you ask it to. Nothing is sent anywhere else by this extension.
+          rearrange, group or close tabs when you ask it to. Tab titles, URLs and page contents are never sent anywhere else by this extension.
         </p>
+        <label id="analytics-setting" class="hint toggle">
+          <input type="checkbox" id="analytics-enabled" checked />
+          Share anonymous usage statistics (which features are used, extension version) to help improve the extension.
+        </label>
       </section>
     </main>
     <script type="module" src="./main.ts"></script>

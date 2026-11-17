@@ -23,14 +23,23 @@ export const responseMessage = z.discriminatedUnion('ok', [
 ]);
 
 /** Extension → server keepalive; WebSocket traffic keeps an MV3 service worker alive. */
+export const agentInfo = z.object({
+  serverVersion: z.string(),
+  client: z.object({ name: z.string(), version: z.string() }).nullable(),
+});
+
+export const welcomeMessage = agentInfo.extend({ type: z.literal('welcome') });
+
 export const pingMessage = z.object({ type: z.literal('ping') });
 export const pongMessage = z.object({ type: z.literal('pong') });
 
 export const extensionToServer = z.union([helloMessage, responseMessage, pingMessage]);
-export const serverToExtension = z.union([requestMessage, pongMessage]);
+export const serverToExtension = z.union([requestMessage, pongMessage, welcomeMessage]);
 
 export type HelloMessage = z.infer<typeof helloMessage>;
 export type RequestMessage = z.infer<typeof requestMessage>;
+export type AgentInfo = z.infer<typeof agentInfo>;
+export type WelcomeMessage = z.infer<typeof welcomeMessage>;
 export type ResponseMessage = z.infer<typeof responseMessage>;
 export type ExtensionToServer = z.infer<typeof extensionToServer>;
 export type ServerToExtension = z.infer<typeof serverToExtension>;

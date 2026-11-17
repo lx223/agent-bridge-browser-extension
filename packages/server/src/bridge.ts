@@ -1,7 +1,7 @@
 import { randomUUID } from 'node:crypto';
 import type { IncomingMessage } from 'node:http';
 import { WebSocketServer, type WebSocket } from 'ws';
-import { extensionToServer, PROTOCOL_VERSION, type HelloMessage, type ServerToExtension } from '@agent-browser-bridge/protocol';
+import { extensionToServer, PROTOCOL_VERSION, type AgentInfo, type HelloMessage, type ServerToExtension } from '@agent-browser-bridge/protocol';
 
 export interface BridgeOptions {
   port: number;
@@ -10,6 +10,7 @@ export interface BridgeOptions {
   extensionId?: string;
   requestTimeoutMs?: number;
   log?: (msg: string) => void;
+  agentInfo?: () => AgentInfo;
 }
 
 export type BridgeStatus =
@@ -96,6 +97,11 @@ export class ExtensionBridge {
     });
   }
 
+  announceAgent() {
+    if (!this.socket || !this.hello || !this.opts.agentInfo) return;
+    this.socket.send(JSON.stringify({ type: 'welcome', ...this.opts.agentInfo() } satisfies ServerToExtension));
+  }
+
   private get timeoutMs() {
     return this.opts.requestTimeoutMs ?? 30_000;
   }
@@ -133,6 +139,7 @@ export class ExtensionBridge {
           }
           this.hello = msg;
           this.log(`Extension ${msg.extensionVersion} connected`);
+          this.announceAgent();
           return;
         case 'ping':
           socket.send(JSON.stringify({ type: 'pong' } satisfies ServerToExtension));

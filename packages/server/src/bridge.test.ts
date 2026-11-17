@@ -69,6 +69,26 @@ describe('ExtensionBridge', () => {
     await expect(bridge!.request('boom', {})).rejects.toThrow('kaboom');
   });
 
+  it('tells the extension which agent is connected', async () => {
+    let client: { name: string; version: string } | null = null;
+    const port = await startBridge({ agentInfo: () => ({ serverVersion: '9.9.9', client }) });
+    const ws = await connect(port, EXT_ORIGIN);
+    const welcomes: unknown[] = [];
+    ws.on('message', (raw) => {
+      const msg = JSON.parse(raw.toString());
+      if (msg.type === 'welcome') welcomes.push(msg);
+    });
+    ws.send(JSON.stringify({ type: 'hello', protocolVersion: PROTOCOL_VERSION, extensionVersion: '0.1.0', userAgent: 'test' }));
+    await expect.poll(() => welcomes.length).toBe(1);
+    client = { name: 'claude-code', version: '2.0.0' };
+    bridge!.announceAgent();
+    await expect.poll(() => welcomes.length).toBe(2);
+    expect(welcomes).toEqual([
+      { type: 'welcome', serverVersion: '9.9.9', client: null },
+      { type: 'welcome', serverVersion: '9.9.9', client: { name: 'claude-code', version: '2.0.0' } },
+    ]);
+  });
+
   it('times out unanswered requests', async () => {
     const port = await startBridge({ requestTimeoutMs: 50 });
     const ws = await connect(port, EXT_ORIGIN);
