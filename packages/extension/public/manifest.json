@@ -27,5 +27,9 @@
       "32": "icons/disconnected-32.png"
     }
   },
+  "options_ui": {
+    "page": "src/options/index.html",
+    "open_in_tab": false
+  },
   "minimum_chrome_version": "116"
 }
