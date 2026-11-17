@@ -100,11 +100,30 @@ export class ExtensionBridge {
     method: string,
     params: unknown,
     agent: AgentInfo | null = this.opts.agentInfo?.() ?? null,
+    instance?: string,
   ): Promise<unknown> {
-    if (this.role === 'relay' && this.upstream) return this.send(this.upstream, method, params, agent, browser);
-    const target = this.role === 'host' ? this.connectedBrowsers().find(([, hello]) => hello.browser === browser) : undefined;
-    if (target) return this.send(target[0], method, params, agent);
-    return Promise.reject(new NotConnectedError(this.error ?? notConnected(browser)));
+    if (this.role === 'relay' && this.upstream) return this.send(this.upstream, method, params, agent, { browser, instance });
+    if (this.role !== 'host') return Promise.reject(new NotConnectedError(this.error ?? notConnected(browser)));
+    try {
+      return this.send(this.pick(browser, instance), method, params, agent);
+    } catch (err) {
+      return Promise.reject(err);
+    }
+  }
+
+  private pick(browser: string, instance?: string): WebSocket {
+    const candidates = this.connectedBrowsers().filter(([, hello]) => hello.browser === browser);
+    if (!candidates.length) throw new NotConnectedError(this.error ?? notConnected(browser));
+    const listed = candidates.map(([, hello]) => `${hello.instanceId ?? 'unknown'} (${hello.label ?? hello.browser})`).join(', ');
+    if (instance !== undefined) {
+      const target = candidates.find(([, hello]) => hello.instanceId === instance);
+      if (!target) throw new NotConnectedError(`No ${browser} instance "${instance}" is connected. Connected instances: ${listed}.`);
+      return target[0];
+    }
+    if (candidates.length > 1) {
+      throw new Error(`Several ${browser} instances are connected: ${listed}. Pass instance to choose one.`);
+    }
+    return candidates[0][0];
   }
 
   private connectedBrowsers(): [WebSocket, HelloMessage][] {
@@ -119,7 +138,13 @@ export class ExtensionBridge {
     return this.opts.host ?? '127.0.0.1';
   }
 
-  private send(socket: WebSocket, method: string, params: unknown, agent: AgentInfo | null, browser?: string): Promise<unknown> {
+  private send(
+    socket: WebSocket,
+    method: string,
+    params: unknown,
+    agent: AgentInfo | null,
+    target?: { browser: string; instance?: string },
+  ): Promise<unknown> {
     const id = randomUUID();
     const message: ServerToExtension = {
       type: 'request',
@@ -127,7 +152,8 @@ export class ExtensionBridge {
       method,
       params,
       ...(agent && { agent }),
-      ...(browser !== undefined && { browser }),
+      ...(target && { browser: target.browser }),
+      ...(target?.instance !== undefined && { instance: target.instance }),
     };
     return new Promise((resolve, reject) => {
       const timer = setTimeout(() => {
@@ -282,7 +308,7 @@ export class ExtensionBridge {
     socket.on('message', (raw) => {
       const msg = this.parse(raw, relayToHost);
       if (!msg) return;
-      this.request(msg.browser ?? 'chrome', msg.method, msg.params, msg.agent ?? null).then(
+      this.request(msg.browser ?? 'chrome', msg.method, msg.params, msg.agent ?? null, msg.instance).then(
         (result) => this.reply(socket, { type: 'response', id: msg.id, ok: true, result }),
         (err) => this.reply(socket, { type: 'response', id: msg.id, ok: false, error: errorMessage(err) }),
       );
@@ -319,9 +345,9 @@ export class ExtensionBridge {
             socket.close(4001, 'Protocol version mismatch');
             return;
           }
-          this.replaceSameBrowser(socket, msg.browser);
+          this.replaceSameInstance(socket, msg);
           this.extensions.set(socket, msg);
-          this.log(`Extension ${msg.extensionVersion} connected from ${msg.browser}`);
+          this.log(`Extension ${msg.extensionVersion} connected from ${msg.label ?? msg.browser}`);
           this.broadcastStatus();
           return;
         case 'ping':
@@ -342,9 +368,9 @@ export class ExtensionBridge {
     });
   }
 
-  private replaceSameBrowser(socket: WebSocket, browser: string) {
+  private replaceSameInstance(socket: WebSocket, incoming: HelloMessage) {
     for (const [previous, hello] of this.connectedBrowsers()) {
-      if (previous === socket || hello.browser !== browser) continue;
+      if (previous === socket || hello.browser !== incoming.browser || hello.instanceId !== incoming.instanceId) continue;
       this.extensions.delete(previous);
       previous.close(4000, 'Replaced by a newer connection');
       this.failPending(new NotConnectedError('Extension reconnected; please retry.'), previous);

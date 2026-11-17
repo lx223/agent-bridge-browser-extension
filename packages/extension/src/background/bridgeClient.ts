@@ -1,5 +1,5 @@
 import { PROTOCOL_VERSION, serverToExtension, type AgentInfo, type ExtensionToServer } from '@agent-browser-bridge/protocol';
-import { detectBrowser } from './browser.ts';
+import { browserLabel, detectBrowser, instanceId } from './browser.ts';
 
 export type ConnectionState = 'connecting' | 'connected' | 'disconnected';
 
@@ -44,13 +44,7 @@ export class BridgeClient {
 
     ws.onopen = () => {
       this.backoff = 1000;
-      this.send({
-        type: 'hello',
-        protocolVersion: PROTOCOL_VERSION,
-        extensionVersion: chrome.runtime.getManifest().version,
-        userAgent: navigator.userAgent,
-        browser: detectBrowser(chrome.runtime.getURL('')),
-      });
+      void this.sendHello();
       this.keepalive = setInterval(() => this.send({ type: 'ping' }), KEEPALIVE_MS);
       this.setState('connected');
     };
@@ -65,6 +59,19 @@ export class BridgeClient {
       this.retry = setTimeout(() => this.connect(), this.backoff);
       this.backoff = Math.min(this.backoff * 2, MAX_BACKOFF_MS);
     };
+  }
+
+  private async sendHello() {
+    const extensionUrl = chrome.runtime.getURL('');
+    this.send({
+      type: 'hello',
+      protocolVersion: PROTOCOL_VERSION,
+      extensionVersion: chrome.runtime.getManifest().version,
+      userAgent: navigator.userAgent,
+      browser: detectBrowser(extensionUrl),
+      instanceId: await instanceId(chrome.storage.local).catch(() => undefined),
+      label: browserLabel(extensionUrl, navigator.userAgent, 'brave' in navigator),
+    });
   }
 
   private async handle(raw: unknown) {

@@ -31,12 +31,14 @@ function connect(port: number, origin: string): Promise<WebSocket> {
 interface ExtensionOptions {
   origin?: string;
   browser?: string;
+  instanceId?: string;
+  label?: string;
 }
 
 async function connectExtension(
   port: number,
   handler: (method: string, params: unknown) => unknown,
-  { origin = EXT_ORIGIN, browser }: ExtensionOptions = {},
+  { origin = EXT_ORIGIN, browser, instanceId, label }: ExtensionOptions = {},
 ) {
   const ws = await connect(port, origin);
   ws.on('message', (raw) => {
@@ -48,16 +50,21 @@ async function connectExtension(
       ws.send(JSON.stringify({ type: 'response', id: msg.id, ok: false, error: (e as Error).message }));
     }
   });
-  ws.send(JSON.stringify({ type: 'hello', protocolVersion: PROTOCOL_VERSION, extensionVersion: '0.1.0', userAgent: 'test', browser }));
+  ws.send(JSON.stringify({ type: 'hello', protocolVersion: PROTOCOL_VERSION, extensionVersion: '0.1.0', userAgent: 'test', browser, instanceId, label }));
   const expected = browser ?? 'chrome';
-  await expect.poll(() => browsersOf(bridge!).includes(expected)).toBe(true);
+  await expect
+    .poll(() => connectedTo(bridge!).some((hello) => hello.browser === expected && hello.instanceId === instanceId))
+    .toBe(true);
   return ws;
 }
 
-function browsersOf(b: ExtensionBridge): string[] {
+function connectedTo(b: ExtensionBridge) {
   const status = b.status();
-  return status.state === 'error' ? [] : status.browsers.map((hello) => hello.browser);
+  return status.state === 'error' ? [] : status.browsers;
 }
+
+const browsersOf = (b: ExtensionBridge) => connectedTo(b).map((hello) => hello.browser);
+const instancesOf = (b: ExtensionBridge) => connectedTo(b).map((hello) => hello.instanceId);
 
 describe('ExtensionBridge', () => {
   it('rejects web page origins', async () => {
@@ -260,6 +267,80 @@ describe('ExtensionBridge', () => {
       const port = await startBridge();
       await connectExtension(port, () => 'legacy');
       expect(browsersOf(bridge!)).toEqual(['chrome']);
+    });
+  });
+
+  describe('with several instances of one browser', () => {
+    async function connectTwo(port: number) {
+      const personal = await connectExtension(port, () => 'personal', { instanceId: 'aaaa1111', label: 'Chrome' });
+      const edge = await connectExtension(port, () => 'edge', { instanceId: 'bbbb2222', label: 'Edge' });
+      return { personal, edge };
+    }
+
+    it('keeps both connected', async () => {
+      const port = await startBridge();
+      await connectTwo(port);
+      expect(instancesOf(bridge!).sort()).toEqual(['aaaa1111', 'bbbb2222']);
+    });
+
+    it('routes to the named instance', async () => {
+      const port = await startBridge();
+      await connectTwo(port);
+      await expect(bridge!.request('chrome', 'tabs.list', {}, null, 'aaaa1111')).resolves.toBe('personal');
+      await expect(bridge!.request('chrome', 'tabs.list', {}, null, 'bbbb2222')).resolves.toBe('edge');
+    });
+
+    it('asks for an instance when several could answer', async () => {
+      const port = await startBridge();
+      await connectTwo(port);
+      await expect(bridge!.request('chrome', 'tabs.list', {})).rejects.toThrow(/aaaa1111 \(Chrome\), bbbb2222 \(Edge\).*Pass instance/);
+    });
+
+    it('reports an unknown instance', async () => {
+      const port = await startBridge();
+      await connectTwo(port);
+      await expect(bridge!.request('chrome', 'tabs.list', {}, null, 'cccc3333')).rejects.toThrow(/No chrome instance "cccc3333"/);
+    });
+
+    it('needs no instance when only one is connected', async () => {
+      const port = await startBridge();
+      await connectExtension(port, () => 'only', { instanceId: 'aaaa1111' });
+      await expect(bridge!.request('chrome', 'tabs.list', {})).resolves.toBe('only');
+    });
+
+    it('replaces the older connection from the same instance only', async () => {
+      const port = await startBridge();
+      const { personal } = await connectTwo(port);
+      const closed = new Promise((resolve) => personal.once('close', resolve));
+      await connectExtension(port, () => 'personal again', { instanceId: 'aaaa1111' });
+      await closed;
+      expect(instancesOf(bridge!).sort()).toEqual(['aaaa1111', 'bbbb2222']);
+      await expect(bridge!.request('chrome', 'tabs.list', {}, null, 'aaaa1111')).resolves.toBe('personal again');
+      await expect(bridge!.request('chrome', 'tabs.list', {}, null, 'bbbb2222')).resolves.toBe('edge');
+    });
+
+    it('relays the instance choice', async () => {
+      const port = await startBridge();
+      await connectTwo(port);
+      const second = new ExtensionBridge({ port });
+      try {
+        await second.start();
+        await expect.poll(() => instancesOf(second).sort()).toEqual(['aaaa1111', 'bbbb2222']);
+        await expect(second.request('chrome', 'tabs.list', {}, null, 'bbbb2222')).resolves.toBe('edge');
+        await expect(second.request('chrome', 'tabs.list', {})).rejects.toThrow(/Pass instance/);
+      } finally {
+        await second.stop();
+      }
+    });
+
+    it('still replaces a legacy extension that sends no instance id', async () => {
+      const port = await startBridge();
+      const first = await connectExtension(port, () => 'first');
+      const closed = new Promise((resolve) => first.once('close', resolve));
+      await connectExtension(port, () => 'second');
+      await closed;
+      expect(browsersOf(bridge!)).toEqual(['chrome']);
+      await expect(bridge!.request('chrome', 'tabs.list', {})).resolves.toBe('second');
     });
   });
 });

@@ -65,7 +65,13 @@ Each browser has its own tools, named after it, because each browser's extension
 | `safari_*` | Tabs and windows: `safari_list_windows`, `safari_list_tabs`, `safari_move_tabs`, `safari_close_tabs`, `safari_open_tab` and `safari_navigate`. |
 | `browser_*` | Tools that do not belong to one browser: `browser_status`. |
 
-Tab, window and group ids are only unique within one browser, so an id from a `chrome_*` tool is only valid in other `chrome_*` tools. Safari has no extension APIs for tab groups or the DevTools Protocol, so those tools exist only for Chrome. Other Chromium browsers such as Edge and Brave use the `chrome_*` tools and share Chrome's connection, so only one of them can be connected at a time.
+Tab, window and group ids are only unique within one browser, so an id from a `chrome_*` tool is only valid in other `chrome_*` tools. Safari has no extension APIs for tab groups or the DevTools Protocol, so those tools exist only for Chrome.
+
+### Several instances of one browser
+
+Other Chromium browsers such as Edge and Brave use the `chrome_*` tools, and each browser profile runs its own copy of the extension. All of them can be connected at once. Each install creates a short instance id the first time it runs and keeps it in the extension's local storage, so a reload reconnects as the same instance.
+
+`browser_status` lists every connected instance with its `instanceId` and a `label` such as `Chrome`, `Edge` or `Brave`. Every `chrome_*` and `safari_*` tool takes an optional `instance` argument. It can be left out while only one instance of that browser is connected. When several are connected, the tool returns an error that lists them and asks the agent to pass `instance`. Ids are only valid within the instance they came from.
 
 A tool whose browser is not connected returns an error saying so.
 

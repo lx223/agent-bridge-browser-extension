@@ -7,6 +7,8 @@ export const helloMessage = z.object({
   extensionVersion: z.string(),
   userAgent: z.string(),
   browser: z.string().default('chrome'),
+  instanceId: z.string().optional(),
+  label: z.string().optional(),
 });
 
 export const agentInfo = z.object({
@@ -21,6 +23,7 @@ export const requestMessage = z.object({
   method: z.string(),
   params: z.unknown(),
   browser: z.string().optional(),
+  instance: z.string().optional(),
   agent: agentInfo.optional(),
 });
 
