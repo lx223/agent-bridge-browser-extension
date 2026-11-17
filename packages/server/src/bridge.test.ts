@@ -69,6 +69,35 @@ describe('ExtensionBridge', () => {
     await expect(bridge!.request('boom', {})).rejects.toThrow('kaboom');
   });
 
+  it('tags each request with the agent that sent it, through relays', async () => {
+    const agent = (name: string) => ({ serverVersion: '9.9.9', client: { name, version: '1.0' } });
+    const port = await startBridge({ agentInfo: () => agent('host-agent') });
+    const seen: unknown[] = [];
+    const ext = await connect(port, EXT_ORIGIN);
+    ext.on('message', (raw) => {
+      const msg = JSON.parse(raw.toString());
+      if (msg.type !== 'request') return;
+      seen.push(msg.agent);
+      ext.send(JSON.stringify({ type: 'response', id: msg.id, ok: true, result: null }));
+    });
+    ext.send(JSON.stringify({ type: 'hello', protocolVersion: PROTOCOL_VERSION, extensionVersion: '0.1.0', userAgent: 'test' }));
+    await expect.poll(() => bridge!.status().state).toBe('connected');
+    const relay = new ExtensionBridge({ port, agentInfo: () => agent('relay-agent') });
+    const legacyRelay = new ExtensionBridge({ port });
+    try {
+      await relay.start();
+      await legacyRelay.start();
+      await expect.poll(() => legacyRelay.status().state).toBe('connected');
+      await bridge!.request('tabs.list', {});
+      await relay.request('tabs.list', {});
+      await legacyRelay.request('tabs.list', {});
+      expect(seen).toEqual([agent('host-agent'), agent('relay-agent'), undefined]);
+    } finally {
+      await relay.stop();
+      await legacyRelay.stop();
+    }
+  });
+
   it('times out unanswered requests', async () => {
     const port = await startBridge({ requestTimeoutMs: 50 });
     const ws = await connect(port, EXT_ORIGIN);
