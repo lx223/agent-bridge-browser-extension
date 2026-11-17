@@ -147,43 +147,57 @@ export async function startHarness(): Promise<Harness> {
   const fixtures = await serveFixtures();
   const fixturePort = (fixtures.address() as { port: number }).port;
   const profile = mkdtempSync(join(tmpdir(), 'agent-browser-bridge-e2e-'));
-  let agent = await startAgent();
-  const context = await chromium.launchPersistentContext(profile, {
-    channel: 'chromium',
-    headless: true,
-    args: [
-      `--disable-extensions-except=${EXTENSION_DIST}`,
-      `--load-extension=${EXTENSION_DIST}`,
-      '--host-resolver-rules=MAP * ~NOTFOUND, EXCLUDE 127.0.0.1',
-    ],
-  });
-  const worker = context.serviceWorkers()[0] ?? (await context.waitForEvent('serviceworker'));
-  const extensionId = new URL(worker.url()).host;
-  await agent.waitUntilConnected();
-
-  const fixture = (name: string) => `http://127.0.0.1:${fixturePort}/${name}`;
-
-  const harness: Harness = {
-    get agent() {
-      return agent;
-    },
-    context,
-    extensionId,
-    fixture,
-    openFixture: (name) => agent.call<Tab>('chrome_open_tab', { url: fixture(name) }),
-    async restartAgent() {
-      await agent.close();
-      agent = await startAgent();
-      return agent;
-    },
-    async close() {
-      await agent.close().catch(() => {});
-      await context.close().catch(() => {});
-      await new Promise((done) => fixtures.close(done));
-      rmSync(profile, { recursive: true, force: true });
-    },
+  let agent: Agent | undefined;
+  let context: BrowserContext | undefined;
+  const close = async () => {
+    await agent?.close().catch(() => {});
+    await context?.close().catch(() => {});
+    await new Promise((done) => fixtures.close(done));
+    rmSync(profile, { recursive: true, force: true });
   };
-  return harness;
+
+  try {
+    agent = await startAgent();
+    context = await chromium.launchPersistentContext(profile, {
+      channel: 'chromium',
+      headless: true,
+      args: [
+        `--disable-extensions-except=${EXTENSION_DIST}`,
+        `--load-extension=${EXTENSION_DIST}`,
+        '--host-resolver-rules=MAP * ~NOTFOUND, EXCLUDE 127.0.0.1',
+      ],
+    });
+    const worker = context.serviceWorkers()[0] ?? (await context.waitForEvent('serviceworker'));
+    const extensionId = new URL(worker.url()).host;
+    await agent.waitUntilConnected();
+
+    const fixture = (name: string) => `http://127.0.0.1:${fixturePort}/${name}`;
+    let current = agent;
+    agent = undefined;
+    const browser = context;
+
+    return {
+      get agent() {
+        return current;
+      },
+      context: browser,
+      extensionId,
+      fixture,
+      openFixture: (name) => current.call<Tab>('chrome_open_tab', { url: fixture(name) }),
+      async restartAgent() {
+        await current.close();
+        current = await startAgent();
+        return current;
+      },
+      async close() {
+        await current.close().catch(() => {});
+        await close();
+      },
+    };
+  } catch (error) {
+    await close();
+    throw error;
+  }
 }
 
 export function refOf(snapshot: string, pattern: RegExp): string {
