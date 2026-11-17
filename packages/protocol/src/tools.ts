@@ -116,7 +116,7 @@ export const toolDefinitions = {
   'tabs.navigate': {
     tool: 'navigate',
     description:
-      'Navigate a tab: pass url to load a page, or "back", "forward" or "reload". Waits for the page to finish loading (up to timeoutMs).',
+      'Navigate a tab: pass url to load a page, or "back", "forward" or "reload". Waits for the page to finish loading (up to timeoutMs). In Chrome, back and forward may briefly attach the debugger when the tab has had no user interaction.',
     params: z.object({
       tabId,
       to: z.string().min(1).describe('A URL, or one of "back", "forward", "reload".'),

@@ -33,9 +33,9 @@ Files that only wire things to the browser are excluded from the unit coverage n
 The files are:
 
 - `e2e/tabs.test.ts`: connection status, listing, grouping, moving, closing, tab plans with undo, error reporting, and a second agent session relaying through the first.
-- `e2e/page.test.ts`: snapshots, click, hover, typing, keys, scrolling, screenshots, waiting, evaluate, navigation, raw CDP, detaching, and the stale ref hint.
-- `e2e/pageTools.test.ts`: listing and calling WebMCP tools that `e2e/fixtures/tools.html` registers, a throwing tool, an unknown tool, a timeout, and the empty list after navigating away. The harness starts Chromium with `--enable-features=WebMCP` for this.
+- `e2e/page.test.ts`: snapshots, click, hover, typing, keys, scrolling, screenshots, waiting, evaluate, navigation, back and forward after a click and directly after a URL navigation, raw CDP, detaching, and the stale ref hint.
 - `e2e/extension.test.ts`: the built manifest and its files, the welcome and options pages, and reconnecting to a new server session.
+- `e2e/pageTools.test.ts`: listing and calling WebMCP tools that `e2e/fixtures/tools.html` registers, a throwing tool, an unknown tool, a timeout, and the empty list after navigating away. The harness starts Chromium with `--enable-features=WebMCP` for this.
 
 `e2e/harness.ts` holds the shared setup. Add fixtures as plain HTML files in `e2e/fixtures/`.
 

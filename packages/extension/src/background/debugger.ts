@@ -27,6 +27,8 @@ function scheduleIdleDetach(tabId: number) {
   );
 }
 
+export const isAttached = (tabId: number) => attached.has(tabId);
+
 async function attach(tabId: number) {
   try {
     await chrome.debugger.attach({ tabId }, PROTOCOL_VERSION);
