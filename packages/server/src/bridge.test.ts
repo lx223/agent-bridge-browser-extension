@@ -69,24 +69,33 @@ describe('ExtensionBridge', () => {
     await expect(bridge!.request('boom', {})).rejects.toThrow('kaboom');
   });
 
-  it('tells the extension which agent is connected', async () => {
-    let client: { name: string; version: string } | null = null;
-    const port = await startBridge({ agentInfo: () => ({ serverVersion: '9.9.9', client }) });
-    const ws = await connect(port, EXT_ORIGIN);
-    const welcomes: unknown[] = [];
-    ws.on('message', (raw) => {
+  it('tags each request with the agent that sent it, through relays', async () => {
+    const agent = (name: string) => ({ serverVersion: '9.9.9', client: { name, version: '1.0' } });
+    const port = await startBridge({ agentInfo: () => agent('host-agent') });
+    const seen: unknown[] = [];
+    const ext = await connect(port, EXT_ORIGIN);
+    ext.on('message', (raw) => {
       const msg = JSON.parse(raw.toString());
-      if (msg.type === 'welcome') welcomes.push(msg);
+      if (msg.type !== 'request') return;
+      seen.push(msg.agent);
+      ext.send(JSON.stringify({ type: 'response', id: msg.id, ok: true, result: null }));
     });
-    ws.send(JSON.stringify({ type: 'hello', protocolVersion: PROTOCOL_VERSION, extensionVersion: '0.1.0', userAgent: 'test' }));
-    await expect.poll(() => welcomes.length).toBe(1);
-    client = { name: 'claude-code', version: '2.0.0' };
-    bridge!.announceAgent();
-    await expect.poll(() => welcomes.length).toBe(2);
-    expect(welcomes).toEqual([
-      { type: 'welcome', serverVersion: '9.9.9', client: null },
-      { type: 'welcome', serverVersion: '9.9.9', client: { name: 'claude-code', version: '2.0.0' } },
-    ]);
+    ext.send(JSON.stringify({ type: 'hello', protocolVersion: PROTOCOL_VERSION, extensionVersion: '0.1.0', userAgent: 'test' }));
+    await expect.poll(() => bridge!.status().state).toBe('connected');
+    const relay = new ExtensionBridge({ port, agentInfo: () => agent('relay-agent') });
+    const legacyRelay = new ExtensionBridge({ port });
+    try {
+      await relay.start();
+      await legacyRelay.start();
+      await expect.poll(() => legacyRelay.status().state).toBe('connected');
+      await bridge!.request('tabs.list', {});
+      await relay.request('tabs.list', {});
+      await legacyRelay.request('tabs.list', {});
+      expect(seen).toEqual([agent('host-agent'), agent('relay-agent'), undefined]);
+    } finally {
+      await relay.stop();
+      await legacyRelay.stop();
+    }
   });
 
   it('times out unanswered requests', async () => {
@@ -97,10 +106,78 @@ describe('ExtensionBridge', () => {
     await expect(bridge!.request('tabs.list', {})).rejects.toThrow(/did not answer/);
   });
 
-  it('reports a clear error when the port is taken', async () => {
+  it('relays requests from a second process through the host', async () => {
+    const port = await startBridge();
+    await connectExtension(port, (method, params) => {
+      if (method === 'boom') throw new Error('kaboom');
+      return { method, params };
+    });
+    const second = new ExtensionBridge({ port });
+    try {
+      await expect(second.start()).resolves.toBe(port);
+      await expect.poll(() => second.status()).toMatchObject({ state: 'connected', role: 'relay' });
+      await expect(second.request('tabs.list', { windowId: 2 })).resolves.toEqual({ method: 'tabs.list', params: { windowId: 2 } });
+      await expect(second.request('boom', {})).rejects.toThrow('kaboom');
+      await expect(bridge!.request('tabs.list', {})).resolves.toEqual({ method: 'tabs.list', params: {} });
+    } finally {
+      await second.stop();
+    }
+  });
+
+  it('reports extension disconnects to relays', async () => {
+    const port = await startBridge();
+    const ext = await connectExtension(port, () => null);
+    const second = new ExtensionBridge({ port });
+    try {
+      await second.start();
+      await expect.poll(() => second.status().state).toBe('connected');
+      ext.close();
+      await expect.poll(() => second.status().state).toBe('listening');
+      await expect(second.request('tabs.list', {})).rejects.toThrow(/not connected/);
+    } finally {
+      await second.stop();
+    }
+  });
+
+  it('promotes a relay to host when the host exits', async () => {
     const port = await startBridge();
     const second = new ExtensionBridge({ port });
-    await expect(second.start()).rejects.toThrow(/already in use/);
-    expect(second.status().state).toBe('error');
+    try {
+      await second.start();
+      expect(second.status()).toMatchObject({ role: 'relay' });
+      await bridge!.stop();
+      bridge = second;
+      await expect.poll(() => second.status()).toMatchObject({ state: 'listening', role: 'host' });
+      await connectExtension(port, () => 'ok');
+      await expect(second.request('tabs.list', {})).resolves.toBe('ok');
+    } finally {
+      await second.stop();
+    }
+  });
+
+  it('rejects relay connections that carry a web origin', async () => {
+    const port = await startBridge();
+    await expect(
+      new Promise((resolve, reject) => {
+        const ws = new WebSocket(`ws://127.0.0.1:${port}/relay`, { origin: 'https://evil.example' });
+        sockets.push(ws);
+        ws.once('open', resolve);
+        ws.once('error', reject);
+      }),
+    ).rejects.toThrow(/401/);
+  });
+
+  it('reports a clear error when the port is held by something else', async () => {
+    const { createServer } = await import('node:http');
+    const blocker = createServer((_, res) => res.writeHead(404).end());
+    await new Promise<void>((resolve) => blocker.listen(0, '127.0.0.1', resolve));
+    const port = (blocker.address() as { port: number }).port;
+    bridge = new ExtensionBridge({ port });
+    try {
+      await expect(bridge.start()).rejects.toThrow(/already in use/);
+      expect(bridge.status().state).toBe('error');
+    } finally {
+      blocker.close();
+    }
   });
 });

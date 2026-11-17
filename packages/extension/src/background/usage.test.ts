@@ -39,11 +39,11 @@ describe('UsageTracker', () => {
     expect(connected[0].properties.minutes_since_install).toBe(5);
   });
 
-  it('tags every event with the app and the connected agent', async () => {
+  it('tags tool calls with the app and the agent that made them', async () => {
     const { usage, events } = setup();
     usage.setConnected(true);
-    usage.setAgent({ serverVersion: '0.2.0', client: { name: 'cursor', version: '1.5' } });
-    await usage.toolCalled({ method: 'tabs.list', params: {}, result: [{}, {}], durationMs: 12 });
+    const agent = { serverVersion: '0.2.0', client: { name: 'cursor', version: '1.5' } };
+    await usage.toolCalled({ method: 'tabs.list', params: {}, agent, result: [{}, {}], durationMs: 12 });
     expect(events()[0]).toEqual({
       event: 'tool_called',
       properties: expect.objectContaining({
@@ -60,7 +60,7 @@ describe('UsageTracker', () => {
 
   it('records error codes instead of messages', async () => {
     const { usage, events } = setup();
-    await usage.toolCalled({ method: 'tabs.close', params: { tabIds: [1] }, error: new Error('No tab with id: 1.'), durationMs: 3 });
+    await usage.toolCalled({ method: 'tabs.close', params: { tabIds: [1] }, agent: null, error: new Error('No tab with id: 1.'), durationMs: 3 });
     expect(events()[0].properties).toMatchObject({ ok: false, error_code: 'tab_not_found' });
     expect(JSON.stringify(events()[0])).not.toContain('No tab with id');
   });
@@ -68,11 +68,11 @@ describe('UsageTracker', () => {
   it('tracks plan applies, the first-apply milestone and time to undo', async () => {
     const { usage, events, advance } = setup();
     const plan = { groups: [{ title: 'Work', tabIds: [1, 2] }, { title: 'News', tabIds: [3] }], ungroupTabIds: [4], dryRun: false };
-    await usage.toolCalled({ method: 'plan.apply', params: { ...plan, dryRun: true }, result: { warnings: ['x'] }, durationMs: 5 });
+    await usage.toolCalled({ method: 'plan.apply', params: { ...plan, dryRun: true }, agent: null, result: { warnings: ['x'] }, durationMs: 5 });
     expect(events().map((e) => e.event)).toEqual(['tool_called']);
-    await usage.toolCalled({ method: 'plan.apply', params: plan, result: { warnings: [] }, durationMs: 5 });
+    await usage.toolCalled({ method: 'plan.apply', params: plan, agent: null, result: { warnings: [] }, durationMs: 5 });
     advance(2 * 60_000);
-    await usage.toolCalled({ method: 'plan.undo', params: {}, result: { tabs: 4, groups: 1, warnings: [] }, durationMs: 5 });
+    await usage.toolCalled({ method: 'plan.undo', params: {}, agent: null, result: { tabs: 4, groups: 1, warnings: [] }, durationMs: 5 });
     const [preview, apply, milestone, undo] = events();
     expect(preview.properties).toMatchObject({ dry_run: true, group_count: 2, tabs_grouped: 3, tabs_ungrouped: 1, warning_count: 1 });
     expect(apply.properties).toMatchObject({ dry_run: false });
@@ -92,12 +92,16 @@ describe('UsageTracker', () => {
     expect(active[0].properties).toMatchObject({ agent_connected: true, tab_count_bucket: '26-50', window_count: 2 });
   });
 
-  it('drops agent details on disconnect', async () => {
-    const { usage, events } = setup();
-    usage.setAgent({ serverVersion: '0.2.0', client: { name: 'cursor', version: '1.5' } });
-    usage.setConnected(false);
+  it('reports the last agent seen while connected and forgets it on disconnect', async () => {
+    const { usage, events, advance } = setup();
+    usage.setConnected(true);
+    await usage.toolCalled({ method: 'tabs.list', params: {}, agent: { serverVersion: '0.2.0', client: { name: 'cursor', version: '1.5' } }, result: [], durationMs: 1 });
     await usage.dailyActive();
-    expect(events()[0].properties).toMatchObject({ agent_connected: false, client_name: null });
+    usage.setConnected(false);
+    advance(DAY);
+    await usage.dailyActive();
+    const active = events().filter((e) => e.event === 'extension_active');
+    expect(active.map((e) => e.properties.client_name)).toEqual(['cursor', null]);
   });
 });
 

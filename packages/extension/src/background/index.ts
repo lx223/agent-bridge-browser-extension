@@ -1,12 +1,12 @@
-import { DEFAULT_PORT } from '@agent-browser-bridge/protocol';
+import { DEFAULT_PORT, type AgentInfo } from '@agent-browser-bridge/protocol';
 import { Analytics, ANALYTICS_ENABLED_KEY, isPageEvent, type Properties } from './analytics.ts';
 import { BridgeClient } from './bridgeClient.ts';
+import { listenForDetach } from './debugger.ts';
 import { dispatch } from './handlers.ts';
 import { UsageTracker } from './usage.ts';
 
 const WELCOME_PAGE = 'src/welcome/index.html';
 const RECONNECT_ALARM = 'agent-browser-bridge-reconnect';
-const AGENT_WAIT_MS = 3000;
 
 const analytics = new Analytics({
   apiKey: import.meta.env.VITE_POSTHOG_KEY,
@@ -25,14 +25,14 @@ const usage = new UsageTracker({
   },
 });
 
-const trackedDispatch = async (method: string, params: unknown) => {
+const trackedDispatch = async (method: string, params: unknown, agent: AgentInfo | null) => {
   const started = Date.now();
   try {
     const result = await dispatch(method, params);
-    void usage.toolCalled({ method, params, result, durationMs: Date.now() - started });
+    void usage.toolCalled({ method, params, agent, result, durationMs: Date.now() - started });
     return result;
   } catch (error) {
-    void usage.toolCalled({ method, params, error, durationMs: Date.now() - started });
+    void usage.toolCalled({ method, params, agent, error, durationMs: Date.now() - started });
     throw error;
   }
 };
@@ -42,20 +42,12 @@ const client = new BridgeClient(
   trackedDispatch,
   (status) => {
     usage.setConnected(status.state === 'connected');
-    if (status.state === 'connected') {
-      setTimeout(() => {
-        if (client.status.state === 'connected') void usage.milestone('first_connected');
-      }, AGENT_WAIT_MS);
-    }
+    if (status.state === 'connected') void usage.milestone('first_connected');
     void chrome.action.setBadgeText({ text: status.state === 'connected' ? 'on' : '' });
     void chrome.action.setBadgeBackgroundColor({ color: '#16a34a' });
     chrome.runtime.sendMessage({ type: 'STATUS_CHANGED', status }).catch(() => {
       /* no welcome page open */
     });
-  },
-  (agent) => {
-    usage.setAgent(agent);
-    if (agent.client) void usage.milestone('first_connected');
   },
 );
 
@@ -71,6 +63,8 @@ void syncUninstallSurvey();
 chrome.storage.onChanged.addListener((changes, area) => {
   if (area === 'local' && ANALYTICS_ENABLED_KEY in changes) void syncUninstallSurvey();
 });
+
+listenForDetach();
 
 const openWelcome = () => chrome.tabs.create({ url: chrome.runtime.getURL(WELCOME_PAGE) });
 

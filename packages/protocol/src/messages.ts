@@ -8,12 +8,18 @@ export const helloMessage = z.object({
   userAgent: z.string(),
 });
 
+export const agentInfo = z.object({
+  serverVersion: z.string(),
+  client: z.object({ name: z.string(), version: z.string() }).nullable(),
+});
+
 /** Server → extension: call a bridge method. */
 export const requestMessage = z.object({
   type: z.literal('request'),
   id: z.string(),
   method: z.string(),
   params: z.unknown(),
+  agent: agentInfo.optional(),
 });
 
 /** Extension → server: result of a request. */
@@ -23,23 +29,26 @@ export const responseMessage = z.discriminatedUnion('ok', [
 ]);
 
 /** Extension → server keepalive; WebSocket traffic keeps an MV3 service worker alive. */
-export const agentInfo = z.object({
-  serverVersion: z.string(),
-  client: z.object({ name: z.string(), version: z.string() }).nullable(),
-});
-
-export const welcomeMessage = agentInfo.extend({ type: z.literal('welcome') });
-
 export const pingMessage = z.object({ type: z.literal('ping') });
 export const pongMessage = z.object({ type: z.literal('pong') });
 
 export const extensionToServer = z.union([helloMessage, responseMessage, pingMessage]);
-export const serverToExtension = z.union([requestMessage, pongMessage, welcomeMessage]);
+export const serverToExtension = z.union([requestMessage, pongMessage]);
 
 export type HelloMessage = z.infer<typeof helloMessage>;
 export type RequestMessage = z.infer<typeof requestMessage>;
 export type AgentInfo = z.infer<typeof agentInfo>;
-export type WelcomeMessage = z.infer<typeof welcomeMessage>;
 export type ResponseMessage = z.infer<typeof responseMessage>;
 export type ExtensionToServer = z.infer<typeof extensionToServer>;
 export type ServerToExtension = z.infer<typeof serverToExtension>;
+
+export const relayStatusMessage = z.object({
+  type: z.literal('status'),
+  extension: helloMessage.nullable(),
+});
+
+export const relayToHost = requestMessage;
+export const hostToRelay = z.union([responseMessage, relayStatusMessage]);
+
+export type RelayStatusMessage = z.infer<typeof relayStatusMessage>;
+export type HostToRelay = z.infer<typeof hostToRelay>;

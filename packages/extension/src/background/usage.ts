@@ -23,6 +23,7 @@ export interface UsageDeps {
 export interface ToolOutcome {
   method: string;
   params: unknown;
+  agent: AgentInfo | null;
   durationMs: number;
   result?: unknown;
   error?: unknown;
@@ -91,7 +92,7 @@ export function toolMetrics(method: string, params: unknown, result: unknown): P
 }
 
 export class UsageTracker {
-  private agent: AgentInfo | null = null;
+  private lastClient: string | null = null;
   private connected = false;
   private readonly milestones = new Map<Milestone, Promise<void>>();
 
@@ -112,16 +113,7 @@ export class UsageTracker {
 
   setConnected(connected: boolean) {
     this.connected = connected;
-    if (!connected) this.setAgent(null);
-  }
-
-  setAgent(agent: AgentInfo | null) {
-    this.agent = agent;
-    this.deps.analytics.setContext(
-      agent
-        ? { client_name: agent.client?.name ?? null, client_version: agent.client?.version ?? null, server_version: agent.serverVersion }
-        : {},
-    );
+    if (!connected) this.lastClient = null;
   }
 
   milestone(name: Milestone) {
@@ -140,9 +132,18 @@ export class UsageTracker {
     return task;
   }
 
-  async toolCalled({ method, params, durationMs, result, error }: ToolOutcome) {
+  async toolCalled({ method, params, agent, durationMs, result, error }: ToolOutcome) {
     const ok = error === undefined;
-    const properties: Properties = { method, ok, duration_ms: durationMs, ...(ok ? toolMetrics(method, params, result) : { error_code: errorCode(error) }) };
+    if (agent?.client) this.lastClient = agent.client.name;
+    const properties: Properties = {
+      method,
+      ok,
+      duration_ms: durationMs,
+      client_name: agent?.client?.name ?? null,
+      client_version: agent?.client?.version ?? null,
+      server_version: agent?.serverVersion ?? null,
+      ...(ok ? toolMetrics(method, params, result) : { error_code: errorCode(error) }),
+    };
     const dryRun = asRecord(params).dryRun === true;
 
     if (ok && method === 'plan.undo') {
@@ -166,7 +167,7 @@ export class UsageTracker {
       agent_connected: this.connected,
       tab_count_bucket: counts ? tabCountBucket(counts.tabs) : null,
       window_count: counts?.windows ?? null,
-      client_name: this.agent?.client?.name ?? null,
+      client_name: this.lastClient,
     });
   }
 }

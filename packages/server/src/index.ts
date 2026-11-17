@@ -20,14 +20,12 @@ const bridge = new ExtensionBridge({
 
 try {
   await bridge.start();
-  log(`Waiting for the browser extension on ws://127.0.0.1:${port}`);
 } catch (err) {
   // Keep serving MCP so the agent can surface the problem via get_bridge_status.
   log(err instanceof Error ? err.message : String(err));
 }
 
 const server = createMcpServer(bridge, pkg.version);
-server.server.oninitialized = () => bridge.announceAgent();
 await server.connect(new StdioServerTransport());
 
 const shutdown = async () => {

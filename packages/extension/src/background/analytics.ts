@@ -24,13 +24,7 @@ export interface AnalyticsConfig {
 export const APP_TAG = 'agent-browser-bridge';
 
 export class Analytics {
-  private context: Properties = {};
-
   constructor(private readonly config: AnalyticsConfig) {}
-
-  setContext(context: Properties) {
-    this.context = context;
-  }
 
   async isEnabled() {
     if (!this.config.apiKey) return false;
@@ -50,7 +44,6 @@ export class Analytics {
           distinct_id: await this.distinctId(),
           timestamp: new Date().toISOString(),
           properties: {
-            ...this.context,
             ...properties,
             app: APP_TAG,
             extension_version: this.config.version,

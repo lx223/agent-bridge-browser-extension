@@ -24,9 +24,8 @@ export class BridgeClient {
 
   constructor(
     private readonly url: string,
-    private readonly dispatch: (method: string, params: unknown) => Promise<unknown>,
+    private readonly dispatch: (method: string, params: unknown, agent: AgentInfo | null) => Promise<unknown>,
     private readonly onStatus: (status: ConnectionStatus) => void = () => {},
-    private readonly onAgent: (agent: AgentInfo) => void = () => {},
   ) {
     this._status = { state: 'disconnected', url, since: Date.now() };
   }
@@ -73,13 +72,9 @@ export class BridgeClient {
     } catch {
       return;
     }
-    if (msg.type === 'welcome') {
-      this.onAgent({ serverVersion: msg.serverVersion, client: msg.client });
-      return;
-    }
     if (msg.type !== 'request') return;
     try {
-      const result = await this.dispatch(msg.method, msg.params);
+      const result = await this.dispatch(msg.method, msg.params, msg.agent ?? null);
       this.send({ type: 'response', id: msg.id, ok: true, result: result ?? null });
     } catch (err) {
       this.send({ type: 'response', id: msg.id, ok: false, error: err instanceof Error ? err.message : String(err) });
