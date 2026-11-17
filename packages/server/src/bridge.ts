@@ -6,6 +6,7 @@ import {
   hostToRelay,
   PROTOCOL_VERSION,
   relayToHost,
+  type AgentInfo,
   type HelloMessage,
   type HostToRelay,
   type ResponseMessage,
@@ -18,6 +19,7 @@ export interface BridgeOptions {
   extensionId?: string;
   requestTimeoutMs?: number;
   log?: (msg: string) => void;
+  agentInfo?: () => AgentInfo;
 }
 
 export type BridgeRole = 'host' | 'relay';
@@ -93,10 +95,15 @@ export class ExtensionBridge {
     return { state: browsers.length ? 'connected' : 'listening', role: this.role, port, browsers };
   }
 
-  request(browser: string, method: string, params: unknown): Promise<unknown> {
-    if (this.role === 'relay' && this.upstream) return this.send(this.upstream, method, params, browser);
+  request(
+    browser: string,
+    method: string,
+    params: unknown,
+    agent: AgentInfo | null = this.opts.agentInfo?.() ?? null,
+  ): Promise<unknown> {
+    if (this.role === 'relay' && this.upstream) return this.send(this.upstream, method, params, agent, browser);
     const target = this.role === 'host' ? this.connectedBrowsers().find(([, hello]) => hello.browser === browser) : undefined;
-    if (target) return this.send(target[0], method, params);
+    if (target) return this.send(target[0], method, params, agent);
     return Promise.reject(new NotConnectedError(this.error ?? notConnected(browser)));
   }
 
@@ -112,9 +119,16 @@ export class ExtensionBridge {
     return this.opts.host ?? '127.0.0.1';
   }
 
-  private send(socket: WebSocket, method: string, params: unknown, browser?: string): Promise<unknown> {
+  private send(socket: WebSocket, method: string, params: unknown, agent: AgentInfo | null, browser?: string): Promise<unknown> {
     const id = randomUUID();
-    const message: ServerToExtension = { type: 'request', id, method, params, ...(browser !== undefined && { browser }) };
+    const message: ServerToExtension = {
+      type: 'request',
+      id,
+      method,
+      params,
+      ...(agent && { agent }),
+      ...(browser !== undefined && { browser }),
+    };
     return new Promise((resolve, reject) => {
       const timer = setTimeout(() => {
         this.pending.delete(id);
@@ -268,7 +282,7 @@ export class ExtensionBridge {
     socket.on('message', (raw) => {
       const msg = this.parse(raw, relayToHost);
       if (!msg) return;
-      this.request(msg.browser ?? 'chrome', msg.method, msg.params).then(
+      this.request(msg.browser ?? 'chrome', msg.method, msg.params, msg.agent ?? null).then(
         (result) => this.reply(socket, { type: 'response', id: msg.id, ok: true, result }),
         (err) => this.reply(socket, { type: 'response', id: msg.id, ok: false, error: errorMessage(err) }),
       );

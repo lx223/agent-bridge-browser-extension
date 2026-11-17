@@ -6,7 +6,10 @@ export default defineConfig(({ mode }) => ({
     outDir: 'dist',
     emptyOutDir: mode !== 'development',
     rollupOptions: {
-      input: { welcome: resolve(__dirname, 'src/welcome/index.html') },
+      input: {
+        welcome: resolve(__dirname, 'src/welcome/index.html'),
+        options: resolve(__dirname, 'src/options/index.html'),
+      },
       output: {
         entryFileNames: 'assets/[name]-[hash].js',
         chunkFileNames: 'assets/[name]-[hash].js',

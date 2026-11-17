@@ -14,9 +14,24 @@ The extension uses Chrome session storage to keep the previous tab and group lay
 
 ## Where information goes
 
-The extension connects to a WebSocket server at 127.0.0.1:17373 on your computer. It does not send analytics, advertising data or telemetry to the developer and does not operate a developer-hosted data collection service. It reads webpage content only when a connected agent calls a page tool for a specific tab.
+The extension connects to a WebSocket server at 127.0.0.1:17373 on your computer. It reads webpage content only when a connected agent calls a page tool for a specific tab, and it does not send advertising data.
 
 The local MCP server passes tool results to the agent you connect. Your chosen agent or its model provider may transmit, process or retain those results under its own privacy policy and settings. Local communication between the extension and bridge does not mean that your agent processes data only on your device. Only connect agents you trust.
+
+## Usage analytics
+
+Release builds send anonymous usage events to PostHog (EU region, eu.i.posthog.com) so the developer can see whether setup works, which features are used and whether people keep using the extension. Events are:
+
+- extension installed or updated, setup page opened, setup link clicked or snippet copied;
+- the first time an agent connects and the first time a tab plan is applied, with minutes since install;
+- once a day while the browser is open: whether an agent is connected, the number of open windows, and the number of open tabs as a range (such as 11–25);
+- each tool call: the tool name, whether it succeeded, how long it took, a fixed error category on failure (such as "tab not found"), and counts such as how many tabs or groups it affected, whether it was a preview, and minutes between applying a plan and undoing it.
+
+Events also include the extension version, the MCP server version, and the name and version the connected agent reports for itself (such as "claude-code"). Each event includes a random identifier generated on install and kept in extension local storage. Events never include tab titles, URLs, domains, tab or window contents, tab-group names, error messages, or tool parameters or results. PostHog receives your IP address as part of the network request; the PostHog project is configured to discard it.
+
+When analytics is on, uninstalling the extension may open a short optional PostHog survey asking why you left, linked to the same random identifier.
+
+Usage analytics are on by default. You can turn them off at any time with the "Share anonymous usage statistics" checkbox on the extension's options page (right-click the toolbar icon and choose Options) or on the setup page (click the toolbar icon). Builds made from source without a PostHog key send no analytics.
 
 ## Use and sharing
 
@@ -24,7 +39,7 @@ Browser information is used to provide the extension's single purpose: letting y
 
 ## Your choices
 
-You control which agent you connect and its permissions. A connected agent can request browser information; change, move, group or close tabs; and read pages and act in them as you, including submitting forms. Chrome shows a banner while the extension is attached to a page; cancelling it detaches the extension from that tab. Disconnect the agent or stop the local MCP server to stop bridge communication; disable or uninstall the extension to stop its operation. Removing the extension removes its extension storage. Consult your agent provider about deleting information it has received.
+You control which agent you connect and its permissions. A connected agent can request browser information; change, move, group or close tabs; and read pages and act in them as you, including submitting forms. Chrome shows a banner while the extension is attached to a page; cancelling it detaches the extension from that tab. Disconnect the agent or stop the local MCP server to stop bridge communication; disable or uninstall the extension to stop its operation. Removing the extension removes its extension storage, including the analytics identifier. Consult your agent provider about deleting information it has received.
 
 ## Changes and contact
 

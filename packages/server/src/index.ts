@@ -8,7 +8,15 @@ import pkg from '../package.json' with { type: 'json' };
 const log = (msg: string) => process.stderr.write(`[agent-browser-bridge] ${msg}\n`);
 
 const port = Number(process.env.AGENT_BROWSER_BRIDGE_PORT ?? DEFAULT_PORT);
-const bridge = new ExtensionBridge({ port, extensionId: process.env.AGENT_BROWSER_BRIDGE_EXTENSION_ID || undefined, log });
+const bridge = new ExtensionBridge({
+  port,
+  extensionId: process.env.AGENT_BROWSER_BRIDGE_EXTENSION_ID || undefined,
+  log,
+  agentInfo: () => {
+    const client = server.server.getClientVersion();
+    return { serverVersion: pkg.version, client: client ? { name: client.name, version: client.version } : null };
+  },
+});
 
 try {
   await bridge.start();
