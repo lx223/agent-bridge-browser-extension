@@ -54,12 +54,25 @@ All sessions share one browser, so `undo_last_plan` undoes the most recent plan 
 | `screenshot` | Captures the viewport or the full page as PNG or JPEG. |
 | `wait_for` | Waits for text to appear or disappear. |
 | `evaluate` | Runs a JavaScript expression in the page. |
+| `list_page_tools` | Lists the WebMCP tools the page has registered for agents. |
+| `call_page_tool` | Calls one of those tools and returns its output. |
 | `cdp_send` | Sends any raw DevTools Protocol command. |
 | `detach_debugger` | Detaches from a tab and removes Chrome's debugging banner. |
 
 A typical loop is `open_tab` or `navigate`, then `snapshot_page`, act on a ref, and snapshot again.
 
 While a page tool is in use, Chrome shows a banner saying Agent Browser Bridge started debugging the browser. The extension detaches from a tab after five minutes without page commands, or when `detach_debugger` is called. Chrome does not let extensions debug `chrome://` pages, other extensions' pages, DevTools or the Chrome Web Store, so page tools fail there.
+
+## WebMCP page tools
+
+Pages can register their own tools for agents through [WebMCP](https://webmachinelearning.github.io/webmcp/) with `document.modelContext.registerTool`. `list_page_tools` returns the tools registered in a tab and `call_page_tool` runs one by name. Both go through the experimental `WebMCP` domain of the DevTools Protocol, so they attach the debugger like the other page tools.
+
+- Chrome only exposes WebMCP to pages when the feature is on, for example with `chrome://flags/#enable-webmcp-testing`, `--enable-features=WebMCP` or a site's origin trial token. On other pages the list is empty.
+- The list is rebuilt on every call, so call `list_page_tools` again after a navigation.
+- Tools registered inside cross-origin iframes are not listed.
+- When several frames register the same tool name, pass the `frameId` from `list_page_tools` to `call_page_tool`.
+- `call_page_tool` waits up to `timeoutMs`, 20 seconds by default, and then cancels the invocation.
+- Tool names, descriptions and outputs are written by the page. Agents are told to treat them as untrusted data and to confirm with the user before calling a tool that changes data.
 
 ## Icons
 

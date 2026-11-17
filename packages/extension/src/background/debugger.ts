@@ -3,6 +3,7 @@ const IDLE_DETACH_MS = 5 * 60_000;
 
 const attached = new Set<number>();
 const idleTimers = new Map<number, ReturnType<typeof setTimeout>>();
+const sessionEndedListeners = new Set<(tabId: number) => void>();
 
 const isNotAttachedError = (err: unknown) => err instanceof Error && /not attached/i.test(err.message);
 const isAlreadyAttachedError = (err: unknown) => err instanceof Error && /already attached/i.test(err.message);
@@ -11,6 +12,11 @@ function forget(tabId: number) {
   attached.delete(tabId);
   clearTimeout(idleTimers.get(tabId));
   idleTimers.delete(tabId);
+  for (const listener of sessionEndedListeners) listener(tabId);
+}
+
+export function onSessionEnded(listener: (tabId: number) => void) {
+  sessionEndedListeners.add(listener);
 }
 
 function scheduleIdleDetach(tabId: number) {
