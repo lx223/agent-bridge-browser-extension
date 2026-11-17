@@ -9,6 +9,7 @@ import { z } from 'zod';
 const tabId = z.number().int().nonnegative();
 const windowId = z.number().int().nonnegative();
 const groupId = z.number().int().nonnegative();
+const ref = z.string().regex(/^e\d+$/).describe('Element ref from snapshot_page, e.g. "e42".');
 
 export const groupColor = z.enum(['grey', 'blue', 'red', 'yellow', 'green', 'pink', 'purple', 'cyan', 'orange']);
 export type GroupColor = z.infer<typeof groupColor>;
@@ -102,10 +103,153 @@ export const toolDefinitions = {
     params: z.object({}),
     readOnly: false,
   },
+  'tabs.create': {
+    tool: 'open_tab',
+    description: 'Open a new tab, optionally at a URL and in a given window. Waits for the page to finish loading.',
+    params: z.object({
+      url: z.string().optional(),
+      windowId: windowId.optional(),
+      active: z.boolean().default(true),
+    }),
+    readOnly: false,
+  },
+  'tabs.navigate': {
+    tool: 'navigate',
+    description:
+      'Navigate a tab: pass url to load a page, or "back", "forward" or "reload". Waits for the page to finish loading (up to timeoutMs).',
+    params: z.object({
+      tabId,
+      to: z.string().min(1).describe('A URL, or one of "back", "forward", "reload".'),
+      timeoutMs: z.number().int().min(0).max(25_000).default(15_000),
+    }),
+    readOnly: false,
+  },
+  'page.snapshot': {
+    tool: 'snapshot_page',
+    description:
+      'Read the page in a tab as an accessibility tree. Each element that can be acted on carries a ref like [ref=e42]; pass it to click, type_text, hover or scroll. Take a fresh snapshot after the page changes. Attaches the Chrome debugger to the tab, which shows a banner.',
+    params: z.object({
+      tabId,
+      interestingOnly: z.boolean().default(true).describe('Drop decorative and empty nodes.'),
+      maxNodes: z.number().int().min(1).max(10_000).default(2_000),
+    }),
+    readOnly: true,
+    output: 'text',
+  },
+  'page.click': {
+    tool: 'click',
+    description: 'Click an element by ref from snapshot_page, or at viewport coordinates x/y. Sends real mouse events.',
+    params: z.object({
+      tabId,
+      ref: ref.optional(),
+      x: z.number().optional(),
+      y: z.number().optional(),
+      button: z.enum(['left', 'right', 'middle']).default('left'),
+      clickCount: z.number().int().min(1).max(3).default(1),
+    }),
+    readOnly: false,
+  },
+  'page.hover': {
+    tool: 'hover',
+    description: 'Move the mouse over an element by ref from snapshot_page.',
+    params: z.object({ tabId, ref }),
+    readOnly: false,
+  },
+  'page.type': {
+    tool: 'type_text',
+    description:
+      'Type text. If ref is given, the element is focused first; clear replaces its current value. submit presses Enter afterwards.',
+    params: z.object({
+      tabId,
+      text: z.string(),
+      ref: ref.optional(),
+      clear: z.boolean().default(false),
+      submit: z.boolean().default(false),
+    }),
+    readOnly: false,
+  },
+  'page.pressKey': {
+    tool: 'press_key',
+    description:
+      'Press a key or combination in the focused element, e.g. "Enter", "Escape", "ArrowDown", "Tab", "a", "Control+a", "Meta+Shift+K".',
+    params: z.object({ tabId, key: z.string().min(1) }),
+    readOnly: false,
+  },
+  'page.scroll': {
+    tool: 'scroll',
+    description: 'Scroll with the mouse wheel over an element by ref, or over the middle of the viewport. Positive deltaY scrolls down.',
+    params: z.object({
+      tabId,
+      ref: ref.optional(),
+      deltaX: z.number().default(0),
+      deltaY: z.number().default(0),
+    }),
+    readOnly: false,
+  },
+  'page.screenshot': {
+    tool: 'screenshot',
+    description: 'Capture a screenshot of a tab. fullPage captures the whole scrollable page.',
+    params: z.object({
+      tabId,
+      fullPage: z.boolean().default(false),
+      format: z.enum(['png', 'jpeg']).default('png'),
+      quality: z.number().int().min(0).max(100).optional().describe('JPEG quality.'),
+    }),
+    readOnly: true,
+    output: 'image',
+  },
+  'page.waitFor': {
+    tool: 'wait_for',
+    description: 'Wait until text appears on the page (or disappears, with gone: true), up to timeoutMs.',
+    params: z.object({
+      tabId,
+      text: z.string().min(1),
+      gone: z.boolean().default(false),
+      timeoutMs: z.number().int().min(0).max(25_000).default(10_000),
+    }),
+    readOnly: true,
+  },
+  'page.evaluate': {
+    tool: 'evaluate',
+    description:
+      'Evaluate a JavaScript expression in the page and return its JSON-serialisable value. Promises are awaited. It runs with the page\'s privileges; prefer snapshot_page and the input tools for interaction.',
+    params: z.object({ tabId, expression: z.string().min(1) }),
+    readOnly: false,
+  },
+  'cdp.send': {
+    tool: 'cdp_send',
+    description:
+      'Send a raw Chrome DevTools Protocol command to a tab, e.g. method "Network.getCookies". Use only when no other tool fits.',
+    params: z.object({
+      tabId,
+      method: z.string().regex(/^[A-Z][A-Za-z]*\.[a-z][A-Za-z]*$/),
+      params: z.record(z.string(), z.unknown()).default({}),
+    }),
+    readOnly: false,
+    destructive: true,
+  },
+  'cdp.detach': {
+    tool: 'detach_debugger',
+    description: 'Detach the Chrome debugger from a tab, removing its banner. Page tools re-attach when next used.',
+    params: z.object({ tabId }),
+    readOnly: false,
+  },
 } as const satisfies Record<
   string,
-  { tool: string; description: string; params: z.ZodObject; readOnly: boolean; destructive?: boolean }
+  {
+    tool: string;
+    description: string;
+    params: z.ZodObject;
+    readOnly: boolean;
+    destructive?: boolean;
+    output?: 'text' | 'image';
+  }
 >;
+
+export interface ImageResult {
+  data: string;
+  mimeType: string;
+}
 
 export type Method = keyof typeof toolDefinitions;
 export type ParamsOf<M extends Method> = z.output<(typeof toolDefinitions)[M]['params']>;

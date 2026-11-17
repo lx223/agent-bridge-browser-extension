@@ -1,5 +1,6 @@
 import { DEFAULT_PORT } from '@agent-browser-bridge/protocol';
 import { BridgeClient } from './bridgeClient.ts';
+import { listenForDetach } from './debugger.ts';
 import { dispatch } from './handlers.ts';
 
 const WELCOME_PAGE = 'src/welcome/index.html';
@@ -12,6 +13,8 @@ const client = new BridgeClient(`ws://127.0.0.1:${DEFAULT_PORT}`, dispatch, (sta
     /* no welcome page open */
   });
 });
+
+listenForDetach();
 
 const openWelcome = () => chrome.tabs.create({ url: chrome.runtime.getURL(WELCOME_PAGE) });
 

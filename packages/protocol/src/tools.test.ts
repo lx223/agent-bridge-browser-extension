@@ -17,3 +17,15 @@ describe('toolDefinitions', () => {
     expect(() => toolDefinitions['tabs.group'].params.parse({ tabIds: [] })).toThrow();
   });
 });
+
+describe('page tool params', () => {
+  it('requires refs shaped like snapshot refs', () => {
+    expect(() => toolDefinitions['page.click'].params.parse({ tabId: 1, ref: '12' })).toThrow();
+    expect(toolDefinitions['page.click'].params.parse({ tabId: 1, ref: 'e12' })).toMatchObject({ button: 'left', clickCount: 1 });
+  });
+
+  it('accepts only Domain.method names for raw CDP', () => {
+    expect(() => toolDefinitions['cdp.send'].params.parse({ tabId: 1, method: 'eval' })).toThrow();
+    expect(toolDefinitions['cdp.send'].params.parse({ tabId: 1, method: 'Network.getCookies' }).params).toEqual({});
+  });
+});
