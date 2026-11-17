@@ -97,6 +97,8 @@ A tool whose browser is not connected returns an error saying so.
 
 A typical loop is `chrome_open_tab` or `chrome_navigate`, then `chrome_snapshot_page`, act on a ref, and snapshot again.
 
+`chrome_navigate` with `back` or `forward` uses `chrome.tabs.goBack` and `chrome.tabs.goForward`. Chrome refuses those with "Cannot find a next page in history." in a tab whose history was built only by agent navigations, with no click or key press in the page. When that happens the extension attaches the debugger, moves to the neighbouring history entry with `Page.navigateToHistoryEntry`, and detaches again once the page has loaded, so the debugging banner shows only for that step. If the debugger was already attached for page tools it stays attached. At either end of the history the tool reports that the tab is on its first or last page.
+
 While a page tool is in use, Chrome shows a banner saying Agent Browser Bridge started debugging the browser. The extension detaches from a tab after five minutes without page commands, or when `chrome_detach_debugger` is called. Chrome does not let extensions debug `chrome://` pages, other extensions' pages, DevTools or the Chrome Web Store, so page tools fail there.
 
 ## Icons

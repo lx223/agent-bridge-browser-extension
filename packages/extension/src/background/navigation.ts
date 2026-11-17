@@ -1,4 +1,5 @@
 import type { ParamsOf } from '@agent-browser-bridge/protocol';
+import { stepHistory } from './history.ts';
 import { serializeTab } from './serialize.ts';
 
 function watchForLoad(timeoutMs: number) {
@@ -56,15 +57,17 @@ export async function openTab({ url, windowId, active }: ParamsOf<'tabs.create'>
 
 export async function navigateTab({ tabId, to, timeoutMs }: ParamsOf<'tabs.navigate'>) {
   const watcher = watchForLoad(timeoutMs);
+  let release = async () => {};
   try {
     const action = to.trim().toLowerCase();
-    if (action === 'back') await chrome.tabs.goBack(tabId);
-    else if (action === 'forward') await chrome.tabs.goForward(tabId);
+    if (action === 'back' || action === 'forward') release = await stepHistory(tabId, action);
     else if (action === 'reload') await chrome.tabs.reload(tabId);
     else await chrome.tabs.update(tabId, { url: normalizeUrl(to) });
     return await loadedTab(tabId, await watcher.until(tabId));
   } catch (err) {
     watcher.cancel();
     throw err;
+  } finally {
+    await release();
   }
 }
