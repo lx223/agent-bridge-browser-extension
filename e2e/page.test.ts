@@ -123,6 +123,31 @@ describe('page control through the built server and extension', () => {
     expect(await go('forward')).toMatchObject({ url: harness.fixture('form.html'), loaded: true });
   });
 
+  it('goes back and forward directly after navigating to a url', async () => {
+    const go = (to: string) => harness.agent.call<Tab>('chrome_navigate', { tabId, to });
+    await go(harness.fixture('second.html'));
+    expect(await go('back')).toMatchObject({ title: 'Fixture form', url: harness.fixture('form.html'), loaded: true });
+    expect(await go('forward')).toMatchObject({ title: 'Second page', url: harness.fixture('second.html'), loaded: true });
+    expect(await harness.agent.call('chrome_detach_debugger', { tabId })).toEqual({ detached: false });
+  });
+
+  it('keeps the debugger attached when stepping through history during page control', async () => {
+    const go = (to: string) => harness.agent.call<Tab>('chrome_navigate', { tabId, to });
+    await go(harness.fixture('second.html'));
+    expect(await snapshot()).toContain('Page: Second page');
+    expect(await go('back')).toMatchObject({ url: harness.fixture('form.html'), loaded: true });
+    expect(await harness.agent.call('chrome_detach_debugger', { tabId })).toEqual({ detached: true });
+  });
+
+  it('reports the edge of history when there is nowhere to go', async () => {
+    const back = await harness.agent.raw('chrome_navigate', { tabId, to: 'back' });
+    expect(back.isError).toBe(true);
+    expect(back.text).toContain('Cannot go back: the tab is on the first page of its history.');
+    const forward = await harness.agent.raw('chrome_navigate', { tabId, to: 'forward' });
+    expect(forward.isError).toBe(true);
+    expect(forward.text).toContain('Cannot go forward: the tab is on the last page of its history.');
+  });
+
   it('sends raw CDP commands and detaches the debugger', async () => {
     const result = await harness.agent.call<{ result: { value: number } }>('chrome_cdp_send', {
       tabId,
