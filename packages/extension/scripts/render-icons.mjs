@@ -9,7 +9,7 @@ const pngDir = join(root, 'public/icons');
 const chrome = process.env.CHROME_PATH ?? '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 
 const BRAND = '#4f46e5';
-const IDLE = '#6b7280';
+const OFFLINE = '#9ca3af';
 const GREEN = '#22c55e';
 
 function iconSvg({ background, dot }) {
@@ -33,7 +33,7 @@ function iconSvg({ background, dot }) {
 const variants = {
   icon: { svg: { background: BRAND }, sizes: [16, 32, 48, 128] },
   connected: { svg: { background: BRAND, dot: GREEN }, sizes: [16, 32] },
-  disconnected: { svg: { background: IDLE }, sizes: [16, 32] },
+  disconnected: { svg: { background: BRAND, dot: OFFLINE }, sizes: [16, 32] },
 };
 
 mkdirSync(svgDir, { recursive: true });

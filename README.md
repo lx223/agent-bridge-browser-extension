@@ -31,7 +31,7 @@ claude mcp add agent-browser-bridge -- npx -y agent-browser-bridge-mcp
 
 The status on the setup page turns green when your agent is connected.
 
-The toolbar icon shows the same status: a gray **A** means no agent is connected, and a purple **A** with a green dot means an agent is connected.
+The toolbar icon shows the same status: a gray dot on the **A** means no agent is connected, and a green dot means an agent is connected.
 
 ## Multiple agent sessions
 
