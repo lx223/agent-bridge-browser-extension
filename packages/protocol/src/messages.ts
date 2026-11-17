@@ -37,12 +37,16 @@ export const responseMessage = z.discriminatedUnion('ok', [
 export const pingMessage = z.object({ type: z.literal('ping') });
 export const pongMessage = z.object({ type: z.literal('pong') });
 
+/** Server → extension: every agent session sharing the bridge, resent whenever it changes. */
+export const agentsMessage = z.object({ type: z.literal('agents'), agents: z.array(agentInfo) });
+
 export const extensionToServer = z.union([helloMessage, responseMessage, pingMessage]);
-export const serverToExtension = z.union([requestMessage, pongMessage]);
+export const serverToExtension = z.union([requestMessage, pongMessage, agentsMessage]);
 
 export type HelloMessage = z.infer<typeof helloMessage>;
 export type RequestMessage = z.infer<typeof requestMessage>;
 export type AgentInfo = z.infer<typeof agentInfo>;
+export type AgentsMessage = z.infer<typeof agentsMessage>;
 export type ResponseMessage = z.infer<typeof responseMessage>;
 export type ExtensionToServer = z.infer<typeof extensionToServer>;
 export type ServerToExtension = z.infer<typeof serverToExtension>;
@@ -53,8 +57,12 @@ export const relayStatusMessage = z.object({
   extensions: z.array(helloMessage).optional(),
 });
 
-export const relayToHost = requestMessage;
+/** Relay → host: the relaying agent session, sent on joining and whenever it changes. */
+export const relayAgentMessage = z.object({ type: z.literal('agent'), agent: agentInfo });
+
+export const relayToHost = z.union([requestMessage, relayAgentMessage]);
 export const hostToRelay = z.union([responseMessage, relayStatusMessage]);
 
 export type RelayStatusMessage = z.infer<typeof relayStatusMessage>;
 export type HostToRelay = z.infer<typeof hostToRelay>;
+export type RelayToHost = z.infer<typeof relayToHost>;

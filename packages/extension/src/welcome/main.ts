@@ -1,6 +1,7 @@
 import { SERVER_PACKAGE } from '@agent-browser-bridge/protocol';
 import type { PageEvent, Properties } from '../background/analytics.ts';
 import type { ConnectionStatus } from '../background/bridgeClient.ts';
+import { renderAgentList } from '../settings/agentList.ts';
 import { analyticsAvailable, bindAnalyticsToggle } from '../settings/analyticsToggle.ts';
 import { claudeCodeCommand, cursorInstallUrl, mcpJsonConfig, vscodeInstallUrl } from './install.ts';
 
@@ -37,6 +38,7 @@ function render(status: ConnectionStatus | undefined) {
   const state = status?.state ?? 'disconnected';
   $('status').dataset.state = state;
   $('status-text').textContent = STATUS_TEXT[state];
+  renderAgentList($('agents'), status?.agents ?? []);
 }
 
 chrome.runtime.onMessage.addListener((message) => {

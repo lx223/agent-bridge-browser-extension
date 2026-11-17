@@ -18,13 +18,15 @@ const bridge = new ExtensionBridge({
   },
 });
 
+const server = createMcpServer(bridge, pkg.version);
+server.server.oninitialized = () => bridge.agentChanged();
+
 try {
   await bridge.start();
 } catch (err) {
   log(err instanceof Error ? err.message : String(err));
 }
 
-const server = createMcpServer(bridge, pkg.version);
 await server.connect(new StdioServerTransport());
 
 const shutdown = async () => {

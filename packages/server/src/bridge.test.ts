@@ -121,6 +121,37 @@ describe('ExtensionBridge', () => {
     }
   });
 
+  it('tells the extension which agent sessions share the bridge', async () => {
+    const agent = (name: string | null) => ({ serverVersion: '9.9.9', client: name ? { name, version: '1.0' } : null });
+    let hostClient: string | null = null;
+    const port = await startBridge({ agentInfo: () => agent(hostClient) });
+    const lists: unknown[] = [];
+    const ext = await connect(port, EXT_ORIGIN);
+    ext.on('message', (raw) => {
+      const msg = JSON.parse(raw.toString());
+      if (msg.type === 'agents') lists.push(msg.agents);
+    });
+    ext.send(JSON.stringify({ type: 'hello', protocolVersion: PROTOCOL_VERSION, extensionVersion: '0.1.0', userAgent: 'test' }));
+    await expect.poll(() => lists.at(-1)).toEqual([agent(null)]);
+
+    hostClient = 'host-agent';
+    bridge!.agentChanged();
+    await expect.poll(() => lists.at(-1)).toEqual([agent('host-agent')]);
+
+    let relayClient = 'relay-agent';
+    const relay = new ExtensionBridge({ port, agentInfo: () => agent(relayClient) });
+    try {
+      await relay.start();
+      await expect.poll(() => lists.at(-1)).toEqual([agent('host-agent'), agent('relay-agent')]);
+      relayClient = 'renamed-agent';
+      relay.agentChanged();
+      await expect.poll(() => lists.at(-1)).toEqual([agent('host-agent'), agent('renamed-agent')]);
+    } finally {
+      await relay.stop();
+    }
+    await expect.poll(() => lists.at(-1)).toEqual([agent('host-agent')]);
+  });
+
   it('times out unanswered requests', async () => {
     const port = await startBridge({ requestTimeoutMs: 50 });
     const ws = await connect(port, EXT_ORIGIN);

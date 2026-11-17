@@ -167,6 +167,22 @@ describe('BridgeClient', () => {
     expect(peer.received[1]).toMatchObject({ id: 'e', ok: true });
   });
 
+  it('tracks the agent sessions the server reports and forgets them on disconnect', async () => {
+    const { client, states, peer } = await connected();
+    const agents = [
+      { serverVersion: '1.0.0', client: { name: 'claude-code', version: '2.0.0' } },
+      { serverVersion: '1.0.0', client: null },
+    ];
+    expect(client.status.agents).toEqual([]);
+    peer.socket.send(JSON.stringify({ type: 'agents', agents }));
+    await until(() => client.status.agents.length === 2);
+    expect(client.status).toMatchObject({ state: 'connected', agents });
+    expect(states).toEqual(['connecting', 'connected', 'connected']);
+    peer.socket.terminate();
+    await until(() => client.status.state === 'disconnected');
+    expect(client.status.agents).toEqual([]);
+  });
+
   it('pings every 20 seconds to keep the service worker alive', async () => {
     const { peer } = await connected();
     await vi.advanceTimersByTimeAsync(19_999);
