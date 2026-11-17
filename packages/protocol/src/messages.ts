@@ -6,6 +6,9 @@ export const helloMessage = z.object({
   protocolVersion: z.number().int(),
   extensionVersion: z.string(),
   userAgent: z.string(),
+  browser: z.string().default('chrome'),
+  instanceId: z.string().optional(),
+  label: z.string().optional(),
 });
 
 export const agentInfo = z.object({
@@ -19,6 +22,8 @@ export const requestMessage = z.object({
   id: z.string(),
   method: z.string(),
   params: z.unknown(),
+  browser: z.string().optional(),
+  instance: z.string().optional(),
   agent: agentInfo.optional(),
 });
 
@@ -45,6 +50,7 @@ export type ServerToExtension = z.infer<typeof serverToExtension>;
 export const relayStatusMessage = z.object({
   type: z.literal('status'),
   extension: helloMessage.nullable(),
+  extensions: z.array(helloMessage).optional(),
 });
 
 export const relayToHost = requestMessage;

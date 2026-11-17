@@ -9,7 +9,7 @@ import { z } from 'zod';
 const tabId = z.number().int().nonnegative();
 const windowId = z.number().int().nonnegative();
 const groupId = z.number().int().nonnegative();
-const ref = z.string().regex(/^e\d+$/).describe('Element ref from snapshot_page, e.g. "e42".');
+const ref = z.string().regex(/^e\d+$/).describe('Element ref from chrome_snapshot_page, e.g. "e42".');
 
 export const groupColor = z.enum(['grey', 'blue', 'red', 'yellow', 'green', 'pink', 'purple', 'cyan', 'orange']);
 export type GroupColor = z.infer<typeof groupColor>;
@@ -78,7 +78,7 @@ export const toolDefinitions = {
   },
   'tabs.close': {
     tool: 'close_tabs',
-    description: 'Close tabs. This cannot be undone with undo_last_plan; confirm with the user before closing.',
+    description: 'Close tabs. This cannot be undone; confirm with the user before closing.',
     params: z.object({ tabIds: z.array(tabId).min(1) }),
     readOnly: false,
     destructive: true,
@@ -86,7 +86,7 @@ export const toolDefinitions = {
   'plan.apply': {
     tool: 'apply_tab_plan',
     description:
-      'Reorganise tabs in one step. Each group entry lists the tabs it should contain; a group whose title matches an existing group (in the same window when windowId is given) is reused, otherwise one is created. Tabs listed in ungroupTabIds are removed from their groups. Use dryRun to preview. The prior layout is saved so undo_last_plan can restore it.',
+      'Reorganise tabs in one step. Each group entry lists the tabs it should contain; a group whose title matches an existing group (in the same window when windowId is given) is reused, otherwise one is created. Tabs listed in ungroupTabIds are removed from their groups. Use dryRun to preview. The prior layout is saved so chrome_undo_last_plan can restore it.',
     params: z.object({
       windowId: windowId.optional().describe('Window to create new groups in. Defaults to the window of the first tab in each group.'),
       groups: z
@@ -99,7 +99,7 @@ export const toolDefinitions = {
   },
   'plan.undo': {
     tool: 'undo_last_plan',
-    description: 'Restore the tab and group layout saved before the last apply_tab_plan (best effort; closed tabs are not reopened).',
+    description: 'Restore the tab and group layout saved before the last chrome_apply_tab_plan (best effort; closed tabs are not reopened).',
     params: z.object({}),
     readOnly: false,
   },
@@ -127,7 +127,7 @@ export const toolDefinitions = {
   'page.snapshot': {
     tool: 'snapshot_page',
     description:
-      'Read the page in a tab as an accessibility tree. Each element that can be acted on carries a ref like [ref=e42]; pass it to click, type_text, hover or scroll. Take a fresh snapshot after the page changes. Attaches the Chrome debugger to the tab, which shows a banner.',
+      'Read the page in a tab as an accessibility tree. Each element that can be acted on carries a ref like [ref=e42]; pass it to chrome_click, chrome_type_text, chrome_hover or chrome_scroll. Take a fresh snapshot after the page changes. Attaches the Chrome debugger to the tab, which shows a banner.',
     params: z.object({
       tabId,
       interestingOnly: z.boolean().default(true).describe('Drop decorative and empty nodes.'),
@@ -138,7 +138,7 @@ export const toolDefinitions = {
   },
   'page.click': {
     tool: 'click',
-    description: 'Click an element by ref from snapshot_page, or at viewport coordinates x/y. Sends real mouse events.',
+    description: 'Click an element by ref from chrome_snapshot_page, or at viewport coordinates x/y. Sends real mouse events.',
     params: z.object({
       tabId,
       ref: ref.optional(),
@@ -151,7 +151,7 @@ export const toolDefinitions = {
   },
   'page.hover': {
     tool: 'hover',
-    description: 'Move the mouse over an element by ref from snapshot_page.',
+    description: 'Move the mouse over an element by ref from chrome_snapshot_page.',
     params: z.object({ tabId, ref }),
     readOnly: false,
   },
@@ -212,7 +212,7 @@ export const toolDefinitions = {
   'page.evaluate': {
     tool: 'evaluate',
     description:
-      'Evaluate a JavaScript expression in the page and return its JSON-serialisable value. Promises are awaited. It runs with the page\'s privileges; prefer snapshot_page and the input tools for interaction.',
+      'Evaluate a JavaScript expression in the page and return its JSON-serialisable value. Promises are awaited. It runs with the page\'s privileges; prefer chrome_snapshot_page and the input tools for interaction.',
     params: z.object({ tabId, expression: z.string().min(1) }),
     readOnly: false,
   },
@@ -254,3 +254,15 @@ export interface ImageResult {
 export type Method = keyof typeof toolDefinitions;
 export type ParamsOf<M extends Method> = z.output<(typeof toolDefinitions)[M]['params']>;
 export const methods = Object.keys(toolDefinitions) as Method[];
+
+export const browserApis = {
+  chrome: methods,
+  safari: ['windows.list', 'tabs.list', 'tabs.move', 'tabs.close', 'tabs.create', 'tabs.navigate'],
+} as const satisfies Record<string, readonly Method[]>;
+
+export type Browser = keyof typeof browserApis;
+export const browsers = Object.keys(browserApis) as Browser[];
+export const browserLabels: Record<Browser, string> = { chrome: 'Chrome', safari: 'Safari' };
+
+export const STATUS_TOOL = 'browser_status';
+export const browserToolName = (browser: Browser, method: Method) => `${browser}_${toolDefinitions[method].tool}`;

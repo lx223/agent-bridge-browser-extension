@@ -28,7 +28,7 @@ export const refFor = (backendNodeId: number) => `e${backendNodeId}`;
 
 export function backendNodeIdFromRef(ref: string): number {
   const match = /^e(\d+)$/.exec(ref);
-  if (!match) throw new Error(`Invalid ref "${ref}"; use a ref from snapshot_page such as "e42".`);
+  if (!match) throw new Error(`Invalid ref "${ref}"; use a ref from chrome_snapshot_page such as "e42".`);
   return Number(match[1]);
 }
 
