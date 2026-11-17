@@ -13,7 +13,7 @@ There are three layers. Presubmit runs all of them on every pull request.
 Tests live next to the code as `*.test.ts` and run with Vitest in a Node environment.
 
 - `packages/server/src/mcp.test.ts` connects a real MCP client to `createMcpServer` over an in-memory transport with a fake bridge. It checks the tool list against the protocol, the published schemas and annotations, the text, JSON and image result formats, and error results.
-- `packages/extension/src/background/bridgeClient.test.ts` runs `BridgeClient` against a real local WebSocket server with fake timers. It covers the hello handshake, request dispatch, error responses, malformed messages, keepalive pings, reconnecting and backoff. The test uses the `ws` client as the `WebSocket` global because it reports refused connections the way Chrome does on every supported Node version.
+- `packages/extension/src/background/bridgeClient.test.ts` runs `BridgeClient` against a real local WebSocket server with fake timers. It covers the hello handshake, the list of connected agent sessions, request dispatch, error responses, malformed messages, keepalive pings, reconnecting and backoff. The test uses the `ws` client as the `WebSocket` global because it reports refused connections the way Chrome does on every supported Node version.
 - `packages/extension/src/test/` holds in-memory fakes of `chrome.tabs`, `chrome.tabGroups`, `chrome.storage.session` and `chrome.debugger` for the plan and page logic.
 
 ## Coverage

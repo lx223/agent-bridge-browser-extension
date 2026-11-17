@@ -7,6 +7,7 @@ export interface ConnectionStatus {
   state: ConnectionState;
   url: string;
   since: number;
+  agents: AgentInfo[];
 }
 
 const KEEPALIVE_MS = 20_000; // < 30s idle limit for MV3 service workers
@@ -28,7 +29,7 @@ export class BridgeClient {
     private readonly dispatch: (method: string, params: unknown, agent: AgentInfo | null) => Promise<unknown>,
     private readonly onStatus: (status: ConnectionStatus) => void = () => {},
   ) {
-    this._status = { state: 'disconnected', url, since: Date.now() };
+    this._status = { state: 'disconnected', url, since: Date.now(), agents: [] };
   }
 
   get status() {
@@ -81,6 +82,11 @@ export class BridgeClient {
     } catch {
       return;
     }
+    if (msg.type === 'agents') {
+      this._status = { ...this._status, agents: msg.agents };
+      this.onStatus(this._status);
+      return;
+    }
     if (msg.type !== 'request') return;
     try {
       const result = await this.dispatch(msg.method, msg.params, msg.agent ?? null);
@@ -96,7 +102,7 @@ export class BridgeClient {
 
   private setState(state: ConnectionState) {
     if (this._status.state === state) return;
-    this._status = { state, url: this.url, since: Date.now() };
+    this._status = { state, url: this.url, since: Date.now(), agents: [] };
     this.onStatus(this._status);
   }
 }

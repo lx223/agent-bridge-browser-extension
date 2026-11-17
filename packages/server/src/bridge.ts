@@ -9,6 +9,7 @@ import {
   type AgentInfo,
   type HelloMessage,
   type HostToRelay,
+  type RelayToHost,
   type ResponseMessage,
   type ServerToExtension,
 } from '@agent-browser-bridge/protocol';
@@ -57,7 +58,7 @@ export class ExtensionBridge {
 
   private wss?: WebSocketServer;
   private extensions = new Map<WebSocket, HelloMessage | undefined>();
-  private relays = new Set<WebSocket>();
+  private relays = new Map<WebSocket, AgentInfo | undefined>();
 
   private upstream?: WebSocket;
   private upstreamBrowsers: HelloMessage[] = [];
@@ -124,6 +125,30 @@ export class ExtensionBridge {
       throw new Error(`Several ${browser} instances are connected: ${listed}. Pass instance to choose one.`);
     }
     return candidates[0][0];
+  }
+
+  agentChanged() {
+    if (this.role === 'host') this.broadcastAgents();
+    else if (this.role === 'relay' && this.upstream) this.announceAgent(this.upstream);
+  }
+
+  agents(): AgentInfo[] {
+    const own = this.opts.agentInfo?.();
+    const relayed = [...this.relays.values()].filter((agent): agent is AgentInfo => agent !== undefined);
+    return own ? [own, ...relayed] : relayed;
+  }
+
+  private broadcastAgents() {
+    const message: ServerToExtension = { type: 'agents', agents: this.agents() };
+    for (const [socket] of this.connectedBrowsers()) {
+      if (socket.readyState === WebSocket.OPEN) socket.send(JSON.stringify(message));
+    }
+  }
+
+  private announceAgent(upstream: WebSocket) {
+    const agent = this.opts.agentInfo?.();
+    if (!agent || upstream.readyState !== WebSocket.OPEN) return;
+    upstream.send(JSON.stringify({ type: 'agent', agent } satisfies RelayToHost));
   }
 
   private connectedBrowsers(): [WebSocket, HelloMessage][] {
@@ -267,6 +292,7 @@ export class ExtensionBridge {
         this.error = undefined;
         this.boundPort = this.opts.port;
         this.log(`Another agent session hosts the bridge; relaying through it on port ${this.opts.port}`);
+        this.announceAgent(ws);
         resolve();
       });
       ws.on('message', (raw) => {
@@ -302,12 +328,17 @@ export class ExtensionBridge {
   }
 
   private attachRelay(socket: WebSocket) {
-    this.relays.add(socket);
+    this.relays.set(socket, undefined);
     this.log(`Agent session joined (${this.relays.size} relayed)`);
     this.sendStatus(socket);
     socket.on('message', (raw) => {
       const msg = this.parse(raw, relayToHost);
       if (!msg) return;
+      if (msg.type === 'agent') {
+        this.relays.set(socket, msg.agent);
+        this.broadcastAgents();
+        return;
+      }
       this.request(msg.browser ?? 'chrome', msg.method, msg.params, msg.agent ?? null, msg.instance).then(
         (result) => this.reply(socket, { type: 'response', id: msg.id, ok: true, result }),
         (err) => this.reply(socket, { type: 'response', id: msg.id, ok: false, error: errorMessage(err) }),
@@ -316,6 +347,7 @@ export class ExtensionBridge {
     socket.on('close', () => {
       this.relays.delete(socket);
       this.log(`Agent session left (${this.relays.size} relayed)`);
+      this.broadcastAgents();
     });
   }
 
@@ -329,7 +361,7 @@ export class ExtensionBridge {
   }
 
   private broadcastStatus() {
-    for (const relay of this.relays) this.sendStatus(relay);
+    for (const relay of this.relays.keys()) this.sendStatus(relay);
   }
 
   private attachExtension(socket: WebSocket) {
@@ -348,6 +380,7 @@ export class ExtensionBridge {
           this.replaceSameInstance(socket, msg);
           this.extensions.set(socket, msg);
           this.log(`Extension ${msg.extensionVersion} connected from ${msg.label ?? msg.browser}`);
+          socket.send(JSON.stringify({ type: 'agents', agents: this.agents() } satisfies ServerToExtension));
           this.broadcastStatus();
           return;
         case 'ping':

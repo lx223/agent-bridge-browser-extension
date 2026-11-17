@@ -43,6 +43,8 @@ describe('the packaged extension', () => {
     const { page, errors } = await openExtensionPage('src/welcome/index.html');
     await page.waitForSelector('#status[data-state="connected"]');
     expect(await page.textContent('#status-text')).toMatch(/^Connected/);
+    await page.waitForSelector('#agents li');
+    expect(await page.textContent('#agents li')).toMatch(/^e2e 0\.0\.0 server /);
     expect(await page.textContent('#claude-code-cmd')).toContain(SERVER_PACKAGE);
     expect(JSON.parse((await page.textContent('#json-config'))!)).toBeTypeOf('object');
     expect(await page.getAttribute('#cursor-link', 'href')).toMatch(/^cursor:/);
@@ -53,6 +55,8 @@ describe('the packaged extension', () => {
 
   it('renders the options page', async () => {
     const { page, errors } = await openExtensionPage('src/options/index.html');
+    await page.waitForSelector('#connection[data-state="connected"] #agents li');
+    expect(await page.textContent('#agents li')).toMatch(/^e2e 0\.0\.0 server /);
     expect(await page.getAttribute('#privacy-link', 'href')).toMatch(/PRIVACY\.md$/);
     const settingHidden = await page.locator('#analytics-setting').isHidden();
     const noticeHidden = await page.locator('#analytics-unavailable').isHidden();
