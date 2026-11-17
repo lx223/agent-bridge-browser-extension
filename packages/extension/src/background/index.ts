@@ -1,12 +1,20 @@
 import { DEFAULT_PORT, type AgentInfo } from '@agent-browser-bridge/protocol';
 import { Analytics, ANALYTICS_ENABLED_KEY, isPageEvent, type Properties } from './analytics.ts';
-import { BridgeClient } from './bridgeClient.ts';
+import { BridgeClient, type ConnectionState } from './bridgeClient.ts';
 import { listenForDetach } from './debugger.ts';
 import { dispatch } from './handlers.ts';
 import { UsageTracker } from './usage.ts';
 
 const WELCOME_PAGE = 'src/welcome/index.html';
 const RECONNECT_ALARM = 'agent-browser-bridge-reconnect';
+
+const showStatus = (state: ConnectionState) => {
+  const icon = state === 'connected' ? 'connected' : 'disconnected';
+  void chrome.action.setIcon({ path: { 16: `icons/${icon}-16.png`, 32: `icons/${icon}-32.png` } });
+  void chrome.action.setTitle({
+    title: state === 'connected' ? 'Agent Browser Bridge: agent connected' : 'Agent Browser Bridge: no agent connected',
+  });
+};
 
 const analytics = new Analytics({
   apiKey: import.meta.env.VITE_POSTHOG_KEY,
@@ -43,8 +51,7 @@ const client = new BridgeClient(
   (status) => {
     usage.setConnected(status.state === 'connected');
     if (status.state === 'connected') void usage.milestone('first_connected');
-    void chrome.action.setBadgeText({ text: status.state === 'connected' ? 'on' : '' });
-    void chrome.action.setBadgeBackgroundColor({ color: '#16a34a' });
+    showStatus(status.state);
     chrome.runtime.sendMessage({ type: 'STATUS_CHANGED', status }).catch(() => {
       /* no welcome page open */
     });

@@ -7,7 +7,8 @@
   "description": "Chrome extension that exposes browser APIs to AI agents over MCP.",
   "scripts": {
     "build": "vite build",
-    "dev": "vite build --watch --mode development"
+    "dev": "vite build --watch --mode development",
+    "icons": "node scripts/render-icons.mjs"
   },
   "dependencies": {
     "@agent-browser-bridge/protocol": "*",
