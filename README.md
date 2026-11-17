@@ -31,6 +31,12 @@ claude mcp add agent-browser-bridge -- npx -y agent-browser-bridge-mcp
 
 The status on the setup page turns green when your agent is connected.
 
+## Multiple agent sessions
+
+Several agent sessions can use the browser at the same time. The first MCP server process to start listens on port 17373 and holds the extension connection. Later processes connect to it on `ws://127.0.0.1:17373/relay` and forward their requests through it. If the hosting process exits, one of the remaining processes takes over the port and the extension reconnects to it automatically.
+
+All sessions share one browser, so `undo_last_plan` undoes the most recent plan applied by any session.
+
 ## What your agent can do
 
 **Tabs and windows** use Chrome's extension APIs: `list_windows`, `list_tabs`, `list_tab_groups`, `group_tabs`, `update_tab_group`, `ungroup_tabs`, `move_tabs`, `move_tab_group`, `close_tabs`, `apply_tab_plan`, `undo_last_plan`, `open_tab` and `navigate`.
