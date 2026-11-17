@@ -8,12 +8,18 @@ export const helloMessage = z.object({
   userAgent: z.string(),
 });
 
+export const agentInfo = z.object({
+  serverVersion: z.string(),
+  client: z.object({ name: z.string(), version: z.string() }).nullable(),
+});
+
 /** Server → extension: call a bridge method. */
 export const requestMessage = z.object({
   type: z.literal('request'),
   id: z.string(),
   method: z.string(),
   params: z.unknown(),
+  agent: agentInfo.optional(),
 });
 
 /** Extension → server: result of a request. */
@@ -31,6 +37,7 @@ export const serverToExtension = z.union([requestMessage, pongMessage]);
 
 export type HelloMessage = z.infer<typeof helloMessage>;
 export type RequestMessage = z.infer<typeof requestMessage>;
+export type AgentInfo = z.infer<typeof agentInfo>;
 export type ResponseMessage = z.infer<typeof responseMessage>;
 export type ExtensionToServer = z.infer<typeof extensionToServer>;
 export type ServerToExtension = z.infer<typeof serverToExtension>;

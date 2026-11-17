@@ -37,6 +37,10 @@ jobs:
       - run: npm run typecheck
       - run: npm test
       - run: npm run build
+        env:
+          VITE_POSTHOG_KEY: phc_FtV2hwQzJhR4Ul4ts9ViUxKZIP9MlDPMjMyvvPfZFjg
+          VITE_POSTHOG_HOST: https://eu.i.posthog.com
+          VITE_UNINSTALL_SURVEY_URL: https://eu.posthogsurveys.com/external_surveys/01a1eb02-9bf0-0000-54ae-59e3f95e3984
 
       - name: Zip extension
         run: cp LICENSE packages/extension/dist/ && cd packages/extension/dist && zip -r "$GITHUB_WORKSPACE/agent-browser-bridge-${{ steps.version.outputs.extension }}.zip" .
