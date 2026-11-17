@@ -45,4 +45,4 @@ The store declarations state that data is not sold or transferred outside approv
 5. Submit for review. The 0.3.0 submission kept the existing tester distribution and enabled automatic publication after approval.
 6. Verify that the dashboard reports Pending review. Submission does not mean the update is already published.
 
-The MCP server is released separately through the Publish npm package workflow and any approval required on npm's staged packages page.
+The MCP server is released separately through the Publish npm package workflow. See [npm publishing](npm-publishing.md) for its trusted publisher configuration.
