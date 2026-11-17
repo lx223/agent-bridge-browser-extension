@@ -3,8 +3,13 @@ type Responder = (params: Record<string, unknown>) => unknown;
 export function installFakeDebugger(responders: Record<string, Responder> = {}) {
   const commands: { method: string; params: Record<string, unknown> }[] = [];
   const attachedTabs = new Set<number>();
+  const eventListeners = new Set<(source: { tabId: number }, method: string, params?: object) => void>();
+  const emit = (tabId: number, method: string, params: object) => {
+    for (const listener of eventListeners) listener({ tabId }, method, params);
+  };
   const fake = {
     debugger: {
+      onEvent: { addListener: (listener: (source: { tabId: number }, method: string, params?: object) => void) => eventListeners.add(listener) },
       attach: async ({ tabId }: { tabId: number }) => {
         if (attachedTabs.has(tabId)) throw new Error(`Another debugger is already attached to the tab with id: ${tabId}.`);
         attachedTabs.add(tabId);
@@ -24,5 +29,5 @@ export function installFakeDebugger(responders: Record<string, Responder> = {}) 
     },
   };
   (globalThis as unknown as { chrome: unknown }).chrome = fake;
-  return { commands, attachedTabs };
+  return { commands, attachedTabs, emit };
 }

@@ -165,6 +165,7 @@ export async function startHarness(): Promise<Harness> {
         `--disable-extensions-except=${EXTENSION_DIST}`,
         `--load-extension=${EXTENSION_DIST}`,
         '--host-resolver-rules=MAP * ~NOTFOUND, EXCLUDE 127.0.0.1',
+        '--enable-features=WebMCP',
       ],
     });
     const worker = context.serviceWorkers()[0] ?? (await context.waitForEvent('serviceworker'));

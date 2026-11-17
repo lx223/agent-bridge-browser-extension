@@ -2,6 +2,7 @@ import { DEFAULT_PORT, type AgentInfo } from '@agent-browser-bridge/protocol';
 import { Analytics, ANALYTICS_ENABLED_KEY, isPageEvent, type Properties } from './analytics.ts';
 import { BridgeClient, type ConnectionState } from './bridgeClient.ts';
 import { listenForDetach } from './debugger.ts';
+import { listenForPageToolEvents } from './pageTools.ts';
 import { dispatch } from './handlers.ts';
 import { UsageTracker } from './usage.ts';
 
@@ -72,6 +73,7 @@ chrome.storage.onChanged.addListener((changes, area) => {
 });
 
 listenForDetach();
+listenForPageToolEvents();
 
 const openWelcome = () => chrome.tabs.create({ url: chrome.runtime.getURL(WELCOME_PAGE) });
 

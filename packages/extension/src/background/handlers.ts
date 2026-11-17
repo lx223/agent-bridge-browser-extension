@@ -14,6 +14,7 @@ import {
   typeText,
   waitFor,
 } from './page.ts';
+import { callPageTool, listPageTools } from './pageTools.ts';
 import { applyPlan, undoLastPlan } from './plan.ts';
 import { serializeGroup, serializeTab, serializeWindow } from './serialize.ts';
 
@@ -86,6 +87,8 @@ export const handlers: Handlers = {
   'page.screenshot': screenshot,
   'page.waitFor': waitFor,
   'page.evaluate': evaluateHandler,
+  'page.listTools': listPageTools,
+  'page.callTool': callPageTool,
   'cdp.send': cdpSend,
   'cdp.detach': cdpDetach,
 };

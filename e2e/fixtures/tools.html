@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Fixture tools</title>
+  </head>
+  <body>
+    <h1>Fixture tools</h1>
+    <p id="status">idle</p>
+    <script>
+      const numbers = { type: 'object', properties: { a: { type: 'number' }, b: { type: 'number' } }, required: ['a', 'b'] };
+      const nothing = { type: 'object', properties: {} };
+      document.modelContext.registerTool({
+        name: 'add',
+        description: 'Add two numbers',
+        inputSchema: numbers,
+        execute: async ({ a, b }) => {
+          document.getElementById('status').textContent = `added ${a} and ${b}`;
+          return { content: [{ type: 'text', text: String(a + b) }] };
+        },
+      });
+      document.modelContext.registerTool({
+        name: 'explode',
+        description: 'Always throws',
+        inputSchema: nothing,
+        execute: async () => {
+          throw new Error('kaput');
+        },
+      });
+      document.modelContext.registerTool({
+        name: 'stall',
+        description: 'Never answers',
+        inputSchema: nothing,
+        execute: () => new Promise(() => {}),
+      });
+    </script>
+  </body>
+</html>

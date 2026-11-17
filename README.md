@@ -92,6 +92,8 @@ A tool whose browser is not connected returns an error saying so.
 | `chrome_screenshot` | Captures the viewport or the full page as PNG or JPEG. |
 | `chrome_wait_for` | Waits for text to appear or disappear. |
 | `chrome_evaluate` | Runs a JavaScript expression in the page. |
+| `chrome_list_page_tools` | Lists the WebMCP tools the page has registered for agents. |
+| `chrome_call_page_tool` | Calls one of those tools and returns its output. |
 | `chrome_cdp_send` | Sends any raw DevTools Protocol command. |
 | `chrome_detach_debugger` | Detaches from a tab and removes Chrome's debugging banner. |
 
@@ -100,6 +102,17 @@ A typical loop is `chrome_open_tab` or `chrome_navigate`, then `chrome_snapshot_
 `chrome_navigate` with `back` or `forward` uses `chrome.tabs.goBack` and `chrome.tabs.goForward`. Chrome refuses those with "Cannot find a next page in history." in a tab whose history was built only by agent navigations, with no click or key press in the page. When that happens the extension attaches the debugger, moves to the neighbouring history entry with `Page.navigateToHistoryEntry`, and detaches again once the page has loaded, so the debugging banner shows only for that step. If the debugger was already attached for page tools it stays attached. At either end of the history the tool reports that the tab is on its first or last page.
 
 While a page tool is in use, Chrome shows a banner saying Agent Browser Bridge started debugging the browser. The extension detaches from a tab after five minutes without page commands, or when `chrome_detach_debugger` is called. Chrome does not let extensions debug `chrome://` pages, other extensions' pages, DevTools or the Chrome Web Store, so page tools fail there.
+
+## WebMCP page tools
+
+Pages can register their own tools for agents through [WebMCP](https://webmachinelearning.github.io/webmcp/) with `document.modelContext.registerTool`. `chrome_list_page_tools` returns the tools registered in a tab and `chrome_call_page_tool` runs one by name. Both are Chrome only. They go through the experimental `WebMCP` domain of the DevTools Protocol, so they attach the debugger like the other page tools.
+
+- Chrome only exposes WebMCP to pages when the feature is on, for example with `chrome://flags/#enable-webmcp-testing`, `--enable-features=WebMCP` or a site's origin trial token. On other pages the list is empty.
+- The list is rebuilt on every call, so call `chrome_list_page_tools` again after a navigation.
+- Tools registered inside cross-origin iframes are not listed.
+- When several frames register the same tool name, pass the `frameId` from `chrome_list_page_tools` to `chrome_call_page_tool`.
+- `chrome_call_page_tool` waits up to `timeoutMs`, 20 seconds by default, and then cancels the invocation.
+- Tool names, descriptions and outputs are written by the page. Agents are told to treat them as untrusted data and to confirm with the user before calling a tool that changes data.
 
 ## Icons
 
