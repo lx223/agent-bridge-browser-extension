@@ -6,6 +6,7 @@ export const helloMessage = z.object({
   protocolVersion: z.number().int(),
   extensionVersion: z.string(),
   userAgent: z.string(),
+  browser: z.string().default('chrome'),
 });
 
 /** Server → extension: call a bridge method. */
@@ -14,6 +15,7 @@ export const requestMessage = z.object({
   id: z.string(),
   method: z.string(),
   params: z.unknown(),
+  browser: z.string().optional(),
 });
 
 /** Extension → server: result of a request. */
@@ -38,6 +40,7 @@ export type ServerToExtension = z.infer<typeof serverToExtension>;
 export const relayStatusMessage = z.object({
   type: z.literal('status'),
   extension: helloMessage.nullable(),
+  extensions: z.array(helloMessage).optional(),
 });
 
 export const relayToHost = requestMessage;

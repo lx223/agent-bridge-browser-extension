@@ -89,12 +89,12 @@ export async function applyPlan(plan: PlanParams) {
     });
     groups.push({ title: spec.title, groupId, tabCount: tabIds.length });
   }
-  return { applied: true, groups, warnings, undo: 'Call undo_last_plan to restore the previous layout.' };
+  return { applied: true, groups, warnings, undo: 'Call chrome_undo_last_plan to restore the previous layout.' };
 }
 
 export async function undoLastPlan() {
   const stored = (await chrome.storage.session.get(SNAPSHOT_KEY))[SNAPSHOT_KEY] as Snapshot | undefined;
-  if (!stored) throw new Error('Nothing to undo: no apply_tab_plan has run since the browser started.');
+  if (!stored) throw new Error('Nothing to undo: no chrome_apply_tab_plan has run since the browser started.');
 
   const current = await chrome.tabs.query({});
   const currentIds = new Set(current.map((t) => t.id));

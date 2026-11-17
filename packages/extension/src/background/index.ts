@@ -19,7 +19,7 @@ listenForDetach();
 const openWelcome = () => chrome.tabs.create({ url: chrome.runtime.getURL(WELCOME_PAGE) });
 
 chrome.runtime.onInstalled.addListener(({ reason }) => {
-  if (reason === chrome.runtime.OnInstalledReason.INSTALL) void openWelcome();
+  if (reason === 'install') void openWelcome();
 });
 
 chrome.action.onClicked.addListener(() => void openWelcome());

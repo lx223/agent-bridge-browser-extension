@@ -1,4 +1,5 @@
 import { PROTOCOL_VERSION, serverToExtension, type ExtensionToServer } from '@agent-browser-bridge/protocol';
+import { detectBrowser } from './browser.ts';
 
 export type ConnectionState = 'connecting' | 'connected' | 'disconnected';
 
@@ -48,6 +49,7 @@ export class BridgeClient {
         protocolVersion: PROTOCOL_VERSION,
         extensionVersion: chrome.runtime.getManifest().version,
         userAgent: navigator.userAgent,
+        browser: detectBrowser(chrome.runtime.getURL('')),
       });
       this.keepalive = setInterval(() => this.send({ type: 'ping' }), KEEPALIVE_MS);
       this.setState('connected');
