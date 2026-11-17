@@ -26,6 +26,8 @@ The setup page opens automatically. Click the toolbar icon to reopen it.
 
 Use the setup page's install buttons for **Cursor** or **VS Code**.
 
+Or copy the setup page's **agent setup prompt** and paste it into your agent. It checks for Node.js and then adds the MCP server to the agent's own configuration.
+
 For **Claude Code**, run:
 
 ```bash
