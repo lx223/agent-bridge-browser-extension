@@ -34,3 +34,14 @@ export type RequestMessage = z.infer<typeof requestMessage>;
 export type ResponseMessage = z.infer<typeof responseMessage>;
 export type ExtensionToServer = z.infer<typeof extensionToServer>;
 export type ServerToExtension = z.infer<typeof serverToExtension>;
+
+export const relayStatusMessage = z.object({
+  type: z.literal('status'),
+  extension: helloMessage.nullable(),
+});
+
+export const relayToHost = requestMessage;
+export const hostToRelay = z.union([responseMessage, relayStatusMessage]);
+
+export type RelayStatusMessage = z.infer<typeof relayStatusMessage>;
+export type HostToRelay = z.infer<typeof hostToRelay>;
