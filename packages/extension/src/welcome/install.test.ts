@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { agentSetupPrompt, claudeCodeCommand, cursorInstallUrl, mcpJsonConfig, vscodeInstallUrl } from './install.ts';
+import { agentSetupPrompt, claudeCodeCommand, claudeDesktopExtensionUrl, cursorInstallUrl, mcpJsonConfig, vscodeInstallUrl } from './install.ts';
 
 describe('install snippets', () => {
   it('builds the Claude Code command', () => {
@@ -27,6 +27,10 @@ describe('install snippets', () => {
       command: 'npx',
       args: ['-y', 'agent-browser-bridge-mcp'],
     });
+  });
+
+  it('links to the Claude Desktop extension in the latest release', () => {
+    expect(claudeDesktopExtensionUrl).toMatch(/\/releases\/latest\/download\/agent-browser-bridge\.mcpb$/);
   });
 
   it('includes every install method in the agent setup prompt', () => {

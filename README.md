@@ -34,7 +34,9 @@ For **Claude Code**, run:
 claude mcp add agent-browser-bridge -- npx -y agent-browser-bridge-mcp
 ```
 
-For **Claude Desktop or another MCP client**, add this to its MCP configuration and restart the client:
+For **Claude Desktop**, download [`agent-browser-bridge.mcpb`](https://github.com/lx223/agent-bridge-browser-extension/releases/latest/download/agent-browser-bridge.mcpb) from the latest release and open it. Claude Desktop installs it as an extension and runs it with its built-in Node.js, so you do not need Node.js installed.
+
+For **another MCP client**, add this to its MCP configuration and restart the client:
 
 ```json
 {

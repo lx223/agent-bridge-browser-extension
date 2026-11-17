@@ -45,7 +45,7 @@ code { background: var(--code-bg); padding: 1px 5px; border-radius: 4px; }
 .status .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--wait); }
 .status[data-state='connected'] .dot { background: var(--ok); }
 
-.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-top: 16px; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 14px; margin-top: 16px; }
 .card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
 .card.wide { grid-column: 1 / -1; }
 .card p { color: var(--muted); margin: 0 0 12px; font-size: 14px; }

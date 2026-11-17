@@ -17,6 +17,9 @@ export const cursorInstallUrl = (): string => {
 export const vscodeInstallUrl = (): string =>
   `vscode:mcp/install?${encodeURIComponent(JSON.stringify({ name: SERVER_NAME, ...launch, args: [...launch.args] }))}`;
 
+export const claudeDesktopExtensionUrl =
+  'https://github.com/lx223/agent-bridge-browser-extension/releases/latest/download/agent-browser-bridge.mcpb';
+
 export const MIN_NODE_VERSION = 20;
 
 export const agentSetupPrompt = [

@@ -33,3 +33,7 @@ coverage/
 
 # Copied from the root at pack time
 packages/server/LICENSE
+
+# Claude Desktop extension bundle
+packages/server/mcpb-dist/
+*.mcpb

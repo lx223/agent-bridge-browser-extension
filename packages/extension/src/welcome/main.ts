@@ -2,7 +2,7 @@ import { SERVER_PACKAGE } from '@agent-browser-bridge/protocol';
 import type { PageEvent, Properties } from '../background/analytics.ts';
 import type { ConnectionStatus } from '../background/bridgeClient.ts';
 import { analyticsAvailable, bindAnalyticsToggle } from '../settings/analyticsToggle.ts';
-import { agentSetupPrompt, claudeCodeCommand, cursorInstallUrl, mcpJsonConfig, vscodeInstallUrl } from './install.ts';
+import { agentSetupPrompt, claudeCodeCommand, claudeDesktopExtensionUrl, cursorInstallUrl, mcpJsonConfig, vscodeInstallUrl } from './install.ts';
 
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 
@@ -12,12 +12,14 @@ $('json-config').textContent = mcpJsonConfig;
 $('agent-prompt').textContent = agentSetupPrompt;
 $<HTMLAnchorElement>('cursor-link').href = cursorInstallUrl();
 $<HTMLAnchorElement>('vscode-link').href = vscodeInstallUrl();
+$<HTMLAnchorElement>('claude-desktop-link').href = claudeDesktopExtensionUrl;
 
 const track = (event: PageEvent, properties: Properties) =>
   chrome.runtime.sendMessage({ type: 'TRACK', event, properties }).catch(() => undefined);
 
 $('cursor-link').addEventListener('click', () => void track('setup_link_clicked', { agent: 'cursor' }));
 $('vscode-link').addEventListener('click', () => void track('setup_link_clicked', { agent: 'vscode' }));
+$('claude-desktop-link').addEventListener('click', () => void track('setup_link_clicked', { agent: 'claude_desktop' }));
 
 document.querySelectorAll<HTMLButtonElement>('button[data-copy]').forEach((button) => {
   const label = button.textContent;
