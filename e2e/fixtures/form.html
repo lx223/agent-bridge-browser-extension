@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Fixture form</title>
+    <style>
+      body { margin: 16px; font: 16px sans-serif; }
+      #spacer { height: 3000px; }
+    </style>
+  </head>
+  <body>
+    <h1>Fixture form</h1>
+    <button id="press" type="button">Press me</button>
+    <button id="hover" type="button">Hover target</button>
+    <p id="status">idle</p>
+    <form id="greeting">
+      <label>Name <input id="name" name="name" value="old value" /></label>
+    </form>
+    <p id="greeting-output"></p>
+    <p id="last-key"></p>
+    <p id="late"></p>
+    <div id="spacer"></div>
+    <script>
+      const status = document.getElementById('status');
+      document.getElementById('press').addEventListener('click', () => (status.textContent = 'pressed'));
+      document.getElementById('press').addEventListener('dblclick', () => (status.textContent = 'double pressed'));
+      document.getElementById('hover').addEventListener('mouseover', () => (status.textContent = 'hovered'));
+      document.getElementById('greeting').addEventListener('submit', (event) => {
+        event.preventDefault();
+        document.getElementById('greeting-output').textContent = 'Hello, ' + document.getElementById('name').value;
+      });
+      document.addEventListener('keydown', (event) => {
+        const modifiers = ['ctrlKey', 'shiftKey', 'altKey', 'metaKey'].filter((m) => event[m]).join('+');
+        document.getElementById('last-key').textContent = 'key:' + (modifiers ? modifiers + '+' : '') + event.key;
+      });
+      window.revealLater = () => setTimeout(() => (document.getElementById('late').textContent = 'Arrived late'), 600);
+    </script>
+  </body>
+</html>
