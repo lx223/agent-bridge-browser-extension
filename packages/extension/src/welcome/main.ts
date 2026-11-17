@@ -1,6 +1,7 @@
 import { SERVER_PACKAGE } from '@agent-browser-bridge/protocol';
-import { ANALYTICS_ENABLED_KEY, type PageEvent, type Properties } from '../background/analytics.ts';
+import type { PageEvent, Properties } from '../background/analytics.ts';
 import type { ConnectionStatus } from '../background/bridgeClient.ts';
+import { analyticsAvailable, bindAnalyticsToggle } from '../settings/analyticsToggle.ts';
 import { claudeCodeCommand, cursorInstallUrl, mcpJsonConfig, vscodeInstallUrl } from './install.ts';
 
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
@@ -47,14 +48,8 @@ const poll = () => chrome.runtime.sendMessage({ type: 'RECONNECT' }).then(render
 void poll();
 setInterval(poll, 3000);
 
-const analyticsToggle = $<HTMLInputElement>('analytics-enabled');
-if (import.meta.env.VITE_POSTHOG_KEY) {
-  void chrome.storage.local.get(ANALYTICS_ENABLED_KEY).then((stored) => {
-    analyticsToggle.checked = stored[ANALYTICS_ENABLED_KEY] !== false;
-  });
-  analyticsToggle.addEventListener('change', () => {
-    void chrome.storage.local.set({ [ANALYTICS_ENABLED_KEY]: analyticsToggle.checked });
-  });
+if (analyticsAvailable) {
+  bindAnalyticsToggle($<HTMLInputElement>('analytics-enabled'));
 } else {
   $('analytics-setting').hidden = true;
 }
