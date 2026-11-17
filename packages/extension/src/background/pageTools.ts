@@ -33,7 +33,7 @@ interface Invocations {
 }
 
 const NO_TOOLS_NOTE =
-  'This page has not registered any WebMCP tools. Use snapshot_page and the input tools instead. Tools inside cross-origin iframes are not listed.';
+  'This page has not registered any WebMCP tools. Use chrome_snapshot_page and the input tools instead. Tools inside cross-origin iframes are not listed.';
 
 const toolsByTab = new Map<number, Map<string, PageTool>>();
 const refreshes = new Map<number, Promise<PageTool[]>>();
@@ -82,7 +82,7 @@ function handleSessionEnded(tabId: number) {
 }
 
 export function listenForPageToolEvents() {
-  chrome.debugger.onEvent.addListener(handleEvent);
+  chrome.debugger?.onEvent.addListener(handleEvent);
   onSessionEnded(handleSessionEnded);
 }
 

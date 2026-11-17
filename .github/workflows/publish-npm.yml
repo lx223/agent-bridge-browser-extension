@@ -23,6 +23,15 @@ jobs:
         with:
           node-version-file: '.nvmrc'
           registry-url: 'https://registry.npmjs.org'
+      - name: Check the version is not already published
+        working-directory: packages/server
+        run: |
+          NAME=$(node -p "require('./package.json').name")
+          VERSION=$(node -p "require('./package.json').version")
+          if npm view "$NAME@$VERSION" version >/dev/null 2>&1; then
+            echo "::error::$NAME@$VERSION is already on npm. Bump the version in packages/server/package.json first."
+            exit 1
+          fi
       - run: npm ci
       - run: npm run typecheck
       - run: npm test

@@ -78,10 +78,10 @@ listenForPageToolEvents();
 const openWelcome = () => chrome.tabs.create({ url: chrome.runtime.getURL(WELCOME_PAGE) });
 
 chrome.runtime.onInstalled.addListener(({ reason, previousVersion }) => {
-  if (reason === chrome.runtime.OnInstalledReason.INSTALL) {
+  if (reason === 'install') {
     void openWelcome();
     void usage.installed();
-  } else if (reason === chrome.runtime.OnInstalledReason.UPDATE) {
+  } else if (reason === 'update') {
     void analytics.capture('extension_updated', { previous_version: previousVersion ?? null });
   }
 });

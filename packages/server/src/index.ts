@@ -21,7 +21,6 @@ const bridge = new ExtensionBridge({
 try {
   await bridge.start();
 } catch (err) {
-  // Keep serving MCP so the agent can surface the problem via get_bridge_status.
   log(err instanceof Error ? err.message : String(err));
 }
 
