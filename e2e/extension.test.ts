@@ -67,9 +67,9 @@ describe('the packaged extension', () => {
 
     const agent = await harness.restartAgent();
     const status = await agent.waitUntilConnected();
-    expect(status.extension?.extensionVersion).toBe(EXTENSION_VERSION);
+    expect(status.browsers.map((b) => b.extensionVersion)).toEqual([EXTENSION_VERSION]);
     await page.waitForSelector('#status[data-state="connected"]');
-    expect((await agent.call<unknown[]>('list_tabs')).length).toBeGreaterThan(0);
+    expect((await agent.call<unknown[]>('chrome_list_tabs')).length).toBeGreaterThan(0);
     await page.close();
   });
 });

@@ -16,9 +16,9 @@ beforeEach(async () => {
   tabId = (await harness.openFixture('form.html')).id;
 });
 
-const evaluate = async (expression: string) => (await harness.agent.call<{ value: unknown }>('evaluate', { tabId, expression })).value;
+const evaluate = async (expression: string) => (await harness.agent.call<{ value: unknown }>('chrome_evaluate', { tabId, expression })).value;
 const textOf = (id: string) => evaluate(`document.getElementById(${JSON.stringify(id)}).textContent`);
-const snapshot = () => harness.agent.text('snapshot_page', { tabId });
+const snapshot = () => harness.agent.text('chrome_snapshot_page', { tabId });
 
 describe('page control through the built server and extension', () => {
   it('snapshots the page as an accessibility tree with refs', async () => {
@@ -32,23 +32,23 @@ describe('page control through the built server and extension', () => {
 
   it('clicks elements by ref and by coordinates', async () => {
     const ref = refOf(await snapshot(), /button "Press me"/);
-    const { clicked } = await harness.agent.call<{ clicked: { x: number; y: number } }>('click', { tabId, ref });
+    const { clicked } = await harness.agent.call<{ clicked: { x: number; y: number } }>('chrome_click', { tabId, ref });
     expect(await textOf('status')).toBe('pressed');
 
     await evaluate(`document.getElementById('status').textContent = 'idle'`);
-    await harness.agent.call('click', { tabId, x: clicked.x, y: clicked.y, clickCount: 2 });
+    await harness.agent.call('chrome_click', { tabId, x: clicked.x, y: clicked.y, clickCount: 2 });
     expect(await textOf('status')).toBe('double pressed');
   });
 
   it('hovers over elements', async () => {
     const ref = refOf(await snapshot(), /button "Hover target"/);
-    await harness.agent.call('hover', { tabId, ref });
+    await harness.agent.call('chrome_hover', { tabId, ref });
     expect(await textOf('status')).toBe('hovered');
   });
 
   it('types into a field, replacing its value, and submits', async () => {
     const ref = refOf(await snapshot(), /textbox "Name"/);
-    const typed = await harness.agent.call('type_text', { tabId, ref, text: 'Ada', clear: true, submit: true });
+    const typed = await harness.agent.call('chrome_type_text', { tabId, ref, text: 'Ada', clear: true, submit: true });
     expect(typed).toEqual({ typed: 3, submitted: true });
     expect(await evaluate(`document.getElementById('name').value`)).toBe('Ada');
     expect(await textOf('greeting-output')).toBe('Hello, Ada');
@@ -56,31 +56,31 @@ describe('page control through the built server and extension', () => {
 
   it('appends to a field when not clearing', async () => {
     const ref = refOf(await snapshot(), /textbox "Name"/);
-    await harness.agent.call('type_text', { tabId, ref, text: '!' });
+    await harness.agent.call('chrome_type_text', { tabId, ref, text: '!' });
     expect(await evaluate(`document.getElementById('name').value`)).toContain('!');
   });
 
   it('presses keys and key combinations', async () => {
-    await harness.agent.call('press_key', { tabId, key: 'Escape' });
+    await harness.agent.call('chrome_press_key', { tabId, key: 'Escape' });
     expect(await textOf('last-key')).toBe('key:Escape');
-    await harness.agent.call('press_key', { tabId, key: 'Control+Shift+K' });
+    await harness.agent.call('chrome_press_key', { tabId, key: 'Control+Shift+K' });
     expect(await textOf('last-key')).toMatch(/^key:ctrlKey\+shiftKey\+k$/i);
   });
 
   it('scrolls the viewport', async () => {
     expect(await evaluate('window.scrollY')).toBe(0);
-    await harness.agent.call('scroll', { tabId, deltaY: 600 });
+    await harness.agent.call('chrome_scroll', { tabId, deltaY: 600 });
     await expect.poll(() => evaluate('window.scrollY')).toBeGreaterThan(0);
   });
 
   it('captures viewport and full-page screenshots', async () => {
-    const png = await harness.agent.raw('screenshot', { tabId });
+    const png = await harness.agent.raw('chrome_screenshot', { tabId });
     expect(png.isError).toBe(false);
     expect(png.content[0]).toMatchObject({ type: 'image', mimeType: 'image/png' });
     const viewport = Buffer.from(png.content[0]!.data!, 'base64');
     expect(viewport.subarray(1, 4).toString('latin1')).toBe('PNG');
 
-    const jpeg = await harness.agent.raw('screenshot', { tabId, fullPage: true, format: 'jpeg', quality: 50 });
+    const jpeg = await harness.agent.raw('chrome_screenshot', { tabId, fullPage: true, format: 'jpeg', quality: 50 });
     expect(jpeg.content[0]).toMatchObject({ type: 'image', mimeType: 'image/jpeg' });
     const fullPage = Buffer.from(jpeg.content[0]!.data!, 'base64');
     expect([...fullPage.subarray(0, 2)]).toEqual([0xff, 0xd8]);
@@ -89,54 +89,54 @@ describe('page control through the built server and extension', () => {
 
   it('waits for text to appear and times out when it never does', async () => {
     await evaluate('window.revealLater()');
-    const waited = await harness.agent.call<{ matched: boolean }>('wait_for', { tabId, text: 'Arrived late' });
+    const waited = await harness.agent.call<{ matched: boolean }>('chrome_wait_for', { tabId, text: 'Arrived late' });
     expect(waited.matched).toBe(true);
 
-    const gone = await harness.agent.call<{ matched: boolean }>('wait_for', { tabId, text: 'Never rendered', gone: true });
+    const gone = await harness.agent.call<{ matched: boolean }>('chrome_wait_for', { tabId, text: 'Never rendered', gone: true });
     expect(gone.matched).toBe(true);
 
-    const missing = await harness.agent.raw('wait_for', { tabId, text: 'Never rendered', timeoutMs: 300 });
+    const missing = await harness.agent.raw('chrome_wait_for', { tabId, text: 'Never rendered', timeoutMs: 300 });
     expect(missing.isError).toBe(true);
     expect(missing.text).toMatch(/Timed out after 300ms/);
   });
 
   it('evaluates expressions, awaiting promises and surfacing exceptions', async () => {
     expect(await evaluate('Promise.resolve({ sum: 1 + 2 })')).toEqual({ sum: 3 });
-    const thrown = await harness.agent.raw('evaluate', { tabId, expression: `throw new Error('boom')` });
+    const thrown = await harness.agent.raw('chrome_evaluate', { tabId, expression: `throw new Error('boom')` });
     expect(thrown.isError).toBe(true);
     expect(thrown.text).toContain('boom');
   });
 
   it('navigates to a url and reloads', async () => {
-    const go = (to: string) => harness.agent.call<Tab>('navigate', { tabId, to });
+    const go = (to: string) => harness.agent.call<Tab>('chrome_navigate', { tabId, to });
     expect(await go(harness.fixture('second.html'))).toMatchObject({ title: 'Second page', url: harness.fixture('second.html'), loaded: true });
     expect(await go('reload')).toMatchObject({ url: harness.fixture('second.html'), loaded: true });
     expect(await snapshot()).toMatch(/link "Back to the form"/);
   });
 
   it('goes back and forward through history created by a click', async () => {
-    const go = (to: string) => harness.agent.call<Tab>('navigate', { tabId, to });
+    const go = (to: string) => harness.agent.call<Tab>('chrome_navigate', { tabId, to });
     await go(harness.fixture('second.html'));
-    await harness.agent.call('click', { tabId, ref: refOf(await snapshot(), /link "Back to the form"/) });
-    await harness.agent.call('wait_for', { tabId, text: 'Press me' });
+    await harness.agent.call('chrome_click', { tabId, ref: refOf(await snapshot(), /link "Back to the form"/) });
+    await harness.agent.call('chrome_wait_for', { tabId, text: 'Press me' });
     expect(await go('back')).toMatchObject({ url: harness.fixture('second.html'), loaded: true });
     expect(await go('forward')).toMatchObject({ url: harness.fixture('form.html'), loaded: true });
   });
 
   it('sends raw CDP commands and detaches the debugger', async () => {
-    const result = await harness.agent.call<{ result: { value: number } }>('cdp_send', {
+    const result = await harness.agent.call<{ result: { value: number } }>('chrome_cdp_send', {
       tabId,
       method: 'Runtime.evaluate',
       params: { expression: '6 * 7', returnByValue: true },
     });
     expect(result.result.value).toBe(42);
-    expect(await harness.agent.call('detach_debugger', { tabId })).toEqual({ detached: true });
-    expect(await harness.agent.call('detach_debugger', { tabId })).toEqual({ detached: false });
+    expect(await harness.agent.call('chrome_detach_debugger', { tabId })).toEqual({ detached: true });
+    expect(await harness.agent.call('chrome_detach_debugger', { tabId })).toEqual({ detached: false });
     expect(await textOf('status')).toBe('idle');
   });
 
   it('rejects page tools for tabs that do not exist', async () => {
-    const result = await harness.agent.raw('snapshot_page', { tabId: 999_999_999 });
+    const result = await harness.agent.raw('chrome_snapshot_page', { tabId: 999_999_999 });
     expect(result.isError).toBe(true);
   });
 });

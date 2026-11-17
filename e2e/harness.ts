@@ -6,7 +6,7 @@ import { join, resolve } from 'node:path';
 import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 import { StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js';
 import { chromium, type BrowserContext } from 'playwright';
-import { DEFAULT_PORT } from '@agent-browser-bridge/protocol';
+import { DEFAULT_PORT, STATUS_TOOL } from '@agent-browser-bridge/protocol';
 
 const ROOT = resolve(import.meta.dirname, '..');
 const EXTENSION_DIST = join(ROOT, 'packages/extension/dist');
@@ -54,7 +54,7 @@ export interface BridgeStatus {
   state: string;
   role: string;
   port: number;
-  extension: { extensionVersion: string; protocolVersion: number; userAgent: string } | null;
+  browsers: Array<{ browser: string; label?: string; instanceId?: string; extensionVersion: string; protocolVersion: number; userAgent: string }>;
 }
 
 export interface Agent {
@@ -103,7 +103,7 @@ export async function startAgent(name = 'e2e'): Promise<Agent> {
   const waitUntilConnected = async () => {
     const deadline = Date.now() + CONNECT_TIMEOUT_MS;
     for (;;) {
-      const status = await call<BridgeStatus>('get_bridge_status');
+      const status = await call<BridgeStatus>(STATUS_TOOL);
       if (status.state === 'connected') return status;
       if (Date.now() > deadline) throw new Error(`Extension did not connect: ${JSON.stringify(status)}`);
       await sleep(100);
@@ -170,7 +170,7 @@ export async function startHarness(): Promise<Harness> {
     context,
     extensionId,
     fixture,
-    openFixture: (name) => agent.call<Tab>('open_tab', { url: fixture(name) }),
+    openFixture: (name) => agent.call<Tab>('chrome_open_tab', { url: fixture(name) }),
     async restartAgent() {
       await agent.close();
       agent = await startAgent();

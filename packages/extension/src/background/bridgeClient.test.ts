@@ -68,7 +68,16 @@ const request = (peer: Peer, id: string, method: string, params: unknown = {}, a
 beforeEach(() => {
   vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout', 'setInterval', 'clearInterval'] });
   vi.stubGlobal('WebSocket', BrowserLikeSocket);
-  vi.stubGlobal('chrome', { runtime: { getManifest: () => ({ version: '9.9.9' }) } });
+  const stored: Record<string, unknown> = { bridgeInstanceId: 'abc12345' };
+  vi.stubGlobal('chrome', {
+    runtime: { getManifest: () => ({ version: '9.9.9' }), getURL: () => 'chrome-extension://test/' },
+    storage: {
+      local: {
+        get: async (key: string) => (key in stored ? { [key]: stored[key] } : {}),
+        set: async (items: Record<string, unknown>) => void Object.assign(stored, items),
+      },
+    },
+  });
 });
 
 afterEach(async () => {
@@ -91,7 +100,15 @@ describe('BridgeClient', () => {
   it('introduces itself once the socket opens', async () => {
     const { client, states, peer } = await connected();
     expect(peer.received).toEqual([
-      { type: 'hello', protocolVersion: PROTOCOL_VERSION, extensionVersion: '9.9.9', userAgent: navigator.userAgent },
+      {
+        type: 'hello',
+        protocolVersion: PROTOCOL_VERSION,
+        extensionVersion: '9.9.9',
+        userAgent: navigator.userAgent,
+        browser: 'chrome',
+        instanceId: 'abc12345',
+        label: 'Chrome',
+      },
     ]);
     expect(states).toEqual(['connecting', 'connected']);
     expect(client.status.state).toBe('connected');
