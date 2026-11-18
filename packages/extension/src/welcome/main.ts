@@ -1,13 +1,12 @@
-import { SERVER_PACKAGE } from '@agent-browser-bridge/protocol';
 import type { PageEvent, Properties } from '../background/analytics.ts';
 import type { ConnectionStatus } from '../background/bridgeClient.ts';
 import { renderAgentList } from '../settings/agentList.ts';
 import { analyticsAvailable, bindAnalyticsToggle } from '../settings/analyticsToggle.ts';
-import { claudeCodeCommand, cursorInstallUrl, mcpJsonConfig, vscodeInstallUrl } from './install.ts';
+import { claudeCodeCommand, cursorInstallUrl, LAUNCH_SPEC, mcpJsonConfig, vscodeInstallUrl } from './install.ts';
 
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 
-document.querySelectorAll('[data-pkg]').forEach((el) => (el.textContent = SERVER_PACKAGE));
+document.querySelectorAll('[data-pkg]').forEach((el) => (el.textContent = LAUNCH_SPEC));
 $('claude-code-cmd').textContent = claudeCodeCommand;
 $('json-config').textContent = mcpJsonConfig;
 $<HTMLAnchorElement>('cursor-link').href = cursorInstallUrl();

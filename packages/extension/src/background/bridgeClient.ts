@@ -22,6 +22,8 @@ export class BridgeClient {
   private keepalive?: ReturnType<typeof setInterval>;
   private retry?: ReturnType<typeof setTimeout>;
   private backoff = 1000;
+  private inFlight = 0;
+  private idleWaiters: (() => void)[] = [];
   private _status: ConnectionStatus;
 
   constructor(
@@ -34,6 +36,11 @@ export class BridgeClient {
 
   get status() {
     return this._status;
+  }
+
+  whenIdle(): Promise<void> {
+    if (this.inFlight === 0) return Promise.resolve();
+    return new Promise((resolve) => this.idleWaiters.push(resolve));
   }
 
   connect() {
@@ -88,11 +95,15 @@ export class BridgeClient {
       return;
     }
     if (msg.type !== 'request') return;
+    this.inFlight++;
     try {
       const result = await this.dispatch(msg.method, msg.params, msg.agent ?? null);
       this.send({ type: 'response', id: msg.id, ok: true, result: result ?? null });
     } catch (err) {
       this.send({ type: 'response', id: msg.id, ok: false, error: err instanceof Error ? err.message : String(err) });
+    } finally {
+      this.inFlight--;
+      if (this.inFlight === 0) this.idleWaiters.splice(0).forEach((resolve) => resolve());
     }
   }
 

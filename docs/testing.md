@@ -13,14 +13,17 @@ There are three layers. Presubmit runs all of them on every pull request.
 Tests live next to the code as `*.test.ts` and run with Vitest in a Node environment.
 
 - `packages/server/src/mcp.test.ts` connects a real MCP client to `createMcpServer` over an in-memory transport with a fake bridge. It checks the tool list against the protocol, the published schemas and annotations, the text, JSON and image result formats, and error results.
-- `packages/extension/src/background/bridgeClient.test.ts` runs `BridgeClient` against a real local WebSocket server with fake timers. It covers the hello handshake, the list of connected agent sessions, request dispatch, error responses, malformed messages, keepalive pings, reconnecting and backoff. The test uses the `ws` client as the `WebSocket` global because it reports refused connections the way Chrome does on every supported Node version.
+- `packages/server/src/bridge.test.ts` runs hosts and relays on real local WebSockets. Besides routing, it covers handing the bridge over to a newer server version, including requests in flight and other relays.
+- `packages/server/src/launcher.test.ts` drives the self-updating launcher with in-memory fake workers. It covers passing messages through, replaying the handshake to a new version, draining the old worker, routing cancellations, failed upgrades and update check timing. `docs/updates.md` describes the design.
+- `packages/extension/src/background/bridgeClient.test.ts` runs `BridgeClient` against a real local WebSocket server with fake timers. It covers the hello handshake, the list of connected agent sessions, request dispatch, error responses, malformed messages, keepalive pings, reconnecting, backoff and waiting for requests in flight.
+- `packages/extension/src/background/update.test.ts` checks that a pending extension update reloads the service worker once requests have finished, or after a minute at most. The test uses the `ws` client as the `WebSocket` global because it reports refused connections the way Chrome does on every supported Node version.
 - `packages/extension/src/test/` holds in-memory fakes of `chrome.tabs`, `chrome.tabGroups`, `chrome.storage.session` and `chrome.debugger` for the plan and page logic.
 
 ## Coverage
 
 `npm run test:coverage` prints a table and writes an HTML report to `coverage/`. Thresholds are set in `vitest.config.ts` a little below the current numbers, so a change that removes tests or adds untested logic fails presubmit. Raise them when coverage rises.
 
-Files that only wire things to the browser are excluded from the unit coverage numbers because the end-to-end suite is what exercises them: the service worker entry, the `chrome.*` handlers, navigation, serialisation, the welcome and options pages, and the server entry point.
+Files that only wire things to the browser are excluded from the unit coverage numbers because the end-to-end suite is what exercises them: the service worker entry, the `chrome.*` handlers, navigation, serialisation, the welcome and options pages, and the server entry points (`index.ts`, `worker.ts` and the process wiring in `autoUpdate.ts`). The end-to-end suite starts the server through the launcher, so it runs that wiring too.
 
 ## End-to-end tests
 

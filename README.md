@@ -29,7 +29,7 @@ Use the setup page's install buttons for **Cursor** or **VS Code**.
 For **Claude Code**, run:
 
 ```bash
-claude mcp add agent-browser-bridge -- npx -y agent-browser-bridge-mcp
+claude mcp add agent-browser-bridge -- npx -y agent-browser-bridge-mcp@latest
 ```
 
 For **Claude Desktop or another MCP client**, add this to its MCP configuration and restart the client:
@@ -39,13 +39,15 @@ For **Claude Desktop or another MCP client**, add this to its MCP configuration 
   "mcpServers": {
     "agent-browser-bridge": {
       "command": "npx",
-      "args": ["-y", "agent-browser-bridge-mcp"]
+      "args": ["-y", "agent-browser-bridge-mcp@latest"]
     }
   }
 }
 ```
 
 The setup page and toolbar indicator turn green when an agent connects. Try asking it to list your Chrome tabs.
+
+The extension and the server update themselves while running, so you don't need to restart your browser or agent after a release. See [docs/updates.md](docs/updates.md).
 
 ### Safari
 

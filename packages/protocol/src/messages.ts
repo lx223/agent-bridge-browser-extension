@@ -60,8 +60,10 @@ export const relayStatusMessage = z.object({
 /** Relay → host: the relaying agent session, sent on joining and whenever it changes. */
 export const relayAgentMessage = z.object({ type: z.literal('agent'), agent: agentInfo });
 
+export const relayHandoverMessage = z.object({ type: z.literal('handover') });
+
 export const relayToHost = z.union([requestMessage, relayAgentMessage]);
-export const hostToRelay = z.union([responseMessage, relayStatusMessage]);
+export const hostToRelay = z.union([responseMessage, relayStatusMessage, relayHandoverMessage]);
 
 export type RelayStatusMessage = z.infer<typeof relayStatusMessage>;
 export type HostToRelay = z.infer<typeof hostToRelay>;
