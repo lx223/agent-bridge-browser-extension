@@ -1,6 +1,6 @@
 # Agent Browser Bridge
 
-**Like ChatGPT's browser agent, but you control your own browser with any agent you like.**
+**Control your own browser with any AI agent you like.**
 
 ## Why use it
 
