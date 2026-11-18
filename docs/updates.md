@@ -29,14 +29,7 @@ A minute after start and then every hour, the launcher asks the npm registry (th
 
 If the new version fails to start or initialize, the launcher keeps the current worker and tries again at the next check. A request the old worker never answers gets an error response asking the agent to retry. The launcher itself does not change until the agent session restarts, so it is kept small and generic.
 
-Workers are started with `AGENT_BROWSER_BRIDGE_WORKER=1`, which makes the entry point run the server directly.
-
-### Settings
-
-| Variable | Effect |
-| --- | --- |
-| `AGENT_BROWSER_BRIDGE_AUTO_UPDATE=0` | Run the server directly with no launcher and no update checks. |
-| `AGENT_BROWSER_BRIDGE_UPDATE_CHECK_MINUTES` | Minutes between update checks. Defaults to 60. |
+The launcher is always on. It costs one small extra Node process and one registry request an hour. Workers are started with `AGENT_BROWSER_BRIDGE_WORKER=1`, which makes the entry point run the server directly; this is internal to the launcher.
 
 ### Handing the bridge over to a newer server
 

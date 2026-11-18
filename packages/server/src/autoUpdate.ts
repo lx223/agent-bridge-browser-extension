@@ -26,11 +26,6 @@ function spawnWorker(version: string | null): WorkerProcess {
   return { stdin: child.stdin, stdout: child.stdout, exited, kill: () => child.kill() };
 }
 
-const minutes = (name: string, fallback: number) => {
-  const value = Number(process.env[name]);
-  return (Number.isFinite(value) && value > 0 ? value : fallback) * 60_000;
-};
-
 export function runLauncher() {
   const launcher = new Launcher({
     input: process.stdin,
@@ -40,7 +35,6 @@ export function runLauncher() {
     latestVersion: () => latestPublishedVersion(),
     exit: (code) => process.exit(code),
     log,
-    checkIntervalMs: minutes('AGENT_BROWSER_BRIDGE_UPDATE_CHECK_MINUTES', 60),
   });
   launcher.scheduleUpdateChecks();
   process.on('SIGINT', () => launcher.shutdown());
