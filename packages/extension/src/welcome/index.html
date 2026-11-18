@@ -23,6 +23,12 @@
         <p class="hint">Your agent starts a small local server (<code>npx -y <span data-pkg></span></code>) that this extension connects to. Pick your agent:</p>
 
         <div class="cards">
+          <article class="card wide">
+            <h3>Let your agent set it up</h3>
+            <p>Paste this prompt into any agent that can run commands and edit its own settings, such as Claude Code, Cursor or Codex. It checks for Node.js, then adds the server.</p>
+            <div class="snippet block"><pre id="agent-prompt" class="wrap"></pre><button data-copy="agent-prompt">Copy prompt</button></div>
+          </article>
+
           <article class="card">
             <h3>Claude Code</h3>
             <p>Run once in a terminal:</p>
@@ -41,9 +47,15 @@
             <a id="vscode-link" class="button">Add to VS Code</a>
           </article>
 
+          <article class="card">
+            <h3>Claude Desktop</h3>
+            <p>Download the extension, then open the file to install it. No Node.js needed.</p>
+            <a id="claude-desktop-link" class="button">Download for Claude Desktop</a>
+          </article>
+
           <article class="card wide">
-            <h3>Claude Desktop and other agents</h3>
-            <p>Add this to the agent's MCP config (for Claude Desktop: Settings → Developer → Edit Config), then restart it.</p>
+            <h3>Other agents</h3>
+            <p>Add this to the agent's MCP config, then restart it.</p>
             <div class="snippet block"><pre id="json-config"></pre><button data-copy="json-config">Copy</button></div>
           </article>
         </div>
