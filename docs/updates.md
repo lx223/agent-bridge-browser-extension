@@ -29,7 +29,7 @@ A minute after start and then every hour, the launcher asks the npm registry (th
 
 If the new version fails to start or initialize, the launcher keeps the current worker and tries again at the next check. A request the old worker never answers gets an error response asking the agent to retry. The launcher itself does not change until the agent session restarts, so it is kept small and generic.
 
-The launcher is always on. It costs one small extra Node process and one registry request an hour. Workers are started with `AGENT_BROWSER_BRIDGE_WORKER=1`, which makes the entry point run the server directly; this is internal to the launcher.
+The launcher is always on for the npm package. It costs one small extra Node process and one registry request an hour. Workers are started with `AGENT_BROWSER_BRIDGE_WORKER=1`, which makes the entry point run the server directly; this is internal to the launcher. The Claude Desktop extension bundle runs the server directly instead, as `docs/claude-desktop-extension.md` explains.
 
 ### Handing the bridge over to a newer server
 

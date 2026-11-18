@@ -26,13 +26,17 @@ The setup page opens automatically. Click the toolbar icon to reopen it.
 
 Use the setup page's install buttons for **Cursor** or **VS Code**.
 
+Or copy the setup page's **agent setup prompt** and paste it into your agent. It checks for Node.js and then adds the MCP server to the agent's own configuration.
+
 For **Claude Code**, run:
 
 ```bash
 claude mcp add agent-browser-bridge -- npx -y agent-browser-bridge-mcp@latest
 ```
 
-For **Claude Desktop or another MCP client**, add this to its MCP configuration and restart the client:
+For **Claude Desktop**, download [`agent-browser-bridge.mcpb`](https://github.com/lx223/agent-bridge-browser-extension/releases/latest/download/agent-browser-bridge.mcpb) from the latest release and open it. Claude Desktop installs it as an extension and runs it with its built-in Node.js, so you do not need Node.js installed.
+
+For **another MCP client**, add this to its MCP configuration and restart the client:
 
 ```json
 {

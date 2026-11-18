@@ -16,7 +16,8 @@
   "scripts": {
     "build": "vite build",
     "prepack": "cp ../../LICENSE .",
-    "dev": "vite build --watch"
+    "dev": "vite build --watch",
+    "pack:mcpb": "node scripts/pack-mcpb.mjs"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.32.2",
@@ -25,6 +26,7 @@
   },
   "devDependencies": {
     "@agent-browser-bridge/protocol": "*",
+    "@anthropic-ai/mcpb": "^2.1.2",
     "@types/ws": "^8.18.2"
   },
   "repository": {

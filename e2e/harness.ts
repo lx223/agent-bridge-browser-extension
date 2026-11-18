@@ -10,7 +10,7 @@ import { DEFAULT_PORT, STATUS_TOOL } from '@agent-browser-bridge/protocol';
 
 const ROOT = resolve(import.meta.dirname, '..');
 const EXTENSION_DIST = join(ROOT, 'packages/extension/dist');
-const SERVER_ENTRY = join(ROOT, 'packages/server/dist/index.js');
+const SERVER_ENTRY = resolve(ROOT, process.env.E2E_SERVER_ENTRY ?? 'packages/server/dist/index.js');
 const FIXTURES = join(ROOT, 'e2e/fixtures');
 const CONNECT_TIMEOUT_MS = 30_000;
 

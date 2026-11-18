@@ -23,6 +23,7 @@ export default defineConfig({
         'packages/extension/src/welcome/main.ts',
         'packages/server/src/index.ts',
         'packages/server/src/worker.ts',
+        'packages/server/src/standalone.ts',
         'packages/server/src/autoUpdate.ts',
       ],
       reporter: ['text', 'html'],

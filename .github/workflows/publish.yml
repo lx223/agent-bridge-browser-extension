@@ -1,8 +1,8 @@
 name: Publish Release
 
 # Manually triggered. Releases the extension zip to GitHub using the version in
-# packages/extension/package.json. The MCP server is published to npm by
-# publish-npm.yml.
+# packages/extension/package.json, together with the Claude Desktop extension
+# bundle. The MCP server is published to npm by publish-npm.yml.
 on:
   workflow_dispatch:
 
@@ -42,6 +42,9 @@ jobs:
           VITE_POSTHOG_HOST: https://eu.i.posthog.com
           VITE_UNINSTALL_SURVEY_URL: https://eu.posthogsurveys.com/external_surveys/01a1eb02-9bf0-0000-54ae-59e3f95e3984
 
+      - name: Pack Claude Desktop extension
+        run: npm run pack:mcpb -w agent-browser-bridge-mcp -- "$GITHUB_WORKSPACE/agent-browser-bridge.mcpb"
+
       - name: Zip extension
         run: cp LICENSE packages/extension/dist/ && cd packages/extension/dist && zip -r "$GITHUB_WORKSPACE/agent-browser-bridge-${{ steps.version.outputs.extension }}.zip" .
 
@@ -49,5 +52,7 @@ jobs:
         with:
           tag_name: v${{ steps.version.outputs.extension }}
           name: Release v${{ steps.version.outputs.extension }}
-          files: agent-browser-bridge-${{ steps.version.outputs.extension }}.zip
+          files: |
+            agent-browser-bridge-${{ steps.version.outputs.extension }}.zip
+            agent-browser-bridge.mcpb
           generate_release_notes: true
