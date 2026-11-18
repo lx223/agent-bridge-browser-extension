@@ -31,7 +31,7 @@ Or copy the setup page's **agent setup prompt** and paste it into your agent. It
 For **Claude Code**, run:
 
 ```bash
-claude mcp add agent-browser-bridge -- npx -y agent-browser-bridge-mcp
+claude mcp add agent-browser-bridge -- npx -y agent-browser-bridge-mcp@latest
 ```
 
 For **Claude Desktop**, download [`agent-browser-bridge.mcpb`](https://github.com/lx223/agent-bridge-browser-extension/releases/latest/download/agent-browser-bridge.mcpb) from the latest release and open it. Claude Desktop installs it as an extension and runs it with its built-in Node.js, so you do not need Node.js installed.
@@ -43,13 +43,15 @@ For **another MCP client**, add this to its MCP configuration and restart the cl
   "mcpServers": {
     "agent-browser-bridge": {
       "command": "npx",
-      "args": ["-y", "agent-browser-bridge-mcp"]
+      "args": ["-y", "agent-browser-bridge-mcp@latest"]
     }
   }
 }
 ```
 
 The setup page and toolbar indicator turn green when an agent connects. Try asking it to list your Chrome tabs.
+
+The extension and the server update themselves while running, so you don't need to restart your browser or agent after a release. See [docs/updates.md](docs/updates.md).
 
 ### Safari
 

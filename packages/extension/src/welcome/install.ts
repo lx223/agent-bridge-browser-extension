@@ -1,7 +1,9 @@
 import { SERVER_NAME, SERVER_PACKAGE } from '@agent-browser-bridge/protocol';
 
-/** How every agent launches the server: `npx -y agent-browser-bridge-mcp`. */
-export const launch = { command: 'npx', args: ['-y', SERVER_PACKAGE] } as const;
+export const LAUNCH_SPEC = `${SERVER_PACKAGE}@latest`;
+
+/** How every agent launches the server: `npx -y agent-browser-bridge-mcp@latest`. */
+export const launch = { command: 'npx', args: ['-y', LAUNCH_SPEC] } as const;
 
 export const claudeCodeCommand = `claude mcp add ${SERVER_NAME} -- ${launch.command} ${launch.args.join(' ')}`;
 

@@ -132,6 +132,40 @@ describe('BridgeClient', () => {
     expect(peer.received[1]).toEqual({ type: 'response', id: 'a', ok: true, result: [{ id: 1 }] });
   });
 
+  it('is idle when no request is being handled', async () => {
+    const { client } = await connected();
+    await expect(client.whenIdle()).resolves.toBeUndefined();
+  });
+
+  it('becomes idle only once every request in flight has been answered', async () => {
+    const finishers: (() => void)[] = [];
+    const dispatch = vi.fn(() => new Promise((resolve) => finishers.push(() => resolve(null))));
+    const { client, peer } = await connected(dispatch);
+    request(peer, 'a', 'tabs.list');
+    request(peer, 'b', 'tabs.list');
+    await until(() => finishers.length === 2);
+    let idle = false;
+    void client.whenIdle().then(() => (idle = true));
+    finishers[0]!();
+    await until(() => peer.received.length === 2);
+    expect(idle).toBe(false);
+    finishers[1]!();
+    await until(() => idle);
+    expect(peer.received).toHaveLength(3);
+  });
+
+  it('becomes idle after a failed request too', async () => {
+    let fail: (err: Error) => void = () => {};
+    const dispatch = vi.fn(() => new Promise((_, reject) => (fail = reject)));
+    const { client, peer } = await connected(dispatch);
+    request(peer, 'a', 'boom');
+    await until(() => dispatch.mock.calls.length === 1);
+    let idle = false;
+    void client.whenIdle().then(() => (idle = true));
+    fail(new Error('kaboom'));
+    await until(() => idle);
+  });
+
   it('passes a null agent and a null result when neither is provided', async () => {
     const dispatch = vi.fn(async () => undefined);
     const { peer } = await connected(dispatch);

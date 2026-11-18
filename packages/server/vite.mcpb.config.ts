@@ -6,7 +6,7 @@ export default defineConfig({
     'process.env.WS_NO_UTF_8_VALIDATE': JSON.stringify('1'),
   },
   build: {
-    ssr: 'src/index.ts',
+    ssr: 'src/standalone.ts',
     target: 'node20',
     outDir: 'mcpb-dist/server',
     emptyOutDir: true,

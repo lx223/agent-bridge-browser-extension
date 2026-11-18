@@ -4,6 +4,7 @@ import { agentLabel } from '../settings/agentList.ts';
 import { BridgeClient, type ConnectionStatus } from './bridgeClient.ts';
 import { listenForDetach } from './debugger.ts';
 import { listenForPageToolEvents } from './pageTools.ts';
+import { applyUpdatesWhenIdle } from './update.ts';
 import { dispatch } from './handlers.ts';
 import { UsageTracker } from './usage.ts';
 
@@ -81,6 +82,8 @@ listenForDetach();
 listenForPageToolEvents();
 
 const openWelcome = () => chrome.tabs.create({ url: chrome.runtime.getURL(WELCOME_PAGE) });
+
+applyUpdatesWhenIdle(chrome.runtime, () => client.whenIdle());
 
 chrome.runtime.onInstalled.addListener(({ reason, previousVersion }) => {
   if (reason === 'install') {

@@ -13,12 +13,15 @@ import {
   type ResponseMessage,
   type ServerToExtension,
 } from '@agent-browser-bridge/protocol';
+import { isNewerVersion } from './version.ts';
 
 export interface BridgeOptions {
   port: number;
   host?: string;
   extensionId?: string;
+  version?: string;
   requestTimeoutMs?: number;
+  handoverWaitMs?: number;
   log?: (msg: string) => void;
   agentInfo?: () => AgentInfo;
 }
@@ -42,6 +45,9 @@ export const RELAY_PATH = '/relay';
 
 const ESTABLISH_ATTEMPTS = 5;
 const RETRY_MS = 2_000;
+const HANDOVER_WAIT_MS = 5_000;
+const REJOIN_AFTER_HANDOVER_MS = 500;
+const HANDOVER_CLOSE_CODE = 4002;
 const notConnected = (browser: string) =>
   `The Agent Browser Bridge extension is not connected in ${browser}. Make sure ${browser} is open with the extension installed and enabled; it reconnects automatically within ~30 seconds.`;
 const EXTENSION_SCHEMES = ['chrome-extension://', 'safari-web-extension://'];
@@ -55,6 +61,7 @@ export class ExtensionBridge {
   private error?: string;
   private stopped = false;
   private retryTimer?: NodeJS.Timeout;
+  private handingOver = false;
 
   private wss?: WebSocketServer;
   private extensions = new Map<WebSocket, HelloMessage | undefined>();
@@ -85,7 +92,7 @@ export class ExtensionBridge {
     clearTimeout(this.retryTimer);
     this.failPending(new NotConnectedError('Bridge stopped'));
     this.upstream?.terminate();
-    for (const client of this.wss?.clients ?? []) client.terminate();
+    for (const client of [...(this.wss?.clients ?? []), ...this.extensions.keys(), ...this.relays.keys()]) client.terminate();
     await new Promise<void>((resolve) => (this.wss ? this.wss.close(() => resolve()) : resolve()));
   }
 
@@ -157,6 +164,10 @@ export class ExtensionBridge {
 
   private get timeoutMs() {
     return this.opts.requestTimeoutMs ?? 30_000;
+  }
+
+  private get port() {
+    return this.boundPort ?? this.opts.port;
   }
 
   private get hostname() {
@@ -245,7 +256,7 @@ export class ExtensionBridge {
     return new Promise((resolve, reject) => {
       const wss = new WebSocketServer({
         host: this.hostname,
-        port: this.opts.port,
+        port: this.port,
         verifyClient: ({ req }: { req: IncomingMessage }) => this.isAllowedClient(req),
       });
       wss.once('error', (err) => {
@@ -257,7 +268,7 @@ export class ExtensionBridge {
         this.wss = wss;
         this.role = 'host';
         this.error = undefined;
-        this.boundPort = typeof addr === 'object' && addr ? addr.port : this.opts.port;
+        this.boundPort = typeof addr === 'object' && addr ? addr.port : this.port;
         this.log(`Hosting the bridge on ws://${this.hostname}:${this.boundPort}`);
         resolve(this.boundPort);
       });
@@ -279,7 +290,7 @@ export class ExtensionBridge {
 
   private connectUpstream(): Promise<void> {
     return new Promise((resolve, reject) => {
-      const ws = new WebSocket(`ws://${this.hostname}:${this.opts.port}${RELAY_PATH}`);
+      const ws = new WebSocket(`ws://${this.hostname}:${this.port}${RELAY_PATH}`);
       let opened = false;
       ws.on('error', (err) => {
         if (!opened) reject(err);
@@ -290,15 +301,15 @@ export class ExtensionBridge {
         this.upstreamBrowsers = [];
         this.role = 'relay';
         this.error = undefined;
-        this.boundPort = this.opts.port;
-        this.log(`Another agent session hosts the bridge; relaying through it on port ${this.opts.port}`);
+        this.boundPort = this.port;
+        this.log(`Another agent session hosts the bridge; relaying through it on port ${this.port}`);
         this.announceAgent(ws);
         resolve();
       });
       ws.on('message', (raw) => {
         const msg = this.parse(raw, hostToRelay);
         if (!msg) return;
-        this.handleHostMessage(msg);
+        this.handleHostMessage(ws, msg);
       });
       ws.on('close', () => {
         if (this.upstream !== ws) return;
@@ -313,9 +324,66 @@ export class ExtensionBridge {
     });
   }
 
-  private handleHostMessage(msg: HostToRelay) {
+  private handleHostMessage(upstream: WebSocket, msg: HostToRelay) {
     if (msg.type === 'status') this.upstreamBrowsers = msg.extensions ?? (msg.extension ? [msg.extension] : []);
+    else if (msg.type === 'handover') void this.takeOver(upstream);
     else this.settle(msg);
+  }
+
+  private async takeOver(upstream: WebSocket) {
+    if (this.upstream !== upstream) return;
+    if (!(await this.listenForTakeOver())) return;
+    this.log('Took over hosting the bridge from an older agent-browser-bridge server');
+    this.upstream = undefined;
+    this.upstreamBrowsers = [];
+    await this.whenSettled(this.timeoutMs, upstream);
+    upstream.close(HANDOVER_CLOSE_CODE, 'Took over the bridge');
+  }
+
+  private async listenForTakeOver(): Promise<boolean> {
+    for (let attempt = 0; attempt < ESTABLISH_ATTEMPTS && !this.stopped && this.upstream; attempt++) {
+      try {
+        await this.listen();
+        return true;
+      } catch (err) {
+        if ((err as NodeJS.ErrnoException).code !== 'EADDRINUSE') break;
+        await delay(100);
+      }
+    }
+    return false;
+  }
+
+  private considerHandover(successor: WebSocket, agent: AgentInfo) {
+    const own = this.opts.version;
+    if (this.handingOver || this.role !== 'host' || !own || !isNewerVersion(agent.serverVersion, own)) return;
+    void this.handOver(successor, agent.serverVersion);
+  }
+
+  private async handOver(successor: WebSocket, version: string) {
+    this.handingOver = true;
+    this.log(`An agent session with server ${version} joined; handing the bridge over to it`);
+    const successorLeft = new Promise<void>((resolve) => {
+      if (successor.readyState >= WebSocket.CLOSING) resolve();
+      else successor.once('close', () => resolve());
+    });
+    this.wss?.close();
+    this.wss = undefined;
+    this.reply(successor, { type: 'handover' });
+    await Promise.race([successorLeft, delay(this.opts.handoverWaitMs ?? HANDOVER_WAIT_MS)]);
+    await this.whenSettled(this.timeoutMs);
+    this.role = undefined;
+    this.error = 'Handing the bridge over to a newer agent-browser-bridge server; please retry.';
+    for (const socket of [...this.extensions.keys(), ...this.relays.keys()]) {
+      socket.close(HANDOVER_CLOSE_CODE, 'Bridge handed over to a newer server');
+    }
+    this.handingOver = false;
+    this.scheduleEstablish(REJOIN_AFTER_HANDOVER_MS);
+  }
+
+  private async whenSettled(limitMs: number, socket?: WebSocket) {
+    const deadline = Date.now() + limitMs;
+    const busy = () => [...this.pending.values()].some((p) => !socket || p.socket === socket);
+    while (busy() && Date.now() < deadline && !this.stopped) await delay(50);
   }
 
   private parse<T>(raw: WebSocket.RawData, schema: { safeParse: (v: unknown) => { success: true; data: T } | { success: false } }): T | undefined {
@@ -337,6 +405,7 @@ export class ExtensionBridge {
       if (msg.type === 'agent') {
         this.relays.set(socket, msg.agent);
         this.broadcastAgents();
+        this.considerHandover(socket, msg.agent);
         return;
       }
       this.request(msg.browser ?? 'chrome', msg.method, msg.params, msg.agent ?? null, msg.instance).then(
