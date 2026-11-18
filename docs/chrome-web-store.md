@@ -4,6 +4,8 @@ The following copy was used for the 0.3.0 submission on 17 November 2026. Review
 
 ## Store description
 
+Control your own browser with any AI agent you like.
+
 Connect your AI coding agent to your everyday Chrome browser through Model Context Protocol (MCP).
 
 Agent Browser Bridge lets a connected agent list windows and tabs, organise tabs into named and coloured groups, move tabs and groups, and close tabs on request. Preview a grouping plan before applying it, and undo the last plan to restore the previous layout.
