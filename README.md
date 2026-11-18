@@ -1,5 +1,7 @@
 # Agent Browser Bridge
 
+**Control your own browser with any AI agent you like.**
+
 ## Why use it
 
 Connect your MCP-compatible agent to the browser you already use, with your existing tabs and signed-in sessions.
