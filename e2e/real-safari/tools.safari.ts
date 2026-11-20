@@ -1,4 +1,7 @@
-import type { Server } from 'node:http';
+import { cpSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { createServer, type Server } from 'node:http';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { WebSocketServer } from 'ws';
 import { DEFAULT_PORT, PROTOCOL_VERSION, STATUS_TOOL } from '@agent-browser-bridge/protocol';
@@ -59,6 +62,56 @@ const fixture = (name: string) => `http://127.0.0.1:${(fixtures.address() as { p
 const listTabs = (filter: Record<string, unknown> = {}) => agent.call<Tab[]>('safari_tabs_list', filter);
 const openTab = (name: string) => agent.call<Tab>('safari_tabs_create', { url: fixture(name) });
 
+function listenForBeacons(): Promise<{ port: number; received: string[]; close(): Promise<void> }> {
+  const received: string[] = [];
+  const server = createServer((request, response) => {
+    received.push(decodeURIComponent(request.url ?? ''));
+    response.writeHead(200, { 'content-type': 'text/html', 'access-control-allow-origin': '*' }).end('<title>beacon</title>');
+  });
+  return new Promise((done) =>
+    server.listen(0, '127.0.0.1', () =>
+      done({
+        port: (server.address() as { port: number }).port,
+        received,
+        close: () => new Promise((closed) => server.close(() => closed())),
+      }),
+    ),
+  );
+}
+
+function instrumentedExtension(beaconPort: number) {
+  const directory = mkdtempSync(join(tmpdir(), 'agent-browser-bridge-safari-probe-'));
+  cpSync(EXTENSION_DIST, directory, { recursive: true });
+  const background = join(directory, 'background.js');
+  const prelude = `
+    const beaconUrl = (via, stage, detail) =>
+      'http://127.0.0.1:${beaconPort}/beacon?via=' + via + '&stage=' + stage + '&detail=' + encodeURIComponent(JSON.stringify(detail === undefined ? null : detail));
+    const beacon = (stage, detail) => {
+      try { fetch(beaconUrl('fetch', stage, detail), { mode: 'no-cors' }).catch(() => {}); } catch (error) {}
+      try { chrome.tabs.create({ url: beaconUrl('tab', stage, detail), active: false }).catch(() => {}); } catch (error) {}
+    };
+    beacon('start', { namespaces: Object.keys(chrome).sort(), runtime: Object.keys(chrome.runtime).sort(), userAgent: navigator.userAgent, url: chrome.runtime.getURL('') });
+    self.addEventListener('error', (event) => beacon('error-event', String(event.message)));
+    self.addEventListener('unhandledrejection', (event) => beacon('unhandled-rejection', String(event.reason)));
+    try {
+      const socket = new WebSocket('ws://127.0.0.1:${DEFAULT_PORT}');
+      socket.onopen = () => { beacon('websocket', 'open'); socket.close(); };
+      socket.onerror = () => beacon('websocket', 'error');
+    } catch (error) {
+      beacon('websocket', 'threw ' + error);
+    }
+    try {
+  `;
+  const epilogue = `
+      beacon('end', 'the background script ran to its last line');
+    } catch (error) {
+      beacon('threw', { message: String(error), stack: String(error && error.stack) });
+    }
+  `;
+  writeFileSync(background, `${prelude}\n${readFileSync(background, 'utf-8')}\n${epilogue}`);
+  return directory;
+}
+
 function listenForConnectionAttempts(ms: number) {
   const attempts: Array<{ origin: string; userAgent: string | undefined; messages: string[] }> = [];
   const server = new WebSocketServer({ port: DEFAULT_PORT, host: '127.0.0.1' });
@@ -104,10 +157,15 @@ beforeAll(async () => {
   fixtures = await serveFixtures();
   safari = await startSafariSession();
   console.log(`Safari session capabilities: ${JSON.stringify(safari.capabilities)}`);
+  const beacons = await listenForBeacons();
+  const probeExtension = instrumentedExtension(beacons.port);
   const listening = listenForConnectionAttempts(PROBE_MS);
-  console.log(`Loaded the extension: ${JSON.stringify(await safari.loadExtension(EXTENSION_DIST))}`);
+  console.log(`Loaded the instrumented extension: ${JSON.stringify(await safari.loadExtension(probeExtension))}`);
   console.log(`Connection attempts in the first ${PROBE_MS} ms: ${JSON.stringify(await listening)}`);
+  console.log(`Beacons from the background script:\n${beacons.received.join('\n') || 'none'}`);
   await describeSafari().catch((error: unknown) => console.log(`Could not describe Safari: ${String(error)}`));
+  await beacons.close();
+  rmSync(probeExtension, { recursive: true, force: true });
   agent = await startAgent();
   await safariConnected(CONNECT_TIMEOUT_MS);
 });
