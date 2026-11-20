@@ -5,6 +5,7 @@ import {
   extensionToServer,
   hostToRelay,
   PROTOCOL_VERSION,
+  REPLACED_CLOSE_CODE,
   relayToHost,
   type AgentInfo,
   type HelloMessage,
@@ -13,6 +14,7 @@ import {
   type ResponseMessage,
   type ServerToExtension,
 } from '@agent-browser-bridge/protocol';
+import { describeInstance, identifyHint } from './instances.ts';
 import { isNewerVersion } from './version.ts';
 
 export interface BridgeOptions {
@@ -122,14 +124,14 @@ export class ExtensionBridge {
   private pick(browser: string, instance?: string): WebSocket {
     const candidates = this.connectedBrowsers().filter(([, hello]) => hello.browser === browser);
     if (!candidates.length) throw new NotConnectedError(this.error ?? notConnected(browser));
-    const listed = candidates.map(([, hello]) => `${hello.instanceId ?? 'unknown'} (${hello.label ?? hello.browser})`).join(', ');
+    const listed = candidates.map(([, hello]) => describeInstance(hello)).join(', ');
     if (instance !== undefined) {
       const target = candidates.find(([, hello]) => hello.instanceId === instance);
       if (!target) throw new NotConnectedError(`No ${browser} instance "${instance}" is connected. Connected instances: ${listed}.`);
       return target[0];
     }
     if (candidates.length > 1) {
-      throw new Error(`Several ${browser} instances are connected: ${listed}. Pass instance to choose one.`);
+      throw new Error(`Several ${browser} instances are connected: ${listed}. Pass instance to choose one. ${identifyHint}`);
     }
     return candidates[0][0];
   }
@@ -448,7 +450,7 @@ export class ExtensionBridge {
           }
           this.replaceSameInstance(socket, msg);
           this.extensions.set(socket, msg);
-          this.log(`Extension ${msg.extensionVersion} connected from ${msg.label ?? msg.browser}`);
+          this.log(`Extension ${msg.extensionVersion} connected from ${describeInstance(msg)}`);
           socket.send(JSON.stringify({ type: 'agents', agents: this.agents() } satisfies ServerToExtension));
           this.broadcastStatus();
           return;
@@ -474,7 +476,7 @@ export class ExtensionBridge {
     for (const [previous, hello] of this.connectedBrowsers()) {
       if (previous === socket || hello.browser !== incoming.browser || hello.instanceId !== incoming.instanceId) continue;
       this.extensions.delete(previous);
-      previous.close(4000, 'Replaced by a newer connection');
+      previous.close(REPLACED_CLOSE_CODE, 'Replaced by a newer connection');
       this.failPending(new NotConnectedError('Extension reconnected; please retry.'), previous);
     }
   }

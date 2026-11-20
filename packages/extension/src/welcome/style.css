@@ -47,6 +47,13 @@ code { background: var(--code-bg); padding: 1px 5px; border-radius: 4px; }
 .agents { margin: 10px 0 0; padding-left: 20px; }
 .agents[hidden] { display: none; }
 .server-version { color: var(--muted); font-size: 13px; }
+.instance-name { margin-top: 16px; }
+.instance-name label { display: block; font-weight: 600; font-size: 14px; }
+.instance-name input {
+  font: inherit; font-size: 14px; margin-top: 4px; width: 100%; max-width: 300px;
+  padding: 6px 10px; border-radius: 6px; border: 1px solid var(--border); background: var(--card); color: var(--fg);
+}
+.instance-name .hint { margin: 4px 0 0; font-size: 13px; }
 
 .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 14px; margin-top: 16px; }
 .card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px; }

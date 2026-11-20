@@ -33,12 +33,13 @@ interface ExtensionOptions {
   browser?: string;
   instanceId?: string;
   label?: string;
+  name?: string;
 }
 
 async function connectExtension(
   port: number,
   handler: (method: string, params: unknown) => unknown,
-  { origin = EXT_ORIGIN, browser, instanceId, label }: ExtensionOptions = {},
+  { origin = EXT_ORIGIN, browser, instanceId, label, name }: ExtensionOptions = {},
 ) {
   const ws = await connect(port, origin);
   ws.on('message', (raw) => {
@@ -50,7 +51,7 @@ async function connectExtension(
       ws.send(JSON.stringify({ type: 'response', id: msg.id, ok: false, error: (e as Error).message }));
     }
   });
-  ws.send(JSON.stringify({ type: 'hello', protocolVersion: PROTOCOL_VERSION, extensionVersion: '0.1.0', userAgent: 'test', browser, instanceId, label }));
+  ws.send(JSON.stringify({ type: 'hello', protocolVersion: PROTOCOL_VERSION, extensionVersion: '0.1.0', userAgent: 'test', browser, instanceId, label, name }));
   const expected = browser ?? 'chrome';
   await expect
     .poll(() => connectedTo(bridge!).some((hello) => hello.browser === expected && hello.instanceId === instanceId))
@@ -432,6 +433,24 @@ describe('ExtensionBridge', () => {
       const port = await startBridge();
       await connectTwo(port);
       await expect(bridge!.request('chrome', 'tabs.list', {})).rejects.toThrow(/aaaa1111 \(Chrome\), bbbb2222 \(Edge\).*Pass instance/);
+    });
+
+    it('lists instances by name and suggests identifying them', async () => {
+      const port = await startBridge();
+      await connectExtension(port, () => 'work', { instanceId: 'aaaa1111', label: 'Chrome', name: 'Work' });
+      await connectExtension(port, () => 'other', { instanceId: 'bbbb2222', label: 'Chrome' });
+      await expect(bridge!.request('chrome', 'tabs.list', {})).rejects.toThrow(
+        /"Work" \(Chrome, aaaa1111\), bbbb2222 \(Chrome\)\. Pass instance to choose one\. .*browser_identify_instances/,
+      );
+    });
+
+    it('takes a new name from a repeated hello on the same connection', async () => {
+      const port = await startBridge();
+      const ws = await connectExtension(port, () => 'work', { instanceId: 'aaaa1111', label: 'Chrome' });
+      ws.send(JSON.stringify({ type: 'hello', protocolVersion: PROTOCOL_VERSION, extensionVersion: '0.1.0', userAgent: 'test', instanceId: 'aaaa1111', label: 'Chrome', name: 'Work' }));
+      await expect.poll(() => connectedTo(bridge!).map((hello) => hello.name)).toEqual(['Work']);
+      expect(ws.readyState).toBe(WebSocket.OPEN);
+      await expect(bridge!.request('chrome', 'tabs.list', {})).resolves.toBe('work');
     });
 
     it('reports an unknown instance', async () => {

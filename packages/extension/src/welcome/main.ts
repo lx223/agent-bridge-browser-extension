@@ -2,6 +2,7 @@ import type { PageEvent, Properties } from '../background/analytics.ts';
 import type { ConnectionStatus } from '../background/bridgeClient.ts';
 import { renderAgentList } from '../settings/agentList.ts';
 import { analyticsAvailable, bindAnalyticsToggle } from '../settings/analyticsToggle.ts';
+import { bindInstanceName } from '../settings/instanceName.ts';
 import { agentSetupPrompt, claudeCodeCommand, claudeDesktopExtensionUrl, cursorInstallUrl, LAUNCH_SPEC, mcpJsonConfig, vscodeInstallUrl } from './install.ts';
 
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
@@ -13,6 +14,7 @@ $('agent-prompt').textContent = agentSetupPrompt;
 $<HTMLAnchorElement>('cursor-link').href = cursorInstallUrl();
 $<HTMLAnchorElement>('vscode-link').href = vscodeInstallUrl();
 $<HTMLAnchorElement>('claude-desktop-link').href = claudeDesktopExtensionUrl;
+bindInstanceName($<HTMLInputElement>('instance-name'), $('instance-id'));
 
 const track = (event: PageEvent, properties: Properties) =>
   chrome.runtime.sendMessage({ type: 'TRACK', event, properties }).catch(() => undefined);

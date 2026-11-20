@@ -2,6 +2,7 @@ import { DEFAULT_PORT, type AgentInfo } from '@agent-browser-bridge/protocol';
 import { Analytics, ANALYTICS_ENABLED_KEY, isPageEvent, type Properties } from './analytics.ts';
 import { agentLabel } from '../settings/agentList.ts';
 import { BridgeClient, type ConnectionStatus } from './bridgeClient.ts';
+import { INSTANCE_NAME_KEY } from './browser.ts';
 import { listenForDetach } from './debugger.ts';
 import { listenForPageToolEvents } from './pageTools.ts';
 import { applyUpdatesWhenIdle } from './update.ts';
@@ -75,7 +76,9 @@ const syncUninstallSurvey = async () => {
 };
 void syncUninstallSurvey();
 chrome.storage.onChanged.addListener((changes, area) => {
-  if (area === 'local' && ANALYTICS_ENABLED_KEY in changes) void syncUninstallSurvey();
+  if (area !== 'local') return;
+  if (ANALYTICS_ENABLED_KEY in changes) void syncUninstallSurvey();
+  if (INSTANCE_NAME_KEY in changes) client.reintroduce();
 });
 
 listenForDetach();
