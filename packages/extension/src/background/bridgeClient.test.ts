@@ -115,6 +115,13 @@ describe('BridgeClient', () => {
     expect(client.status.state).toBe('connected');
   });
 
+  it('reports its own instance id once it has introduced itself', async () => {
+    const { client } = createClient(1);
+    expect(client.status).not.toHaveProperty('instanceId');
+    const { client: introduced } = await connected();
+    expect(introduced.status.instanceId).toBe('abc12345');
+  });
+
   it('keeps a single socket when asked to connect again', async () => {
     const { client, states } = await connected();
     client.connect();

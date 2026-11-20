@@ -1,6 +1,6 @@
 import { DEFAULT_PORT, type AgentInfo } from '@agent-browser-bridge/protocol';
 import { Analytics, ANALYTICS_ENABLED_KEY, isPageEvent, type Properties } from './analytics.ts';
-import { agentLabel } from '../settings/agentList.ts';
+import { sessionTitle } from '../settings/sessionList.ts';
 import { BridgeClient, type ConnectionStatus } from './bridgeClient.ts';
 import { INSTANCE_NAME_KEY } from './browser.ts';
 import { listenForDetach } from './debugger.ts';
@@ -15,7 +15,7 @@ const RECONNECT_ALARM = 'agent-browser-bridge-reconnect';
 const statusTitle = ({ state, agents }: ConnectionStatus) => {
   if (state !== 'connected') return 'Agent Browser Bridge: no agent connected';
   if (!agents.length) return 'Agent Browser Bridge: agent connected';
-  return `Agent Browser Bridge: connected to ${agents.map(agentLabel).join(', ')}`;
+  return `Agent Browser Bridge: connected to ${agents.map(sessionTitle).join(', ')}`;
 };
 
 const showStatus = (status: ConnectionStatus) => {

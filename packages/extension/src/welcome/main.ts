@@ -1,6 +1,6 @@
 import type { PageEvent, Properties } from '../background/analytics.ts';
 import type { ConnectionStatus } from '../background/bridgeClient.ts';
-import { renderAgentList } from '../settings/agentList.ts';
+import { renderSessionList } from '../settings/sessionList.ts';
 import { analyticsAvailable, bindAnalyticsToggle } from '../settings/analyticsToggle.ts';
 import { bindInstanceName } from '../settings/instanceName.ts';
 import { agentSetupPrompt, claudeCodeCommand, claudeDesktopExtensionUrl, cursorInstallUrl, LAUNCH_SPEC, mcpJsonConfig, vscodeInstallUrl } from './install.ts';
@@ -41,9 +41,11 @@ const STATUS_TEXT: Record<ConnectionStatus['state'], string> = {
 
 function render(status: ConnectionStatus | undefined) {
   const state = status?.state ?? 'disconnected';
+  const sessions = status?.agents.length ?? 0;
   $('status').dataset.state = state;
-  $('status-text').textContent = STATUS_TEXT[state];
-  renderAgentList($('agents'), status?.agents ?? []);
+  $('status-text').textContent =
+    state === 'connected' && sessions > 1 ? `Connected: ${sessions} agent sessions can use the browser.` : STATUS_TEXT[state];
+  renderSessionList($('agents'), status?.agents ?? [], status?.instanceId);
 }
 
 chrome.runtime.onMessage.addListener((message) => {

@@ -14,6 +14,8 @@ When a connected agent uses page tools, the extension uses Chrome's `debugger` p
 
 The extension uses Chrome session storage to keep the previous tab and group layout for the undo feature. That snapshot contains tab identifiers, positions, group membership, group names and a timestamp. It is replaced by a later applied plan, removed after undo, and cleared when the browser session ends.
 
+The local bridge also tells the extension which agent sessions are connected, so the setup and options pages can list them. For each session this includes the name and version the agent reports for itself, a random session identifier, when the session started, the name and path of the project folder the agent is working in, the last browser tool it used and when, how many tool calls it made, and which browser profiles it used. The extension only shows this on its own pages; it is not stored and not included in usage analytics.
+
 ## Where information goes
 
 The extension connects to a WebSocket server at 127.0.0.1:17373 on your computer. It reads webpage content only when a connected agent calls a page tool for a specific tab, and it does not send advertising data.

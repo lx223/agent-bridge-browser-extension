@@ -44,7 +44,7 @@ The files are:
 
 `npm run test:e2e:mcpb` runs the same suite against the Claude Desktop extension bundle (`packages/server/mcpb-dist/server/index.js`) instead of the npm build. The bundle inlines every dependency, so this catches bundling problems that only show up once the extension connects. Set `E2E_SERVER_ENTRY` to point the suite at any other server entry.
 
-`e2e/harness.ts` holds the shared setup. Add fixtures as plain HTML files in `e2e/fixtures/`.
+`e2e/harness.ts` holds the shared setup. Add fixtures as plain HTML files in `e2e/fixtures/`. `startHarness` also takes a browser locale, device scale factor, colour scheme and the MCP client name and version the agent reports. The tests use the defaults; the [store screenshot generator](chrome-web-store.md#screenshots) sets them.
 
 ### Stale element refs
 
