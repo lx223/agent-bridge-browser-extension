@@ -15,40 +15,36 @@ const PROBE_MS = 20_000;
 const EXTENSION_PAGE_PROBE = `
   const done = arguments[arguments.length - 1];
   const within = (promise, ms) => Promise.race([promise, new Promise((resolve) => setTimeout(() => resolve('no answer after ' + ms + ' ms'), ms))]);
-  (async () => {
-    const report = { href: location.href, chrome: typeof chrome, browser: typeof browser };
-    report.namespaces = Object.keys(chrome).sort();
-    report.runtime = Object.keys(chrome.runtime).sort();
+  const attempt = async (run) => {
     try {
-      report.backgroundStatus = await within(chrome.runtime.sendMessage({ type: 'GET_STATUS' }), 5000);
+      return await within(run(), 6000);
     } catch (error) {
-      report.backgroundStatusError = String(error);
+      return 'threw ' + error;
     }
-    report.webSocket = await new Promise((resolve) => {
+  };
+  const socketResult = (url) =>
+    new Promise((resolve) => {
       try {
-        const socket = new WebSocket('ws://127.0.0.1:${DEFAULT_PORT}');
+        const socket = new WebSocket(url);
         socket.onopen = () => {
           resolve('open');
           socket.close();
         };
         socket.onerror = () => resolve('error');
-        socket.onclose = (event) => resolve('closed with ' + event.code);
+        socket.onclose = (event) => resolve('closed with ' + event.code + ' ' + event.reason);
         setTimeout(() => resolve('no result after 5000 ms'), 5000);
       } catch (error) {
         resolve('threw ' + error);
       }
     });
-    try {
-      await chrome.alarms.create('probe', { periodInMinutes: 0.5 });
-      report.halfMinuteAlarm = 'accepted';
-    } catch (error) {
-      report.halfMinuteAlarm = String(error);
-    }
-    try {
-      report.tabs = await within(chrome.tabs.query({}), 5000);
-    } catch (error) {
-      report.tabsError = String(error);
-    }
+  (async () => {
+    const report = { href: location.href };
+    report.backgroundLog = await attempt(() => chrome.runtime.sendMessage({ type: 'PROBE_LOG' }));
+    report.backgroundStatus = await attempt(() => chrome.runtime.sendMessage({ type: 'GET_STATUS' }));
+    report.permissions = await attempt(() => chrome.permissions.getAll());
+    report.pageWebSocket = await socketResult('ws://127.0.0.1:${DEFAULT_PORT}');
+    report.pageFetch = await attempt(() => fetch('http://127.0.0.1:${DEFAULT_PORT}/', { mode: 'no-cors' }).then((response) => 'answered ' + response.type));
+    report.tabs = await attempt(() => chrome.tabs.query({}));
     done(report);
   })().catch((error) => done({ probeError: String(error) }));
 `;
@@ -84,28 +80,36 @@ function instrumentedExtension(beaconPort: number) {
   cpSync(EXTENSION_DIST, directory, { recursive: true });
   const background = join(directory, 'background.js');
   const prelude = `
-    const beaconUrl = (via, stage, detail) =>
-      'http://127.0.0.1:${beaconPort}/beacon?via=' + via + '&stage=' + stage + '&detail=' + encodeURIComponent(JSON.stringify(detail === undefined ? null : detail));
-    const beacon = (stage, detail) => {
-      try { fetch(beaconUrl('fetch', stage, detail), { mode: 'no-cors' }).catch(() => {}); } catch (error) {}
-      try { chrome.tabs.create({ url: beaconUrl('tab', stage, detail), active: false }).catch(() => {}); } catch (error) {}
-    };
-    beacon('start', { namespaces: Object.keys(chrome).sort(), runtime: Object.keys(chrome.runtime).sort(), userAgent: navigator.userAgent, url: chrome.runtime.getURL('') });
-    self.addEventListener('error', (event) => beacon('error-event', String(event.message)));
-    self.addEventListener('unhandledrejection', (event) => beacon('unhandled-rejection', String(event.reason)));
+    const probeLog = [];
+    const note = (stage, detail) => probeLog.push([Date.now(), stage, detail === undefined ? null : detail]);
+    chrome.runtime.onMessage.addListener((message, sender, respond) => {
+      if (message && message.type === 'PROBE_LOG') respond(probeLog);
+      return false;
+    });
+    self.addEventListener('error', (event) => note('error-event', String(event.message)));
+    self.addEventListener('unhandledrejection', (event) => note('unhandled-rejection', String(event.reason)));
+    note('start', { url: chrome.runtime.getURL(''), context: typeof ServiceWorkerGlobalScope === 'undefined' ? 'page' : 'service worker' });
+    chrome.tabs
+      .create({ url: 'http://127.0.0.1:${beaconPort}/beacon?base=' + encodeURIComponent(chrome.runtime.getURL('')), active: false })
+      .then(() => note('beacon-tab', 'opened'), (error) => note('beacon-tab', String(error)));
+    fetch('http://127.0.0.1:${beaconPort}/beacon?via=fetch', { mode: 'no-cors' }).then(
+      (response) => note('fetch', 'answered ' + response.type),
+      (error) => note('fetch', String(error)),
+    );
     try {
       const socket = new WebSocket('ws://127.0.0.1:${DEFAULT_PORT}');
-      socket.onopen = () => { beacon('websocket', 'open'); socket.close(); };
-      socket.onerror = () => beacon('websocket', 'error');
+      socket.onopen = () => note('websocket', 'open');
+      socket.onerror = () => note('websocket', 'error');
+      socket.onclose = (event) => note('websocket', 'closed with ' + event.code + ' ' + event.reason);
     } catch (error) {
-      beacon('websocket', 'threw ' + error);
+      note('websocket', 'threw ' + error);
     }
     try {
   `;
   const epilogue = `
-      beacon('end', 'the background script ran to its last line');
+      note('end', 'the background script ran to its last line');
     } catch (error) {
-      beacon('threw', { message: String(error), stack: String(error && error.stack) });
+      note('threw', { message: String(error), stack: String(error && error.stack) });
     }
   `;
   writeFileSync(background, `${prelude}\n${readFileSync(background, 'utf-8')}\n${epilogue}`);
@@ -128,12 +132,18 @@ function listenForConnectionAttempts(ms: number) {
   });
 }
 
-async function describeSafari() {
+async function describeSafari(beacons: string[]) {
+  const base = beacons.map((beacon) => /[?&]base=([^&]+)/.exec(beacon)?.[1]).find((found) => found !== undefined);
+  if (!base) {
+    console.log(`The background script did not report its address. Safari pages: ${JSON.stringify(await safari.pages())}`);
+    return;
+  }
+  console.log(`Opening ${base}src/welcome/index.html: ${await safari.open(`${base}src/welcome/index.html`)}`);
   const pages = await safari.pages();
   console.log(`Safari pages: ${JSON.stringify(pages)}`);
   for (const page of pages.filter((candidate) => candidate.url.startsWith('safari-web-extension://'))) {
     const report = await safari.runInPage(page.handle, EXTENSION_PAGE_PROBE).catch((error: unknown) => `probe failed: ${String(error)}`);
-    console.log(`Extension page probe: ${JSON.stringify(report)}`);
+    console.log(`Extension page probe: ${JSON.stringify(report, null, 1)}`);
   }
 }
 
@@ -163,7 +173,7 @@ beforeAll(async () => {
   console.log(`Loaded the instrumented extension: ${JSON.stringify(await safari.loadExtension(probeExtension))}`);
   console.log(`Connection attempts in the first ${PROBE_MS} ms: ${JSON.stringify(await listening)}`);
   console.log(`Beacons from the background script:\n${beacons.received.join('\n') || 'none'}`);
-  await describeSafari().catch((error: unknown) => console.log(`Could not describe Safari: ${String(error)}`));
+  await describeSafari(beacons.received).catch((error: unknown) => console.log(`Could not describe Safari: ${String(error)}`));
   await beacons.close();
   rmSync(probeExtension, { recursive: true, force: true });
   agent = await startAgent();

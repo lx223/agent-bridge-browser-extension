@@ -9,6 +9,7 @@ export interface SafariSession {
   command<T = unknown>(method: string, path: string, body?: unknown): Promise<T>;
   loadExtension(directory: string): Promise<unknown>;
   pages(): Promise<SafariPage[]>;
+  open(url: string): Promise<string>;
   runInPage<T = unknown>(handle: string, script: string): Promise<T>;
   driverOutput(): string;
   close(): Promise<void>;
@@ -80,6 +81,13 @@ export async function startSafariSession(): Promise<SafariSession> {
           listed.push({ handle, url: await command<string>('GET', '/url'), title: await command<string>('GET', '/title') });
         }
         return listed;
+      },
+      async open(url: string) {
+        await command('POST', '/timeouts', { pageLoad: 5_000 });
+        return command('POST', '/url', { url }).then(
+          () => 'loaded',
+          (error: unknown) => `navigation reported: ${String(error)}`,
+        );
       },
       async runInPage<T>(handle: string, script: string) {
         await command('POST', '/window', { handle });
