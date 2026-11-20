@@ -69,3 +69,5 @@ npm run build:safari -w agent-browser-bridge-extension
 ```
 
 Open the generated project in `packages/extension/safari/` with Xcode, select the macOS scheme and run it. In Safari, enable **Settings > Advanced > Show features for web developers**, choose **Develop > Allow Unsigned Extensions**, and enable Agent Browser Bridge under **Settings > Extensions**. Allow website access so Safari can read tab titles and URLs, then connect your agent as above.
+
+Maintainers release the Safari app through the Mac App Store; see [docs/safari-app-store.md](docs/safari-app-store.md).

@@ -1,0 +1,75 @@
+name: Safari Archive
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - .github/workflows/safari-archive.yml
+      - packages/extension/scripts/set-safari-bundle-id.mjs
+
+jobs:
+  archive:
+    runs-on: macos-latest
+    env:
+      APP_ID: dev.agentbrowserbridge.app
+      PROJECT_DIR: packages/extension/safari/Agent Browser Bridge
+    steps:
+      - uses: actions/checkout@v4
+
+      - run: echo "ARCHIVE=$RUNNER_TEMP/AgentBrowserBridge.xcarchive" >> "$GITHUB_ENV"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'npm'
+
+      - run: npm ci
+
+      - name: Read version
+        id: version
+        run: echo "extension=$(node -p "require('./packages/extension/package.json').version")" >> "$GITHUB_OUTPUT"
+
+      - run: xcodebuild -version
+
+      - name: Build Safari project
+        run: npm run build:safari -w agent-browser-bridge-extension
+        env:
+          VITE_POSTHOG_KEY: phc_FtV2hwQzJhR4Ul4ts9ViUxKZIP9MlDPMjMyvvPfZFjg
+          VITE_POSTHOG_HOST: https://eu.i.posthog.com
+          VITE_UNINSTALL_SURVEY_URL: https://eu.posthogsurveys.com/external_surveys/01a1eb02-9bf0-0000-54ae-59e3f95e3984
+
+      - name: Archive
+        working-directory: ${{ env.PROJECT_DIR }}
+        run: |
+          xcodebuild archive \
+            -project "Agent Browser Bridge.xcodeproj" \
+            -scheme "Agent Browser Bridge" \
+            -configuration Release \
+            -destination "generic/platform=macOS" \
+            -archivePath "$ARCHIVE" \
+            MARKETING_VERSION="${{ steps.version.outputs.extension }}" \
+            CURRENT_PROJECT_VERSION="${{ github.run_number }}" \
+            MACOSX_DEPLOYMENT_TARGET=12.0 \
+            INFOPLIST_KEY_LSApplicationCategoryType=public.app-category.developer-tools \
+            CODE_SIGN_STYLE=Manual \
+            CODE_SIGN_IDENTITY=- \
+            DEVELOPMENT_TEAM=
+
+      - name: Check bundle identifiers and version
+        run: |
+          app="$ARCHIVE/Products/Applications/Agent Browser Bridge.app"
+          appex="$app/Contents/PlugIns/Agent Browser Bridge Extension.appex"
+          plist() { /usr/libexec/PlistBuddy -c "Print :$2" "$1/Contents/Info.plist"; }
+          test "$(plist "$app" CFBundleIdentifier)" = "$APP_ID"
+          test "$(plist "$appex" CFBundleIdentifier)" = "$APP_ID.Extension"
+          test "$(plist "$app" CFBundleShortVersionString)" = "${{ steps.version.outputs.extension }}"
+          test "$(plist "$app" LSApplicationCategoryType)" = "public.app-category.developer-tools"
+          codesign -d --entitlements - "$app"
+
+      - name: Zip archive
+        run: ditto -c -k --keepParent "$ARCHIVE" "$RUNNER_TEMP/agent-browser-bridge-safari.xcarchive.zip"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: agent-browser-bridge-safari-${{ steps.version.outputs.extension }}-${{ github.run_number }}
+          path: ${{ runner.temp }}/agent-browser-bridge-safari.xcarchive.zip
