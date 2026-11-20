@@ -8,7 +8,7 @@ const projectLocation = join(root, 'safari');
 const appIconSet = join(root, 'safari-app', 'AppIcon.appiconset');
 const appWindowIcon = join(appIconSet, 'icon_128x128@2x.png');
 const appName = 'Agent Browser Bridge';
-const bundleIdentifier = 'dev.lanxiao.agentbrowserbridge';
+const bundleIdentifier = 'dev.agentbrowserbridge';
 const extensionBundleIdentifier = `${bundleIdentifier}.Extension`;
 const bundleIdentifierSetting = /PRODUCT_BUNDLE_IDENTIFIER = "?([^";]+)"?;/g;
 const openInXcode = !process.argv.includes('--no-open');
