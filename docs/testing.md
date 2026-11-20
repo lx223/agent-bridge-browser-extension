@@ -108,7 +108,7 @@ What the simulation does not prove: that real Safari behaves the way MDN and the
 1. builds the extension and generates the Xcode project through `npm run build:safari`, without opening Xcode,
 2. builds the generated Xcode project with `xcodebuild`, without code signing,
 3. checks that the extension bundle inside the app contains the same `manifest.json` and `background.js` as `packages/extension/dist`, and the icons and pages,
-4. checks that the app's icon includes the 1024 pixel image the App Store asks for.
+4. checks that the Xcode project uses the committed app icon, and that the built app's icon includes the 1024 pixel image the App Store asks for.
 
 On GitHub the job summary shows the converter's output, including any manifest keys the installed Safari does not support.
 
