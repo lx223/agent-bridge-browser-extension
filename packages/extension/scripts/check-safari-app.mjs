@@ -7,6 +7,7 @@ import { fileURLToPath } from 'node:url';
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const dist = join(root, 'dist');
 const projectLocation = join(root, 'safari');
+const appIconSet = join(root, 'safari-app', 'AppIcon.appiconset');
 const packagedFiles = ['manifest.json', 'background.js', 'icons/icon-128.png', 'src/welcome/index.html', 'src/options/index.html'];
 
 const findBySuffix = (directory, suffix) =>
@@ -63,9 +64,27 @@ try {
     }
   }
 
+  const [projectIconSet] = findBySuffix(projectLocation, 'AppIcon.appiconset');
+  const changedIconFiles = readdirSync(appIconSet).filter(
+    (file) => !existsSync(join(projectIconSet, file)) || !readFileSync(join(projectIconSet, file)).equals(readFileSync(join(appIconSet, file))),
+  );
+  if (changedIconFiles.length) fail(`The Xcode project does not use the committed app icon for: ${changedIconFiles.join(', ')}`);
+
+  const [assetCatalog] = findBySuffix(join(derivedData, 'Build', 'Products'), join('.app', 'Contents', 'Resources', 'Assets.car'));
+  if (!assetCatalog) fail('The Safari app has no compiled asset catalog (Assets.car).');
+  const renditions = JSON.parse(execFileSync('assetutil', ['--info', assetCatalog], { encoding: 'utf-8', maxBuffer: 64 * 1024 * 1024 }));
+  const iconWidths = [...new Set(renditions.filter((rendition) => rendition.Name === 'AppIcon' && rendition.PixelWidth).map((rendition) => rendition.PixelWidth))];
+  const storeIconWidth = Math.max(0, ...iconWidths);
+  if (storeIconWidth !== 1024) {
+    fail(`The largest Safari app icon image is ${storeIconWidth}px wide instead of 1024px; the app holds: ${iconWidths.sort((a, b) => a - b).join(', ') || 'none'}`);
+  }
+
   const { version } = JSON.parse(readFileSync(join(resources, 'manifest.json'), 'utf-8'));
   const xcodeVersion = execFileSync('xcodebuild', ['-version'], { encoding: 'utf-8' });
-  summarise('Safari app build', `Built ${extension.split('/').pop()} with extension version ${version}\n${xcodeVersion}`);
+  summarise(
+    'Safari app build',
+    `Built ${extension.split('/').pop()} with extension version ${version} and a ${storeIconWidth}px app icon\n${xcodeVersion}`,
+  );
   console.log(`The Safari app builds and packages extension version ${version}.`);
 } finally {
   rmSync(derivedData, { recursive: true, force: true });
