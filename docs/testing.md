@@ -103,11 +103,13 @@ What the simulation does not prove: that real Safari behaves the way MDN and the
 
 `npm run test:safari-app -w agent-browser-bridge-extension` needs macOS with Xcode. Presubmit runs it on a macOS runner. `packages/extension/scripts/check-safari-app.mjs`:
 
-1. builds the extension and runs Apple's `safari-web-extension-converter` through `npm run build:safari`, without opening Xcode,
+1. builds the extension and generates the Xcode project through `npm run build:safari`, without opening Xcode,
 2. builds the generated Xcode project with `xcodebuild`, without code signing,
 3. checks that the extension bundle inside the app contains the same `manifest.json` and `background.js` as `packages/extension/dist`, and the icons and pages.
 
 On GitHub the job summary shows the converter's output, including any manifest keys the installed Safari does not support.
+
+`npm run build:safari` runs `packages/extension/scripts/build-safari.mjs`. Apple's `safari-web-extension-converter` gives the app a bundle identifier made from its name, which does not match the extension's `dev.agentbrowserbridge.app.Extension`, and Xcode refuses to build an extension whose identifier does not start with its app's. The script sets the app's identifier to `dev.agentbrowserbridge.app` after converting, and fails if the project holds any other identifier.
 
 This proves the app can be built from a clean checkout. It does not sign, notarise or install the app.
 

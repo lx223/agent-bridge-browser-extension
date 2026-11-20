@@ -46,7 +46,7 @@ const derivedData = mkdtempSync(join(tmpdir(), 'agent-browser-bridge-safari-'));
 try {
   execFileSync(
     'xcodebuild',
-    ['-project', project, '-scheme', schemes[0], '-configuration', 'Debug', '-derivedDataPath', derivedData, 'CODE_SIGNING_ALLOWED=NO', 'build'],
+    ['-quiet', '-project', project, '-scheme', schemes[0], '-configuration', 'Debug', '-derivedDataPath', derivedData, 'CODE_SIGNING_ALLOWED=NO', 'build'],
     { stdio: 'inherit' },
   );
 
