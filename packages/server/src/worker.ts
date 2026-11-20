@@ -1,13 +1,18 @@
+import { homedir } from 'node:os';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
-import { DEFAULT_PORT } from '@agent-browser-bridge/protocol';
+import { DEFAULT_PORT, type AgentProject } from '@agent-browser-bridge/protocol';
 import { ExtensionBridge } from './bridge.ts';
 import { createMcpServer } from './mcp.ts';
+import { projectFromPath, sessionIdentity, trackProject } from './session.ts';
 import pkg from '../package.json' with { type: 'json' };
 
 const log = (msg: string) => process.stderr.write(`[agent-browser-bridge] ${msg}\n`);
 
 export async function runWorker() {
   const port = Number(process.env.AGENT_BROWSER_BRIDGE_PORT ?? DEFAULT_PORT);
+  const { sessionId, startedAt } = sessionIdentity(process.env);
+  const home = homedir();
+  let project: AgentProject | undefined = projectFromPath(process.cwd(), home);
   const bridge = new ExtensionBridge({
     port,
     extensionId: process.env.AGENT_BROWSER_BRIDGE_EXTENSION_ID || undefined,
@@ -15,12 +20,25 @@ export async function runWorker() {
     version: pkg.version,
     agentInfo: () => {
       const client = server.server.getClientVersion();
-      return { serverVersion: pkg.version, client: client ? { name: client.name, version: client.version } : null };
+      return {
+        serverVersion: pkg.version,
+        client: client ? { name: client.name, version: client.version } : null,
+        sessionId,
+        startedAt,
+        ...(project && { project }),
+      };
     },
   });
 
   const server = createMcpServer(bridge, pkg.version);
-  server.server.oninitialized = () => bridge.agentChanged();
+  const refreshProject = trackProject(server.server, home, (found) => {
+    project = found;
+    bridge.agentChanged();
+  });
+  server.server.oninitialized = () => {
+    bridge.agentChanged();
+    void refreshProject();
+  };
 
   try {
     await bridge.start();

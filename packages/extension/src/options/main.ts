@@ -1,5 +1,5 @@
 import type { ConnectionStatus } from '../background/bridgeClient.ts';
-import { renderAgentList } from '../settings/agentList.ts';
+import { renderSessionList } from '../settings/sessionList.ts';
 import { analyticsAvailable, bindAnalyticsToggle } from '../settings/analyticsToggle.ts';
 import { bindInstanceName } from '../settings/instanceName.ts';
 
@@ -16,17 +16,22 @@ const STATUS_TEXT: Record<ConnectionStatus['state'], string> = {
   disconnected: 'No agent connected',
 };
 
+let latest: ConnectionStatus | undefined;
+
 function render(status: ConnectionStatus | undefined) {
+  latest = status;
   const state = status?.state ?? 'disconnected';
+  const sessions = status?.agents.length ?? 0;
   $('connection').dataset.state = state;
-  $('status-text').textContent = STATUS_TEXT[state];
-  renderAgentList($('agents'), status?.agents ?? []);
+  $('status-text').textContent = state === 'connected' && sessions > 1 ? `${sessions} agent sessions connected` : STATUS_TEXT[state];
+  renderSessionList($('agents'), status?.agents ?? [], status?.instanceId);
 }
 
 chrome.runtime.onMessage.addListener((message) => {
   if (message?.type === 'STATUS_CHANGED') render(message.status);
 });
 void chrome.runtime.sendMessage({ type: 'GET_STATUS' }).then(render, () => render(undefined));
+setInterval(() => render(latest), 30_000);
 
 if (analyticsAvailable) {
   bindAnalyticsToggle($<HTMLInputElement>('analytics-enabled'));

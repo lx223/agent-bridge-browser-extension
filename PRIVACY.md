@@ -1,6 +1,6 @@
 # Agent Browser Bridge privacy policy
 
-Last updated: 17 November 2026
+Last updated: 20 November 2026
 
 Agent Browser Bridge connects Chrome tabs, tab groups and web pages to an MCP-compatible agent through a bridge server running on your computer.
 
@@ -11,6 +11,8 @@ When a connected agent requests browser information, the extension can send tab 
 When a connected agent uses page tools, the extension uses Chrome's `debugger` permission to attach to the requested tab and can send that page's content to the local bridge: its accessibility tree (visible text, labels, form field values and element roles), screenshots, the results of JavaScript the agent evaluates in the page, and the results of DevTools Protocol commands the agent sends. Depending on what the agent requests, this can include anything the page shows or holds, such as messages, account details, form contents and cookies. Page tools also let the agent click, type, scroll and navigate in the page as you.
 
 The extension uses Chrome session storage to keep the previous tab and group layout for the undo feature. That snapshot contains tab identifiers, positions, group membership, group names and a timestamp. It is replaced by a later applied plan, removed after undo, and cleared when the browser session ends.
+
+The local bridge also tells the extension which agent sessions are connected, so the setup and options pages can list them. For each session this includes the name and version the agent reports for itself, a random session identifier, when the session started, the name and path of the project folder the agent is working in, the last browser tool it used and when, how many tool calls it made, and which browser profiles it used. The extension only shows this on its own pages; it is not stored and not included in usage analytics.
 
 ## Where information goes
 

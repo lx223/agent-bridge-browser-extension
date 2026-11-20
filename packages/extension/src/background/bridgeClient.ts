@@ -1,4 +1,11 @@
-import { PROTOCOL_VERSION, REPLACED_CLOSE_CODE, serverToExtension, type AgentInfo, type ExtensionToServer } from '@agent-browser-bridge/protocol';
+import {
+  PROTOCOL_VERSION,
+  REPLACED_CLOSE_CODE,
+  serverToExtension,
+  type AgentInfo,
+  type AgentSession,
+  type ExtensionToServer,
+} from '@agent-browser-bridge/protocol';
 import { browserLabel, detectBrowser, instanceId, instanceName, newInstanceId, storeInstanceId } from './browser.ts';
 
 export type ConnectionState = 'connecting' | 'connected' | 'disconnected';
@@ -7,7 +14,8 @@ export interface ConnectionStatus {
   state: ConnectionState;
   url: string;
   since: number;
-  agents: AgentInfo[];
+  agents: AgentSession[];
+  instanceId?: string;
 }
 
 const KEEPALIVE_MS = 20_000; // < 30s idle limit for MV3 service workers
@@ -35,8 +43,8 @@ export class BridgeClient {
     this._status = { state: 'disconnected', url, since: Date.now(), agents: [] };
   }
 
-  get status() {
-    return this._status;
+  get status(): ConnectionStatus {
+    return this.instance === undefined ? this._status : { ...this._status, instanceId: this.instance };
   }
 
   whenIdle(): Promise<void> {
@@ -104,7 +112,7 @@ export class BridgeClient {
     }
     if (msg.type === 'agents') {
       this._status = { ...this._status, agents: msg.agents };
-      this.onStatus(this._status);
+      this.onStatus(this.status);
       return;
     }
     if (msg.type !== 'request') return;
@@ -127,6 +135,6 @@ export class BridgeClient {
   private setState(state: ConnectionState) {
     if (this._status.state === state) return;
     this._status = { state, url: this.url, since: Date.now(), agents: [] };
-    this.onStatus(this._status);
+    this.onStatus(this.status);
   }
 }
