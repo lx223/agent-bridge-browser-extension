@@ -8,8 +8,16 @@ export interface SafariSession {
   capabilities: Record<string, unknown>;
   command<T = unknown>(method: string, path: string, body?: unknown): Promise<T>;
   loadExtension(directory: string): Promise<unknown>;
+  pages(): Promise<SafariPage[]>;
+  runInPage<T = unknown>(handle: string, script: string): Promise<T>;
   driverOutput(): string;
   close(): Promise<void>;
+}
+
+export interface SafariPage {
+  handle: string;
+  url: string;
+  title: string;
 }
 
 const sleep = (ms: number) => new Promise((done) => setTimeout(done, ms));
@@ -65,6 +73,19 @@ export async function startSafariSession(): Promise<SafariSession> {
       capabilities: created.capabilities,
       command,
       loadExtension: (directory) => command('POST', '/webextension', { type: 'path', path: directory }),
+      async pages() {
+        const listed: SafariPage[] = [];
+        for (const handle of await command<string[]>('GET', '/window/handles')) {
+          await command('POST', '/window', { handle });
+          listed.push({ handle, url: await command<string>('GET', '/url'), title: await command<string>('GET', '/title') });
+        }
+        return listed;
+      },
+      async runInPage<T>(handle: string, script: string) {
+        await command('POST', '/window', { handle });
+        await command('POST', '/timeouts', { script: 30_000 });
+        return command<T>('POST', '/execute/async', { script, args: [] });
+      },
       driverOutput,
       async close() {
         await command('DELETE', '').catch(() => {});
