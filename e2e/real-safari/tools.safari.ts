@@ -40,73 +40,61 @@ function listenForBeacons(): Promise<{ port: number; received: string[]; close()
 
 interface ProbeVariant {
   label: string;
-  hostPermissions?: string[];
+  background: Record<string, unknown>;
 }
 
 const PROBE_VARIANTS: ProbeVariant[] = [
-  { label: 'as-built' },
-  { label: 'loopback-permission', hostPermissions: ['*://127.0.0.1/*', '*://localhost/*'] },
-  { label: 'all-urls-permission', hostPermissions: ['<all_urls>'] },
+  { label: 'service-worker', background: { service_worker: 'background.js' } },
+  { label: 'background-page', background: { scripts: ['background.js'], persistent: false } },
 ];
 
 function instrumentedExtension(beaconPort: number, variant: ProbeVariant) {
   const directory = mkdtempSync(join(tmpdir(), 'agent-browser-bridge-safari-probe-'));
   cpSync(EXTENSION_DIST, directory, { recursive: true });
+  const manifestPath = join(directory, 'manifest.json');
+  const manifest = JSON.parse(readFileSync(manifestPath, 'utf-8')) as Record<string, unknown>;
+  writeFileSync(manifestPath, JSON.stringify({ ...manifest, background: variant.background }, null, 2));
   const background = join(directory, 'background.js');
-  if (variant.hostPermissions) {
-    const manifestPath = join(directory, 'manifest.json');
-    const manifest = JSON.parse(readFileSync(manifestPath, 'utf-8')) as Record<string, unknown>;
-    writeFileSync(manifestPath, JSON.stringify({ ...manifest, host_permissions: variant.hostPermissions }, null, 2));
-  }
   const prelude = `
-    const probeLog = [];
     const startedAt = Date.now();
-    const note = (stage, detail) => probeLog.push([Date.now() - startedAt, stage, detail === undefined ? null : detail]);
-    const beaconUrl = (query) => 'http://127.0.0.1:${beaconPort}/beacon?label=${variant.label}&' + query;
-    const recorded = (stage, promise) => promise.then((value) => note(stage, value), (error) => note(stage, 'rejected: ' + error));
-    let ticks = 0;
-    setInterval(() => (ticks += 1), 500);
-    self.addEventListener('error', (event) => note('error-event', String(event.message)));
-    self.addEventListener('unhandledrejection', (event) => note('unhandled-rejection', String(event.reason)));
-    chrome.runtime.onInstalled.addListener((details) => note('installed', details.reason));
-    note('start', { url: chrome.runtime.getURL(''), context: typeof ServiceWorkerGlobalScope === 'undefined' ? 'page' : 'service worker' });
-    recorded('fetch-127.0.0.1', fetch('http://127.0.0.1:${beaconPort}/beacon?via=fetch', { mode: 'no-cors' }).then((response) => response.type));
-    recorded('fetch-localhost', fetch('http://localhost:${beaconPort}/beacon?via=fetch-localhost', { mode: 'no-cors' }).then((response) => response.type));
-    const trySocket = (label, url) => {
+    const shot = (stage, detail) => {
+      const query = 'label=${variant.label}&stage=' + stage + '&ms=' + (Date.now() - startedAt) + '&detail=' + encodeURIComponent(JSON.stringify(detail === undefined ? null : detail));
       try {
-        const socket = new WebSocket(url);
-        socket.onopen = () => note(label, 'open');
-        socket.onerror = () => note(label, 'error');
-        socket.onclose = (event) => note(label, 'closed with ' + event.code + ' ' + event.reason);
-      } catch (error) {
-        note(label, 'threw ' + error);
-      }
+        chrome.tabs.create({ url: 'http://127.0.0.1:${beaconPort}/beacon?' + query, active: false });
+      } catch (error) {}
     };
-    trySocket('websocket-127.0.0.1', 'ws://127.0.0.1:${DEFAULT_PORT}');
-    trySocket('websocket-localhost', 'ws://localhost:${DEFAULT_PORT}');
-    recorded('permissions', chrome.permissions.getAll());
-    recorded('tabs', chrome.tabs.query({}).then((tabs) => tabs.map((tab) => ({ id: tab.id, url: tab.url, title: tab.title }))));
+    shot('sync', {
+      context: typeof ServiceWorkerGlobalScope !== 'undefined' && self instanceof ServiceWorkerGlobalScope ? 'service worker' : 'page',
+      webSocket: typeof WebSocket,
+      fetch: typeof fetch,
+      setTimeout: typeof setTimeout,
+    });
+    Promise.resolve().then(() => shot('microtask'));
+    setTimeout(() => shot('timeout-0'), 0);
+    setTimeout(() => shot('timeout-250'), 250);
+    setTimeout(() => shot('timeout-1000'), 1000);
+    setTimeout(() => shot('timeout-5000'), 5000);
     try {
-      chrome.alarms.create('probe', { periodInMinutes: 0.5 });
-      note('half-minute-alarm', 'accepted');
+      const socket = new WebSocket('ws://127.0.0.1:${DEFAULT_PORT}');
+      socket.onopen = () => shot('websocket-open');
+      socket.onerror = () => shot('websocket-error');
+      socket.onclose = (event) => shot('websocket-close', event.code + ' ' + event.reason);
     } catch (error) {
-      note('half-minute-alarm', 'threw ' + error);
+      shot('websocket-threw', String(error));
     }
-    const report = (attempt) => {
-      note('ticks', ticks);
-      chrome.tabs.create({ url: beaconUrl('attempt=' + attempt + '&log=' + encodeURIComponent(JSON.stringify(probeLog))), active: false });
-    };
-    setTimeout(() => report(1), 1500);
-    setTimeout(() => report(2), 2600);
+    fetch('http://127.0.0.1:${beaconPort}/beacon?label=${variant.label}&stage=fetch-arrived', { mode: 'no-cors' }).then(
+      (response) => shot('fetch-answered', response.type),
+      (error) => shot('fetch-failed', String(error)),
+    );
     try {
   `;
   const epilogue = `
-      note('end', 'the background script ran to its last line');
+      shot('end');
     } catch (error) {
-      note('threw', { message: String(error), stack: String(error && error.stack) });
+      shot('threw', { message: String(error), stack: String(error && error.stack) });
     }
   `;
-  writeFileSync(background, `${prelude}\n${readFileSync(background, 'utf-8')}\n${epilogue}`);
+  writeFileSync(background, `${prelude}\\n${readFileSync(background, 'utf-8')}\\n${epilogue}`);
   return directory;
 }
 
