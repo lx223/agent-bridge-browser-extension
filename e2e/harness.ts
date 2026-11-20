@@ -9,10 +9,11 @@ import { chromium, type BrowserContext } from 'playwright';
 import { DEFAULT_PORT, STATUS_TOOL } from '@agent-browser-bridge/protocol';
 
 const ROOT = resolve(import.meta.dirname, '..');
-const EXTENSION_DIST = join(ROOT, 'packages/extension/dist');
-const SERVER_ENTRY = join(ROOT, 'packages/server/dist/index.js');
+export const EXTENSION_DIST = join(ROOT, 'packages/extension/dist');
+const SERVER_ENTRY = resolve(ROOT, process.env.E2E_SERVER_ENTRY ?? 'packages/server/dist/index.js');
 const FIXTURES = join(ROOT, 'e2e/fixtures');
 const CONNECT_TIMEOUT_MS = 30_000;
+export const LOCAL_ONLY = '--host-resolver-rules=MAP * ~NOTFOUND, EXCLUDE 127.0.0.1';
 
 export const EXTENSION_VERSION: string = JSON.parse(readFileSync(join(ROOT, 'packages/extension/package.json'), 'utf-8')).version;
 
@@ -85,8 +86,8 @@ function requireBuild() {
   }
 }
 
-export async function startAgent(name = 'e2e'): Promise<Agent> {
-  const client = new Client({ name, version: '0.0.0' });
+export async function startAgent(name = 'e2e', version = '0.0.0'): Promise<Agent> {
+  const client = new Client({ name, version });
   await client.connect(new StdioClientTransport({ command: process.execPath, args: [SERVER_ENTRY], stderr: 'ignore' }));
 
   const raw = async (tool: string, args: Record<string, unknown> = {}): Promise<ToolResult> => {
@@ -97,7 +98,7 @@ export async function startAgent(name = 'e2e'): Promise<Agent> {
   const text = async (tool: string, args?: Record<string, unknown>) => {
     const result = await raw(tool, args);
     if (result.isError) throw new Error(`${tool} failed: ${result.text}`);
-    return result.text;
+    return result.content[0]?.text ?? '';
   };
   const call = async <T>(tool: string, args?: Record<string, unknown>) => JSON.parse(await text(tool, args)) as T;
   const waitUntilConnected = async () => {
@@ -136,13 +137,25 @@ export interface Harness {
   close(): Promise<void>;
 }
 
-export async function startHarness(): Promise<Harness> {
+export interface HarnessOptions {
+  locale?: string;
+  deviceScaleFactor?: number;
+  colorScheme?: 'light' | 'dark';
+  agentName?: string;
+  agentVersion?: string;
+}
+
+export async function requireFreeBridge() {
   requireBuild();
   if (await portInUse(DEFAULT_PORT)) {
     throw new Error(
       `Port ${DEFAULT_PORT} is already in use, probably by a running agent session. Close it before running the end-to-end tests so they cannot reach your own browser.`,
     );
   }
+}
+
+export async function startHarness(options: HarnessOptions = {}): Promise<Harness> {
+  await requireFreeBridge();
 
   const fixtures = await serveFixtures();
   const fixturePort = (fixtures.address() as { port: number }).port;
@@ -157,15 +170,20 @@ export async function startHarness(): Promise<Harness> {
   };
 
   try {
-    agent = await startAgent();
+    const launchAgent = () => startAgent(options.agentName, options.agentVersion);
+    agent = await launchAgent();
     context = await chromium.launchPersistentContext(profile, {
       channel: 'chromium',
       headless: true,
+      locale: options.locale,
+      deviceScaleFactor: options.deviceScaleFactor,
+      colorScheme: options.colorScheme,
       args: [
         `--disable-extensions-except=${EXTENSION_DIST}`,
         `--load-extension=${EXTENSION_DIST}`,
-        '--host-resolver-rules=MAP * ~NOTFOUND, EXCLUDE 127.0.0.1',
+        LOCAL_ONLY,
         '--enable-features=WebMCP',
+        ...(options.locale ? [`--lang=${options.locale}`] : []),
       ],
     });
     const worker = context.serviceWorkers()[0] ?? (await context.waitForEvent('serviceworker'));
@@ -184,10 +202,10 @@ export async function startHarness(): Promise<Harness> {
       context: browser,
       extensionId,
       fixture,
-      openFixture: (name) => current.call<Tab>('chrome_open_tab', { url: fixture(name) }),
+      openFixture: (name) => current.call<Tab>('chrome_tabs_create', { url: fixture(name) }),
       async restartAgent() {
         await current.close();
-        current = await startAgent();
+        current = await launchAgent();
         return current;
       },
       async close() {

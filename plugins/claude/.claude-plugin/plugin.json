@@ -1,0 +1,16 @@
+{
+  "name": "agent-browser-bridge",
+  "version": "0.1.0",
+  "description": "Let Claude organise your browser tabs and operate web pages in the browser you already use, through the Agent Browser Bridge extension.",
+  "author": {
+    "name": "Agent Browser Bridge",
+    "url": "https://github.com/lx223/agent-bridge-browser-extension"
+  },
+  "homepage": "https://github.com/lx223/agent-bridge-browser-extension",
+  "repository": "https://github.com/lx223/agent-bridge-browser-extension",
+  "license": "Apache-2.0",
+  "keywords": ["browser", "chrome", "safari", "tabs", "mcp"],
+  "network": {
+    "hosts": ["registry.npmjs.org"]
+  }
+}

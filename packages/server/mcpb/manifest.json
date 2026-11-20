@@ -1,0 +1,29 @@
+{
+  "manifest_version": "0.3",
+  "name": "agent-browser-bridge",
+  "display_name": "Agent Browser Bridge",
+  "version": "0.0.0",
+  "description": "Let Claude organise your browser tabs and operate web pages through the Agent Browser Bridge extension.",
+  "long_description": "Connects Claude to the browser you already use, with your existing tabs and signed-in sessions. Requires the Agent Browser Bridge extension in Chrome or Safari. The bridge only listens on 127.0.0.1.",
+  "author": { "name": "Agent Browser Bridge", "url": "https://github.com/lx223/agent-bridge-browser-extension" },
+  "repository": { "type": "git", "url": "https://github.com/lx223/agent-bridge-browser-extension.git" },
+  "homepage": "https://github.com/lx223/agent-bridge-browser-extension",
+  "support": "https://github.com/lx223/agent-bridge-browser-extension/issues",
+  "icon": "icon.png",
+  "license": "Apache-2.0",
+  "privacy_policies": ["https://github.com/lx223/agent-bridge-browser-extension/blob/main/PRIVACY.md"],
+  "keywords": ["browser", "chrome", "safari", "tabs"],
+  "server": {
+    "type": "node",
+    "entry_point": "server/index.js",
+    "mcp_config": {
+      "command": "node",
+      "args": ["${__dirname}/server/index.js"]
+    }
+  },
+  "tools_generated": true,
+  "compatibility": {
+    "platforms": ["darwin", "win32", "linux"],
+    "runtimes": { "node": ">=20.0.0" }
+  }
+}

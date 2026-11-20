@@ -1,14 +1,18 @@
 # Chrome Web Store Submission
 
-Copy for the dashboard, based on version 0.3.0. Review against the package and [privacy policy](../../PRIVACY.md) before each submission. Release procedure: [Chrome Web Store releases](../../docs/chrome-web-store.md).
+Copy for the dashboard. The data usage disclosures record the 0.3.0 submission. Review against the package and [privacy policy](../../PRIVACY.md) before each submission. Release procedure: [Chrome Web Store releases](../../docs/chrome-web-store.md).
 
 ## Description (16,000 char limit)
 
 ### English (United Kingdom)
 
+Control your own browser with any AI agent you like.
+
 Connect your AI coding agent to your everyday Chrome browser through Model Context Protocol (MCP).
 
-Agent Browser Bridge lets a connected agent list windows and tabs, organise tabs into named and coloured groups, move tabs and groups, and close tabs on request. Preview a grouping plan before applying it, and undo the last plan to restore the previous layout.
+Agent Browser Bridge lets a connected agent list, open, focus and close windows and tabs, organise tabs into named and coloured groups, move, pin, mute, duplicate and unload tabs, and close tabs on request. Preview a grouping plan before applying it, and undo the last plan to restore the previous layout.
+
+Agents can also help you pick up earlier work: search your browsing history, list recently closed tabs and the tabs open on your other signed-in devices, and reopen them. They can search and organise your bookmarks and Reading List, find and start downloads, see your most visited sites, search with your default search engine, and notify you when a task finishes.
 
 Connected agents can also inspect and operate web pages, navigate, click, type, and use page-provided WebMCP tools. The debugger permission enables this page control through the Chrome DevTools Protocol. Only connect agents you trust: they can receive tab titles, URLs and page contents and interact with pages on your behalf.
 
@@ -35,6 +39,38 @@ Read and update Chrome tab groups, including names, colours, collapsed state and
 ### storage
 
 Store the previous tab and group layout in session storage for undo. Local storage retains the browser instance identifier, analytics preference, random analytics installation identifier and analytics timing state across service-worker restarts.
+
+### history
+
+Search the user's browsing history and list visits to a page when the connected MCP agent is asked to find or recap something the user viewed earlier, including pages whose tabs are closed. The extension only reads history; it does not add or delete entries.
+
+### sessions
+
+List recently closed tabs and windows and the tabs open on the user's other signed-in devices, and reopen them with their navigation history when the user's agent is asked to. The tabs API cannot see closed tabs or other devices.
+
+### readingList
+
+List, add, update and remove Reading List entries when the user asks their agent to save pages for later or find something they saved.
+
+### bookmarks
+
+Search, create, rename, move and remove bookmarks and folders at the user's request, for example to save a set of tabs for a project or find a bookmarked page.
+
+### downloads
+
+Search the download list, start a download of a URL the user asks for, show a downloaded file in its folder, and remove entries from the list. The extension does not open or delete downloaded files.
+
+### topSites
+
+List the user's most visited sites so the agent can find pages the user returns to often.
+
+### search
+
+Run a search with the user's own default search engine in a new tab when the user asks their agent to look something up.
+
+### notifications
+
+Show a desktop notification from the user's agent, such as when a long-running task the user requested finishes.
 
 ### alarms
 
@@ -98,5 +134,13 @@ Page control cannot operate on chrome:// pages, extension pages, DevTools or the
 | tabs | Reads titles and URLs across open tabs and windows for agent inspection and organisation. | activeTab covers only the invoked tab, not the user's multi-window tab layout. |
 | tabGroups | Reads and changes group names, colours, positions and collapsed state. | tabs alone does not expose group metadata or update groups. |
 | storage | Saves undo snapshots, browser identity, analytics preference and analytics state. | In-memory worker state is lost when the service worker stops. |
+| history | Searches history and lists visits to a page when the agent is asked to find earlier browsing. Read only. | tabs only covers pages that are still open. |
+| sessions | Lists and restores recently closed tabs and windows and tabs on the user's other devices. | tabs cannot see closed tabs or other devices. |
+| readingList | Lists, adds, updates and removes Reading List entries at the user's request. | No other API exposes the Reading List. |
+| bookmarks | Searches, creates, renames, moves and removes bookmarks and folders at the user's request. | No other API exposes bookmarks. |
+| downloads | Searches the download list, starts a requested download, shows a file in its folder and removes list entries. | No other API exposes the download list. |
+| topSites | Lists the most visited sites. | history alone does not return Chrome's most visited ranking. |
+| search | Runs a search with the user's default search engine in a new tab. | Opening a fixed search URL would ignore the user's chosen engine. |
+| notifications | Shows a desktop notification from the agent, such as when a requested task finishes. | Pages and the service worker cannot show system notifications without it. |
 | alarms | Wakes the service worker periodically to reconnect the local bridge. | Ordinary worker timers do not survive suspension. |
 | debugger | Attaches the DevTools Protocol for page snapshots, screenshots, interactions, evaluation, navigation fallback and WebMCP tools. | tabs and tabGroups APIs cannot inspect or operate page contents. |

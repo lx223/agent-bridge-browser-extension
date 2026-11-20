@@ -1,14 +1,22 @@
 {
   "manifest_version": 3,
   "name": "Agent Browser Bridge",
-  "description": "Let your AI agent organise your tabs and operate web pages over MCP.",
+  "description": "Control your own browser with any AI agent you like: organise tabs and operate web pages over MCP.",
   "version": "0.0.0",
   "permissions": [
     "tabs",
     "tabGroups",
     "storage",
     "alarms",
-    "debugger"
+    "debugger",
+    "history",
+    "sessions",
+    "readingList",
+    "bookmarks",
+    "downloads",
+    "topSites",
+    "search",
+    "notifications"
   ],
   "icons": {
     "16": "icons/icon-16.png",

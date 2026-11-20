@@ -2,22 +2,38 @@ import { randomUUID } from 'node:crypto';
 import type { IncomingMessage } from 'node:http';
 import WebSocket, { WebSocketServer } from 'ws';
 import {
+  browserApis,
+  browserToolName,
   extensionToServer,
   hostToRelay,
+  NAME_INSTANCE_TOOL,
   PROTOCOL_VERSION,
+  REPLACED_CLOSE_CODE,
   relayToHost,
+  SET_INSTANCE_NAME_METHOD,
+  toolDefinitions,
+  type AgentActivity,
   type AgentInfo,
+  type AgentInstanceUse,
+  type AgentSession,
+  type Browser,
   type HelloMessage,
   type HostToRelay,
+  type Method,
+  type RelayToHost,
   type ResponseMessage,
   type ServerToExtension,
 } from '@agent-browser-bridge/protocol';
+import { describeInstance, identifyHint } from './instances.ts';
+import { isNewerVersion } from './version.ts';
 
 export interface BridgeOptions {
   port: number;
   host?: string;
   extensionId?: string;
+  version?: string;
   requestTimeoutMs?: number;
+  handoverWaitMs?: number;
   log?: (msg: string) => void;
   agentInfo?: () => AgentInfo;
 }
@@ -41,11 +57,22 @@ export const RELAY_PATH = '/relay';
 
 const ESTABLISH_ATTEMPTS = 5;
 const RETRY_MS = 2_000;
+const HANDOVER_WAIT_MS = 5_000;
+const REJOIN_AFTER_HANDOVER_MS = 500;
+const HANDOVER_CLOSE_CODE = 4002;
+const ACTIVITY_BROADCAST_MS = 250;
+const MAX_INSTANCES_PER_AGENT = 8;
 const notConnected = (browser: string) =>
   `The Agent Browser Bridge extension is not connected in ${browser}. Make sure ${browser} is open with the extension installed and enabled; it reconnects automatically within ~30 seconds.`;
 const EXTENSION_SCHEMES = ['chrome-extension://', 'safari-web-extension://'];
 
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+const toolLabel = (browser: string, method: string) => {
+  if (method === SET_INSTANCE_NAME_METHOD) return NAME_INSTANCE_TOOL;
+  if (method in toolDefinitions && browser in browserApis) return browserToolName(browser as Browser, method as Method);
+  return method;
+};
+const sameInstance = (a: AgentInstanceUse, b: AgentInstanceUse) => a.browser === b.browser && a.instanceId === b.instanceId;
 const errorMessage = (err: unknown) => (err instanceof Error ? err.message : String(err));
 
 export class ExtensionBridge {
@@ -54,10 +81,13 @@ export class ExtensionBridge {
   private error?: string;
   private stopped = false;
   private retryTimer?: NodeJS.Timeout;
+  private handingOver = false;
 
   private wss?: WebSocketServer;
   private extensions = new Map<WebSocket, HelloMessage | undefined>();
-  private relays = new Set<WebSocket>();
+  private relays = new Map<WebSocket, AgentInfo | undefined>();
+  private activity = new Map<string, AgentActivity>();
+  private broadcastTimer?: NodeJS.Timeout;
 
   private upstream?: WebSocket;
   private upstreamBrowsers: HelloMessage[] = [];
@@ -82,9 +112,10 @@ export class ExtensionBridge {
   async stop(): Promise<void> {
     this.stopped = true;
     clearTimeout(this.retryTimer);
+    clearTimeout(this.broadcastTimer);
     this.failPending(new NotConnectedError('Bridge stopped'));
     this.upstream?.terminate();
-    for (const client of this.wss?.clients ?? []) client.terminate();
+    for (const client of [...(this.wss?.clients ?? []), ...this.extensions.keys(), ...this.relays.keys()]) client.terminate();
     await new Promise<void>((resolve) => (this.wss ? this.wss.close(() => resolve()) : resolve()));
   }
 
@@ -105,7 +136,9 @@ export class ExtensionBridge {
     if (this.role === 'relay' && this.upstream) return this.send(this.upstream, method, params, agent, { browser, instance });
     if (this.role !== 'host') return Promise.reject(new NotConnectedError(this.error ?? notConnected(browser)));
     try {
-      return this.send(this.pick(browser, instance), method, params, agent);
+      const socket = this.pick(browser, instance);
+      this.recordActivity(agent, browser, method, this.extensions.get(socket));
+      return this.send(socket, method, params, agent);
     } catch (err) {
       return Promise.reject(err);
     }
@@ -114,16 +147,75 @@ export class ExtensionBridge {
   private pick(browser: string, instance?: string): WebSocket {
     const candidates = this.connectedBrowsers().filter(([, hello]) => hello.browser === browser);
     if (!candidates.length) throw new NotConnectedError(this.error ?? notConnected(browser));
-    const listed = candidates.map(([, hello]) => `${hello.instanceId ?? 'unknown'} (${hello.label ?? hello.browser})`).join(', ');
+    const listed = candidates.map(([, hello]) => describeInstance(hello)).join(', ');
     if (instance !== undefined) {
       const target = candidates.find(([, hello]) => hello.instanceId === instance);
       if (!target) throw new NotConnectedError(`No ${browser} instance "${instance}" is connected. Connected instances: ${listed}.`);
       return target[0];
     }
     if (candidates.length > 1) {
-      throw new Error(`Several ${browser} instances are connected: ${listed}. Pass instance to choose one.`);
+      throw new Error(`Several ${browser} instances are connected: ${listed}. Pass instance to choose one. ${identifyHint}`);
     }
     return candidates[0][0];
+  }
+
+  agentChanged() {
+    if (this.role === 'host') this.broadcastAgents();
+    else if (this.role === 'relay' && this.upstream) this.announceAgent(this.upstream);
+  }
+
+  agents(): AgentSession[] {
+    const own = this.opts.agentInfo?.();
+    const relayed = [...this.relays.values()].filter((agent): agent is AgentInfo => agent !== undefined);
+    const all = own ? [own, ...relayed] : relayed;
+    const latest = all.filter((agent, index) => agent.sessionId === undefined || !all.slice(index + 1).some((later) => later.sessionId === agent.sessionId));
+    return latest.map((agent) => {
+      const activity = agent.sessionId === undefined ? undefined : this.activity.get(agent.sessionId);
+      return activity ? { ...agent, activity } : agent;
+    });
+  }
+
+  private sessionStillPresent(sessionId: string) {
+    return this.opts.agentInfo?.()?.sessionId === sessionId || [...this.relays.values()].some((agent) => agent?.sessionId === sessionId);
+  }
+
+  private recordActivity(agent: AgentInfo | null, browser: string, method: string, hello: HelloMessage | undefined) {
+    if (agent?.sessionId === undefined) return;
+    const previous = this.activity.get(agent.sessionId);
+    const use: AgentInstanceUse = {
+      browser,
+      ...(hello?.instanceId !== undefined && { instanceId: hello.instanceId }),
+      ...(hello?.label !== undefined && { label: hello.label }),
+      ...(hello?.name !== undefined && { name: hello.name }),
+    };
+    this.activity.set(agent.sessionId, {
+      lastUsedAt: Date.now(),
+      lastTool: toolLabel(browser, method),
+      calls: (previous?.calls ?? 0) + 1,
+      instances: [use, ...(previous?.instances ?? []).filter((other) => !sameInstance(other, use))].slice(0, MAX_INSTANCES_PER_AGENT),
+    });
+    this.scheduleAgentsBroadcast();
+  }
+
+  private scheduleAgentsBroadcast() {
+    if (this.broadcastTimer) return;
+    this.broadcastTimer = setTimeout(() => {
+      this.broadcastTimer = undefined;
+      if (this.role === 'host') this.broadcastAgents();
+    }, ACTIVITY_BROADCAST_MS);
+  }
+
+  private broadcastAgents() {
+    const message: ServerToExtension = { type: 'agents', agents: this.agents() };
+    for (const [socket] of this.connectedBrowsers()) {
+      if (socket.readyState === WebSocket.OPEN) socket.send(JSON.stringify(message));
+    }
+  }
+
+  private announceAgent(upstream: WebSocket) {
+    const agent = this.opts.agentInfo?.();
+    if (!agent || upstream.readyState !== WebSocket.OPEN) return;
+    upstream.send(JSON.stringify({ type: 'agent', agent } satisfies RelayToHost));
   }
 
   private connectedBrowsers(): [WebSocket, HelloMessage][] {
@@ -132,6 +224,10 @@ export class ExtensionBridge {
 
   private get timeoutMs() {
     return this.opts.requestTimeoutMs ?? 30_000;
+  }
+
+  private get port() {
+    return this.boundPort ?? this.opts.port;
   }
 
   private get hostname() {
@@ -220,7 +316,7 @@ export class ExtensionBridge {
     return new Promise((resolve, reject) => {
       const wss = new WebSocketServer({
         host: this.hostname,
-        port: this.opts.port,
+        port: this.port,
         verifyClient: ({ req }: { req: IncomingMessage }) => this.isAllowedClient(req),
       });
       wss.once('error', (err) => {
@@ -232,7 +328,7 @@ export class ExtensionBridge {
         this.wss = wss;
         this.role = 'host';
         this.error = undefined;
-        this.boundPort = typeof addr === 'object' && addr ? addr.port : this.opts.port;
+        this.boundPort = typeof addr === 'object' && addr ? addr.port : this.port;
         this.log(`Hosting the bridge on ws://${this.hostname}:${this.boundPort}`);
         resolve(this.boundPort);
       });
@@ -254,7 +350,7 @@ export class ExtensionBridge {
 
   private connectUpstream(): Promise<void> {
     return new Promise((resolve, reject) => {
-      const ws = new WebSocket(`ws://${this.hostname}:${this.opts.port}${RELAY_PATH}`);
+      const ws = new WebSocket(`ws://${this.hostname}:${this.port}${RELAY_PATH}`);
       let opened = false;
       ws.on('error', (err) => {
         if (!opened) reject(err);
@@ -265,14 +361,15 @@ export class ExtensionBridge {
         this.upstreamBrowsers = [];
         this.role = 'relay';
         this.error = undefined;
-        this.boundPort = this.opts.port;
-        this.log(`Another agent session hosts the bridge; relaying through it on port ${this.opts.port}`);
+        this.boundPort = this.port;
+        this.log(`Another agent session hosts the bridge; relaying through it on port ${this.port}`);
+        this.announceAgent(ws);
         resolve();
       });
       ws.on('message', (raw) => {
         const msg = this.parse(raw, hostToRelay);
         if (!msg) return;
-        this.handleHostMessage(msg);
+        this.handleHostMessage(ws, msg);
       });
       ws.on('close', () => {
         if (this.upstream !== ws) return;
@@ -287,9 +384,66 @@ export class ExtensionBridge {
     });
   }
 
-  private handleHostMessage(msg: HostToRelay) {
+  private handleHostMessage(upstream: WebSocket, msg: HostToRelay) {
     if (msg.type === 'status') this.upstreamBrowsers = msg.extensions ?? (msg.extension ? [msg.extension] : []);
+    else if (msg.type === 'handover') void this.takeOver(upstream);
     else this.settle(msg);
+  }
+
+  private async takeOver(upstream: WebSocket) {
+    if (this.upstream !== upstream) return;
+    if (!(await this.listenForTakeOver())) return;
+    this.log('Took over hosting the bridge from an older agent-browser-bridge server');
+    this.upstream = undefined;
+    this.upstreamBrowsers = [];
+    await this.whenSettled(this.timeoutMs, upstream);
+    upstream.close(HANDOVER_CLOSE_CODE, 'Took over the bridge');
+  }
+
+  private async listenForTakeOver(): Promise<boolean> {
+    for (let attempt = 0; attempt < ESTABLISH_ATTEMPTS && !this.stopped && this.upstream; attempt++) {
+      try {
+        await this.listen();
+        return true;
+      } catch (err) {
+        if ((err as NodeJS.ErrnoException).code !== 'EADDRINUSE') break;
+        await delay(100);
+      }
+    }
+    return false;
+  }
+
+  private considerHandover(successor: WebSocket, agent: AgentInfo) {
+    const own = this.opts.version;
+    if (this.handingOver || this.role !== 'host' || !own || !isNewerVersion(agent.serverVersion, own)) return;
+    void this.handOver(successor, agent.serverVersion);
+  }
+
+  private async handOver(successor: WebSocket, version: string) {
+    this.handingOver = true;
+    this.log(`An agent session with server ${version} joined; handing the bridge over to it`);
+    const successorLeft = new Promise<void>((resolve) => {
+      if (successor.readyState >= WebSocket.CLOSING) resolve();
+      else successor.once('close', () => resolve());
+    });
+    this.wss?.close();
+    this.wss = undefined;
+    this.reply(successor, { type: 'handover' });
+    await Promise.race([successorLeft, delay(this.opts.handoverWaitMs ?? HANDOVER_WAIT_MS)]);
+    await this.whenSettled(this.timeoutMs);
+    this.role = undefined;
+    this.error = 'Handing the bridge over to a newer agent-browser-bridge server; please retry.';
+    for (const socket of [...this.extensions.keys(), ...this.relays.keys()]) {
+      socket.close(HANDOVER_CLOSE_CODE, 'Bridge handed over to a newer server');
+    }
+    this.handingOver = false;
+    this.scheduleEstablish(REJOIN_AFTER_HANDOVER_MS);
+  }
+
+  private async whenSettled(limitMs: number, socket?: WebSocket) {
+    const deadline = Date.now() + limitMs;
+    const busy = () => [...this.pending.values()].some((p) => !socket || p.socket === socket);
+    while (busy() && Date.now() < deadline && !this.stopped) await delay(50);
   }
 
   private parse<T>(raw: WebSocket.RawData, schema: { safeParse: (v: unknown) => { success: true; data: T } | { success: false } }): T | undefined {
@@ -302,20 +456,29 @@ export class ExtensionBridge {
   }
 
   private attachRelay(socket: WebSocket) {
-    this.relays.add(socket);
+    this.relays.set(socket, undefined);
     this.log(`Agent session joined (${this.relays.size} relayed)`);
     this.sendStatus(socket);
     socket.on('message', (raw) => {
       const msg = this.parse(raw, relayToHost);
       if (!msg) return;
+      if (msg.type === 'agent') {
+        this.relays.set(socket, msg.agent);
+        this.broadcastAgents();
+        this.considerHandover(socket, msg.agent);
+        return;
+      }
       this.request(msg.browser ?? 'chrome', msg.method, msg.params, msg.agent ?? null, msg.instance).then(
         (result) => this.reply(socket, { type: 'response', id: msg.id, ok: true, result }),
         (err) => this.reply(socket, { type: 'response', id: msg.id, ok: false, error: errorMessage(err) }),
       );
     });
     socket.on('close', () => {
+      const sessionId = this.relays.get(socket)?.sessionId;
       this.relays.delete(socket);
+      if (sessionId !== undefined && !this.sessionStillPresent(sessionId)) this.activity.delete(sessionId);
       this.log(`Agent session left (${this.relays.size} relayed)`);
+      this.broadcastAgents();
     });
   }
 
@@ -329,7 +492,7 @@ export class ExtensionBridge {
   }
 
   private broadcastStatus() {
-    for (const relay of this.relays) this.sendStatus(relay);
+    for (const relay of this.relays.keys()) this.sendStatus(relay);
   }
 
   private attachExtension(socket: WebSocket) {
@@ -347,7 +510,8 @@ export class ExtensionBridge {
           }
           this.replaceSameInstance(socket, msg);
           this.extensions.set(socket, msg);
-          this.log(`Extension ${msg.extensionVersion} connected from ${msg.label ?? msg.browser}`);
+          this.log(`Extension ${msg.extensionVersion} connected from ${describeInstance(msg)}`);
+          socket.send(JSON.stringify({ type: 'agents', agents: this.agents() } satisfies ServerToExtension));
           this.broadcastStatus();
           return;
         case 'ping':
@@ -372,7 +536,7 @@ export class ExtensionBridge {
     for (const [previous, hello] of this.connectedBrowsers()) {
       if (previous === socket || hello.browser !== incoming.browser || hello.instanceId !== incoming.instanceId) continue;
       this.extensions.delete(previous);
-      previous.close(4000, 'Replaced by a newer connection');
+      previous.close(REPLACED_CLOSE_CODE, 'Replaced by a newer connection');
       this.failPending(new NotConnectedError('Extension reconnected; please retry.'), previous);
     }
   }

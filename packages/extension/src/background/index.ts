@@ -1,20 +1,27 @@
 import { DEFAULT_PORT, type AgentInfo } from '@agent-browser-bridge/protocol';
 import { Analytics, ANALYTICS_ENABLED_KEY, isPageEvent, type Properties } from './analytics.ts';
-import { BridgeClient, type ConnectionState } from './bridgeClient.ts';
+import { sessionTitle } from '../settings/sessionList.ts';
+import { BridgeClient, type ConnectionStatus } from './bridgeClient.ts';
+import { INSTANCE_NAME_KEY } from './browser.ts';
 import { listenForDetach } from './debugger.ts';
 import { listenForPageToolEvents } from './pageTools.ts';
+import { applyUpdatesWhenIdle } from './update.ts';
 import { dispatch } from './handlers.ts';
 import { UsageTracker } from './usage.ts';
 
 const WELCOME_PAGE = 'src/welcome/index.html';
 const RECONNECT_ALARM = 'agent-browser-bridge-reconnect';
 
-const showStatus = (state: ConnectionState) => {
-  const icon = state === 'connected' ? 'connected' : 'disconnected';
+const statusTitle = ({ state, agents }: ConnectionStatus) => {
+  if (state !== 'connected') return 'Agent Browser Bridge: no agent connected';
+  if (!agents.length) return 'Agent Browser Bridge: agent connected';
+  return `Agent Browser Bridge: connected to ${agents.map(sessionTitle).join(', ')}`;
+};
+
+const showStatus = (status: ConnectionStatus) => {
+  const icon = status.state === 'connected' ? 'connected' : 'disconnected';
   void chrome.action.setIcon({ path: { 16: `icons/${icon}-16.png`, 32: `icons/${icon}-32.png` } });
-  void chrome.action.setTitle({
-    title: state === 'connected' ? 'Agent Browser Bridge: agent connected' : 'Agent Browser Bridge: no agent connected',
-  });
+  void chrome.action.setTitle({ title: statusTitle(status) });
 };
 
 const analytics = new Analytics({
@@ -52,7 +59,7 @@ const client = new BridgeClient(
   (status) => {
     usage.setConnected(status.state === 'connected');
     if (status.state === 'connected') void usage.milestone('first_connected');
-    showStatus(status.state);
+    showStatus(status);
     chrome.runtime.sendMessage({ type: 'STATUS_CHANGED', status }).catch(() => {
       /* no welcome page open */
     });
@@ -69,13 +76,17 @@ const syncUninstallSurvey = async () => {
 };
 void syncUninstallSurvey();
 chrome.storage.onChanged.addListener((changes, area) => {
-  if (area === 'local' && ANALYTICS_ENABLED_KEY in changes) void syncUninstallSurvey();
+  if (area !== 'local') return;
+  if (ANALYTICS_ENABLED_KEY in changes) void syncUninstallSurvey();
+  if (INSTANCE_NAME_KEY in changes) client.reintroduce();
 });
 
 listenForDetach();
 listenForPageToolEvents();
 
 const openWelcome = () => chrome.tabs.create({ url: chrome.runtime.getURL(WELCOME_PAGE) });
+
+applyUpdatesWhenIdle(chrome.runtime, () => client.whenIdle());
 
 chrome.runtime.onInstalled.addListener(({ reason, previousVersion }) => {
   if (reason === 'install') {

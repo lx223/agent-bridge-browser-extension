@@ -6,6 +6,8 @@ export default defineConfig({
       { test: { name: 'protocol', root: 'packages/protocol', environment: 'node' } },
       { test: { name: 'server', root: 'packages/server', environment: 'node' } },
       { test: { name: 'extension', root: 'packages/extension', environment: 'node' } },
+      { test: { name: 'store', root: 'store', environment: 'node' } },
+      { test: { name: 'plugins', root: 'plugins', environment: 'node' } },
     ],
     coverage: {
       provider: 'v8',
@@ -22,6 +24,9 @@ export default defineConfig({
         'packages/extension/src/settings/**',
         'packages/extension/src/welcome/main.ts',
         'packages/server/src/index.ts',
+        'packages/server/src/worker.ts',
+        'packages/server/src/standalone.ts',
+        'packages/server/src/autoUpdate.ts',
       ],
       reporter: ['text', 'html'],
       thresholds: { statements: 85, branches: 70, functions: 88, lines: 88 },

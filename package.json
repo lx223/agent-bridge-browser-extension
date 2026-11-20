@@ -12,13 +12,16 @@
     "build": "npm run build -w agent-browser-bridge-mcp -w agent-browser-bridge-extension",
     "dev:extension": "npm run dev -w agent-browser-bridge-extension",
     "dev:server": "npm run dev -w agent-browser-bridge-mcp",
-    "typecheck": "tsc -p packages/protocol && tsc -p packages/server && tsc -p packages/extension && tsc -p e2e",
+    "typecheck": "tsc -p packages/protocol && tsc -p packages/server && tsc -p packages/extension && tsc -p e2e && tsc -p store && tsc -p plugins",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
-    "test:e2e": "npm run build && vitest run --config vitest.e2e.config.ts"
+    "test:e2e": "npm run build && vitest run --config vitest.e2e.config.ts",
+    "screenshots": "npm run build && node store/screenshots/generate.ts",
+    "test:e2e:mcpb": "npm run build && npm run pack:mcpb -w agent-browser-bridge-mcp && E2E_SERVER_ENTRY=packages/server/mcpb-dist/server/index.js vitest run --config vitest.e2e.config.ts"
   },
   "devDependencies": {
+    "@mdn/browser-compat-data": "^8.1.10",
     "@types/node": "^26.6.6",
     "@vitest/coverage-v8": "^4.1.12",
     "playwright": "^1.63.0",

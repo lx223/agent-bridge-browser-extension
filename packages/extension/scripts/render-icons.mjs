@@ -6,11 +6,31 @@ import { join, resolve } from 'node:path';
 const root = resolve(import.meta.dirname, '..');
 const svgDir = join(root, 'icons');
 const pngDir = join(root, 'public/icons');
+const claudePluginIcon = resolve(root, '../../plugins/claude/.claude-plugin/icon.png');
 const chrome = process.env.CHROME_PATH ?? '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 
 const BRAND = '#4f46e5';
 const OFFLINE = '#9ca3af';
 const GREEN = '#22c55e';
+
+function renderPng(work, name, source, size, output) {
+  const html = join(work, `${name}-${size}.html`);
+  const dataUri = `data:image/svg+xml;base64,${Buffer.from(source).toString('base64')}`;
+  writeFileSync(
+    html,
+    `<!doctype html><html><body style="margin:0;background:transparent"><img src="${dataUri}" width="${size}" height="${size}" style="display:block"></body></html>`,
+  );
+  execFileSync(chrome, [
+    '--headless=new',
+    '--disable-gpu',
+    '--hide-scrollbars',
+    '--force-device-scale-factor=1',
+    '--default-background-color=00000000',
+    `--window-size=${size},${size}`,
+    `--screenshot=${output}`,
+    `file://${html}`,
+  ], { stdio: 'ignore' });
+}
 
 function iconSvg({ background, dot }) {
   const badge = dot
@@ -45,24 +65,10 @@ try {
     const source = iconSvg(svg);
     writeFileSync(join(svgDir, `${name}.svg`), source);
     for (const size of sizes) {
-      const html = join(work, `${name}-${size}.html`);
-      const dataUri = `data:image/svg+xml;base64,${Buffer.from(source).toString('base64')}`;
-      writeFileSync(
-        html,
-        `<!doctype html><html><body style="margin:0;background:transparent"><img src="${dataUri}" width="${size}" height="${size}" style="display:block"></body></html>`,
-      );
-      execFileSync(chrome, [
-        '--headless=new',
-        '--disable-gpu',
-        '--hide-scrollbars',
-        '--force-device-scale-factor=1',
-        '--default-background-color=00000000',
-        `--window-size=${size},${size}`,
-        `--screenshot=${join(pngDir, `${name}-${size}.png`)}`,
-        `file://${html}`,
-      ], { stdio: 'ignore' });
+      renderPng(work, name, source, size, join(pngDir, `${name}-${size}.png`));
     }
   }
+  renderPng(work, 'claude-plugin', iconSvg(variants.icon.svg), 512, claudePluginIcon);
 } finally {
   rmSync(work, { recursive: true, force: true });
 }
