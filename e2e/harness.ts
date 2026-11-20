@@ -114,7 +114,7 @@ export async function startAgent(name = 'e2e', version = '0.0.0'): Promise<Agent
   return { client, raw, call, text, waitUntilConnected, close: () => client.close() };
 }
 
-export function serveFixtures(): Promise<Server> {
+function serveFixtures(): Promise<Server> {
   const server = createServer((request, response) => {
     const name = new URL(request.url ?? '/', 'http://localhost').pathname.replace(/^\/+/, '');
     const path = join(FIXTURES, name);
