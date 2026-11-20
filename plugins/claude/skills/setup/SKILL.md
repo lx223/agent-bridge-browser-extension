@@ -33,7 +33,7 @@ Safari needs a macOS app built from source with Xcode. Point the user to the Saf
 
 ## 3. Check the server
 
-The server runs with `npx -y agent-browser-bridge-mcp@latest` and needs Node.js 20 or later.
+The server is the `agent-browser-bridge-mcp` npm package, started with `npx`. It needs Node.js 20 or later.
 
 1. Run `node --version`. If Node.js is missing or older than 20, help the user install the current LTS release and check that `npx` works.
 2. Ask the user to run `/mcp` and check the state of the `agent-browser-bridge` server, then reconnect it or run `/reload-plugins`.
