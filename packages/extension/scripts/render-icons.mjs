@@ -7,11 +7,35 @@ const root = resolve(import.meta.dirname, '..');
 const svgDir = join(root, 'icons');
 const pngDir = join(root, 'public/icons');
 const appIconSetDir = join(root, 'safari-app/AppIcon.appiconset');
+const claudePluginIcon = resolve(root, '../../plugins/claude/.claude-plugin/icon.png');
 const chrome = process.env.CHROME_PATH ?? '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 
 const BRAND = '#4f46e5';
 const OFFLINE = '#9ca3af';
 const GREEN = '#22c55e';
+const GLYPH = 'M34 102 L64 26 L94 102 M45 76 H83';
+const APP_ICON_CANVAS = 1024;
+const APP_ICON_PLATE = 824;
+const APP_ICON_POINT_SIZES = [16, 32, 128, 256, 512];
+
+function renderPng(work, name, source, size, output) {
+  const html = join(work, `${name}-${size}.html`);
+  const dataUri = `data:image/svg+xml;base64,${Buffer.from(source).toString('base64')}`;
+  writeFileSync(
+    html,
+    `<!doctype html><html><body style="margin:0;background:transparent"><img src="${dataUri}" width="${size}" height="${size}" style="display:block"></body></html>`,
+  );
+  execFileSync(chrome, [
+    '--headless=new',
+    '--disable-gpu',
+    '--hide-scrollbars',
+    '--force-device-scale-factor=1',
+    '--default-background-color=00000000',
+    `--window-size=${size},${size}`,
+    `--screenshot=${output}`,
+    `file://${html}`,
+  ], { stdio: 'ignore' });
+}
 
 function iconSvg({ background, dot }) {
   const badge = dot
@@ -30,11 +54,6 @@ function iconSvg({ background, dot }) {
 </svg>
 `;
 }
-
-const GLYPH = 'M34 102 L64 26 L94 102 M45 76 H83';
-const APP_ICON_CANVAS = 1024;
-const APP_ICON_PLATE = 824;
-const APP_ICON_POINT_SIZES = [16, 32, 128, 256, 512];
 
 function appIconSvg() {
   const inset = (APP_ICON_CANVAS - APP_ICON_PLATE) / 2;
@@ -63,25 +82,6 @@ const variants = {
   disconnected: { svg: { background: BRAND, dot: OFFLINE }, sizes: [16, 32] },
 };
 
-function render(work, source, size, output) {
-  const html = join(work, `${size}-${output.replace(/[^a-z0-9]/gi, '-')}.html`);
-  const dataUri = `data:image/svg+xml;base64,${Buffer.from(source).toString('base64')}`;
-  writeFileSync(
-    html,
-    `<!doctype html><html><body style="margin:0;background:transparent"><img src="${dataUri}" width="${size}" height="${size}" style="display:block"></body></html>`,
-  );
-  execFileSync(chrome, [
-    '--headless=new',
-    '--disable-gpu',
-    '--hide-scrollbars',
-    '--force-device-scale-factor=1',
-    '--default-background-color=00000000',
-    `--window-size=${size},${size}`,
-    `--screenshot=${output}`,
-    `file://${html}`,
-  ], { stdio: 'ignore' });
-}
-
 mkdirSync(svgDir, { recursive: true });
 mkdirSync(pngDir, { recursive: true });
 mkdirSync(appIconSetDir, { recursive: true });
@@ -91,8 +91,11 @@ try {
   for (const [name, { svg, sizes }] of Object.entries(variants)) {
     const source = iconSvg(svg);
     writeFileSync(join(svgDir, `${name}.svg`), source);
-    for (const size of sizes) render(work, source, size, join(pngDir, `${name}-${size}.png`));
+    for (const size of sizes) {
+      renderPng(work, name, source, size, join(pngDir, `${name}-${size}.png`));
+    }
   }
+  renderPng(work, 'claude-plugin', iconSvg(variants.icon.svg), 512, claudePluginIcon);
 
   const appIcon = appIconSvg();
   writeFileSync(join(svgDir, 'app-icon.svg'), appIcon);
@@ -105,7 +108,7 @@ try {
       pixels: points * scale,
     })),
   );
-  for (const { filename, pixels } of images) render(work, appIcon, pixels, join(appIconSetDir, filename));
+  for (const { filename, pixels } of images) renderPng(work, `app-icon-${filename}`, appIcon, pixels, join(appIconSetDir, filename));
   writeFileSync(
     join(appIconSetDir, 'Contents.json'),
     `${JSON.stringify({ images: images.map(({ pixels, ...image }) => image), info: { version: 1, author: 'xcode' } }, null, 2)}\n`,

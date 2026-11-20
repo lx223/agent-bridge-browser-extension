@@ -7,6 +7,7 @@ export default defineConfig({
       { test: { name: 'server', root: 'packages/server', environment: 'node' } },
       { test: { name: 'extension', root: 'packages/extension', environment: 'node' } },
       { test: { name: 'store', root: 'store', environment: 'node' } },
+      { test: { name: 'plugins', root: 'plugins', environment: 'node' } },
     ],
     coverage: {
       provider: 'v8',
