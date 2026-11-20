@@ -12,43 +12,6 @@ const CONNECT_TIMEOUT_MS = 60_000;
 const IDLE_MS = 75_000;
 const PROBE_MS = 20_000;
 
-const EXTENSION_PAGE_PROBE = `
-  const done = arguments[arguments.length - 1];
-  const within = (promise, ms) => Promise.race([promise, new Promise((resolve) => setTimeout(() => resolve('no answer after ' + ms + ' ms'), ms))]);
-  const attempt = async (run) => {
-    try {
-      return await within(run(), 6000);
-    } catch (error) {
-      return 'threw ' + error;
-    }
-  };
-  const socketResult = (url) =>
-    new Promise((resolve) => {
-      try {
-        const socket = new WebSocket(url);
-        socket.onopen = () => {
-          resolve('open');
-          socket.close();
-        };
-        socket.onerror = () => resolve('error');
-        socket.onclose = (event) => resolve('closed with ' + event.code + ' ' + event.reason);
-        setTimeout(() => resolve('no result after 5000 ms'), 5000);
-      } catch (error) {
-        resolve('threw ' + error);
-      }
-    });
-  (async () => {
-    const report = { href: location.href };
-    report.backgroundLog = await attempt(() => chrome.runtime.sendMessage({ type: 'PROBE_LOG' }));
-    report.backgroundStatus = await attempt(() => chrome.runtime.sendMessage({ type: 'GET_STATUS' }));
-    report.permissions = await attempt(() => chrome.permissions.getAll());
-    report.pageWebSocket = await socketResult('ws://127.0.0.1:${DEFAULT_PORT}');
-    report.pageFetch = await attempt(() => fetch('http://127.0.0.1:${DEFAULT_PORT}/', { mode: 'no-cors' }).then((response) => 'answered ' + response.type));
-    report.tabs = await attempt(() => chrome.tabs.query({}));
-    done(report);
-  })().catch((error) => done({ probeError: String(error) }));
-`;
-
 let agent: Agent;
 let safari: SafariSession;
 let fixtures: Server;
@@ -81,29 +44,46 @@ function instrumentedExtension(beaconPort: number) {
   const background = join(directory, 'background.js');
   const prelude = `
     const probeLog = [];
-    const note = (stage, detail) => probeLog.push([Date.now(), stage, detail === undefined ? null : detail]);
-    chrome.runtime.onMessage.addListener((message, sender, respond) => {
-      if (message && message.type === 'PROBE_LOG') respond(probeLog);
-      return false;
-    });
+    const note = (stage, detail) => probeLog.push([Date.now() % 100000, stage, detail === undefined ? null : detail]);
+    const beaconUrl = (query) => 'http://127.0.0.1:${beaconPort}/beacon?' + query;
+    let beaconTab;
     self.addEventListener('error', (event) => note('error-event', String(event.message)));
     self.addEventListener('unhandledrejection', (event) => note('unhandled-rejection', String(event.reason)));
     note('start', { url: chrome.runtime.getURL(''), context: typeof ServiceWorkerGlobalScope === 'undefined' ? 'page' : 'service worker' });
-    chrome.tabs
-      .create({ url: 'http://127.0.0.1:${beaconPort}/beacon?base=' + encodeURIComponent(chrome.runtime.getURL('')), active: false })
-      .then(() => note('beacon-tab', 'opened'), (error) => note('beacon-tab', String(error)));
-    fetch('http://127.0.0.1:${beaconPort}/beacon?via=fetch', { mode: 'no-cors' }).then(
+    chrome.tabs.create({ url: beaconUrl('opened=1'), active: false }).then(
+      (tab) => {
+        beaconTab = tab.id;
+        note('beacon-tab', 'opened');
+      },
+      (error) => note('beacon-tab', String(error)),
+    );
+    fetch(beaconUrl('via=fetch'), { mode: 'no-cors' }).then(
       (response) => note('fetch', 'answered ' + response.type),
       (error) => note('fetch', String(error)),
     );
-    try {
-      const socket = new WebSocket('ws://127.0.0.1:${DEFAULT_PORT}');
-      socket.onopen = () => note('websocket', 'open');
-      socket.onerror = () => note('websocket', 'error');
-      socket.onclose = (event) => note('websocket', 'closed with ' + event.code + ' ' + event.reason);
-    } catch (error) {
-      note('websocket', 'threw ' + error);
-    }
+    const trySocket = (label, url) => {
+      try {
+        const socket = new WebSocket(url);
+        socket.onopen = () => note(label, 'open');
+        socket.onerror = () => note(label, 'error');
+        socket.onclose = (event) => note(label, 'closed with ' + event.code + ' ' + event.reason);
+      } catch (error) {
+        note(label, 'threw ' + error);
+      }
+    };
+    trySocket('websocket-127.0.0.1', 'ws://127.0.0.1:${DEFAULT_PORT}');
+    trySocket('websocket-localhost', 'ws://localhost:${DEFAULT_PORT}');
+    chrome.permissions.getAll().then(
+      (granted) => note('permissions', granted),
+      (error) => note('permissions', String(error)),
+    );
+    const flush = (attempt) => {
+      const url = beaconUrl('attempt=' + attempt + '&log=' + encodeURIComponent(JSON.stringify(probeLog)));
+      const sent = beaconTab === undefined ? chrome.tabs.create({ url, active: false }) : chrome.tabs.update(beaconTab, { url });
+      sent.catch((error) => note('flush', String(error)));
+    };
+    setTimeout(() => flush(1), 6000);
+    setTimeout(() => flush(2), 14000);
     try {
   `;
   const epilogue = `
@@ -133,18 +113,8 @@ function listenForConnectionAttempts(ms: number) {
 }
 
 async function describeSafari(beacons: string[]) {
-  const base = beacons.map((beacon) => /[?&]base=([^&]+)/.exec(beacon)?.[1]).find((found) => found !== undefined);
-  if (!base) {
-    console.log(`The background script did not report its address. Safari pages: ${JSON.stringify(await safari.pages())}`);
-    return;
-  }
-  console.log(`Opening ${base}src/welcome/index.html: ${await safari.open(`${base}src/welcome/index.html`)}`);
-  const pages = await safari.pages();
-  console.log(`Safari pages: ${JSON.stringify(pages)}`);
-  for (const page of pages.filter((candidate) => candidate.url.startsWith('safari-web-extension://'))) {
-    const report = await safari.runInPage(page.handle, EXTENSION_PAGE_PROBE).catch((error: unknown) => `probe failed: ${String(error)}`);
-    console.log(`Extension page probe: ${JSON.stringify(report, null, 1)}`);
-  }
+  console.log(`Beacons from the background script:\n${beacons.join('\n') || 'none'}`);
+  console.log(`Safari pages: ${JSON.stringify(await safari.pages())}`);
 }
 
 async function safariConnected(timeoutMs: number): Promise<BridgeStatus> {
@@ -172,7 +142,6 @@ beforeAll(async () => {
   const listening = listenForConnectionAttempts(PROBE_MS);
   console.log(`Loaded the instrumented extension: ${JSON.stringify(await safari.loadExtension(probeExtension))}`);
   console.log(`Connection attempts in the first ${PROBE_MS} ms: ${JSON.stringify(await listening)}`);
-  console.log(`Beacons from the background script:\n${beacons.received.join('\n') || 'none'}`);
   await describeSafari(beacons.received).catch((error: unknown) => console.log(`Could not describe Safari: ${String(error)}`));
   await beacons.close();
   rmSync(probeExtension, { recursive: true, force: true });
