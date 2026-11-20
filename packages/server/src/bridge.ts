@@ -4,10 +4,16 @@ import WebSocket, { WebSocketServer } from 'ws';
 import {
   extensionToServer,
   hostToRelay,
+  NAME_INSTANCE_TOOL,
   PROTOCOL_VERSION,
   REPLACED_CLOSE_CODE,
   relayToHost,
+  SET_INSTANCE_NAME_METHOD,
+  toolDefinitions,
+  type AgentActivity,
   type AgentInfo,
+  type AgentInstanceUse,
+  type AgentSession,
   type HelloMessage,
   type HostToRelay,
   type RelayToHost,
@@ -50,11 +56,19 @@ const RETRY_MS = 2_000;
 const HANDOVER_WAIT_MS = 5_000;
 const REJOIN_AFTER_HANDOVER_MS = 500;
 const HANDOVER_CLOSE_CODE = 4002;
+const ACTIVITY_BROADCAST_MS = 250;
+const MAX_INSTANCES_PER_AGENT = 8;
 const notConnected = (browser: string) =>
   `The Agent Browser Bridge extension is not connected in ${browser}. Make sure ${browser} is open with the extension installed and enabled; it reconnects automatically within ~30 seconds.`;
 const EXTENSION_SCHEMES = ['chrome-extension://', 'safari-web-extension://'];
 
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+const toolLabel = (browser: string, method: string) => {
+  if (method === SET_INSTANCE_NAME_METHOD) return NAME_INSTANCE_TOOL;
+  if (method in toolDefinitions) return `${browser}_${toolDefinitions[method as keyof typeof toolDefinitions].tool}`;
+  return method;
+};
+const sameInstance = (a: AgentInstanceUse, b: AgentInstanceUse) => a.browser === b.browser && a.instanceId === b.instanceId;
 const errorMessage = (err: unknown) => (err instanceof Error ? err.message : String(err));
 
 export class ExtensionBridge {
@@ -68,6 +82,8 @@ export class ExtensionBridge {
   private wss?: WebSocketServer;
   private extensions = new Map<WebSocket, HelloMessage | undefined>();
   private relays = new Map<WebSocket, AgentInfo | undefined>();
+  private activity = new Map<string, AgentActivity>();
+  private broadcastTimer?: NodeJS.Timeout;
 
   private upstream?: WebSocket;
   private upstreamBrowsers: HelloMessage[] = [];
@@ -92,6 +108,7 @@ export class ExtensionBridge {
   async stop(): Promise<void> {
     this.stopped = true;
     clearTimeout(this.retryTimer);
+    clearTimeout(this.broadcastTimer);
     this.failPending(new NotConnectedError('Bridge stopped'));
     this.upstream?.terminate();
     for (const client of [...(this.wss?.clients ?? []), ...this.extensions.keys(), ...this.relays.keys()]) client.terminate();
@@ -115,7 +132,9 @@ export class ExtensionBridge {
     if (this.role === 'relay' && this.upstream) return this.send(this.upstream, method, params, agent, { browser, instance });
     if (this.role !== 'host') return Promise.reject(new NotConnectedError(this.error ?? notConnected(browser)));
     try {
-      return this.send(this.pick(browser, instance), method, params, agent);
+      const socket = this.pick(browser, instance);
+      this.recordActivity(agent, browser, method, this.extensions.get(socket));
+      return this.send(socket, method, params, agent);
     } catch (err) {
       return Promise.reject(err);
     }
@@ -141,10 +160,45 @@ export class ExtensionBridge {
     else if (this.role === 'relay' && this.upstream) this.announceAgent(this.upstream);
   }
 
-  agents(): AgentInfo[] {
+  agents(): AgentSession[] {
     const own = this.opts.agentInfo?.();
     const relayed = [...this.relays.values()].filter((agent): agent is AgentInfo => agent !== undefined);
-    return own ? [own, ...relayed] : relayed;
+    const all = own ? [own, ...relayed] : relayed;
+    const latest = all.filter((agent, index) => agent.sessionId === undefined || !all.slice(index + 1).some((later) => later.sessionId === agent.sessionId));
+    return latest.map((agent) => {
+      const activity = agent.sessionId === undefined ? undefined : this.activity.get(agent.sessionId);
+      return activity ? { ...agent, activity } : agent;
+    });
+  }
+
+  private sessionStillPresent(sessionId: string) {
+    return this.opts.agentInfo?.()?.sessionId === sessionId || [...this.relays.values()].some((agent) => agent?.sessionId === sessionId);
+  }
+
+  private recordActivity(agent: AgentInfo | null, browser: string, method: string, hello: HelloMessage | undefined) {
+    if (agent?.sessionId === undefined) return;
+    const previous = this.activity.get(agent.sessionId);
+    const use: AgentInstanceUse = {
+      browser,
+      ...(hello?.instanceId !== undefined && { instanceId: hello.instanceId }),
+      ...(hello?.label !== undefined && { label: hello.label }),
+      ...(hello?.name !== undefined && { name: hello.name }),
+    };
+    this.activity.set(agent.sessionId, {
+      lastUsedAt: Date.now(),
+      lastTool: toolLabel(browser, method),
+      calls: (previous?.calls ?? 0) + 1,
+      instances: [use, ...(previous?.instances ?? []).filter((other) => !sameInstance(other, use))].slice(0, MAX_INSTANCES_PER_AGENT),
+    });
+    this.scheduleAgentsBroadcast();
+  }
+
+  private scheduleAgentsBroadcast() {
+    if (this.broadcastTimer) return;
+    this.broadcastTimer = setTimeout(() => {
+      this.broadcastTimer = undefined;
+      if (this.role === 'host') this.broadcastAgents();
+    }, ACTIVITY_BROADCAST_MS);
   }
 
   private broadcastAgents() {
@@ -416,7 +470,9 @@ export class ExtensionBridge {
       );
     });
     socket.on('close', () => {
+      const sessionId = this.relays.get(socket)?.sessionId;
       this.relays.delete(socket);
+      if (sessionId !== undefined && !this.sessionStillPresent(sessionId)) this.activity.delete(sessionId);
       this.log(`Agent session left (${this.relays.size} relayed)`);
       this.broadcastAgents();
     });

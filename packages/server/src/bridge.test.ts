@@ -153,6 +153,98 @@ describe('ExtensionBridge', () => {
     await expect.poll(() => lists.at(-1)).toEqual([agent('host-agent')]);
   });
 
+  describe('agent session activity', () => {
+    const session = (sessionId: string, name = 'claude-code') => ({
+      serverVersion: '9.9.9',
+      client: { name, version: '2.0' },
+      sessionId,
+      startedAt: 1_000,
+      project: { name: 'shop', path: '/work/shop' },
+    });
+
+    async function listen(port: number) {
+      const lists: Array<Array<Record<string, unknown>>> = [];
+      const ws = await connectExtension(port, () => [], { instanceId: 'aaaa1111', label: 'Chrome', name: 'Work' });
+      ws.on('message', (raw) => {
+        const msg = JSON.parse(raw.toString());
+        if (msg.type === 'agents') lists.push(msg.agents);
+      });
+      return lists;
+    }
+
+    it('reports what each session last did and which instances it used', async () => {
+      const port = await startBridge({ agentInfo: () => session('host-session') });
+      const lists = await listen(port);
+      await connectExtension(port, () => [], { instanceId: 'bbbb2222', label: 'Edge' });
+      await bridge!.request('chrome', 'tabs.list', {}, undefined, 'bbbb2222');
+      await bridge!.request('chrome', 'page.snapshot', { tabId: 1 }, undefined, 'aaaa1111');
+      await bridge!.request('chrome', 'instance.setName', { name: 'Work' }, undefined, 'aaaa1111');
+      await expect.poll(() => (lists.at(-1)?.[0]?.activity as { calls?: number } | undefined)?.calls).toBe(3);
+      expect(lists.at(-1)).toEqual([
+        {
+          ...session('host-session'),
+          activity: {
+            lastUsedAt: expect.any(Number),
+            lastTool: 'browser_name_instance',
+            calls: 3,
+            instances: [
+              { browser: 'chrome', instanceId: 'aaaa1111', label: 'Chrome', name: 'Work' },
+              { browser: 'chrome', instanceId: 'bbbb2222', label: 'Edge' },
+            ],
+          },
+        },
+      ]);
+      expect(bridge!.agents()[0]!.activity?.lastTool).toBe('browser_name_instance');
+    });
+
+    it('names tools after the browser and ignores sessions without an id', async () => {
+      const port = await startBridge({ agentInfo: () => ({ serverVersion: '9.9.9', client: null }) });
+      await listen(port);
+      await bridge!.request('chrome', 'tabs.list', {});
+      expect(bridge!.agents()).toEqual([{ serverVersion: '9.9.9', client: null }]);
+      const relay = new ExtensionBridge({ port, agentInfo: () => session('relay-session') });
+      try {
+        await relay.start();
+        await expect.poll(() => bridge!.agents().length).toBe(2);
+        await relay.request('chrome', 'tabs.list', {});
+        await relay.request('chrome', 'custom.method', {}).catch(() => undefined);
+        expect(bridge!.agents()[1]!.activity).toMatchObject({ lastTool: 'custom.method', calls: 2 });
+        await relay.request('chrome', 'tabs.list', {});
+        expect(bridge!.agents()[1]!.activity).toMatchObject({ lastTool: 'chrome_list_tabs', calls: 3 });
+      } finally {
+        await relay.stop();
+      }
+    });
+
+    it('shows one entry per session while an updated worker takes over, and forgets the session once it leaves', async () => {
+      const port = await startBridge();
+      const lists = await listen(port);
+      const oldWorker = new ExtensionBridge({ port, agentInfo: () => session('shared', 'old') });
+      const newWorker = new ExtensionBridge({ port, agentInfo: () => session('shared', 'new') });
+      try {
+        await oldWorker.start();
+        await oldWorker.request('chrome', 'tabs.list', {});
+        await newWorker.start();
+        await expect.poll(() => lists.at(-1)?.map((agent) => (agent.client as { name: string }).name)).toEqual(['new']);
+        await oldWorker.stop();
+        await expect.poll(() => bridge!.agents()).toHaveLength(1);
+        expect(bridge!.agents()[0]!.activity?.calls).toBe(1);
+      } finally {
+        await oldWorker.stop();
+        await newWorker.stop();
+      }
+      await expect.poll(() => bridge!.agents()).toEqual([]);
+      const comeback = new ExtensionBridge({ port, agentInfo: () => session('shared') });
+      try {
+        await comeback.start();
+        await expect.poll(() => bridge!.agents()).toHaveLength(1);
+        expect(bridge!.agents()[0]!.activity).toBeUndefined();
+      } finally {
+        await comeback.stop();
+      }
+    });
+  });
+
   it('times out unanswered requests', async () => {
     const port = await startBridge({ requestTimeoutMs: 50 });
     const ws = await connect(port, EXT_ORIGIN);
