@@ -38,29 +38,37 @@ function listenForBeacons(): Promise<{ port: number; received: string[]; close()
   );
 }
 
-function instrumentedExtension(beaconPort: number) {
+interface ProbeVariant {
+  label: string;
+  immediateTab: boolean;
+  reportAfterMs: number;
+}
+
+const PROBE_VARIANTS: ProbeVariant[] = [
+  { label: 'immediate-tab-then-report-at-4s', immediateTab: true, reportAfterMs: 4_000 },
+  { label: 'report-at-4s', immediateTab: false, reportAfterMs: 4_000 },
+  { label: 'report-at-12s', immediateTab: false, reportAfterMs: 12_000 },
+];
+
+function instrumentedExtension(beaconPort: number, variant: ProbeVariant) {
   const directory = mkdtempSync(join(tmpdir(), 'agent-browser-bridge-safari-probe-'));
   cpSync(EXTENSION_DIST, directory, { recursive: true });
   const background = join(directory, 'background.js');
   const prelude = `
     const probeLog = [];
-    const note = (stage, detail) => probeLog.push([Date.now() % 100000, stage, detail === undefined ? null : detail]);
-    const beaconUrl = (query) => 'http://127.0.0.1:${beaconPort}/beacon?' + query;
-    let beaconTab;
+    const startedAt = Date.now();
+    const note = (stage, detail) => probeLog.push([Date.now() - startedAt, stage, detail === undefined ? null : detail]);
+    const beaconUrl = (query) => 'http://127.0.0.1:${beaconPort}/beacon?label=${variant.label}&' + query;
+    const recorded = (stage, promise) => promise.then((value) => note(stage, value), (error) => note(stage, 'rejected: ' + error));
+    let ticks = 0;
+    setInterval(() => (ticks += 1), 500);
     self.addEventListener('error', (event) => note('error-event', String(event.message)));
     self.addEventListener('unhandledrejection', (event) => note('unhandled-rejection', String(event.reason)));
+    chrome.runtime.onInstalled.addListener((details) => note('installed', details.reason));
     note('start', { url: chrome.runtime.getURL(''), context: typeof ServiceWorkerGlobalScope === 'undefined' ? 'page' : 'service worker' });
-    chrome.tabs.create({ url: beaconUrl('opened=1'), active: false }).then(
-      (tab) => {
-        beaconTab = tab.id;
-        note('beacon-tab', 'opened');
-      },
-      (error) => note('beacon-tab', String(error)),
-    );
-    fetch(beaconUrl('via=fetch'), { mode: 'no-cors' }).then(
-      (response) => note('fetch', 'answered ' + response.type),
-      (error) => note('fetch', String(error)),
-    );
+    if (${variant.immediateTab}) recorded('first-tab', chrome.tabs.create({ url: beaconUrl('opened=1'), active: false }).then((tab) => tab.id));
+    recorded('fetch-127.0.0.1', fetch('http://127.0.0.1:${beaconPort}/beacon?via=fetch', { mode: 'no-cors' }).then((response) => response.type));
+    recorded('fetch-localhost', fetch('http://localhost:${beaconPort}/beacon?via=fetch-localhost', { mode: 'no-cors' }).then((response) => response.type));
     const trySocket = (label, url) => {
       try {
         const socket = new WebSocket(url);
@@ -73,17 +81,18 @@ function instrumentedExtension(beaconPort: number) {
     };
     trySocket('websocket-127.0.0.1', 'ws://127.0.0.1:${DEFAULT_PORT}');
     trySocket('websocket-localhost', 'ws://localhost:${DEFAULT_PORT}');
-    chrome.permissions.getAll().then(
-      (granted) => note('permissions', granted),
-      (error) => note('permissions', String(error)),
-    );
-    const flush = (attempt) => {
-      const url = beaconUrl('attempt=' + attempt + '&log=' + encodeURIComponent(JSON.stringify(probeLog)));
-      const sent = beaconTab === undefined ? chrome.tabs.create({ url, active: false }) : chrome.tabs.update(beaconTab, { url });
-      sent.catch((error) => note('flush', String(error)));
-    };
-    setTimeout(() => flush(1), 6000);
-    setTimeout(() => flush(2), 14000);
+    recorded('permissions', chrome.permissions.getAll());
+    recorded('tabs', chrome.tabs.query({}).then((tabs) => tabs.map((tab) => ({ id: tab.id, url: tab.url, title: tab.title }))));
+    try {
+      chrome.alarms.create('probe', { periodInMinutes: 0.5 });
+      note('half-minute-alarm', 'accepted');
+    } catch (error) {
+      note('half-minute-alarm', 'threw ' + error);
+    }
+    setTimeout(() => {
+      note('ticks', ticks);
+      chrome.tabs.create({ url: beaconUrl('log=' + encodeURIComponent(JSON.stringify(probeLog))), active: false });
+    }, ${variant.reportAfterMs});
     try {
   `;
   const epilogue = `
@@ -138,13 +147,15 @@ beforeAll(async () => {
   safari = await startSafariSession();
   console.log(`Safari session capabilities: ${JSON.stringify(safari.capabilities)}`);
   const beacons = await listenForBeacons();
-  const probeExtension = instrumentedExtension(beacons.port);
+  const probeExtensions = PROBE_VARIANTS.map((variant) => instrumentedExtension(beacons.port, variant));
   const listening = listenForConnectionAttempts(PROBE_MS);
-  console.log(`Loaded the instrumented extension: ${JSON.stringify(await safari.loadExtension(probeExtension))}`);
+  for (const probeExtension of probeExtensions) {
+    console.log(`Loaded an instrumented extension: ${JSON.stringify(await safari.loadExtension(probeExtension))}`);
+  }
   console.log(`Connection attempts in the first ${PROBE_MS} ms: ${JSON.stringify(await listening)}`);
   await describeSafari(beacons.received).catch((error: unknown) => console.log(`Could not describe Safari: ${String(error)}`));
   await beacons.close();
-  rmSync(probeExtension, { recursive: true, force: true });
+  for (const probeExtension of probeExtensions) rmSync(probeExtension, { recursive: true, force: true });
   agent = await startAgent();
   await safariConnected(CONNECT_TIMEOUT_MS);
 });
