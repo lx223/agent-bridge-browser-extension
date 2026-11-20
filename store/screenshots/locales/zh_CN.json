@@ -1,0 +1,56 @@
+{
+  "captions": {
+    "tabs": {
+      "headline": "让 AI 智能体整理你的标签页",
+      "subline": "先预览分组方案，一步应用，改变主意还能撤销。"
+    },
+    "pages": {
+      "headline": "智能体直接操作真实网页",
+      "subline": "读取页面、填写表单、点击按钮，就在你日常使用的浏览器里。"
+    },
+    "profiles": {
+      "headline": "为浏览器配置文件命名",
+      "subline": "说一声“用工作浏览器”，智能体就会选中正确的 Chrome 配置文件。"
+    },
+    "setup": {
+      "headline": "连接你已在用的智能体",
+      "subline": "支持 Claude Code、Cursor、VS Code、Claude Desktop 及任何 MCP 客户端。一切都在你的电脑上运行。"
+    }
+  },
+  "chat": {
+    "you": "你",
+    "agent": "智能体"
+  },
+  "tabs": {
+    "prompt": "把我打开的标签页按主题分组。",
+    "reply": "已完成。我把 {tabs} 个标签页分成了 {groups} 组。如需恢复原来的布局，告诉我撤销即可。",
+    "groups": {
+      "travel": "里斯本之旅",
+      "work": "第三季度报告",
+      "recipes": "晚餐灵感"
+    },
+    "pages": {
+      "travel": ["飞往里斯本的航班 – 比价", "阿尔法玛区酒店", "里斯本十大必游景点"],
+      "work": ["第三季度收入看板", "第三季度报告草稿", "团队会议纪要"],
+      "recipes": ["工作日快手意面", "烤盘烤蔬菜"]
+    }
+  },
+  "booking": {
+    "prompt": "今晚帮我在 Casa Azul 订一张 4 人桌，名字写 Ada Lovelace。",
+    "reply": "已完成。Casa Azul 已确认 Ada Lovelace 名下的 4 人桌。",
+    "restaurant": "Casa Azul",
+    "heading": "预订餐桌",
+    "name": "姓名",
+    "guests": "人数",
+    "when": "时间",
+    "tonight": "今晚 19:30",
+    "submit": "预订",
+    "confirmation": "已为 {name} 预订 {guests} 人桌，今晚见！",
+    "guestName": "Ada Lovelace"
+  },
+  "profiles": {
+    "prompt": "这个 Chrome 配置文件用于工作，把它命名为“工作”。",
+    "reply": "已完成。以后你说要用工作浏览器，我就会使用这个配置文件。",
+    "name": "工作"
+  }
+}

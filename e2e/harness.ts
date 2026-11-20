@@ -85,8 +85,8 @@ function requireBuild() {
   }
 }
 
-export async function startAgent(name = 'e2e'): Promise<Agent> {
-  const client = new Client({ name, version: '0.0.0' });
+export async function startAgent(name = 'e2e', version = '0.0.0'): Promise<Agent> {
+  const client = new Client({ name, version });
   await client.connect(new StdioClientTransport({ command: process.execPath, args: [SERVER_ENTRY], stderr: 'ignore' }));
 
   const raw = async (tool: string, args: Record<string, unknown> = {}): Promise<ToolResult> => {
@@ -136,7 +136,15 @@ export interface Harness {
   close(): Promise<void>;
 }
 
-export async function startHarness(): Promise<Harness> {
+export interface HarnessOptions {
+  locale?: string;
+  deviceScaleFactor?: number;
+  colorScheme?: 'light' | 'dark';
+  agentName?: string;
+  agentVersion?: string;
+}
+
+export async function startHarness(options: HarnessOptions = {}): Promise<Harness> {
   requireBuild();
   if (await portInUse(DEFAULT_PORT)) {
     throw new Error(
@@ -157,15 +165,20 @@ export async function startHarness(): Promise<Harness> {
   };
 
   try {
-    agent = await startAgent();
+    const launchAgent = () => startAgent(options.agentName, options.agentVersion);
+    agent = await launchAgent();
     context = await chromium.launchPersistentContext(profile, {
       channel: 'chromium',
       headless: true,
+      locale: options.locale,
+      deviceScaleFactor: options.deviceScaleFactor,
+      colorScheme: options.colorScheme,
       args: [
         `--disable-extensions-except=${EXTENSION_DIST}`,
         `--load-extension=${EXTENSION_DIST}`,
         '--host-resolver-rules=MAP * ~NOTFOUND, EXCLUDE 127.0.0.1',
         '--enable-features=WebMCP',
+        ...(options.locale ? [`--lang=${options.locale}`] : []),
       ],
     });
     const worker = context.serviceWorkers()[0] ?? (await context.waitForEvent('serviceworker'));
@@ -187,7 +200,7 @@ export async function startHarness(): Promise<Harness> {
       openFixture: (name) => current.call<Tab>('chrome_open_tab', { url: fixture(name) }),
       async restartAgent() {
         await current.close();
-        current = await startAgent();
+        current = await launchAgent();
         return current;
       },
       async close() {

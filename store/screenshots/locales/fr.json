@@ -1,0 +1,56 @@
+{
+  "captions": {
+    "tabs": {
+      "headline": "Laissez votre agent IA ranger vos onglets",
+      "subline": "Prévisualisez un plan de regroupement, appliquez-le en une étape et annulez-le si vous changez d'avis."
+    },
+    "pages": {
+      "headline": "Votre agent agit dans de vraies pages web",
+      "subline": "Il lit la page, remplit les formulaires et clique sur les boutons, dans le navigateur que vous utilisez déjà."
+    },
+    "profiles": {
+      "headline": "Nommez vos profils de navigateur",
+      "subline": "Demandez votre navigateur Travail et votre agent choisit le bon profil Chrome."
+    },
+    "setup": {
+      "headline": "Connectez l'agent que vous utilisez déjà",
+      "subline": "Claude Code, Cursor, VS Code, Claude Desktop ou tout client MCP. Tout s'exécute sur votre ordinateur."
+    }
+  },
+  "chat": {
+    "you": "Vous",
+    "agent": "Agent"
+  },
+  "tabs": {
+    "prompt": "Range mes onglets ouverts en groupes par thème.",
+    "reply": "C'est fait. J'ai réparti {tabs} onglets en {groups} groupes. Demandez-moi d'annuler pour retrouver l'ancienne disposition.",
+    "groups": {
+      "travel": "Voyage à Lisbonne",
+      "work": "Rapport T3",
+      "recipes": "Idées de dîner"
+    },
+    "pages": {
+      "travel": ["Vols pour Lisbonne : comparer les prix", "Hôtels dans l'Alfama", "Lisbonne : les 10 incontournables"],
+      "work": ["Tableau de bord du CA T3", "Brouillon du rapport T3", "Notes de réunion d'équipe"],
+      "recipes": ["Pâtes faciles pour la semaine", "Légumes rôtis au four"]
+    }
+  },
+  "booking": {
+    "prompt": "Réserve une table pour 4 au Casa Azul ce soir au nom d'Ada Lovelace.",
+    "reply": "C'est fait. Casa Azul a confirmé une table pour 4 au nom d'Ada Lovelace.",
+    "restaurant": "Casa Azul",
+    "heading": "Réserver une table",
+    "name": "Nom",
+    "guests": "Personnes",
+    "when": "Quand",
+    "tonight": "Ce soir, 19 h 30",
+    "submit": "Réserver",
+    "confirmation": "Table pour {guests} réservée au nom de {name}. À ce soir !",
+    "guestName": "Ada Lovelace"
+  },
+  "profiles": {
+    "prompt": "Ce profil Chrome est pour le travail. Appelle-le Travail.",
+    "reply": "C'est fait. Quand vous demanderez votre navigateur Travail, j'utiliserai ce profil.",
+    "name": "Travail"
+  }
+}
