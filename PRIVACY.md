@@ -1,12 +1,14 @@
 # Agent Browser Bridge privacy policy
 
-Last updated: 17 November 2026
+Last updated: 20 November 2026
 
 Agent Browser Bridge connects Chrome tabs, tab groups and web pages to an MCP-compatible agent through a bridge server running on your computer.
 
 ## Information used
 
-When a connected agent requests browser information, the extension can send tab titles and URLs, tab and window identifiers, tab order and state (such as pinned, active, audible, discarded and last-accessed time), window properties, and tab-group names, colours and layout to the local bridge. The connection handshake also includes the extension version and browser user-agent string. URLs and tab titles may contain personal or sensitive information.
+When a connected agent requests browser information, the extension can send tab titles and URLs, tab and window identifiers, tab order and state (such as pinned, active, audible, muted, discarded and last-accessed time), window properties, and tab-group names, colours and layout to the local bridge. The connection handshake also includes the extension version and browser user-agent string. URLs and tab titles may contain personal or sensitive information.
+
+When a connected agent searches history or sessions, the extension uses Chrome's `history` and `sessions` permissions and can send to the local bridge the URLs, titles, visit times, visit counts and how each visit started (such as a typed address or a followed link) for the pages that match; the tabs and windows you closed recently; and, when Chrome sync is on, the names of your other signed-in devices and the titles and URLs of the tabs open on them. The extension does not add to or delete your history.
 
 When a connected agent uses page tools, the extension uses Chrome's `debugger` permission to attach to the requested tab and can send that page's content to the local bridge: its accessibility tree (visible text, labels, form field values and element roles), screenshots, the results of JavaScript the agent evaluates in the page, and the results of DevTools Protocol commands the agent sends. Depending on what the agent requests, this can include anything the page shows or holds, such as messages, account details, form contents and cookies. Page tools also let the agent click, type, scroll and navigate in the page as you.
 
@@ -25,7 +27,7 @@ Release builds send anonymous usage events to PostHog (EU region, eu.i.posthog.c
 - extension installed or updated, setup page opened, setup link clicked or snippet copied;
 - the first time an agent connects and the first time a tab plan is applied, with minutes since install;
 - once a day while the browser is open: whether an agent is connected, the number of open windows, and the number of open tabs as a range (such as 11–25);
-- each tool call: the tool name, whether it succeeded, how long it took, a fixed error category on failure (such as "tab not found"), and counts such as how many tabs or groups it affected, whether it was a preview, and minutes between applying a plan and undoing it.
+- each tool call: the tool name, whether it succeeded, how long it took, a fixed error category on failure (such as "tab not found"), and counts such as how many tabs or groups it affected, how many results a history or recently closed search returned, whether it was a preview, and minutes between applying a plan and undoing it.
 
 Events also include the extension version, the MCP server version, and the name and version the connected agent reports for itself (such as "claude-code"). Each event includes a random identifier generated on install and kept in extension local storage. Events never include tab titles, URLs, domains, tab or window contents, tab-group names, error messages, or tool parameters or results. PostHog receives your IP address as part of the network request; the PostHog project is configured to discard it.
 
@@ -39,7 +41,7 @@ Browser information is used to provide the extension's single purpose: letting y
 
 ## Your choices
 
-You control which agent you connect and its permissions. A connected agent can request browser information; change, move, group or close tabs; and read pages and act in them as you, including submitting forms. Chrome shows a banner while the extension is attached to a page; cancelling it detaches the extension from that tab. Disconnect the agent or stop the local MCP server to stop bridge communication; disable or uninstall the extension to stop its operation. Removing the extension removes its extension storage, including the analytics identifier. Consult your agent provider about deleting information it has received.
+You control which agent you connect and its permissions. A connected agent can request browser information, including your browsing history and the tabs on your other signed-in devices; open, change, move, group, unload or close tabs and windows; reopen closed tabs; and read pages and act in them as you, including submitting forms. Chrome shows a banner while the extension is attached to a page; cancelling it detaches the extension from that tab. Disconnect the agent or stop the local MCP server to stop bridge communication; disable or uninstall the extension to stop its operation. Removing the extension removes its extension storage, including the analytics identifier. Consult your agent provider about deleting information it has received.
 
 ## Changes and contact
 

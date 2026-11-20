@@ -18,6 +18,22 @@ describe('toolDefinitions', () => {
   });
 });
 
+describe('history and session params', () => {
+  it('fills history search defaults', () => {
+    expect(toolDefinitions['history.search'].params.parse({})).toEqual({ text: '', maxResults: 100 });
+  });
+
+  it('caps recently closed results at the browser limit', () => {
+    expect(toolDefinitions['sessions.getRecentlyClosed'].params.parse({})).toEqual({ maxResults: 25 });
+    expect(() => toolDefinitions['sessions.getRecentlyClosed'].params.parse({ maxResults: 26 })).toThrow();
+  });
+
+  it('restores the most recent session when no id is given', () => {
+    expect(toolDefinitions['sessions.restore'].params.parse({})).toEqual({});
+    expect(() => toolDefinitions['sessions.restore'].params.parse({ sessionId: '' })).toThrow();
+  });
+});
+
 describe('page tool params', () => {
   it('requires refs shaped like snapshot refs', () => {
     expect(() => toolDefinitions['page.click'].params.parse({ tabId: 1, ref: '12' })).toThrow();
@@ -42,10 +58,10 @@ describe('browser namespaces', () => {
     expect(new Set(names).size).toBe(names.length);
   });
 
-  it('gives Chrome every tool and Safari neither tab groups nor page control', () => {
+  it('gives Chrome every tool and Safari neither tab groups, history, sessions nor page control', () => {
     expect(browserApis.chrome).toEqual(methods);
     for (const method of browserApis.safari) {
-      expect(method).not.toMatch(/^(page|cdp|plan|tabGroups)\./);
+      expect(method).not.toMatch(/^(page|cdp|plan|tabGroups|history|sessions)\./);
       expect(['tabs.group', 'tabs.ungroup']).not.toContain(method);
     }
   });

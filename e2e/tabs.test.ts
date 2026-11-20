@@ -129,6 +129,55 @@ describe('tab management through the built server and extension', () => {
     await closeAllButOne();
   });
 
+  it('filters tabs by url, title and state', async () => {
+    const [a, b] = await openThree();
+    const second = await harness.agent.call<Tab[]>('chrome_list_tabs', { url: harness.fixture('second.html') });
+    expect(second.map((t) => t.id)).toEqual([b!.id]);
+    const titledSecond = await harness.agent.call<Tab[]>('chrome_list_tabs', { title: 'Second*' });
+    expect(titledSecond.map((t) => t.id)).toEqual([b!.id]);
+    await harness.agent.call('chrome_group_tabs', { tabIds: [a!.id], title: 'Filtered' });
+    const grouped = await harness.agent.call<Tab[]>('chrome_list_tabs', { groupId: (await titled('Filtered'))!.id });
+    expect(grouped.map((t) => t.id)).toEqual([a!.id]);
+    await closeAllButOne();
+  });
+
+  it('updates and duplicates tabs', async () => {
+    const [a] = await openThree();
+    expect(await harness.agent.call<Tab>('chrome_update_tab', { tabId: a!.id, active: true, muted: true })).toMatchObject({
+      id: a!.id,
+      active: true,
+      muted: true,
+    });
+    expect(await harness.agent.call<Tab>('chrome_update_tab', { tabId: a!.id, pinned: true })).toMatchObject({ pinned: true });
+    expect((await harness.agent.call<Tab[]>('chrome_list_tabs', { pinned: true })).map((t) => t.id)).toEqual([a!.id]);
+    await harness.agent.call('chrome_update_tab', { tabId: a!.id, pinned: false });
+
+    const copy = await harness.agent.call<Tab>('chrome_duplicate_tab', { tabId: a!.id });
+    expect(copy.id).not.toBe(a!.id);
+    await expect.poll(async () => (await tabs()).find((t) => t.id === copy.id)?.url).toBe(harness.fixture('form.html'));
+    await closeAllButOne();
+  });
+
+  it('creates, updates and closes windows', async () => {
+    const created = await harness.agent.call<{ id: number; type: string; tabs: Tab[] }>('chrome_create_window', {
+      url: [harness.fixture('form.html'), harness.fixture('second.html')],
+    });
+    expect(created.type).toBe('normal');
+    expect(created.tabs).toHaveLength(2);
+
+    const updated = await harness.agent.call<{ id: number; state: string }>('chrome_update_window', { windowId: created.id, state: 'normal', drawAttention: true });
+    expect(updated).toMatchObject({ id: created.id, state: 'normal' });
+
+    const moved = await harness.agent.call<{ id: number; tabs: Tab[] }>('chrome_create_window', { tabId: created.tabs[1]!.id });
+    expect(moved.tabs.map((t) => t.id)).toEqual([created.tabs[1]!.id]);
+
+    expect(await harness.agent.call('chrome_close_window', { windowId: created.id })).toEqual({ closed: created.id });
+    await harness.agent.call('chrome_close_window', { windowId: moved.id });
+    const windows = await harness.agent.call<Array<{ id: number }>>('chrome_list_windows');
+    expect(windows.map((w) => w.id)).not.toContain(created.id);
+    expect(windows.map((w) => w.id)).not.toContain(moved.id);
+  });
+
   it('reports browser errors as tool errors', async () => {
     const result = await harness.agent.raw('chrome_close_tabs', { tabIds: [999_999_999] });
     expect(result.isError).toBe(true);

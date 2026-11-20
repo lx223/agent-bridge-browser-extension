@@ -69,7 +69,11 @@ export function toolMetrics(method: string, params: unknown, result: unknown): P
     case 'tabs.ungroup':
     case 'tabs.move':
     case 'tabs.close':
+    case 'tabs.discard':
       return { tab_count: lengthOf(p.tabIds) };
+    case 'history.search':
+    case 'sessions.getRecentlyClosed':
+      return { result_count: lengthOf(result) };
     case 'plan.apply': {
       const groups = Array.isArray(p.groups) ? p.groups.map(asRecord) : [];
       return {

@@ -63,6 +63,9 @@ describe('createMcpServer', () => {
     expect(annotations('chrome_group_tabs')).toMatchObject({ readOnlyHint: false, destructiveHint: false, openWorldHint: false });
     expect(annotations('chrome_open_tab')).toMatchObject({ openWorldHint: true });
     expect(annotations('chrome_navigate')).toMatchObject({ openWorldHint: true });
+    expect(annotations('chrome_restore_session')).toMatchObject({ readOnlyHint: false, openWorldHint: true });
+    expect(annotations('chrome_search_history')).toMatchObject({ readOnlyHint: true, openWorldHint: false });
+    expect(annotations('chrome_close_window')).toMatchObject({ destructiveHint: true, openWorldHint: false });
     expect(annotations('chrome_snapshot_page')).toMatchObject({ readOnlyHint: true, openWorldHint: true });
     expect(annotations('chrome_cdp_send')).toMatchObject({ destructiveHint: true, openWorldHint: true });
   });

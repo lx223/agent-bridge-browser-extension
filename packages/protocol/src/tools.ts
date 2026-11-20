@@ -14,6 +14,14 @@ const ref = z.string().regex(/^e\d+$/).describe('Element ref from chrome_snapsho
 export const groupColor = z.enum(['grey', 'blue', 'red', 'yellow', 'green', 'pink', 'purple', 'cyan', 'orange']);
 export type GroupColor = z.infer<typeof groupColor>;
 
+const windowState = z.enum(['normal', 'minimized', 'maximized', 'fullscreen']);
+const windowBounds = {
+  left: z.number().int().optional(),
+  top: z.number().int().optional(),
+  width: z.number().int().positive().optional(),
+  height: z.number().int().positive().optional(),
+};
+
 const groupProps = {
   title: z.string().optional().describe('Group title shown on the tab strip.'),
   color: groupColor.optional(),
@@ -27,11 +35,55 @@ export const toolDefinitions = {
     params: z.object({}),
     readOnly: true,
   },
+  'windows.create': {
+    tool: 'create_window',
+    description:
+      'Open a new window, optionally with URLs or by moving one existing tab into it. Does not wait for pages to load. Returns the window with its tabs.',
+    params: z.object({
+      url: z.union([z.string(), z.array(z.string()).min(1)]).optional(),
+      tabId: tabId.optional().describe('An existing tab to move into the new window.'),
+      focused: z.boolean().optional(),
+      state: windowState.optional(),
+      incognito: z.boolean().optional(),
+      ...windowBounds,
+    }),
+    readOnly: false,
+  },
+  'windows.update': {
+    tool: 'update_window',
+    description: 'Focus a window, change its state (normal, minimized, maximized, fullscreen), flash it for attention, or move and resize it.',
+    params: z.object({
+      windowId,
+      focused: z.boolean().optional(),
+      state: windowState.optional(),
+      drawAttention: z.boolean().optional(),
+      ...windowBounds,
+    }),
+    readOnly: false,
+  },
+  'windows.remove': {
+    tool: 'close_window',
+    description: 'Close a window and every tab in it. Confirm with the user first; chrome_restore_session can usually reopen it.',
+    params: z.object({ windowId }),
+    readOnly: false,
+    destructive: true,
+  },
   'tabs.list': {
     tool: 'list_tabs',
     description:
-      'List open tabs (id, windowId, index, title, url, groupId, pinned, active, lastAccessed). Optionally filter by window.',
-    params: z.object({ windowId: windowId.optional() }),
+      'List open tabs (id, windowId, index, title, url, groupId, pinned, active, muted, discarded, lastAccessed). Every filter is optional and they combine. title and url accept * wildcards; url takes match patterns such as "*://*.example.com/*".',
+    params: z.object({
+      windowId: windowId.optional(),
+      groupId: groupId.optional(),
+      title: z.string().optional(),
+      url: z.union([z.string(), z.array(z.string()).min(1)]).optional(),
+      active: z.boolean().optional(),
+      pinned: z.boolean().optional(),
+      audible: z.boolean().optional(),
+      muted: z.boolean().optional(),
+      discarded: z.boolean().optional(),
+      lastFocusedWindow: z.boolean().optional().describe('true for tabs in the window the user last focused.'),
+    }),
     readOnly: true,
   },
   'tabGroups.list': {
@@ -83,6 +135,32 @@ export const toolDefinitions = {
     readOnly: false,
     destructive: true,
   },
+  'tabs.update': {
+    tool: 'update_tab',
+    description:
+      "Switch to a tab (active), pin or unpin it, mute or unmute it, or set whether the browser may discard it. Activating a tab does not focus its window; use chrome_update_window for that. Use chrome_navigate to load a URL.",
+    params: z.object({
+      tabId,
+      active: z.boolean().optional(),
+      pinned: z.boolean().optional(),
+      muted: z.boolean().optional(),
+      autoDiscardable: z.boolean().optional(),
+    }),
+    readOnly: false,
+  },
+  'tabs.discard': {
+    tool: 'discard_tabs',
+    description:
+      'Unload tabs from memory while keeping them in the tab strip; a discarded tab reloads when the user switches to it. Returns the discarded tabs, and in failed each tab the browser would not discard (such as one already discarded) with the reason.',
+    params: z.object({ tabIds: z.array(tabId).min(1) }),
+    readOnly: false,
+  },
+  'tabs.duplicate': {
+    tool: 'duplicate_tab',
+    description: 'Duplicate a tab next to it, with its back and forward history. Returns the new tab.',
+    params: z.object({ tabId }),
+    readOnly: false,
+  },
   'plan.apply': {
     tool: 'apply_tab_plan',
     description:
@@ -122,6 +200,46 @@ export const toolDefinitions = {
       to: z.string().min(1).describe('A URL, or one of "back", "forward", "reload".'),
       timeoutMs: z.number().int().min(0).max(25_000).default(15_000),
     }),
+    readOnly: false,
+  },
+  'history.search': {
+    tool: 'search_history',
+    description:
+      'Search browsing history by words in page titles and URLs; empty text matches every page. Times are milliseconds since the epoch. startTime defaults to 24 hours ago, so pass it to look further back. Returns one entry per URL, most recent first: id, url, title, lastVisitTime, visitCount, typedCount.',
+    params: z.object({
+      text: z.string().default(''),
+      startTime: z.number().nonnegative().optional(),
+      endTime: z.number().nonnegative().optional(),
+      maxResults: z.number().int().min(1).max(10_000).default(100),
+    }),
+    readOnly: true,
+  },
+  'history.getVisits': {
+    tool: 'list_history_visits',
+    description:
+      'List every recorded visit to a URL: visitTime (milliseconds since the epoch), transition (such as link, typed or reload), referringVisitId, and isLocal (false for visits synced from another device). Pass the exact url from chrome_search_history.',
+    params: z.object({ url: z.string().min(1) }),
+    readOnly: true,
+  },
+  'sessions.getRecentlyClosed': {
+    tool: 'list_recently_closed',
+    description:
+      'List recently closed tabs and windows, newest first. Each entry has lastModified (seconds since the epoch) and either a tab or a window with its tabs. Pass a sessionId to chrome_restore_session to reopen it.',
+    params: z.object({ maxResults: z.number().int().min(1).max(25).default(25) }),
+    readOnly: true,
+  },
+  'sessions.getDevices': {
+    tool: 'list_device_sessions',
+    description:
+      "List windows and tabs open on the user's other signed-in devices, from Chrome sync. Each device has deviceName and sessions; each session has lastModified (seconds since the epoch) and a window with its tabs. Empty when sync is off. Pass a sessionId to chrome_restore_session to open it here.",
+    params: z.object({ maxResults: z.number().int().min(1).max(25).default(25).describe('Sessions per device.') }),
+    readOnly: true,
+  },
+  'sessions.restore': {
+    tool: 'restore_session',
+    description:
+      'Reopen a tab or window by sessionId from chrome_list_recently_closed or chrome_list_device_sessions. A closed tab comes back with its back and forward history. Without sessionId, reopens the most recently closed tab or window. Returns the restored tab or window with its new ids.',
+    params: z.object({ sessionId: z.string().min(1).optional() }),
     readOnly: false,
   },
   'page.snapshot': {
