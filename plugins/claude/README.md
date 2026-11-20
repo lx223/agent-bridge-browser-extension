@@ -6,11 +6,7 @@ Claude can find, group, pin and close tabs across windows, search your history, 
 
 ## Install
 
-In Claude Code:
-
-```
-/plugin install agent-browser-bridge --marketplace lx223/agent-bridge-browser-extension
-```
+In Claude, open **Customize > Plugins > Discover**, select Agent Browser Bridge and choose **Add**. Claude Code loads the plugin for the same account the next time it starts.
 
 ## Requirements
 

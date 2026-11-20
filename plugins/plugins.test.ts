@@ -9,7 +9,6 @@ const pluginDir = join(repoDir, 'plugins/claude');
 const readJson = (path: string) => JSON.parse(readFileSync(path, 'utf8'));
 
 describe('Claude plugin', () => {
-  const marketplace = readJson(join(repoDir, '.claude-plugin/marketplace.json'));
   const manifest = readJson(join(pluginDir, '.claude-plugin/plugin.json'));
   const setupSkill = readFileSync(join(pluginDir, 'skills/setup/SKILL.md'), 'utf8');
 
@@ -25,14 +24,6 @@ describe('Claude plugin', () => {
   it('describes itself in a README long enough for the plugin directory', () => {
     const prose = readFileSync(join(pluginDir, 'README.md'), 'utf8').replace(/```[\s\S]*?```/g, '');
     expect(prose.split(/\s+/).filter(Boolean).length).toBeGreaterThanOrEqual(40);
-  });
-
-  it('is listed in the marketplace under its own name and folder', () => {
-    expect(marketplace.plugins).toHaveLength(1);
-    const [entry] = marketplace.plugins;
-    expect(entry.name).toBe(manifest.name);
-    expect(join(repoDir, entry.source)).toBe(pluginDir);
-    expect(entry.description).toBe(manifest.description);
   });
 
   it('has a version and the icon the plugin directory asks for', () => {
