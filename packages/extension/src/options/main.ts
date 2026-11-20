@@ -1,12 +1,14 @@
 import type { ConnectionStatus } from '../background/bridgeClient.ts';
 import { renderAgentList } from '../settings/agentList.ts';
 import { analyticsAvailable, bindAnalyticsToggle } from '../settings/analyticsToggle.ts';
+import { bindInstanceName } from '../settings/instanceName.ts';
 
 const PRIVACY_URL = 'https://github.com/lx223/agent-bridge-browser-extension/blob/main/PRIVACY.md';
 
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 
 $<HTMLAnchorElement>('privacy-link').href = PRIVACY_URL;
+bindInstanceName($<HTMLInputElement>('instance-name'), $('instance-id'));
 
 const STATUS_TEXT: Record<ConnectionStatus['state'], string> = {
   connected: 'Agent connected',

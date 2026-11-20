@@ -9,6 +9,7 @@ export const helloMessage = z.object({
   browser: z.string().default('chrome'),
   instanceId: z.string().optional(),
   label: z.string().optional(),
+  name: z.string().optional(),
 });
 
 export const agentInfo = z.object({

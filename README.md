@@ -9,7 +9,7 @@ Connect your MCP-compatible agent to the browser you already use, with your exis
 - **Organise your real browser.** Find tabs across windows, group them, preview an organisation plan and undo the last applied plan.
 - **Act on Chrome pages.** Inspect page structure, take screenshots, click, type, scroll, navigate and call page-provided WebMCP tools.
 - **Share one browser across agents.** Multiple agent processes connect through a shared local bridge, with automatic host failover.
-- **Connect multiple browsers and profiles.** Chrome and Safari can connect together; Chromium profiles and instances are addressed separately. Safari supports tabs and windows; Chrome also supports tab groups and page control.
+- **Connect multiple browsers and profiles.** Chrome and Safari can connect together; Chromium profiles and instances are addressed separately. Ask your agent to tell your profiles apart and it shows you a few tabs from each, then names them, so "my Work Chrome" just works. Safari supports tabs and windows; Chrome also supports tab groups and page control. See [docs/profiles.md](docs/profiles.md).
 - **Choose your agent.** Use Cursor, VS Code, Claude Code or another MCP client. The bridge runs locally. Your chosen agent can receive browser data and act in signed-in pages, so connect only agents you trust. Optional usage analytics can be disabled in extension settings; see the [privacy policy](PRIVACY.md).
 
 ## Install
