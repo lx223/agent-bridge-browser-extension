@@ -1,12 +1,15 @@
 import type { PageEvent, Properties } from '../background/analytics.ts';
 import type { ConnectionStatus } from '../background/bridgeClient.ts';
+import { detectBrowser } from '../background/browser.ts';
 import { renderSessionList } from '../settings/sessionList.ts';
 import { analyticsAvailable, bindAnalyticsToggle } from '../settings/analyticsToggle.ts';
+import { showContentFor } from '../settings/browserContent.ts';
 import { bindInstanceName } from '../settings/instanceName.ts';
 import { agentSetupPrompt, claudeCodeCommand, claudeDesktopExtensionUrl, cursorInstallUrl, LAUNCH_SPEC, mcpJsonConfig, vscodeInstallUrl } from './install.ts';
 
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 
+showContentFor(detectBrowser(chrome.runtime.getURL('')), document.querySelectorAll<HTMLElement>('[data-browser]'));
 document.querySelectorAll('[data-pkg]').forEach((el) => (el.textContent = LAUNCH_SPEC));
 $('claude-code-cmd').textContent = claudeCodeCommand;
 $('json-config').textContent = mcpJsonConfig;

@@ -63,9 +63,21 @@ try {
     }
   }
 
+  const [appIcon] = findBySuffix(join(derivedData, 'Build', 'Products'), join('Contents', 'Resources', 'AppIcon.icns'));
+  if (!appIcon) fail('The Safari app has no AppIcon.icns.');
+  const iconImages = join(derivedData, 'AppIcon.iconset');
+  execFileSync('iconutil', ['--convert', 'iconset', '--output', iconImages, appIcon]);
+  const storeIcon = join(iconImages, 'icon_512x512@2x.png');
+  if (!existsSync(storeIcon)) fail(`The Safari app icon has no 1024px image; it holds: ${readdirSync(iconImages).join(', ')}`);
+  const storeIconWidth = readFileSync(storeIcon).readUInt32BE(16);
+  if (storeIconWidth !== 1024) fail(`The largest Safari app icon image is ${storeIconWidth}px wide instead of 1024px.`);
+
   const { version } = JSON.parse(readFileSync(join(resources, 'manifest.json'), 'utf-8'));
   const xcodeVersion = execFileSync('xcodebuild', ['-version'], { encoding: 'utf-8' });
-  summarise('Safari app build', `Built ${extension.split('/').pop()} with extension version ${version}\n${xcodeVersion}`);
+  summarise(
+    'Safari app build',
+    `Built ${extension.split('/').pop()} with extension version ${version} and a ${storeIconWidth}px app icon\n${xcodeVersion}`,
+  );
   console.log(`The Safari app builds and packages extension version ${version}.`);
 } finally {
   rmSync(derivedData, { recursive: true, force: true });

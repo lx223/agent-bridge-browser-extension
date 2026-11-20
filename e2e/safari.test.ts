@@ -2,6 +2,7 @@ import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
 import { IDENTIFY_INSTANCES_TOOL, NAME_INSTANCE_TOOL, PROTOCOL_VERSION } from '@agent-browser-bridge/protocol';
 import { EXTENSION_DIST, EXTENSION_VERSION, requireFreeBridge, startAgent, type Agent, type Tab } from './harness.ts';
 import { COMPAT_DATA_VERSION, compareVersions, safariSupport } from './safari/apiSupport.ts';
+import { openSetupPageAsSafari } from './safari/setupPage.ts';
 import { SAFARI_VERSION, startSimulatedSafari, type SimulatedSafari } from './safari/simulatedSafari.ts';
 
 const NEWS = 'https://news.example.com/today';
@@ -68,6 +69,29 @@ describe('the built extension in a simulated Safari', () => {
       state: 'connected',
       instanceId: expect.stringMatching(/^[0-9a-f]{8}$/),
     });
+  });
+
+  it('shows the Safari wording and the connection on the setup page', async () => {
+    const setup = await openSetupPageAsSafari({
+      extensionDir: EXTENSION_DIST,
+      extensionOrigin: safari.origin,
+      sendMessage: (message) => safari.sendMessage(message),
+    });
+    try {
+      const { page } = setup;
+      await page.waitForSelector('#status[data-state="connected"]');
+      await expect.poll(() => page.locator('#agents li.session .chip').allTextContents()).toEqual(['Safari, this browser']);
+
+      const visibleText = await page.locator('main').innerText();
+      expect(visibleText).toContain('Let your AI agent find, open, move and close your Safari tabs.');
+      expect(visibleText).toContain('With Safari open, ask your agent:');
+      expect(visibleText).toContain('It cannot read or act in web pages in Safari.');
+      expect(visibleText).not.toMatch(/With Chrome open|chrome_plan_apply|debugging banner/);
+      expect(await page.locator('[data-browser="chrome"]:visible').count()).toBe(0);
+      expect(setup.errors).toEqual([]);
+    } finally {
+      await setup.close();
+    }
   });
 
   it('lists windows', async () => {

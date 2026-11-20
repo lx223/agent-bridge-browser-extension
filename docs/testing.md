@@ -85,6 +85,8 @@ Safari only loads an extension from a signed app, or from an unsigned one after 
 
 The tests then call the `safari_*` tools through MCP and compare the results with the simulated browser's own state. They cover connecting as Safari, the setup page opening on install and from the toolbar button, the toolbar icon and title, every Safari tool, naming the Safari instance, and reconnecting to a new agent session.
 
+One test opens the built setup page the way Safari would (`e2e/safari/setupPage.ts`). Chromium renders it, but the page gets a `safari-web-extension://` extension URL and its messages go to the simulated Safari's background script. The test checks that the page shows the Safari wording and the connection, and none of the Chrome wording. The setup page marks wording for one browser with `data-browser="chrome"` or `data-browser="safari"`, and `packages/extension/src/settings/browserContent.ts` hides the other.
+
 This catches code that Safari cannot run. If the background script reaches for an API the simulation does not have, the test fails and says which one and what MDN knows about it:
 
 ```text
@@ -97,7 +99,7 @@ When the message says Safari has the API but the simulation does not, add it to 
 
 The simulation cannot drift into offering more than Safari does. A test compares every API it offers with MDN's browser compatibility data (the `@mdn/browser-compat-data` package) and fails if one is missing from Safari or newer than `SAFARI_VERSION` in `simulatedSafari.ts`. That constant is the Safari version the extension needs. It is 27 because `tabs.move`, which `safari_tabs_move` uses, arrived in Safari 27. Update the package now and then to pick up MDN's corrections.
 
-What the simulation does not prove: that real Safari behaves the way MDN and the simulation say, how Safari handles website access for tab titles and URLs, how long it keeps the background script alive, and anything about the setup and options pages, which the simulation does not render.
+What the simulation does not prove: that real Safari behaves the way MDN and the simulation say, how Safari handles website access for tab titles and URLs, how long it keeps the background script alive, and how Safari itself lays out the setup and options pages.
 
 ### Safari app build
 
@@ -105,11 +107,14 @@ What the simulation does not prove: that real Safari behaves the way MDN and the
 
 1. builds the extension and generates the Xcode project through `npm run build:safari`, without opening Xcode,
 2. builds the generated Xcode project with `xcodebuild`, without code signing,
-3. checks that the extension bundle inside the app contains the same `manifest.json` and `background.js` as `packages/extension/dist`, and the icons and pages.
+3. checks that the extension bundle inside the app contains the same `manifest.json` and `background.js` as `packages/extension/dist`, and the icons and pages,
+4. checks that the app's icon includes the 1024 pixel image the App Store asks for.
 
 On GitHub the job summary shows the converter's output, including any manifest keys the installed Safari does not support.
 
 `npm run build:safari` runs `packages/extension/scripts/build-safari.mjs`. Apple's `safari-web-extension-converter` gives the app a bundle identifier made from its name, which does not match the extension's `dev.agentbrowserbridge.app.Extension`, and Xcode refuses to build an extension whose identifier does not start with its app's. The script sets the app's identifier to `dev.agentbrowserbridge.app` after converting, and fails if the project holds any other identifier.
+
+The converter also builds the app icon by enlarging the extension's 128 pixel icon. The script replaces it with the icon set in `packages/extension/safari-app/AppIcon.appiconset`, which follows the macOS icon shape and has every size up to 1024 pixels, and uses the same artwork for the icon shown in the app's window. `npm run icons -w agent-browser-bridge-extension` draws that set, along with the extension's own icons, from `packages/extension/scripts/render-icons.mjs`. It needs Chrome; set `CHROME_PATH` if it is not in the default macOS location.
 
 This proves the app can be built from a clean checkout. It does not sign, notarise or install the app.
 
