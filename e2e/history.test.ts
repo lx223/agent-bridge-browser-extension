@@ -35,9 +35,9 @@ afterAll(async () => {
   await harness?.close();
 });
 
-const tabs = () => harness.agent.call<Tab[]>('chrome_list_tabs');
-const searchHistory = (args: Record<string, unknown>) => harness.agent.call<HistoryItem[]>('chrome_search_history', args);
-const recentlyClosed = () => harness.agent.call<Session[]>('chrome_list_recently_closed');
+const tabs = () => harness.agent.call<Tab[]>('chrome_tabs_list');
+const searchHistory = (args: Record<string, unknown>) => harness.agent.call<HistoryItem[]>('chrome_history_search', args);
+const recentlyClosed = () => harness.agent.call<Session[]>('chrome_sessions_get_recently_closed');
 
 describe('history and sessions through the built server and extension', () => {
   it('searches history and lists visits to a page', async () => {
@@ -52,42 +52,42 @@ describe('history and sessions through the built server and extension', () => {
 
     expect(await searchHistory({ text: 'Second page', startTime, endTime: startTime - 1 })).toEqual([]);
 
-    const visits = await harness.agent.call<VisitItem[]>('chrome_list_history_visits', { url });
+    const visits = await harness.agent.call<VisitItem[]>('chrome_history_get_visits', { url });
     expect(visits.length).toBeGreaterThan(0);
     expect(visits[0]).toMatchObject({ visitTime: expect.any(Number), transition: expect.any(String) });
   });
 
   it('lists a closed tab and restores it by session id', async () => {
     const tab = await harness.openFixture('form.html');
-    await harness.agent.call('chrome_close_tabs', { tabIds: [tab.id] });
+    await harness.agent.call('chrome_tabs_close', { tabIds: [tab.id] });
 
     await expect.poll(async () => (await recentlyClosed())[0]?.tab?.url).toBe(harness.fixture('form.html'));
     const [latest] = await recentlyClosed();
     expect(latest!.lastModified).toBeGreaterThan(0);
     expect(latest!.tab!.sessionId).toEqual(expect.any(String));
 
-    const restored = await harness.agent.call<Session>('chrome_restore_session', { sessionId: latest!.tab!.sessionId });
+    const restored = await harness.agent.call<Session>('chrome_sessions_restore', { sessionId: latest!.tab!.sessionId });
     expect(restored.tab).toMatchObject({ url: harness.fixture('form.html'), id: expect.any(Number) });
     expect((await tabs()).map((t) => t.id)).toContain(restored.tab!.id);
-    await harness.agent.call('chrome_close_tabs', { tabIds: [restored.tab!.id] });
+    await harness.agent.call('chrome_tabs_close', { tabIds: [restored.tab!.id] });
   });
 
   it('restores the most recently closed tab without a session id', async () => {
     const tab = await harness.openFixture('second.html');
-    await harness.agent.call('chrome_close_tabs', { tabIds: [tab.id] });
+    await harness.agent.call('chrome_tabs_close', { tabIds: [tab.id] });
     await expect.poll(async () => (await recentlyClosed())[0]?.tab?.url).toBe(harness.fixture('second.html'));
 
-    const restored = await harness.agent.call<Session>('chrome_restore_session');
+    const restored = await harness.agent.call<Session>('chrome_sessions_restore');
     expect(restored.tab).toMatchObject({ url: harness.fixture('second.html') });
-    await harness.agent.call('chrome_close_tabs', { tabIds: [restored.tab!.id] });
+    await harness.agent.call('chrome_tabs_close', { tabIds: [restored.tab!.id] });
   });
 
   it('lists no other devices when sync is off', async () => {
-    expect(await harness.agent.call('chrome_list_device_sessions')).toEqual([]);
+    expect(await harness.agent.call('chrome_sessions_get_devices')).toEqual([]);
   });
 
   it('reports an unknown session id as a tool error', async () => {
-    const result = await harness.agent.raw('chrome_restore_session', { sessionId: 'missing' });
+    const result = await harness.agent.raw('chrome_sessions_restore', { sessionId: 'missing' });
     expect(result.isError).toBe(true);
   });
 });

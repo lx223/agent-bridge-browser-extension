@@ -202,7 +202,7 @@ export async function startHarness(options: HarnessOptions = {}): Promise<Harnes
       context: browser,
       extensionId,
       fixture,
-      openFixture: (name) => current.call<Tab>('chrome_open_tab', { url: fixture(name) }),
+      openFixture: (name) => current.call<Tab>('chrome_tabs_create', { url: fixture(name) }),
       async restartAgent() {
         await current.close();
         current = await launchAgent();

@@ -13,7 +13,7 @@ const claude: AgentSession = {
   project: { name: 'shop', path: '/work/shop' },
   activity: {
     lastUsedAt: minutes(1),
-    lastTool: 'chrome_list_tabs',
+    lastTool: 'chrome_tabs_list',
     calls: 12,
     instances: [
       { browser: 'chrome', instanceId: 'aaaa1111', label: 'Chrome', name: 'Work' },
@@ -76,7 +76,7 @@ describe('sessionViews', () => {
         project: 'shop',
         projectPath: '/work/shop',
         sessionId: 'session-claude',
-        details: ['Started 2 h ago', 'Last used chrome_list_tabs 1 min ago, 12 calls'],
+        details: ['Started 2 h ago', 'Last used chrome_tabs_list 1 min ago, 12 calls'],
         instances: [
           { text: 'Work (Chrome)', current: true },
           { text: 'Safari', current: false },
@@ -100,7 +100,7 @@ describe('sessionViews', () => {
     const quiet: AgentSession = { ...claude, activity: { ...claude.activity!, lastUsedAt: minutes(30), calls: 1, instances: [{ browser: 'chrome' }] } };
     const [first, second] = sessionViews([legacy, quiet], NOW);
     expect(first).toMatchObject({ client: 'claude-code 2.1.3', active: false, instances: [{ text: 'chrome', current: false }] });
-    expect(first!.details[1]).toBe('Last used chrome_list_tabs 30 min ago, 1 call');
+    expect(first!.details[1]).toBe('Last used chrome_tabs_list 30 min ago, 1 call');
     expect(second).toEqual({ key: 'session-1', client: 'Agent starting up', serverVersion: '0.4.0', details: ['Has not used a browser yet'], instances: [], active: false });
   });
 });

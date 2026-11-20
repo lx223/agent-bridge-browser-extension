@@ -210,7 +210,7 @@ describe('ExtensionBridge', () => {
         await relay.request('chrome', 'custom.method', {}).catch(() => undefined);
         expect(bridge!.agents()[1]!.activity).toMatchObject({ lastTool: 'custom.method', calls: 2 });
         await relay.request('chrome', 'tabs.list', {});
-        expect(bridge!.agents()[1]!.activity).toMatchObject({ lastTool: 'chrome_list_tabs', calls: 3 });
+        expect(bridge!.agents()[1]!.activity).toMatchObject({ lastTool: 'chrome_tabs_list', calls: 3 });
       } finally {
         await relay.stop();
       }

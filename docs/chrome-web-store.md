@@ -55,8 +55,8 @@ npm run screenshots -- --out ~/Desktop/store-screenshots
 
 | File | Shows |
 | --- | --- |
-| `1-tabs.png` | An agent grouping open tabs by topic with `chrome_apply_tab_plan` |
-| `2-pages.png` | An agent filling in and submitting a booking form, with the page captured by `chrome_screenshot` |
+| `1-tabs.png` | An agent grouping open tabs by topic with `chrome_plan_apply` |
+| `2-pages.png` | An agent filling in and submitting a booking form, with the page captured by `chrome_page_screenshot` |
 | `3-profiles.png` | An agent naming the browser profile, and the options popup showing the name |
 | `4-setup.png` | The setup page with an agent connected |
 

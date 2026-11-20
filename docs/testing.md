@@ -48,7 +48,7 @@ The files are:
 
 ### Stale element refs
 
-A ref from `chrome_snapshot_page` stops working once its element leaves the page. `chrome.debugger.sendCommand` rejects with an `Error` whose message is the CDP error as a JSON string, and `withStaleRefHint` in `packages/extension/src/background/page.ts` matches on that text to replace it with `Element eN no longer exists; take a new chrome_snapshot_page.` These are the messages Chromium returns:
+A ref from `chrome_page_snapshot` stops working once its element leaves the page. `chrome.debugger.sendCommand` rejects with an `Error` whose message is the CDP error as a JSON string, and `withStaleRefHint` in `packages/extension/src/background/page.ts` matches on that text to replace it with `Element eN no longer exists; take a new chrome_page_snapshot.` These are the messages Chromium returns:
 
 | Situation | Message |
 | --- | --- |

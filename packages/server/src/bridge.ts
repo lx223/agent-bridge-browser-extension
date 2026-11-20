@@ -2,6 +2,8 @@ import { randomUUID } from 'node:crypto';
 import type { IncomingMessage } from 'node:http';
 import WebSocket, { WebSocketServer } from 'ws';
 import {
+  browserApis,
+  browserToolName,
   extensionToServer,
   hostToRelay,
   NAME_INSTANCE_TOOL,
@@ -14,8 +16,10 @@ import {
   type AgentInfo,
   type AgentInstanceUse,
   type AgentSession,
+  type Browser,
   type HelloMessage,
   type HostToRelay,
+  type Method,
   type RelayToHost,
   type ResponseMessage,
   type ServerToExtension,
@@ -65,7 +69,7 @@ const EXTENSION_SCHEMES = ['chrome-extension://', 'safari-web-extension://'];
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 const toolLabel = (browser: string, method: string) => {
   if (method === SET_INSTANCE_NAME_METHOD) return NAME_INSTANCE_TOOL;
-  if (method in toolDefinitions) return `${browser}_${toolDefinitions[method as keyof typeof toolDefinitions].tool}`;
+  if (method in toolDefinitions && browser in browserApis) return browserToolName(browser as Browser, method as Method);
   return method;
 };
 const sameInstance = (a: AgentInstanceUse, b: AgentInstanceUse) => a.browser === b.browser && a.instanceId === b.instanceId;

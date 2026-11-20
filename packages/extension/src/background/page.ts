@@ -33,7 +33,7 @@ async function withStaleRefHint<T>(ref: string, run: () => Promise<T>): Promise<
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
     if (STALE_REF_ERROR.test(message)) {
-      throw new Error(`Element ${ref} no longer exists; take a new chrome_snapshot_page.`);
+      throw new Error(`Element ${ref} no longer exists; take a new chrome_page_snapshot.`);
     }
     throw err;
   }

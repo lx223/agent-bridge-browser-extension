@@ -44,7 +44,7 @@ describe('createMcpServer', () => {
   it('identifies itself and explains how to use the browser', async () => {
     const { client } = await connect();
     expect(client.getServerVersion()).toMatchObject({ name: SERVER_NAME, version: '1.2.3' });
-    expect(client.getInstructions()).toContain('chrome_snapshot_page');
+    expect(client.getInstructions()).toContain('chrome_page_snapshot');
   });
 
   it('registers the status tool plus one tool per browser method', async () => {
@@ -70,7 +70,7 @@ describe('createMcpServer', () => {
         expect(Object.keys(tool.inputSchema.properties ?? {}).sort()).toEqual([...Object.keys(def.params.shape), 'instance'].sort());
       }
     }
-    expect(tools.find((t) => t.name === 'chrome_click')!.inputSchema.required).toEqual(['tabId']);
+    expect(tools.find((t) => t.name === 'chrome_page_click')!.inputSchema.required).toEqual(['tabId']);
   });
 
   it('marks read-only, destructive and open-world tools', async () => {
@@ -78,15 +78,15 @@ describe('createMcpServer', () => {
     const { tools } = await client.listTools();
     const annotations = (name: string) => tools.find((t) => t.name === name)!.annotations;
     expect(annotations(STATUS_TOOL)).toMatchObject({ readOnlyHint: true });
-    expect(annotations('chrome_list_tabs')).toMatchObject({ readOnlyHint: true, destructiveHint: false, openWorldHint: false });
-    expect(annotations('chrome_close_tabs')).toMatchObject({ readOnlyHint: false, destructiveHint: true, openWorldHint: false });
-    expect(annotations('chrome_group_tabs')).toMatchObject({ readOnlyHint: false, destructiveHint: false, openWorldHint: false });
-    expect(annotations('chrome_open_tab')).toMatchObject({ openWorldHint: true });
-    expect(annotations('chrome_navigate')).toMatchObject({ openWorldHint: true });
-    expect(annotations('chrome_restore_session')).toMatchObject({ readOnlyHint: false, openWorldHint: true });
-    expect(annotations('chrome_search_history')).toMatchObject({ readOnlyHint: true, openWorldHint: false });
-    expect(annotations('chrome_close_window')).toMatchObject({ destructiveHint: true, openWorldHint: false });
-    expect(annotations('chrome_snapshot_page')).toMatchObject({ readOnlyHint: true, openWorldHint: true });
+    expect(annotations('chrome_tabs_list')).toMatchObject({ readOnlyHint: true, destructiveHint: false, openWorldHint: false });
+    expect(annotations('chrome_tabs_close')).toMatchObject({ readOnlyHint: false, destructiveHint: true, openWorldHint: false });
+    expect(annotations('chrome_tabs_group')).toMatchObject({ readOnlyHint: false, destructiveHint: false, openWorldHint: false });
+    expect(annotations('chrome_tabs_create')).toMatchObject({ openWorldHint: true });
+    expect(annotations('chrome_tabs_navigate')).toMatchObject({ openWorldHint: true });
+    expect(annotations('chrome_sessions_restore')).toMatchObject({ readOnlyHint: false, openWorldHint: true });
+    expect(annotations('chrome_history_search')).toMatchObject({ readOnlyHint: true, openWorldHint: false });
+    expect(annotations('chrome_windows_remove')).toMatchObject({ destructiveHint: true, openWorldHint: false });
+    expect(annotations('chrome_page_snapshot')).toMatchObject({ readOnlyHint: true, openWorldHint: true });
     expect(annotations('chrome_cdp_send')).toMatchObject({ destructiveHint: true, openWorldHint: true });
   });
 
@@ -98,7 +98,7 @@ describe('createMcpServer', () => {
 
   it('forwards calls to the bridge with defaults applied and returns JSON', async () => {
     const { client, bridge } = await connect(async () => [{ id: 7, title: 'Docs' }]);
-    const result = await client.callTool({ name: 'chrome_apply_tab_plan', arguments: { groups: [{ title: 'Docs', tabIds: [7] }] } });
+    const result = await client.callTool({ name: 'chrome_plan_apply', arguments: { groups: [{ title: 'Docs', tabIds: [7] }] } });
     expect(bridge.request).toHaveBeenCalledWith(
       'chrome',
       'plan.apply',
@@ -112,19 +112,19 @@ describe('createMcpServer', () => {
 
   it('routes each call to its browser and chosen instance', async () => {
     const { client, bridge } = await connect(async () => []);
-    await client.callTool({ name: 'safari_list_tabs', arguments: { windowId: 2, instance: 'work' } });
+    await client.callTool({ name: 'safari_tabs_list', arguments: { windowId: 2, instance: 'work' } });
     expect(bridge.request).toHaveBeenCalledWith('safari', 'tabs.list', { windowId: 2 }, undefined, 'work');
   });
 
   it('returns snapshots as plain text', async () => {
     const { client } = await connect(async () => 'Page: Docs\n- button "Go" [ref=e1]');
-    const result = await client.callTool({ name: 'chrome_snapshot_page', arguments: { tabId: 1 } });
+    const result = await client.callTool({ name: 'chrome_page_snapshot', arguments: { tabId: 1 } });
     expect(contentOf(result)).toEqual([{ type: 'text', text: 'Page: Docs\n- button "Go" [ref=e1]' }]);
   });
 
   it('returns screenshots as image content', async () => {
     const { client } = await connect(async () => ({ data: 'aGVsbG8=', mimeType: 'image/png' }));
-    const result = await client.callTool({ name: 'chrome_screenshot', arguments: { tabId: 1 } });
+    const result = await client.callTool({ name: 'chrome_page_screenshot', arguments: { tabId: 1 } });
     expect(contentOf(result)).toEqual([{ type: 'image', data: 'aGVsbG8=', mimeType: 'image/png' }]);
   });
 
@@ -132,14 +132,14 @@ describe('createMcpServer', () => {
     const { client } = await connect(async () => {
       throw new Error('extension is not connected');
     });
-    const result = await client.callTool({ name: 'chrome_list_tabs', arguments: {} });
+    const result = await client.callTool({ name: 'chrome_tabs_list', arguments: {} });
     expect(result.isError).toBe(true);
     expect(contentOf(result)[0]!.text).toBe('extension is not connected');
   });
 
   it('rejects invalid arguments without reaching the bridge', async () => {
     const { client, bridge } = await connect();
-    const outcome = await client.callTool({ name: 'chrome_close_tabs', arguments: { tabIds: [] } }).then(
+    const outcome = await client.callTool({ name: 'chrome_tabs_close', arguments: { tabIds: [] } }).then(
       (result) => ({ failed: result.isError === true, message: contentOf(result)[0]?.text ?? '' }),
       (error: Error) => ({ failed: true, message: error.message }),
     );
@@ -174,12 +174,12 @@ describe('createMcpServer', () => {
 
     it('tags each result with the instance that answered and stays on it', async () => {
       const { client, bridge, setConnected } = await connectTo([hello('aaaa1111', { name: 'Work' })]);
-      const first = await client.callTool({ name: 'chrome_list_tabs', arguments: {} });
+      const first = await client.callTool({ name: 'chrome_tabs_list', arguments: {} });
       expect(contentOf(first).at(-1)).toEqual({ type: 'text', text: 'Browser instance: "Work" (Chrome, aaaa1111)' });
       expect(bridge.request).toHaveBeenLastCalledWith('chrome', 'tabs.list', {}, undefined, 'aaaa1111');
 
       setConnected([hello('bbbb2222')]);
-      const second = await client.callTool({ name: 'chrome_close_tabs', arguments: { tabIds: [1] } });
+      const second = await client.callTool({ name: 'chrome_tabs_close', arguments: { tabIds: [1] } });
       expect(second.isError).toBe(true);
       expect(contentOf(second)[0]!.text).toMatch(/this session was using, "Work" \(Chrome, aaaa1111\), is not connected/);
       expect(bridge.request).toHaveBeenCalledTimes(1);
@@ -187,7 +187,7 @@ describe('createMcpServer', () => {
 
     it('accepts an instance name', async () => {
       const { client, bridge } = await connectTo([hello('aaaa1111', { name: 'Work' }), hello('bbbb2222', { name: 'Personal' })]);
-      await client.callTool({ name: 'chrome_list_tabs', arguments: { instance: 'personal' } });
+      await client.callTool({ name: 'chrome_tabs_list', arguments: { instance: 'personal' } });
       expect(bridge.request).toHaveBeenLastCalledWith('chrome', 'tabs.list', {}, undefined, 'bbbb2222');
     });
 
@@ -218,7 +218,7 @@ describe('createMcpServer', () => {
         ],
       });
       expect(bridge.request).toHaveBeenCalledWith('chrome', 'tabs.list', {}, undefined, 'aaaa1111');
-      await client.callTool({ name: 'chrome_list_windows', arguments: {} });
+      await client.callTool({ name: 'chrome_windows_list', arguments: {} });
       expect(bridge.request).toHaveBeenLastCalledWith('chrome', 'windows.list', {}, undefined, undefined);
     });
 
@@ -251,7 +251,7 @@ describe('createMcpServer', () => {
       const result = await client.callTool({ name: NAME_INSTANCE_TOOL, arguments: { browser: 'chrome', instance: 'aaaa1111', name: 'Work' } });
       expect(bridge.request).toHaveBeenCalledWith('chrome', 'instance.setName', { name: 'Work' }, undefined, 'aaaa1111');
       expect(JSON.parse(contentOf(result)[0]!.text!)).toEqual({ browser: 'chrome', instanceId: 'aaaa1111', name: 'Work' });
-      const listed = await client.callTool({ name: 'chrome_list_tabs', arguments: { instance: 'work' } });
+      const listed = await client.callTool({ name: 'chrome_tabs_list', arguments: { instance: 'work' } });
       expect(listed.isError).toBeFalsy();
     });
 

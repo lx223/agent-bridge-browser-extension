@@ -41,7 +41,7 @@ afterAll(async () => {
   if (profile) rmSync(profile, { recursive: true, force: true, maxRetries: 10, retryDelay: 200 });
 });
 
-const open = (title: string) => agent.call<Tab>('chrome_open_tab', { url: `data:text/html,<title>${title}</title>${title}` });
+const open = (title: string) => agent.call<Tab>('chrome_tabs_create', { url: `data:text/html,<title>${title}</title>${title}` });
 
 interface DiscardResult {
   discarded: Array<Tab & { discarded: boolean }>;
@@ -53,18 +53,18 @@ describe('discarding tabs in a browser without Playwright attached', () => {
     const first = await open('First');
     const second = await open('Second');
 
-    const result = await agent.call<DiscardResult>('chrome_discard_tabs', { tabIds: [first.id] });
+    const result = await agent.call<DiscardResult>('chrome_tabs_discard', { tabIds: [first.id] });
     expect(result.discarded).toEqual([expect.objectContaining({ id: first.id, discarded: true })]);
     expect(result.failed).toEqual([]);
 
-    const again = await agent.call<DiscardResult>('chrome_discard_tabs', { tabIds: [first.id, second.id] });
+    const again = await agent.call<DiscardResult>('chrome_tabs_discard', { tabIds: [first.id, second.id] });
     expect(again.discarded.map((tab) => tab.id)).toEqual([second.id]);
     expect(again.failed).toEqual([{ tabId: first.id, error: expect.stringMatching(/Cannot discard tab/) }]);
 
-    const listed = await agent.call<Tab[]>('chrome_list_tabs', { discarded: true });
+    const listed = await agent.call<Tab[]>('chrome_tabs_list', { discarded: true });
     expect(listed.map((tab) => tab.id).sort()).toEqual([first.id, second.id].sort());
 
-    const copy = await agent.call<Tab>('chrome_duplicate_tab', { tabId: second.id });
+    const copy = await agent.call<Tab>('chrome_tabs_duplicate', { tabId: second.id });
     expect(copy.id).not.toBe(second.id);
   });
 });
