@@ -9,6 +9,8 @@ import { z } from 'zod';
 const tabId = z.number().int().nonnegative();
 const windowId = z.number().int().nonnegative();
 const groupId = z.number().int().nonnegative();
+const bookmarkId = z.string().min(1);
+const downloadId = z.number().int().nonnegative();
 const ref = z.string().regex(/^e\d+$/).describe('Element ref from chrome_page_snapshot, e.g. "e42".');
 
 export const groupColor = z.enum(['grey', 'blue', 'red', 'yellow', 'green', 'pink', 'purple', 'cyan', 'orange']);
@@ -216,6 +218,152 @@ export const toolDefinitions = {
     description:
       'Reopen a tab or window by sessionId from chrome_sessions_get_recently_closed or chrome_sessions_get_devices. A closed tab comes back with its back and forward history. Without sessionId, reopens the most recently closed tab or window. Returns the restored tab or window with its new ids.',
     params: z.object({ sessionId: z.string().min(1).optional() }),
+    readOnly: false,
+  },
+  'readingList.query': {
+    description:
+      "List the user's Reading List entries (url, title, hasBeenRead, creationTime, lastUpdateTime in milliseconds since the epoch). Every filter is optional; url and title must match exactly.",
+    params: z.object({ url: z.string().optional(), title: z.string().optional(), hasBeenRead: z.boolean().optional() }),
+    readOnly: true,
+  },
+  'readingList.addEntry': {
+    description: 'Add a page to the Reading List. Fails if the URL is already on it.',
+    params: z.object({ url: z.string().min(1), title: z.string().min(1), hasBeenRead: z.boolean().default(false) }),
+    readOnly: false,
+  },
+  'readingList.updateEntry': {
+    description: 'Change the title of a Reading List entry or mark it read or unread, by its url.',
+    params: z.object({ url: z.string().min(1), title: z.string().min(1).optional(), hasBeenRead: z.boolean().optional() }),
+    readOnly: false,
+  },
+  'readingList.removeEntry': {
+    description: 'Remove an entry from the Reading List by its url.',
+    params: z.object({ url: z.string().min(1) }),
+    readOnly: false,
+    destructive: true,
+  },
+  'bookmarks.search': {
+    description:
+      'Search bookmarks. query matches words in titles and URLs; url and title must match exactly. Returns bookmarks and folders (id, parentId, index, title, url, dateAdded); folders have no url.',
+    params: z.object({ query: z.string().min(1).optional(), url: z.string().min(1).optional(), title: z.string().min(1).optional() }),
+    readOnly: true,
+  },
+  'bookmarks.getRecent': {
+    description: 'List the most recently added bookmarks.',
+    params: z.object({ numberOfItems: z.number().int().min(1).max(1_000).default(20) }),
+    readOnly: true,
+  },
+  'bookmarks.getChildren': {
+    description:
+      'List the bookmarks and folders directly inside a folder. Folder "0" is the root; its children are the bookmarks bar, other bookmarks and mobile bookmarks.',
+    params: z.object({ id: bookmarkId }),
+    readOnly: true,
+  },
+  'bookmarks.getSubTree': {
+    description: 'Return a folder with everything inside it, nested under children. Can be large for big folders; prefer chrome_bookmarks_get_children.',
+    params: z.object({ id: bookmarkId }),
+    readOnly: true,
+  },
+  'bookmarks.create': {
+    description: 'Create a bookmark, or a folder when url is omitted. Defaults to the end of "Other bookmarks". Returns the new node.',
+    params: z.object({
+      parentId: bookmarkId.optional(),
+      index: z.number().int().nonnegative().optional(),
+      title: z.string().optional(),
+      url: z.string().min(1).optional(),
+    }),
+    readOnly: false,
+  },
+  'bookmarks.update': {
+    description: "Change a bookmark's or folder's title, or a bookmark's url.",
+    params: z.object({ id: bookmarkId, title: z.string().optional(), url: z.string().min(1).optional() }),
+    readOnly: false,
+  },
+  'bookmarks.move': {
+    description: 'Move a bookmark or folder to another folder and/or position.',
+    params: z.object({ id: bookmarkId, parentId: bookmarkId.optional(), index: z.number().int().nonnegative().optional() }),
+    readOnly: false,
+  },
+  'bookmarks.remove': {
+    description: 'Delete a bookmark or an empty folder. This cannot be undone; confirm with the user first.',
+    params: z.object({ id: bookmarkId }),
+    readOnly: false,
+    destructive: true,
+  },
+  'bookmarks.removeTree': {
+    description: 'Delete a folder and everything in it. This cannot be undone; confirm with the user first.',
+    params: z.object({ id: bookmarkId }),
+    readOnly: false,
+    destructive: true,
+  },
+  'downloads.search': {
+    description:
+      'Search the download list, newest first by default. query matches words in the file name or URL. Times are ISO 8601 strings. Each item has id, url, filename (full path), mime, startTime, endTime, state (in_progress, interrupted, complete), exists (whether the file is still on disk), bytesReceived and totalBytes.',
+    params: z.object({
+      id: z.number().int().nonnegative().optional(),
+      query: z.array(z.string()).optional(),
+      startedAfter: z.string().optional(),
+      startedBefore: z.string().optional(),
+      filenameRegex: z.string().optional(),
+      urlRegex: z.string().optional(),
+      mime: z.string().optional(),
+      state: z.enum(['in_progress', 'interrupted', 'complete']).optional(),
+      exists: z.boolean().optional(),
+      orderBy: z.array(z.string()).default(['-startTime']).describe('Item properties to sort by; prefix with - for descending.'),
+      limit: z.number().int().min(1).max(1_000).default(100),
+    }),
+    readOnly: true,
+  },
+  'downloads.download': {
+    description:
+      "Download a URL into the user's download folder, using their cookies for that site. filename is a path relative to the download folder. Returns the downloadId at once; check progress with chrome_downloads_search.",
+    params: z.object({
+      url: z.string().min(1),
+      filename: z.string().min(1).optional(),
+      conflictAction: z.enum(['uniquify', 'overwrite', 'prompt']).optional(),
+    }),
+    readOnly: false,
+  },
+  'downloads.show': {
+    description: 'Show a downloaded file in its folder in the file manager.',
+    params: z.object({ downloadId }),
+    readOnly: false,
+  },
+  'downloads.erase': {
+    description: 'Remove an entry from the download list. The file stays on disk.',
+    params: z.object({ downloadId }),
+    readOnly: false,
+  },
+  'topSites.get': {
+    description: "List the user's most visited sites (url, title), as shown on the new tab page.",
+    params: z.object({}),
+    readOnly: true,
+  },
+  'search.query': {
+    description:
+      "Search with the user's default search engine. Opens the results in a new tab unless disposition or tabId says otherwise; find the tab with chrome_tabs_list {active: true}.",
+    params: z.object({
+      text: z.string().min(1),
+      disposition: z.enum(['NEW_TAB', 'NEW_WINDOW', 'CURRENT_TAB']).optional(),
+      tabId: tabId.optional().describe('Show the results in this tab instead.'),
+    }),
+    readOnly: false,
+  },
+  'notifications.create': {
+    description:
+      'Show a desktop notification to the user, such as when a long task finishes. Returns the notificationId. The operating system may hide notifications if they are turned off for the browser.',
+    params: z.object({
+      title: z.string().min(1),
+      message: z.string(),
+      contextMessage: z.string().optional(),
+      requireInteraction: z.boolean().optional().describe('Keep it on screen until the user dismisses it.'),
+      silent: z.boolean().optional(),
+    }),
+    readOnly: false,
+  },
+  'notifications.clear': {
+    description: 'Dismiss a notification by its notificationId. Returns whether it was still showing.',
+    params: z.object({ notificationId: z.string().min(1) }),
     readOnly: false,
   },
   'page.snapshot': {

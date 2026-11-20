@@ -37,6 +37,7 @@ The files are:
 
 - `e2e/tabs.test.ts`: connection status, listing and filtering tabs, grouping, moving, updating, duplicating, closing, creating, updating and closing windows, tab plans with undo, error reporting, and a second agent session relaying through the first.
 - `e2e/history.test.ts`: searching history, listing visits, listing and restoring recently closed tabs by session id and without one, the empty device list without sync, and an unknown session id.
+- `e2e/browserData.test.ts`: the Reading List, bookmarks, downloads, most visited sites, searching with the default search engine and notifications. Playwright saves downloads under random names in its own folder, so the download test finds its file by URL rather than by name.
 - `e2e/discard.test.ts`: discarding tabs, the per-tab failure for a tab that is already discarded, and filtering discarded tabs. It starts Chromium as a plain process instead of through Playwright, because Chromium closes once a tab is discarded while Playwright is attached to the browser. Playwright's attachment also gives discarded tabs new ids, which does not happen otherwise.
 - `e2e/page.test.ts`: snapshots, click, hover, typing, keys, scrolling, screenshots, waiting, evaluate, navigation, back and forward after a click and directly after a URL navigation, raw CDP, detaching, and the stale ref hint.
 - `e2e/extension.test.ts`: the built manifest and its files, the welcome and options pages, and reconnecting to a new server session.
