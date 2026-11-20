@@ -12,7 +12,7 @@
     "build": "npm run build -w agent-browser-bridge-mcp -w agent-browser-bridge-extension",
     "dev:extension": "npm run dev -w agent-browser-bridge-extension",
     "dev:server": "npm run dev -w agent-browser-bridge-mcp",
-    "typecheck": "tsc -p packages/protocol && tsc -p packages/server && tsc -p packages/extension && tsc -p e2e && tsc -p store",
+    "typecheck": "tsc -p packages/protocol && tsc -p packages/server && tsc -p packages/extension && tsc -p e2e && tsc -p store && tsc -p plugins",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
