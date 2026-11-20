@@ -10,7 +10,13 @@
     "alarms",
     "debugger",
     "history",
-    "sessions"
+    "sessions",
+    "readingList",
+    "bookmarks",
+    "downloads",
+    "topSites",
+    "search",
+    "notifications"
   ],
   "icons": {
     "16": "icons/icon-16.png",

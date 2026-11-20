@@ -37,6 +37,29 @@ describe('history and session params', () => {
   });
 });
 
+describe('bookmark, download and search params', () => {
+  it('names the new tools after their API methods', () => {
+    expect(browserToolName('chrome', 'readingList.addEntry')).toBe('chrome_reading_list_add_entry');
+    expect(browserToolName('chrome', 'topSites.get')).toBe('chrome_top_sites_get');
+    expect(browserToolName('chrome', 'bookmarks.removeTree')).toBe('chrome_bookmarks_remove_tree');
+  });
+
+  it('fills defaults', () => {
+    expect(toolDefinitions['readingList.addEntry'].params.parse({ url: 'https://a.test', title: 'A' })).toEqual({
+      url: 'https://a.test',
+      title: 'A',
+      hasBeenRead: false,
+    });
+    expect(toolDefinitions['downloads.search'].params.parse({})).toEqual({ orderBy: ['-startTime'], limit: 100 });
+    expect(toolDefinitions['bookmarks.getRecent'].params.parse({})).toEqual({ numberOfItems: 20 });
+  });
+
+  it('accepts only the browser search dispositions', () => {
+    expect(() => toolDefinitions['search.query'].params.parse({ text: 'x', disposition: 'BACKGROUND' })).toThrow();
+    expect(() => toolDefinitions['search.query'].params.parse({ text: '' })).toThrow();
+  });
+});
+
 describe('page tool params', () => {
   it('requires refs shaped like snapshot refs', () => {
     expect(() => toolDefinitions['page.click'].params.parse({ tabId: 1, ref: '12' })).toThrow();
@@ -64,7 +87,7 @@ describe('browser namespaces', () => {
   it('gives Chrome every tool and Safari neither tab groups, history, sessions nor page control', () => {
     expect(browserApis.chrome).toEqual(methods);
     for (const method of browserApis.safari) {
-      expect(method).not.toMatch(/^(page|cdp|plan|tabGroups|history|sessions)\./);
+      expect(method).not.toMatch(/^(page|cdp|plan|tabGroups|history|sessions|readingList|bookmarks|downloads|topSites|search|notifications)\./);
       expect(['tabs.group', 'tabs.ungroup']).not.toContain(method);
     }
   });

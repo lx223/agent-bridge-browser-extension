@@ -37,8 +37,18 @@ const groupUpdate = (p: { title?: string; color?: GroupColor; collapsed?: boolea
 
 const messageOf = (err: unknown) => (err instanceof Error ? err.message : String(err));
 
+const NOTIFICATION_ICON = 'icons/icon-128.png';
+
+type OptionalApi = 'readingList' | 'bookmarks' | 'downloads' | 'topSites' | 'search' | 'notifications';
+
+function api<K extends OptionalApi>(name: K): (typeof chrome)[K] {
+  const namespace = (chrome as Partial<typeof chrome>)[name];
+  if (!namespace) throw new Error(`This browser does not support chrome.${name}.`);
+  return namespace as (typeof chrome)[K];
+}
+
 const definedOnly = <T extends object>(value: T) =>
-  Object.fromEntries(Object.entries(value).filter(([, v]) => v !== undefined)) as Partial<T>;
+  Object.fromEntries(Object.entries(value).filter(([, v]) => v !== undefined)) as T;
 
 export const handlers: Handlers = {
   'windows.list': async () => (await chrome.windows.getAll({ populate: true })).map(serializeWindow),
@@ -119,6 +129,61 @@ export const handlers: Handlers = {
   'sessions.getRecentlyClosed': async ({ maxResults }) => (await chrome.sessions.getRecentlyClosed({ maxResults })).map(serializeSession),
   'sessions.getDevices': async ({ maxResults }) => (await chrome.sessions.getDevices({ maxResults })).map(serializeDevice),
   'sessions.restore': async ({ sessionId }) => serializeSession(await chrome.sessions.restore(sessionId)),
+
+  'readingList.query': (query) => api('readingList').query(definedOnly(query)),
+  'readingList.addEntry': async (entry) => {
+    await api('readingList').addEntry(entry);
+    return { added: entry };
+  },
+  'readingList.updateEntry': async (update) => {
+    await api('readingList').updateEntry(definedOnly(update));
+    return (await api('readingList').query({ url: update.url }))[0] ?? null;
+  },
+  'readingList.removeEntry': async ({ url }) => {
+    await api('readingList').removeEntry({ url });
+    return { removed: url };
+  },
+
+  'bookmarks.search': (query) => api('bookmarks').search(definedOnly(query)),
+  'bookmarks.getRecent': ({ numberOfItems }) => api('bookmarks').getRecent(numberOfItems),
+  'bookmarks.getChildren': ({ id }) => api('bookmarks').getChildren(id),
+  'bookmarks.getSubTree': ({ id }) => api('bookmarks').getSubTree(id),
+  'bookmarks.create': (bookmark) => api('bookmarks').create(definedOnly(bookmark)),
+  'bookmarks.update': ({ id, ...changes }) => api('bookmarks').update(id, definedOnly(changes)),
+  'bookmarks.move': ({ id, ...destination }) => api('bookmarks').move(id, definedOnly(destination)),
+  'bookmarks.remove': async ({ id }) => {
+    await api('bookmarks').remove(id);
+    return { removed: id };
+  },
+  'bookmarks.removeTree': async ({ id }) => {
+    await api('bookmarks').removeTree(id);
+    return { removed: id };
+  },
+
+  'downloads.search': (query) => api('downloads').search(definedOnly(query)),
+  'downloads.download': async (options) => ({ downloadId: await api('downloads').download(definedOnly(options)) }),
+  'downloads.show': async ({ downloadId }) => {
+    api('downloads').show(downloadId);
+    return { shown: downloadId };
+  },
+  'downloads.erase': async ({ downloadId }) => ({ erased: await api('downloads').erase({ id: downloadId }) }),
+
+  'topSites.get': () => api('topSites').get(),
+
+  'search.query': async ({ text, disposition, tabId }) => {
+    const target = tabId !== undefined ? { tabId } : { disposition: (disposition ?? 'NEW_TAB') as chrome.search.Disposition };
+    await api('search').query({ text, ...target });
+    return { searched: text, ...target };
+  },
+
+  'notifications.create': async (options) => ({
+    notificationId: await api('notifications').create({
+      type: 'basic',
+      iconUrl: chrome.runtime.getURL(NOTIFICATION_ICON),
+      ...definedOnly(options),
+    }),
+  }),
+  'notifications.clear': async ({ notificationId }) => ({ cleared: await api('notifications').clear(notificationId) }),
 
   'plan.apply': applyPlan,
   'plan.undo': undoLastPlan,
