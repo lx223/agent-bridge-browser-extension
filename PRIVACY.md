@@ -2,7 +2,7 @@
 
 Last updated: 20 November 2026
 
-Agent Browser Bridge connects Chrome tabs, tab groups and web pages to an MCP-compatible agent through a bridge server running on your computer.
+Agent Browser Bridge connects your browser's tabs, tab groups and web pages to an MCP-compatible agent through a bridge server running on your computer. It runs in Chrome, in other Chromium browsers such as Edge and Brave, and in Safari. Safari offers fewer tools, so less information is used there; see [Safari](#safari).
 
 ## Information used
 
@@ -17,6 +17,12 @@ When a connected agent uses page tools, the extension uses Chrome's `debugger` p
 The extension uses Chrome session storage to keep the previous tab and group layout for the undo feature. That snapshot contains tab identifiers, positions, group membership, group names and a timestamp. It is replaced by a later applied plan, removed after undo, and cleared when the browser session ends.
 
 The local bridge also tells the extension which agent sessions are connected, so the setup and options pages can list them. For each session this includes the name and version the agent reports for itself, a random session identifier, when the session started, the name and path of the project folder the agent is working in, the last browser tool it used and when, how many tool calls it made, and which browser profiles it used. The extension only shows this on its own pages; it is not stored and not included in usage analytics.
+
+### Safari
+
+In Safari the extension has window and tab tools only. A connected agent can list windows and tabs, and open, navigate, move and close tabs. For this the extension can send tab titles and URLs, tab and window identifiers, and tab order and state to the local bridge, together with the extension version and browser user-agent string in the connection handshake. Safari gives the extension a tab's title and URL only for websites you have allowed the extension on.
+
+The history, sessions, bookmarks, Reading List, downloads, most-visited-sites, search, notification, tab-group and page tools do not exist in Safari. The extension does not read page content, browsing history, bookmarks or downloads there, and it keeps no undo snapshot. The list of connected agent sessions, where information goes, and usage analytics work as described in the rest of this policy.
 
 ## Where information goes
 
@@ -37,7 +43,7 @@ Events also include the extension version, the MCP server version, and the name 
 
 When analytics is on, uninstalling the extension may open a short optional PostHog survey asking why you left, linked to the same random identifier.
 
-Usage analytics are on by default. You can turn them off at any time with the "Share anonymous usage statistics" checkbox on the extension's options page (right-click the toolbar icon and choose Options) or on the setup page (click the toolbar icon). Builds made from source without a PostHog key send no analytics.
+Usage analytics are on by default. You can turn them off at any time with the "Share anonymous usage statistics" checkbox on the setup page (click the toolbar icon) or on the extension's options page (in Chrome, right-click the toolbar icon and choose Options). Builds made from source without a PostHog key send no analytics.
 
 ## Use and sharing
 
@@ -45,7 +51,7 @@ Browser information is used to provide the extension's single purpose: letting y
 
 ## Your choices
 
-You control which agent you connect and its permissions. A connected agent can request browser information, including your browsing history and the tabs on your other signed-in devices; open, change, move, group, unload or close tabs and windows; reopen closed tabs; change your bookmarks and Reading List; start downloads; search with your default search engine; show you notifications; and read pages and act in them as you, including submitting forms. Chrome shows a banner while the extension is attached to a page; cancelling it detaches the extension from that tab. Disconnect the agent or stop the local MCP server to stop bridge communication; disable or uninstall the extension to stop its operation. Removing the extension removes its extension storage, including the analytics identifier. Consult your agent provider about deleting information it has received.
+You control which agent you connect and its permissions. A connected agent can request browser information, including your browsing history and the tabs on your other signed-in devices; open, change, move, group, unload or close tabs and windows; reopen closed tabs; change your bookmarks and Reading List; start downloads; search with your default search engine; show you notifications; and read pages and act in them as you, including submitting forms. Chrome shows a banner while the extension is attached to a page; cancelling it detaches the extension from that tab. In Safari a connected agent can only list windows and tabs and open, navigate, move and close tabs. Disconnect the agent or stop the local MCP server to stop bridge communication; disable or uninstall the extension to stop its operation. Removing the extension removes its extension storage, including the analytics identifier. Consult your agent provider about deleting information it has received.
 
 ## Changes and contact
 

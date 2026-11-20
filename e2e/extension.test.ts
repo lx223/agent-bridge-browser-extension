@@ -50,6 +50,11 @@ describe('the packaged extension', () => {
     expect(await session.locator('.session-project').textContent()).toBe(basename(process.cwd()));
     expect(await session.locator('.session-details').textContent()).toMatch(/^Started just now · Last used chrome_windows_list just now, \d+ calls?$/);
     expect(await session.getAttribute('title')).toMatch(/^Session [0-9a-f-]{36} · server \d+\.\d+\.\d+/);
+    const visibleText = await page.locator('main').innerText();
+    expect(visibleText).toContain('With Chrome open, ask your agent:');
+    expect(visibleText).not.toMatch(/With Safari open|Safari tabs/);
+    expect(await page.locator('[data-browser="safari"]:visible').count()).toBe(0);
+
     expect(await page.textContent('#claude-code-cmd')).toContain(SERVER_PACKAGE);
     expect(JSON.parse((await page.textContent('#json-config'))!)).toBeTypeOf('object');
     expect(await page.getAttribute('#cursor-link', 'href')).toMatch(/^cursor:/);

@@ -10,7 +10,8 @@
     <main>
       <header>
         <h1>Agent Browser Bridge</h1>
-        <p class="lede">Let your AI agent organise your tabs and operate web pages.</p>
+        <p class="lede" data-browser="chrome">Let your AI agent organise your tabs and operate web pages.</p>
+        <p class="lede" data-browser="safari" hidden>Let your AI agent find, open, move and close your Safari tabs.</p>
         <div id="status" class="status" data-state="disconnected">
           <span class="dot"></span>
           <span id="status-text">Checking connection…</span>
@@ -68,18 +69,35 @@
 
       <section>
         <h2>2. Try it</h2>
-        <p>With Chrome open, ask your agent:</p>
-        <blockquote>Organise my open tabs into groups by topic. Show me the plan first.</blockquote>
-        <blockquote>Open the Chrome release notes and summarise what changed in the latest version.</blockquote>
-        <p class="hint">The status above turns green once your agent's server is running. Changes made with <code>chrome_plan_apply</code> can be reverted by asking the agent to undo.</p>
+        <div data-browser="chrome">
+          <p>With Chrome open, ask your agent:</p>
+          <blockquote>Organise my open tabs into groups by topic. Show me the plan first.</blockquote>
+          <blockquote>Open the Chrome release notes and summarise what changed in the latest version.</blockquote>
+          <p class="hint">The status above turns green once your agent's server is running. Changes made with <code>chrome_plan_apply</code> can be reverted by asking the agent to undo.</p>
+        </div>
+        <div data-browser="safari" hidden>
+          <p>With Safari open, ask your agent:</p>
+          <blockquote>Which tabs do I have open in Safari? Close the duplicates, but ask me first.</blockquote>
+          <blockquote>Put my Safari tabs in order by site.</blockquote>
+          <p class="hint">
+            The status above turns green once your agent's server is running. In Safari your agent can list windows and tabs and open, navigate,
+            move and close tabs. If tab titles and addresses are missing, give the extension website access in Safari under Settings &gt; Extensions.
+            Tab groups, history, bookmarks and page control are available in Chrome.
+          </p>
+        </div>
       </section>
 
       <section>
         <h2>Privacy</h2>
-        <p class="hint">
+        <p class="hint" data-browser="chrome">
           Your browsing data stays on your computer: the extension only talks to <code>127.0.0.1</code>. Your agent can read tab titles and URLs,
           rearrange, group or close tabs, and read and act in web pages when you ask it to. Chrome shows a debugging banner while it
           works in a page. Tab titles, URLs and page contents are never sent anywhere else by this extension.
+        </p>
+        <p class="hint" data-browser="safari" hidden>
+          Your browsing data stays on your computer: the extension only talks to <code>127.0.0.1</code>. Your agent can read tab titles and URLs,
+          and open, navigate, move or close tabs when you ask it to. It cannot read or act in web pages in Safari. Tab titles and URLs are never
+          sent anywhere else by this extension.
         </p>
         <label id="analytics-setting" class="hint toggle">
           <input type="checkbox" id="analytics-enabled" checked />
