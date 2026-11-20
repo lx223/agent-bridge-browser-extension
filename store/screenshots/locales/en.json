@@ -1,0 +1,56 @@
+{
+  "captions": {
+    "tabs": {
+      "headline": "Let your AI agent tidy your tabs",
+      "subline": "Preview a grouping plan, apply it in one step, and undo it if you change your mind."
+    },
+    "pages": {
+      "headline": "Your agent works in real web pages",
+      "subline": "It reads the page, fills in forms and clicks buttons in the browser you already use."
+    },
+    "profiles": {
+      "headline": "Name your browser profiles",
+      "subline": "Ask for your Work browser and your agent picks the right Chrome profile."
+    },
+    "setup": {
+      "headline": "Connect the agent you already use",
+      "subline": "Claude Code, Cursor, VS Code, Claude Desktop or any MCP client. Everything runs on your computer."
+    }
+  },
+  "chat": {
+    "you": "You",
+    "agent": "Agent"
+  },
+  "tabs": {
+    "prompt": "Organise my open tabs into groups by topic.",
+    "reply": "Done. I grouped {tabs} tabs into {groups} groups. Ask me to undo it if you want the old layout back.",
+    "groups": {
+      "travel": "Lisbon trip",
+      "work": "Q3 report",
+      "recipes": "Dinner ideas"
+    },
+    "pages": {
+      "travel": ["Flights to Lisbon – compare prices", "Hotels in Alfama", "Lisbon: top 10 things to do"],
+      "work": ["Q3 revenue dashboard", "Q3 report draft", "Team meeting notes"],
+      "recipes": ["Easy weeknight pasta", "Roast vegetable tray bake"]
+    }
+  },
+  "booking": {
+    "prompt": "Book a table for 4 at Casa Azul tonight under Ada Lovelace.",
+    "reply": "Done. Casa Azul confirmed a table for 4 under Ada Lovelace.",
+    "restaurant": "Casa Azul",
+    "heading": "Reserve a table",
+    "name": "Name",
+    "guests": "Guests",
+    "when": "When",
+    "tonight": "Tonight, 7:30 pm",
+    "submit": "Book table",
+    "confirmation": "Table for {guests} booked for {name}. See you tonight!",
+    "guestName": "Ada Lovelace"
+  },
+  "profiles": {
+    "prompt": "This Chrome profile is for work. Call it Work.",
+    "reply": "Done. When you ask for your Work browser, I'll use this profile.",
+    "name": "Work"
+  }
+}

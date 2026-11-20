@@ -38,12 +38,46 @@ Privacy policy URL: https://github.com/lx223/agent-bridge-browser-extension/blob
 
 The store declarations state that data is not sold or transferred outside approved use cases, used for unrelated purposes, or used to determine creditworthiness or for lending. Check these declarations against current behaviour before submitting.
 
+## Screenshots
+
+`npm run screenshots` builds the extension and the MCP server, then writes 1280x800 PNG screenshots for every locale to `store/screenshots/out/<locale>/`. That folder is not committed. Upload the files for each language under Store listing in the developer dashboard. The number at the start of each file name gives its position in the listing.
+
+```bash
+npm run screenshots
+npm run screenshots -- --locale de,ja
+npm run screenshots -- --locale en --scene tabs,pages
+npm run screenshots -- --out ~/Desktop/store-screenshots
+```
+
+| File | Shows |
+| --- | --- |
+| `1-tabs.png` | An agent grouping open tabs by topic with `chrome_apply_tab_plan` |
+| `2-pages.png` | An agent filling in and submitting a booking form, with the page captured by `chrome_screenshot` |
+| `3-profiles.png` | An agent naming the browser profile, and the options popup showing the name |
+| `4-setup.png` | The setup page with an agent connected |
+
+The script uses the end-to-end harness (`e2e/harness.ts`). Each screenshot comes from a real session: the built MCP server, the built extension in headless Chromium, and demo pages served on `127.0.0.1`. The tab groups, form contents, tool names and extension pages are what the extension actually produced. The caption, the chat transcript and the window frame around each capture are drawn by the script. Chromium starts with the locale's language, so the demo pages and the browser use it too. The extension's own pages are English only, because the extension is not localised yet.
+
+Like the end-to-end tests, the script needs port 17373 free and Playwright's Chromium installed. Japanese and Chinese need CJK fonts on the machine. macOS and Windows have them; on Linux install a package such as `fonts-noto-cjk`.
+
+### Locales
+
+Each file in `store/screenshots/locales/` is one store language, named with the Chrome Web Store locale code, such as `de.json`, `pt_BR.json` or `zh_CN.json`. It holds the captions, the chat transcript and the demo page text. `en.json` is the reference.
+
+To add a language, copy `en.json` to the new code and translate every value. Keep placeholders such as `{tabs}` and keep the same number of entries in each list. The script and `npm test` both reject a locale file with missing, extra or empty strings, or with different placeholders. If a caption or transcript is too long for its box, the script still writes the file but lists the text that was cut off and exits with an error, so shorten that text and run it again.
+
+The translations other than English were written without a native speaker review. Have them checked before you publish them.
+
+### Layout
+
+`store/screenshots/scenes.ts` drives each scene through MCP tool calls and returns the content for the frame. `store/screenshots/frame.ts` holds the caption, chat and window templates and their sizes. `store/screenshots/demo.ts` serves the demo pages built from the locale strings. To add a scene, add its name to `sceneNames` in `store/screenshots/locale.ts`, a caption for it in every locale file, and a capture function in `scenes.ts`.
+
 ## Release steps
 
 1. Run the repository checks and the Publish Release workflow on the intended main commit.
 2. Download the extension ZIP from that GitHub release and verify its manifest version.
 3. Upload the ZIP under Package in the developer dashboard.
-4. Review the description, permission justifications and data disclosures above against the new package and privacy policy. Save the draft.
+4. Review the description, permission justifications and data disclosures above against the new package and privacy policy. If the release changes what the extension looks like or does, regenerate the [screenshots](#screenshots) and upload them. Save the draft.
 5. Submit for review. The 0.3.0 submission kept the existing tester distribution and enabled automatic publication after approval.
 6. Verify that the dashboard reports Pending review. Submission does not mean the update is already published.
 
