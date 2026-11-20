@@ -9,3 +9,5 @@ export const DEFAULT_PORT = 17373;
 
 /** Bumped when bridge messages change incompatibly. */
 export const PROTOCOL_VERSION = 1;
+
+export const REPLACED_CLOSE_CODE = 4000;

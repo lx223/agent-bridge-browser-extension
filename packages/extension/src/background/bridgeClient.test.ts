@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import WebSocketClient, { WebSocketServer, type WebSocket as ServerSocket } from 'ws';
-import { PROTOCOL_VERSION } from '@agent-browser-bridge/protocol';
+import { PROTOCOL_VERSION, REPLACED_CLOSE_CODE } from '@agent-browser-bridge/protocol';
 import { BridgeClient, type ConnectionState } from './bridgeClient.ts';
 
 type Dispatch = ConstructorParameters<typeof BridgeClient>[1];
@@ -21,6 +21,7 @@ class BrowserLikeSocket extends WebSocketClient {
 let server: WebSocketServer | undefined;
 let peers: Peer[] = [];
 let clients: BridgeClient[] = [];
+let stored: Record<string, unknown> = {};
 
 const until = async (condition: () => boolean) => {
   while (!condition()) await new Promise((resolve) => setImmediate(resolve));
@@ -68,7 +69,7 @@ const request = (peer: Peer, id: string, method: string, params: unknown = {}, a
 beforeEach(() => {
   vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout', 'setInterval', 'clearInterval'] });
   vi.stubGlobal('WebSocket', BrowserLikeSocket);
-  const stored: Record<string, unknown> = { bridgeInstanceId: 'abc12345' };
+  stored = { bridgeInstanceId: 'abc12345' };
   vi.stubGlobal('chrome', {
     runtime: { getManifest: () => ({ version: '9.9.9' }), getURL: () => 'chrome-extension://test/' },
     storage: {
@@ -280,5 +281,55 @@ describe('BridgeClient', () => {
     await until(() => client.status.state === 'connected');
     await vi.advanceTimersByTimeAsync(5000);
     expect(peers).toHaveLength(2);
+  });
+
+  it('introduces itself with the name the user gave this profile', async () => {
+    stored.bridgeInstanceName = '  Work ';
+    const { peer } = await connected();
+    expect(peer.received[0]).toMatchObject({ type: 'hello', instanceId: 'abc12345', name: 'Work' });
+  });
+
+  it('introduces itself again when asked, such as after a rename', async () => {
+    const { client, peer } = await connected();
+    stored.bridgeInstanceName = 'Personal';
+    client.reintroduce();
+    await until(() => peer.received.length === 2);
+    expect(peer.received[1]).toMatchObject({ type: 'hello', instanceId: 'abc12345', name: 'Personal' });
+  });
+
+  it('does not introduce itself while disconnected', () => {
+    const { client } = createClient(1);
+    expect(() => client.reintroduce()).not.toThrow();
+  });
+
+  it('takes a new instance id when another browser with the same id replaces it', async () => {
+    const { states, peer } = await connected();
+    peer.socket.close(REPLACED_CLOSE_CODE, 'Replaced by a newer connection');
+    await until(() => states.at(-1) === 'disconnected');
+    await vi.advanceTimersByTimeAsync(1000);
+    await until(() => peers.length === 2 && peers[1]!.received.length === 1);
+    const renewed = peers[1]!.received[0]!.instanceId;
+    expect(renewed).toMatch(/^[0-9a-f]{8}$/);
+    expect(renewed).not.toBe('abc12345');
+    expect(stored.bridgeInstanceId).toBe(renewed);
+  });
+
+  it('keeps its instance id when the server simply goes away', async () => {
+    const { states, peer } = await connected();
+    peer.socket.close(1001, 'Going away');
+    await until(() => states.at(-1) === 'disconnected');
+    await vi.advanceTimersByTimeAsync(1000);
+    await until(() => peers.length === 2 && peers[1]!.received.length === 1);
+    expect(peers[1]!.received[0]).toMatchObject({ instanceId: 'abc12345' });
+  });
+
+  it('still identifies itself when storage is unavailable', async () => {
+    vi.stubGlobal('chrome', {
+      runtime: { getManifest: () => ({ version: '9.9.9' }), getURL: () => 'chrome-extension://test/' },
+      storage: { local: { get: async () => Promise.reject(new Error('storage unavailable')), set: async () => {} } },
+    });
+    const { peer } = await connected();
+    expect(peer.received[0]!.instanceId).toMatch(/^[0-9a-f]{8}$/);
+    expect(peer.received[0]).not.toHaveProperty('name');
   });
 });

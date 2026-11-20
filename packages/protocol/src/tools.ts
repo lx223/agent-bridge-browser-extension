@@ -404,4 +404,12 @@ export const browsers = Object.keys(browserApis) as Browser[];
 export const browserLabels: Record<Browser, string> = { chrome: 'Chrome', safari: 'Safari' };
 
 export const STATUS_TOOL = 'browser_status';
+export const IDENTIFY_INSTANCES_TOOL = 'browser_identify_instances';
+export const NAME_INSTANCE_TOOL = 'browser_name_instance';
+export const NAME_INSTANCES_PROMPT = 'name_browser_profiles';
+
+export const MAX_INSTANCE_NAME_LENGTH = 40;
+export const SET_INSTANCE_NAME_METHOD = 'instance.setName';
+export const setInstanceNameParams = z.object({ name: z.string().max(MAX_INSTANCE_NAME_LENGTH) });
+export type SetInstanceNameParams = z.infer<typeof setInstanceNameParams>;
 export const browserToolName = (browser: Browser, method: Method) => `${browser}_${toolDefinitions[method].tool}`;

@@ -1,4 +1,12 @@
-import { toolDefinitions, type GroupColor, type Method, type ParamsOf } from '@agent-browser-bridge/protocol';
+import {
+  SET_INSTANCE_NAME_METHOD,
+  setInstanceNameParams,
+  toolDefinitions,
+  type GroupColor,
+  type Method,
+  type ParamsOf,
+} from '@agent-browser-bridge/protocol';
+import { instanceId, saveInstanceName } from './browser.ts';
 import { toChromeColor } from './color.ts';
 import { navigateTab, openTab } from './navigation.ts';
 import {
@@ -133,7 +141,15 @@ export const handlers: Handlers = {
 };
 
 /** Validates params against the shared schema, then runs the handler. */
+async function setInstanceName(params: unknown) {
+  const parsed = setInstanceNameParams.safeParse(params ?? {});
+  if (!parsed.success) throw new Error(`Invalid params for ${SET_INSTANCE_NAME_METHOD}: ${parsed.error.message}`);
+  const name = await saveInstanceName(chrome.storage.local, parsed.data.name);
+  return { instanceId: await instanceId(chrome.storage.local), name };
+}
+
 export async function dispatch(method: string, params: unknown): Promise<unknown> {
+  if (method === SET_INSTANCE_NAME_METHOD) return setInstanceName(params);
   if (!(method in toolDefinitions)) throw new Error(`Unknown method: ${method}`);
   const m = method as Method;
   const parsed = toolDefinitions[m].params.safeParse(params ?? {});

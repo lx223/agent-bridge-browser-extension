@@ -1,5 +1,5 @@
-import { PROTOCOL_VERSION, serverToExtension, type AgentInfo, type ExtensionToServer } from '@agent-browser-bridge/protocol';
-import { browserLabel, detectBrowser, instanceId } from './browser.ts';
+import { PROTOCOL_VERSION, REPLACED_CLOSE_CODE, serverToExtension, type AgentInfo, type ExtensionToServer } from '@agent-browser-bridge/protocol';
+import { browserLabel, detectBrowser, instanceId, instanceName, newInstanceId, storeInstanceId } from './browser.ts';
 
 export type ConnectionState = 'connecting' | 'connected' | 'disconnected';
 
@@ -24,6 +24,7 @@ export class BridgeClient {
   private backoff = 1000;
   private inFlight = 0;
   private idleWaiters: (() => void)[] = [];
+  private instance?: string;
   private _status: ConnectionStatus;
 
   constructor(
@@ -59,9 +60,10 @@ export class BridgeClient {
 
     ws.onmessage = (event) => void this.handle(event.data);
 
-    ws.onclose = () => {
+    ws.onclose = (event) => {
       clearInterval(this.keepalive);
       if (this.ws !== ws) return;
+      if (event.code === REPLACED_CLOSE_CODE) this.takeNewInstanceId();
       this.ws = undefined;
       this.setState('disconnected');
       this.retry = setTimeout(() => this.connect(), this.backoff);
@@ -69,17 +71,28 @@ export class BridgeClient {
     };
   }
 
+  reintroduce() {
+    if (this.ws?.readyState === WebSocket.OPEN) void this.sendHello();
+  }
+
   private async sendHello() {
     const extensionUrl = chrome.runtime.getURL('');
+    this.instance ??= await instanceId(chrome.storage.local).catch(() => newInstanceId());
     this.send({
       type: 'hello',
       protocolVersion: PROTOCOL_VERSION,
       extensionVersion: chrome.runtime.getManifest().version,
       userAgent: navigator.userAgent,
       browser: detectBrowser(extensionUrl),
-      instanceId: await instanceId(chrome.storage.local).catch(() => undefined),
+      instanceId: this.instance,
       label: browserLabel(extensionUrl, navigator.userAgent, 'brave' in navigator),
+      name: await instanceName(chrome.storage.local).catch(() => undefined),
     });
+  }
+
+  private takeNewInstanceId() {
+    this.instance = newInstanceId();
+    void storeInstanceId(chrome.storage.local, this.instance).catch(() => undefined);
   }
 
   private async handle(raw: unknown) {

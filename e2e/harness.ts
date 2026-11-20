@@ -98,7 +98,7 @@ export async function startAgent(name = 'e2e'): Promise<Agent> {
   const text = async (tool: string, args?: Record<string, unknown>) => {
     const result = await raw(tool, args);
     if (result.isError) throw new Error(`${tool} failed: ${result.text}`);
-    return result.text;
+    return result.content[0]?.text ?? '';
   };
   const call = async <T>(tool: string, args?: Record<string, unknown>) => JSON.parse(await text(tool, args)) as T;
   const waitUntilConnected = async () => {

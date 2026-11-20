@@ -1,5 +1,13 @@
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
-import { browserApis, browsers, browserToolName, PROTOCOL_VERSION, STATUS_TOOL } from '@agent-browser-bridge/protocol';
+import {
+  browserApis,
+  browsers,
+  browserToolName,
+  IDENTIFY_INSTANCES_TOOL,
+  NAME_INSTANCE_TOOL,
+  PROTOCOL_VERSION,
+  STATUS_TOOL,
+} from '@agent-browser-bridge/protocol';
 import { EXTENSION_VERSION, startAgent, startHarness, type Harness, type Tab, type TabGroup } from './harness.ts';
 
 let harness: Harness;
@@ -40,7 +48,12 @@ describe('tab management through the built server and extension', () => {
 
   it('exposes the status tool and every browser tool', async () => {
     const { tools } = await harness.agent.client.listTools();
-    const expected = [STATUS_TOOL, ...browsers.flatMap((browser) => browserApis[browser].map((method) => browserToolName(browser, method)))];
+    const expected = [
+      STATUS_TOOL,
+      IDENTIFY_INSTANCES_TOOL,
+      NAME_INSTANCE_TOOL,
+      ...browsers.flatMap((browser) => browserApis[browser].map((method) => browserToolName(browser, method))),
+    ];
     expect(tools.map((t) => t.name).sort()).toEqual(expected.sort());
   });
 
@@ -49,6 +62,32 @@ describe('tab management through the built server and extension', () => {
     const listed = await harness.agent.call<Tab[]>('chrome_list_tabs', { instance: connected[0]!.instanceId });
     expect(listed.length).toBeGreaterThan(0);
     expect((await harness.agent.raw('chrome_list_tabs', { instance: 'missing' })).isError).toBe(true);
+    const tagged = await harness.agent.raw('chrome_list_windows');
+    expect(tagged.content.at(-1)).toEqual({ type: 'text', text: `Browser instance: ${connected[0]!.instanceId} (Chrome)` });
+  });
+
+  it('lets the agent identify the profile, name it, and address it by name', async () => {
+    const opened = await harness.openFixture('second.html');
+    const { instances } = await harness.agent.call<{ instances: Array<{ instanceId: string; name: string | null; sampleTabs: Array<{ title: string; site: string }> }> }>(
+      IDENTIFY_INSTANCES_TOOL,
+      { sampleSize: 20 },
+    );
+    expect(instances).toHaveLength(1);
+    expect(instances[0]!.name).toBeNull();
+    expect(instances[0]!.sampleTabs.map((tab) => tab.site)).toContain(new URL(harness.fixture('second.html')).hostname);
+
+    const id = instances[0]!.instanceId;
+    expect(await harness.agent.call(NAME_INSTANCE_TOOL, { browser: 'chrome', instance: id, name: 'Work' })).toEqual({ browser: 'chrome', instanceId: id, name: 'Work' });
+    const { browsers: connected } = await harness.agent.waitUntilConnected();
+    expect(connected[0]).toMatchObject({ instanceId: id, name: 'Work' });
+
+    const byName = await harness.agent.raw('chrome_list_windows', { instance: 'work' });
+    expect(byName.isError).toBe(false);
+    expect(byName.content.at(-1)).toEqual({ type: 'text', text: `Browser instance: "Work" (Chrome, ${id})` });
+
+    await harness.agent.call(NAME_INSTANCE_TOOL, { browser: 'chrome', instance: 'Work', name: '' });
+    expect((await harness.agent.waitUntilConnected()).browsers[0]).not.toHaveProperty('name');
+    await harness.agent.call('chrome_close_tabs', { tabIds: [opened.id] });
   });
 
   it('reports Safari as not connected', async () => {

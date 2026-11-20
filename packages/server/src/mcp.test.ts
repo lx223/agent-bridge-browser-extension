@@ -1,7 +1,20 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 import { InMemoryTransport } from '@modelcontextprotocol/sdk/inMemory.js';
-import { browserApis, browserLabels, browsers, browserToolName, SERVER_NAME, STATUS_TOOL, toolDefinitions } from '@agent-browser-bridge/protocol';
+import {
+  browserApis,
+  browserLabels,
+  browsers,
+  browserToolName,
+  IDENTIFY_INSTANCES_TOOL,
+  NAME_INSTANCE_TOOL,
+  NAME_INSTANCES_PROMPT,
+  PROTOCOL_VERSION,
+  SERVER_NAME,
+  STATUS_TOOL,
+  toolDefinitions,
+  type HelloMessage,
+} from '@agent-browser-bridge/protocol';
 import type { BridgeStatus, ExtensionBridge } from './bridge.ts';
 import { createMcpServer } from './mcp.ts';
 
@@ -12,8 +25,10 @@ afterEach(async () => {
   await Promise.all(closers.splice(0).map((close) => close()));
 });
 
-async function connect(request: (browser: string, method: string, params: unknown) => Promise<unknown> = async () => null) {
-  const bridge = { status: () => LISTENING, request: vi.fn(request) };
+type Request = (browser: string, method: string, params: unknown, agent: unknown, instance?: string) => Promise<unknown>;
+
+async function connect(request: Request = async () => null, status: () => BridgeStatus = () => LISTENING) {
+  const bridge = { status, request: vi.fn(request) };
   const server = createMcpServer(bridge as unknown as ExtensionBridge, '1.2.3');
   const client = new Client({ name: 'contract-test', version: '0.0.0' });
   const [clientTransport, serverTransport] = InMemoryTransport.createLinkedPair();
@@ -35,7 +50,12 @@ describe('createMcpServer', () => {
   it('registers the status tool plus one tool per browser method', async () => {
     const { client } = await connect();
     const { tools } = await client.listTools();
-    const expected = [STATUS_TOOL, ...browsers.flatMap((browser) => browserApis[browser].map((method) => browserToolName(browser, method)))];
+    const expected = [
+      STATUS_TOOL,
+      IDENTIFY_INSTANCES_TOOL,
+      NAME_INSTANCE_TOOL,
+      ...browsers.flatMap((browser) => browserApis[browser].map((method) => browserToolName(browser, method))),
+    ];
     expect(tools.map((t) => t.name).sort()).toEqual(expected.sort());
   });
 
@@ -126,5 +146,157 @@ describe('createMcpServer', () => {
     expect(outcome.failed).toBe(true);
     expect(outcome.message).toMatch(/tabIds/);
     expect(bridge.request).not.toHaveBeenCalled();
+  });
+
+  describe('with named browser instances', () => {
+    const hello = (instanceId: string, extra: Partial<HelloMessage> = {}): HelloMessage => ({
+      type: 'hello',
+      protocolVersion: PROTOCOL_VERSION,
+      extensionVersion: '1.0.0',
+      userAgent: 'test',
+      browser: 'chrome',
+      instanceId,
+      label: 'Chrome',
+      ...extra,
+    });
+
+    async function connectTo(initial: HelloMessage[], request: Request = async () => []) {
+      let connected = initial;
+      const status = (): BridgeStatus => ({ state: connected.length ? 'connected' : 'listening', role: 'host', port: 17373, browsers: connected });
+      return { ...(await connect(request, status)), setConnected: (next: HelloMessage[]) => (connected = next) };
+    }
+
+    const tabsOf = (instance?: string) => [
+      { id: 1, windowId: 1, title: `${instance} inbox`, url: `https://mail.${instance}.example/`, active: false, lastAccessed: 5 },
+      { id: 2, windowId: 1, title: 'New Tab', url: 'chrome://newtab/', active: true, lastAccessed: 9 },
+      { id: 3, windowId: 2, title: `${instance} docs`, url: `https://docs.${instance}.example/a`, active: true, lastAccessed: 1 },
+    ];
+
+    it('tags each result with the instance that answered and stays on it', async () => {
+      const { client, bridge, setConnected } = await connectTo([hello('aaaa1111', { name: 'Work' })]);
+      const first = await client.callTool({ name: 'chrome_list_tabs', arguments: {} });
+      expect(contentOf(first).at(-1)).toEqual({ type: 'text', text: 'Browser instance: "Work" (Chrome, aaaa1111)' });
+      expect(bridge.request).toHaveBeenLastCalledWith('chrome', 'tabs.list', {}, undefined, 'aaaa1111');
+
+      setConnected([hello('bbbb2222')]);
+      const second = await client.callTool({ name: 'chrome_close_tabs', arguments: { tabIds: [1] } });
+      expect(second.isError).toBe(true);
+      expect(contentOf(second)[0]!.text).toMatch(/this session was using, "Work" \(Chrome, aaaa1111\), is not connected/);
+      expect(bridge.request).toHaveBeenCalledTimes(1);
+    });
+
+    it('accepts an instance name', async () => {
+      const { client, bridge } = await connectTo([hello('aaaa1111', { name: 'Work' }), hello('bbbb2222', { name: 'Personal' })]);
+      await client.callTool({ name: 'chrome_list_tabs', arguments: { instance: 'personal' } });
+      expect(bridge.request).toHaveBeenLastCalledWith('chrome', 'tabs.list', {}, undefined, 'bbbb2222');
+    });
+
+    it('identifies each instance by a few of its tabs without pinning', async () => {
+      const { client, bridge } = await connectTo(
+        [hello('aaaa1111', { name: 'Work' }), hello('bbbb2222'), hello('cccc3333', { browser: 'safari', label: 'Safari' })],
+        async (_browser, method, _params, _agent, instance) => {
+          if (instance === 'bbbb2222') throw new Error('Browser did not answer tabs.list within 30s');
+          return method === 'tabs.list' ? tabsOf(instance) : null;
+        },
+      );
+      const result = await client.callTool({ name: IDENTIFY_INSTANCES_TOOL, arguments: { browser: 'chrome', sampleSize: 2 } });
+      expect(JSON.parse(contentOf(result)[0]!.text!)).toEqual({
+        instances: [
+          {
+            browser: 'chrome',
+            label: 'Chrome',
+            instanceId: 'aaaa1111',
+            name: 'Work',
+            windows: 2,
+            tabs: 3,
+            sampleTabs: [
+              { title: 'aaaa1111 docs', site: 'docs.aaaa1111.example' },
+              { title: 'aaaa1111 inbox', site: 'mail.aaaa1111.example' },
+            ],
+          },
+          { browser: 'chrome', label: 'Chrome', instanceId: 'bbbb2222', name: null, error: 'Browser did not answer tabs.list within 30s' },
+        ],
+      });
+      expect(bridge.request).toHaveBeenCalledWith('chrome', 'tabs.list', {}, undefined, 'aaaa1111');
+      await client.callTool({ name: 'chrome_list_windows', arguments: {} });
+      expect(bridge.request).toHaveBeenLastCalledWith('chrome', 'windows.list', {}, undefined, undefined);
+    });
+
+    it('explains how to proceed when nothing is connected', async () => {
+      const { client } = await connectTo([]);
+      const result = await client.callTool({ name: IDENTIFY_INSTANCES_TOOL, arguments: {} });
+      expect(JSON.parse(contentOf(result)[0]!.text!)).toEqual({
+        instances: [],
+        note: `No browser is connected. Call ${STATUS_TOOL} and ask the user to open their browser.`,
+      });
+    });
+
+    it('marks an extension without an instance id as needing an update', async () => {
+      const legacy = { ...hello('x'), instanceId: undefined };
+      const { client, bridge } = await connectTo([legacy]);
+      const result = await client.callTool({ name: IDENTIFY_INSTANCES_TOOL, arguments: {} });
+      expect(JSON.parse(contentOf(result)[0]!.text!).instances[0]).toMatchObject({ instanceId: null, error: expect.stringMatching(/older extension/) });
+      expect(bridge.request).not.toHaveBeenCalled();
+    });
+
+    it('names an instance and waits until the bridge reports the new name', async () => {
+      let reconnect: (next: HelloMessage[]) => void = () => {};
+      const { client, bridge, setConnected } = await connectTo([hello('aaaa1111')], async (_browser, method, params) => {
+        if (method !== 'instance.setName') return [];
+        const { name } = params as { name: string };
+        setTimeout(() => reconnect([hello('aaaa1111', { name })]), 20);
+        return { instanceId: 'aaaa1111', name };
+      });
+      reconnect = setConnected;
+      const result = await client.callTool({ name: NAME_INSTANCE_TOOL, arguments: { browser: 'chrome', instance: 'aaaa1111', name: 'Work' } });
+      expect(bridge.request).toHaveBeenCalledWith('chrome', 'instance.setName', { name: 'Work' }, undefined, 'aaaa1111');
+      expect(JSON.parse(contentOf(result)[0]!.text!)).toEqual({ browser: 'chrome', instanceId: 'aaaa1111', name: 'Work' });
+      const listed = await client.callTool({ name: 'chrome_list_tabs', arguments: { instance: 'work' } });
+      expect(listed.isError).toBeFalsy();
+    });
+
+    it('renames an instance addressed by its current name', async () => {
+      const { client, bridge } = await connectTo([hello('aaaa1111', { name: 'Work' })], async () => ({ instanceId: 'aaaa1111', name: null }));
+      vi.useFakeTimers({ toFake: ['setTimeout', 'Date'] });
+      try {
+        const call = client.callTool({ name: NAME_INSTANCE_TOOL, arguments: { browser: 'chrome', instance: 'Work', name: '' } });
+        await vi.advanceTimersByTimeAsync(3_100);
+        const result = await call;
+        expect(bridge.request).toHaveBeenCalledWith('chrome', 'instance.setName', { name: '' }, undefined, 'aaaa1111');
+        expect(JSON.parse(contentOf(result)[0]!.text!)).toMatchObject({ instanceId: 'aaaa1111', name: null, note: expect.stringMatching(/few seconds/) });
+      } finally {
+        vi.useRealTimers();
+      }
+    });
+
+    it('asks for an extension update when the browser cannot be named by an agent', async () => {
+      const { client } = await connectTo([hello('aaaa1111')], async () => {
+        throw new Error('Unknown method: instance.setName');
+      });
+      const result = await client.callTool({ name: NAME_INSTANCE_TOOL, arguments: { browser: 'chrome', instance: 'aaaa1111', name: 'Work' } });
+      expect(result.isError).toBe(true);
+      expect(contentOf(result)[0]!.text).toMatch(/older Agent Browser Bridge extension/);
+    });
+
+    it('reports other naming failures as they are', async () => {
+      const { client } = await connectTo([hello('aaaa1111')], async () => {
+        throw new Error('The browser extension in chrome disconnected.');
+      });
+      const result = await client.callTool({ name: NAME_INSTANCE_TOOL, arguments: { browser: 'chrome', instance: 'aaaa1111', name: 'Work' } });
+      expect(contentOf(result)[0]!.text).toBe('The browser extension in chrome disconnected.');
+    });
+
+    it('offers a prompt that walks through naming profiles', async () => {
+      const { client } = await connectTo([]);
+      const { prompts } = await client.listPrompts();
+      expect(prompts.map((prompt) => prompt.name)).toEqual([NAME_INSTANCES_PROMPT]);
+      const plain = await client.getPrompt({ name: NAME_INSTANCES_PROMPT, arguments: {} });
+      const text = (plain.messages[0]!.content as { text: string }).text;
+      expect(text).toContain(IDENTIFY_INSTANCES_TOOL);
+      expect(text).toContain(NAME_INSTANCE_TOOL);
+      expect(text).not.toContain('looking for');
+      const focused = await client.getPrompt({ name: NAME_INSTANCES_PROMPT, arguments: { looking_for: 'work' } });
+      expect((focused.messages[0]!.content as { text: string }).text).toContain(`I'm looking for the one I call "work".`);
+    });
   });
 });
