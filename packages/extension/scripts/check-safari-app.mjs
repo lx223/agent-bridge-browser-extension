@@ -1,4 +1,4 @@
-import { execFileSync } from 'node:child_process';
+import { execFileSync, spawnSync } from 'node:child_process';
 import { appendFileSync, existsSync, mkdtempSync, readFileSync, readdirSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
@@ -27,14 +27,14 @@ function summarise(title, body) {
 
 if (process.platform !== 'darwin') fail('The Safari app can only be built on macOS with Xcode installed.');
 
-const converterOutput = execFileSync('npm', ['run', 'build:safari', '--', '--no-open'], {
-  cwd: root,
-  encoding: 'utf-8',
-  stdio: ['ignore', 'pipe', 'inherit'],
-});
-console.log(converterOutput);
-const converterReport = converterOutput.slice(Math.max(0, converterOutput.indexOf('Xcode Project Location')));
-summarise('Safari web extension converter', converterReport || converterOutput);
+const conversion = spawnSync('npm', ['run', 'build:safari', '--', '--no-open'], { cwd: root, encoding: 'utf-8' });
+process.stdout.write(conversion.stdout);
+process.stderr.write(conversion.stderr);
+if (conversion.status !== 0) fail('Generating the Safari app project failed.');
+
+const unsupportedKeys = /^Warning: The following keys in your manifest\.json are not supported.*\n(?:\t.*\n?)*/m.exec(conversion.stderr)?.[0] ?? '';
+const converterReport = conversion.stdout.slice(Math.max(0, conversion.stdout.indexOf('Xcode Project Location')));
+summarise('Safari web extension converter', `${unsupportedKeys}\n${converterReport}`);
 
 const [project] = findBySuffix(projectLocation, '.xcodeproj');
 if (!project) fail(`The converter did not create an Xcode project under ${projectLocation}.`);
