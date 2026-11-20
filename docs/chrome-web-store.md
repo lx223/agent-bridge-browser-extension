@@ -8,7 +8,9 @@ Control your own browser with any AI agent you like.
 
 Connect your AI coding agent to your everyday Chrome browser through Model Context Protocol (MCP).
 
-Agent Browser Bridge lets a connected agent list windows and tabs, organise tabs into named and coloured groups, move tabs and groups, and close tabs on request. Preview a grouping plan before applying it, and undo the last plan to restore the previous layout.
+Agent Browser Bridge lets a connected agent list, open, focus and close windows and tabs, organise tabs into named and coloured groups, move, pin, mute, duplicate and unload tabs, and close tabs on request. Preview a grouping plan before applying it, and undo the last plan to restore the previous layout.
+
+Agents can also help you pick up earlier work: search your browsing history, list recently closed tabs and the tabs open on your other signed-in devices, and reopen them.
 
 Connected agents can also inspect and operate web pages, navigate, click, type, and use page-provided WebMCP tools. The debugger permission enables this page control through the Chrome DevTools Protocol. Only connect agents you trust: they can receive tab titles, URLs and page contents and interact with pages on your behalf.
 
@@ -27,6 +29,8 @@ Allow a user-selected MCP agent to inspect and organise Chrome tabs and operate 
 | tabs | Read tab titles, URLs and window membership so the connected MCP agent can list tabs and organise them at the user's request. Also supports moving, grouping and closing tabs. |
 | tabGroups | Read and update Chrome tab groups, including names, colours, collapsed state and position, to apply the user's requested organisation plan. |
 | storage | Store the previous tab and group layout for undo, the browser instance identifier, and the user's analytics preference. |
+| history | Search the user's browsing history and list visits to a page when the connected MCP agent is asked to find or recap something the user viewed earlier, including pages whose tabs are closed. The extension only reads history; it does not add or delete entries. |
+| sessions | List recently closed tabs and windows and the tabs open on the user's other signed-in devices, and reopen them with their navigation history when the user's agent is asked to. The tabs API cannot see closed tabs or other devices. |
 | alarms | Periodically wake the extension service worker to reconnect to the local MCP bridge when the worker has been suspended. |
 | debugger | The debugger permission enables Chrome DevTools Protocol access to tabs for browser actions requested by the user through their connected MCP agent. It is needed to inspect page structure and content, capture screenshots, navigate, click, type, scroll, and invoke page-provided WebMCP tools. These operations are routed through the local MCP bridge; ordinary tabs and tabGroups APIs cannot provide page inspection or interaction. |
 
@@ -51,8 +55,8 @@ npm run screenshots -- --out ~/Desktop/store-screenshots
 
 | File | Shows |
 | --- | --- |
-| `1-tabs.png` | An agent grouping open tabs by topic with `chrome_apply_tab_plan` |
-| `2-pages.png` | An agent filling in and submitting a booking form, with the page captured by `chrome_screenshot` |
+| `1-tabs.png` | An agent grouping open tabs by topic with `chrome_plan_apply` |
+| `2-pages.png` | An agent filling in and submitting a booking form, with the page captured by `chrome_page_screenshot` |
 | `3-profiles.png` | An agent naming the browser profile, and the options popup showing the name |
 | `4-setup.png` | The setup page with an agent connected |
 
@@ -78,6 +82,7 @@ The translations other than English were written without a native speaker review
 2. Download the extension ZIP from that GitHub release and verify its manifest version.
 3. Upload the ZIP under Package in the developer dashboard.
 4. Review the description, permission justifications and data disclosures above against the new package and privacy policy. If the release changes what the extension looks like or does, regenerate the [screenshots](#screenshots) and upload them. Save the draft.
+   The `history` and `sessions` permissions added after 0.4.1 change Chrome's install warning to "Read and change your browsing history on all your signed-in devices". When an update adds a warning like this, Chrome disables the extension for existing users until they accept it, so the bridge stays disconnected for them until then. Mention this in the release notes.
 5. Submit for review. The 0.3.0 submission kept the existing tester distribution and enabled automatic publication after approval.
 6. Verify that the dashboard reports Pending review. Submission does not mean the update is already published.
 

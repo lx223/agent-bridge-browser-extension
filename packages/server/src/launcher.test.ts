@@ -136,7 +136,7 @@ function harness(make: (version: string | null) => FakeWorker = (version) => fak
 
 const initialize = { id: 0, method: 'initialize', params: { protocolVersion: '2025-06-18', clientInfo: { name: 'agent', version: '1' } } };
 const initialized = { method: 'notifications/initialized' };
-const call = (id: number) => ({ id, method: 'tools/call', params: { name: 'chrome_list_tabs' } });
+const call = (id: number) => ({ id, method: 'tools/call', params: { name: 'chrome_tabs_list' } });
 
 async function initializedHarness(...args: Parameters<typeof harness>) {
   const h = harness(...args);

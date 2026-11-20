@@ -115,6 +115,11 @@ describe('helpers', () => {
     expect(errorCode(new Error('Cannot group pinned tabs'))).toBe('pinned_tab');
   });
 
+  it('counts discarded tabs and history results', () => {
+    expect(toolMetrics('tabs.discard', { tabIds: [1, 2] }, {})).toEqual({ tab_count: 2 });
+    expect(toolMetrics('history.search', {}, [{}, {}, {}])).toEqual({ result_count: 3 });
+  });
+
   it('ignores unknown methods', () => {
     expect(toolMetrics('nope', {}, {})).toEqual({});
   });

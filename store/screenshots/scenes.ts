@@ -30,9 +30,9 @@ const snapshotLine = (snapshot: string, pattern: RegExp) =>
     .replace(/^[\s-]+/, '');
 
 async function closeDemoTabs(context: SceneContext) {
-  const tabs = await context.harness.agent.call<Tab[]>('chrome_list_tabs');
+  const tabs = await context.harness.agent.call<Tab[]>('chrome_tabs_list');
   const ours = tabs.filter((tab) => tab.url.startsWith(context.demo.url('/')));
-  if (ours.length) await context.harness.agent.call('chrome_close_tabs', { tabIds: ours.map((tab) => tab.id) });
+  if (ours.length) await context.harness.agent.call('chrome_tabs_close', { tabIds: ours.map((tab) => tab.id) });
 }
 
 async function capturePage(context: SceneContext, url: string, size: Size, ready: string) {
@@ -54,7 +54,7 @@ async function tabs(context: SceneContext) {
   const order = Array.from({ length: longest }, (_, index) => topics.map((topic) => ({ topic, index }))).flat();
   const opened = new Map<number, Topic>();
   for (const { topic, index } of order.filter(({ topic, index }) => index < text.pages[topic].length)) {
-    const tab = await harness.agent.call<Tab>('chrome_open_tab', { url: demo.url(demo.tabPath(topic, index)), active: false });
+    const tab = await harness.agent.call<Tab>('chrome_tabs_create', { url: demo.url(demo.tabPath(topic, index)), active: false });
     opened.set(tab.id, topic);
   }
 
@@ -63,10 +63,10 @@ async function tabs(context: SceneContext) {
     color: TOPIC_COLORS[topic],
     tabIds: [...opened].filter(([, owner]) => owner === topic).map(([id]) => id),
   }));
-  await harness.agent.call('chrome_apply_tab_plan', { groups: plan });
+  await harness.agent.call('chrome_plan_apply', { groups: plan });
 
-  const groups = await harness.agent.call<TabGroup[]>('chrome_list_tab_groups');
-  const titles = new Map((await harness.agent.call<Tab[]>('chrome_list_tabs')).map((tab) => [tab.id, tab.title]));
+  const groups = await harness.agent.call<TabGroup[]>('chrome_tab_groups_list');
+  const titles = new Map((await harness.agent.call<Tab[]>('chrome_tabs_list')).map((tab) => [tab.id, tab.title]));
   const views = plan.map(({ title }) => {
     const group = groups.find((candidate) => candidate.title === title)!;
     return { title: group.title, color: group.color, tabs: group.tabIds.map((id) => titles.get(id)!) };
@@ -75,8 +75,8 @@ async function tabs(context: SceneContext) {
 
   const messages: ChatMessage[] = [
     { kind: 'user', text: text.prompt },
-    { kind: 'tool', name: 'chrome_list_tabs' },
-    { kind: 'tool', name: 'chrome_apply_tab_plan', detail: views.map((view) => view.title).join(' · ') },
+    { kind: 'tool', name: 'chrome_tabs_list' },
+    { kind: 'tool', name: 'chrome_plan_apply', detail: views.map((view) => view.title).join(' · ') },
     { kind: 'agent', text: fill(text.reply, { tabs: opened.size, groups: views.length }) },
   ];
   return chatCard(locale.strings.chat, messages) + windowCard({ size: SIDE_WINDOW, body: tabGroupsBody(views) });
@@ -86,11 +86,11 @@ async function pages(context: SceneContext) {
   const { harness, demo, locale } = context;
   const text = locale.strings.booking;
   const url = demo.url('/booking');
-  const tab = await harness.agent.call<Tab>('chrome_open_tab', { url });
+  const tab = await harness.agent.call<Tab>('chrome_tabs_create', { url });
   const page = harness.context.pages().find((candidate) => candidate.url() === url)!;
   await page.setViewportSize(SIDE_WINDOW);
 
-  const snapshot = await harness.agent.text('chrome_snapshot_page', { tabId: tab.id });
+  const snapshot = await harness.agent.text('chrome_page_snapshot', { tabId: tab.id });
   const fields = [
     { pattern: new RegExp(`textbox "${escapeRegExp(text.name)}"`), value: text.guestName },
     { pattern: new RegExp(`spinbutton "${escapeRegExp(text.guests)}"`), value: '4' },
@@ -99,20 +99,20 @@ async function pages(context: SceneContext) {
 
   const messages: ChatMessage[] = [
     { kind: 'user', text: text.prompt },
-    { kind: 'tool', name: 'chrome_snapshot_page', detail: text.restaurant },
+    { kind: 'tool', name: 'chrome_page_snapshot', detail: text.restaurant },
   ];
   for (const field of fields) {
-    await harness.agent.call('chrome_type_text', { tabId: tab.id, ref: refOf(snapshot, field.pattern), text: field.value });
-    messages.push({ kind: 'tool', name: 'chrome_type_text', detail: `${snapshotLine(snapshot, field.pattern)} ← "${field.value}"` });
+    await harness.agent.call('chrome_page_type', { tabId: tab.id, ref: refOf(snapshot, field.pattern), text: field.value });
+    messages.push({ kind: 'tool', name: 'chrome_page_type', detail: `${snapshotLine(snapshot, field.pattern)} ← "${field.value}"` });
   }
-  await harness.agent.call('chrome_click', { tabId: tab.id, ref: refOf(snapshot, submit) });
-  messages.push({ kind: 'tool', name: 'chrome_click', detail: snapshotLine(snapshot, submit) });
+  await harness.agent.call('chrome_page_click', { tabId: tab.id, ref: refOf(snapshot, submit) });
+  messages.push({ kind: 'tool', name: 'chrome_page_click', detail: snapshotLine(snapshot, submit) });
   await page.waitForSelector('#confirmation:not([hidden])');
   messages.push({ kind: 'agent', text: text.reply });
 
-  const shot = await harness.agent.raw('chrome_screenshot', { tabId: tab.id });
+  const shot = await harness.agent.raw('chrome_page_screenshot', { tabId: tab.id });
   const image = shot.content.find((item) => item.type === 'image');
-  if (shot.isError || !image?.data) throw new Error(`chrome_screenshot failed: ${shot.text}`);
+  if (shot.isError || !image?.data) throw new Error(`chrome_page_screenshot failed: ${shot.text}`);
   await closeDemoTabs(context);
 
   return chatCard(locale.strings.chat, messages) + windowCard({ title: text.restaurant, size: SIDE_WINDOW, body: screenshotBody(Buffer.from(image.data, 'base64'), SIDE_WINDOW) });

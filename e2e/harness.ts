@@ -9,10 +9,11 @@ import { chromium, type BrowserContext } from 'playwright';
 import { DEFAULT_PORT, STATUS_TOOL } from '@agent-browser-bridge/protocol';
 
 const ROOT = resolve(import.meta.dirname, '..');
-const EXTENSION_DIST = join(ROOT, 'packages/extension/dist');
+export const EXTENSION_DIST = join(ROOT, 'packages/extension/dist');
 const SERVER_ENTRY = resolve(ROOT, process.env.E2E_SERVER_ENTRY ?? 'packages/server/dist/index.js');
 const FIXTURES = join(ROOT, 'e2e/fixtures');
 const CONNECT_TIMEOUT_MS = 30_000;
+export const LOCAL_ONLY = '--host-resolver-rules=MAP * ~NOTFOUND, EXCLUDE 127.0.0.1';
 
 export const EXTENSION_VERSION: string = JSON.parse(readFileSync(join(ROOT, 'packages/extension/package.json'), 'utf-8')).version;
 
@@ -144,13 +145,17 @@ export interface HarnessOptions {
   agentVersion?: string;
 }
 
-export async function startHarness(options: HarnessOptions = {}): Promise<Harness> {
+export async function requireFreeBridge() {
   requireBuild();
   if (await portInUse(DEFAULT_PORT)) {
     throw new Error(
       `Port ${DEFAULT_PORT} is already in use, probably by a running agent session. Close it before running the end-to-end tests so they cannot reach your own browser.`,
     );
   }
+}
+
+export async function startHarness(options: HarnessOptions = {}): Promise<Harness> {
+  await requireFreeBridge();
 
   const fixtures = await serveFixtures();
   const fixturePort = (fixtures.address() as { port: number }).port;
@@ -176,7 +181,7 @@ export async function startHarness(options: HarnessOptions = {}): Promise<Harnes
       args: [
         `--disable-extensions-except=${EXTENSION_DIST}`,
         `--load-extension=${EXTENSION_DIST}`,
-        '--host-resolver-rules=MAP * ~NOTFOUND, EXCLUDE 127.0.0.1',
+        LOCAL_ONLY,
         '--enable-features=WebMCP',
         ...(options.locale ? [`--lang=${options.locale}`] : []),
       ],
@@ -197,7 +202,7 @@ export async function startHarness(options: HarnessOptions = {}): Promise<Harnes
       context: browser,
       extensionId,
       fixture,
-      openFixture: (name) => current.call<Tab>('chrome_open_tab', { url: fixture(name) }),
+      openFixture: (name) => current.call<Tab>('chrome_tabs_create', { url: fixture(name) }),
       async restartAgent() {
         await current.close();
         current = await launchAgent();

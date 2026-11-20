@@ -35,7 +35,9 @@ Files that only wire things to the browser are excluded from the unit coverage n
 
 The files are:
 
-- `e2e/tabs.test.ts`: connection status, listing, grouping, moving, closing, tab plans with undo, error reporting, and a second agent session relaying through the first.
+- `e2e/tabs.test.ts`: connection status, listing and filtering tabs, grouping, moving, updating, duplicating, closing, creating, updating and closing windows, tab plans with undo, error reporting, and a second agent session relaying through the first.
+- `e2e/history.test.ts`: searching history, listing visits, listing and restoring recently closed tabs by session id and without one, the empty device list without sync, and an unknown session id.
+- `e2e/discard.test.ts`: discarding tabs, the per-tab failure for a tab that is already discarded, and filtering discarded tabs. It starts Chromium as a plain process instead of through Playwright, because Chromium closes once a tab is discarded while Playwright is attached to the browser. Playwright's attachment also gives discarded tabs new ids, which does not happen otherwise.
 - `e2e/page.test.ts`: snapshots, click, hover, typing, keys, scrolling, screenshots, waiting, evaluate, navigation, back and forward after a click and directly after a URL navigation, raw CDP, detaching, and the stale ref hint.
 - `e2e/extension.test.ts`: the built manifest and its files, the welcome and options pages, and reconnecting to a new server session.
 - `e2e/pageTools.test.ts`: listing and calling WebMCP tools that `e2e/fixtures/tools.html` registers, a throwing tool, an unknown tool, a timeout, and the empty list after navigating away. The harness starts Chromium with `--enable-features=WebMCP` for this.
@@ -46,7 +48,7 @@ The files are:
 
 ### Stale element refs
 
-A ref from `chrome_snapshot_page` stops working once its element leaves the page. `chrome.debugger.sendCommand` rejects with an `Error` whose message is the CDP error as a JSON string, and `withStaleRefHint` in `packages/extension/src/background/page.ts` matches on that text to replace it with `Element eN no longer exists; take a new chrome_snapshot_page.` These are the messages Chromium returns:
+A ref from `chrome_page_snapshot` stops working once its element leaves the page. `chrome.debugger.sendCommand` rejects with an `Error` whose message is the CDP error as a JSON string, and `withStaleRefHint` in `packages/extension/src/background/page.ts` matches on that text to replace it with `Element eN no longer exists; take a new chrome_page_snapshot.` These are the messages Chromium returns:
 
 | Situation | Message |
 | --- | --- |

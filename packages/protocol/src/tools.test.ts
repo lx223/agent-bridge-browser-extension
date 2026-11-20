@@ -2,10 +2,13 @@ import { describe, expect, it } from 'vitest';
 import { browserApis, browsers, browserToolName, methods, STATUS_TOOL, toolDefinitions } from './index.ts';
 
 describe('toolDefinitions', () => {
-  it('uses unique snake_case tool names', () => {
-    const names = methods.map((m) => toolDefinitions[m].tool);
+  it('names each tool after its browser API method', () => {
+    const names = methods.map((m) => browserToolName('chrome', m));
     expect(new Set(names).size).toBe(names.length);
-    for (const name of names) expect(name).toMatch(/^[a-z][a-z_]*$/);
+    for (const name of names) expect(name).toMatch(/^chrome_[a-z]+(_[a-z]+)+$/);
+    expect(browserToolName('chrome', 'sessions.restore')).toBe('chrome_sessions_restore');
+    expect(browserToolName('chrome', 'tabGroups.update')).toBe('chrome_tab_groups_update');
+    expect(browserToolName('chrome', 'sessions.getRecentlyClosed')).toBe('chrome_sessions_get_recently_closed');
   });
 
   it('fills plan defaults', () => {
@@ -15,6 +18,22 @@ describe('toolDefinitions', () => {
   it('rejects unknown colors and empty tab lists', () => {
     expect(() => toolDefinitions['tabs.group'].params.parse({ tabIds: [1], color: 'magenta' })).toThrow();
     expect(() => toolDefinitions['tabs.group'].params.parse({ tabIds: [] })).toThrow();
+  });
+});
+
+describe('history and session params', () => {
+  it('fills history search defaults', () => {
+    expect(toolDefinitions['history.search'].params.parse({})).toEqual({ text: '', maxResults: 100 });
+  });
+
+  it('caps recently closed results at the browser limit', () => {
+    expect(toolDefinitions['sessions.getRecentlyClosed'].params.parse({})).toEqual({ maxResults: 25 });
+    expect(() => toolDefinitions['sessions.getRecentlyClosed'].params.parse({ maxResults: 26 })).toThrow();
+  });
+
+  it('restores the most recent session when no id is given', () => {
+    expect(toolDefinitions['sessions.restore'].params.parse({})).toEqual({});
+    expect(() => toolDefinitions['sessions.restore'].params.parse({ sessionId: '' })).toThrow();
   });
 });
 
@@ -32,8 +51,8 @@ describe('page tool params', () => {
 
 describe('browser namespaces', () => {
   it('prefixes every tool with its browser', () => {
-    expect(browserToolName('chrome', 'tabs.list')).toBe('chrome_list_tabs');
-    expect(browserToolName('safari', 'tabs.list')).toBe('safari_list_tabs');
+    expect(browserToolName('chrome', 'tabs.list')).toBe('chrome_tabs_list');
+    expect(browserToolName('safari', 'tabs.list')).toBe('safari_tabs_list');
     expect(browserToolName('chrome', 'cdp.send')).toBe('chrome_cdp_send');
   });
 
@@ -42,10 +61,10 @@ describe('browser namespaces', () => {
     expect(new Set(names).size).toBe(names.length);
   });
 
-  it('gives Chrome every tool and Safari neither tab groups nor page control', () => {
+  it('gives Chrome every tool and Safari neither tab groups, history, sessions nor page control', () => {
     expect(browserApis.chrome).toEqual(methods);
     for (const method of browserApis.safari) {
-      expect(method).not.toMatch(/^(page|cdp|plan|tabGroups)\./);
+      expect(method).not.toMatch(/^(page|cdp|plan|tabGroups|history|sessions)\./);
       expect(['tabs.group', 'tabs.ungroup']).not.toContain(method);
     }
   });

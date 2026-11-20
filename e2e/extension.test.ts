@@ -43,12 +43,12 @@ describe('the packaged extension', () => {
     const { page, errors } = await openExtensionPage('src/welcome/index.html');
     await page.waitForSelector('#status[data-state="connected"]');
     expect(await page.textContent('#status-text')).toMatch(/^Connected/);
-    await harness.agent.call('chrome_list_windows');
+    await harness.agent.call('chrome_windows_list');
     const session = page.locator('#agents li.session');
     await expect.poll(() => session.locator('.chip').allTextContents()).toEqual(['Chrome, this browser']);
     expect(await session.locator('.session-head strong').textContent()).toBe('e2e 0.0.0');
     expect(await session.locator('.session-project').textContent()).toBe(basename(process.cwd()));
-    expect(await session.locator('.session-details').textContent()).toMatch(/^Started just now · Last used chrome_list_windows just now, \d+ calls?$/);
+    expect(await session.locator('.session-details').textContent()).toMatch(/^Started just now · Last used chrome_windows_list just now, \d+ calls?$/);
     expect(await session.getAttribute('title')).toMatch(/^Session [0-9a-f-]{36} · server \d+\.\d+\.\d+/);
     expect(await page.textContent('#claude-code-cmd')).toContain(SERVER_PACKAGE);
     expect(JSON.parse((await page.textContent('#json-config'))!)).toBeTypeOf('object');
@@ -78,7 +78,7 @@ describe('the packaged extension', () => {
     const status = await agent.waitUntilConnected();
     expect(status.browsers.map((b) => b.extensionVersion)).toEqual([EXTENSION_VERSION]);
     await page.waitForSelector('#status[data-state="connected"]');
-    expect((await agent.call<unknown[]>('chrome_list_tabs')).length).toBeGreaterThan(0);
+    expect((await agent.call<unknown[]>('chrome_tabs_list')).length).toBeGreaterThan(0);
     await page.close();
   });
 });

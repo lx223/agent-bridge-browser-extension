@@ -11,6 +11,7 @@ export function serializeTab(tab: chrome.tabs.Tab) {
     pinned: tab.pinned,
     active: tab.active,
     audible: tab.audible ?? false,
+    muted: tab.mutedInfo?.muted ?? false,
     discarded: tab.discarded,
     lastAccessed: tab.lastAccessed,
   };
@@ -36,4 +37,26 @@ export function serializeWindow(win: chrome.windows.Window) {
     incognito: win.incognito,
     tabCount: win.tabs?.length ?? 0,
   };
+}
+
+export function serializeWindowWithTabs(win: chrome.windows.Window) {
+  return { ...serializeWindow(win), tabs: (win.tabs ?? []).map(serializeTab) };
+}
+
+function serializeSessionTab(tab: chrome.tabs.Tab) {
+  return { ...serializeTab(tab), sessionId: tab.sessionId };
+}
+
+export function serializeSession(session: chrome.sessions.Session) {
+  return {
+    lastModified: session.lastModified,
+    ...(session.tab && { tab: serializeSessionTab(session.tab) }),
+    ...(session.window && {
+      window: { ...serializeWindow(session.window), sessionId: session.window.sessionId, tabs: (session.window.tabs ?? []).map(serializeSessionTab) },
+    }),
+  };
+}
+
+export function serializeDevice(device: chrome.sessions.Device) {
+  return { deviceName: device.deviceName, sessions: device.sessions.map(serializeSession) };
 }

@@ -40,7 +40,7 @@ describe('page tools registered through WebMCP', () => {
 
   it('explains an empty list', async () => {
     installPage(103, []);
-    expect(await call('page.listTools', { tabId: 103 })).toMatchObject({ tools: [], note: expect.stringContaining('chrome_snapshot_page') });
+    expect(await call('page.listTools', { tabId: 103 })).toMatchObject({ tools: [], note: expect.stringContaining('chrome_page_snapshot') });
   });
 
   it('reports Chrome versions without the WebMCP domain', async () => {

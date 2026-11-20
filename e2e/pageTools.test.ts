@@ -18,11 +18,11 @@ afterAll(async () => {
   await harness?.close();
 });
 
-const callTool = (args: Record<string, unknown>) => harness.agent.raw('chrome_call_page_tool', { tabId, ...args });
+const callTool = (args: Record<string, unknown>) => harness.agent.raw('chrome_page_call_tool', { tabId, ...args });
 
 describe('WebMCP page tools through the built server and extension', () => {
   it('lists the tools the page registered', async () => {
-    const { tools, note } = await harness.agent.call<ListedTools>('chrome_list_page_tools', { tabId });
+    const { tools, note } = await harness.agent.call<ListedTools>('chrome_page_list_tools', { tabId });
     expect(note).toBeUndefined();
     expect(tools.map((tool) => tool.name).sort()).toEqual(['add', 'explode', 'stall']);
     const add = tools.find((tool) => tool.name === 'add')!;
@@ -32,9 +32,9 @@ describe('WebMCP page tools through the built server and extension', () => {
   });
 
   it('calls a tool and returns what the page returned', async () => {
-    const result = await harness.agent.call<{ output: unknown }>('chrome_call_page_tool', { tabId, name: 'add', input: { a: 2, b: 3 } });
+    const result = await harness.agent.call<{ output: unknown }>('chrome_page_call_tool', { tabId, name: 'add', input: { a: 2, b: 3 } });
     expect(result.output).toEqual({ content: [{ type: 'text', text: '5' }] });
-    const { value } = await harness.agent.call<{ value: string }>('chrome_evaluate', {
+    const { value } = await harness.agent.call<{ value: string }>('chrome_page_evaluate', {
       tabId,
       expression: `document.getElementById('status').textContent`,
     });
@@ -60,9 +60,9 @@ describe('WebMCP page tools through the built server and extension', () => {
   });
 
   it('returns an empty list with a note after navigating to a page without tools', async () => {
-    await harness.agent.call('chrome_navigate', { tabId, to: harness.fixture('second.html') });
-    const { tools, note } = await harness.agent.call<ListedTools>('chrome_list_page_tools', { tabId });
+    await harness.agent.call('chrome_tabs_navigate', { tabId, to: harness.fixture('second.html') });
+    const { tools, note } = await harness.agent.call<ListedTools>('chrome_page_list_tools', { tabId });
     expect(tools).toEqual([]);
-    expect(note).toContain('chrome_snapshot_page');
+    expect(note).toContain('chrome_page_snapshot');
   });
 });
