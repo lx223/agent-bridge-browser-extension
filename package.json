@@ -21,6 +21,7 @@
     "test:e2e:mcpb": "npm run build && npm run pack:mcpb -w agent-browser-bridge-mcp && E2E_SERVER_ENTRY=packages/server/mcpb-dist/server/index.js vitest run --config vitest.e2e.config.ts"
   },
   "devDependencies": {
+    "@mdn/browser-compat-data": "^8.1.10",
     "@types/node": "^26.6.6",
     "@vitest/coverage-v8": "^4.1.12",
     "playwright": "^1.63.0",

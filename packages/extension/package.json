@@ -8,6 +8,7 @@
   "scripts": {
     "build": "vite build && vite build --config vite.background.config.ts",
     "build:safari": "npm run build && xcrun safari-web-extension-converter dist --project-location safari --app-name \"Agent Browser Bridge\" --bundle-identifier dev.agentbrowserbridge.app --macos-only --copy-resources --no-prompt --force",
+    "test:safari-app": "node scripts/check-safari-app.mjs",
     "dev": "vite build --mode development && (vite build --watch --mode development & vite build --watch --mode development --config vite.background.config.ts)",
     "icons": "node scripts/render-icons.mjs"
   },

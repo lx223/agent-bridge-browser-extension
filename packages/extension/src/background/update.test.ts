@@ -54,4 +54,10 @@ describe('applyUpdatesWhenIdle', () => {
     await flush();
     expect(runtime.reload).toHaveBeenCalledTimes(1);
   });
+
+  it('does nothing in a browser without update events, such as Safari', () => {
+    const reload = vi.fn();
+    expect(() => applyUpdatesWhenIdle({ reload }, async () => {})).not.toThrow();
+    expect(reload).not.toHaveBeenCalled();
+  });
 });
