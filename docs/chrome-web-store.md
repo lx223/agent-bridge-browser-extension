@@ -48,4 +48,4 @@ The translations other than English were written without a native speaker review
 5. Submit for review. The 0.3.0 submission kept the existing tester distribution and enabled automatic publication after approval.
 6. Verify that the dashboard reports Pending review. Submission does not mean the update is already published.
 
-The MCP server is released separately through the Publish npm package workflow and any approval required on npm's staged packages page. See [npm publishing](npm-publishing.md) for its trusted publisher configuration.
+The MCP server is released separately through the Publish npm package workflow and any approval required on npm's staged packages page, after the new extension version is live in every store it is published in. See [npm publishing](npm-publishing.md#release-order) for the release order and its trusted publisher configuration.
