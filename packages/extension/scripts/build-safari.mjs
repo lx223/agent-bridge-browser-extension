@@ -10,7 +10,8 @@ const appWindowIcon = join(appIconSet, 'icon_128x128@2x.png');
 const appName = 'Agent Browser Bridge';
 const bundleIdentifier = 'dev.agentbrowserbridge.app';
 const extensionBundleIdentifier = `${bundleIdentifier}.Extension`;
-const bundleIdentifierSetting = /PRODUCT_BUNDLE_IDENTIFIER = "?([^";]+)"?;/g;
+const bundleIdentifierSetting = /("?PRODUCT_BUNDLE_IDENTIFIER"?\s*[:=]\s*)"?([^";,\s]+)"?/g;
+const projectFileNames = ['project.pbxproj', 'project.xcproj'].map((name) => join('.xcodeproj', name));
 const openInXcode = !process.argv.includes('--no-open');
 
 function fail(message) {
@@ -41,14 +42,14 @@ execFileSync(
 );
 
 const generatedPaths = readdirSync(projectLocation, { recursive: true }).map(String);
-const projectFile = generatedPaths.find((path) => path.endsWith(join('.xcodeproj', 'project.pbxproj')));
+const projectFile = generatedPaths.find((path) => projectFileNames.some((name) => path.endsWith(name)));
 if (!projectFile) fail(`The converter did not create an Xcode project under ${projectLocation}.`);
 
 const projectPath = join(projectLocation, projectFile);
 const generated = readFileSync(projectPath, 'utf-8');
-const identifiersIn = (project) => [...new Set([...project.matchAll(bundleIdentifierSetting)].map((match) => match[1]))].sort();
-const corrected = generated.replace(bundleIdentifierSetting, (setting, identifier) =>
-  identifier === extensionBundleIdentifier ? setting : `PRODUCT_BUNDLE_IDENTIFIER = "${bundleIdentifier}";`,
+const identifiersIn = (project) => [...new Set([...project.matchAll(bundleIdentifierSetting)].map((match) => match[2]))].sort();
+const corrected = generated.replace(bundleIdentifierSetting, (setting, key, identifier) =>
+  identifier === extensionBundleIdentifier ? setting : `${key}"${bundleIdentifier}"`,
 );
 
 const identifiers = identifiersIn(corrected);
