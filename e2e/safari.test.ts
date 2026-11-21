@@ -1,6 +1,6 @@
 import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
 import { IDENTIFY_INSTANCES_TOOL, NAME_INSTANCE_TOOL, PROTOCOL_VERSION } from '@agent-browser-bridge/protocol';
-import { EXTENSION_DIST, EXTENSION_VERSION, requireFreeBridge, startAgent, type Agent, type Tab } from './harness.ts';
+import { EXTENSION_VERSION, startAgent, testBridge, type Agent, type Tab } from './harness.ts';
 import { COMPAT_DATA_VERSION, compareVersions, safariSupport } from './safari/apiSupport.ts';
 import { openSetupPageAsSafari } from './safari/setupPage.ts';
 import { SAFARI_VERSION, startSimulatedSafari, type SimulatedSafari } from './safari/simulatedSafari.ts';
@@ -20,6 +20,7 @@ interface WindowSummary {
 
 let agent: Agent;
 let safari: SimulatedSafari;
+let extensionDir: string;
 
 const welcomePage = () => `${safari.origin}/src/welcome/index.html`;
 const browserUrls = () => safari.tabs().map((tab) => tab.url);
@@ -27,9 +28,9 @@ const listTabs = (filter: Record<string, unknown> = {}) => agent.call<Tab[]>('sa
 const urlsOf = (tabs: Tab[]) => tabs.map((tab) => tab.url);
 
 beforeAll(async () => {
-  await requireFreeBridge();
+  ({ extensionDir } = await testBridge());
   agent = await startAgent();
-  safari = startSimulatedSafari({ extensionDir: EXTENSION_DIST, windows: [[NEWS, DOCS], [SHOP]] });
+  safari = startSimulatedSafari({ extensionDir, windows: [[NEWS, DOCS], [SHOP]] });
   await agent.waitUntilConnected();
 });
 
@@ -73,7 +74,7 @@ describe('the built extension in a simulated Safari', () => {
 
   it('shows the Safari wording and the connection on the setup page', async () => {
     const setup = await openSetupPageAsSafari({
-      extensionDir: EXTENSION_DIST,
+      extensionDir,
       extensionOrigin: safari.origin,
       sendMessage: (message) => safari.sendMessage(message),
     });
@@ -270,13 +271,13 @@ describe('the Safari simulation', () => {
 
   it('names the API when a background script uses one Safari lacks', () => {
     const start = () =>
-      startSimulatedSafari({ extensionDir: EXTENSION_DIST, backgroundSource: 'chrome.runtime.onUpdateAvailable.addListener(() => {});' });
+      startSimulatedSafari({ extensionDir, backgroundSource: 'chrome.runtime.onUpdateAvailable.addListener(() => {});' });
     expect(start).toThrow(/failed to start in the simulated Safari/);
     expect(start).toThrow(/runtime\.onUpdateAvailable: MDN lists it as not supported in Safari/);
   });
 
   it('tells a missing simulation apart from a missing Safari API', () => {
-    const start = () => startSimulatedSafari({ extensionDir: EXTENSION_DIST, backgroundSource: 'chrome.tabs.setZoom.call();' });
+    const start = () => startSimulatedSafari({ extensionDir, backgroundSource: 'chrome.tabs.setZoom.call();' });
     expect(start).toThrow(/tabs\.setZoom: Safari [\d.]+ has it, but the simulation in e2e\/safari does not yet/);
   });
 });
