@@ -276,6 +276,12 @@ describe('the Safari simulation', () => {
     expect(start).toThrow(/runtime\.onUpdateAvailable: MDN lists it as not supported in Safari/);
   });
 
+  it('refuses a service worker background, which Safari 27 does not run', () => {
+    const start = () =>
+      startSimulatedSafari({ extensionDir, manifest: { name: 'x', version: '1', background: { service_worker: 'background.js' } } });
+    expect(start).toThrow(/does not run service worker backgrounds/);
+  });
+
   it('tells a missing simulation apart from a missing Safari API', () => {
     const start = () => startSimulatedSafari({ extensionDir, backgroundSource: 'chrome.tabs.setZoom.call();' });
     expect(start).toThrow(/tabs\.setZoom: Safari [\d.]+ has it, but the simulation in e2e\/safari does not yet/);

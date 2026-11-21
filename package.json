@@ -18,6 +18,7 @@
     "test:coverage": "vitest run --coverage",
     "test:e2e": "npm run build && vitest run --config vitest.e2e.config.ts",
     "screenshots": "npm run build && node store/screenshots/generate.ts",
+    "screenshots:safari": "npm run build && node store/screenshots/safari.ts",
     "test:e2e:mcpb": "npm run build && npm run pack:mcpb -w agent-browser-bridge-mcp && E2E_SERVER_ENTRY=packages/server/mcpb-dist/server/index.js vitest run --config vitest.e2e.config.ts"
   },
   "devDependencies": {
