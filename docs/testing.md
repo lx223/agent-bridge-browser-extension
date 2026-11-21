@@ -80,7 +80,7 @@ Safari only loads an extension from a signed app, or from an unsigned one after 
 
 `e2e/safari.test.ts` runs as part of `npm run test:e2e`, on Linux as well as macOS. It starts the built MCP server like the Chromium tests do, but instead of a browser it uses `e2e/safari/simulatedSafari.ts`:
 
-1. It reads `packages/extension/dist/manifest.json` and runs the built `background.js` as a classic script, the only kind of background script Safari loads.
+1. It reads `packages/extension/dist/manifest.json`, turns it into the Safari manifest with `safariManifest` (`packages/extension/src/safariManifest.ts`), and runs the background script as a classic script. It refuses a manifest whose background is a service worker: Safari 27 lists such a worker under **Develop > Web Extension Background Content** but never runs it, so the extension never connects. The Safari build runs the same `background.js` as a non-persistent background page instead.
 2. The script gets a `chrome` object that has only what Safari offers: no `chrome.debugger`, `chrome.tabGroups` or `runtime.onUpdateAvailable`, and tabs without `groupId`, `discarded` or `lastAccessed`.
 3. Its WebSocket sends a `safari-web-extension://` origin, so the server treats it as Safari.
 4. Windows, tabs, page loads, back and forward history, extension storage, alarms and the toolbar button are kept in memory. `fetch` always fails, so nothing leaves the machine.
@@ -109,12 +109,13 @@ What the simulation does not prove: that real Safari behaves the way MDN and the
 
 1. builds the extension and generates the Xcode project through `npm run build:safari`, without opening Xcode,
 2. builds the generated Xcode project with `xcodebuild`, without code signing,
-3. checks that the extension bundle inside the app contains the same `manifest.json` and `background.js` as `packages/extension/dist`, and the icons and pages,
-4. checks that the Xcode project uses the committed app icon, and that the built app's icon includes the 1024 pixel image the App Store asks for.
+3. checks that the extension bundle inside the app contains the same `background.js` as `packages/extension/dist`, the manifest from `safariManifest`, and the icons and pages,
+4. checks that the Xcode project uses the committed app icon, and that the built app's icon includes the 1024 pixel image the App Store asks for,
+5. checks that the built app's Info.plist has the bundle identifier, version, App Store category, minimum macOS version and export compliance key the App Store needs.
 
 On GitHub the job summary shows the converter's output, including any manifest keys the installed Safari does not support.
 
-`npm run build:safari` runs `packages/extension/scripts/build-safari.mjs`. Apple's `safari-web-extension-converter` gives the app a bundle identifier made from its name, which does not match the extension's `dev.agentbrowserbridge.app.Extension`, and Xcode refuses to build an extension whose identifier does not start with its app's. The script sets the app's identifier to `dev.agentbrowserbridge.app` after converting, and fails if the project holds any other identifier.
+`npm run build:safari` runs `packages/extension/scripts/build-safari.mjs`. Apple's `safari-web-extension-converter` gives the app a bundle identifier made from its name, which does not match the extension's `dev.agentbrowserbridge.app.Extension`, and Xcode refuses to build an extension whose identifier does not start with its app's. The script sets the app's identifier to `dev.agentbrowserbridge.app` after converting, and fails if the project holds any other identifier. It also sets the version, build number, minimum macOS version and App Store keys the release needs; see [Mac App Store releases](safari-app-store.md#how-the-app-is-built).
 
 The converter also builds the app icon by enlarging the extension's 128 pixel icon. The script replaces it with the icon set in `packages/extension/safari-app/AppIcon.appiconset`, which follows the macOS icon shape and has every size up to 1024 pixels, and uses the same artwork for the icon shown in the app's window. `npm run icons -w agent-browser-bridge-extension` draws that set, along with the extension's own icons, from `packages/extension/scripts/render-icons.mjs`. It needs Chrome; set `CHROME_PATH` if it is not in the default macOS location.
 
@@ -130,5 +131,7 @@ Do this before a Safari release and after changing anything the Safari tools use
 4. Check that tab titles and URLs are present. If they are empty, website access has not been granted.
 5. Leave Safari idle for a few minutes, then call a tool again to check that the extension is still connected or reconnects.
 6. End the agent session and start a new one, and check that Safari reconnects within about 30 seconds.
+
+Build the app inside the repository, for example with Xcode's default derived data or under `packages/extension/safari-release/`. In testing, Safari did not load the background script of the same app built under `/private/tmp`.
 
 If real Safari behaves differently from the simulation, change the simulation to match and add a test for it.

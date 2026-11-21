@@ -59,7 +59,7 @@ The extension and the server update themselves while running, so you don't need 
 
 ### Safari
 
-Safari requires building a macOS app from source with Xcode installed:
+The Safari extension is being prepared for the Mac App Store; see [docs/safari-app-store.md](docs/safari-app-store.md). Until it is published, build the macOS app from source with Xcode installed:
 
 ```bash
 git clone https://github.com/lx223/agent-bridge-browser-extension.git

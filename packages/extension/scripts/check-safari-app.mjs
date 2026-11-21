@@ -3,6 +3,7 @@ import { appendFileSync, existsSync, mkdtempSync, readFileSync, readdirSync, rmS
 import { tmpdir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { safariManifest } from '../src/safariManifest.ts';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const dist = join(root, 'dist');
@@ -58,10 +59,13 @@ try {
   const missing = packagedFiles.filter((file) => !existsSync(join(resources, file)));
   if (missing.length) fail(`The Safari extension bundle is missing: ${missing.join(', ')}`);
 
-  for (const file of ['manifest.json', 'background.js']) {
-    if (!readFileSync(join(resources, file)).equals(readFileSync(join(dist, file)))) {
-      fail(`${file} in the Safari extension bundle differs from the built extension.`);
-    }
+  if (!readFileSync(join(resources, 'background.js')).equals(readFileSync(join(dist, 'background.js')))) {
+    fail('background.js in the Safari extension bundle differs from the built extension.');
+  }
+  const bundledManifest = JSON.parse(readFileSync(join(resources, 'manifest.json'), 'utf-8'));
+  const expectedManifest = safariManifest(JSON.parse(readFileSync(join(dist, 'manifest.json'), 'utf-8')));
+  if (JSON.stringify(bundledManifest) !== JSON.stringify(expectedManifest)) {
+    fail('manifest.json in the Safari extension bundle is not the built manifest with a non-persistent background page.');
   }
 
   const [projectIconSet] = findBySuffix(projectLocation, 'AppIcon.appiconset');
@@ -80,6 +84,20 @@ try {
   }
 
   const { version } = JSON.parse(readFileSync(join(resources, 'manifest.json'), 'utf-8'));
+  const [app] = findBySuffix(join(derivedData, 'Build', 'Products'), '.app').filter((path) => !path.includes('.app/'));
+  const appInfo = JSON.parse(execFileSync('plutil', ['-convert', 'json', '-o', '-', join(app, 'Contents', 'Info.plist')], { encoding: 'utf-8' }));
+  const expectedAppInfo = {
+    CFBundleIdentifier: 'dev.agentbrowserbridge.app',
+    CFBundleShortVersionString: version,
+    LSApplicationCategoryType: 'public.app-category.developer-tools',
+    LSMinimumSystemVersion: '14.0',
+    ITSAppUsesNonExemptEncryption: false,
+  };
+  const wrongAppInfo = Object.entries(expectedAppInfo).filter(([key, value]) => appInfo[key] !== value);
+  if (wrongAppInfo.length) {
+    fail(`The Safari app's Info.plist is not ready for the App Store: ${wrongAppInfo.map(([key, value]) => `${key} is ${JSON.stringify(appInfo[key])}, expected ${JSON.stringify(value)}`).join('; ')}`);
+  }
+
   const xcodeVersion = execFileSync('xcodebuild', ['-version'], { encoding: 'utf-8' });
   summarise(
     'Safari app build',
