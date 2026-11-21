@@ -506,12 +506,59 @@ export const methods = Object.keys(toolDefinitions) as Method[];
 
 export const browserApis = {
   chrome: methods,
-  safari: ['windows.list', 'tabs.list', 'tabs.move', 'tabs.close', 'tabs.create', 'tabs.navigate'],
+  safari: [
+    'windows.list',
+    'windows.create',
+    'windows.update',
+    'windows.remove',
+    'tabs.list',
+    'tabs.move',
+    'tabs.close',
+    'tabs.update',
+    'tabs.duplicate',
+    'tabs.create',
+    'tabs.navigate',
+  ],
 } as const satisfies Record<string, readonly Method[]>;
 
 export type Browser = keyof typeof browserApis;
 export const browsers = Object.keys(browserApis) as Browser[];
 export const browserLabels: Record<Browser, string> = { chrome: 'Chrome', safari: 'Safari' };
+
+interface BrowserVariant {
+  description: string;
+  unsupportedParams?: readonly string[];
+}
+
+const browserVariants: { [B in Browser]?: { [M in (typeof browserApis)[B][number]]?: BrowserVariant } } = {
+  safari: {
+    'windows.update': {
+      description: 'Focus a window, change its state (normal, minimized, maximized, fullscreen), or move and resize it.',
+      unsupportedParams: ['drawAttention'],
+    },
+    'windows.remove': {
+      description: 'Close a window and every tab in it. Safari tools cannot reopen it; confirm with the user first.',
+    },
+    'tabs.list': {
+      description:
+        'List open tabs (id, windowId, index, title, url, pinned, active, audible, muted). Every filter is optional and they combine. title and url accept * wildcards; url takes match patterns such as "*://*.example.com/*". Safari reports a title and url only for websites the extension has access to.',
+      unsupportedParams: ['groupId', 'discarded'],
+    },
+    'tabs.update': {
+      description:
+        'Switch to a tab (active), pin or unpin it, or mute or unmute it. Activating a tab does not focus its window; use safari_windows_update for that. Use safari_tabs_navigate to load a URL.',
+      unsupportedParams: ['autoDiscardable'],
+    },
+  },
+};
+
+export function browserTool(browser: Browser, method: Method) {
+  const def = toolDefinitions[method];
+  const variant = (browserVariants[browser] as Partial<Record<Method, BrowserVariant>> | undefined)?.[method];
+  const unsupported = new Set(variant?.unsupportedParams ?? []);
+  const params: Record<string, z.ZodType> = Object.fromEntries(Object.entries(def.params.shape).filter(([name]) => !unsupported.has(name)));
+  return { description: variant?.description ?? def.description, params };
+}
 
 export const STATUS_TOOL = 'browser_status';
 export const IDENTIFY_INSTANCES_TOOL = 'browser_identify_instances';

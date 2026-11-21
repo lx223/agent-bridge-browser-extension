@@ -21,12 +21,23 @@ interface SimulatedTab {
   position: number;
   active: boolean;
   pinned: boolean;
+  muted: boolean;
   status: 'loading' | 'complete';
 }
 
-interface SimulatedWindow {
+type WindowState = 'normal' | 'minimized' | 'maximized' | 'fullscreen';
+
+interface Bounds {
+  left: number;
+  top: number;
+  width: number;
+  height: number;
+}
+
+interface SimulatedWindow extends Bounds {
   id: number;
   focused: boolean;
+  state: WindowState;
   tabs: SimulatedTab[];
 }
 
@@ -45,12 +56,12 @@ export interface SafariTab {
   status: 'loading' | 'complete';
 }
 
-export interface SafariWindow {
+export interface SafariWindow extends Bounds {
   id: number;
   focused: boolean;
   incognito: boolean;
   type: 'normal';
-  state: 'normal';
+  state: WindowState;
   tabs?: SafariTab[];
 }
 
@@ -70,6 +81,17 @@ interface TabChange {
   url?: string;
   active?: boolean;
   pinned?: boolean;
+  muted?: boolean;
+}
+
+interface WindowChange extends Partial<Bounds> {
+  focused?: boolean;
+  state?: WindowState;
+}
+
+interface WindowCreation extends WindowChange {
+  url?: string | string[];
+  tabId?: number;
 }
 
 interface Manifest {
@@ -239,7 +261,7 @@ export function startSimulatedSafari(options: SimulatedSafariOptions): Simulated
       pinned: tab.pinned,
       incognito: false,
       audible: false,
-      mutedInfo: { muted: false },
+      mutedInfo: { muted: tab.muted },
       status: tab.status,
     };
   };
@@ -248,7 +270,11 @@ export function startSimulatedSafari(options: SimulatedSafariOptions): Simulated
     focused: window.focused,
     incognito: false,
     type: 'normal',
-    state: 'normal',
+    state: window.state,
+    left: window.left,
+    top: window.top,
+    width: window.width,
+    height: window.height,
     ...(populate && { tabs: window.tabs.map(describeTab) }),
   });
 
@@ -268,13 +294,13 @@ export function startSimulatedSafari(options: SimulatedSafariOptions): Simulated
   };
 
   const addTab = (window: SimulatedWindow, page: Page, active: boolean) => {
-    const tab: SimulatedTab = { id: nextId++, pages: [page], position: 0, active: false, pinned: false, status: 'complete' };
+    const tab: SimulatedTab = { id: nextId++, pages: [page], position: 0, active: false, pinned: false, muted: false, status: 'complete' };
     window.tabs.push(tab);
     if (active || window.tabs.length === 1) activate(tab);
     return tab;
   };
   const addWindow = (pages: Page[]) => {
-    const window: SimulatedWindow = { id: nextId++, focused: false, tabs: [] };
+    const window: SimulatedWindow = { id: nextId++, focused: false, state: 'normal', left: 0, top: 0, width: 1280, height: 800, tabs: [] };
     windows.push(window);
     pages.forEach((page, index) => addTab(window, page, index === 0));
     focus(window);
@@ -331,8 +357,53 @@ export function startSimulatedSafari(options: SimulatedSafariOptions): Simulated
     const tab = findTab(id);
     if (change.active) activate(tab);
     if (change.pinned !== undefined) tab.pinned = change.pinned;
+    if (change.muted !== undefined) tab.muted = change.muted;
     if (change.url !== undefined) visit(tab, change.url);
     return describeTab(tab);
+  };
+
+  const duplicateTab = (id: number) => {
+    const original = findTab(id);
+    const window = windowOf(original);
+    const copy: SimulatedTab = { ...original, id: nextId++, pages: [...original.pages], pinned: false, muted: false };
+    window.tabs.splice(window.tabs.indexOf(original) + 1, 0, copy);
+    activate(copy);
+    load(copy);
+    return describeTab(copy);
+  };
+
+  const changeWindow = (window: SimulatedWindow, { focused, state, ...bounds }: WindowChange) => {
+    Object.assign(window, Object.fromEntries(Object.entries(bounds).filter(([, value]) => value !== undefined)));
+    if (state !== undefined) window.state = state;
+    if (focused) focus(window);
+    if (focused === false && window.focused) window.focused = false;
+  };
+
+  const createWindow = ({ url, tabId, focused = true, ...change }: WindowCreation = {}) => {
+    const moved = tabId === undefined ? undefined : findTab(tabId);
+    const pages = url === undefined ? (moved ? [] : [START_PAGE]) : [url].flat().map(pageAt);
+    const previouslyFocused = focusedWindow();
+    const window = addWindow(pages);
+    if (moved) moveTabs(moved.id, { index: 0, windowId: window.id });
+    for (const tab of window.tabs.slice(moved ? 1 : 0)) load(tab);
+    changeWindow(window, change);
+    if (!focused && previouslyFocused) focus(previouslyFocused);
+    return describeWindow(window, true);
+  };
+
+  const updateWindow = (id: number, change: WindowChange) => {
+    const window = findWindow(id);
+    changeWindow(window, change);
+    return describeWindow(window, false);
+  };
+
+  const removeWindow = (id: number) => {
+    const window = findWindow(id);
+    for (const tab of [...window.tabs]) {
+      window.tabs.splice(window.tabs.indexOf(tab), 1);
+      onTabRemoved.emit(tab.id, { windowId: window.id, isWindowClosing: true });
+    }
+    settle(window);
   };
 
   const removeTabs = (ids: number | number[]) => {
@@ -417,12 +488,16 @@ export function startSimulatedSafari(options: SimulatedSafariOptions): Simulated
     },
     windows: {
       getAll: async ({ populate = false }: { populate?: boolean } = {}) => windows.map((window) => describeWindow(window, populate)),
+      create: async (properties?: WindowCreation) => createWindow(properties),
+      update: async (id: number, change: WindowChange) => updateWindow(id, change),
+      remove: async (id: number) => removeWindow(id),
     },
     tabs: {
       query: async (query?: TabQuery) => queryTabs(query),
       get: async (id: number) => describeTab(findTab(id)),
       create: async (properties?: { url?: string; windowId?: number; active?: boolean }) => createTab(properties),
       update: async (id: number, change: TabChange) => updateTab(id, change),
+      duplicate: async (id: number) => duplicateTab(id),
       remove: async (ids: number | number[]) => removeTabs(ids),
       move: async (ids: number | number[], properties: { index: number; windowId?: number }) => moveTabs(ids, properties),
       reload: async (id: number) => load(findTab(id)),
