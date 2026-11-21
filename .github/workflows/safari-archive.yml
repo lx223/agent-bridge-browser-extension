@@ -11,7 +11,7 @@ jobs:
   archive:
     runs-on: macos-latest
     env:
-      APP_ID: dev.agentbrowserbridge.app
+      APP_ID: dev.agentbrowserbridge
       PROJECT_DIR: packages/extension/safari/Agent Browser Bridge
     steps:
       - uses: actions/checkout@v4
