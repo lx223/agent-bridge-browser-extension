@@ -9,14 +9,17 @@ Copy for App Store Connect. Review it against the build and the [privacy policy]
 | Name (30 characters) | Agent Browser Bridge |
 | Subtitle (30 characters) | Let AI agents use Safari tabs |
 | Bundle ID | dev.agentbrowserbridge.app |
-| SKU | agent-browser-bridge-safari |
+| SKU | agent-browser-bridge |
 | Primary category | Developer Tools |
 | Secondary category | Productivity |
 | Price | Free |
+| Availability | Every country or region except China mainland, which needs AI-generated content and security filings |
+| EU trader status | Not a trader under the Digital Services Act |
+| Content rights | Does not contain, show or access third-party content |
 | Privacy policy URL | https://github.com/lx223/agent-bridge-browser-extension/blob/main/PRIVACY.md |
 | Support URL | https://github.com/lx223/agent-bridge-browser-extension/issues |
 | Marketing URL | https://github.com/lx223/agent-bridge-browser-extension |
-| Copyright | 2026 followed by the developer account's legal name |
+| Copyright | 2026 Lan Xiao |
 
 ## Promotional text (170 characters)
 
@@ -88,4 +91,9 @@ The extension connects to a local MCP server on 127.0.0.1:17373, which the user'
 
 ## Screenshots
 
-The Mac App Store needs one to ten 16:10 screenshots at 1280x800, 1440x900, 2560x1600 or 2880x1800. Do not reuse the Chrome Web Store screenshots: they show tab groups and page tools that Safari does not have. Take them in real Safari during the [manual check](../../docs/testing.md#checking-real-safari-by-hand), for example the setup page with an agent connected, and an agent listing and moving Safari tabs.
+`npm run screenshots:safari` writes the two 1280x800 screenshots to `store/screenshots/out/safari/`; upload both under the macOS version's App Previews and Screenshots. Do not reuse the Chrome Web Store screenshots: they show tab groups and page tools that Safari does not have.
+
+- `1-setup.png`: the built setup page in its Safari wording, connected to one agent session.
+- `2-tabs.png`: an agent opening and closing Safari tabs with the `safari_*` tools.
+
+The script needs neither the bridge nor a running agent. It loads the real built setup page in Playwright's Chromium, posing as Safari through `e2e/safari/setupPage.ts`, with a stubbed background that reports one connected session. The tabs screenshot is drawn in HTML from fixed text. Both use the caption, window and chat styles of the Chrome Web Store screenshots in `store/screenshots/frame.ts`.

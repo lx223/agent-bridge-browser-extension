@@ -2,6 +2,15 @@
 
 Safari only loads extensions that come inside a signed Mac app, so the Safari extension ships as the Agent Browser Bridge app on the Mac App Store. Copy-ready App Store Connect fields and reviewer instructions live in [store/safari/submission.md](../store/safari/submission.md).
 
+The app is managed in [App Store Connect](https://appstoreconnect.apple.com/apps/6837496354/distribution) under team `EV27867DV2`:
+
+| Field | Value |
+| --- | --- |
+| Apple ID | 6837496354 |
+| SKU | agent-browser-bridge |
+| App bundle ID | `dev.agentbrowserbridge.app` |
+| Extension bundle ID | `dev.agentbrowserbridge.app.Extension` |
+
 ## How the app is built
 
 `npm run build:safari -w agent-browser-bridge-extension` builds the extension and turns it into an Xcode project with Apple's `safari-web-extension-converter`. The project is generated on every build and not committed. `packages/extension/scripts/build-safari.mjs` then changes what the converter gets wrong for the App Store:
@@ -20,7 +29,7 @@ The script understands both project formats the converter writes: `project.pbxpr
 
 The Safari app is released from a Mac, because signing it for the App Store needs an Apple account. Nothing is built or published by CI for it, and no Apple credential is stored on GitHub.
 
-`npm run release:safari -w agent-browser-bridge-extension -- --team <team ID>` (`packages/extension/scripts/release-safari.mjs`):
+`npm run release:safari -w agent-browser-bridge-extension -- --team EV27867DV2` (`packages/extension/scripts/release-safari.mjs`):
 
 1. builds the extension with the release analytics keys, the same ones the **Publish Release** workflow uses for the Chrome ZIP,
 2. generates the Xcode project with a build number made from the current UTC time, such as `202611211235`, so every upload has a higher one; `--build-number` overrides it,
@@ -38,10 +47,11 @@ Add `--no-upload` to write the signed package to `packages/extension/safari-rele
 ## Release steps
 
 1. Run the [manual check in real Safari](testing.md#checking-real-safari-by-hand) on the commit you are releasing.
-2. On that main commit, run `npm run release:safari -w agent-browser-bridge-extension -- --team <team ID>`.
+2. On that main commit, run `npm run release:safari -w agent-browser-bridge-extension -- --team EV27867DV2`.
 3. Wait for App Store Connect to finish processing the build, which shows under TestFlight. Optionally install it through TestFlight on a Mac and check it once more.
-4. In App Store Connect, add a macOS version with the same version number as `packages/extension/package.json`, choose the build, add the screenshots and What's New text, and check the rest against the [submission copy](../store/safari/submission.md).
-5. Submit for review. Choose manual release if the Chrome and Safari releases should go out together.
-6. Once the app is live, update the Safari install steps in the [README](../README.md#safari) to link to it.
+4. If the release changes what the extension looks like or does, run `npm run screenshots:safari` and upload the new screenshots; see [Screenshots](../store/safari/submission.md#screenshots).
+5. In App Store Connect, add a macOS version with the same version number as `packages/extension/package.json`, choose the build, add the screenshots and What's New text, and check the rest against the [submission copy](../store/safari/submission.md).
+6. Submit for review. Choose manual release if the Chrome and Safari releases should go out together.
+7. Once the app is live, update the Safari install steps in the [README](../README.md#safari) to link to it.
 
 The Mac App Store updates the app, and with it the extension, by itself.
