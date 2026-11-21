@@ -2,6 +2,7 @@ import { randomUUID } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import WebSocketClient from 'ws';
+import { safariManifest } from '../../packages/extension/src/safariManifest.ts';
 import { describeSafariSupport } from './apiSupport.ts';
 
 export const SAFARI_VERSION = '27.0';
@@ -75,13 +76,14 @@ interface TabChange {
 interface Manifest {
   name: string;
   version: string;
-  background: { service_worker: string; type?: string };
+  background: { service_worker?: string; scripts?: string[]; persistent?: boolean; type?: string };
   action?: { default_title?: string };
 }
 
 export interface SimulatedSafariOptions {
   extensionDir: string;
   backgroundSource?: string;
+  manifest?: unknown;
   windows?: string[][];
 }
 
@@ -148,7 +150,7 @@ function matchesUrlPattern(pattern: string, url: string): boolean {
 const messageOf = (error: unknown) => (error instanceof Error ? error.message : String(error));
 
 export function startSimulatedSafari(options: SimulatedSafariOptions): SimulatedSafari {
-  const manifest = JSON.parse(readFileSync(join(options.extensionDir, 'manifest.json'), 'utf-8')) as Manifest;
+  const manifest = (options.manifest ?? safariManifest(JSON.parse(readFileSync(join(options.extensionDir, 'manifest.json'), 'utf-8')))) as Manifest;
   const extensionId = randomUUID().toUpperCase();
   const origin = `safari-web-extension://${extensionId}`;
   const errors: unknown[] = [];
@@ -449,8 +451,10 @@ export function startSimulatedSafari(options: SimulatedSafariOptions): Simulated
   for (const urls of options.windows ?? [[]]) addWindow(urls.length ? urls.map(pageAt) : [START_PAGE]);
 
   try {
-    if (manifest.background.type === 'module') throw new Error('Safari does not load module service workers.');
-    const source = options.backgroundSource ?? readFileSync(join(options.extensionDir, manifest.background.service_worker), 'utf-8');
+    const { service_worker: serviceWorker, scripts, persistent } = manifest.background;
+    if (serviceWorker) throw new Error('Safari 27 does not run service worker backgrounds; the Safari build must use background.scripts.');
+    if (scripts?.length !== 1 || persistent !== false) throw new Error('The simulated Safari expects one non-persistent background script.');
+    const source = options.backgroundSource ?? readFileSync(join(options.extensionDir, scripts[0]), 'utf-8');
     const run = new Function('chrome', 'browser', 'WebSocket', 'navigator', 'fetch', 'setTimeout', 'setInterval', source);
     run(
       extensionApi,
