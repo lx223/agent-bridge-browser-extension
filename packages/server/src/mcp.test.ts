@@ -144,6 +144,26 @@ describe('createMcpServer', () => {
     expect(contentOf(result)).toEqual([{ type: 'image', data: 'aGVsbG8=', mimeType: 'image/png' }]);
   });
 
+  it('reports progress while a call waits, when the client asks for it', async () => {
+    let answer: (value: unknown) => void = () => {};
+    const bridge = { status: () => LISTENING, request: vi.fn(() => new Promise((resolve) => (answer = resolve))) };
+    const server = createMcpServer(bridge as unknown as ExtensionBridge, '1.2.3', { progressIntervalMs: 20 });
+    const client = new Client({ name: 'contract-test', version: '0.0.0' });
+    const [clientTransport, serverTransport] = InMemoryTransport.createLinkedPair();
+    await Promise.all([server.connect(serverTransport), client.connect(clientTransport)]);
+    closers.push(() => client.close());
+
+    const progress: number[] = [];
+    const call = client.callTool({ name: 'chrome_tabs_wait_for', arguments: { tabId: 1, url: '*/done' } }, undefined, {
+      onprogress: ({ progress: value }) => progress.push(value),
+    });
+    await expect.poll(() => progress.length).toBeGreaterThanOrEqual(2);
+    answer({ id: 1 });
+    await expect(call).resolves.toMatchObject({ content: [{ type: 'text', text: JSON.stringify({ id: 1 }, null, 2) }] });
+    expect(progress.slice(0, 2)).toEqual([1, 2]);
+    expect(bridge.request).toHaveBeenCalledWith('chrome', 'tabs.waitFor', { tabId: 1, url: '*/done', timeoutMs: 120_000 }, undefined, undefined);
+  });
+
   it('turns bridge failures into error results', async () => {
     const { client } = await connect(async () => {
       throw new Error('extension is not connected');
@@ -236,6 +256,22 @@ describe('createMcpServer', () => {
       expect(bridge.request).toHaveBeenCalledWith('chrome', 'tabs.list', {}, undefined, 'aaaa1111');
       await client.callTool({ name: 'chrome_windows_list', arguments: {} });
       expect(bridge.request).toHaveBeenLastCalledWith('chrome', 'windows.list', {}, undefined, undefined);
+    });
+
+    it('asks for a browser restart when the extension cannot update itself while connected', async () => {
+      const notice =
+        'The Chrome extension is version 0.3.0, which cannot install updates while it is connected to an agent. Tell the user to quit and reopen Chrome to install the latest version.';
+      const { client } = await connectTo([hello('aaaa1111', { extensionVersion: '0.3.0' })]);
+      const result = await client.callTool({ name: 'chrome_tabs_list', arguments: {} });
+      expect(contentOf(result).at(-1)).toEqual({ type: 'text', text: `Browser instance: aaaa1111 (Chrome)\n${notice}` });
+      const status = await client.callTool({ name: STATUS_TOOL, arguments: {} });
+      expect(JSON.parse(contentOf(status)[0]!.text!).browsers).toEqual([expect.objectContaining({ instanceId: 'aaaa1111', extensionVersion: '0.3.0', notice })]);
+    });
+
+    it('adds no notice for an extension that updates itself', async () => {
+      const { client } = await connectTo([hello('aaaa1111', { extensionVersion: '0.4.0' })]);
+      const status = await client.callTool({ name: STATUS_TOOL, arguments: {} });
+      expect(JSON.parse(contentOf(status)[0]!.text!).browsers[0]).not.toHaveProperty('notice');
     });
 
     it('explains how to proceed when nothing is connected', async () => {
