@@ -8,7 +8,7 @@ const projectLocation = join(root, 'safari');
 const appIconSet = join(root, 'safari-app', 'AppIcon.appiconset');
 const appWindowIcon = join(appIconSet, 'icon_128x128@2x.png');
 const appName = 'Agent Browser Bridge';
-const bundleIdentifier = 'dev.agentbrowserbridge.app';
+const bundleIdentifier = 'dev.agentbrowserbridge';
 const extensionBundleIdentifier = `${bundleIdentifier}.Extension`;
 const bundleIdentifierSetting = /("?PRODUCT_BUNDLE_IDENTIFIER"?\s*[:=]\s*)"?([^";,\s]+)"?/g;
 const projectFileNames = ['project.pbxproj', 'project.xcproj'].map((name) => join('.xcodeproj', name));

@@ -74,6 +74,8 @@ A hidden element gets the same hint as a removed one. It is absent from a new sn
 
 Safari only loads an extension from a signed app, or from an unsigned one after a person turns on **Allow Unsigned Extensions** and enters their password, and that setting resets when Safari quits. Neither works on a CI machine, so no test drives real Safari. Two checks cover what can be automated, and a [manual check](#checking-real-safari-by-hand) covers the rest.
 
+`safaridriver` on GitHub's macOS runners (Safari 27.2) can load an unpacked extension into an automation session with the WebDriver command `POST /session/{id}/webextension`, so this was tried in November 2026 as a replacement for the manual check. Safari accepted the extension, but its background script did not run reliably: in some runs it ran for a moment and opened a tab, in others it did not run at all, and in no run did a WebSocket connection or a `fetch` from it reach the machine. A non-persistent background page in place of the service worker behaved the same way. The extension never connected to the bridge, so there is no real Safari test. Try again when Safari or `safaridriver` changes; the attempt is in the history of the pull request that added this paragraph.
+
 ### Simulated Safari
 
 `e2e/safari.test.ts` runs as part of `npm run test:e2e`, on Linux as well as macOS. It starts the built MCP server like the Chromium tests do, but instead of a browser it uses `e2e/safari/simulatedSafari.ts`:
@@ -112,7 +114,7 @@ What the simulation does not prove: that real Safari behaves the way MDN and the
 
 On GitHub the job summary shows the converter's output, including any manifest keys the installed Safari does not support.
 
-`npm run build:safari` runs `packages/extension/scripts/build-safari.mjs`. Apple's `safari-web-extension-converter` gives the app a bundle identifier made from its name, which does not match the extension's `dev.agentbrowserbridge.app.Extension`, and Xcode refuses to build an extension whose identifier does not start with its app's. The script sets the app's identifier to `dev.agentbrowserbridge.app` after converting, and fails if the project holds any other identifier.
+`npm run build:safari` runs `packages/extension/scripts/build-safari.mjs`. Apple's `safari-web-extension-converter` gives the app a bundle identifier made from its name, which does not match the extension's `dev.agentbrowserbridge.Extension`, and Xcode refuses to build an extension whose identifier does not start with its app's. The script sets the app's identifier to `dev.agentbrowserbridge` after converting, and fails if the project holds any other identifier.
 
 The converter also builds the app icon by enlarging the extension's 128 pixel icon. The script replaces it with the icon set in `packages/extension/safari-app/AppIcon.appiconset`, which follows the macOS icon shape and has every size up to 1024 pixels, and uses the same artwork for the icon shown in the app's window. `npm run icons -w agent-browser-bridge-extension` draws that set, along with the extension's own icons, from `packages/extension/scripts/render-icons.mjs`. It needs Chrome; set `CHROME_PATH` if it is not in the default macOS location.
 
