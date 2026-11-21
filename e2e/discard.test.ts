@@ -4,14 +4,14 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { chromium } from 'playwright';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
-import { EXTENSION_DIST, LOCAL_ONLY, requireFreeBridge, startAgent, type Agent, type Tab } from './harness.ts';
+import { LOCAL_ONLY, startAgent, testBridge, type Agent, type Tab } from './harness.ts';
 
 let agent: Agent;
 let browser: ChildProcess;
 let profile: string;
 
 beforeAll(async () => {
-  await requireFreeBridge();
+  const { extensionDir } = await testBridge();
   profile = mkdtempSync(join(tmpdir(), 'agent-browser-bridge-e2e-'));
   agent = await startAgent();
   browser = spawn(
@@ -21,8 +21,8 @@ beforeAll(async () => {
       '--no-sandbox',
       '--no-first-run',
       `--user-data-dir=${profile}`,
-      `--disable-extensions-except=${EXTENSION_DIST}`,
-      `--load-extension=${EXTENSION_DIST}`,
+      `--disable-extensions-except=${extensionDir}`,
+      `--load-extension=${extensionDir}`,
       LOCAL_ONLY,
       'about:blank',
     ],

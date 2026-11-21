@@ -1,15 +1,17 @@
-import { existsSync, mkdtempSync, readFileSync, rmSync } from 'node:fs';
+import { cpSync, existsSync, mkdtempSync, readFileSync, rmSync } from 'node:fs';
 import { createServer, type Server } from 'node:http';
-import { connect } from 'node:net';
+import { createServer as createNetServer, type AddressInfo } from 'node:net';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { Client } from '@modelcontextprotocol/sdk/client/index.js';
-import { StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js';
+import { getDefaultEnvironment, StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js';
 import { chromium, type BrowserContext } from 'playwright';
+import { build } from 'vite';
 import { DEFAULT_PORT, STATUS_TOOL } from '@agent-browser-bridge/protocol';
 
 const ROOT = resolve(import.meta.dirname, '..');
-export const EXTENSION_DIST = join(ROOT, 'packages/extension/dist');
+const EXTENSION_ROOT = join(ROOT, 'packages/extension');
+const EXTENSION_DIST = join(EXTENSION_ROOT, 'dist');
 const SERVER_ENTRY = resolve(ROOT, process.env.E2E_SERVER_ENTRY ?? 'packages/server/dist/index.js');
 const FIXTURES = join(ROOT, 'e2e/fixtures');
 const CONNECT_TIMEOUT_MS = 30_000;
@@ -69,14 +71,14 @@ export interface Agent {
 
 const sleep = (ms: number) => new Promise((done) => setTimeout(done, ms));
 
-function portInUse(port: number): Promise<boolean> {
-  return new Promise((done) => {
-    const socket = connect({ port, host: '127.0.0.1' });
-    socket.once('connect', () => {
-      socket.destroy();
-      done(true);
+function freePort(): Promise<number> {
+  return new Promise((done, fail) => {
+    const server = createNetServer();
+    server.once('error', fail);
+    server.listen(0, '127.0.0.1', () => {
+      const { port } = server.address() as AddressInfo;
+      server.close(() => done(port));
     });
-    socket.once('error', () => done(false));
   });
 }
 
@@ -86,9 +88,90 @@ function requireBuild() {
   }
 }
 
+export interface TestBridge {
+  port: number;
+  extensionDir: string;
+}
+
+const BRIDGE_PORT_ENV = 'E2E_BRIDGE_PORT';
+const EXTENSION_DIR_ENV = 'E2E_EXTENSION_DIR';
+
+function requireOnlyTestPort({ port, extensionDir }: TestBridge) {
+  const background = readFileSync(join(extensionDir, 'background.js'), 'utf-8');
+  if (port === DEFAULT_PORT || !background.includes(String(port)) || background.includes(String(DEFAULT_PORT))) {
+    throw new Error(`The test extension in ${extensionDir} does not connect only to port ${port}.`);
+  }
+}
+
+export async function createTestBridge(): Promise<TestBridge> {
+  requireBuild();
+  let port = await freePort();
+  while (port === DEFAULT_PORT) port = await freePort();
+  const extensionDir = mkdtempSync(join(tmpdir(), 'agent-browser-bridge-e2e-extension-'));
+  const bridge = { port, extensionDir };
+  try {
+    cpSync(EXTENSION_DIST, extensionDir, { recursive: true });
+    await build({
+      configFile: join(EXTENSION_ROOT, 'vite.background.config.ts'),
+      root: EXTENSION_ROOT,
+      logLevel: 'error',
+      build: { outDir: extensionDir },
+      define: { 'import.meta.env.VITE_BRIDGE_PORT': JSON.stringify(String(port)) },
+    });
+    requireOnlyTestPort(bridge);
+    return bridge;
+  } catch (error) {
+    removeTestBridge(bridge);
+    throw error;
+  }
+}
+
+export function removeTestBridge({ extensionDir }: TestBridge) {
+  rmSync(extensionDir, { recursive: true, force: true });
+}
+
+export function shareTestBridge({ port, extensionDir }: TestBridge) {
+  process.env[BRIDGE_PORT_ENV] = String(port);
+  process.env[EXTENSION_DIR_ENV] = extensionDir;
+}
+
+function sharedTestBridge(): TestBridge | undefined {
+  const port = Number(process.env[BRIDGE_PORT_ENV]);
+  const extensionDir = process.env[EXTENSION_DIR_ENV];
+  return port && extensionDir ? { port, extensionDir } : undefined;
+}
+
+async function ownTestBridge(): Promise<TestBridge> {
+  const bridge = await createTestBridge();
+  process.once('exit', () => removeTestBridge(bridge));
+  return bridge;
+}
+
+async function resolveTestBridge(): Promise<TestBridge> {
+  const shared = sharedTestBridge();
+  if (!shared) return ownTestBridge();
+  requireOnlyTestPort(shared);
+  return shared;
+}
+
+let testBridgePromise: Promise<TestBridge> | undefined;
+
+export function testBridge(): Promise<TestBridge> {
+  testBridgePromise ??= resolveTestBridge();
+  return testBridgePromise;
+}
+
 export async function startAgent(name = 'e2e', version = '0.0.0'): Promise<Agent> {
+  const { port } = await testBridge();
   const client = new Client({ name, version });
-  await client.connect(new StdioClientTransport({ command: process.execPath, args: [SERVER_ENTRY], stderr: 'ignore' }));
+  await client.connect(
+    new StdioClientTransport({
+      command: process.execPath,
+      args: [SERVER_ENTRY],
+      env: { ...getDefaultEnvironment(), AGENT_BROWSER_BRIDGE_PORT: String(port) },
+      stderr: 'ignore',
+    }),
+  );
 
   const raw = async (tool: string, args: Record<string, unknown> = {}): Promise<ToolResult> => {
     const result = await client.callTool({ name: tool, arguments: args });
@@ -145,17 +228,8 @@ export interface HarnessOptions {
   agentVersion?: string;
 }
 
-export async function requireFreeBridge() {
-  requireBuild();
-  if (await portInUse(DEFAULT_PORT)) {
-    throw new Error(
-      `Port ${DEFAULT_PORT} is already in use, probably by a running agent session. Close it before running the end-to-end tests so they cannot reach your own browser.`,
-    );
-  }
-}
-
 export async function startHarness(options: HarnessOptions = {}): Promise<Harness> {
-  await requireFreeBridge();
+  const { extensionDir } = await testBridge();
 
   const fixtures = await serveFixtures();
   const fixturePort = (fixtures.address() as { port: number }).port;
@@ -179,8 +253,8 @@ export async function startHarness(options: HarnessOptions = {}): Promise<Harnes
       deviceScaleFactor: options.deviceScaleFactor,
       colorScheme: options.colorScheme,
       args: [
-        `--disable-extensions-except=${EXTENSION_DIST}`,
-        `--load-extension=${EXTENSION_DIST}`,
+        `--disable-extensions-except=${extensionDir}`,
+        `--load-extension=${extensionDir}`,
         LOCAL_ONLY,
         '--enable-features=WebMCP',
         ...(options.locale ? [`--lang=${options.locale}`] : []),

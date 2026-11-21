@@ -28,10 +28,10 @@ Files that only wire things to the browser are excluded from the unit coverage n
 
 ## End-to-end tests
 
-`npm run test:e2e` builds both packages, then for each file in `e2e/`:
+`npm run test:e2e` builds both packages, picks a free port and makes a test copy of `packages/extension/dist` that connects to it (see [Bridge port](#bridge-port)), then for each file in `e2e/`:
 
-1. starts the built MCP server (`packages/server/dist/index.js`) over stdio with a real MCP client,
-2. launches headless Chromium with `packages/extension/dist` loaded as an unpacked extension,
+1. starts the built MCP server (`packages/server/dist/index.js`) over stdio with a real MCP client and `AGENT_BROWSER_BRIDGE_PORT` set to that port,
+2. launches headless Chromium with the test copy loaded as an unpacked extension,
 3. waits for the extension to connect, then drives it only through MCP tool calls against pages served from `e2e/fixtures/`.
 
 The files are:
@@ -46,6 +46,26 @@ The files are:
 - `e2e/safari.test.ts`: the built extension in a simulated Safari instead of Chromium. See [Safari](#safari).
 
 `npm run test:e2e:mcpb` runs the same suite against the Claude Desktop extension bundle (`packages/server/mcpb-dist/server/index.js`) instead of the npm build. The bundle inlines every dependency, so this catches bundling problems that only show up once the extension connects. Set `E2E_SERVER_ENTRY` to point the suite at any other server entry.
+
+### Bridge port
+
+Release builds connect to port 17373, the server's default. The extension reads the port from `VITE_BRIDGE_PORT` at build time and falls back to 17373 when it is not set, so a release build only changes if that variable is set while building.
+
+`createTestBridge()` in `e2e/harness.ts` picks a free port other than 17373. It copies `packages/extension/dist` to a temporary folder and rebuilds only `background.js` into it with `VITE_BRIDGE_PORT` set to that port, using `packages/extension/vite.background.config.ts`, then checks that the rebuilt script contains the new port and not 17373.
+
+`e2e/globalSetup.ts` does this once per Vitest run, passes the port and folder to the test files in `E2E_BRIDGE_PORT` and `E2E_EXTENSION_DIR`, and deletes the folder when the run ends. Outside Vitest, as in `npm run screenshots`, `testBridge()` makes its own copy and deletes it when the process exits. `startAgent` starts every server with `AGENT_BROWSER_BRIDGE_PORT` set to that port, and Chromium, the simulated Safari and the Safari setup page all load the test copy.
+
+This keeps the tests away from a real agent session on the same machine in both directions. A real browser extension connects only to 17373, so it never reaches a test server, and the test extension connects only to its own port, so it never reaches the real server. The suite therefore runs while an agent session holds 17373, and so do `npm run test:e2e:mcpb` and `npm run screenshots`.
+
+The same two variables run a development build beside a released one by hand:
+
+```bash
+VITE_BRIDGE_PORT=17374 npm run build -w agent-browser-bridge-extension
+```
+
+```bash
+AGENT_BROWSER_BRIDGE_PORT=17374 node packages/server/dist/index.js
+```
 
 `e2e/harness.ts` holds the shared setup. Add fixtures as plain HTML files in `e2e/fixtures/`. `startHarness` also takes a browser locale, device scale factor, colour scheme and the MCP client name and version the agent reports. The tests use the defaults; the [store screenshot generator](chrome-web-store.md#screenshots) sets them.
 
@@ -64,7 +84,7 @@ A hidden element gets the same hint as a removed one. It is absent from a new sn
 
 ### Things to know
 
-- The extension always connects to port 17373, so the files run one at a time. The harness refuses to start if that port is already in use, because a running agent session would otherwise connect the tests to your own browser. Close agent sessions that use the bridge first.
+- A running agent session does not need to be closed. The files run one at a time and share the run's port and test copy of the extension.
 - The test browser cannot resolve any host other than `127.0.0.1`, so nothing leaves the machine, including analytics if your local build has a key.
 - Locally you need Playwright's Chromium once: `npx playwright install chromium`.
 - To run against an existing build without rebuilding: `npx vitest run --config vitest.e2e.config.ts`.
@@ -80,7 +100,7 @@ Safari only loads an extension from a signed app, or from an unsigned one after 
 
 `e2e/safari.test.ts` runs as part of `npm run test:e2e`, on Linux as well as macOS. It starts the built MCP server like the Chromium tests do, but instead of a browser it uses `e2e/safari/simulatedSafari.ts`:
 
-1. It reads `packages/extension/dist/manifest.json` and runs the built `background.js` as a classic script, the only kind of background script Safari loads.
+1. It reads `manifest.json` from the test copy of `packages/extension/dist` and runs its built `background.js` as a classic script, the only kind of background script Safari loads.
 2. The script gets a `chrome` object that has only what Safari offers: no `chrome.debugger`, `chrome.tabGroups` or `runtime.onUpdateAvailable`, and tabs without `groupId`, `discarded` or `lastAccessed`.
 3. Its WebSocket sends a `safari-web-extension://` origin, so the server treats it as Safari.
 4. Windows, tabs, page loads, back and forward history, extension storage, alarms and the toolbar button are kept in memory. `fetch` always fails, so nothing leaves the machine.

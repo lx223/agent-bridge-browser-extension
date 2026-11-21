@@ -1,13 +1,17 @@
-import { defineConfig } from 'vite';
+import { defineConfig, type ResolvedConfig } from 'vite';
 import { resolve } from 'node:path';
 import { readFileSync, writeFileSync } from 'node:fs';
 
 function injectManifestVersion() {
+  let outDir = resolve(__dirname, 'dist');
   return {
     name: 'inject-manifest-version',
+    configResolved(config: ResolvedConfig) {
+      outDir = resolve(config.root, config.build.outDir);
+    },
     closeBundle() {
       const pkg = JSON.parse(readFileSync(resolve(__dirname, 'package.json'), 'utf-8'));
-      const manifestPath = resolve(__dirname, 'dist/manifest.json');
+      const manifestPath = resolve(outDir, 'manifest.json');
       const manifest = JSON.parse(readFileSync(manifestPath, 'utf-8'));
       manifest.version = pkg.version;
       writeFileSync(manifestPath, JSON.stringify(manifest, null, 2));
