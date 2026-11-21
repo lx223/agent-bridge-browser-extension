@@ -4,6 +4,7 @@ import {
   browserApis,
   browserLabels,
   browsers,
+  browserTool,
   browserToolName,
   IDENTIFY_INSTANCES_TOOL,
   NAME_INSTANCE_TOOL,
@@ -73,11 +74,12 @@ export function createMcpServer(bridge: ExtensionBridge, version: string): McpSe
   for (const browser of browsers) {
     for (const method of browserApis[browser]) {
       const def = toolDefinitions[method];
+      const tool = browserTool(browser, method);
       server.registerTool(
         browserToolName(browser, method),
         {
-          description: `${browserLabels[browser]}: ${def.description}`,
-          inputSchema: { ...def.params.shape, instance: instanceParam },
+          description: `${browserLabels[browser]}: ${tool.description}`,
+          inputSchema: { ...tool.params, instance: instanceParam },
           annotations: {
             readOnlyHint: def.readOnly,
             destructiveHint: 'destructive' in def ? def.destructive : false,

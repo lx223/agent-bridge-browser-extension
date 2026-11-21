@@ -3,6 +3,7 @@ import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 import { InMemoryTransport } from '@modelcontextprotocol/sdk/inMemory.js';
 import {
   browserApis,
+  browserTool,
   browserLabels,
   browsers,
   browserToolName,
@@ -12,7 +13,6 @@ import {
   PROTOCOL_VERSION,
   SERVER_NAME,
   STATUS_TOOL,
-  toolDefinitions,
   type HelloMessage,
 } from '@agent-browser-bridge/protocol';
 import type { BridgeStatus, ExtensionBridge } from './bridge.ts';
@@ -64,13 +64,26 @@ describe('createMcpServer', () => {
     const { tools } = await client.listTools();
     for (const browser of browsers) {
       for (const method of browserApis[browser]) {
-        const def = toolDefinitions[method];
+        const def = browserTool(browser, method);
         const tool = tools.find((t) => t.name === browserToolName(browser, method))!;
         expect(tool.description).toBe(`${browserLabels[browser]}: ${def.description}`);
-        expect(Object.keys(tool.inputSchema.properties ?? {}).sort()).toEqual([...Object.keys(def.params.shape), 'instance'].sort());
+        expect(Object.keys(tool.inputSchema.properties ?? {}).sort()).toEqual([...Object.keys(def.params), 'instance'].sort());
       }
     }
     expect(tools.find((t) => t.name === 'chrome_page_click')!.inputSchema.required).toEqual(['tabId']);
+  });
+
+  it('leaves out the params Safari does not support and names Safari tools in its descriptions', async () => {
+    const { client } = await connect();
+    const { tools } = await client.listTools();
+    const tool = (name: string) => tools.find((t) => t.name === name)!;
+    expect(tool('chrome_tabs_update').inputSchema.properties).toHaveProperty('autoDiscardable');
+    expect(tool('safari_tabs_update').inputSchema.properties).not.toHaveProperty('autoDiscardable');
+    expect(tool('safari_windows_update').inputSchema.properties).not.toHaveProperty('drawAttention');
+    expect(tool('safari_tabs_list').inputSchema.properties).not.toHaveProperty('groupId');
+    for (const name of tools.map((t) => t.name).filter((name) => name.startsWith('safari_'))) {
+      expect(tool(name).description).not.toMatch(/chrome_/);
+    }
   });
 
   it('marks read-only, destructive and open-world tools', async () => {

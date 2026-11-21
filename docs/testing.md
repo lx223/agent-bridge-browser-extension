@@ -126,7 +126,7 @@ Do this before a Safari release and after changing anything the Safari tools use
 
 1. Check that the setup page opens and its status turns green, and that the toolbar button shows the connected icon.
 2. Ask the agent for `browser_status`. Safari should be listed with the right extension version.
-3. Call each tool once: `safari_windows_list`, `safari_tabs_list`, `safari_tabs_create`, `safari_tabs_navigate` with a URL and with `back`, `safari_tabs_move` and `safari_tabs_close`.
+3. Call each tool once: `safari_windows_list`, `safari_windows_create` with URLs and with a `tabId`, `safari_windows_update` with `state` and with bounds, `safari_windows_remove`, `safari_tabs_list`, `safari_tabs_create`, `safari_tabs_navigate` with a URL and with `back`, `safari_tabs_update` with `active`, `pinned` and `muted`, `safari_tabs_duplicate`, `safari_tabs_move` and `safari_tabs_close`.
 4. Check that tab titles and URLs are present. If they are empty, website access has not been granted.
 5. Leave Safari idle for a few minutes, then call a tool again to check that the extension is still connected or reconnects.
 6. End the agent session and start a new one, and check that Safari reconnects within about 30 seconds.

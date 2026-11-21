@@ -170,6 +170,56 @@ describe('the built extension in a simulated Safari', () => {
     expect(missing.text).toMatch(/Invalid tab ID/);
   });
 
+  it('opens, focuses, resizes and closes windows', async () => {
+    const [original] = safari.windows();
+    const opened = await agent.call<WindowSummary & { tabs: Tab[] }>('safari_windows_create', { url: ['example.net/a', 'https://example.net/b'] });
+    expect(opened).toMatchObject({ focused: true, tabCount: 2 });
+    expect(urlsOf(opened.tabs)).toEqual(['https://example.net/a', 'https://example.net/b']);
+
+    expect(await agent.call('safari_windows_update', { windowId: original!.id, focused: true, state: 'maximized' })).toMatchObject({
+      id: original!.id,
+      focused: true,
+      state: 'maximized',
+    });
+    await agent.call('safari_windows_update', { windowId: opened.id, state: 'normal', left: 40, top: 30, width: 900, height: 700 });
+    expect(safari.windows().map(({ id, focused, state, left, top, width, height }) => ({ id, focused, state, left, top, width, height }))).toEqual([
+      { id: original!.id, focused: true, state: 'maximized', left: 0, top: 0, width: 1280, height: 800 },
+      { id: opened.id, focused: false, state: 'normal', left: 40, top: 30, width: 900, height: 700 },
+    ]);
+
+    const [docs] = await listTabs({ windowId: original!.id });
+    const split = await agent.call<WindowSummary & { tabs: Tab[] }>('safari_windows_create', { tabId: docs!.id, focused: false });
+    expect(split).toMatchObject({ tabCount: 1, tabs: [{ id: docs!.id, url: DOCS }] });
+    expect(safari.windows().find((window) => window.focused)?.id).toBe(original!.id);
+    await agent.call('safari_tabs_move', { tabIds: [docs!.id], index: 0, windowId: original!.id });
+
+    expect(await agent.call('safari_windows_remove', { windowId: opened.id })).toEqual({ closed: opened.id });
+    expect(safari.windows().map((window) => window.tabs!.map((tab) => tab.url))).toEqual([[DOCS, NEWS]]);
+    await agent.call('safari_windows_update', { windowId: original!.id, state: 'normal' });
+  });
+
+  it('switches, pins, mutes and duplicates tabs', async () => {
+    const [docs, news] = await listTabs();
+
+    expect(await agent.call('safari_tabs_update', { tabId: docs!.id, active: true, pinned: true, muted: true })).toMatchObject({
+      id: docs!.id,
+      active: true,
+      pinned: true,
+      muted: true,
+    });
+    expect(urlsOf(await listTabs({ muted: true }))).toEqual([DOCS]);
+    expect(urlsOf(await listTabs({ pinned: false }))).toEqual([NEWS]);
+    await agent.call('safari_tabs_update', { tabId: docs!.id, pinned: false, muted: false });
+
+    const copy = await agent.call<Tab>('safari_tabs_duplicate', { tabId: news!.id });
+    expect(copy).toMatchObject({ url: NEWS, index: 2, active: true, pinned: false });
+    expect(browserUrls()).toEqual([DOCS, NEWS, NEWS]);
+
+    await agent.call('safari_tabs_close', { tabIds: [copy.id] });
+    await agent.call('safari_tabs_update', { tabId: news!.id, active: true });
+    expect(browserUrls()).toEqual([DOCS, NEWS]);
+  });
+
   it('lets the agent identify Safari, name it, and address it by name', async () => {
     const { instances } = await agent.call<{ instances: Array<{ browser: string; instanceId: string; name: string | null; sampleTabs: Array<{ site: string }> }> }>(
       IDENTIFY_INSTANCES_TOOL,
@@ -226,7 +276,7 @@ describe('the Safari simulation', () => {
   });
 
   it('tells a missing simulation apart from a missing Safari API', () => {
-    const start = () => startSimulatedSafari({ extensionDir: EXTENSION_DIST, backgroundSource: 'chrome.tabs.duplicate.call();' });
-    expect(start).toThrow(/tabs\.duplicate: Safari [\d.]+ has it, but the simulation in e2e\/safari does not yet/);
+    const start = () => startSimulatedSafari({ extensionDir: EXTENSION_DIST, backgroundSource: 'chrome.tabs.setZoom.call();' });
+    expect(start).toThrow(/tabs\.setZoom: Safari [\d.]+ has it, but the simulation in e2e\/safari does not yet/);
   });
 });

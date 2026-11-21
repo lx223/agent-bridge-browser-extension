@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { browserApis, browsers, browserToolName, methods, STATUS_TOOL, toolDefinitions } from './index.ts';
+import { browserApis, browsers, browserTool, browserToolName, methods, STATUS_TOOL, toolDefinitions } from './index.ts';
 
 describe('toolDefinitions', () => {
   it('names each tool after its browser API method', () => {
@@ -90,5 +90,17 @@ describe('browser namespaces', () => {
       expect(method).not.toMatch(/^(page|cdp|plan|tabGroups|history|sessions|readingList|bookmarks|downloads|topSites|search|notifications)\./);
       expect(['tabs.group', 'tabs.ungroup']).not.toContain(method);
     }
+  });
+
+  it('gives Chrome the shared definitions and leaves out params Safari does not support', () => {
+    expect(browserTool('chrome', 'tabs.update')).toEqual({
+      description: toolDefinitions['tabs.update'].description,
+      params: toolDefinitions['tabs.update'].params.shape,
+    });
+    expect(Object.keys(browserTool('safari', 'tabs.update').params)).toEqual(['tabId', 'active', 'pinned', 'muted']);
+    expect(Object.keys(browserTool('safari', 'windows.update').params)).toEqual(['windowId', 'focused', 'state', 'left', 'top', 'width', 'height']);
+    expect(Object.keys(browserTool('safari', 'tabs.list').params)).not.toContain('groupId');
+    expect(Object.keys(browserTool('safari', 'tabs.list').params)).not.toContain('discarded');
+    expect(browserTool('safari', 'tabs.duplicate')).toEqual(browserTool('chrome', 'tabs.duplicate'));
   });
 });

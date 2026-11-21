@@ -8,7 +8,7 @@ import {
 } from '@agent-browser-bridge/protocol';
 import { instanceId, saveInstanceName } from './browser.ts';
 import { toChromeColor } from './color.ts';
-import { navigateTab, openTab } from './navigation.ts';
+import { navigateTab, normalizeUrl, openTab } from './navigation.ts';
 import {
   cdpDetach,
   cdpSend,
@@ -53,8 +53,9 @@ const definedOnly = <T extends object>(value: T) =>
 export const handlers: Handlers = {
   'windows.list': async () => (await chrome.windows.getAll({ populate: true })).map(serializeWindow),
 
-  'windows.create': async (p) => {
-    const win = await chrome.windows.create(definedOnly(p));
+  'windows.create': async ({ url, ...p }) => {
+    const urls = url === undefined ? undefined : [url].flat().map(normalizeUrl);
+    const win = await chrome.windows.create(definedOnly({ ...p, url: urls }));
     return serializeWindowWithTabs(win!);
   },
 
