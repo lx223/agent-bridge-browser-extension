@@ -1,16 +1,26 @@
 import { execFileSync } from 'node:child_process';
-import { existsSync, mkdirSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parseArgs } from 'node:util';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const projectLocation = join(root, 'safari');
+const { version } = JSON.parse(readFileSync(join(root, 'package.json'), 'utf-8'));
+
+const releaseAnalytics = {
+  VITE_POSTHOG_KEY: 'phc_FtV2hwQzJhR4Ul4ts9ViUxKZIP9MlDPMjMyvvPfZFjg',
+  VITE_POSTHOG_HOST: 'https://eu.i.posthog.com',
+  VITE_UNINSTALL_SURVEY_URL: 'https://eu.posthogsurveys.com/external_surveys/01a1eb02-9bf0-0000-54ae-59e3f95e3984',
+};
+
+const utcTimestamp = new Date().toISOString().replace(/\D/g, '').slice(0, 12);
 
 const { values: options } = parseArgs({
   options: {
-    'build-number': { type: 'string' },
-    'output': { type: 'string', default: join(root, 'safari-release') },
+    team: { type: 'string', default: process.env.APPLE_TEAM_ID },
+    'build-number': { type: 'string', default: utcTimestamp },
+    output: { type: 'string', default: join(root, 'safari-release') },
     'no-upload': { type: 'boolean', default: false },
   },
 });
@@ -22,26 +32,30 @@ function fail(message) {
 
 if (process.platform !== 'darwin') fail('The Safari app can only be released from macOS with Xcode installed.');
 
+const teamId = options.team;
+if (!teamId) fail('Pass --team with the Apple Developer team ID, or set APPLE_TEAM_ID.');
 const buildNumber = options['build-number'];
-if (!buildNumber) fail('Pass --build-number with a number higher than every build already uploaded to App Store Connect.');
 
-const required = ['APPLE_TEAM_ID', 'APP_STORE_CONNECT_KEY_ID', 'APP_STORE_CONNECT_ISSUER_ID', 'APP_STORE_CONNECT_KEY_PATH'];
-const missing = required.filter((name) => !process.env[name]);
-if (missing.length) fail(`Set ${missing.join(', ')}. See docs/safari-app-store.md.`);
-if (!existsSync(process.env.APP_STORE_CONNECT_KEY_PATH)) fail(`No App Store Connect API key at ${process.env.APP_STORE_CONNECT_KEY_PATH}.`);
+const apiKey = ['APP_STORE_CONNECT_KEY_ID', 'APP_STORE_CONNECT_ISSUER_ID', 'APP_STORE_CONNECT_KEY_PATH'];
+const apiKeySet = apiKey.filter((name) => process.env[name]);
+if (apiKeySet.length && apiKeySet.length !== apiKey.length) fail(`Set all of ${apiKey.join(', ')} to use an API key, or none to use the Xcode account.`);
+if (apiKeySet.length && !existsSync(process.env.APP_STORE_CONNECT_KEY_PATH)) fail(`No App Store Connect API key at ${process.env.APP_STORE_CONNECT_KEY_PATH}.`);
+const authentication = apiKeySet.length
+  ? [
+      '-authenticationKeyPath',
+      process.env.APP_STORE_CONNECT_KEY_PATH,
+      '-authenticationKeyID',
+      process.env.APP_STORE_CONNECT_KEY_ID,
+      '-authenticationKeyIssuerID',
+      process.env.APP_STORE_CONNECT_ISSUER_ID,
+    ]
+  : [];
 
-const teamId = process.env.APPLE_TEAM_ID;
-const authentication = [
-  '-allowProvisioningUpdates',
-  '-authenticationKeyPath',
-  process.env.APP_STORE_CONNECT_KEY_PATH,
-  '-authenticationKeyID',
-  process.env.APP_STORE_CONNECT_KEY_ID,
-  '-authenticationKeyIssuerID',
-  process.env.APP_STORE_CONNECT_ISSUER_ID,
-];
-
-execFileSync('npm', ['run', 'build:safari', '--', '--no-open', '--build-number', buildNumber], { cwd: root, stdio: 'inherit' });
+execFileSync('npm', ['run', 'build:safari', '--', '--no-open', '--build-number', buildNumber], {
+  cwd: root,
+  stdio: 'inherit',
+  env: { ...process.env, ...releaseAnalytics },
+});
 
 const project = readdirSync(projectLocation, { recursive: true })
   .map(String)
@@ -71,7 +85,6 @@ execFileSync(
     'generic/platform=macOS',
     '-archivePath',
     archivePath,
-    `DEVELOPMENT_TEAM=${teamId}`,
     'CODE_SIGN_STYLE=Manual',
     'CODE_SIGN_IDENTITY=-',
     'archive',
@@ -102,12 +115,12 @@ writeFileSync(
 
 execFileSync(
   'xcodebuild',
-  ['-exportArchive', '-archivePath', archivePath, '-exportOptionsPlist', exportOptionsPath, '-exportPath', output, ...authentication],
+  ['-exportArchive', '-archivePath', archivePath, '-exportOptionsPlist', exportOptionsPath, '-exportPath', output, '-allowProvisioningUpdates', ...authentication],
   { stdio: 'inherit' },
 );
 
 console.log(
   options['no-upload']
-    ? `Exported the signed App Store package to ${output}.`
-    : `Uploaded build ${buildNumber} to App Store Connect. It appears under TestFlight once Apple has processed it.`,
+    ? `Exported the signed App Store package for ${version} (${buildNumber}) to ${output}.`
+    : `Uploaded ${version} (${buildNumber}) to App Store Connect. It appears under TestFlight once Apple has processed it.`,
 );
