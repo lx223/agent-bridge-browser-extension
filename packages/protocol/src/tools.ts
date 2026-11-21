@@ -185,6 +185,17 @@ export const toolDefinitions = {
     }),
     readOnly: false,
   },
+  'tabs.waitFor': {
+    description:
+      "Wait until a tab's url or title matches, for example until the user has signed in and the page moves on. Pass url, title or both; each matches the whole value, ignores case and accepts * wildcards, such as \"https://example.com/account*\". Returns the tab as soon as it matches, at once if it already does. Fails when the tab closes or timeoutMs passes (default 2 minutes, at most 10).",
+    params: z.object({
+      tabId,
+      url: z.string().min(1).optional(),
+      title: z.string().min(1).optional(),
+      timeoutMs: z.number().int().min(0).max(600_000).default(120_000),
+    }),
+    readOnly: true,
+  },
   'history.search': {
     description:
       'Search browsing history by words in page titles and URLs; empty text matches every page. Times are milliseconds since the epoch. startTime defaults to 24 hours ago, so pass it to look further back. Returns one entry per URL, most recent first: id, url, title, lastVisitTime, visitCount, typedCount.',
@@ -518,6 +529,7 @@ export const browserApis = {
     'tabs.duplicate',
     'tabs.create',
     'tabs.navigate',
+    'tabs.waitFor',
   ],
 } as const satisfies Record<string, readonly Method[]>;
 
@@ -548,6 +560,10 @@ const browserVariants: { [B in Browser]?: { [M in (typeof browserApis)[B][number
       description:
         'Switch to a tab (active), pin or unpin it, or mute or unmute it. Activating a tab does not focus its window; use safari_windows_update for that. Use safari_tabs_navigate to load a URL.',
       unsupportedParams: ['autoDiscardable'],
+    },
+    'tabs.waitFor': {
+      description:
+        "Wait until a tab's url or title matches, for example until the user has signed in and the page moves on. Pass url, title or both; each matches the whole value, ignores case and accepts * wildcards, such as \"https://example.com/account*\". Returns the tab as soon as it matches, at once if it already does. Fails when the tab closes or timeoutMs passes (default 2 minutes, at most 10). Safari reports a title and url only for websites the extension has access to, so a tab on any other website never matches.",
     },
   },
 };

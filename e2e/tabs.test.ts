@@ -201,6 +201,22 @@ describe('tab management through the built server and extension', () => {
     await closeAllButOne();
   });
 
+  it('waits for a tab to reach a page, and stops when it closes or time runs out', async () => {
+    const tab = await harness.openFixture('form.html');
+    const arrived = harness.agent.call<Tab>('chrome_tabs_wait_for', { tabId: tab.id, url: '*/second.html', timeoutMs: 10_000 });
+    await harness.agent.call('chrome_tabs_navigate', { tabId: tab.id, to: harness.fixture('second.html') });
+    await expect(arrived).resolves.toMatchObject({ id: tab.id, url: harness.fixture('second.html') });
+    await expect(harness.agent.call<Tab>('chrome_tabs_wait_for', { tabId: tab.id, url: '*SECOND.html' })).resolves.toMatchObject({ id: tab.id });
+
+    const late = await harness.agent.raw('chrome_tabs_wait_for', { tabId: tab.id, url: '*/never.html', timeoutMs: 200 });
+    expect(late.isError).toBe(true);
+    expect(late.text).toContain(`Timed out after 200ms waiting for tab ${tab.id} to match url "*/never.html". It is at url "${harness.fixture('second.html')}"`);
+
+    const closed = harness.agent.raw('chrome_tabs_wait_for', { tabId: tab.id, url: '*/never.html' });
+    await harness.agent.call('chrome_tabs_close', { tabIds: [tab.id] });
+    expect((await closed).text).toBe(`Tab ${tab.id} was closed before its url "*/never.html" matched.`);
+  });
+
   it('creates, updates and closes windows', async () => {
     const created = await harness.agent.call<{ id: number; type: string; tabs: Tab[] }>('chrome_windows_create', {
       url: [harness.fixture('form.html'), harness.fixture('second.html')],

@@ -25,6 +25,7 @@ import {
 import { callPageTool, listPageTools } from './pageTools.ts';
 import { applyPlan, undoLastPlan } from './plan.ts';
 import { serializeDevice, serializeGroup, serializeSession, serializeTab, serializeWindow, serializeWindowWithTabs } from './serialize.ts';
+import { waitForTab } from './tabWait.ts';
 
 type Handlers = { [M in Method]: (params: ParamsOf<M>) => Promise<unknown> };
 type NonEmpty = [number, ...number[]];
@@ -191,6 +192,7 @@ export const handlers: Handlers = {
 
   'tabs.create': openTab,
   'tabs.navigate': navigateTab,
+  'tabs.waitFor': waitForTab,
   'page.snapshot': snapshot,
   'page.click': click,
   'page.hover': hover,
