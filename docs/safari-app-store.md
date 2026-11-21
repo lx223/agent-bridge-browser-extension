@@ -4,8 +4,8 @@ Safari extensions ship inside a macOS app. The app is listed in [App Store Conne
 
 | Target | Bundle ID |
 | --- | --- |
-| App | `dev.agentbrowserbridge` |
-| Safari extension | `dev.agentbrowserbridge.Extension` |
+| App | `dev.agentbrowserbridge.app` |
+| Safari extension | `dev.agentbrowserbridge.app.Extension` |
 
 Both bundle IDs are registered under [Certificates, Identifiers & Profiles](https://developer.apple.com/account/resources/identifiers/list).
 
@@ -21,7 +21,7 @@ Both bundle IDs are registered under [Certificates, Identifiers & Profiles](http
 
 The converter does not produce a project the App Store accepts as is, so `build:safari` and the workflow adjust it:
 
-- `build:safari` sets the app's bundle ID to `dev.agentbrowserbridge` and installs the macOS app icon; see [testing.md](testing.md).
+- `build:safari` sets the app's bundle ID to `dev.agentbrowserbridge.app` and installs the macOS app icon; see [testing.md](testing.md).
 - `MARKETING_VERSION` comes from `packages/extension/package.json` and `CURRENT_PROJECT_VERSION` is the workflow run number, so every upload has a new build number.
 - `MACOSX_DEPLOYMENT_TARGET` is 12.0, matching the extension target, instead of the converter's default of the Xcode SDK version.
 - `LSApplicationCategoryType` is `public.app-category.developer-tools`, which the Mac App Store requires.
