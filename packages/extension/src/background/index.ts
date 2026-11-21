@@ -11,6 +11,7 @@ import { UsageTracker } from './usage.ts';
 
 const WELCOME_PAGE = 'src/welcome/index.html';
 const RECONNECT_ALARM = 'agent-browser-bridge-reconnect';
+const BRIDGE_PORT = Number(import.meta.env.VITE_BRIDGE_PORT || DEFAULT_PORT);
 
 const statusTitle = ({ state, agents }: ConnectionStatus) => {
   if (state !== 'connected') return 'Agent Browser Bridge: no agent connected';
@@ -54,7 +55,7 @@ const trackedDispatch = async (method: string, params: unknown, agent: AgentInfo
 };
 
 const client = new BridgeClient(
-  `ws://127.0.0.1:${DEFAULT_PORT}`,
+  `ws://127.0.0.1:${BRIDGE_PORT}`,
   trackedDispatch,
   (status) => {
     usage.setConnected(status.state === 'connected');
