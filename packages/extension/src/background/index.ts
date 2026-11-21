@@ -1,7 +1,8 @@
-import { DEFAULT_PORT, type AgentInfo } from '@agent-browser-bridge/protocol';
+import { DEFAULT_PORT, isChatMethod, type AgentInfo } from '@agent-browser-bridge/protocol';
 import { Analytics, ANALYTICS_ENABLED_KEY, isPageEvent, type Properties } from './analytics.ts';
 import { sessionTitle } from '../settings/sessionList.ts';
 import { BridgeClient, type ConnectionStatus } from './bridgeClient.ts';
+import { ChatPanel } from './chatPanel.ts';
 import { INSTANCE_NAME_KEY } from './browser.ts';
 import { listenForDetach } from './debugger.ts';
 import { listenForPageToolEvents } from './pageTools.ts';
@@ -42,7 +43,13 @@ const usage = new UsageTracker({
   },
 });
 
+const chatPanel = chrome.sidePanel ? new ChatPanel() : undefined;
+
 const trackedDispatch = async (method: string, params: unknown, agent: AgentInfo | null) => {
+  if (isChatMethod(method)) {
+    if (!chatPanel) throw new Error('This browser has no chat panel yet. Continue in your own window.');
+    return chatPanel.store.dispatch(method, params, agent);
+  }
   const started = Date.now();
   try {
     const result = await dispatch(method, params);
@@ -59,6 +66,7 @@ const client = new BridgeClient(
   trackedDispatch,
   (status) => {
     usage.setConnected(status.state === 'connected');
+    chatPanel?.agentsChanged(status.agents);
     if (status.state === 'connected') void usage.milestone('first_connected');
     showStatus(status);
     chrome.runtime.sendMessage({ type: 'STATUS_CHANGED', status }).catch(() => {
@@ -114,6 +122,13 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 
 chrome.runtime.onMessage.addListener((message, sender, respond) => {
   if (sender.id !== chrome.runtime.id) return false;
+  if (chatPanel?.handles(message)) {
+    chatPanel.handle(message).then(
+      () => respond({ ok: true }),
+      (error: unknown) => respond({ ok: false, error: error instanceof Error ? error.message : String(error) }),
+    );
+    return true;
+  }
   if (message?.type === 'GET_STATUS') {
     respond(client.status);
   } else if (message?.type === 'RECONNECT') {

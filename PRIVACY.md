@@ -1,6 +1,6 @@
 # Agent Browser Bridge privacy policy
 
-Last updated: 20 November 2026
+Last updated: 21 November 2026
 
 Agent Browser Bridge connects your browser's tabs, tab groups and web pages to an MCP-compatible agent through a bridge server running on your computer. It runs in Chrome, in other Chromium browsers such as Edge and Brave, and in Safari. Safari offers fewer tools, so less information is used there; see [Safari](#safari).
 
@@ -15,6 +15,8 @@ When a connected agent uses bookmarks, Reading List, download or most-visited-si
 When a connected agent uses page tools, the extension uses Chrome's `debugger` permission to attach to the requested tab and can send that page's content to the local bridge: its accessibility tree (visible text, labels, form field values and element roles), screenshots, the results of JavaScript the agent evaluates in the page, and the results of DevTools Protocol commands the agent sends. Depending on what the agent requests, this can include anything the page shows or holds, such as messages, account details, form contents and cookies. Page tools also let the agent click, type, scroll and navigate in the page as you.
 
 The extension uses Chrome session storage to keep the previous tab and group layout for the undo feature. That snapshot contains tab identifiers, positions, group membership, group names and a timestamp. It is replaced by a later applied plan, removed after undo, and cleared when the browser session ends.
+
+When an agent uses the chat panel, the extension keeps that conversation in Chrome session storage: the messages the agent and you write, when they were sent, and the name of the agent session. Each message you send also includes the title and URL of the tab you were looking at. Your messages go only to the agent session the conversation belongs to, through the local bridge. Chrome clears the conversations when the browser session ends or the extension updates or reloads, and you can remove a conversation from the panel. Chat messages are not included in usage analytics.
 
 The local bridge also tells the extension which agent sessions are connected, so the setup and options pages can list them. For each session this includes the name and version the agent reports for itself, a random session identifier, when the session started, the name and path of the project folder the agent is working in, the last browser tool it used and when, how many tool calls it made, and which browser profiles it used. The extension only shows this on its own pages; it is not stored and not included in usage analytics.
 

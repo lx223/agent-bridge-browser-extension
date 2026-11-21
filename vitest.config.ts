@@ -23,6 +23,7 @@ export default defineConfig({
         'packages/extension/src/options/**',
         'packages/extension/src/settings/**',
         'packages/extension/src/welcome/main.ts',
+        'packages/extension/src/sidepanel/main.ts',
         'packages/server/src/index.ts',
         'packages/server/src/worker.ts',
         'packages/server/src/standalone.ts',

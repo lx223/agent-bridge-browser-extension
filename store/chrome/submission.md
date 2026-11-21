@@ -16,6 +16,8 @@ Agents can also help you pick up earlier work: search your browsing history, lis
 
 Connected agents can also inspect and operate web pages, navigate, click, type, and use page-provided WebMCP tools. The debugger permission enables this page control through the Chrome DevTools Protocol. Only connect agents you trust: they can receive tab titles, URLs and page contents and interact with pages on your behalf.
 
+A side panel lets you chat with your agent from Chrome, so you don't need to switch back to the agent's window between steps.
+
 The setup page shows connection status and provides configuration options for Cursor, VS Code, Claude Code and other MCP-compatible agents. A separate local Agent Browser Bridge MCP server is required. The extension connects to that server on your computer.
 
 Anonymous product usage analytics can be turned off in the extension settings. See the privacy policy for details.
@@ -71,6 +73,10 @@ Run a search with the user's own default search engine in a new tab when the use
 ### notifications
 
 Show a desktop notification from the user's agent, such as when a long-running task the user requested finishes.
+
+### sidePanel
+
+Show the chat panel where the user talks to their connected agent: the agent's messages appear there and the user's replies go back to it through the local bridge.
 
 ### alarms
 
@@ -142,5 +148,6 @@ Page control cannot operate on chrome:// pages, extension pages, DevTools or the
 | topSites | Lists the most visited sites. | history alone does not return Chrome's most visited ranking. |
 | search | Runs a search with the user's default search engine in a new tab. | Opening a fixed search URL would ignore the user's chosen engine. |
 | notifications | Shows a desktop notification from the agent, such as when a requested task finishes. | Pages and the service worker cannot show system notifications without it. |
+| sidePanel | Shows the chat panel for talking to the connected agent. | A tab or popup would cover the page the user is working on, or close as soon as they click it. |
 | alarms | Wakes the service worker periodically to reconnect the local bridge. | Ordinary worker timers do not survive suspension. |
 | debugger | Attaches the DevTools Protocol for page snapshots, screenshots, interactions, evaluation, navigation fallback and WebMCP tools. | tabs and tabGroups APIs cannot inspect or operate page contents. |

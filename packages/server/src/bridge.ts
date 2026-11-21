@@ -4,7 +4,10 @@ import WebSocket, { WebSocketServer } from 'ws';
 import {
   browserApis,
   browserToolName,
+  CHAT_PEEK_METHOD,
+  chatToolNames,
   extensionToServer,
+  isChatMethod,
   hostToRelay,
   NAME_INSTANCE_TOOL,
   PROTOCOL_VERSION,
@@ -71,6 +74,7 @@ const EXTENSION_SCHEMES = ['chrome-extension://', 'safari-web-extension://'];
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 const toolLabel = (browser: string, method: string) => {
   if (method === SET_INSTANCE_NAME_METHOD) return NAME_INSTANCE_TOOL;
+  if (isChatMethod(method)) return chatToolNames[method];
   if (method in toolDefinitions && browser in browserApis) return browserToolName(browser as Browser, method as Method);
   return method;
 };
@@ -189,7 +193,7 @@ export class ExtensionBridge {
   }
 
   private recordActivity(agent: AgentInfo | null, browser: string, method: string, hello: HelloMessage | undefined) {
-    if (agent?.sessionId === undefined) return;
+    if (agent?.sessionId === undefined || method === CHAT_PEEK_METHOD) return;
     const previous = this.activity.get(agent.sessionId);
     const use: AgentInstanceUse = {
       browser,
