@@ -9,6 +9,7 @@ export default defineConfig(({ mode }) => ({
       input: {
         welcome: resolve(__dirname, 'src/welcome/index.html'),
         options: resolve(__dirname, 'src/options/index.html'),
+        sidepanel: resolve(__dirname, 'src/sidepanel/index.html'),
       },
       output: {
         entryFileNames: 'assets/[name]-[hash].js',

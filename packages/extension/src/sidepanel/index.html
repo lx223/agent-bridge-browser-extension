@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Agent chat</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="header-row">
+        <strong id="title">Agent chat</strong>
+        <a id="setup-link" href="../welcome/index.html" target="_blank">Setup</a>
+      </div>
+      <select id="conversation" aria-label="Conversation" hidden></select>
+      <span id="status" class="status"></span>
+    </header>
+    <section id="empty">
+      <p><strong>Talk to your agent from here</strong></p>
+      <p>Ask your agent to continue in the browser, or run its <code>continue_in_browser</code> prompt. Its messages appear here, and your replies go straight back to it.</p>
+      <p class="hint">Each agent session gets its own conversation.</p>
+    </section>
+    <ol id="messages" aria-live="polite"></ol>
+    <form id="composer" hidden>
+      <textarea id="input" rows="3" placeholder="Message the agent" aria-label="Message the agent"></textarea>
+      <div class="composer-row">
+        <span id="composer-hint" class="hint"></span>
+        <button type="button" id="end">End chat</button>
+        <button type="button" id="remove">Remove</button>
+        <button type="submit" id="send">Send</button>
+      </div>
+      <p id="error" class="error" hidden></p>
+    </form>
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>

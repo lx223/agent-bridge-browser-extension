@@ -197,6 +197,14 @@ describe('ExtensionBridge', () => {
       expect(bridge!.agents()[0]!.activity?.lastTool).toBe('browser_name_instance');
     });
 
+    it('names chat activity after the chat tools and leaves out unread checks', async () => {
+      const port = await startBridge({ agentInfo: () => session('host-session') });
+      await listen(port);
+      await bridge!.request('chrome', 'chat.receive', { waitMs: 0 });
+      await bridge!.request('chrome', 'chat.peek', {});
+      expect(bridge!.agents()[0]!.activity).toMatchObject({ lastTool: 'browser_chat_receive', calls: 1 });
+    });
+
     it('names tools after the browser and ignores sessions without an id', async () => {
       const port = await startBridge({ agentInfo: () => ({ serverVersion: '9.9.9', client: null }) });
       await listen(port);

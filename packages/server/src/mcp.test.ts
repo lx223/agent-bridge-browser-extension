@@ -7,6 +7,9 @@ import {
   browserLabels,
   browsers,
   browserToolName,
+  CHAT_PROMPT,
+  CHAT_RECEIVE_TOOL,
+  CHAT_SEND_TOOL,
   IDENTIFY_INSTANCES_TOOL,
   NAME_INSTANCE_TOOL,
   NAME_INSTANCES_PROMPT,
@@ -54,6 +57,8 @@ describe('createMcpServer', () => {
       STATUS_TOOL,
       IDENTIFY_INSTANCES_TOOL,
       NAME_INSTANCE_TOOL,
+      CHAT_SEND_TOOL,
+      CHAT_RECEIVE_TOOL,
       ...browsers.flatMap((browser) => browserApis[browser].map((method) => browserToolName(browser, method))),
     ];
     expect(tools.map((t) => t.name).sort()).toEqual(expected.sort());
@@ -305,7 +310,7 @@ describe('createMcpServer', () => {
     it('offers a prompt that walks through naming profiles', async () => {
       const { client } = await connectTo([]);
       const { prompts } = await client.listPrompts();
-      expect(prompts.map((prompt) => prompt.name)).toEqual([NAME_INSTANCES_PROMPT]);
+      expect(prompts.map((prompt) => prompt.name).sort()).toEqual([NAME_INSTANCES_PROMPT, CHAT_PROMPT].sort());
       const plain = await client.getPrompt({ name: NAME_INSTANCES_PROMPT, arguments: {} });
       const text = (plain.messages[0]!.content as { text: string }).text;
       expect(text).toContain(IDENTIFY_INSTANCES_TOOL);

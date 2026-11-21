@@ -30,6 +30,7 @@ describe('the packaged extension', () => {
     const referenced = [
       manifest.background.service_worker,
       manifest.options_ui.page,
+      manifest.side_panel.default_path,
       ...Object.values<string>(manifest.icons),
       ...Object.values<string>(manifest.action.default_icon),
       'icons/connected-16.png',

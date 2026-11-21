@@ -3,6 +3,8 @@ import {
   browserApis,
   browsers,
   browserToolName,
+  CHAT_RECEIVE_TOOL,
+  CHAT_SEND_TOOL,
   IDENTIFY_INSTANCES_TOOL,
   NAME_INSTANCE_TOOL,
   PROTOCOL_VERSION,
@@ -52,6 +54,8 @@ describe('tab management through the built server and extension', () => {
       STATUS_TOOL,
       IDENTIFY_INSTANCES_TOOL,
       NAME_INSTANCE_TOOL,
+      CHAT_SEND_TOOL,
+      CHAT_RECEIVE_TOOL,
       ...browsers.flatMap((browser) => browserApis[browser].map((method) => browserToolName(browser, method))),
     ];
     expect(tools.map((t) => t.name).sort()).toEqual(expected.sort());
