@@ -25,6 +25,7 @@ import {
   type ServerToExtension,
 } from '@agent-browser-bridge/protocol';
 import { describeInstance, identifyHint } from './instances.ts';
+import { missingToolMessage } from './outdated.ts';
 import { isNewerVersion } from './version.ts';
 
 export interface BridgeOptions {
@@ -62,6 +63,7 @@ const REJOIN_AFTER_HANDOVER_MS = 500;
 const HANDOVER_CLOSE_CODE = 4002;
 const ACTIVITY_BROADCAST_MS = 250;
 const MAX_INSTANCES_PER_AGENT = 8;
+const RESPONSE_MARGIN_MS = 5_000;
 const notConnected = (browser: string) =>
   `The Agent Browser Bridge extension is not connected in ${browser}. Make sure ${browser} is open with the extension installed and enabled; it reconnects automatically within ~30 seconds.`;
 const EXTENSION_SCHEMES = ['chrome-extension://', 'safari-web-extension://'];
@@ -74,6 +76,10 @@ const toolLabel = (browser: string, method: string) => {
 };
 const sameInstance = (a: AgentInstanceUse, b: AgentInstanceUse) => a.browser === b.browser && a.instanceId === b.instanceId;
 const errorMessage = (err: unknown) => (err instanceof Error ? err.message : String(err));
+const browserWaitOf = (params: unknown) => {
+  const timeoutMs = (params as { timeoutMs?: unknown } | null | undefined)?.timeoutMs;
+  return typeof timeoutMs === 'number' ? timeoutMs : undefined;
+};
 
 export class ExtensionBridge {
   private role?: BridgeRole;
@@ -137,8 +143,11 @@ export class ExtensionBridge {
     if (this.role !== 'host') return Promise.reject(new NotConnectedError(this.error ?? notConnected(browser)));
     try {
       const socket = this.pick(browser, instance);
-      this.recordActivity(agent, browser, method, this.extensions.get(socket));
-      return this.send(socket, method, params, agent);
+      const hello = this.extensions.get(socket);
+      this.recordActivity(agent, browser, method, hello);
+      return this.send(socket, method, params, agent).catch((err: unknown) => {
+        throw hello && method in toolDefinitions && errorMessage(err) === `Unknown method: ${method}` ? new Error(missingToolMessage(hello, toolLabel(browser, method), this.opts.version)) : err;
+      });
     } catch (err) {
       return Promise.reject(err);
     }
@@ -251,11 +260,13 @@ export class ExtensionBridge {
       ...(target && { browser: target.browser }),
       ...(target?.instance !== undefined && { instance: target.instance }),
     };
+    const browserWait = browserWaitOf(params);
+    const limitMs = browserWait === undefined ? this.timeoutMs : Math.max(this.timeoutMs, browserWait + RESPONSE_MARGIN_MS);
     return new Promise((resolve, reject) => {
       const timer = setTimeout(() => {
         this.pending.delete(id);
-        reject(new Error(`Browser did not answer ${method} within ${this.timeoutMs / 1000}s`));
-      }, this.timeoutMs);
+        reject(new Error(`Browser did not answer ${method} within ${limitMs / 1000}s`));
+      }, limitMs);
       this.pending.set(id, { resolve, reject, timer, socket });
       socket.send(JSON.stringify(message));
     });

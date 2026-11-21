@@ -149,6 +149,18 @@ describe('the built extension in a simulated Safari', () => {
     await agent.call('safari_tabs_close', { tabIds: [tabId] });
   });
 
+  it('waits for a tab to reach a page', async () => {
+    const { id: tabId } = await agent.call<Tab>('safari_tabs_create', { url: 'https://example.net/sign-in' });
+    const arrived = agent.call<Tab>('safari_tabs_wait_for', { tabId, url: 'https://example.net/account*', timeoutMs: 10_000 });
+    await agent.call('safari_tabs_navigate', { tabId, to: 'example.net/account/home' });
+    await expect(arrived).resolves.toMatchObject({ id: tabId, url: 'https://example.net/account/home' });
+
+    const late = await agent.raw('safari_tabs_wait_for', { tabId, url: '*/never', timeoutMs: 200 });
+    expect(late.text).toMatch(/^Timed out after 200ms waiting for tab \d+ to match url "\*\/never"/);
+
+    await agent.call('safari_tabs_close', { tabIds: [tabId] });
+  });
+
   it('moves tabs within a window and into another one', async () => {
     const [news, docs, shop] = await listTabs();
 

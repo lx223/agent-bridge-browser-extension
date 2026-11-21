@@ -253,6 +253,38 @@ describe('ExtensionBridge', () => {
     await expect(bridge!.request('chrome', 'tabs.list', {})).rejects.toThrow(/did not answer/);
   });
 
+  it('waits as long as the request asks the browser to, plus a margin', async () => {
+    const port = await startBridge({ requestTimeoutMs: 50 });
+    const ws = await connect(port, EXT_ORIGIN);
+    ws.on('message', (raw) => {
+      const msg = JSON.parse(raw.toString());
+      if (msg.type === 'request') setTimeout(() => ws.send(JSON.stringify({ type: 'response', id: msg.id, ok: true, result: 'matched' })), 150);
+    });
+    ws.send(JSON.stringify({ type: 'hello', protocolVersion: PROTOCOL_VERSION, extensionVersion: '0.1.0', userAgent: 'test' }));
+    await expect.poll(() => bridge!.status().state).toBe('connected');
+    await expect(bridge!.request('chrome', 'tabs.waitFor', { tabId: 1, url: '*', timeoutMs: 100 })).resolves.toBe('matched');
+    await expect(bridge!.request('chrome', 'tabs.list', {})).rejects.toThrow('Browser did not answer tabs.list within 0.05s');
+  });
+
+  it('explains a tool the extension is too old to have, through relays too', async () => {
+    const port = await startBridge({ version: '0.5.0' });
+    await connectExtension(port, (method) => {
+      throw new Error(`Unknown method: ${method}`);
+    });
+    const explained =
+      'The Chrome extension is version 0.1.0, older than this server (0.5.0), and does not have chrome_tabs_update. Ask the user to quit and reopen Chrome, which installs the waiting extension update.';
+    await expect(bridge!.request('chrome', 'tabs.update', { tabId: 1, active: true })).rejects.toThrow(explained);
+    const second = new ExtensionBridge({ port });
+    try {
+      await second.start();
+      await expect.poll(() => second.status()).toMatchObject({ state: 'connected', role: 'relay' });
+      await expect(second.request('chrome', 'tabs.update', { tabId: 1, active: true })).rejects.toThrow(explained);
+      await expect(second.request('chrome', 'other.thing', {})).rejects.toThrow('Unknown method: other.thing');
+    } finally {
+      await second.stop();
+    }
+  });
+
   it('relays requests from a second process through the host', async () => {
     const port = await startBridge();
     await connectExtension(port, (method, params) => {

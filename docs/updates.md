@@ -10,6 +10,15 @@ The service worker listens for `chrome.runtime.onUpdateAvailable` and calls `chr
 
 The code is in `packages/extension/src/background/update.ts`, and `BridgeClient.whenIdle()` reports when requests have finished.
 
+### Extensions that cannot update themselves
+
+Versions before 0.4.0 have no `onUpdateAvailable` listener. While an agent is connected their service worker never stops, so Chrome keeps the downloaded update waiting until the browser restarts. The server cannot reload them, so it tells the agent to ask the user instead (`packages/server/src/outdated.ts`):
+
+- `browser_status` adds a `notice` to such a browser, and each tool result it answers ends with the same notice.
+- When an extension answers `Unknown method` for a tool the server offers, the server replaces the error with one that names both versions and the missing tool, and asks the user to restart the browser. Safari users are sent to the Mac App Store instead.
+
+Quitting and reopening the browser, or turning the extension off and on in `chrome://extensions`, installs the waiting update.
+
 ## MCP server
 
 Agents start the server with `npx -y agent-browser-bridge-mcp@latest`. The `@latest` tag makes npx ask the registry for the newest version on every start instead of reusing whatever it cached first.
