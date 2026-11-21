@@ -2,6 +2,14 @@ name: Publish npm package
 
 on:
   workflow_dispatch:
+    inputs:
+      dist_tag:
+        description: 'npm dist-tag to publish under. Use next when the release needs an extension version that is not live in the stores yet, then run Promote npm package once it is.'
+        type: choice
+        options:
+          - next
+          - latest
+        default: next
 
 permissions:
   contents: read
@@ -41,4 +49,6 @@ jobs:
         run: npm pack --dry-run
       - name: Publish MCP server
         working-directory: packages/server
-        run: npm publish --provenance --access public
+        env:
+          DIST_TAG: ${{ inputs.dist_tag }}
+        run: npm publish --provenance --access public --tag "$DIST_TAG"

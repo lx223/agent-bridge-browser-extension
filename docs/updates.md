@@ -20,7 +20,7 @@ A long-running agent session keeps its server process, so the server also update
 
 The process the agent starts is a small launcher (`packages/server/src/launcher.ts`). It owns the stdio connection to the agent and runs the real server, the worker, as a child process. It passes MCP messages through unchanged and remembers the agent's `initialize` request and `notifications/initialized` notification.
 
-A minute after start and then every hour, the launcher asks the npm registry (the one npm is configured with) for the latest version. When a newer one is published, it:
+A minute after start and then every hour, the launcher asks the npm registry (the one npm is configured with) for the version tagged `latest`. Versions published under another tag are ignored until they are promoted, which is how a server release waits for the extension it needs (see [npm-publishing.md](npm-publishing.md#releasing-ahead-of-the-extension)). When a newer one is published, it:
 
 1. starts `npx -y agent-browser-bridge-mcp@<version>` as a second worker, alongside the first;
 2. replays the agent's `initialize` request to it and waits for a successful answer, then sends `notifications/initialized`;

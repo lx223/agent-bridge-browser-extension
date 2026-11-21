@@ -1,0 +1,50 @@
+name: Promote npm package
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version of agent-browser-bridge-mcp to point the latest dist-tag at'
+        type: string
+        required: true
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: publish-npm
+  cancel-in-progress: false
+
+jobs:
+  promote:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          registry-url: 'https://registry.npmjs.org'
+      - name: Check the version is published
+        working-directory: packages/server
+        env:
+          VERSION: ${{ inputs.version }}
+        run: |
+          NAME=$(node -p "require('./package.json').name")
+          if ! npm view "$NAME@$VERSION" version >/dev/null 2>&1; then
+            echo "::error::$NAME@$VERSION is not on npm. Publish it with the Publish npm package workflow first."
+            exit 1
+          fi
+          echo "Current dist-tags:"
+          npm view "$NAME" dist-tags
+      - name: Point latest at the version
+        working-directory: packages/server
+        env:
+          VERSION: ${{ inputs.version }}
+        run: |
+          NAME=$(node -p "require('./package.json').name")
+          npm dist-tag add "$NAME@$VERSION" latest
+          npm view "$NAME" dist-tags
