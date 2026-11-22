@@ -58,6 +58,43 @@ code { background: var(--code-bg); padding: 1px 5px; border-radius: 4px; }
   background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
   margin-bottom: 28px; overflow: hidden;
 }
+.profile { display: flex; align-items: flex-start; gap: 14px; padding: 16px 18px; border-bottom: 1px solid var(--border); }
+.profile-avatar {
+  flex: none; display: grid; place-items: center; width: 42px; height: 42px; border-radius: 12px;
+  background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent) 55%, #a855f7));
+  color: #fff; font-size: 19px; font-weight: 700;
+}
+.profile-avatar:empty { background: var(--code-bg); border: 1.5px dashed var(--faint); }
+.profile-avatar:empty::before { content: '+'; color: var(--faint); font-weight: 400; font-size: 22px; }
+.profile-main { flex: 1; min-width: 0; }
+.profile-label { display: block; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--faint); }
+.profile-row { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; }
+.profile-field { position: relative; display: flex; align-items: center; margin-left: -8px; max-width: 100%; }
+.profile-field input {
+  font: inherit; font-size: 18px; font-weight: 650; color: var(--fg);
+  width: 16ch; min-width: 3ch; max-width: 100%;
+  padding: 1px 30px 1px 8px; border-radius: 8px;
+  border: 1px solid transparent; background: transparent;
+  transition: background-color 0.15s, border-color 0.15s, box-shadow 0.15s;
+}
+@supports (field-sizing: content) {
+  .profile-field input { field-sizing: content; width: auto; }
+}
+.profile-field input::placeholder { color: var(--accent); font-weight: 500; }
+.profile-field input:hover { background: var(--code-bg); }
+.profile-field input:focus {
+  outline: none; min-width: 14ch; background: var(--card); border-color: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 20%, transparent);
+}
+.profile-edit { position: absolute; right: 9px; display: flex; color: var(--faint); cursor: text; transition: color 0.15s, opacity 0.15s; }
+.profile-field:hover .profile-edit, .profile-field input:placeholder-shown + .profile-edit { color: var(--accent); }
+.profile-field input:focus + .profile-edit { opacity: 0; }
+.profile-saved { font-size: 13px; font-weight: 500; color: var(--ok); }
+.profile-saved:not(:empty)::before { content: '\2713\00a0'; }
+#profile-hint { display: none; font-size: 13px; margin-top: 4px; }
+.profile:focus-within #profile-hint, .profile:has(input:placeholder-shown) #profile-hint { display: block; }
+.profile .instance-id { flex: none; margin-top: 2px; color: var(--faint); font: 11px/1.5 ui-monospace, 'SF Mono', Menlo, monospace; }
+
 .status { display: flex; align-items: flex-start; gap: 12px; padding: 16px 18px; background: var(--wait-soft); }
 .status[data-state='connected'] { background: var(--ok-soft); }
 .status .dot {
@@ -150,14 +187,7 @@ code { background: var(--code-bg); padding: 1px 5px; border-radius: 4px; }
 .settings { margin-top: 40px; }
 .settings h2 { margin-bottom: 12px; }
 .setting { display: block; padding: 14px 0; border-top: 1px solid var(--border); }
-.setting > label { display: block; font-weight: 600; font-size: 14px; }
-.setting input[type='text'] {
-  font: inherit; font-size: 14px; margin: 6px 0; width: 100%; max-width: 300px;
-  padding: 7px 10px; border-radius: 8px; border: 1px solid var(--border); background: var(--card); color: var(--fg);
-}
-.setting input[type='text']:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
 .setting strong { font-size: 14px; }
-.instance-id { display: block; margin-top: 2px; color: var(--faint); font-size: 12px; }
 .toggle { display: flex; gap: 10px; align-items: flex-start; cursor: pointer; }
 .toggle input { margin-top: 4px; }
 .toggle > span { display: flex; flex-direction: column; }

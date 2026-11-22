@@ -17,8 +17,25 @@
         </div>
       </header>
 
-      <section class="connection" aria-live="polite">
-        <div id="status" class="status" data-state="disconnected">
+      <section class="connection">
+        <div class="profile">
+          <span id="profile-avatar" class="profile-avatar" aria-hidden="true"></span>
+          <div class="profile-main">
+            <label class="profile-label" for="instance-name">This profile</label>
+            <div class="profile-row">
+              <div class="profile-field">
+                <input id="instance-name" type="text" placeholder="Give it a name" autocomplete="off" spellcheck="false" enterkeyhint="done" aria-describedby="profile-hint" />
+                <label class="profile-edit" for="instance-name" aria-hidden="true">
+                  <svg viewBox="0 0 16 16" width="14" height="14"><path d="M11.5 2.5l2 2L6 12l-2.75.75L4 10z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" /></svg>
+                </label>
+              </div>
+              <span id="profile-saved" class="profile-saved" role="status"></span>
+            </div>
+            <p id="profile-hint" class="hint">Agents use this name to tell your browsers and profiles apart, so you can ask for your Work browser.</p>
+          </div>
+          <span id="instance-id" class="instance-id"></span>
+        </div>
+        <div id="status" class="status" data-state="disconnected" aria-live="polite">
           <span class="dot" aria-hidden="true"></span>
           <div>
             <strong id="status-text">Checking connection…</strong>
@@ -113,12 +130,7 @@
       </section>
 
       <section class="settings">
-        <h2>Settings</h2>
-        <div class="setting">
-          <label for="instance-name">Name this browser profile</label>
-          <input id="instance-name" type="text" placeholder="For example Work or Personal" autocomplete="off" spellcheck="false" />
-          <p class="hint">Agents use this name to tell your browsers and profiles apart, so you can ask for your Work browser. <span id="instance-id" class="instance-id"></span></p>
-        </div>
+        <h2>Privacy</h2>
         <label id="analytics-setting" class="setting toggle">
           <input type="checkbox" id="analytics-enabled" checked />
           <span>
@@ -127,7 +139,6 @@
           </span>
         </label>
         <div class="setting privacy">
-          <strong>Privacy</strong>
           <p class="hint" data-browser="chrome">
             Your browsing data stays on your computer: the extension only talks to <code>127.0.0.1</code>. Your agent can read tab titles and URLs,
             rearrange, group or close tabs, and read and act in web pages when you ask it to. Chrome shows a debugging banner while it works in a page.

@@ -8,6 +8,7 @@ import { bindInstanceName } from '../settings/instanceName.ts';
 import { PRIVACY_URL } from '../settings/privacy.ts';
 import { AGENT_TAB_KEY, initialAgentTab, isAgentTab, tabAfterKey } from './agentTabs.ts';
 import { agentSetupPrompt, claudeCodeCommand, claudeDesktopExtensionUrl, cursorInstallUrl, LAUNCH_SPEC, mcpJsonConfig, vscodeInstallUrl } from './install.ts';
+import { profileInitial } from './profile.ts';
 import { describeStatus } from './status.ts';
 
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
@@ -21,7 +22,27 @@ $<HTMLAnchorElement>('cursor-link').href = cursorInstallUrl();
 $<HTMLAnchorElement>('vscode-link').href = vscodeInstallUrl();
 $<HTMLAnchorElement>('claude-desktop-link').href = claudeDesktopExtensionUrl;
 $<HTMLAnchorElement>('privacy-link').href = PRIVACY_URL;
-bindInstanceName($<HTMLInputElement>('instance-name'), $('instance-id'));
+
+const profileName = $<HTMLInputElement>('instance-name');
+const showInitial = (name: string) => ($('profile-avatar').textContent = profileInitial(name));
+bindInstanceName(profileName, $('instance-id'), showInitial);
+profileName.addEventListener('input', () => showInitial(profileName.value));
+const profileSaved = $('profile-saved');
+let nameBeforeEdit = '';
+let savedTimer: ReturnType<typeof setTimeout> | undefined;
+profileName.addEventListener('focus', () => (nameBeforeEdit = profileName.value));
+profileName.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape') {
+    profileName.value = nameBeforeEdit;
+    showInitial(nameBeforeEdit);
+  }
+  if (event.key === 'Enter' || event.key === 'Escape') profileName.blur();
+});
+profileName.addEventListener('change', () => {
+  profileSaved.textContent = profileName.value ? 'Saved' : 'Name removed';
+  clearTimeout(savedTimer);
+  savedTimer = setTimeout(() => (profileSaved.textContent = ''), 2000);
+});
 
 const track = (event: PageEvent, properties: Properties) =>
   chrome.runtime.sendMessage({ type: 'TRACK', event, properties }).catch(() => undefined);
