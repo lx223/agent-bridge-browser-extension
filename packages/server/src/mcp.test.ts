@@ -7,6 +7,7 @@ import {
   browserLabels,
   browsers,
   browserToolName,
+  ASK_USER_TOOL,
   CHAT_PROMPT,
   CHAT_RECEIVE_TOOL,
   CHAT_SEND_TOOL,
@@ -59,6 +60,7 @@ describe('createMcpServer', () => {
       NAME_INSTANCE_TOOL,
       CHAT_SEND_TOOL,
       CHAT_RECEIVE_TOOL,
+      ASK_USER_TOOL,
       ...browsers.flatMap((browser) => browserApis[browser].map((method) => browserToolName(browser, method))),
     ];
     expect(tools.map((t) => t.name).sort()).toEqual(expected.sort());

@@ -19,6 +19,7 @@ export default defineConfig({
         'packages/extension/src/background/index.ts',
         'packages/extension/src/background/handlers.ts',
         'packages/extension/src/background/navigation.ts',
+        'packages/extension/src/background/popover.ts',
         'packages/extension/src/background/serialize.ts',
         'packages/extension/src/options/**',
         'packages/extension/src/settings/**',

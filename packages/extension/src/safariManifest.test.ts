@@ -6,10 +6,18 @@ describe('safariManifest', () => {
   it('runs the background service worker as a non-persistent background page', () => {
     const manifest = JSON.parse(readFileSync(new URL('../public/manifest.json', import.meta.url), 'utf-8'));
 
-    const safari = safariManifest(manifest);
+    const { background, permissions, host_permissions, ...rest } = safariManifest(manifest);
 
-    expect(safari.background).toEqual({ scripts: ['background.js'], persistent: false });
-    expect({ ...safari, background: manifest.background }).toEqual(manifest);
+    expect(background).toEqual({ scripts: ['background.js'], persistent: false });
+    expect(permissions).toEqual([...manifest.permissions, 'scripting']);
+    expect(host_permissions).toEqual(['<all_urls>']);
+    expect({ ...rest, background: manifest.background, permissions: manifest.permissions }).toEqual(manifest);
+  });
+
+  it('adds scripting once, so Safari can show questions in pages without the debugger', () => {
+    const safari = safariManifest({ background: { service_worker: 'background.js' }, permissions: ['tabs', 'scripting'] });
+
+    expect(safari.permissions).toEqual(['tabs', 'scripting']);
   });
 
   it('refuses a module background script', () => {

@@ -1,11 +1,12 @@
-import { DEFAULT_PORT, isChatMethod, type AgentInfo } from '@agent-browser-bridge/protocol';
+import { DEFAULT_PORT, isAskMethod, isChatMethod, type AgentInfo } from '@agent-browser-bridge/protocol';
 import { Analytics, ANALYTICS_ENABLED_KEY, isPageEvent, type Properties } from './analytics.ts';
 import { sessionTitle } from '../settings/sessionList.ts';
+import { AskManager, chromeAskNotifier, debuggerPrompt, scriptingPrompt, type PagePrompt } from './ask.ts';
 import { BridgeClient, type ConnectionStatus } from './bridgeClient.ts';
 import { ChatPanel } from './chatPanel.ts';
 import { restoreAfterReload, saveForReload } from './carryOver.ts';
 import { INSTANCE_NAME_KEY } from './browser.ts';
-import { listenForDetach } from './debugger.ts';
+import { listenForDetach, send } from './debugger.ts';
 import { listenForPageToolEvents } from './pageTools.ts';
 import { applyUpdatesWhenIdle } from './update.ts';
 import { dispatch } from './handlers.ts';
@@ -48,8 +49,25 @@ const carriedOver = restoreAfterReload(chrome.storage.session, chrome.storage.lo
 
 const chatPanel = chrome.sidePanel ? new ChatPanel(carriedOver) : undefined;
 
+const pagePrompt = (): PagePrompt | undefined => {
+  const extension = chrome as Partial<typeof chrome>;
+  if (extension.debugger) return debuggerPrompt(send);
+  if (extension.scripting) return scriptingPrompt(extension.scripting);
+  return undefined;
+};
+
+const notifications = (chrome as Partial<typeof chrome>).notifications;
+const asks: AskManager = new AskManager({
+  prompt: pagePrompt(),
+  tabs: chrome.tabs,
+  focusWindow: (windowId) => chrome.windows.update(windowId, { focused: true }),
+  ...(notifications && { notifier: chromeAskNotifier(notifications, (askId) => void asks.reveal(askId)) }),
+});
+chrome.tabs.onRemoved.addListener((tabId) => asks.tabClosed(tabId));
+
 const trackedDispatch = async (method: string, params: unknown, agent: AgentInfo | null) => {
   await carriedOver;
+  if (isAskMethod(method)) return asks.dispatch(method, params, agent);
   if (isChatMethod(method)) {
     if (!chatPanel) throw new Error('This browser has no chat panel yet. Continue in your own window.');
     return chatPanel.store.dispatch(method, params, agent);

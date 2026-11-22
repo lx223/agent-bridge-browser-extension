@@ -1,5 +1,6 @@
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import {
+  ASK_USER_TOOL,
   browserApis,
   browsers,
   browserToolName,
@@ -41,6 +42,7 @@ describe('connecting an agent to the browser', () => {
       NAME_INSTANCE_TOOL,
       CHAT_SEND_TOOL,
       CHAT_RECEIVE_TOOL,
+      ASK_USER_TOOL,
       ...browsers.flatMap((browser) => browserApis[browser].map((method) => browserToolName(browser, method))),
     ];
     expect(tools.map((t) => t.name).sort()).toEqual(expected.sort());
