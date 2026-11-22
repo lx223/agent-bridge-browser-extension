@@ -305,6 +305,9 @@
   "chatStatusDisconnected": {
     "message": "Agent je odpojený"
   },
+  "chatStatusReconnecting": {
+    "message": "Agent sa znova pripája"
+  },
   "chatStatusEnded": {
     "message": "Čet bol ukončený"
   },
@@ -316,6 +319,9 @@
   },
   "chatHintDisconnected": {
     "message": "Táto relácia agenta bola ukončená."
+  },
+  "chatHintReconnecting": {
+    "message": "Spojenie s agentom sa prerušilo. Vaše správy tu počkajú, kým sa znova nepripojí."
   },
   "chatHintEnded": {
     "message": "Ak chcete znova četovať, požiadajte agenta, aby pokračoval v prehliadači."

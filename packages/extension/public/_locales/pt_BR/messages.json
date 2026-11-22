@@ -293,6 +293,9 @@
   "chatStatusDisconnected": {
     "message": "Agente desconectado"
   },
+  "chatStatusReconnecting": {
+    "message": "Reconectando o agente"
+  },
   "chatStatusEnded": {
     "message": "Chat encerrado"
   },
@@ -304,6 +307,9 @@
   },
   "chatHintDisconnected": {
     "message": "Esta sessão de agente foi encerrada."
+  },
+  "chatHintReconnecting": {
+    "message": "A conexão com o agente caiu. Suas mensagens ficam aqui até ele se reconectar."
   },
   "chatHintEnded": {
     "message": "Peça ao agente para continuar no navegador para conversar de novo."

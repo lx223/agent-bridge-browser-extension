@@ -305,6 +305,9 @@
   "chatStatusDisconnected": {
     "message": "Agentas atsijungė"
   },
+  "chatStatusReconnecting": {
+    "message": "Agentas jungiasi iš naujo"
+  },
   "chatStatusEnded": {
     "message": "Pokalbis baigtas"
   },
@@ -316,6 +319,9 @@
   },
   "chatHintDisconnected": {
     "message": "Ši agento sesija baigta."
+  },
+  "chatHintReconnecting": {
+    "message": "Ryšys su agentu nutrūko. Jūsų žinutės lauks čia, kol jis vėl prisijungs."
   },
   "chatHintEnded": {
     "message": "Norėdami vėl kalbėtis, paprašykite agento tęsti naršyklėje."

@@ -281,6 +281,9 @@
   "chatStatusDisconnected": {
     "message": "Nadiskonekta ang agent"
   },
+  "chatStatusReconnecting": {
+    "message": "Muling kumokonekta ang agent"
+  },
   "chatStatusEnded": {
     "message": "Tapos na ang chat"
   },
@@ -292,6 +295,9 @@
   },
   "chatHintDisconnected": {
     "message": "Nagsara na ang session ng agent na ito."
+  },
+  "chatHintReconnecting": {
+    "message": "Naputol ang koneksyon ng agent. Maghihintay rito ang mga mensahe mo hanggang muling kumonekta ito."
   },
   "chatHintEnded": {
     "message": "Hilingin sa agent na magpatuloy sa browser para makapag-chat ulit."

@@ -281,6 +281,9 @@
   "chatStatusDisconnected": {
     "message": "Wakala ametenganishwa"
   },
+  "chatStatusReconnecting": {
+    "message": "Wakala anaunganishwa upya"
+  },
   "chatStatusEnded": {
     "message": "Gumzo limeisha"
   },
@@ -292,6 +295,9 @@
   },
   "chatHintDisconnected": {
     "message": "Kipindi hiki cha wakala kimefungwa."
+  },
+  "chatHintReconnecting": {
+    "message": "Muunganisho wa wakala umekatika. Ujumbe wako utasubiri hapa hadi aunganishwe tena."
   },
   "chatHintEnded": {
     "message": "Mwombe wakala aendelee kwenye kivinjari ili mpige gumzo tena."

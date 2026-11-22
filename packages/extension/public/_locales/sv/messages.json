@@ -281,6 +281,9 @@
   "chatStatusDisconnected": {
     "message": "Agenten är frånkopplad"
   },
+  "chatStatusReconnecting": {
+    "message": "Agenten ansluter igen"
+  },
   "chatStatusEnded": {
     "message": "Chatten är avslutad"
   },
@@ -292,6 +295,9 @@
   },
   "chatHintDisconnected": {
     "message": "Den här agentsessionen har stängts."
+  },
+  "chatHintReconnecting": {
+    "message": "Anslutningen till agenten bröts. Dina meddelanden väntar här tills den är ansluten igen."
   },
   "chatHintEnded": {
     "message": "Be agenten att fortsätta i webbläsaren för att chatta igen."

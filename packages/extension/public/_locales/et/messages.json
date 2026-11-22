@@ -281,6 +281,9 @@
   "chatStatusDisconnected": {
     "message": "Agendi ühendus katkes"
   },
+  "chatStatusReconnecting": {
+    "message": "Agent loob uuesti ühendust"
+  },
   "chatStatusEnded": {
     "message": "Vestlus on lõppenud"
   },
@@ -292,6 +295,9 @@
   },
   "chatHintDisconnected": {
     "message": "See agendiseanss on suletud."
+  },
+  "chatHintReconnecting": {
+    "message": "Ühendus agendiga katkes. Sinu sõnumid ootavad siin, kuni ühendus taastub."
   },
   "chatHintEnded": {
     "message": "Uuesti vestlemiseks paluge agendil brauseris jätkata."

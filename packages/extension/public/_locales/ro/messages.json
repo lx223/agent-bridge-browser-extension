@@ -293,6 +293,9 @@
   "chatStatusDisconnected": {
     "message": "Agent deconectat"
   },
+  "chatStatusReconnecting": {
+    "message": "Agentul se reconectează"
+  },
   "chatStatusEnded": {
     "message": "Chat încheiat"
   },
@@ -304,6 +307,9 @@
   },
   "chatHintDisconnected": {
     "message": "Această sesiune de agent s-a închis."
+  },
+  "chatHintReconnecting": {
+    "message": "Conexiunea cu agentul s-a întrerupt. Mesajele tale așteaptă aici până se reconectează."
   },
   "chatHintEnded": {
     "message": "Cereți-i agentului să continue în browser pentru a discuta din nou."

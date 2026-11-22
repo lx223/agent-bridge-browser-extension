@@ -281,6 +281,9 @@
   "chatStatusDisconnected": {
     "message": "એજન્ટ ડિસ્કનેક્ટ થયો"
   },
+  "chatStatusReconnecting": {
+    "message": "એજન્ટ ફરી કનેક્ટ થઈ રહ્યો છે"
+  },
   "chatStatusEnded": {
     "message": "ચૅટ સમાપ્ત થઈ"
   },
@@ -292,6 +295,9 @@
   },
   "chatHintDisconnected": {
     "message": "આ એજન્ટ સત્ર બંધ થઈ ગયું છે."
+  },
+  "chatHintReconnecting": {
+    "message": "એજન્ટનું કનેક્શન તૂટી ગયું. તે ફરી કનેક્ટ થાય ત્યાં સુધી તમારા સંદેશા અહીં રાહ જોશે."
   },
   "chatHintEnded": {
     "message": "ફરીથી ચૅટ કરવા માટે એજન્ટને બ્રાઉઝરમાં આગળ વધવાનું કહો."

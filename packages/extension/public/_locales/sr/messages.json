@@ -293,6 +293,9 @@
   "chatStatusDisconnected": {
     "message": "Веза са агентом је прекинута"
   },
+  "chatStatusReconnecting": {
+    "message": "Агент се поново повезује"
+  },
   "chatStatusEnded": {
     "message": "Ћаскање је завршено"
   },
@@ -304,6 +307,9 @@
   },
   "chatHintDisconnected": {
     "message": "Ова сесија агента је затворена."
+  },
+  "chatHintReconnecting": {
+    "message": "Веза са агентом је прекинута. Ваше поруке чекају овде док се поново не повеже."
   },
   "chatHintEnded": {
     "message": "Да бисте поново ћаскали, замолите агента да настави у прегледачу."

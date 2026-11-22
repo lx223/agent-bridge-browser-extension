@@ -293,6 +293,9 @@
   "chatStatusDisconnected": {
     "message": "Aģents atvienots"
   },
+  "chatStatusReconnecting": {
+    "message": "Aģents atjauno savienojumu"
+  },
   "chatStatusEnded": {
     "message": "Tērzēšana beigta"
   },
@@ -304,6 +307,9 @@
   },
   "chatHintDisconnected": {
     "message": "Šī aģenta sesija ir slēgta."
+  },
+  "chatHintReconnecting": {
+    "message": "Savienojums ar aģentu pārtrūka. Jūsu ziņas gaidīs šeit, līdz tas atkal pievienosies."
   },
   "chatHintEnded": {
     "message": "Lai tērzētu atkal, palūdziet aģentam turpināt pārlūkprogrammā."

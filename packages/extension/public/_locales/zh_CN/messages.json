@@ -281,6 +281,9 @@
   "chatStatusDisconnected": {
     "message": "智能体已断开连接"
   },
+  "chatStatusReconnecting": {
+    "message": "智能体正在重新连接"
+  },
   "chatStatusEnded": {
     "message": "聊天已结束"
   },
@@ -292,6 +295,9 @@
   },
   "chatHintDisconnected": {
     "message": "此智能体会话已关闭。"
+  },
+  "chatHintReconnecting": {
+    "message": "与智能体的连接已断开。你的消息会在这里等待，直到它重新连接。"
   },
   "chatHintEnded": {
     "message": "如需再次聊天，请让智能体在浏览器中继续。"

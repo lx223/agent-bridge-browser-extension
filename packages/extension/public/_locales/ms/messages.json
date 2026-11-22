@@ -281,6 +281,9 @@
   "chatStatusDisconnected": {
     "message": "Ejen diputuskan sambungan"
   },
+  "chatStatusReconnecting": {
+    "message": "Ejen sedang menyambung semula"
+  },
   "chatStatusEnded": {
     "message": "Sembang ditamatkan"
   },
@@ -292,6 +295,9 @@
   },
   "chatHintDisconnected": {
     "message": "Sesi ejen ini telah ditutup."
+  },
+  "chatHintReconnecting": {
+    "message": "Sambungan ejen terputus. Mesej anda menunggu di sini sehingga ejen bersambung semula."
   },
   "chatHintEnded": {
     "message": "Minta ejen meneruskan dalam penyemak imbas untuk bersembang semula."

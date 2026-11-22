@@ -305,6 +305,9 @@
   "chatStatusDisconnected": {
     "message": "Povezava z agentom je prekinjena"
   },
+  "chatStatusReconnecting": {
+    "message": "Agent se znova povezuje"
+  },
   "chatStatusEnded": {
     "message": "Klepet je končan"
   },
@@ -316,6 +319,9 @@
   },
   "chatHintDisconnected": {
     "message": "Ta seja agenta je zaprta."
+  },
+  "chatHintReconnecting": {
+    "message": "Povezava z agentom je bila prekinjena. Vaša sporočila čakajo tukaj, dokler se znova ne poveže."
   },
   "chatHintEnded": {
     "message": "Če želite znova klepetati, prosite agenta, naj nadaljuje v brskalniku."

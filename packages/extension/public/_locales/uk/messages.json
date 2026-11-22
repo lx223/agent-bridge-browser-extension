@@ -305,6 +305,9 @@
   "chatStatusDisconnected": {
     "message": "Агент від’єднався"
   },
+  "chatStatusReconnecting": {
+    "message": "Агент перепідключається"
+  },
   "chatStatusEnded": {
     "message": "Чат завершено"
   },
@@ -316,6 +319,9 @@
   },
   "chatHintDisconnected": {
     "message": "Цей сеанс агента закрито."
+  },
+  "chatHintReconnecting": {
+    "message": "З'єднання з агентом перервалося. Ваші повідомлення чекатимуть тут, доки він не перепідключиться."
   },
   "chatHintEnded": {
     "message": "Щоб знову поспілкуватися, попросіть агента продовжити в браузері."

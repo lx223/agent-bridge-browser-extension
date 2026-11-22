@@ -281,6 +281,9 @@
   "chatStatusDisconnected": {
     "message": "اتصال عامل قطع شد"
   },
+  "chatStatusReconnecting": {
+    "message": "در حال اتصال دوباره عامل"
+  },
   "chatStatusEnded": {
     "message": "گفتگو پایان یافت"
   },
@@ -292,6 +295,9 @@
   },
   "chatHintDisconnected": {
     "message": "این جلسه عامل بسته شده است."
+  },
+  "chatHintReconnecting": {
+    "message": "اتصال عامل قطع شد. پیام‌های شما تا اتصال دوباره اینجا منتظر می‌مانند."
   },
   "chatHintEnded": {
     "message": "برای گفتگوی دوباره، از عامل بخواهید در مرورگر ادامه دهد."

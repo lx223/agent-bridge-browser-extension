@@ -293,6 +293,9 @@
   "chatStatusDisconnected": {
     "message": "הסוכן התנתק"
   },
+  "chatStatusReconnecting": {
+    "message": "הסוכן מתחבר מחדש"
+  },
   "chatStatusEnded": {
     "message": "הצ'אט הסתיים"
   },
@@ -304,6 +307,9 @@
   },
   "chatHintDisconnected": {
     "message": "הסשן של הסוכן הזה נסגר."
+  },
+  "chatHintReconnecting": {
+    "message": "החיבור לסוכן נותק. ההודעות שלך ימתינו כאן עד שיתחבר מחדש."
   },
   "chatHintEnded": {
     "message": "כדי לשוחח שוב, אפשר לבקש מהסוכן להמשיך בדפדפן."

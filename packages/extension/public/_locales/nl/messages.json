@@ -281,6 +281,9 @@
   "chatStatusDisconnected": {
     "message": "Verbinding met agent verbroken"
   },
+  "chatStatusReconnecting": {
+    "message": "Agent maakt opnieuw verbinding"
+  },
   "chatStatusEnded": {
     "message": "Chat beëindigd"
   },
@@ -292,6 +295,9 @@
   },
   "chatHintDisconnected": {
     "message": "Deze agentsessie is gesloten."
+  },
+  "chatHintReconnecting": {
+    "message": "De verbinding met de agent is weggevallen. Je berichten wachten hier tot hij weer verbonden is."
   },
   "chatHintEnded": {
     "message": "Vraag de agent om verder te gaan in de browser om weer te chatten."

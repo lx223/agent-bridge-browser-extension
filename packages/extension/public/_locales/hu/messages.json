@@ -281,6 +281,9 @@
   "chatStatusDisconnected": {
     "message": "Az ügynök kapcsolata megszakadt"
   },
+  "chatStatusReconnecting": {
+    "message": "Az ügynök újracsatlakozik"
+  },
   "chatStatusEnded": {
     "message": "A csevegés véget ért"
   },
@@ -292,6 +295,9 @@
   },
   "chatHintDisconnected": {
     "message": "Ez az ügynök-munkamenet lezárult."
+  },
+  "chatHintReconnecting": {
+    "message": "Megszakadt a kapcsolat az ügynökkel. Az üzenetei itt várnak, amíg újra nem csatlakozik."
   },
   "chatHintEnded": {
     "message": "Ha újra csevegni szeretne, kérje meg az ügynököt, hogy folytassa a böngészőben."
