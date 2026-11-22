@@ -1,4 +1,4 @@
-import { slotMarkers, splitAroundSlots, t, uiLocale, type MessageKey } from './messages.ts';
+import { slotMarkers, splitAroundSlots, t, textDirection, uiLocale, type MessageKey } from './messages.ts';
 
 const ATTRIBUTES = ['placeholder', 'aria-label', 'title'];
 
@@ -16,7 +16,7 @@ function localizeText(element: HTMLElement, key: MessageKey) {
 
 export function localizePage(root: Document = document) {
   root.documentElement.lang = uiLocale();
-  root.documentElement.dir = chrome.i18n.getMessage('@@bidi_dir') || 'ltr';
+  root.documentElement.dir = textDirection();
   for (const element of root.querySelectorAll<HTMLElement>('[data-i18n]')) localizeText(element, element.dataset.i18n as MessageKey);
   for (const attribute of ATTRIBUTES) {
     for (const element of root.querySelectorAll<HTMLElement>(`[data-i18n-${attribute}]`)) {

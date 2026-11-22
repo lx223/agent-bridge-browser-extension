@@ -11,6 +11,10 @@ export const t = (key: MessageKey, ...substitutions: Substitution[]) => lookup(k
 
 export const uiLocale = () => t('locale').replace('_', '-') || 'en';
 
+const RIGHT_TO_LEFT = new Set(['ar', 'fa', 'he']);
+
+export const textDirection = () => (RIGHT_TO_LEFT.has(uiLocale().split('-')[0]!) ? 'rtl' : 'ltr');
+
 export function plural(base: PluralMessage, count: number, ...substitutions: Substitution[]) {
   const locale = uiLocale();
   const values = [count.toLocaleString(locale), ...substitutions];

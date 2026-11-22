@@ -39,7 +39,6 @@ function serveExtension(extensionDir: string): Promise<Server> {
 
 function installSafariExtensionApi({ origin, messages }: { origin: string; messages: Messages }) {
   const getMessage = (key: string, substitutions: string | string[] = []) => {
-    if (key === '@@bidi_dir') return 'ltr';
     const values = [substitutions].flat();
     return (messages[key]?.message ?? '').replace(/\$([1-9])/g, (_, slot: string) => values[Number(slot) - 1] ?? '');
   };

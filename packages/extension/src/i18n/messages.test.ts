@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { englishI18n } from '../test/englishI18n.ts';
-import { plural, relativeTime, slotMarkers, splitAroundSlots, t, uiLocale } from './messages.ts';
+import { plural, relativeTime, slotMarkers, splitAroundSlots, t, textDirection, uiLocale } from './messages.ts';
 
 const NOW = 10 * 24 * 60 * 60_000;
 const minutes = (n: number) => NOW - n * 60_000;
@@ -31,6 +31,18 @@ describe('uiLocale', () => {
     expect(uiLocale()).toBe('en');
     useLocale('pt_BR', {});
     expect(uiLocale()).toBe('pt-BR');
+  });
+});
+
+describe('textDirection', () => {
+  it('runs right to left for the languages of the messages that need it', () => {
+    expect(textDirection()).toBe('ltr');
+    useLocale('ar', {});
+    expect(textDirection()).toBe('rtl');
+    useLocale('fa', {});
+    expect(textDirection()).toBe('rtl');
+    useLocale('pt_BR', {});
+    expect(textDirection()).toBe('ltr');
   });
 });
 

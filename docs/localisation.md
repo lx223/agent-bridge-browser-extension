@@ -16,7 +16,7 @@ Each language has one file, `packages/extension/public/_locales/<code>/messages.
 | HTML pages | `data-i18n="key"` replaces the element's text. `data-i18n-placeholder`, `data-i18n-aria-label` and `data-i18n-title` set those attributes. `data-i18n-arg` passes one fixed value as `$1`, such as an app name. |
 | TypeScript | `t(key, ...values)` and `plural(base, count, ...values)` from `packages/extension/src/i18n/messages.ts`. Keys are checked against `en/messages.json` at compile time. |
 
-`localizePage()` in `packages/extension/src/i18n/page.ts` runs first on each page. It also sets `lang` and `dir`, so Arabic, Hebrew and Persian lay out from right to left.
+`localizePage()` in `packages/extension/src/i18n/page.ts` runs first on each page. It also sets `lang` and `dir` from the language of the messages, so Arabic, Hebrew and Persian lay out from right to left. Chrome's own `@@bidi_dir` follows Chrome's interface language instead, which can differ, so the extension keeps its own list of right-to-left languages in `messages.ts`. Add to it when adding another right-to-left language.
 
 ### Elements inside a message
 

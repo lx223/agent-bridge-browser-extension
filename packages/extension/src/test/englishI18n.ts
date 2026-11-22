@@ -5,7 +5,6 @@ const messages: Record<string, { message: string }> = english;
 export const englishI18n = {
   getUILanguage: () => 'en',
   getMessage: (key: string, substitutions: string[] = []) => {
-    if (key === '@@bidi_dir') return 'ltr';
     const message = messages[key]?.message;
     if (message === undefined) return '';
     return message.replace(/\$(\$|[1-9])/g, (_, slot: string) => (slot === '$' ? '$' : (substitutions[Number(slot) - 1] ?? '')));
