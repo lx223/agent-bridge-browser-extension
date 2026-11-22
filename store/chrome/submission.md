@@ -83,7 +83,7 @@ Show a desktop notification from the user's agent, such as when a long-running t
 
 ### sidePanel
 
-Show the chat panel where the user talks to their connected agent: the agent's messages appear there and the user's replies go back to it through the local bridge.
+Display a persistent Chrome side panel where the user can read messages from their connected MCP agent, reply while browsing, switch between agent conversations, and see connection and task status. The sidePanel API is required to host and open this browser-integrated chat interface without replacing the current web page.
 
 ### alarms
 
