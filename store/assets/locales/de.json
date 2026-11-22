@@ -10,7 +10,7 @@
     },
     "profiles": {
       "headline": "Benenne deine Browserprofile",
-      "subline": "Frag nach deinem Arbeitsbrowser, und dein Agent wählt das richtige Chrome-Profil."
+      "subline": "Frag nach deinem Browser „Arbeit“, und dein Agent wählt das richtige Chrome-Profil."
     },
     "setup": {
       "headline": "Verbinde den Agenten, den du schon nutzt",
@@ -50,7 +50,7 @@
   },
   "profiles": {
     "prompt": "Dieses Chrome-Profil ist für die Arbeit. Nenn es Arbeit.",
-    "reply": "Erledigt. Wenn du nach deinem Arbeitsbrowser fragst, nutze ich dieses Profil.",
+    "reply": "Erledigt. Wenn du nach deinem Browser „Arbeit“ fragst, nutze ich dieses Profil.",
     "name": "Arbeit"
   },
   "video": {

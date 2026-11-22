@@ -1,7 +1,7 @@
 {
   "captions": {
     "tabs": {
-      "headline": "Sekmelerinizi yapay zekâ ajanınız düzenlesin",
+      "headline": "Sekmelerinizi yapay zeka ajanınız düzenlesin",
       "subline": "Gruplama planını önizleyin, tek adımda uygulayın, fikrinizi değiştirirseniz geri alın."
     },
     "pages": {
@@ -54,7 +54,7 @@
     "name": "İş"
   },
   "video": {
-    "tagline": "Zaten kullandığınız tarayıcıyı yapay zekâ ajanınıza bırakın.",
+    "tagline": "Zaten kullandığınız tarayıcıyı yapay zeka ajanınıza bırakın.",
     "closing": "Claude Code, Cursor, VS Code ve tüm MCP istemcileriyle çalışır. Ücretsiz ve açık kaynak."
   }
 }

@@ -23,7 +23,7 @@
   },
   "tabs": {
     "prompt": "Susun tab saya yang terbuka ke dalam kumpulan mengikut topik.",
-    "reply": "Selesai. Saya telah menyusun {tabs} tab ke dalam {groups} kumpulan. Minta saya buat asal jika anda mahu susun atur lama semula.",
+    "reply": "Selesai. Saya menyusun {tabs} tab ke dalam {groups} kumpulan. Minta saya buat asal jika mahu susun atur lama.",
     "groups": {
       "travel": "Percutian ke Lisbon",
       "work": "Laporan Q3",
@@ -54,7 +54,7 @@
     "name": "Kerja"
   },
   "video": {
-    "tagline": "Biarkan ejen AI anda menggunakan penyemak imbas yang sudah anda gunakan.",
+    "tagline": "Biarkan ejen AI anda menggunakan penyemak imbas anda sendiri.",
     "closing": "Berfungsi dengan Claude Code, Cursor, VS Code dan mana-mana klien MCP. Percuma dan sumber terbuka."
   }
 }

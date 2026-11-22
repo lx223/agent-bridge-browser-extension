@@ -14,7 +14,7 @@
     },
     "setup": {
       "headline": "Koble til agenten du allerede bruker",
-      "subline": "Claude Code, Cursor, VS Code, Claude Desktop eller en hvilken som helst MCP-klient. Alt kjører på datamaskinen din."
+      "subline": "Claude Code, Cursor, VS Code, Claude Desktop eller enhver MCP-klient. Alt kjører på datamaskinen din."
     }
   },
   "chat": {

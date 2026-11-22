@@ -14,7 +14,7 @@
     },
     "setup": {
       "headline": "Kết nối tác nhân bạn đang dùng",
-      "subline": "Claude Code, Cursor, VS Code, Claude Desktop hoặc bất kỳ ứng dụng khách MCP nào. Mọi thứ chạy trên máy tính của bạn."
+      "subline": "Claude Code, Cursor, VS Code, Claude Desktop hoặc ứng dụng khách MCP bất kỳ. Mọi thứ chạy trên máy của bạn."
     }
   },
   "chat": {

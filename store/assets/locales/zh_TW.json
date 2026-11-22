@@ -1,25 +1,25 @@
 {
   "captions": {
     "tabs": {
-      "headline": "讓 AI 代理幫你整理分頁",
+      "headline": "讓 AI 代理程式幫你整理分頁",
       "subline": "預覽分組計畫，一步套用，改變主意也能復原。"
     },
     "pages": {
-      "headline": "代理直接在真實網頁上操作",
+      "headline": "代理程式直接在真實網頁上操作",
       "subline": "在你平常使用的瀏覽器中讀取網頁、填寫表單、點擊按鈕。"
     },
     "profiles": {
       "headline": "為瀏覽器設定檔命名",
-      "subline": "說要用工作瀏覽器，代理就會選對 Chrome 設定檔。"
+      "subline": "說要用工作瀏覽器，代理程式就會選對 Chrome 設定檔。"
     },
     "setup": {
-      "headline": "連接你正在使用的代理",
+      "headline": "連線你正在使用的代理程式",
       "subline": "Claude Code、Cursor、VS Code、Claude Desktop 或任何 MCP 用戶端。一切都在你的電腦上執行。"
     }
   },
   "chat": {
     "you": "你",
-    "agent": "代理"
+    "agent": "代理程式"
   },
   "tabs": {
     "prompt": "把我開啟的分頁依主題分組。",
@@ -54,7 +54,7 @@
     "name": "工作"
   },
   "video": {
-    "tagline": "讓 AI 代理使用你平常用的瀏覽器。",
+    "tagline": "讓 AI 代理程式使用你平常用的瀏覽器。",
     "closing": "支援 Claude Code、Cursor、VS Code 及任何 MCP 用戶端。免費且開源。"
   }
 }

@@ -14,7 +14,7 @@
     },
     "setup": {
       "headline": "നിങ്ങൾ ഉപയോഗിക്കുന്ന ഏജന്റിനെ കണക്റ്റ് ചെയ്യുക",
-      "subline": "Claude Code, Cursor, VS Code, Claude Desktop അല്ലെങ്കിൽ ഏത് MCP ക്ലയന്റും. എല്ലാം നിങ്ങളുടെ കമ്പ്യൂട്ടറിൽ തന്നെ പ്രവർത്തിക്കുന്നു."
+      "subline": "Claude Code, Cursor, VS Code, Claude Desktop അല്ലെങ്കിൽ ഏത് MCP ക്ലയന്റും. എല്ലാം നിങ്ങളുടെ കമ്പ്യൂട്ടറിൽ പ്രവർത്തിക്കുന്നു."
     }
   },
   "chat": {

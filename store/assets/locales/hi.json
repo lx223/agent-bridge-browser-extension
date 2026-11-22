@@ -14,7 +14,7 @@
     },
     "setup": {
       "headline": "वही एजेंट कनेक्ट करें जिसे आप इस्तेमाल करते हैं",
-      "subline": "Claude Code, Cursor, VS Code, Claude Desktop या MCP के साथ काम करने वाला कोई भी एजेंट। सब कुछ आपके कंप्यूटर पर चलता है।"
+      "subline": "Claude Code, Cursor, VS Code, Claude Desktop या कोई भी MCP क्लाइंट। सब कुछ आपके कंप्यूटर पर चलता है।"
     }
   },
   "chat": {
