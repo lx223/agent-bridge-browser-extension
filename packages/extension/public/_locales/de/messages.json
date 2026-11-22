@@ -289,5 +289,29 @@
   },
   "chatTooLong_other": {
     "message": "Nachrichten dürfen höchstens $1 Zeichen lang sein."
+  },
+  "askYourAgent": {
+    "message": "Ihr Agent"
+  },
+  "askFrom": {
+    "message": "$1 fragt"
+  },
+  "askConfirm": {
+    "message": "Bestätigen"
+  },
+  "askCancel": {
+    "message": "Abbrechen"
+  },
+  "askConfirmed": {
+    "message": "Bestätigt. $1 macht weiter."
+  },
+  "askCancelled": {
+    "message": "Abgebrochen. $1 macht nicht weiter."
+  },
+  "askDragHint": {
+    "message": "Zum Verschieben ziehen"
+  },
+  "askNotificationTitle": {
+    "message": "$1 braucht Ihre Antwort"
   }
 }

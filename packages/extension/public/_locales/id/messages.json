@@ -289,5 +289,29 @@
   },
   "chatTooLong_other": {
     "message": "Pesan maksimal $1 karakter."
+  },
+  "askYourAgent": {
+    "message": "Agen Anda"
+  },
+  "askFrom": {
+    "message": "$1 bertanya"
+  },
+  "askConfirm": {
+    "message": "Konfirmasi"
+  },
+  "askCancel": {
+    "message": "Batal"
+  },
+  "askConfirmed": {
+    "message": "Dikonfirmasi. $1 akan melanjutkan."
+  },
+  "askCancelled": {
+    "message": "Dibatalkan. $1 tidak akan melanjutkan."
+  },
+  "askDragHint": {
+    "message": "Tarik untuk memindahkan"
+  },
+  "askNotificationTitle": {
+    "message": "$1 menunggu jawaban Anda"
   }
 }

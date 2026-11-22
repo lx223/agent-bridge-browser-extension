@@ -289,5 +289,29 @@
   },
   "chatTooLong_other": {
     "message": "Съобщенията могат да съдържат най-много $1 знака."
+  },
+  "askYourAgent": {
+    "message": "Вашият агент"
+  },
+  "askFrom": {
+    "message": "$1 пита"
+  },
+  "askConfirm": {
+    "message": "Потвърждаване"
+  },
+  "askCancel": {
+    "message": "Отказ"
+  },
+  "askConfirmed": {
+    "message": "Потвърдено. $1 ще продължи."
+  },
+  "askCancelled": {
+    "message": "Отказано. $1 няма да продължи."
+  },
+  "askDragHint": {
+    "message": "Плъзнете, за да преместите"
+  },
+  "askNotificationTitle": {
+    "message": "$1 очаква вашия отговор"
   }
 }

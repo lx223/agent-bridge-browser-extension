@@ -289,5 +289,29 @@
   },
   "chatTooLong_other": {
     "message": "Ujumbe hauwezi kuzidi herufi $1."
+  },
+  "askYourAgent": {
+    "message": "Wakala wako"
+  },
+  "askFrom": {
+    "message": "$1 anauliza"
+  },
+  "askConfirm": {
+    "message": "Thibitisha"
+  },
+  "askCancel": {
+    "message": "Ghairi"
+  },
+  "askConfirmed": {
+    "message": "Imethibitishwa. $1 ataendelea."
+  },
+  "askCancelled": {
+    "message": "Imeghairiwa. $1 hataendelea."
+  },
+  "askDragHint": {
+    "message": "Buruta ili kusogeza"
+  },
+  "askNotificationTitle": {
+    "message": "$1 anasubiri jibu lako"
   }
 }

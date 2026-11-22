@@ -289,5 +289,29 @@
   },
   "chatTooLong_other": {
     "message": "አንድ መልዕክት ቢበዛ $1 ቁምፊዎች ሊኖረው ይችላል።"
+  },
+  "askYourAgent": {
+    "message": "ወኪልዎ"
+  },
+  "askFrom": {
+    "message": "$1 ይጠይቃል"
+  },
+  "askConfirm": {
+    "message": "አረጋግጥ"
+  },
+  "askCancel": {
+    "message": "ሰርዝ"
+  },
+  "askConfirmed": {
+    "message": "ተረጋግጧል። $1 ይቀጥላል።"
+  },
+  "askCancelled": {
+    "message": "ተሰርዟል። $1 አይቀጥልም።"
+  },
+  "askDragHint": {
+    "message": "ለማንቀሳቀስ ይጎትቱ"
+  },
+  "askNotificationTitle": {
+    "message": "$1 የእርስዎን መልስ ይፈልጋል"
   }
 }

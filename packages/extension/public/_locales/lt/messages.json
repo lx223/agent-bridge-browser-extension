@@ -313,5 +313,29 @@
   },
   "chatTooLong_other": {
     "message": "Žinutėje gali būti ne daugiau kaip $1 simbolių."
+  },
+  "askYourAgent": {
+    "message": "Jūsų agentas"
+  },
+  "askFrom": {
+    "message": "$1 klausia"
+  },
+  "askConfirm": {
+    "message": "Patvirtinti"
+  },
+  "askCancel": {
+    "message": "Atšaukti"
+  },
+  "askConfirmed": {
+    "message": "Patvirtinta. $1 tęs."
+  },
+  "askCancelled": {
+    "message": "Atšaukta. $1 netęs."
+  },
+  "askDragHint": {
+    "message": "Vilkite, kad perkeltumėte"
+  },
+  "askNotificationTitle": {
+    "message": "$1 laukia jūsų atsakymo"
   }
 }

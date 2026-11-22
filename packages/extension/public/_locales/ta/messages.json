@@ -289,5 +289,29 @@
   },
   "chatTooLong_other": {
     "message": "மெசேஜ்களில் அதிகபட்சம் $1 எழுத்துகள் இருக்கலாம்."
+  },
+  "askYourAgent": {
+    "message": "உங்கள் ஏஜென்ட்"
+  },
+  "askFrom": {
+    "message": "$1 கேட்கிறது"
+  },
+  "askConfirm": {
+    "message": "உறுதிசெய்"
+  },
+  "askCancel": {
+    "message": "ரத்துசெய்"
+  },
+  "askConfirmed": {
+    "message": "உறுதிசெய்யப்பட்டது. $1 தொடரும்."
+  },
+  "askCancelled": {
+    "message": "ரத்துசெய்யப்பட்டது. $1 தொடராது."
+  },
+  "askDragHint": {
+    "message": "நகர்த்த இழுக்கவும்"
+  },
+  "askNotificationTitle": {
+    "message": "$1 உங்கள் பதிலுக்காகக் காத்திருக்கிறது"
   }
 }

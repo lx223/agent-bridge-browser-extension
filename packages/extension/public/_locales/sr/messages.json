@@ -301,5 +301,29 @@
   },
   "chatTooLong_other": {
     "message": "Порука може да има највише $1 знакова."
+  },
+  "askYourAgent": {
+    "message": "Ваш агент"
+  },
+  "askFrom": {
+    "message": "$1 пита"
+  },
+  "askConfirm": {
+    "message": "Потврди"
+  },
+  "askCancel": {
+    "message": "Откажи"
+  },
+  "askConfirmed": {
+    "message": "Потврђено. $1 наставља."
+  },
+  "askCancelled": {
+    "message": "Отказано. $1 неће наставити."
+  },
+  "askDragHint": {
+    "message": "Превуците да бисте померили"
+  },
+  "askNotificationTitle": {
+    "message": "$1 чека ваш одговор"
   }
 }

@@ -289,5 +289,29 @@
   },
   "chatTooLong_other": {
     "message": "Hanggang $1 character lang ang puwede sa isang mensahe."
+  },
+  "askYourAgent": {
+    "message": "Ang iyong agent"
+  },
+  "askFrom": {
+    "message": "$1 ay nagtatanong"
+  },
+  "askConfirm": {
+    "message": "Kumpirmahin"
+  },
+  "askCancel": {
+    "message": "Kanselahin"
+  },
+  "askConfirmed": {
+    "message": "Nakumpirma. $1 ay magpapatuloy."
+  },
+  "askCancelled": {
+    "message": "Kinansela. $1 ay hindi magpapatuloy."
+  },
+  "askDragHint": {
+    "message": "I-drag para ilipat"
+  },
+  "askNotificationTitle": {
+    "message": "$1 ay naghihintay ng iyong sagot"
   }
 }

@@ -313,5 +313,29 @@
   },
   "chatTooLong_other": {
     "message": "Повідомлення може містити не більше $1 символу."
+  },
+  "askYourAgent": {
+    "message": "Ваш агент"
+  },
+  "askFrom": {
+    "message": "$1 запитує"
+  },
+  "askConfirm": {
+    "message": "Підтвердити"
+  },
+  "askCancel": {
+    "message": "Скасувати"
+  },
+  "askConfirmed": {
+    "message": "Підтверджено. $1 продовжить."
+  },
+  "askCancelled": {
+    "message": "Скасовано. $1 не продовжуватиме."
+  },
+  "askDragHint": {
+    "message": "Перетягніть, щоб перемістити"
+  },
+  "askNotificationTitle": {
+    "message": "$1 чекає на вашу відповідь"
   }
 }

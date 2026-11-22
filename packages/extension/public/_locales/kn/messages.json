@@ -289,5 +289,29 @@
   },
   "chatTooLong_other": {
     "message": "ಸಂದೇಶಗಳಲ್ಲಿ ಗರಿಷ್ಠ $1 ಅಕ್ಷರಗಳು ಇರಬಹುದು."
+  },
+  "askYourAgent": {
+    "message": "ನಿಮ್ಮ ಏಜೆಂಟ್"
+  },
+  "askFrom": {
+    "message": "$1 ಕೇಳುತ್ತಿದೆ"
+  },
+  "askConfirm": {
+    "message": "ದೃಢೀಕರಿಸಿ"
+  },
+  "askCancel": {
+    "message": "ರದ್ದುಮಾಡಿ"
+  },
+  "askConfirmed": {
+    "message": "ದೃಢೀಕರಿಸಲಾಗಿದೆ. $1 ಮುಂದುವರಿಯುತ್ತದೆ."
+  },
+  "askCancelled": {
+    "message": "ರದ್ದುಮಾಡಲಾಗಿದೆ. $1 ಮುಂದುವರಿಯುವುದಿಲ್ಲ."
+  },
+  "askDragHint": {
+    "message": "ಸರಿಸಲು ಎಳೆಯಿರಿ"
+  },
+  "askNotificationTitle": {
+    "message": "$1 ನಿಮ್ಮ ಉತ್ತರಕ್ಕಾಗಿ ಕಾಯುತ್ತಿದೆ"
   }
 }

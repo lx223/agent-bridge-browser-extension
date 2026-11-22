@@ -301,5 +301,29 @@
   },
   "chatTooLong_other": {
     "message": "Poruka može imati najviše $1 znakova."
+  },
+  "askYourAgent": {
+    "message": "Vaš agent"
+  },
+  "askFrom": {
+    "message": "$1 pita"
+  },
+  "askConfirm": {
+    "message": "Potvrdi"
+  },
+  "askCancel": {
+    "message": "Odustani"
+  },
+  "askConfirmed": {
+    "message": "Potvrđeno. $1 nastavlja."
+  },
+  "askCancelled": {
+    "message": "Otkazano. $1 neće nastaviti."
+  },
+  "askDragHint": {
+    "message": "Povucite za premještanje"
+  },
+  "askNotificationTitle": {
+    "message": "$1 treba vaš odgovor"
   }
 }

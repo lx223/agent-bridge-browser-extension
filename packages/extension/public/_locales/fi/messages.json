@@ -289,5 +289,29 @@
   },
   "chatTooLong_other": {
     "message": "Viestissä voi olla enintään $1 merkkiä."
+  },
+  "askYourAgent": {
+    "message": "Agenttisi"
+  },
+  "askFrom": {
+    "message": "$1 kysyy"
+  },
+  "askConfirm": {
+    "message": "Vahvista"
+  },
+  "askCancel": {
+    "message": "Peruuta"
+  },
+  "askConfirmed": {
+    "message": "Vahvistettu. $1 jatkaa."
+  },
+  "askCancelled": {
+    "message": "Peruutettu. $1 ei jatka."
+  },
+  "askDragHint": {
+    "message": "Siirrä vetämällä"
+  },
+  "askNotificationTitle": {
+    "message": "$1 tarvitsee vastauksesi"
   }
 }

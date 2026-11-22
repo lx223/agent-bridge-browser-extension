@@ -313,5 +313,29 @@
   },
   "chatTooLong_other": {
     "message": "Zpráva může mít nejvýše $1 znaků."
+  },
+  "askYourAgent": {
+    "message": "Váš agent"
+  },
+  "askFrom": {
+    "message": "$1 se ptá"
+  },
+  "askConfirm": {
+    "message": "Potvrdit"
+  },
+  "askCancel": {
+    "message": "Zrušit"
+  },
+  "askConfirmed": {
+    "message": "Potvrzeno. $1 bude pokračovat."
+  },
+  "askCancelled": {
+    "message": "Zrušeno. $1 nebude pokračovat."
+  },
+  "askDragHint": {
+    "message": "Přetažením přesunete"
+  },
+  "askNotificationTitle": {
+    "message": "$1 potřebuje vaši odpověď"
   }
 }

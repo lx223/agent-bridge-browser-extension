@@ -386,5 +386,37 @@
   "chatTooLong_other": {
     "message": "Messages can be at most $1 characters.",
     "description": "Error. $1 is the maximum length of a chat message."
+  },
+  "askYourAgent": {
+    "message": "Your agent",
+    "description": "Name used for the agent in the in-page question popover when the agent did not say its name."
+  },
+  "askFrom": {
+    "message": "$1 asks",
+    "description": "Top bar of the question popover an agent shows inside a web page. $1 is the agent name, such as claude-code, or \"Your agent\"."
+  },
+  "askConfirm": {
+    "message": "Confirm",
+    "description": "Default label of the button in the question popover that lets the agent go ahead."
+  },
+  "askCancel": {
+    "message": "Cancel",
+    "description": "Default label of the button in the question popover that stops the agent."
+  },
+  "askConfirmed": {
+    "message": "Confirmed. $1 will go ahead.",
+    "description": "Shown in the question popover after the user confirms. $1 is the agent name, such as claude-code, or \"Your agent\"."
+  },
+  "askCancelled": {
+    "message": "Cancelled. $1 will not go ahead.",
+    "description": "Shown in the question popover after the user cancels. $1 is the agent name, such as claude-code, or \"Your agent\"."
+  },
+  "askDragHint": {
+    "message": "Drag to move",
+    "description": "Tooltip of the top bar of the question popover, which can be dragged."
+  },
+  "askNotificationTitle": {
+    "message": "$1 needs your answer",
+    "description": "Title of the desktop notification shown while an agent waits for an answer in a page. $1 is the agent name, such as claude-code, or \"Your agent\"."
   }
 }

@@ -301,5 +301,29 @@
   },
   "chatTooLong_other": {
     "message": "Mesajele pot avea cel mult $1 de caractere."
+  },
+  "askYourAgent": {
+    "message": "Agentul dvs."
+  },
+  "askFrom": {
+    "message": "$1 întreabă"
+  },
+  "askConfirm": {
+    "message": "Confirmați"
+  },
+  "askCancel": {
+    "message": "Anulați"
+  },
+  "askConfirmed": {
+    "message": "Confirmat. $1 va continua."
+  },
+  "askCancelled": {
+    "message": "Anulat. $1 nu va continua."
+  },
+  "askDragHint": {
+    "message": "Trageți pentru a muta"
+  },
+  "askNotificationTitle": {
+    "message": "$1 așteaptă răspunsul dvs."
   }
 }

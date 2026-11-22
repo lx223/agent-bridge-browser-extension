@@ -289,5 +289,29 @@
   },
   "chatTooLong_other": {
     "message": "Az üzenet legfeljebb $1 karakter hosszú lehet."
+  },
+  "askYourAgent": {
+    "message": "Az Ön ügynöke"
+  },
+  "askFrom": {
+    "message": "$1 kérdez"
+  },
+  "askConfirm": {
+    "message": "Megerősítés"
+  },
+  "askCancel": {
+    "message": "Mégse"
+  },
+  "askConfirmed": {
+    "message": "Megerősítve. $1 folytatja."
+  },
+  "askCancelled": {
+    "message": "Visszavonva. $1 nem folytatja."
+  },
+  "askDragHint": {
+    "message": "Húzza az áthelyezéshez"
+  },
+  "askNotificationTitle": {
+    "message": "$1 az Ön válaszára vár"
   }
 }

@@ -337,5 +337,29 @@
   },
   "chatTooLong_other": {
     "message": "الحد الأقصى لطول الرسالة $1 حرف."
+  },
+  "askYourAgent": {
+    "message": "وكيلك"
+  },
+  "askFrom": {
+    "message": "$1 يسأل"
+  },
+  "askConfirm": {
+    "message": "تأكيد"
+  },
+  "askCancel": {
+    "message": "إلغاء"
+  },
+  "askConfirmed": {
+    "message": "تم التأكيد. سيتابع $1."
+  },
+  "askCancelled": {
+    "message": "تم الإلغاء. لن يتابع $1."
+  },
+  "askDragHint": {
+    "message": "اسحب للنقل"
+  },
+  "askNotificationTitle": {
+    "message": "$1 بحاجة إلى إجابتك"
   }
 }

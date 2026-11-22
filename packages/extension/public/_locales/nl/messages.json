@@ -289,5 +289,29 @@
   },
   "chatTooLong_other": {
     "message": "Berichten mogen maximaal $1 tekens lang zijn."
+  },
+  "askYourAgent": {
+    "message": "Je agent"
+  },
+  "askFrom": {
+    "message": "$1 vraagt"
+  },
+  "askConfirm": {
+    "message": "Bevestigen"
+  },
+  "askCancel": {
+    "message": "Annuleren"
+  },
+  "askConfirmed": {
+    "message": "Bevestigd. $1 gaat verder."
+  },
+  "askCancelled": {
+    "message": "Geannuleerd. $1 gaat niet verder."
+  },
+  "askDragHint": {
+    "message": "Sleep om te verplaatsen"
+  },
+  "askNotificationTitle": {
+    "message": "$1 wacht op je antwoord"
   }
 }

@@ -313,5 +313,29 @@
   },
   "chatTooLong_other": {
     "message": "Wiadomość może mieć maksymalnie $1 znaku."
+  },
+  "askYourAgent": {
+    "message": "Twój agent"
+  },
+  "askFrom": {
+    "message": "$1 pyta"
+  },
+  "askConfirm": {
+    "message": "Potwierdź"
+  },
+  "askCancel": {
+    "message": "Anuluj"
+  },
+  "askConfirmed": {
+    "message": "Potwierdzono. $1 będzie kontynuować."
+  },
+  "askCancelled": {
+    "message": "Anulowano. $1 nie będzie kontynuować."
+  },
+  "askDragHint": {
+    "message": "Przeciągnij, aby przenieść"
+  },
+  "askNotificationTitle": {
+    "message": "$1 czeka na Twoją odpowiedź"
   }
 }

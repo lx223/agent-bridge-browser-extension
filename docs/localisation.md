@@ -1,6 +1,6 @@
 # Localisation
 
-The extension's pages, toolbar tooltip, notifications and store description follow the browser's language. It ships in every language the Chrome Web Store supports. English is the default and the source for the other languages.
+The extension's pages, toolbar tooltip, notifications, the question popover agents show in pages, and store description follow the browser's language. It ships in every language the Chrome Web Store supports. English is the default and the source for the other languages.
 
 Tool results, errors returned to the agent, and the prompt the setup page gives you to paste into an agent stay in English, because agents read them, not you.
 

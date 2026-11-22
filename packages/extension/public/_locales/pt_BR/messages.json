@@ -301,5 +301,29 @@
   },
   "chatTooLong_other": {
     "message": "As mensagens podem ter no máximo $1 caracteres."
+  },
+  "askYourAgent": {
+    "message": "Seu agente"
+  },
+  "askFrom": {
+    "message": "$1 pergunta"
+  },
+  "askConfirm": {
+    "message": "Confirmar"
+  },
+  "askCancel": {
+    "message": "Cancelar"
+  },
+  "askConfirmed": {
+    "message": "Confirmado. $1 vai continuar."
+  },
+  "askCancelled": {
+    "message": "Cancelado. $1 não vai continuar."
+  },
+  "askDragHint": {
+    "message": "Arraste para mover"
+  },
+  "askNotificationTitle": {
+    "message": "$1 precisa da sua resposta"
   }
 }

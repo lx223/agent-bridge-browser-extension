@@ -289,5 +289,29 @@
   },
   "chatTooLong_other": {
     "message": "Mesajlar en fazla $1 karakter olabilir."
+  },
+  "askYourAgent": {
+    "message": "Ajanınız"
+  },
+  "askFrom": {
+    "message": "$1 soruyor"
+  },
+  "askConfirm": {
+    "message": "Onayla"
+  },
+  "askCancel": {
+    "message": "İptal"
+  },
+  "askConfirmed": {
+    "message": "Onaylandı. $1 devam edecek."
+  },
+  "askCancelled": {
+    "message": "İptal edildi. $1 devam etmeyecek."
+  },
+  "askDragHint": {
+    "message": "Taşımak için sürükleyin"
+  },
+  "askNotificationTitle": {
+    "message": "$1 yanıtınızı bekliyor"
   }
 }

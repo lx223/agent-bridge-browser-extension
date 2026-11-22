@@ -289,5 +289,29 @@
   },
   "chatTooLong_other": {
     "message": "Mesej boleh mengandungi paling banyak $1 aksara."
+  },
+  "askYourAgent": {
+    "message": "Ejen anda"
+  },
+  "askFrom": {
+    "message": "$1 bertanya"
+  },
+  "askConfirm": {
+    "message": "Sahkan"
+  },
+  "askCancel": {
+    "message": "Batal"
+  },
+  "askConfirmed": {
+    "message": "Disahkan. $1 akan meneruskan."
+  },
+  "askCancelled": {
+    "message": "Dibatalkan. $1 tidak akan meneruskan."
+  },
+  "askDragHint": {
+    "message": "Seret untuk alih"
+  },
+  "askNotificationTitle": {
+    "message": "$1 menunggu jawapan anda"
   }
 }

@@ -289,5 +289,29 @@
   },
   "chatTooLong_other": {
     "message": "消息最多只能包含 $1 个字符。"
+  },
+  "askYourAgent": {
+    "message": "您的智能体"
+  },
+  "askFrom": {
+    "message": "$1 请您确认"
+  },
+  "askConfirm": {
+    "message": "确认"
+  },
+  "askCancel": {
+    "message": "取消"
+  },
+  "askConfirmed": {
+    "message": "已确认。$1 将继续。"
+  },
+  "askCancelled": {
+    "message": "已取消。$1 不会继续。"
+  },
+  "askDragHint": {
+    "message": "拖动以移动"
+  },
+  "askNotificationTitle": {
+    "message": "$1 需要您的答复"
   }
 }

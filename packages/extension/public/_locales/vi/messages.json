@@ -289,5 +289,29 @@
   },
   "chatTooLong_other": {
     "message": "Tin nhắn chỉ được dài tối đa $1 ký tự."
+  },
+  "askYourAgent": {
+    "message": "Tác nhân của bạn"
+  },
+  "askFrom": {
+    "message": "$1 hỏi"
+  },
+  "askConfirm": {
+    "message": "Xác nhận"
+  },
+  "askCancel": {
+    "message": "Hủy"
+  },
+  "askConfirmed": {
+    "message": "Đã xác nhận. $1 sẽ tiếp tục."
+  },
+  "askCancelled": {
+    "message": "Đã hủy. $1 sẽ không tiếp tục."
+  },
+  "askDragHint": {
+    "message": "Kéo để di chuyển"
+  },
+  "askNotificationTitle": {
+    "message": "$1 cần câu trả lời của bạn"
   }
 }

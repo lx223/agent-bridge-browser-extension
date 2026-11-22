@@ -289,5 +289,29 @@
   },
   "chatTooLong_other": {
     "message": "Sõnumis võib olla kuni $1 märki."
+  },
+  "askYourAgent": {
+    "message": "Teie agent"
+  },
+  "askFrom": {
+    "message": "$1 küsib"
+  },
+  "askConfirm": {
+    "message": "Kinnita"
+  },
+  "askCancel": {
+    "message": "Tühista"
+  },
+  "askConfirmed": {
+    "message": "Kinnitatud. $1 jätkab."
+  },
+  "askCancelled": {
+    "message": "Tühistatud. $1 ei jätka."
+  },
+  "askDragHint": {
+    "message": "Lohistage teisaldamiseks"
+  },
+  "askNotificationTitle": {
+    "message": "$1 vajab teie vastust"
   }
 }

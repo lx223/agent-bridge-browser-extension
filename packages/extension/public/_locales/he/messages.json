@@ -301,5 +301,29 @@
   },
   "chatTooLong_other": {
     "message": "הודעה יכולה להכיל עד $1 תווים."
+  },
+  "askYourAgent": {
+    "message": "הסוכן שלך"
+  },
+  "askFrom": {
+    "message": "$1 שואל"
+  },
+  "askConfirm": {
+    "message": "אישור"
+  },
+  "askCancel": {
+    "message": "ביטול"
+  },
+  "askConfirmed": {
+    "message": "אושר. $1 ימשיך."
+  },
+  "askCancelled": {
+    "message": "בוטל. $1 לא ימשיך."
+  },
+  "askDragHint": {
+    "message": "גרירה להזזה"
+  },
+  "askNotificationTitle": {
+    "message": "$1 מחכה לתשובה שלך"
   }
 }

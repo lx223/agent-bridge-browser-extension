@@ -289,5 +289,29 @@
   },
   "chatTooLong_other": {
     "message": "Meddelanden får vara högst $1 tecken långa."
+  },
+  "askYourAgent": {
+    "message": "Din agent"
+  },
+  "askFrom": {
+    "message": "$1 frågar"
+  },
+  "askConfirm": {
+    "message": "Bekräfta"
+  },
+  "askCancel": {
+    "message": "Avbryt"
+  },
+  "askConfirmed": {
+    "message": "Bekräftat. $1 fortsätter."
+  },
+  "askCancelled": {
+    "message": "Avbrutet. $1 fortsätter inte."
+  },
+  "askDragHint": {
+    "message": "Dra för att flytta"
+  },
+  "askNotificationTitle": {
+    "message": "$1 behöver ditt svar"
   }
 }

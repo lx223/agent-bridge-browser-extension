@@ -289,5 +289,29 @@
   },
   "chatTooLong_other": {
     "message": "મેસેજમાં વધુમાં વધુ $1 અક્ષરો હોઈ શકે છે."
+  },
+  "askYourAgent": {
+    "message": "તમારો એજન્ટ"
+  },
+  "askFrom": {
+    "message": "$1 પૂછે છે"
+  },
+  "askConfirm": {
+    "message": "પુષ્ટિ કરો"
+  },
+  "askCancel": {
+    "message": "રદ કરો"
+  },
+  "askConfirmed": {
+    "message": "પુષ્ટિ થઈ. $1 આગળ વધશે."
+  },
+  "askCancelled": {
+    "message": "રદ થયું. $1 આગળ નહીં વધે."
+  },
+  "askDragHint": {
+    "message": "ખસેડવા માટે ખેંચો"
+  },
+  "askNotificationTitle": {
+    "message": "$1 તમારા જવાબની રાહ જુએ છે"
   }
 }

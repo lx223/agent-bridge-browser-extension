@@ -301,5 +301,29 @@
   },
   "chatTooLong_other": {
     "message": "Els missatges poden tenir com a màxim $1 caràcters."
+  },
+  "askYourAgent": {
+    "message": "El teu agent"
+  },
+  "askFrom": {
+    "message": "$1 pregunta"
+  },
+  "askConfirm": {
+    "message": "Confirma"
+  },
+  "askCancel": {
+    "message": "Cancel·la"
+  },
+  "askConfirmed": {
+    "message": "Confirmat. $1 continuarà."
+  },
+  "askCancelled": {
+    "message": "Cancel·lat. $1 no continuarà."
+  },
+  "askDragHint": {
+    "message": "Arrossega per moure"
+  },
+  "askNotificationTitle": {
+    "message": "$1 necessita la teva resposta"
   }
 }

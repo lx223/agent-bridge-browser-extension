@@ -289,5 +289,29 @@
   },
   "chatTooLong_other": {
     "message": "メッセージは $1 文字以内にしてください。"
+  },
+  "askYourAgent": {
+    "message": "お使いのエージェント"
+  },
+  "askFrom": {
+    "message": "$1 からの確認"
+  },
+  "askConfirm": {
+    "message": "承認"
+  },
+  "askCancel": {
+    "message": "キャンセル"
+  },
+  "askConfirmed": {
+    "message": "承認しました。$1 が続行します。"
+  },
+  "askCancelled": {
+    "message": "キャンセルしました。$1 は続行しません。"
+  },
+  "askDragHint": {
+    "message": "ドラッグして移動"
+  },
+  "askNotificationTitle": {
+    "message": "$1 があなたの回答を待っています"
   }
 }

@@ -289,5 +289,29 @@
   },
   "chatTooLong_other": {
     "message": "پیام‌ها حداکثر می‌توانند $1 نویسه داشته باشند."
+  },
+  "askYourAgent": {
+    "message": "عامل شما"
+  },
+  "askFrom": {
+    "message": "$1 می‌پرسد"
+  },
+  "askConfirm": {
+    "message": "تأیید"
+  },
+  "askCancel": {
+    "message": "لغو"
+  },
+  "askConfirmed": {
+    "message": "تأیید شد. $1 ادامه می‌دهد."
+  },
+  "askCancelled": {
+    "message": "لغو شد. $1 ادامه نمی‌دهد."
+  },
+  "askDragHint": {
+    "message": "برای جابه‌جایی بکشید"
+  },
+  "askNotificationTitle": {
+    "message": "$1 منتظر پاسخ شماست"
   }
 }

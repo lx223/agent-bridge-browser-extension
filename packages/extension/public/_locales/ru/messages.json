@@ -313,5 +313,29 @@
   },
   "chatTooLong_other": {
     "message": "Сообщение может содержать не более $1 символа."
+  },
+  "askYourAgent": {
+    "message": "Ваш агент"
+  },
+  "askFrom": {
+    "message": "$1 спрашивает"
+  },
+  "askConfirm": {
+    "message": "Подтвердить"
+  },
+  "askCancel": {
+    "message": "Отмена"
+  },
+  "askConfirmed": {
+    "message": "Подтверждено. $1 продолжит."
+  },
+  "askCancelled": {
+    "message": "Отменено. $1 не будет продолжать."
+  },
+  "askDragHint": {
+    "message": "Перетащите, чтобы переместить"
+  },
+  "askNotificationTitle": {
+    "message": "$1 ждёт вашего ответа"
   }
 }

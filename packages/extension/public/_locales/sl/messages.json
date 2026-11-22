@@ -313,5 +313,29 @@
   },
   "chatTooLong_other": {
     "message": "Sporočilo ima lahko največ $1 znakov."
+  },
+  "askYourAgent": {
+    "message": "Vaš agent"
+  },
+  "askFrom": {
+    "message": "$1 sprašuje"
+  },
+  "askConfirm": {
+    "message": "Potrdi"
+  },
+  "askCancel": {
+    "message": "Prekliči"
+  },
+  "askConfirmed": {
+    "message": "Potrjeno. $1 bo nadaljeval."
+  },
+  "askCancelled": {
+    "message": "Preklicano. $1 ne bo nadaljeval."
+  },
+  "askDragHint": {
+    "message": "Povlecite za premik"
+  },
+  "askNotificationTitle": {
+    "message": "$1 čaka na vaš odgovor"
   }
 }

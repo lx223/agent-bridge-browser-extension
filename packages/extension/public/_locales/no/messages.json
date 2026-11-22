@@ -289,5 +289,29 @@
   },
   "chatTooLong_other": {
     "message": "Meldinger kan være på maks $1 tegn."
+  },
+  "askYourAgent": {
+    "message": "Agenten din"
+  },
+  "askFrom": {
+    "message": "$1 spør"
+  },
+  "askConfirm": {
+    "message": "Bekreft"
+  },
+  "askCancel": {
+    "message": "Avbryt"
+  },
+  "askConfirmed": {
+    "message": "Bekreftet. $1 fortsetter."
+  },
+  "askCancelled": {
+    "message": "Avbrutt. $1 fortsetter ikke."
+  },
+  "askDragHint": {
+    "message": "Dra for å flytte"
+  },
+  "askNotificationTitle": {
+    "message": "$1 trenger svaret ditt"
   }
 }

@@ -289,5 +289,29 @@
   },
   "chatTooLong_other": {
     "message": "訊息最多只能包含 $1 個字元。"
+  },
+  "askYourAgent": {
+    "message": "你的代理程式"
+  },
+  "askFrom": {
+    "message": "$1 請你確認"
+  },
+  "askConfirm": {
+    "message": "確認"
+  },
+  "askCancel": {
+    "message": "取消"
+  },
+  "askConfirmed": {
+    "message": "已確認。$1 將繼續執行。"
+  },
+  "askCancelled": {
+    "message": "已取消。$1 不會繼續執行。"
+  },
+  "askDragHint": {
+    "message": "拖曳即可移動"
+  },
+  "askNotificationTitle": {
+    "message": "$1 需要你的回覆"
   }
 }

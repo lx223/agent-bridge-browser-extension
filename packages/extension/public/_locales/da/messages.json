@@ -289,5 +289,29 @@
   },
   "chatTooLong_other": {
     "message": "Beskeder må højst være på $1 tegn."
+  },
+  "askYourAgent": {
+    "message": "Din agent"
+  },
+  "askFrom": {
+    "message": "$1 spørger"
+  },
+  "askConfirm": {
+    "message": "Bekræft"
+  },
+  "askCancel": {
+    "message": "Annuller"
+  },
+  "askConfirmed": {
+    "message": "Bekræftet. $1 fortsætter."
+  },
+  "askCancelled": {
+    "message": "Annulleret. $1 fortsætter ikke."
+  },
+  "askDragHint": {
+    "message": "Træk for at flytte"
+  },
+  "askNotificationTitle": {
+    "message": "$1 har brug for dit svar"
   }
 }

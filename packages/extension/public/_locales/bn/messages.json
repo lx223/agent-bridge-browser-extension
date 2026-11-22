@@ -289,5 +289,29 @@
   },
   "chatTooLong_other": {
     "message": "মেসেজে সর্বোচ্চ $1টি অক্ষর থাকতে পারে।"
+  },
+  "askYourAgent": {
+    "message": "আপনার এজেন্ট"
+  },
+  "askFrom": {
+    "message": "$1 জানতে চাইছে"
+  },
+  "askConfirm": {
+    "message": "নিশ্চিত করুন"
+  },
+  "askCancel": {
+    "message": "বাতিল করুন"
+  },
+  "askConfirmed": {
+    "message": "নিশ্চিত করা হয়েছে। $1 এগিয়ে যাবে।"
+  },
+  "askCancelled": {
+    "message": "বাতিল করা হয়েছে। $1 এগিয়ে যাবে না।"
+  },
+  "askDragHint": {
+    "message": "সরাতে টেনে আনুন"
+  },
+  "askNotificationTitle": {
+    "message": "$1 আপনার উত্তরের অপেক্ষায় আছে"
   }
 }

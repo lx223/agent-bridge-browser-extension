@@ -289,5 +289,29 @@
   },
   "chatTooLong_other": {
     "message": "Τα μηνύματα μπορούν να έχουν έως $1 χαρακτήρες."
+  },
+  "askYourAgent": {
+    "message": "Ο πράκτοράς σας"
+  },
+  "askFrom": {
+    "message": "$1 ρωτά"
+  },
+  "askConfirm": {
+    "message": "Επιβεβαίωση"
+  },
+  "askCancel": {
+    "message": "Ακύρωση"
+  },
+  "askConfirmed": {
+    "message": "Επιβεβαιώθηκε. $1 θα συνεχίσει."
+  },
+  "askCancelled": {
+    "message": "Ακυρώθηκε. $1 δεν θα συνεχίσει."
+  },
+  "askDragHint": {
+    "message": "Σύρετε για μετακίνηση"
+  },
+  "askNotificationTitle": {
+    "message": "$1 χρειάζεται την απάντησή σας"
   }
 }

@@ -289,5 +289,29 @@
   },
   "chatTooLong_other": {
     "message": "ข้อความมีความยาวได้สูงสุด $1 อักขระ"
+  },
+  "askYourAgent": {
+    "message": "เอเจนต์ของคุณ"
+  },
+  "askFrom": {
+    "message": "$1 ถาม"
+  },
+  "askConfirm": {
+    "message": "ยืนยัน"
+  },
+  "askCancel": {
+    "message": "ยกเลิก"
+  },
+  "askConfirmed": {
+    "message": "ยืนยันแล้ว $1 จะดำเนินการต่อ"
+  },
+  "askCancelled": {
+    "message": "ยกเลิกแล้ว $1 จะไม่ดำเนินการต่อ"
+  },
+  "askDragHint": {
+    "message": "ลากเพื่อย้าย"
+  },
+  "askNotificationTitle": {
+    "message": "$1 รอคำตอบจากคุณ"
   }
 }

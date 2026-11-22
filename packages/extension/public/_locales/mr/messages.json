@@ -289,5 +289,29 @@
   },
   "chatTooLong_other": {
     "message": "मेसेजमध्ये जास्तीत जास्त $1 वर्ण असू शकतात."
+  },
+  "askYourAgent": {
+    "message": "तुमचा एजंट"
+  },
+  "askFrom": {
+    "message": "$1 विचारत आहे"
+  },
+  "askConfirm": {
+    "message": "पुष्टी करा"
+  },
+  "askCancel": {
+    "message": "रद्द करा"
+  },
+  "askConfirmed": {
+    "message": "पुष्टी झाली. $1 पुढे जाईल."
+  },
+  "askCancelled": {
+    "message": "रद्द केले. $1 पुढे जाणार नाही."
+  },
+  "askDragHint": {
+    "message": "हलवण्यासाठी ड्रॅग करा"
+  },
+  "askNotificationTitle": {
+    "message": "$1 तुमच्या उत्तराची वाट पाहत आहे"
   }
 }

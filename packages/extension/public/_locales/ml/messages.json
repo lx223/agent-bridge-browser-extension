@@ -289,5 +289,29 @@
   },
   "chatTooLong_other": {
     "message": "സന്ദേശങ്ങളിൽ പരമാവധി $1 പ്രതീകങ്ങൾ ഉണ്ടാകാം."
+  },
+  "askYourAgent": {
+    "message": "നിങ്ങളുടെ ഏജന്റ്"
+  },
+  "askFrom": {
+    "message": "$1 ചോദിക്കുന്നു"
+  },
+  "askConfirm": {
+    "message": "സ്ഥിരീകരിക്കുക"
+  },
+  "askCancel": {
+    "message": "റദ്ദാക്കുക"
+  },
+  "askConfirmed": {
+    "message": "സ്ഥിരീകരിച്ചു. $1 തുടരും."
+  },
+  "askCancelled": {
+    "message": "റദ്ദാക്കി. $1 തുടരില്ല."
+  },
+  "askDragHint": {
+    "message": "നീക്കാൻ വലിച്ചിടുക"
+  },
+  "askNotificationTitle": {
+    "message": "$1 നിങ്ങളുടെ മറുപടിക്കായി കാത്തിരിക്കുന്നു"
   }
 }

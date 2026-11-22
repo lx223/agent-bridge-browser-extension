@@ -301,5 +301,29 @@
   },
   "chatTooLong_other": {
     "message": "Ziņojumā var būt ne vairāk kā $1 rakstzīmes."
+  },
+  "askYourAgent": {
+    "message": "Jūsu aģents"
+  },
+  "askFrom": {
+    "message": "$1 jautā"
+  },
+  "askConfirm": {
+    "message": "Apstiprināt"
+  },
+  "askCancel": {
+    "message": "Atcelt"
+  },
+  "askConfirmed": {
+    "message": "Apstiprināts. $1 turpinās."
+  },
+  "askCancelled": {
+    "message": "Atcelts. $1 neturpinās."
+  },
+  "askDragHint": {
+    "message": "Velciet, lai pārvietotu"
+  },
+  "askNotificationTitle": {
+    "message": "$1 gaida jūsu atbildi"
   }
 }
