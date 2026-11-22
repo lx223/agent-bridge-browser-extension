@@ -1,0 +1,320 @@
+{
+  "locale": {
+    "message": "fil"
+  },
+  "extDescription": {
+    "message": "Kontrolin ang sarili mong browser gamit ang anumang AI agent na gusto mo: ayusin ang mga tab at gamitin ang mga web page sa MCP."
+  },
+  "actionTitle": {
+    "message": "Agent Browser Bridge: setup at status"
+  },
+  "actionTitleDisconnected": {
+    "message": "Agent Browser Bridge: walang nakakonektang agent"
+  },
+  "actionTitleConnected": {
+    "message": "Agent Browser Bridge: nakakonekta ang agent"
+  },
+  "actionTitleConnectedTo": {
+    "message": "Agent Browser Bridge: nakakonekta sa $1"
+  },
+  "notificationReply": {
+    "message": "I-click ang button ng Agent Browser Bridge sa toolbar para sumagot"
+  },
+  "optionsTitle": {
+    "message": "Mga opsyon ng Agent Browser Bridge"
+  },
+  "statusChecking": {
+    "message": "Sinusuri ang koneksyon…"
+  },
+  "statusLooking": {
+    "message": "Hinahanap ang iyong agent…"
+  },
+  "welcomeLede": {
+    "message": "Hayaang ayusin ng iyong AI agent ang mga tab mo at gamitin ang mga web page."
+  },
+  "welcomeLedeSafari": {
+    "message": "Hayaang hanapin, buksan, ilipat at isara ng iyong AI agent ang mga tab mo sa Safari."
+  },
+  "profileLabel": {
+    "message": "Ang profile na ito"
+  },
+  "profilePlaceholder": {
+    "message": "Bigyan ito ng pangalan"
+  },
+  "profileHint": {
+    "message": "Ginagamit ng mga agent ang pangalang ito para matukoy ang pagkakaiba ng iyong mga browser at profile, kaya puwede mong hilingin ang browser mo sa Trabaho."
+  },
+  "profileSaved": {
+    "message": "Na-save"
+  },
+  "profileNameRemoved": {
+    "message": "Inalis ang pangalan"
+  },
+  "statusNotConnected": {
+    "message": "Hindi pa nakakonekta"
+  },
+  "statusSetUpHint": {
+    "message": "Ikonekta ang iyong agent sa ibaba, pagkatapos ay magsimula ng bagong session dito."
+  },
+  "statusConnected": {
+    "message": "Nakakonekta"
+  },
+  "statusConnectedMany_one": {
+    "message": "Nakakonekta sa $1 session ng agent"
+  },
+  "statusConnectedMany_other": {
+    "message": "Nakakonekta sa $1 session ng agent"
+  },
+  "statusConnectedHint": {
+    "message": "Magagamit ng iyong agent ang browser na ito. Subukan ang isa sa mga prompt sa ibaba."
+  },
+  "welcomeStepConnect": {
+    "message": "Ikonekta ang iyong agent"
+  },
+  "stepDone": {
+    "message": "Tapos na"
+  },
+  "welcomePickAgent": {
+    "message": "Piliin ang agent na ginagamit mo."
+  },
+  "welcomeAgentTabs": {
+    "message": "Ang iyong agent"
+  },
+  "welcomeTabOther": {
+    "message": "Iba pa"
+  },
+  "welcomeClaudeCodeSteps": {
+    "message": "Patakbuhin ito nang isang beses sa terminal, pagkatapos ay magsimula ng bagong session ng Claude Code."
+  },
+  "welcomeClaudeDesktopSteps": {
+    "message": "I-download ang extension at buksan ang file. Ii-install ito ng Claude Desktop para sa iyo, hindi kailangan ng Node.js."
+  },
+  "welcomeOpensToConfirm": {
+    "message": "Magbubukas ang $1 at hihilingin sa iyong kumpirmahin."
+  },
+  "welcomeOtherAgentsSteps": {
+    "message": "Idagdag ito sa MCP config ng agent, pagkatapos ay i-restart ito."
+  },
+  "welcomeAgentSetupHint": {
+    "message": "I-paste ang prompt na ito sa isang agent na nakakapagpatakbo ng mga command, gaya ng Claude Code, Cursor o Codex. Tinitingnan nito kung may Node.js, pagkatapos ay idinadagdag ang server."
+  },
+  "showPrompt": {
+    "message": "Ipakita ang prompt"
+  },
+  "welcomeServerFootnote": {
+    "message": "Nagpapatakbo ang iyong agent ng maliit na lokal na server, $1, na kinokonektahan ng extension na ito."
+  },
+  "welcomeStepAsk": {
+    "message": "Magtanong ng kahit ano"
+  },
+  "welcomeUndoFootnote": {
+    "message": "Nagbago ang isip mo? Maibabalik ang mga pagbabagong ginawa gamit ang $1 sa pamamagitan ng paghiling sa agent na i-undo ang mga ito."
+  },
+  "welcomeSafariFootnote": {
+    "message": "Sa Safari, kayang buksan, ayusin at isara ng iyong agent ang mga window, at kayang magbukas, mag-navigate, lumipat, mag-pin, mag-mute, mag-duplicate, maglipat at magsara ng mga tab. Available sa Chrome ang mga grupo ng tab, history, bookmark at kontrol sa page. Kung walang lumalabas na pamagat at address ng tab, bigyan ang extension ng access sa website sa Safari sa ilalim ng Settings > Extensions."
+  },
+  "welcomeAnalyticsHint": {
+    "message": "Kung aling mga feature ang ginagamit at ang bersyon ng extension, para makatulong na mapahusay ang extension."
+  },
+  "instanceNameLabel": {
+    "message": "Pangalanan ang profile ng browser na ito"
+  },
+  "instanceNamePlaceholder": {
+    "message": "Halimbawa, Trabaho o Personal"
+  },
+  "optionsInstanceNameHint": {
+    "message": "Ginagamit ng mga agent ang pangalang ito para matukoy ang pagkakaiba ng iyong mga browser at profile. $1"
+  },
+  "instanceId": {
+    "message": "ID ng instance: $1"
+  },
+  "welcomeAgentSetupTitle": {
+    "message": "Hayaang ang agent mo ang mag-set up nito"
+  },
+  "copyPrompt": {
+    "message": "Kopyahin ang prompt"
+  },
+  "copy": {
+    "message": "Kopyahin"
+  },
+  "copied": {
+    "message": "Nakopya"
+  },
+  "welcomeAddTo": {
+    "message": "Idagdag sa $1"
+  },
+  "welcomeDownloadFor": {
+    "message": "I-download para sa $1"
+  },
+  "welcomeTryIntro": {
+    "message": "Habang nakabukas ang Chrome, sabihin sa iyong agent:"
+  },
+  "welcomeTryTabs": {
+    "message": "Pagpangkat-pangkatin ang mga nakabukas kong tab ayon sa paksa. Ipakita mo muna sa akin ang plano."
+  },
+  "welcomeTryPage": {
+    "message": "Buksan ang release notes ng Chrome at ibuod kung ano ang nagbago sa pinakabagong bersyon."
+  },
+  "welcomeTryIntroSafari": {
+    "message": "Habang nakabukas ang Safari, sabihin sa iyong agent:"
+  },
+  "welcomeTryDuplicatesSafari": {
+    "message": "Anong mga tab ang nakabukas sa Safari ko? Isara ang mga duplicate, pero tanungin mo muna ako."
+  },
+  "welcomeTrySortSafari": {
+    "message": "Ayusin ang mga tab ko sa Safari ayon sa site."
+  },
+  "welcomePrivacyHeading": {
+    "message": "Privacy"
+  },
+  "welcomePrivacy": {
+    "message": "Nananatili sa iyong computer ang data ng pag-browse mo: sa $1 lang nakikipag-ugnayan ang extension. Kayang basahin ng iyong agent ang mga pamagat at URL ng tab, ayusing muli, ipangkat o isara ang mga tab, at magbasa at kumilos sa mga web page kapag hiniling mo. Nagpapakita ang Chrome ng banner ng pag-debug habang gumagana ito sa isang page. Hindi kailanman ipinapadala ng extension na ito saanman ang mga pamagat ng tab, URL at nilalaman ng page."
+  },
+  "welcomePrivacySafari": {
+    "message": "Nananatili sa iyong computer ang data ng pag-browse mo: sa $1 lang nakikipag-ugnayan ang extension. Kayang basahin ng iyong agent ang mga pamagat at URL ng tab, at magbukas, mag-ayos o magsara ng mga window at tab kapag hiniling mo. Hindi ito makakapagbasa o makakakilos sa mga web page sa Safari. Hindi kailanman ipinapadala ng extension na ito saanman ang mga pamagat ng tab at URL."
+  },
+  "analyticsTitle": {
+    "message": "Ibahagi ang anonymous na istatistika ng paggamit"
+  },
+  "analyticsHint": {
+    "message": "Kung aling mga feature ang ginagamit, kung nagtatagumpay ang mga ito, at ang mga bersyon ng extension at agent. Hindi kailanman ang mga pamagat ng tab, URL o nilalaman ng page. $1"
+  },
+  "privacyPolicy": {
+    "message": "Patakaran sa privacy"
+  },
+  "analyticsUnavailable": {
+    "message": "Hindi nangongolekta ng istatistika ng paggamit ang build na ito."
+  },
+  "openSetup": {
+    "message": "Buksan ang setup at status ng koneksyon"
+  },
+  "optionsConnected": {
+    "message": "Nakakonekta ang agent"
+  },
+  "optionsConnectedMany_one": {
+    "message": "$1 session ng agent ang nakakonekta"
+  },
+  "optionsConnectedMany_other": {
+    "message": "$1 session ng agent ang nakakonekta"
+  },
+  "optionsDisconnected": {
+    "message": "Walang nakakonektang agent"
+  },
+  "agentStartingUp": {
+    "message": "Nagsisimula ang agent"
+  },
+  "sessionInProject": {
+    "message": "$1 sa $2"
+  },
+  "sessionStarted": {
+    "message": "Sinimulan $1"
+  },
+  "sessionLastUsed_one": {
+    "message": "Huling ginamit ang $2 $3, $1 tawag"
+  },
+  "sessionLastUsed_other": {
+    "message": "Huling ginamit ang $2 $3, $1 tawag"
+  },
+  "sessionUnused": {
+    "message": "Hindi pa gumagamit ng browser"
+  },
+  "sessionId": {
+    "message": "Session $1"
+  },
+  "serverVersion": {
+    "message": "server $1"
+  },
+  "instanceThisBrowser": {
+    "message": "$1, ang browser na ito"
+  },
+  "justNow": {
+    "message": "ngayon lang"
+  },
+  "chatTitle": {
+    "message": "Chat sa agent"
+  },
+  "chatSetup": {
+    "message": "Setup"
+  },
+  "chatConversation": {
+    "message": "Pag-uusap"
+  },
+  "chatEmptyHeading": {
+    "message": "Kausapin ang iyong agent mula rito"
+  },
+  "chatEmptyBody": {
+    "message": "Hilingin sa iyong agent na magpatuloy sa browser, o patakbuhin ang $1 prompt nito. Lalabas dito ang mga mensahe nito, at direktang babalik dito ang mga sagot mo."
+  },
+  "chatEmptyHint": {
+    "message": "May sariling pag-uusap ang bawat session ng agent."
+  },
+  "chatInput": {
+    "message": "Magmensahe sa agent"
+  },
+  "chatEnd": {
+    "message": "Tapusin ang chat"
+  },
+  "chatRemove": {
+    "message": "Alisin"
+  },
+  "chatSend": {
+    "message": "Ipadala"
+  },
+  "chatError": {
+    "message": "Nagkaproblema."
+  },
+  "chatUnseen_one": {
+    "message": "$2 ($1 bago)"
+  },
+  "chatUnseen_other": {
+    "message": "$2 ($1 bago)"
+  },
+  "chatStatusWaiting": {
+    "message": "Hinihintay ang sagot mo"
+  },
+  "chatStatusWorking": {
+    "message": "Gumagana"
+  },
+  "chatStatusWorkingTool": {
+    "message": "Gumagana: ginamit ang $1 $2"
+  },
+  "chatStatusDisconnected": {
+    "message": "Nadiskonekta ang agent"
+  },
+  "chatStatusEnded": {
+    "message": "Tapos na ang chat"
+  },
+  "chatHintWaiting": {
+    "message": "Enter para ipadala, Shift+Enter para sa bagong linya."
+  },
+  "chatHintWorking": {
+    "message": "Babasahin ng agent ang mensahe mo sa susunod nitong pagtingin sa chat."
+  },
+  "chatHintDisconnected": {
+    "message": "Nagsara na ang session ng agent na ito."
+  },
+  "chatHintEnded": {
+    "message": "Hilingin sa agent na magpatuloy sa browser para makapag-chat ulit."
+  },
+  "chatReadByAgent": {
+    "message": "nabasa ng agent"
+  },
+  "chatNotReadYet": {
+    "message": "hindi pa nababasa"
+  },
+  "chatEndedNotice": {
+    "message": "Tinapos mo ang chat."
+  },
+  "chatConversationGone": {
+    "message": "Wala na ang pag-uusap na ito."
+  },
+  "chatEndedError": {
+    "message": "Tapos na ang chat na ito. Hilingin sa agent na magpatuloy sa browser para simulan itong muli."
+  },
+  "chatTooLong_one": {
+    "message": "Hanggang $1 character lang ang puwede sa isang mensahe."
+  },
+  "chatTooLong_other": {
+    "message": "Hanggang $1 character lang ang puwede sa isang mensahe."
+  }
+}

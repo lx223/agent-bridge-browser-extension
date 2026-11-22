@@ -4,6 +4,7 @@ import { join } from 'node:path';
 import WebSocketClient from 'ws';
 import { safariManifest } from '../../../packages/extension/src/safariManifest.ts';
 import { describeSafariSupport } from './apiSupport.ts';
+import { defaultLocaleMessages, getMessage } from './i18n.ts';
 
 export const SAFARI_VERSION = '27.0';
 
@@ -461,7 +462,13 @@ export function startSimulatedSafari(options: SimulatedSafariOptions): Simulated
     if (Object.keys(changes).length) onStorageChanged.emit(changes, 'local');
   };
 
+  const messages = defaultLocaleMessages(options.extensionDir);
+
   const api = {
+    i18n: {
+      getMessage: (key: string, substitutions?: string | string[]) => getMessage(messages, key, substitutions),
+      getUILanguage: () => 'en',
+    },
     runtime: {
       id: extensionId,
       getURL: (path = '') => `${origin}/${path.replace(/^\//, '')}`,

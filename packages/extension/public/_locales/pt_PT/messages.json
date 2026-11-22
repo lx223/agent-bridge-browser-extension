@@ -1,0 +1,335 @@
+{
+  "locale": {
+    "message": "pt_PT"
+  },
+  "extDescription": {
+    "message": "Controle o seu navegador com o agente de IA que preferir: organize separadores e opere páginas Web através de MCP."
+  },
+  "actionTitle": {
+    "message": "Agent Browser Bridge: configuração e estado"
+  },
+  "actionTitleDisconnected": {
+    "message": "Agent Browser Bridge: nenhum agente ligado"
+  },
+  "actionTitleConnected": {
+    "message": "Agent Browser Bridge: agente ligado"
+  },
+  "actionTitleConnectedTo": {
+    "message": "Agent Browser Bridge: ligado a $1"
+  },
+  "notificationReply": {
+    "message": "Clique no botão do Agent Browser Bridge na barra de ferramentas para responder"
+  },
+  "optionsTitle": {
+    "message": "Opções do Agent Browser Bridge"
+  },
+  "statusChecking": {
+    "message": "A verificar a ligação…"
+  },
+  "statusLooking": {
+    "message": "A procurar o seu agente…"
+  },
+  "welcomeLede": {
+    "message": "Deixe o seu agente de IA organizar os seus separadores e operar páginas Web."
+  },
+  "welcomeLedeSafari": {
+    "message": "Deixe o seu agente de IA encontrar, abrir, mover e fechar os seus separadores do Safari."
+  },
+  "profileLabel": {
+    "message": "Este perfil"
+  },
+  "profilePlaceholder": {
+    "message": "Atribua-lhe um nome"
+  },
+  "profileHint": {
+    "message": "Os agentes utilizam este nome para distinguir os seus navegadores e perfis, para que possa pedir o navegador \"Trabalho\"."
+  },
+  "profileSaved": {
+    "message": "Guardado"
+  },
+  "profileNameRemoved": {
+    "message": "Nome removido"
+  },
+  "statusNotConnected": {
+    "message": "Ainda não ligado"
+  },
+  "statusSetUpHint": {
+    "message": "Ligue o seu agente abaixo e, em seguida, inicie uma nova sessão nele."
+  },
+  "statusConnected": {
+    "message": "Ligado"
+  },
+  "statusConnectedMany_one": {
+    "message": "Ligado a $1 sessão de agente"
+  },
+  "statusConnectedMany_many": {
+    "message": "Ligado a $1 sessões de agente"
+  },
+  "statusConnectedMany_other": {
+    "message": "Ligado a $1 sessões de agente"
+  },
+  "statusConnectedHint": {
+    "message": "O seu agente pode utilizar este navegador. Experimente um dos prompts abaixo."
+  },
+  "welcomeStepConnect": {
+    "message": "Ligue o seu agente"
+  },
+  "stepDone": {
+    "message": "Concluído"
+  },
+  "welcomePickAgent": {
+    "message": "Escolha o agente que utiliza."
+  },
+  "welcomeAgentTabs": {
+    "message": "O seu agente"
+  },
+  "welcomeTabOther": {
+    "message": "Outro"
+  },
+  "welcomeClaudeCodeSteps": {
+    "message": "Execute isto uma vez num terminal e, em seguida, inicie uma nova sessão do Claude Code."
+  },
+  "welcomeClaudeDesktopSteps": {
+    "message": "Transfira a extensão e abra o ficheiro. O Claude Desktop instala-a por si, sem precisar do Node.js."
+  },
+  "welcomeOpensToConfirm": {
+    "message": "O $1 abre e pede-lhe que confirme."
+  },
+  "welcomeOtherAgentsSteps": {
+    "message": "Adicione isto à configuração MCP do agente e, em seguida, reinicie-o."
+  },
+  "welcomeAgentSetupHint": {
+    "message": "Cole este prompt num agente que consiga executar comandos, como o Claude Code, o Cursor ou o Codex. O agente verifica se o Node.js está instalado e adiciona o servidor."
+  },
+  "showPrompt": {
+    "message": "Mostrar prompt"
+  },
+  "welcomeServerFootnote": {
+    "message": "O seu agente executa um pequeno servidor local, $1, ao qual esta extensão se liga."
+  },
+  "welcomeStepAsk": {
+    "message": "Peça-lhe algo"
+  },
+  "welcomeUndoFootnote": {
+    "message": "Mudou de ideias? As alterações feitas com $1 podem ser revertidas se pedir ao agente que as anule."
+  },
+  "welcomeSafariFootnote": {
+    "message": "No Safari, o seu agente pode abrir, organizar e fechar janelas, bem como abrir separadores, navegar neles, alternar entre eles, fixá-los, silenciá-los, duplicá-los, movê-los e fechá-los. Os grupos de separadores, o histórico, os marcadores e o controlo de páginas estão disponíveis no Chrome. Se faltarem os títulos e os endereços dos separadores, dê à extensão acesso a sites no Safari, em Definições > Extensões."
+  },
+  "welcomeAnalyticsHint": {
+    "message": "Que funcionalidades são utilizadas e a versão da extensão, para ajudar a melhorar a extensão."
+  },
+  "instanceNameLabel": {
+    "message": "Atribua um nome a este perfil do navegador"
+  },
+  "instanceNamePlaceholder": {
+    "message": "Por exemplo, Trabalho ou Pessoal"
+  },
+  "optionsInstanceNameHint": {
+    "message": "Os agentes utilizam este nome para distinguir os seus navegadores e perfis. $1"
+  },
+  "instanceId": {
+    "message": "ID da instância: $1"
+  },
+  "welcomeAgentSetupTitle": {
+    "message": "Deixe o seu agente fazer a configuração"
+  },
+  "copyPrompt": {
+    "message": "Copiar prompt"
+  },
+  "copy": {
+    "message": "Copiar"
+  },
+  "copied": {
+    "message": "Copiado"
+  },
+  "welcomeAddTo": {
+    "message": "Adicionar ao $1"
+  },
+  "welcomeDownloadFor": {
+    "message": "Transferir para $1"
+  },
+  "welcomeTryIntro": {
+    "message": "Com o Chrome aberto, peça ao seu agente:"
+  },
+  "welcomeTryTabs": {
+    "message": "Organiza os meus separadores abertos em grupos por tema. Mostra-me primeiro o plano."
+  },
+  "welcomeTryPage": {
+    "message": "Abre as notas de lançamento do Chrome e resume o que mudou na versão mais recente."
+  },
+  "welcomeTryIntroSafari": {
+    "message": "Com o Safari aberto, peça ao seu agente:"
+  },
+  "welcomeTryDuplicatesSafari": {
+    "message": "Que separadores tenho abertos no Safari? Fecha os duplicados, mas pergunta-me primeiro."
+  },
+  "welcomeTrySortSafari": {
+    "message": "Ordena os meus separadores do Safari por site."
+  },
+  "welcomePrivacyHeading": {
+    "message": "Privacidade"
+  },
+  "welcomePrivacy": {
+    "message": "Os seus dados de navegação ficam no seu computador: a extensão só comunica com $1. O seu agente pode ler os títulos e os URLs dos separadores, reorganizar, agrupar ou fechar separadores, e ler e agir em páginas Web quando lho pedir. O Chrome mostra um aviso de depuração enquanto o agente trabalha numa página. Esta extensão nunca envia os títulos dos separadores, os URLs nem o conteúdo das páginas para qualquer outro lado."
+  },
+  "welcomePrivacySafari": {
+    "message": "Os seus dados de navegação ficam no seu computador: a extensão só comunica com $1. O seu agente pode ler os títulos e os URLs dos separadores, bem como abrir, organizar ou fechar janelas e separadores quando lho pedir. No Safari, não consegue ler nem agir em páginas Web. Esta extensão nunca envia os títulos nem os URLs dos separadores para qualquer outro lado."
+  },
+  "analyticsTitle": {
+    "message": "Partilhar estatísticas de utilização anónimas"
+  },
+  "analyticsHint": {
+    "message": "Que funcionalidades são utilizadas, se funcionam e as versões da extensão e do agente. Nunca títulos de separadores, URLs ou conteúdo de páginas. $1"
+  },
+  "privacyPolicy": {
+    "message": "Política de privacidade"
+  },
+  "analyticsUnavailable": {
+    "message": "Esta versão não recolhe estatísticas de utilização."
+  },
+  "openSetup": {
+    "message": "Abrir a configuração e o estado da ligação"
+  },
+  "optionsConnected": {
+    "message": "Agente ligado"
+  },
+  "optionsConnectedMany_one": {
+    "message": "$1 sessão de agente ligada"
+  },
+  "optionsConnectedMany_many": {
+    "message": "$1 sessões de agente ligadas"
+  },
+  "optionsConnectedMany_other": {
+    "message": "$1 sessões de agente ligadas"
+  },
+  "optionsDisconnected": {
+    "message": "Nenhum agente ligado"
+  },
+  "agentStartingUp": {
+    "message": "Agente a iniciar"
+  },
+  "sessionInProject": {
+    "message": "$1 em $2"
+  },
+  "sessionStarted": {
+    "message": "Iniciada $1"
+  },
+  "sessionLastUsed_one": {
+    "message": "Última utilização: $2 $3, $1 chamada"
+  },
+  "sessionLastUsed_many": {
+    "message": "Última utilização: $2 $3, $1 chamadas"
+  },
+  "sessionLastUsed_other": {
+    "message": "Última utilização: $2 $3, $1 chamadas"
+  },
+  "sessionUnused": {
+    "message": "Ainda não utilizou nenhum navegador"
+  },
+  "sessionId": {
+    "message": "Sessão $1"
+  },
+  "serverVersion": {
+    "message": "servidor $1"
+  },
+  "instanceThisBrowser": {
+    "message": "$1, este navegador"
+  },
+  "justNow": {
+    "message": "agora mesmo"
+  },
+  "chatTitle": {
+    "message": "Chat com o agente"
+  },
+  "chatSetup": {
+    "message": "Configuração"
+  },
+  "chatConversation": {
+    "message": "Conversa"
+  },
+  "chatEmptyHeading": {
+    "message": "Fale com o seu agente a partir daqui"
+  },
+  "chatEmptyBody": {
+    "message": "Peça ao seu agente que continue no navegador ou execute o prompt $1 do agente. As mensagens do agente aparecem aqui e as suas respostas chegam-lhe diretamente."
+  },
+  "chatEmptyHint": {
+    "message": "Cada sessão de agente tem a sua própria conversa."
+  },
+  "chatInput": {
+    "message": "Envie uma mensagem ao agente"
+  },
+  "chatEnd": {
+    "message": "Terminar chat"
+  },
+  "chatRemove": {
+    "message": "Remover"
+  },
+  "chatSend": {
+    "message": "Enviar"
+  },
+  "chatError": {
+    "message": "Ocorreu um erro."
+  },
+  "chatUnseen_one": {
+    "message": "$2 ($1 nova)"
+  },
+  "chatUnseen_many": {
+    "message": "$2 ($1 novas)"
+  },
+  "chatUnseen_other": {
+    "message": "$2 ($1 novas)"
+  },
+  "chatStatusWaiting": {
+    "message": "A aguardar a sua resposta"
+  },
+  "chatStatusWorking": {
+    "message": "A trabalhar"
+  },
+  "chatStatusWorkingTool": {
+    "message": "A trabalhar: última utilização de $1 $2"
+  },
+  "chatStatusDisconnected": {
+    "message": "Agente desligado"
+  },
+  "chatStatusEnded": {
+    "message": "Chat terminado"
+  },
+  "chatHintWaiting": {
+    "message": "Enter para enviar, Shift+Enter para uma nova linha."
+  },
+  "chatHintWorking": {
+    "message": "O agente lê a sua mensagem da próxima vez que verificar o chat."
+  },
+  "chatHintDisconnected": {
+    "message": "Esta sessão de agente foi fechada."
+  },
+  "chatHintEnded": {
+    "message": "Peça ao agente que continue no navegador para voltar a conversar."
+  },
+  "chatReadByAgent": {
+    "message": "lida pelo agente"
+  },
+  "chatNotReadYet": {
+    "message": "ainda não lida"
+  },
+  "chatEndedNotice": {
+    "message": "Terminou o chat."
+  },
+  "chatConversationGone": {
+    "message": "Esta conversa já não existe."
+  },
+  "chatEndedError": {
+    "message": "Este chat terminou. Peça ao agente que continue no navegador para o retomar."
+  },
+  "chatTooLong_one": {
+    "message": "As mensagens podem ter, no máximo, $1 caráter."
+  },
+  "chatTooLong_many": {
+    "message": "As mensagens podem ter, no máximo, $1 carateres."
+  },
+  "chatTooLong_other": {
+    "message": "As mensagens podem ter, no máximo, $1 carateres."
+  }
+}

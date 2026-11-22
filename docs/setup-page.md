@@ -9,4 +9,4 @@ The setup page (`packages/extension/src/welcome/`) opens when the extension is i
 
 When the page opens and an agent is already connected, the "Connect your agent" step starts collapsed and marked done, so the prompts to try come first. It stays where the user left it after that, so the page never jumps while someone is following the setup steps.
 
-The status wording lives in `status.ts`, the profile badge letter in `profile.ts`, and the tab order and keyboard handling in `agentTabs.ts`, all unit tested. The page itself is covered by the end-to-end tests in `e2e/connection/extension.test.ts` and `e2e/safari/safari.test.ts`.
+Every piece of text on the page comes from the extension's messages, so it follows the browser's language; see [localisation](localisation.md). The status wording is picked in `status.ts`, the profile badge letter in `profile.ts`, and the tab order and keyboard handling in `agentTabs.ts`, all unit tested. The page itself is covered by the end-to-end tests in `e2e/connection/extension.test.ts` and `e2e/safari/safari.test.ts`.

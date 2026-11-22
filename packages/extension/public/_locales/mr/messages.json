@@ -1,0 +1,320 @@
+{
+  "locale": {
+    "message": "mr"
+  },
+  "extDescription": {
+    "message": "तुमच्या आवडीच्या कोणत्याही AI एजंटद्वारे तुमचा ब्राउझर नियंत्रित करा: MCP वापरून टॅब व्यवस्थित करा आणि वेब पेज हाताळा."
+  },
+  "actionTitle": {
+    "message": "Agent Browser Bridge: सेटअप आणि स्थिती"
+  },
+  "actionTitleDisconnected": {
+    "message": "Agent Browser Bridge: कोणताही एजंट कनेक्ट केलेला नाही"
+  },
+  "actionTitleConnected": {
+    "message": "Agent Browser Bridge: एजंट कनेक्ट केला आहे"
+  },
+  "actionTitleConnectedTo": {
+    "message": "Agent Browser Bridge: $1 शी कनेक्ट केले आहे"
+  },
+  "notificationReply": {
+    "message": "उत्तर देण्यासाठी टूलबारमधील Agent Browser Bridge बटणावर क्लिक करा"
+  },
+  "optionsTitle": {
+    "message": "Agent Browser Bridge पर्याय"
+  },
+  "statusChecking": {
+    "message": "कनेक्शन तपासत आहे…"
+  },
+  "statusLooking": {
+    "message": "तुमचा एजंट शोधत आहे…"
+  },
+  "welcomeLede": {
+    "message": "तुमच्या AI एजंटला तुमचे टॅब व्यवस्थित करू द्या आणि वेब पेज हाताळू द्या."
+  },
+  "welcomeLedeSafari": {
+    "message": "तुमच्या AI एजंटला तुमचे Safari टॅब शोधू, उघडू, हलवू आणि बंद करू द्या."
+  },
+  "profileLabel": {
+    "message": "हे प्रोफाइल"
+  },
+  "profilePlaceholder": {
+    "message": "याला नाव द्या"
+  },
+  "profileHint": {
+    "message": "एजंट हे नाव वापरून तुमचे ब्राउझर आणि प्रोफाइल वेगवेगळे ओळखतात, त्यामुळे तुम्ही तुमचा ऑफिस ब्राउझर वापरायला सांगू शकता."
+  },
+  "profileSaved": {
+    "message": "सेव्ह केले"
+  },
+  "profileNameRemoved": {
+    "message": "नाव काढले"
+  },
+  "statusNotConnected": {
+    "message": "अद्याप कनेक्ट केलेले नाही"
+  },
+  "statusSetUpHint": {
+    "message": "खाली तुमचा एजंट कनेक्ट करा, त्यानंतर त्यात नवीन सेशन सुरू करा."
+  },
+  "statusConnected": {
+    "message": "कनेक्ट केले आहे"
+  },
+  "statusConnectedMany_one": {
+    "message": "$1 एजंट सेशनशी कनेक्ट केले आहे"
+  },
+  "statusConnectedMany_other": {
+    "message": "$1 एजंट सेशनशी कनेक्ट केले आहे"
+  },
+  "statusConnectedHint": {
+    "message": "तुमचा एजंट हा ब्राउझर वापरू शकतो. खालीलपैकी एखादा प्रॉम्प्ट वापरून पहा."
+  },
+  "welcomeStepConnect": {
+    "message": "तुमचा एजंट कनेक्ट करा"
+  },
+  "stepDone": {
+    "message": "पूर्ण"
+  },
+  "welcomePickAgent": {
+    "message": "तुम्ही वापरत असलेला एजंट निवडा."
+  },
+  "welcomeAgentTabs": {
+    "message": "तुमचा एजंट"
+  },
+  "welcomeTabOther": {
+    "message": "इतर"
+  },
+  "welcomeClaudeCodeSteps": {
+    "message": "टर्मिनलमध्ये हे एकदा रन करा, त्यानंतर नवीन Claude Code सेशन सुरू करा."
+  },
+  "welcomeClaudeDesktopSteps": {
+    "message": "एक्स्टेंशन डाउनलोड करा आणि फाइल उघडा. Claude Desktop ते तुमच्यासाठी इंस्टॉल करते, Node.js ची आवश्यकता नाही."
+  },
+  "welcomeOpensToConfirm": {
+    "message": "$1 उघडते आणि तुम्हाला कंफर्म करायला सांगते."
+  },
+  "welcomeOtherAgentsSteps": {
+    "message": "हे एजंटच्या MCP कॉन्फिगरेशनमध्ये जोडा, नंतर एजंट रीस्टार्ट करा."
+  },
+  "welcomeAgentSetupHint": {
+    "message": "कमांड रन करू शकणाऱ्या एजंटमध्ये हा प्रॉम्प्ट पेस्ट करा, उदा. Claude Code, Cursor किंवा Codex. तो Node.js आहे का ते तपासतो आणि सर्व्हर जोडतो."
+  },
+  "showPrompt": {
+    "message": "प्रॉम्प्ट दाखवा"
+  },
+  "welcomeServerFootnote": {
+    "message": "तुमचा एजंट एक छोटा स्थानिक सर्व्हर ($1) चालवतो, ज्याला हे एक्स्टेंशन कनेक्ट होते."
+  },
+  "welcomeStepAsk": {
+    "message": "त्याला काहीतरी विचारा"
+  },
+  "welcomeUndoFootnote": {
+    "message": "विचार बदलला? $1 ने केलेले बदल एजंटला पूर्ववत करायला सांगून परत आधीसारखे करता येतात."
+  },
+  "welcomeSafariFootnote": {
+    "message": "Safari मध्ये तुमचा एजंट विंडो उघडू, मांडू आणि बंद करू शकतो, तसेच टॅब उघडू, नेव्हिगेट करू, स्विच करू, पिन करू, म्यूट करू, डुप्लिकेट करू, हलवू आणि बंद करू शकतो. टॅब गट, इतिहास, बुकमार्क आणि पेज नियंत्रण Chrome मध्ये उपलब्ध आहेत. टॅबची शीर्षके आणि पत्ते दिसत नसल्यास, Safari मध्ये सेटिंग्ज > एक्स्टेंशन्स येथे एक्स्टेंशनला वेबसाइट ॲक्सेस द्या."
+  },
+  "welcomeAnalyticsHint": {
+    "message": "एक्स्टेंशनमध्ये सुधारणा करण्यात मदत करण्यासाठी, कोणती वैशिष्ट्ये वापरली जातात आणि एक्स्टेंशनची आवृत्ती."
+  },
+  "instanceNameLabel": {
+    "message": "या ब्राउझर प्रोफाइलला नाव द्या"
+  },
+  "instanceNamePlaceholder": {
+    "message": "उदाहरणार्थ ऑफिस किंवा वैयक्तिक"
+  },
+  "optionsInstanceNameHint": {
+    "message": "एजंट हे नाव वापरून तुमचे ब्राउझर आणि प्रोफाइल वेगवेगळे ओळखतात. $1"
+  },
+  "instanceId": {
+    "message": "इंस्टन्स आयडी: $1"
+  },
+  "welcomeAgentSetupTitle": {
+    "message": "तुमच्या एजंटकडून सेट करून घ्या"
+  },
+  "copyPrompt": {
+    "message": "प्रॉम्प्ट कॉपी करा"
+  },
+  "copy": {
+    "message": "कॉपी करा"
+  },
+  "copied": {
+    "message": "कॉपी केले"
+  },
+  "welcomeAddTo": {
+    "message": "$1 मध्ये जोडा"
+  },
+  "welcomeDownloadFor": {
+    "message": "$1 साठी डाउनलोड करा"
+  },
+  "welcomeTryIntro": {
+    "message": "Chrome उघडे ठेवून तुमच्या एजंटला सांगा:"
+  },
+  "welcomeTryTabs": {
+    "message": "माझे उघडे टॅब विषयानुसार गटांमध्ये व्यवस्थित करा. आधी मला प्लॅन दाखवा."
+  },
+  "welcomeTryPage": {
+    "message": "Chrome च्या रिलीझ नोट्स उघडा आणि नवीन आवृत्तीत काय बदलले त्याचा सारांश द्या."
+  },
+  "welcomeTryIntroSafari": {
+    "message": "Safari उघडे ठेवून तुमच्या एजंटला सांगा:"
+  },
+  "welcomeTryDuplicatesSafari": {
+    "message": "Safari मध्ये माझे कोणकोणते टॅब उघडे आहेत? डुप्लिकेट टॅब बंद करा, पण आधी मला विचारा."
+  },
+  "welcomeTrySortSafari": {
+    "message": "माझे Safari टॅब साइटनुसार क्रमाने लावा."
+  },
+  "welcomePrivacyHeading": {
+    "message": "गोपनीयता"
+  },
+  "welcomePrivacy": {
+    "message": "तुमचा ब्राउझिंग डेटा तुमच्या कॉंप्युटरवरच राहतो: एक्स्टेंशन फक्त $1 शी संवाद साधते. तुम्ही सांगितल्यावर तुमचा एजंट टॅबची शीर्षके आणि URL वाचू शकतो, टॅबची पुनर्रचना करू शकतो, त्यांचा गट करू शकतो किंवा ते बंद करू शकतो, आणि वेब पेज वाचून त्यावर कृती करू शकतो. तो एखाद्या पेजवर काम करत असताना Chrome डीबगिंग बॅनर दाखवते. हे एक्स्टेंशन टॅबची शीर्षके, URL आणि पेजचा आशय इतर कुठेही पाठवत नाही."
+  },
+  "welcomePrivacySafari": {
+    "message": "तुमचा ब्राउझिंग डेटा तुमच्या कॉंप्युटरवरच राहतो: एक्स्टेंशन फक्त $1 शी संवाद साधते. तुम्ही सांगितल्यावर तुमचा एजंट टॅबची शीर्षके आणि URL वाचू शकतो, तसेच विंडो आणि टॅब उघडू, मांडू किंवा बंद करू शकतो. तो Safari मधील वेब पेज वाचू शकत नाही किंवा त्यावर कृती करू शकत नाही. हे एक्स्टेंशन टॅबची शीर्षके आणि URL इतर कुठेही पाठवत नाही."
+  },
+  "analyticsTitle": {
+    "message": "वापराची निनावी आकडेवारी शेअर करा"
+  },
+  "analyticsHint": {
+    "message": "कोणती वैशिष्ट्ये वापरली जातात, ती यशस्वी होतात का, आणि एक्स्टेंशन व एजंटच्या आवृत्त्या. टॅबची शीर्षके, URL किंवा पेजचा आशय कधीही नाही. $1"
+  },
+  "privacyPolicy": {
+    "message": "गोपनीयता धोरण"
+  },
+  "analyticsUnavailable": {
+    "message": "हा बिल्ड वापराची आकडेवारी गोळा करत नाही."
+  },
+  "openSetup": {
+    "message": "सेटअप आणि कनेक्शनची स्थिती उघडा"
+  },
+  "optionsConnected": {
+    "message": "एजंट कनेक्ट केला आहे"
+  },
+  "optionsConnectedMany_one": {
+    "message": "$1 एजंट सेशन कनेक्ट केले आहे"
+  },
+  "optionsConnectedMany_other": {
+    "message": "$1 एजंट सेशन कनेक्ट केली आहेत"
+  },
+  "optionsDisconnected": {
+    "message": "कोणताही एजंट कनेक्ट केलेला नाही"
+  },
+  "agentStartingUp": {
+    "message": "एजंट सुरू होत आहे"
+  },
+  "sessionInProject": {
+    "message": "$2 मध्ये $1"
+  },
+  "sessionStarted": {
+    "message": "$1 सुरू झाले"
+  },
+  "sessionLastUsed_one": {
+    "message": "$3 शेवटचे $2 वापरले, $1 कॉल"
+  },
+  "sessionLastUsed_other": {
+    "message": "$3 शेवटचे $2 वापरले, $1 कॉल"
+  },
+  "sessionUnused": {
+    "message": "अद्याप ब्राउझर वापरलेला नाही"
+  },
+  "sessionId": {
+    "message": "सेशन $1"
+  },
+  "serverVersion": {
+    "message": "सर्व्हर $1"
+  },
+  "instanceThisBrowser": {
+    "message": "$1, हा ब्राउझर"
+  },
+  "justNow": {
+    "message": "आत्ताच"
+  },
+  "chatTitle": {
+    "message": "एजंट चॅट"
+  },
+  "chatSetup": {
+    "message": "सेटअप"
+  },
+  "chatConversation": {
+    "message": "संभाषण"
+  },
+  "chatEmptyHeading": {
+    "message": "येथून तुमच्या एजंटशी बोला"
+  },
+  "chatEmptyBody": {
+    "message": "तुमच्या एजंटला ब्राउझरमध्ये पुढे सुरू ठेवायला सांगा किंवा त्याचा $1 प्रॉम्प्ट रन करा. त्याचे मेसेज येथे दिसतात आणि तुमची उत्तरे थेट त्याच्याकडे जातात."
+  },
+  "chatEmptyHint": {
+    "message": "प्रत्येक एजंट सेशनचे स्वतःचे वेगळे संभाषण असते."
+  },
+  "chatInput": {
+    "message": "एजंटला मेसेज पाठवा"
+  },
+  "chatEnd": {
+    "message": "चॅट संपवा"
+  },
+  "chatRemove": {
+    "message": "काढून टाका"
+  },
+  "chatSend": {
+    "message": "पाठवा"
+  },
+  "chatError": {
+    "message": "काहीतरी चुकले."
+  },
+  "chatUnseen_one": {
+    "message": "$2 ($1 नवीन)"
+  },
+  "chatUnseen_other": {
+    "message": "$2 ($1 नवीन)"
+  },
+  "chatStatusWaiting": {
+    "message": "तुमच्या उत्तराची प्रतीक्षा करत आहे"
+  },
+  "chatStatusWorking": {
+    "message": "काम करत आहे"
+  },
+  "chatStatusWorkingTool": {
+    "message": "काम करत आहे: $2 $1 वापरले"
+  },
+  "chatStatusDisconnected": {
+    "message": "एजंट डिस्कनेक्ट झाला"
+  },
+  "chatStatusEnded": {
+    "message": "चॅट संपले"
+  },
+  "chatHintWaiting": {
+    "message": "पाठवण्यासाठी Enter, नवीन ओळीसाठी Shift+Enter दाबा."
+  },
+  "chatHintWorking": {
+    "message": "एजंट पुढच्या वेळी चॅट तपासेल तेव्हा तुमचा मेसेज वाचेल."
+  },
+  "chatHintDisconnected": {
+    "message": "हे एजंट सेशन बंद झाले आहे."
+  },
+  "chatHintEnded": {
+    "message": "पुन्हा चॅट करण्यासाठी एजंटला ब्राउझरमध्ये पुढे सुरू ठेवायला सांगा."
+  },
+  "chatReadByAgent": {
+    "message": "एजंटने वाचला"
+  },
+  "chatNotReadYet": {
+    "message": "अद्याप वाचलेला नाही"
+  },
+  "chatEndedNotice": {
+    "message": "तुम्ही चॅट संपवले."
+  },
+  "chatConversationGone": {
+    "message": "हे संभाषण आता अस्तित्वात नाही."
+  },
+  "chatEndedError": {
+    "message": "हे चॅट संपले आहे. ते पुन्हा सुरू करण्यासाठी एजंटला ब्राउझरमध्ये पुढे सुरू ठेवायला सांगा."
+  },
+  "chatTooLong_one": {
+    "message": "मेसेजमध्ये जास्तीत जास्त $1 वर्ण असू शकतो."
+  },
+  "chatTooLong_other": {
+    "message": "मेसेजमध्ये जास्तीत जास्त $1 वर्ण असू शकतात."
+  }
+}

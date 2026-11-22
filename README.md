@@ -13,6 +13,7 @@ Connect your MCP-compatible agent to the browser you already use, with your exis
 - **Chat with your agent from Chrome's side panel.** Ask your agent to continue in the browser and keep talking to it there, instead of switching back to its window between steps. See [docs/chat.md](docs/chat.md).
 - **Share one browser across agents.** Multiple agent processes connect through a shared local bridge, with automatic host failover. The extension lists each agent session with its project, last activity and the browser profiles it used; see [docs/sessions.md](docs/sessions.md).
 - **Connect multiple browsers and profiles.** Chrome and Safari can connect together; Chromium profiles and instances are addressed separately. Ask your agent to tell your profiles apart and it shows you a few tabs from each, then names them, so "my Work Chrome" just works. Safari supports tabs and windows; Chrome also supports tab groups, history, sessions, bookmarks, the Reading List, downloads, search, notifications and page control. See [docs/profiles.md](docs/profiles.md).
+- **In your language.** The extension's pages follow your browser's language, in every language the Chrome Web Store supports. See [docs/localisation.md](docs/localisation.md).
 - **Choose your agent.** Use Cursor, VS Code, Claude Code or another MCP client. The bridge runs locally. Your chosen agent can receive browser data and act in signed-in pages, so connect only agents you trust. Optional usage analytics can be disabled in extension settings; see the [privacy policy](PRIVACY.md).
 
 ## Install

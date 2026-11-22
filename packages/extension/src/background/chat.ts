@@ -13,6 +13,7 @@ import {
   type ChatReceiveParams,
   type ChatTab,
 } from '@agent-browser-bridge/protocol';
+import { plural, t } from '../i18n/messages.ts';
 import { sessionTitle } from '../settings/sessionList.ts';
 
 export const CHAT_STORAGE_KEY = 'chat.conversations';
@@ -170,11 +171,11 @@ export class ChatStore {
   async userSays(sessionId: string, text: string, tab?: ChatTab): Promise<void> {
     const trimmed = text.trim();
     if (!trimmed) return;
-    if (trimmed.length > MAX_CHAT_MESSAGE_LENGTH) throw new Error(`Messages can be at most ${MAX_CHAT_MESSAGE_LENGTH} characters.`);
+    if (trimmed.length > MAX_CHAT_MESSAGE_LENGTH) throw new Error(plural('chatTooLong', MAX_CHAT_MESSAGE_LENGTH));
     await this.update((all) => {
       const conversation = all[sessionId];
-      if (!conversation) throw new Error('This conversation no longer exists.');
-      if (conversation.ended) throw new Error('This chat has ended. Ask the agent to continue in the browser to start it again.');
+      if (!conversation) throw new Error(t('chatConversationGone'));
+      if (conversation.ended) throw new Error(t('chatEndedError'));
       this.append(conversation, 'user', trimmed, tab);
     });
     this.wake(sessionId);
@@ -186,7 +187,7 @@ export class ChatStore {
       if (!conversation || conversation.ended) return;
       conversation.ended = true;
       conversation.listeningUntil = 0;
-      this.append(conversation, 'notice', 'You ended the chat.');
+      this.append(conversation, 'notice', t('chatEndedNotice'));
     });
     this.wake(sessionId);
   }

@@ -5,6 +5,8 @@ import { renderSessionList } from '../settings/sessionList.ts';
 import { analyticsAvailable, bindAnalyticsToggle } from '../settings/analyticsToggle.ts';
 import { showContentFor } from '../settings/browserContent.ts';
 import { bindInstanceName } from '../settings/instanceName.ts';
+import { t } from '../i18n/messages.ts';
+import { localizePage } from '../i18n/page.ts';
 import { PRIVACY_URL } from '../settings/privacy.ts';
 import { AGENT_TAB_KEY, initialAgentTab, isAgentTab, tabAfterKey } from './agentTabs.ts';
 import { agentSetupPrompt, claudeCodeCommand, claudeDesktopExtensionUrl, cursorInstallUrl, LAUNCH_SPEC, mcpJsonConfig, vscodeInstallUrl } from './install.ts';
@@ -13,6 +15,7 @@ import { describeStatus } from './status.ts';
 
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 
+localizePage();
 showContentFor(detectBrowser(chrome.runtime.getURL('')), document.querySelectorAll<HTMLElement>('[data-browser]'));
 document.querySelectorAll('[data-pkg]').forEach((el) => (el.textContent = LAUNCH_SPEC));
 $('claude-code-cmd').textContent = claudeCodeCommand;
@@ -39,7 +42,7 @@ profileName.addEventListener('keydown', (event) => {
   if (event.key === 'Enter' || event.key === 'Escape') profileName.blur();
 });
 profileName.addEventListener('change', () => {
-  profileSaved.textContent = profileName.value ? 'Saved' : 'Name removed';
+  profileSaved.textContent = profileName.value ? t('profileSaved') : t('profileNameRemoved');
   clearTimeout(savedTimer);
   savedTimer = setTimeout(() => (profileSaved.textContent = ''), 2000);
 });
@@ -56,7 +59,7 @@ document.querySelectorAll<HTMLButtonElement>('button[data-copy]').forEach((butto
   button.addEventListener('click', async () => {
     void track('setup_snippet_copied', { snippet: button.dataset.copy! });
     await navigator.clipboard.writeText($(button.dataset.copy!).textContent ?? '');
-    button.textContent = 'Copied';
+    button.textContent = t('copied');
     button.dataset.copied = 'true';
     setTimeout(() => {
       button.textContent = label;

@@ -1,0 +1,350 @@
+{
+  "locale": {
+    "message": "pl"
+  },
+  "extDescription": {
+    "message": "Steruj własną przeglądarką za pomocą dowolnego agenta AI: porządkuj karty i obsługuj strony internetowe przez MCP."
+  },
+  "actionTitle": {
+    "message": "Agent Browser Bridge: konfiguracja i stan"
+  },
+  "actionTitleDisconnected": {
+    "message": "Agent Browser Bridge: brak połączonego agenta"
+  },
+  "actionTitleConnected": {
+    "message": "Agent Browser Bridge: agent połączony"
+  },
+  "actionTitleConnectedTo": {
+    "message": "Agent Browser Bridge, połączono: $1"
+  },
+  "notificationReply": {
+    "message": "Aby odpowiedzieć, kliknij przycisk Agent Browser Bridge na pasku narzędzi"
+  },
+  "optionsTitle": {
+    "message": "Opcje Agent Browser Bridge"
+  },
+  "statusChecking": {
+    "message": "Sprawdzanie połączenia…"
+  },
+  "statusLooking": {
+    "message": "Szukanie agenta…"
+  },
+  "welcomeLede": {
+    "message": "Pozwól agentowi AI porządkować Twoje karty i obsługiwać strony internetowe."
+  },
+  "welcomeLedeSafari": {
+    "message": "Pozwól agentowi AI znajdować, otwierać, przenosić i zamykać Twoje karty w Safari."
+  },
+  "profileLabel": {
+    "message": "Ten profil"
+  },
+  "profilePlaceholder": {
+    "message": "Nadaj mu nazwę"
+  },
+  "profileHint": {
+    "message": "Dzięki tej nazwie agenci odróżniają Twoje przeglądarki i profile, więc możesz poprosić o przeglądarkę „Praca”."
+  },
+  "profileSaved": {
+    "message": "Zapisano"
+  },
+  "profileNameRemoved": {
+    "message": "Usunięto nazwę"
+  },
+  "statusNotConnected": {
+    "message": "Jeszcze nie połączono"
+  },
+  "statusSetUpHint": {
+    "message": "Połącz agenta poniżej, a potem rozpocznij w nim nową sesję."
+  },
+  "statusConnected": {
+    "message": "Połączono"
+  },
+  "statusConnectedMany_one": {
+    "message": "Połączono z $1 sesją agenta"
+  },
+  "statusConnectedMany_few": {
+    "message": "Połączono z $1 sesjami agenta"
+  },
+  "statusConnectedMany_many": {
+    "message": "Połączono z $1 sesjami agenta"
+  },
+  "statusConnectedMany_other": {
+    "message": "Połączono z $1 sesji agenta"
+  },
+  "statusConnectedHint": {
+    "message": "Agent może korzystać z tej przeglądarki. Wypróbuj jeden z promptów poniżej."
+  },
+  "welcomeStepConnect": {
+    "message": "Połącz agenta"
+  },
+  "stepDone": {
+    "message": "Gotowe"
+  },
+  "welcomePickAgent": {
+    "message": "Wybierz agenta, z którego korzystasz."
+  },
+  "welcomeAgentTabs": {
+    "message": "Twój agent"
+  },
+  "welcomeTabOther": {
+    "message": "Inny"
+  },
+  "welcomeClaudeCodeSteps": {
+    "message": "Uruchom to raz w terminalu, a potem rozpocznij nową sesję Claude Code."
+  },
+  "welcomeClaudeDesktopSteps": {
+    "message": "Pobierz rozszerzenie i otwórz plik. Claude Desktop zainstaluje je za Ciebie, Node.js nie jest potrzebny."
+  },
+  "welcomeOpensToConfirm": {
+    "message": "Otworzy się $1 z prośbą o potwierdzenie."
+  },
+  "welcomeOtherAgentsSteps": {
+    "message": "Dodaj to do konfiguracji MCP agenta, a potem uruchom go ponownie."
+  },
+  "welcomeAgentSetupHint": {
+    "message": "Wklej ten prompt do agenta, który potrafi uruchamiać polecenia, np. Claude Code, Cursor lub Codex. Sprawdzi, czy masz Node.js, i doda serwer."
+  },
+  "showPrompt": {
+    "message": "Pokaż prompt"
+  },
+  "welcomeServerFootnote": {
+    "message": "Agent uruchamia mały lokalny serwer ($1), z którym łączy się to rozszerzenie."
+  },
+  "welcomeStepAsk": {
+    "message": "Poproś agenta o coś"
+  },
+  "welcomeUndoFootnote": {
+    "message": "Zmiana zdania? Zmiany wprowadzone za pomocą $1 możesz cofnąć – wystarczy poprosić o to agenta."
+  },
+  "welcomeSafariFootnote": {
+    "message": "W Safari agent może otwierać, rozmieszczać i zamykać okna, a także otwierać, przełączać, przypinać, wyciszać, duplikować, przenosić i zamykać karty oraz otwierać w nich adresy. Grupy kart, historia, zakładki i sterowanie stronami są dostępne w Chrome. Jeśli nie widać tytułów i adresów kart, przyznaj rozszerzeniu dostęp do witryn w Safari w sekcji Ustawienia > Rozszerzenia."
+  },
+  "welcomeAnalyticsHint": {
+    "message": "Które funkcje są używane i wersja rozszerzenia – aby pomóc ulepszać rozszerzenie."
+  },
+  "instanceNameLabel": {
+    "message": "Nazwij ten profil przeglądarki"
+  },
+  "instanceNamePlaceholder": {
+    "message": "Na przykład Praca lub Prywatny"
+  },
+  "optionsInstanceNameHint": {
+    "message": "Dzięki tej nazwie agenci odróżniają Twoje przeglądarki i profile. $1"
+  },
+  "instanceId": {
+    "message": "Identyfikator instancji: $1"
+  },
+  "welcomeAgentSetupTitle": {
+    "message": "Zleć konfigurację agentowi"
+  },
+  "copyPrompt": {
+    "message": "Kopiuj prompt"
+  },
+  "copy": {
+    "message": "Kopiuj"
+  },
+  "copied": {
+    "message": "Skopiowano"
+  },
+  "welcomeAddTo": {
+    "message": "Dodaj do $1"
+  },
+  "welcomeDownloadFor": {
+    "message": "Pobierz dla $1"
+  },
+  "welcomeTryIntro": {
+    "message": "Przy otwartym Chrome poproś agenta:"
+  },
+  "welcomeTryTabs": {
+    "message": "Pogrupuj moje otwarte karty według tematów. Najpierw pokaż mi plan."
+  },
+  "welcomeTryPage": {
+    "message": "Otwórz informacje o wersji Chrome i podsumuj, co się zmieniło w najnowszej wersji."
+  },
+  "welcomeTryIntroSafari": {
+    "message": "Przy otwartym Safari poproś agenta:"
+  },
+  "welcomeTryDuplicatesSafari": {
+    "message": "Jakie karty mam otwarte w Safari? Zamknij duplikaty, ale najpierw mnie zapytaj."
+  },
+  "welcomeTrySortSafari": {
+    "message": "Uporządkuj moje karty w Safari według witryn."
+  },
+  "welcomePrivacyHeading": {
+    "message": "Prywatność"
+  },
+  "welcomePrivacy": {
+    "message": "Twoje dane przeglądania pozostają na Twoim komputerze: rozszerzenie komunikuje się tylko z $1. Agent może odczytywać tytuły i adresy URL kart, zmieniać ich kolejność, grupować lub zamykać karty oraz odczytywać strony internetowe i wykonywać na nich działania, gdy go o to poprosisz. Gdy agent działa na stronie, Chrome wyświetla baner debugowania. To rozszerzenie nigdy nie wysyła nigdzie indziej tytułów kart, adresów URL ani zawartości stron."
+  },
+  "welcomePrivacySafari": {
+    "message": "Twoje dane przeglądania pozostają na Twoim komputerze: rozszerzenie komunikuje się tylko z $1. Agent może odczytywać tytuły i adresy URL kart oraz otwierać, rozmieszczać lub zamykać okna i karty, gdy go o to poprosisz. W Safari nie może odczytywać stron internetowych ani wykonywać na nich działań. To rozszerzenie nigdy nie wysyła nigdzie indziej tytułów kart ani adresów URL."
+  },
+  "analyticsTitle": {
+    "message": "Wysyłaj anonimowe statystyki użytkowania"
+  },
+  "analyticsHint": {
+    "message": "Które funkcje są używane, czy działają poprawnie oraz wersje rozszerzenia i agenta. Nigdy tytuły kart, adresy URL ani zawartość stron. $1"
+  },
+  "privacyPolicy": {
+    "message": "Polityka prywatności"
+  },
+  "analyticsUnavailable": {
+    "message": "Ta wersja nie zbiera statystyk użytkowania."
+  },
+  "openSetup": {
+    "message": "Otwórz konfigurację i stan połączenia"
+  },
+  "optionsConnected": {
+    "message": "Agent połączony"
+  },
+  "optionsConnectedMany_one": {
+    "message": "Połączono $1 sesję agenta"
+  },
+  "optionsConnectedMany_few": {
+    "message": "Połączono $1 sesje agenta"
+  },
+  "optionsConnectedMany_many": {
+    "message": "Połączono $1 sesji agenta"
+  },
+  "optionsConnectedMany_other": {
+    "message": "Połączono $1 sesji agenta"
+  },
+  "optionsDisconnected": {
+    "message": "Brak połączonego agenta"
+  },
+  "agentStartingUp": {
+    "message": "Agent się uruchamia"
+  },
+  "sessionInProject": {
+    "message": "$1 w $2"
+  },
+  "sessionStarted": {
+    "message": "Rozpoczęto $1"
+  },
+  "sessionLastUsed_one": {
+    "message": "Ostatnio użyto $2 $3, $1 wywołanie"
+  },
+  "sessionLastUsed_few": {
+    "message": "Ostatnio użyto $2 $3, $1 wywołania"
+  },
+  "sessionLastUsed_many": {
+    "message": "Ostatnio użyto $2 $3, $1 wywołań"
+  },
+  "sessionLastUsed_other": {
+    "message": "Ostatnio użyto $2 $3, $1 wywołania"
+  },
+  "sessionUnused": {
+    "message": "Nie korzystano jeszcze z przeglądarki"
+  },
+  "sessionId": {
+    "message": "Sesja $1"
+  },
+  "serverVersion": {
+    "message": "serwer $1"
+  },
+  "instanceThisBrowser": {
+    "message": "$1, ta przeglądarka"
+  },
+  "justNow": {
+    "message": "przed chwilą"
+  },
+  "chatTitle": {
+    "message": "Czat z agentem"
+  },
+  "chatSetup": {
+    "message": "Konfiguracja"
+  },
+  "chatConversation": {
+    "message": "Rozmowa"
+  },
+  "chatEmptyHeading": {
+    "message": "Rozmawiaj z agentem tutaj"
+  },
+  "chatEmptyBody": {
+    "message": "Poproś agenta, aby kontynuował w przeglądarce, albo uruchom jego prompt $1. Jego wiadomości pojawią się tutaj, a Twoje odpowiedzi trafią prosto do niego."
+  },
+  "chatEmptyHint": {
+    "message": "Każda sesja agenta ma własną rozmowę."
+  },
+  "chatInput": {
+    "message": "Napisz do agenta"
+  },
+  "chatEnd": {
+    "message": "Zakończ czat"
+  },
+  "chatRemove": {
+    "message": "Usuń"
+  },
+  "chatSend": {
+    "message": "Wyślij"
+  },
+  "chatError": {
+    "message": "Coś poszło nie tak."
+  },
+  "chatUnseen_one": {
+    "message": "$2 (nowe: $1)"
+  },
+  "chatUnseen_few": {
+    "message": "$2 (nowe: $1)"
+  },
+  "chatUnseen_many": {
+    "message": "$2 (nowe: $1)"
+  },
+  "chatUnseen_other": {
+    "message": "$2 (nowe: $1)"
+  },
+  "chatStatusWaiting": {
+    "message": "Czeka na Twoją odpowiedź"
+  },
+  "chatStatusWorking": {
+    "message": "Pracuje"
+  },
+  "chatStatusWorkingTool": {
+    "message": "Pracuje: użył $1 $2"
+  },
+  "chatStatusDisconnected": {
+    "message": "Agent rozłączony"
+  },
+  "chatStatusEnded": {
+    "message": "Czat zakończony"
+  },
+  "chatHintWaiting": {
+    "message": "Enter – wyślij, Shift+Enter – nowy wiersz."
+  },
+  "chatHintWorking": {
+    "message": "Agent przeczyta Twoją wiadomość, gdy następnym razem sprawdzi czat."
+  },
+  "chatHintDisconnected": {
+    "message": "Ta sesja agenta została zamknięta."
+  },
+  "chatHintEnded": {
+    "message": "Aby znów porozmawiać, poproś agenta, by kontynuował w przeglądarce."
+  },
+  "chatReadByAgent": {
+    "message": "przeczytane przez agenta"
+  },
+  "chatNotReadYet": {
+    "message": "jeszcze nieprzeczytane"
+  },
+  "chatEndedNotice": {
+    "message": "Czat został przez Ciebie zakończony."
+  },
+  "chatConversationGone": {
+    "message": "Ta rozmowa już nie istnieje."
+  },
+  "chatEndedError": {
+    "message": "Ten czat został zakończony. Aby rozpocząć go ponownie, poproś agenta, by kontynuował w przeglądarce."
+  },
+  "chatTooLong_one": {
+    "message": "Wiadomość może mieć maksymalnie $1 znak."
+  },
+  "chatTooLong_few": {
+    "message": "Wiadomość może mieć maksymalnie $1 znaki."
+  },
+  "chatTooLong_many": {
+    "message": "Wiadomość może mieć maksymalnie $1 znaków."
+  },
+  "chatTooLong_other": {
+    "message": "Wiadomość może mieć maksymalnie $1 znaku."
+  }
+}

@@ -1,19 +1,18 @@
 import type { ConnectionStatus } from '../background/bridgeClient.ts';
+import { plural, t } from '../i18n/messages.ts';
 
 export interface StatusCopy {
   headline: string;
   hint: string;
 }
 
-const SET_UP_HINT = 'Connect your agent below, then start a new session in it.';
-
 export function describeStatus(status: Pick<ConnectionStatus, 'state' | 'agents'> | undefined): StatusCopy {
   const state = status?.state ?? 'disconnected';
-  if (state === 'connecting') return { headline: 'Looking for your agent…', hint: SET_UP_HINT };
-  if (state === 'disconnected') return { headline: 'Not connected yet', hint: SET_UP_HINT };
+  if (state === 'connecting') return { headline: t('statusLooking'), hint: t('statusSetUpHint') };
+  if (state === 'disconnected') return { headline: t('statusNotConnected'), hint: t('statusSetUpHint') };
   const sessions = status?.agents.length ?? 0;
   return {
-    headline: sessions > 1 ? `Connected to ${sessions} agent sessions` : 'Connected',
-    hint: 'Your agent can use this browser. Try one of the prompts below.',
+    headline: sessions > 1 ? plural('statusConnectedMany', sessions) : t('statusConnected'),
+    hint: t('statusConnectedHint'),
   };
 }

@@ -1,0 +1,320 @@
+{
+  "locale": {
+    "message": "et"
+  },
+  "extDescription": {
+    "message": "Juhtige oma brauserit mis tahes AI-agendiga: korraldage vahelehti ja kasutage veebilehti MCP kaudu."
+  },
+  "actionTitle": {
+    "message": "Agent Browser Bridge: seadistus ja olek"
+  },
+  "actionTitleDisconnected": {
+    "message": "Agent Browser Bridge: ühtegi agenti pole ühendatud"
+  },
+  "actionTitleConnected": {
+    "message": "Agent Browser Bridge: agent on ühendatud"
+  },
+  "actionTitleConnectedTo": {
+    "message": "Agent Browser Bridge: ühendatud ($1)"
+  },
+  "notificationReply": {
+    "message": "Vastamiseks klõpsake tööriistaribal nuppu Agent Browser Bridge"
+  },
+  "optionsTitle": {
+    "message": "Agent Browser Bridge – valikud"
+  },
+  "statusChecking": {
+    "message": "Ühenduse kontrollimine …"
+  },
+  "statusLooking": {
+    "message": "Teie agendi otsimine …"
+  },
+  "welcomeLede": {
+    "message": "Laske oma AI-agendil vahelehti korraldada ja veebilehti kasutada."
+  },
+  "welcomeLedeSafari": {
+    "message": "Laske oma AI-agendil Safari vahelehti leida, avada, teisaldada ja sulgeda."
+  },
+  "profileLabel": {
+    "message": "See profiil"
+  },
+  "profilePlaceholder": {
+    "message": "Andke sellele nimi"
+  },
+  "profileHint": {
+    "message": "Agendid eristavad selle nime järgi teie brausereid ja profiile, nii et saate küsida näiteks brauserit Töö."
+  },
+  "profileSaved": {
+    "message": "Salvestatud"
+  },
+  "profileNameRemoved": {
+    "message": "Nimi eemaldatud"
+  },
+  "statusNotConnected": {
+    "message": "Pole veel ühendatud"
+  },
+  "statusSetUpHint": {
+    "message": "Ühendage allpool oma agent ja seejärel alustage selles uut seanssi."
+  },
+  "statusConnected": {
+    "message": "Ühendatud"
+  },
+  "statusConnectedMany_one": {
+    "message": "Ühendatud: $1 agendiseanss"
+  },
+  "statusConnectedMany_other": {
+    "message": "Ühendatud: $1 agendiseanssi"
+  },
+  "statusConnectedHint": {
+    "message": "Teie agent saab seda brauserit kasutada. Proovige mõnda allolevat viipa."
+  },
+  "welcomeStepConnect": {
+    "message": "Ühendage oma agent"
+  },
+  "stepDone": {
+    "message": "Valmis"
+  },
+  "welcomePickAgent": {
+    "message": "Valige agent, mida kasutate."
+  },
+  "welcomeAgentTabs": {
+    "message": "Teie agent"
+  },
+  "welcomeTabOther": {
+    "message": "Muu"
+  },
+  "welcomeClaudeCodeSteps": {
+    "message": "Käivitage see üks kord terminalis ja seejärel alustage uut Claude Code'i seanssi."
+  },
+  "welcomeClaudeDesktopSteps": {
+    "message": "Laadige laiendus alla ja avage fail. Claude Desktop installib selle teie eest, Node.js-i pole vaja."
+  },
+  "welcomeOpensToConfirm": {
+    "message": "$1 avaneb ja palub teil kinnitada."
+  },
+  "welcomeOtherAgentsSteps": {
+    "message": "Lisage see agendi MCP konfiguratsiooni ja taaskäivitage agent."
+  },
+  "welcomeAgentSetupHint": {
+    "message": "Kleepige see viip agenti, mis saab käske käivitada, näiteks Claude Code, Cursor või Codex. See kontrollib, kas Node.js on olemas, ja lisab serveri."
+  },
+  "showPrompt": {
+    "message": "Näita viipa"
+  },
+  "welcomeServerFootnote": {
+    "message": "Teie agent käivitab väikese kohaliku serveri $1, millega see laiendus ühendub."
+  },
+  "welcomeStepAsk": {
+    "message": "Küsige midagi"
+  },
+  "welcomeUndoFootnote": {
+    "message": "Mõtlesite ümber? Tööriistaga $1 tehtud muudatused saab tagasi võtta, kui palute agendil need tühistada."
+  },
+  "welcomeSafariFootnote": {
+    "message": "Safaris saab agent aknaid avada, paigutada ja sulgeda ning vahelehti avada, neis liikuda, nende vahel vahetada, kinnitada, vaigistada, duplikeerida, teisaldada ja sulgeda. Vahelehtede rühmad, ajalugu, järjehoidjad ja lehtede juhtimine on saadaval Chrome'is. Kui vahelehtede pealkirjad ja aadressid puuduvad, andke laiendusele Safaris veebisaitidele juurdepääs jaotises Settings > Extensions."
+  },
+  "welcomeAnalyticsHint": {
+    "message": "Milliseid funktsioone kasutatakse ja laienduse versioon, et aidata laiendust täiustada."
+  },
+  "instanceNameLabel": {
+    "message": "Pange sellele brauseriprofiilile nimi"
+  },
+  "instanceNamePlaceholder": {
+    "message": "Näiteks Töö või Isiklik"
+  },
+  "optionsInstanceNameHint": {
+    "message": "Agendid eristavad selle nime järgi teie brausereid ja profiile. $1"
+  },
+  "instanceId": {
+    "message": "Eksemplari ID: $1"
+  },
+  "welcomeAgentSetupTitle": {
+    "message": "Laske agendil see seadistada"
+  },
+  "copyPrompt": {
+    "message": "Kopeeri viip"
+  },
+  "copy": {
+    "message": "Kopeeri"
+  },
+  "copied": {
+    "message": "Kopeeritud"
+  },
+  "welcomeAddTo": {
+    "message": "Lisa: $1"
+  },
+  "welcomeDownloadFor": {
+    "message": "Laadi alla: $1"
+  },
+  "welcomeTryIntro": {
+    "message": "Kui Chrome on avatud, kirjutage oma agendile:"
+  },
+  "welcomeTryTabs": {
+    "message": "Korralda mu avatud vahelehed teemade kaupa rühmadesse. Näita mulle enne plaani."
+  },
+  "welcomeTryPage": {
+    "message": "Ava Chrome'i väljalaskemärkmed ja tee kokkuvõte, mis uusimas versioonis muutus."
+  },
+  "welcomeTryIntroSafari": {
+    "message": "Kui Safari on avatud, kirjutage oma agendile:"
+  },
+  "welcomeTryDuplicatesSafari": {
+    "message": "Mis vahelehed mul Safaris avatud on? Sulge duplikaadid, aga küsi enne minult."
+  },
+  "welcomeTrySortSafari": {
+    "message": "Järjesta mu Safari vahelehed saitide kaupa."
+  },
+  "welcomePrivacyHeading": {
+    "message": "Privaatsus"
+  },
+  "welcomePrivacy": {
+    "message": "Teie sirvimisandmed jäävad teie arvutisse: laiendus suhtleb ainult aadressiga $1. Teie agent saab lugeda vahelehtede pealkirju ja URL-e, vahelehti ümber paigutada, rühmitada või sulgeda ning teie palvel veebilehti lugeda ja neil toiminguid teha. Kui agent lehel töötab, kuvab Chrome silumise bänneri. See laiendus ei saada vahelehtede pealkirju, URL-e ega lehtede sisu kunagi kuhugi mujale."
+  },
+  "welcomePrivacySafari": {
+    "message": "Teie sirvimisandmed jäävad teie arvutisse: laiendus suhtleb ainult aadressiga $1. Teie agent saab lugeda vahelehtede pealkirju ja URL-e ning teie palvel aknaid ja vahelehti avada, paigutada või sulgeda. Safaris ei saa see veebilehti lugeda ega neil toiminguid teha. See laiendus ei saada vahelehtede pealkirju ega URL-e kunagi kuhugi mujale."
+  },
+  "analyticsTitle": {
+    "message": "Jaga anonüümset kasutusstatistikat"
+  },
+  "analyticsHint": {
+    "message": "Milliseid funktsioone kasutatakse, kas need õnnestuvad, ning laienduse ja agendi versioonid. Mitte kunagi vahelehtede pealkirju, URL-e ega lehtede sisu. $1"
+  },
+  "privacyPolicy": {
+    "message": "Privaatsuseeskirjad"
+  },
+  "analyticsUnavailable": {
+    "message": "See järk ei kogu kasutusstatistikat."
+  },
+  "openSetup": {
+    "message": "Ava seadistus ja ühenduse olek"
+  },
+  "optionsConnected": {
+    "message": "Agent on ühendatud"
+  },
+  "optionsConnectedMany_one": {
+    "message": "$1 agendiseanss on ühendatud"
+  },
+  "optionsConnectedMany_other": {
+    "message": "$1 agendiseanssi on ühendatud"
+  },
+  "optionsDisconnected": {
+    "message": "Ühtegi agenti pole ühendatud"
+  },
+  "agentStartingUp": {
+    "message": "Agent käivitub"
+  },
+  "sessionInProject": {
+    "message": "$1 projektis $2"
+  },
+  "sessionStarted": {
+    "message": "Alustatud $1"
+  },
+  "sessionLastUsed_one": {
+    "message": "Viimati kasutatud $2 $3, $1 kutse"
+  },
+  "sessionLastUsed_other": {
+    "message": "Viimati kasutatud $2 $3, $1 kutset"
+  },
+  "sessionUnused": {
+    "message": "Pole veel brauserit kasutanud"
+  },
+  "sessionId": {
+    "message": "Seanss $1"
+  },
+  "serverVersion": {
+    "message": "server $1"
+  },
+  "instanceThisBrowser": {
+    "message": "$1, see brauser"
+  },
+  "justNow": {
+    "message": "just praegu"
+  },
+  "chatTitle": {
+    "message": "Agendi vestlus"
+  },
+  "chatSetup": {
+    "message": "Seadistus"
+  },
+  "chatConversation": {
+    "message": "Vestlus"
+  },
+  "chatEmptyHeading": {
+    "message": "Suhelge oma agendiga siin"
+  },
+  "chatEmptyBody": {
+    "message": "Paluge agendil brauseris jätkata või käivitage selle viip $1. Agendi sõnumid kuvatakse siin ja teie vastused jõuavad otse temani."
+  },
+  "chatEmptyHint": {
+    "message": "Igal agendiseansil on oma vestlus."
+  },
+  "chatInput": {
+    "message": "Sõnum agendile"
+  },
+  "chatEnd": {
+    "message": "Lõpeta vestlus"
+  },
+  "chatRemove": {
+    "message": "Eemalda"
+  },
+  "chatSend": {
+    "message": "Saada"
+  },
+  "chatError": {
+    "message": "Midagi läks valesti."
+  },
+  "chatUnseen_one": {
+    "message": "$2 ($1 uus)"
+  },
+  "chatUnseen_other": {
+    "message": "$2 ($1 uut)"
+  },
+  "chatStatusWaiting": {
+    "message": "Ootab teie vastust"
+  },
+  "chatStatusWorking": {
+    "message": "Töötab"
+  },
+  "chatStatusWorkingTool": {
+    "message": "Töötab: kasutas tööriista $1 $2"
+  },
+  "chatStatusDisconnected": {
+    "message": "Agendi ühendus katkes"
+  },
+  "chatStatusEnded": {
+    "message": "Vestlus on lõppenud"
+  },
+  "chatHintWaiting": {
+    "message": "Saatmiseks vajutage Enter, uue rea jaoks Shift+Enter."
+  },
+  "chatHintWorking": {
+    "message": "Agent loeb teie sõnumit, kui ta järgmine kord vestlust kontrollib."
+  },
+  "chatHintDisconnected": {
+    "message": "See agendiseanss on suletud."
+  },
+  "chatHintEnded": {
+    "message": "Uuesti vestlemiseks paluge agendil brauseris jätkata."
+  },
+  "chatReadByAgent": {
+    "message": "agent luges"
+  },
+  "chatNotReadYet": {
+    "message": "pole veel loetud"
+  },
+  "chatEndedNotice": {
+    "message": "Lõpetasite vestluse."
+  },
+  "chatConversationGone": {
+    "message": "Seda vestlust pole enam olemas."
+  },
+  "chatEndedError": {
+    "message": "See vestlus on lõppenud. Selle uuesti alustamiseks paluge agendil brauseris jätkata."
+  },
+  "chatTooLong_one": {
+    "message": "Sõnumis võib olla kuni $1 märk."
+  },
+  "chatTooLong_other": {
+    "message": "Sõnumis võib olla kuni $1 märki."
+  }
+}
