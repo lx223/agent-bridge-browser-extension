@@ -52,5 +52,9 @@
     "prompt": "Este perfil de Chrome es para el trabajo. Llámalo Trabajo.",
     "reply": "Hecho. Cuando pidas tu navegador «Trabajo», usaré este perfil.",
     "name": "Trabajo"
+  },
+  "video": {
+    "tagline": "Deja que tu agente de IA use el navegador que ya usas.",
+    "closing": "Funciona con Claude Code, Cursor, VS Code y cualquier cliente MCP. Gratis y de código abierto."
   }
 }

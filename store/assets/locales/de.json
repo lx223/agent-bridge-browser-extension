@@ -52,5 +52,9 @@
     "prompt": "Dieses Chrome-Profil ist für die Arbeit. Nenn es Arbeit.",
     "reply": "Erledigt. Wenn du nach deinem Arbeitsbrowser fragst, nutze ich dieses Profil.",
     "name": "Arbeit"
+  },
+  "video": {
+    "tagline": "Lass deinen KI-Agenten den Browser nutzen, den du schon verwendest.",
+    "closing": "Funktioniert mit Claude Code, Cursor, VS Code und jedem MCP-Client. Kostenlos und Open Source."
   }
 }

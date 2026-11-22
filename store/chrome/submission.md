@@ -23,6 +23,11 @@ The setup page shows connection status and provides configuration options for Cu
 Anonymous product usage analytics can be turned off in the extension settings. See the privacy policy for details.
 
 
+## Graphic Assets
+
+`npm run store:assets -- --store chrome` writes the screenshots, promo tiles, store icon and promo video. See [Store assets](../../docs/chrome-web-store.md#store-assets) for which file goes in which dashboard field.
+
+
 ## Single Purpose
 
 Allow a user-selected MCP agent to inspect and organise Chrome tabs and operate web pages through a local bridge server.

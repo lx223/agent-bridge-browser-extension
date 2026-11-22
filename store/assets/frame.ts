@@ -3,9 +3,15 @@ import { join } from 'node:path';
 import { escapeHtml, pngDataUri } from './html.ts';
 import type { Caption } from './locale.ts';
 
-export const FRAME = { width: 1280, height: 800 };
+export interface Layout {
+  width: number;
+  height: number;
+  stageTop: number;
+}
+
+export const SCREENSHOT_LAYOUT: Layout = { width: 1280, height: 800, stageTop: 240 };
+export const VIDEO_LAYOUT: Layout = { width: 1280, height: 720, stageTop: 176 };
 export const STAGE = { width: 1120, height: 520 };
-const STAGE_TOP = 240;
 const TITLE_BAR = 36;
 const CHAT_WIDTH = 400;
 const GAP = 24;
@@ -20,8 +26,10 @@ export interface Size {
 
 export const scaled = (size: Size, factor: number): Size => ({ width: Math.round(size.width * factor), height: Math.round(size.height * factor) });
 
+export const PRODUCT_NAME = 'Agent Browser Bridge';
+
 const ICON = readFileSync(join(import.meta.dirname, '../../packages/extension/icons/icon.svg'));
-const iconUri = `data:image/svg+xml;base64,${ICON.toString('base64')}`;
+export const ICON_URI = `data:image/svg+xml;base64,${ICON.toString('base64')}`;
 
 const groupColors: Record<string, string> = {
   grey: '#5f6368',
@@ -42,28 +50,46 @@ export interface ChatLabels {
   agent: string;
 }
 
+export interface WindowState {
+  step: number;
+  body: string;
+}
+
+export interface Stage {
+  messages: ChatMessage[];
+  window: { title?: string; size: Size; states: WindowState[] };
+}
+
+export interface Slide {
+  caption: Caption;
+  stage: Stage;
+}
+
 export interface TabGroupView {
   title: string;
   color: string;
   tabs: string[];
 }
 
-const styles = `
+export const BACKGROUND = 'radial-gradient(1200px 600px at 85% -10%, #818cf8 0%, rgba(129, 140, 248, 0) 60%), linear-gradient(160deg, #4f46e5 0%, #312e81 100%)';
+export const FONT_STACK = "system-ui, -apple-system, 'Segoe UI', 'Hiragino Sans', 'PingFang SC', 'Microsoft YaHei', 'Noto Sans CJK JP', 'Noto Sans CJK SC', sans-serif";
+
+const styles = (layout: Layout) => `
   * { box-sizing: border-box; }
   html, body { margin: 0; }
   body {
-    width: ${FRAME.width}px; height: ${FRAME.height}px; overflow: hidden;
-    font-family: system-ui, -apple-system, 'Segoe UI', 'Hiragino Sans', 'PingFang SC', 'Microsoft YaHei', 'Noto Sans CJK JP', 'Noto Sans CJK SC', sans-serif;
+    width: ${layout.width}px; height: ${layout.height}px; overflow: hidden;
+    font-family: ${FONT_STACK};
     color: #0f172a;
-    background: radial-gradient(1200px 600px at 85% -10%, #818cf8 0%, rgba(129, 140, 248, 0) 60%), linear-gradient(160deg, #4f46e5 0%, #312e81 100%);
+    background: ${BACKGROUND};
   }
-  .frame { position: relative; height: 100%; }
-  header { position: absolute; left: 80px; right: 80px; top: 0; height: ${STAGE_TOP}px; display: flex; gap: 22px; align-items: center; }
+  .frame { position: absolute; inset: 0; }
+  header { position: absolute; left: 80px; right: 80px; top: 0; height: ${layout.stageTop}px; display: flex; gap: 22px; align-items: center; }
   header img { width: 60px; height: 60px; flex: none; border-radius: 14px; box-shadow: 0 6px 18px rgba(15, 23, 42, 0.35); }
   .caption { min-width: 0; flex: 1; }
   h1 { margin: 0; color: #fff; font-size: 42px; line-height: 1.15; font-weight: 700; letter-spacing: -0.01em; max-height: 97px; overflow: hidden; }
   .subline { margin: 12px 0 0; color: #e0e7ff; font-size: 21px; line-height: 1.4; max-height: 59px; overflow: hidden; }
-  .stage { position: absolute; left: 80px; top: ${STAGE_TOP}px; width: ${STAGE.width}px; height: ${STAGE.height}px; display: flex; gap: ${GAP}px; }
+  .stage { position: absolute; left: 80px; top: ${layout.stageTop}px; width: ${STAGE.width}px; height: ${STAGE.height}px; display: flex; gap: ${GAP}px; }
 
   .window { flex: none; height: 100%; background: #fff; border-radius: 14px; overflow: hidden; box-shadow: 0 24px 60px rgba(15, 23, 42, 0.45); display: flex; flex-direction: column; }
   .bar { height: ${TITLE_BAR}px; flex: none; display: flex; align-items: center; gap: 8px; padding: 0 14px; background: #eef0f4; border-bottom: 1px solid #dfe3ea; }
@@ -74,6 +100,7 @@ const styles = `
   .bar span { margin-left: 10px; font-size: 13px; color: #475569; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .body { flex: 1; position: relative; overflow: hidden; }
   .body > img { display: block; }
+  .state { position: absolute; inset: 0; }
 
   .chat { width: ${CHAT_WIDTH}px; flex: none; height: 100%; background: #0f172a; color: #e2e8f0; border-radius: 14px; box-shadow: 0 24px 60px rgba(15, 23, 42, 0.45); padding: 22px 22px; display: flex; flex-direction: column; gap: 14px; overflow: hidden; }
   .who { font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #94a3b8; margin-bottom: 4px; }
@@ -92,6 +119,7 @@ const styles = `
   .group h3 { margin: 0 0 6px; font-size: 15px; }
   .group ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 5px; }
   .group li { display: flex; align-items: center; gap: 10px; font-size: 14px; color: #334155; background: #fff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 6px 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .group.loose { border-color: #cbd5e1; }
   .group li i { flex: none; width: 18px; height: 18px; border-radius: 5px; color: #fff; font: 600 11px/18px system-ui, sans-serif; text-align: center; font-style: normal; }
 
   .center { height: 100%; display: flex; align-items: center; justify-content: center; background: #e9ecf2; }
@@ -110,42 +138,62 @@ export const popupBody = (png: Buffer, size: Size) =>
   `<div class="center"><div class="popup">${screenshotBody(png, size)}</div></div>`;
 
 export function chatCard(labels: ChatLabels, messages: ChatMessage[]) {
-  const items = messages.map((message) => {
+  const items = messages.map((message, step) => {
     if (message.kind === 'tool') {
       const detail = message.detail ? `<small>${escapeHtml(message.detail)}</small>` : '';
-      return `<div class="tool"><b>${escapeHtml(message.name)}</b>${detail}</div>`;
+      return `<div class="tool" data-step="${step}"><b>${escapeHtml(message.name)}</b>${detail}</div>`;
     }
     const who = message.kind === 'user' ? labels.you : labels.agent;
-    return `<div class="${message.kind}"><div class="who">${escapeHtml(who)}</div><p>${escapeHtml(message.text)}</p></div>`;
+    return `<div class="${message.kind}" data-step="${step}"><div class="who">${escapeHtml(who)}</div><p>${escapeHtml(message.text)}</p></div>`;
   });
   return `<section class="chat" data-fit>${items.join('')}</section>`;
 }
 
+const colorOf = (color: string) => groupColors[color] ?? groupColors.grey;
+
+const tabItem = (title: string, color: string) => `<li><i style="background: ${colorOf(color)}">${escapeHtml([...title][0] ?? '')}</i>${escapeHtml(title)}</li>`;
+
 export function tabGroupsBody(groups: TabGroupView[]) {
-  const colorOf = (group: TabGroupView) => groupColors[group.color] ?? groupColors.grey;
-  const chips = groups.map((group) => `<span class="chip" style="background: ${colorOf(group)}">${escapeHtml(group.title)} · ${group.tabs.length}</span>`);
+  const chips = groups.map((group) => `<span class="chip" style="background: ${colorOf(group.color)}">${escapeHtml(group.title)} · ${group.tabs.length}</span>`);
   const sections = groups.map((group) => {
-    const tabs = group.tabs.map((title) => `<li><i style="background: ${colorOf(group)}">${escapeHtml([...title][0] ?? '')}</i>${escapeHtml(title)}</li>`);
-    return `<div class="group" style="border-color: ${colorOf(group)}"><h3 style="color: ${colorOf(group)}">${escapeHtml(group.title)}</h3><ul>${tabs.join('')}</ul></div>`;
+    const tabs = group.tabs.map((title) => tabItem(title, group.color));
+    return `<div class="group" style="border-color: ${colorOf(group.color)}"><h3 style="color: ${colorOf(group.color)}">${escapeHtml(group.title)}</h3><ul>${tabs.join('')}</ul></div>`;
   });
   return `<div class="groups" data-fit><div class="strip">${chips.join('')}</div>${sections.join('')}</div>`;
 }
 
-export function frameHtml(options: { languageTag: string; caption: Caption; stage: string }) {
-  return `<!doctype html>
-<html lang="${options.languageTag}">
-  <head><meta charset="utf-8" /><style>${styles}</style></head>
-  <body>
-    <div class="frame">
+export function tabListBody(titles: string[]) {
+  const chip = `<span class="chip" style="background: ${colorOf('grey')}">${titles.length}</span>`;
+  const tabs = titles.map((title) => tabItem(title, 'grey'));
+  return `<div class="groups" data-fit><div class="strip">${chip}</div><div class="group loose"><ul>${tabs.join('')}</ul></div></div>`;
+}
+
+export function stageHtml(labels: ChatLabels, stage: Stage, animated: boolean) {
+  const states = [...stage.window.states].sort((a, b) => a.step - b.step);
+  const body = animated
+    ? states.map((state) => `<div class="state" data-step="${state.step}">${state.body}</div>`).join('')
+    : states.at(-1)!.body;
+  const chat = stage.messages.length ? chatCard(labels, stage.messages) : '';
+  return chat + windowCard({ title: stage.window.title, size: stage.window.size, body });
+}
+
+export function slideHtml(labels: ChatLabels, slide: Slide, animated = false) {
+  return `<div class="frame">
       <header>
-        <img src="${iconUri}" alt="" />
+        <img src="${ICON_URI}" alt="" />
         <div class="caption">
-          <h1 data-fit>${escapeHtml(options.caption.headline)}</h1>
-          <p class="subline" data-fit>${escapeHtml(options.caption.subline)}</p>
+          <h1 data-fit>${escapeHtml(slide.caption.headline)}</h1>
+          <p class="subline" data-fit>${escapeHtml(slide.caption.subline)}</p>
         </div>
       </header>
-      <div class="stage">${options.stage}</div>
-    </div>
-  </body>
+      <div class="stage">${stageHtml(labels, slide.stage, animated)}</div>
+    </div>`;
+}
+
+export function documentHtml(options: { languageTag: string; layout: Layout; content: string; extraStyles?: string }) {
+  return `<!doctype html>
+<html lang="${options.languageTag}">
+  <head><meta charset="utf-8" /><style>${styles(options.layout)}${options.extraStyles ?? ''}</style></head>
+  <body>${options.content}</body>
 </html>`;
 }

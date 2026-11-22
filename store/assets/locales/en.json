@@ -52,5 +52,9 @@
     "prompt": "This Chrome profile is for work. Call it Work.",
     "reply": "Done. When you ask for your Work browser, I'll use this profile.",
     "name": "Work"
+  },
+  "video": {
+    "tagline": "Let your AI agent use the browser you already use.",
+    "closing": "Works with Claude Code, Cursor, VS Code and any MCP client. Free and open source."
   }
 }

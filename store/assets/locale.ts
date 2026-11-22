@@ -42,6 +42,10 @@ export interface LocaleStrings {
     reply: string;
     name: string;
   };
+  video: {
+    tagline: string;
+    closing: string;
+  };
 }
 
 export interface Locale {
