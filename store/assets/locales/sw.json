@@ -1,0 +1,60 @@
+{
+  "captions": {
+    "tabs": {
+      "headline": "Ruhusu wakala wako wa AI apange vichupo vyako",
+      "subline": "Hakiki mpango wa kupanga vikundi, uutekeleze kwa hatua moja, na uutendue ukibadilisha nia."
+    },
+    "pages": {
+      "headline": "Wakala wako hutumia kurasa halisi za wavuti",
+      "subline": "Husoma ukurasa, hujaza fomu na hubofya vitufe kwenye kivinjari unachotumia tayari."
+    },
+    "profiles": {
+      "headline": "Zipe majina wasifu za kivinjari chako",
+      "subline": "Omba kivinjari chako cha Kazini na wakala wako atachagua wasifu sahihi wa Chrome."
+    },
+    "setup": {
+      "headline": "Unganisha wakala unayemtumia tayari",
+      "subline": "Claude Code, Cursor, VS Code, Claude Desktop au wakala yeyote wa MCP. Kila kitu hufanyika kwenye kompyuta yako."
+    }
+  },
+  "chat": {
+    "you": "Wewe",
+    "agent": "Wakala"
+  },
+  "tabs": {
+    "prompt": "Panga vichupo vyangu vilivyofunguliwa katika vikundi kulingana na mada.",
+    "reply": "Nimemaliza. Nimepanga vichupo {tabs} katika vikundi {groups}. Niombe nitendue ukitaka mpangilio wa zamani urudi.",
+    "groups": {
+      "travel": "Safari ya Lisbon",
+      "work": "Ripoti ya Q3",
+      "recipes": "Mlo wa jioni"
+    },
+    "pages": {
+      "travel": ["Ndege kwenda Lisbon – linganisha bei", "Hoteli katika Alfama", "Lisbon: mambo 10 bora ya kufanya"],
+      "work": ["Dashibodi ya mapato ya Q3", "Rasimu ya ripoti ya Q3", "Maelezo ya mkutano wa timu"],
+      "recipes": ["Pasta rahisi ya siku za kazi", "Mboga za kuoka kwenye trei"]
+    }
+  },
+  "booking": {
+    "prompt": "Weka nafasi ya meza ya watu 4 katika Casa Azul leo usiku kwa jina la Ada Lovelace.",
+    "reply": "Nimemaliza. Casa Azul imethibitisha meza ya watu 4 kwa jina la Ada Lovelace.",
+    "restaurant": "Casa Azul",
+    "heading": "Weka nafasi ya meza",
+    "name": "Jina",
+    "guests": "Idadi ya watu",
+    "when": "Lini",
+    "tonight": "Leo usiku, 19:30",
+    "submit": "Weka nafasi",
+    "confirmation": "Meza ya watu {guests} imehifadhiwa kwa jina la {name}. Tuonane leo usiku!",
+    "guestName": "Ada Lovelace"
+  },
+  "profiles": {
+    "prompt": "Wasifu huu wa Chrome ni wa kazi. Uite Kazini.",
+    "reply": "Nimemaliza. Ukiomba kivinjari chako cha Kazini, nitatumia wasifu huu.",
+    "name": "Kazini"
+  },
+  "video": {
+    "tagline": "Ruhusu wakala wako wa AI atumie kivinjari unachotumia tayari.",
+    "closing": "Hufanya kazi na Claude Code, Cursor, VS Code na wakala yeyote anayeoana na MCP. Bila malipo na chanzo huria."
+  }
+}
