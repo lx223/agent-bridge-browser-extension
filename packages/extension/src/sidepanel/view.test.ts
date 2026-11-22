@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import type { AgentSession } from '@agent-browser-bridge/protocol';
 import type { Conversation } from '../background/chat.ts';
-import { chooseConversation, panelView } from './view.ts';
+import { canSubmit, chooseConversation, panelView } from './view.ts';
 
 const NOW = 1_700_000_000_000;
 
@@ -31,7 +31,7 @@ const session = (sessionId: string, extra: Partial<AgentSession> = {}): AgentSes
 describe('panelView', () => {
   it('explains how to start when there is no conversation', () => {
     const view = panelView({}, [], NOW);
-    expect(view).toMatchObject({ title: 'Agent chat', canSend: false, options: [] });
+    expect(view).toMatchObject({ title: 'Agent chat', canSend: false, options: [], pickConversation: false, canEnd: false, canRemove: false });
     expect(view.selected).toBeUndefined();
   });
 
@@ -81,6 +81,21 @@ describe('panelView', () => {
       { key: 'a', label: 'claude-code in a' },
       { key: 'b', label: 'claude-code in b (1 new)' },
     ]);
+    expect(view.pickConversation).toBe(true);
+  });
+
+  it('shows a single conversation by its title instead of a picker', () => {
+    const view = panelView({ a: conversation('a') }, [session('a')], NOW);
+    expect(view).toMatchObject({ title: 'claude-code in a', pickConversation: false });
+  });
+
+  it('offers exactly one conversation action: end while it runs, remove once it is over', () => {
+    const actions = (view: { canEnd: boolean; canRemove: boolean }) => [view.canEnd && 'end', view.canRemove && 'remove'].filter(Boolean);
+    expect(actions(panelView({ a: conversation('a', { listeningUntil: NOW + 1_000 }) }, [session('a')], NOW))).toEqual(['end']);
+    expect(actions(panelView({ a: conversation('a') }, [session('a')], NOW))).toEqual(['end']);
+    expect(actions(panelView({ a: conversation('a', { goneAt: NOW - 1_000 }) }, [], NOW))).toEqual(['end']);
+    expect(actions(panelView({ a: conversation('a') }, [], NOW))).toEqual(['remove']);
+    expect(actions(panelView({ a: conversation('a', { ended: true }) }, [session('a')], NOW))).toEqual(['remove']);
   });
 });
 
@@ -93,5 +108,14 @@ describe('chooseConversation', () => {
     expect(chooseConversation(conversations)).toBe('old');
     expect(chooseConversation(conversations, 'ended')).toBe('ended');
     expect(chooseConversation(conversations, 'gone')).toBe('old');
+  });
+});
+
+describe('canSubmit', () => {
+  it('only sends a non-blank draft to a chat that accepts replies and is not already sending', () => {
+    expect(canSubmit({ canSend: true }, 'Pin the inbox', false)).toBe(true);
+    expect(canSubmit({ canSend: true }, '  \n ', false)).toBe(false);
+    expect(canSubmit({ canSend: true }, 'Pin the inbox', true)).toBe(false);
+    expect(canSubmit({ canSend: false }, 'Pin the inbox', false)).toBe(false);
   });
 });

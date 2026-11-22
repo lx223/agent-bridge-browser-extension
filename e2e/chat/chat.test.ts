@@ -39,6 +39,9 @@ describe('the browser chat panel', () => {
   it('explains how to start a chat before there is one', async () => {
     expect(await panel.isVisible('#empty')).toBe(true);
     expect(await panel.textContent('#empty')).toContain('continue_in_browser');
+    expect(await panel.isVisible('#composer')).toBe(false);
+    expect(await panel.isVisible('#end')).toBe(false);
+    expect(await panel.isVisible('#setup-link')).toBe(true);
     expect(await opensPanelFromToolbar()).toBe(false);
   });
 
@@ -59,6 +62,12 @@ describe('the browser chat panel', () => {
     await panel.waitForSelector('.message.from-agent >> text=I grouped your tabs. What next?');
     await panel.waitForSelector('body[data-state="waiting"]');
     expect(await panel.textContent('#title')).toBe('Tidy my tabs');
+    expect(await panel.isVisible('#picker')).toBe(false);
+    expect(await panel.isVisible('#end')).toBe(true);
+    expect(await panel.isVisible('#remove')).toBe(false);
+    expect(await panel.isDisabled('#send')).toBe(true);
+    await panel.fill('#input', '   ');
+    expect(await panel.isDisabled('#send')).toBe(true);
     await reply('Pin the inbox please');
     const inbox = await answered;
     expect(inbox.messages).toEqual([expect.objectContaining({ text: 'Pin the inbox please', viewingTab: expect.objectContaining({ url: expect.stringContaining('sidepanel') }) })]);
@@ -69,7 +78,9 @@ describe('the browser chat panel', () => {
   it('tells the agent about messages sent while it works', async () => {
     await harness.agent.call(CHAT_SEND_TOOL, { ...ME, text: 'Working on it', waitForReply: false });
     await panel.waitForSelector('.message.from-agent >> text=Working on it');
-    await reply('Also close the docs tab');
+    await panel.fill('#input', 'Also close the docs tab');
+    await panel.click('#send');
+    expect(await panel.inputValue('#input')).toBe('');
     await panel.waitForSelector('.message.from-user >> text=Also close the docs tab');
     const result = await harness.agent.raw('chrome_windows_list');
     expect(result.content.at(-1)?.text).toBe(`The user sent a new message in the browser chat. Call ${CHAT_RECEIVE_TOOL} to read it.`);
@@ -85,8 +96,33 @@ describe('the browser chat panel', () => {
     expect(inbox).toMatchObject({ ended: true, messages: [] });
     await panel.waitForSelector('body[data-state="ended"]');
     expect(await panel.isDisabled('#input')).toBe(true);
+    expect(await panel.isVisible('#field')).toBe(false);
+    expect(await panel.textContent('#composer-hint')).toBe('Ask the agent to continue in the browser to chat again.');
+    await panel.waitForSelector('#remove:visible');
+    expect(await panel.isVisible('#end')).toBe(false);
     expect(await panel.textContent('.message.from-notice .text')).toBe('You ended the chat.');
     await expect.poll(opensPanelFromToolbar).toBe(false);
+  });
+
+  it('grows the message box with the draft', async () => {
+    await harness.agent.call(CHAT_SEND_TOOL, { agentSessionId: 'e2e-agent-2', agentSessionName: 'Second chat', text: 'Hello again', waitForReply: false });
+    await panel.waitForSelector('#picker:visible');
+    expect(await panel.isVisible('#title')).toBe(false);
+    expect(await panel.inputValue('#conversation')).not.toBe('');
+    await panel.waitForSelector('#input:visible');
+    const height = () => panel.locator('#input').evaluate((element) => element.getBoundingClientRect().height);
+    const single = await height();
+    await panel.fill('#input', 'one\ntwo\nthree');
+    expect(await height()).toBeGreaterThan(single);
+    await panel.fill('#input', '');
+    expect(await height()).toBe(single);
+  });
+
+  it('removes a finished conversation from the panel', async () => {
+    await panel.selectOption('#conversation', { label: 'Tidy my tabs' });
+    await panel.click('#remove');
+    await panel.waitForSelector('#picker', { state: 'hidden' });
+    expect(await panel.textContent('#title')).toBe('Second chat');
   });
 
   it('runs without page errors', () => {
