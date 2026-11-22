@@ -72,14 +72,25 @@ export interface TabGroupView {
 }
 
 export const BACKGROUND = 'radial-gradient(1200px 600px at 85% -10%, #818cf8 0%, rgba(129, 140, 248, 0) 60%), linear-gradient(160deg, #4f46e5 0%, #312e81 100%)';
-export const FONT_STACK = "system-ui, -apple-system, 'Segoe UI', 'Hiragino Sans', 'PingFang SC', 'Microsoft YaHei', 'Noto Sans CJK JP', 'Noto Sans CJK SC', sans-serif";
+const CJK_FONTS: Record<string, string[]> = {
+  ja: ["'Hiragino Sans'", "'Yu Gothic'", "'Noto Sans CJK JP'"],
+  'zh-CN': ["'PingFang SC'", "'Microsoft YaHei'", "'Noto Sans CJK SC'"],
+  'zh-TW': ["'PingFang TC'", "'Microsoft JhengHei'", "'Noto Sans CJK TC'"],
+  ko: ["'Apple SD Gothic Neo'", "'Malgun Gothic'", "'Noto Sans CJK KR'"],
+};
 
-const styles = (layout: Layout) => `
+export function fontStack(languageTag: string) {
+  const preferred = CJK_FONTS[languageTag] ?? [];
+  const others = Object.values(CJK_FONTS).flat().filter((font) => !preferred.includes(font));
+  return ['system-ui', '-apple-system', "'Segoe UI'", ...preferred, ...others, 'sans-serif'].join(', ');
+}
+
+const styles = (layout: Layout, languageTag: string) => `
   * { box-sizing: border-box; }
   html, body { margin: 0; }
   body {
     width: ${layout.width}px; height: ${layout.height}px; overflow: hidden;
-    font-family: ${FONT_STACK};
+    font-family: ${fontStack(languageTag)};
     color: #0f172a;
     background: ${BACKGROUND};
   }
@@ -193,7 +204,7 @@ export function slideHtml(labels: ChatLabels, slide: Slide, animated = false) {
 export function documentHtml(options: { languageTag: string; layout: Layout; content: string; extraStyles?: string }) {
   return `<!doctype html>
 <html lang="${options.languageTag}">
-  <head><meta charset="utf-8" /><style>${styles(options.layout)}${options.extraStyles ?? ''}</style></head>
+  <head><meta charset="utf-8" /><style>${styles(options.layout, options.languageTag)}${options.extraStyles ?? ''}</style></head>
   <body>${options.content}</body>
 </html>`;
 }

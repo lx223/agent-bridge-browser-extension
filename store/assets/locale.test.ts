@@ -1,9 +1,17 @@
 import { describe, expect, it } from 'vitest';
-import { availableLocales, compareToReference, fill, loadLocale, REFERENCE_LOCALE } from './locale.ts';
+import { availableLocales, CHROME_WEB_STORE_LOCALES, compareToReference, fill, loadLocale, REFERENCE_LOCALE, RIGHT_TO_LEFT_LOCALES } from './locale.ts';
 
 describe('store screenshot locales', () => {
   it.each(availableLocales())('%s has every string the reference locale has', (code) => {
     expect(() => loadLocale(code)).not.toThrow();
+  });
+
+  it('names every locale file with a Chrome Web Store locale code', () => {
+    expect(availableLocales().filter((code) => !CHROME_WEB_STORE_LOCALES.includes(code))).toEqual([]);
+  });
+
+  it('has no right-to-left locales, which the layouts cannot render', () => {
+    expect(availableLocales().filter((code) => RIGHT_TO_LEFT_LOCALES.includes(code))).toEqual([]);
   });
 
   it('includes the reference locale', () => {

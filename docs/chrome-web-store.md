@@ -41,7 +41,7 @@ Upload the screenshots for each language under Store listing in the developer da
 
 The script uses the end-to-end harness (`e2e/support/harness.ts`). Each scene comes from a real session: the built MCP server, the built extension in headless Chromium, and demo pages served on `127.0.0.1`. The tab groups, form contents, tool names and extension pages are what the extension actually produced, and every window state the video shows was captured at that point in the session. The caption, the chat transcript and the window frame around each capture are drawn by the script. Chromium starts with the locale's language, so the demo pages and the browser use it too. The extension's own pages are English only, because the extension is not localised yet.
 
-Like the end-to-end tests, the script needs Playwright's Chromium installed. Videos also need `ffmpeg` with `libx264` on the `PATH`; leave out `--kind video` to skip them. Japanese and Chinese need CJK fonts on the machine. macOS and Windows have them; on Linux install a package such as `fonts-noto-cjk`. A full run takes about ten minutes, most of it the six Chrome videos.
+Like the end-to-end tests, the script needs Playwright's Chromium installed. Videos also need `ffmpeg` with `libx264` on the `PATH`; leave out `--kind video` to skip them. Chinese, Japanese and Korean need CJK fonts on the machine. macOS and Windows have them; on Linux install a package such as `fonts-noto-cjk`. A full run takes about twenty minutes, most of it one Chrome video per locale; use `--locale` to render only the languages you are updating.
 
 ### Videos
 
@@ -51,9 +51,31 @@ In each scene the chat messages appear one at a time, and the window changes whe
 
 ### Locales
 
-Each file in `store/assets/locales/` is one store language, named with the Chrome Web Store locale code, such as `de.json`, `pt_BR.json` or `zh_CN.json`. It holds the captions, the chat transcript, the demo page text and the video's tagline and closing line. `en.json` is the reference, and the promo tiles use its tagline.
+Each file in `store/assets/locales/` is one store language. The Chrome Web Store shows a listing's screenshots and promo video to people whose Chrome uses that language, so each locale reaches a region:
 
-To add a language, copy `en.json` to the new code and translate every value. Keep placeholders such as `{tabs}` and keep the same number of entries in each list. The script and `npm test` both reject a locale file with missing, extra or empty strings, or with different placeholders. If a caption, transcript or title card is too long for its box, the script still writes the file but lists the text that was cut off and exits with an error, so shorten that text and run it again.
+| File | Language | Main regions |
+| --- | --- | --- |
+| `en.json` | English (reference) | Every region without its own listing language |
+| `de.json` | German | Germany, Austria, Switzerland |
+| `es.json` | Spanish | Spain, Latin America |
+| `fr.json` | French | France, Belgium, Canada, Switzerland |
+| `id.json` | Indonesian | Indonesia |
+| `it.json` | Italian | Italy |
+| `ja.json` | Japanese | Japan |
+| `ko.json` | Korean | South Korea |
+| `nl.json` | Dutch | Netherlands, Belgium |
+| `pl.json` | Polish | Poland |
+| `pt_BR.json` | Brazilian Portuguese | Brazil |
+| `ru.json` | Russian | Russia, Central Asia |
+| `tr.json` | Turkish | Turkey |
+| `zh_CN.json` | Simplified Chinese | Mainland China, Singapore |
+| `zh_TW.json` | Traditional Chinese | Taiwan, Hong Kong |
+
+Each file holds the captions, the chat transcript, the demo page text and the video's tagline and closing line. `en.json` is the reference, and the promo tiles use its tagline.
+
+To add a language, copy `en.json` to a file named with a [Chrome Web Store locale code](https://developer.chrome.com/docs/extensions/reference/api/i18n#locales), such as `vi.json`, `pt_PT.json` or `es_419.json`, and translate every value. Keep placeholders such as `{tabs}` and keep the same number of entries in each list. The script and `npm test` both reject a file whose name is not a Chrome Web Store locale code, and a locale file with missing, extra or empty strings or with different placeholders. Right-to-left languages (`ar`, `fa`, `he`) are rejected too, because the layouts do not mirror yet. If a caption, transcript or title card is too long for its box, the script still writes the file but lists the text that was cut off and exits with an error, so shorten that text and run it again.
+
+Chinese, Japanese and Korean text uses that language's own fonts, in `fontStack` in `store/assets/frame.ts`, so shared characters take the regional glyph shapes.
 
 The translations other than English were written without a native speaker review. Have them checked before you publish them.
 

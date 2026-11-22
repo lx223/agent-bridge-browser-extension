@@ -1,6 +1,6 @@
 import { join } from 'node:path';
 import type { Browser } from 'playwright';
-import { BACKGROUND, documentHtml, FONT_STACK, ICON_URI, PRODUCT_NAME, tabGroupsBody, windowCard, type Size } from './frame.ts';
+import { BACKGROUND, documentHtml, fontStack, ICON_URI, PRODUCT_NAME, tabGroupsBody, windowCard, type Size } from './frame.ts';
 import { escapeHtml } from './html.ts';
 import { topics, type Locale } from './locale.ts';
 import { renderStill } from './render.ts';
@@ -13,7 +13,7 @@ const STORE_ICON_ARTWORK = 96;
 const MARQUEE_TABS_PER_GROUP = 2;
 
 const tileStyles = (size: Size) => `
-  body.tile { width: ${size.width}px; height: ${size.height}px; font-family: ${FONT_STACK}; background: ${BACKGROUND}; color: #fff; }
+  body.tile { width: ${size.width}px; height: ${size.height}px; font-family: ${fontStack('en')}; background: ${BACKGROUND}; color: #fff; }
   .small { height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 32px; }
   .small img { width: 84px; height: 84px; border-radius: 20px; box-shadow: 0 10px 24px rgba(15, 23, 42, 0.4); }
   .small h1 { margin: 22px 0 0; font-size: 34px; line-height: 1.1; font-weight: 700; letter-spacing: -0.01em; }

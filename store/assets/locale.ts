@@ -4,6 +4,12 @@ import { basename, join } from 'node:path';
 export const LOCALES_DIR = join(import.meta.dirname, 'locales');
 export const REFERENCE_LOCALE = 'en';
 
+export const CHROME_WEB_STORE_LOCALES = [
+  'ar', 'am', 'bg', 'bn', 'ca', 'cs', 'da', 'de', 'el', 'en', 'en_AU', 'en_GB', 'en_US', 'es', 'es_419', 'et', 'fa', 'fi', 'fil', 'fr', 'gu', 'he', 'hi', 'hr', 'hu', 'id', 'it', 'ja', 'kn', 'ko',
+  'lt', 'lv', 'ml', 'mr', 'ms', 'nl', 'no', 'pl', 'pt_BR', 'pt_PT', 'ro', 'ru', 'sk', 'sl', 'sr', 'sv', 'sw', 'ta', 'te', 'th', 'tr', 'uk', 'vi', 'zh_CN', 'zh_TW',
+];
+export const RIGHT_TO_LEFT_LOCALES = ['ar', 'fa', 'he'];
+
 export const topics = ['travel', 'work', 'recipes'] as const;
 export type Topic = (typeof topics)[number];
 
@@ -95,6 +101,8 @@ export function loadLocale(code: string): Locale {
   if (!availableLocales().includes(code)) {
     throw new Error(`No locale file for "${code}". Available: ${availableLocales().join(', ')}`);
   }
+  if (!CHROME_WEB_STORE_LOCALES.includes(code)) throw new Error(`"${code}" is not a Chrome Web Store locale code. Use one of ${CHROME_WEB_STORE_LOCALES.join(', ')}.`);
+  if (RIGHT_TO_LEFT_LOCALES.includes(code)) throw new Error(`locales/${code}.json is a right-to-left language, which the screenshot and video layouts do not support yet.`);
   const strings = readJson(code);
   const problems = compareToReference(readJson(REFERENCE_LOCALE), strings);
   if (problems.length) throw new Error(`locales/${code}.json does not match ${REFERENCE_LOCALE}.json:\n  ${problems.join('\n  ')}`);

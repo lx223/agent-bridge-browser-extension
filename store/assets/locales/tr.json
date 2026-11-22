@@ -1,0 +1,60 @@
+{
+  "captions": {
+    "tabs": {
+      "headline": "Sekmelerinizi yapay zekâ ajanınız düzenlesin",
+      "subline": "Gruplama planını önizleyin, tek adımda uygulayın, fikrinizi değiştirirseniz geri alın."
+    },
+    "pages": {
+      "headline": "Ajanınız gerçek web sayfalarında çalışır",
+      "subline": "Kullandığınız tarayıcıda sayfayı okur, formları doldurur ve düğmelere tıklar."
+    },
+    "profiles": {
+      "headline": "Tarayıcı profillerinize ad verin",
+      "subline": "İş tarayıcınızı isteyin, ajanınız doğru Chrome profilini seçsin."
+    },
+    "setup": {
+      "headline": "Zaten kullandığınız ajanı bağlayın",
+      "subline": "Claude Code, Cursor, VS Code, Claude Desktop veya herhangi bir MCP istemcisi. Her şey kendi bilgisayarınızda çalışır."
+    }
+  },
+  "chat": {
+    "you": "Siz",
+    "agent": "Ajan"
+  },
+  "tabs": {
+    "prompt": "Açık sekmelerimi konuya göre gruplara ayır.",
+    "reply": "Tamamlandı. {tabs} sekmeyi {groups} grupta topladım. Eski düzene dönmek isterseniz geri almamı isteyin.",
+    "groups": {
+      "travel": "Lizbon gezisi",
+      "work": "3. çeyrek raporu",
+      "recipes": "Akşam yemeği fikirleri"
+    },
+    "pages": {
+      "travel": ["Lizbon uçuşları – fiyatları karşılaştır", "Alfama'daki oteller", "Lizbon'da yapılacak 10 şey"],
+      "work": ["3. çeyrek gelir paneli", "3. çeyrek raporu taslağı", "Ekip toplantısı notları"],
+      "recipes": ["Kolay hafta içi makarna", "Fırında sebze"]
+    }
+  },
+  "booking": {
+    "prompt": "Bu akşam Casa Azul'da Ada Lovelace adına 4 kişilik masa ayırt.",
+    "reply": "Tamamlandı. Casa Azul, Ada Lovelace adına 4 kişilik masayı onayladı.",
+    "restaurant": "Casa Azul",
+    "heading": "Masa ayırtın",
+    "name": "Ad",
+    "guests": "Kişi",
+    "when": "Ne zaman",
+    "tonight": "Bu akşam, 19.30",
+    "submit": "Masa ayırt",
+    "confirmation": "{name} adına {guests} kişilik masa ayrıldı. Bu akşam görüşmek üzere!",
+    "guestName": "Ada Lovelace"
+  },
+  "profiles": {
+    "prompt": "Bu Chrome profili iş için. Adını İş koy.",
+    "reply": "Tamamlandı. İş tarayıcınızı istediğinizde bu profili kullanacağım.",
+    "name": "İş"
+  },
+  "video": {
+    "tagline": "Zaten kullandığınız tarayıcıyı yapay zekâ ajanınıza bırakın.",
+    "closing": "Claude Code, Cursor, VS Code ve tüm MCP istemcileriyle çalışır. Ücretsiz ve açık kaynak."
+  }
+}

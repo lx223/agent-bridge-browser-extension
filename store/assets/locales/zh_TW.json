@@ -1,0 +1,60 @@
+{
+  "captions": {
+    "tabs": {
+      "headline": "讓 AI 代理幫你整理分頁",
+      "subline": "預覽分組計畫，一步套用，改變主意也能復原。"
+    },
+    "pages": {
+      "headline": "代理直接在真實網頁上操作",
+      "subline": "在你平常使用的瀏覽器中讀取網頁、填寫表單、點擊按鈕。"
+    },
+    "profiles": {
+      "headline": "為瀏覽器設定檔命名",
+      "subline": "說要用工作瀏覽器，代理就會選對 Chrome 設定檔。"
+    },
+    "setup": {
+      "headline": "連接你正在使用的代理",
+      "subline": "Claude Code、Cursor、VS Code、Claude Desktop 或任何 MCP 用戶端。一切都在你的電腦上執行。"
+    }
+  },
+  "chat": {
+    "you": "你",
+    "agent": "代理"
+  },
+  "tabs": {
+    "prompt": "把我開啟的分頁依主題分組。",
+    "reply": "完成了。我把 {tabs} 個分頁分成 {groups} 組。想恢復原本的排列，叫我復原即可。",
+    "groups": {
+      "travel": "里斯本之旅",
+      "work": "第三季報告",
+      "recipes": "晚餐點子"
+    },
+    "pages": {
+      "travel": ["飛往里斯本的航班 – 比價", "阿爾法瑪區飯店", "里斯本十大必去景點"],
+      "work": ["第三季營收儀表板", "第三季報告草稿", "團隊會議記錄"],
+      "recipes": ["平日快速義大利麵", "烤盤烤蔬菜"]
+    }
+  },
+  "booking": {
+    "prompt": "今晚幫我在 Casa Azul 訂 4 人桌，名字寫 Ada Lovelace。",
+    "reply": "完成了。Casa Azul 已確認 Ada Lovelace 名下的 4 人桌。",
+    "restaurant": "Casa Azul",
+    "heading": "預訂座位",
+    "name": "姓名",
+    "guests": "人數",
+    "when": "時間",
+    "tonight": "今晚 19:30",
+    "submit": "預訂",
+    "confirmation": "已為 {name} 預訂 {guests} 人桌，今晚見！",
+    "guestName": "Ada Lovelace"
+  },
+  "profiles": {
+    "prompt": "這個 Chrome 設定檔是工作用的，把它命名為「工作」。",
+    "reply": "完成了。之後你說要用工作瀏覽器，我就會使用這個設定檔。",
+    "name": "工作"
+  },
+  "video": {
+    "tagline": "讓 AI 代理使用你平常用的瀏覽器。",
+    "closing": "支援 Claude Code、Cursor、VS Code 及任何 MCP 用戶端。免費且開源。"
+  }
+}
