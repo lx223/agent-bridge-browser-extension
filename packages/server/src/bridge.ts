@@ -5,6 +5,7 @@ import {
   browserApis,
   browserToolName,
   CHAT_PEEK_METHOD,
+  CHAT_RECEIVE_METHOD,
   chatToolNames,
   extensionToServer,
   isChatMethod,
@@ -23,6 +24,7 @@ import {
   type HelloMessage,
   type HostToRelay,
   type Method,
+  type ReconnectingInstance,
   type RelayToHost,
   type ResponseMessage,
   type ServerToExtension,
@@ -38,6 +40,9 @@ export interface BridgeOptions {
   version?: string;
   requestTimeoutMs?: number;
   handoverWaitMs?: number;
+  reconnectGraceMs?: number;
+  reloadGraceMs?: number;
+  hostChangeGraceMs?: number;
   log?: (msg: string) => void;
   agentInfo?: () => AgentInfo;
 }
@@ -55,7 +60,14 @@ interface Pending {
   socket: WebSocket;
 }
 
+interface ExpectedInstance {
+  browser: string;
+  instanceId?: string;
+  until: number;
+}
+
 export class NotConnectedError extends Error {}
+export class ConnectionLostError extends NotConnectedError {}
 
 export const RELAY_PATH = '/relay';
 
@@ -67,6 +79,11 @@ const HANDOVER_CLOSE_CODE = 4002;
 const ACTIVITY_BROADCAST_MS = 250;
 const MAX_INSTANCES_PER_AGENT = 8;
 const RESPONSE_MARGIN_MS = 5_000;
+const RECONNECT_GRACE_MS = 5_000;
+const RELOAD_GRACE_MS = 20_000;
+const HOST_CHANGE_GRACE_MS = 10_000;
+const MAX_ATTEMPTS = 3;
+const PROTOCOL_MISMATCH_CLOSE_CODE = 4001;
 const notConnected = (browser: string) =>
   `The Agent Browser Bridge extension is not connected in ${browser}. Make sure ${browser} is open with the extension installed and enabled; it reconnects automatically within ~30 seconds.`;
 const EXTENSION_SCHEMES = ['chrome-extension://', 'safari-web-extension://'];
@@ -79,6 +96,9 @@ const toolLabel = (browser: string, method: string) => {
   return method;
 };
 const sameInstance = (a: AgentInstanceUse, b: AgentInstanceUse) => a.browser === b.browser && a.instanceId === b.instanceId;
+const instanceKey = (instance: { browser: string; instanceId?: string }) => `${instance.browser}:${instance.instanceId ?? ''}`;
+const isRetryable = (method: string) =>
+  method === CHAT_RECEIVE_METHOD || method === CHAT_PEEK_METHOD || (method in toolDefinitions && toolDefinitions[method as Method].readOnly);
 const errorMessage = (err: unknown) => (err instanceof Error ? err.message : String(err));
 const browserWaitOf = (params: unknown) => {
   const timeoutMs = (params as { timeoutMs?: unknown } | null | undefined)?.timeoutMs;
@@ -103,6 +123,9 @@ export class ExtensionBridge {
   private upstreamBrowsers: HelloMessage[] = [];
 
   private pending = new Map<string, Pending>();
+  private expected = new Map<string, ExpectedInstance>();
+  private reloading = new WeakSet<WebSocket>();
+  private changeListeners = new Set<() => void>();
   private readonly log: (msg: string) => void;
 
   constructor(private readonly opts: BridgeOptions) {
@@ -123,6 +146,8 @@ export class ExtensionBridge {
     this.stopped = true;
     clearTimeout(this.retryTimer);
     clearTimeout(this.broadcastTimer);
+    this.expected.clear();
+    this.notifyChange();
     this.failPending(new NotConnectedError('Bridge stopped'));
     this.upstream?.terminate();
     for (const client of [...(this.wss?.clients ?? []), ...this.extensions.keys(), ...this.relays.keys()]) client.terminate();
@@ -136,25 +161,103 @@ export class ExtensionBridge {
     return { state: browsers.length ? 'connected' : 'listening', role: this.role, port, browsers };
   }
 
-  request(
+  async request(
     browser: string,
     method: string,
     params: unknown,
     agent: AgentInfo | null = this.opts.agentInfo?.() ?? null,
     instance?: string,
   ): Promise<unknown> {
-    if (this.role === 'relay' && this.upstream) return this.send(this.upstream, method, params, agent, { browser, instance });
-    if (this.role !== 'host') return Promise.reject(new NotConnectedError(this.error ?? notConnected(browser)));
-    try {
-      const socket = this.pick(browser, instance);
-      const hello = this.extensions.get(socket);
-      this.recordActivity(agent, browser, method, hello);
-      return this.send(socket, method, params, agent).catch((err: unknown) => {
-        throw hello && method in toolDefinitions && errorMessage(err) === `Unknown method: ${method}` ? new Error(missingToolMessage(hello, toolLabel(browser, method), this.opts.version)) : err;
-      });
-    } catch (err) {
-      return Promise.reject(err);
+    for (let attempt = 1; ; attempt++) {
+      await this.ready(browser);
+      try {
+        return await this.attempt(browser, method, params, agent, instance, attempt === 1);
+      } catch (err) {
+        if (!(err instanceof ConnectionLostError) || this.stopped) throw err;
+        if (!isRetryable(method)) {
+          throw new ConnectionLostError(
+            `${err.message} It was running ${toolLabel(browser, method)}, which may or may not have taken effect; check before trying again.`,
+          );
+        }
+        if (attempt >= MAX_ATTEMPTS) throw err;
+        this.log(`Retrying ${method} after the connection to ${browser} was lost`);
+      }
     }
+  }
+
+  async ready(browser: string): Promise<void> {
+    for (let deadline = this.reconnectDeadline(browser); deadline !== undefined; deadline = this.reconnectDeadline(browser)) {
+      await this.nextChange(deadline - Date.now());
+    }
+  }
+
+  private async attempt(browser: string, method: string, params: unknown, agent: AgentInfo | null, instance: string | undefined, record: boolean) {
+    if (this.role === 'relay' && this.upstream) return this.send(this.upstream, method, params, agent, { browser, instance });
+    if (this.role !== 'host') throw new NotConnectedError(this.error ?? notConnected(browser));
+    const socket = this.pick(browser, instance);
+    const hello = this.extensions.get(socket);
+    if (record) this.recordActivity(agent, browser, method, hello);
+    try {
+      return await this.send(socket, method, params, agent);
+    } catch (err) {
+      throw hello && method in toolDefinitions && errorMessage(err) === `Unknown method: ${method}` ? new Error(missingToolMessage(hello, toolLabel(browser, method), this.opts.version)) : err;
+    }
+  }
+
+  private currentBrowsers(): HelloMessage[] {
+    if (this.role === 'host') return this.connectedBrowsers().map(([, hello]) => hello);
+    if (this.role === 'relay') return this.upstreamBrowsers;
+    return [];
+  }
+
+  private reconnectDeadline(browser: string): number | undefined {
+    const now = Date.now();
+    const current = this.currentBrowsers();
+    let deadline: number | undefined;
+    for (const [key, entry] of this.expected) {
+      if (entry.until <= now || current.some((hello) => instanceKey(hello) === key)) {
+        this.expected.delete(key);
+        continue;
+      }
+      if (entry.browser === browser) deadline = Math.max(deadline ?? 0, entry.until);
+    }
+    return deadline;
+  }
+
+  private expect(instance: { browser: string; instanceId?: string }, waitMs: number) {
+    if (this.stopped || waitMs <= 0) return;
+    const until = Date.now() + waitMs;
+    const key = instanceKey(instance);
+    const previous = this.expected.get(key);
+    if (previous && previous.until >= until) return;
+    this.expected.set(key, { browser: instance.browser, ...(instance.instanceId !== undefined && { instanceId: instance.instanceId }), until });
+  }
+
+  private reconnecting(): ReconnectingInstance[] {
+    const now = Date.now();
+    return [...this.expected.values()]
+      .filter((entry) => entry.until > now)
+      .map((entry) => ({
+        browser: entry.browser,
+        ...(entry.instanceId !== undefined && { instanceId: entry.instanceId }),
+        waitMs: entry.until - now,
+      }));
+  }
+
+  private nextChange(ms: number): Promise<void> {
+    return new Promise((resolve) => {
+      const done = () => {
+        clearTimeout(timer);
+        this.changeListeners.delete(done);
+        resolve();
+      };
+      const timer = setTimeout(done, Math.max(0, ms));
+      this.changeListeners.add(done);
+    });
+  }
+
+  private notifyChange() {
+    for (const listener of [...this.changeListeners]) listener();
   }
 
   private pick(browser: string, instance?: string): WebSocket {
@@ -220,9 +323,11 @@ export class ExtensionBridge {
 
   private broadcastAgents() {
     const message: ServerToExtension = { type: 'agents', agents: this.agents() };
-    for (const [socket] of this.connectedBrowsers()) {
-      if (socket.readyState === WebSocket.OPEN) socket.send(JSON.stringify(message));
-    }
+    for (const [socket] of this.connectedBrowsers()) this.toExtension(socket, message);
+  }
+
+  private toExtension(socket: WebSocket, message: ServerToExtension) {
+    if (socket.readyState === WebSocket.OPEN) socket.send(JSON.stringify(message));
   }
 
   private announceAgent(upstream: WebSocket) {
@@ -266,6 +371,7 @@ export class ExtensionBridge {
     };
     const browserWait = browserWaitOf(params);
     const limitMs = browserWait === undefined ? this.timeoutMs : Math.max(this.timeoutMs, browserWait + RESPONSE_MARGIN_MS);
+    if (socket.readyState !== WebSocket.OPEN) return Promise.reject(new ConnectionLostError('The connection to the browser closed.'));
     return new Promise((resolve, reject) => {
       const timer = setTimeout(() => {
         this.pending.delete(id);
@@ -344,7 +450,10 @@ export class ExtensionBridge {
         this.role = 'host';
         this.error = undefined;
         this.boundPort = typeof addr === 'object' && addr ? addr.port : this.port;
+        wss.removeAllListeners('error');
+        wss.on('error', (err) => this.log(`Bridge server error: ${errorMessage(err)}`));
         this.log(`Hosting the bridge on ws://${this.hostname}:${this.boundPort}`);
+        this.notifyChange();
         resolve(this.boundPort);
       });
       wss.on('connection', (socket, req) => {
@@ -379,6 +488,7 @@ export class ExtensionBridge {
         this.boundPort = this.port;
         this.log(`Another agent session hosts the bridge; relaying through it on port ${this.port}`);
         this.announceAgent(ws);
+        this.notifyChange();
         resolve();
       });
       ws.on('message', (raw) => {
@@ -388,20 +498,25 @@ export class ExtensionBridge {
       });
       ws.on('close', () => {
         if (this.upstream !== ws) return;
+        for (const hello of this.upstreamBrowsers) this.expect(hello, this.opts.hostChangeGraceMs ?? HOST_CHANGE_GRACE_MS);
         this.upstream = undefined;
         this.upstreamBrowsers = [];
         this.role = undefined;
         this.error = 'The agent session hosting the bridge exited; taking over.';
-        this.failPending(new NotConnectedError('The agent session hosting the bridge exited; please retry.'), ws);
+        this.failPending(new ConnectionLostError('The agent session hosting the bridge exited.'), ws);
         this.log('Bridge host went away; re-establishing');
+        this.notifyChange();
         this.scheduleEstablish(Math.random() * 300);
       });
     });
   }
 
   private handleHostMessage(upstream: WebSocket, msg: HostToRelay) {
-    if (msg.type === 'status') this.upstreamBrowsers = msg.extensions ?? (msg.extension ? [msg.extension] : []);
-    else if (msg.type === 'handover') void this.takeOver(upstream);
+    if (msg.type === 'status') {
+      this.upstreamBrowsers = msg.extensions ?? (msg.extension ? [msg.extension] : []);
+      for (const entry of msg.reconnecting ?? []) this.expect(entry, entry.waitMs);
+      this.notifyChange();
+    } else if (msg.type === 'handover') void this.takeOver(upstream);
     else this.settle(msg);
   }
 
@@ -473,6 +588,7 @@ export class ExtensionBridge {
   private attachRelay(socket: WebSocket) {
     this.relays.set(socket, undefined);
     this.log(`Agent session joined (${this.relays.size} relayed)`);
+    socket.on('error', (err) => this.log(`Relay connection error: ${errorMessage(err)}`));
     this.sendStatus(socket);
     socket.on('message', (raw) => {
       const msg = this.parse(raw, relayToHost);
@@ -503,7 +619,7 @@ export class ExtensionBridge {
 
   private sendStatus(socket: WebSocket) {
     const browsers = this.connectedBrowsers().map(([, hello]) => hello);
-    this.reply(socket, { type: 'status', extension: browsers[0] ?? null, extensions: browsers });
+    this.reply(socket, { type: 'status', extension: browsers[0] ?? null, extensions: browsers, reconnecting: this.reconnecting() });
   }
 
   private broadcastStatus() {
@@ -512,6 +628,7 @@ export class ExtensionBridge {
 
   private attachExtension(socket: WebSocket) {
     this.extensions.set(socket, undefined);
+    socket.on('error', (err) => this.log(`Extension connection error: ${errorMessage(err)}`));
 
     socket.on('message', (raw) => {
       const msg = this.parse(raw, extensionToServer);
@@ -520,17 +637,23 @@ export class ExtensionBridge {
         case 'hello':
           if (msg.protocolVersion !== PROTOCOL_VERSION) {
             this.log(`Extension speaks protocol v${msg.protocolVersion}, server expects v${PROTOCOL_VERSION}; update whichever is older.`);
-            socket.close(4001, 'Protocol version mismatch');
+            socket.close(PROTOCOL_MISMATCH_CLOSE_CODE, 'Protocol version mismatch');
             return;
           }
           this.replaceSameInstance(socket, msg);
           this.extensions.set(socket, msg);
+          this.expected.delete(instanceKey(msg));
           this.log(`Extension ${msg.extensionVersion} connected from ${describeInstance(msg)}`);
-          socket.send(JSON.stringify({ type: 'agents', agents: this.agents() } satisfies ServerToExtension));
+          this.toExtension(socket, { type: 'agents', agents: this.agents() });
           this.broadcastStatus();
+          this.notifyChange();
           return;
         case 'ping':
-          socket.send(JSON.stringify({ type: 'pong' } satisfies ServerToExtension));
+          this.toExtension(socket, { type: 'pong' });
+          return;
+        case 'reloading':
+          this.reloading.add(socket);
+          this.log('Extension is reloading to install an update');
           return;
         case 'response':
           this.settle(msg);
@@ -540,11 +663,21 @@ export class ExtensionBridge {
     socket.on('close', () => {
       const hello = this.extensions.get(socket);
       if (!this.extensions.delete(socket)) return;
-      this.failPending(new NotConnectedError(`The browser extension in ${hello?.browser ?? 'the browser'} disconnected.`), socket);
+      const reloading = this.reloading.has(socket);
+      if (hello) this.expect(hello, this.graceAfterClose(reloading));
+      const reason = reloading ? 'reloaded to install an update' : 'disconnected';
+      this.failPending(new ConnectionLostError(`The browser extension in ${hello?.browser ?? 'the browser'} ${reason}.`), socket);
       if (!hello) return;
       this.broadcastStatus();
-      this.log(`Extension disconnected from ${hello.browser}`);
+      this.notifyChange();
+      this.log(`Extension ${reason} from ${hello.browser}`);
     });
+  }
+
+  private graceAfterClose(reloading: boolean) {
+    if (reloading) return this.opts.reloadGraceMs ?? RELOAD_GRACE_MS;
+    if (this.role === undefined) return this.opts.hostChangeGraceMs ?? HOST_CHANGE_GRACE_MS;
+    return this.opts.reconnectGraceMs ?? RECONNECT_GRACE_MS;
   }
 
   private replaceSameInstance(socket: WebSocket, incoming: HelloMessage) {
@@ -552,7 +685,7 @@ export class ExtensionBridge {
       if (previous === socket || hello.browser !== incoming.browser || hello.instanceId !== incoming.instanceId) continue;
       this.extensions.delete(previous);
       previous.close(REPLACED_CLOSE_CODE, 'Replaced by a newer connection');
-      this.failPending(new NotConnectedError('Extension reconnected; please retry.'), previous);
+      this.failPending(new ConnectionLostError('The extension reconnected.'), previous);
     }
   }
 }

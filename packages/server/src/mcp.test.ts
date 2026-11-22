@@ -31,7 +31,7 @@ afterEach(async () => {
 type Request = (browser: string, method: string, params: unknown, agent: unknown, instance?: string) => Promise<unknown>;
 
 async function connect(request: Request = async () => null, status: () => BridgeStatus = () => LISTENING) {
-  const bridge = { status, request: vi.fn(request) };
+  const bridge = { status, request: vi.fn(request), ready: async () => {} };
   const server = createMcpServer(bridge as unknown as ExtensionBridge, '1.2.3');
   const client = new Client({ name: 'contract-test', version: '0.0.0' });
   const [clientTransport, serverTransport] = InMemoryTransport.createLinkedPair();
@@ -151,7 +151,7 @@ describe('createMcpServer', () => {
 
   it('reports progress while a call waits, when the client asks for it', async () => {
     let answer: (value: unknown) => void = () => {};
-    const bridge = { status: () => LISTENING, request: vi.fn(() => new Promise((resolve) => (answer = resolve))) };
+    const bridge = { status: () => LISTENING, request: vi.fn(() => new Promise((resolve) => (answer = resolve))), ready: async () => {} };
     const server = createMcpServer(bridge as unknown as ExtensionBridge, '1.2.3', { progressIntervalMs: 20 });
     const client = new Client({ name: 'contract-test', version: '0.0.0' });
     const [clientTransport, serverTransport] = InMemoryTransport.createLinkedPair();

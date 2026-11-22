@@ -108,12 +108,14 @@ export class BrowserChat {
   }
 
   async send(text: string, instance: string | undefined): Promise<void> {
+    await this.bridge.ready(CHAT_BROWSER);
     const target = this.resolve(instance);
     await this.call(target, CHAT_SEND_METHOD, { text });
     this.target = target;
   }
 
   async receive(instance: string | undefined, timeoutMs: number, progress?: Progress): Promise<ChatInbox> {
+    await this.bridge.ready(CHAT_BROWSER);
     const target = this.resolve(instance);
     const deadline = Date.now() + timeoutMs;
     for (let round = 0; ; round++) {

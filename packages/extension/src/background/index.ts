@@ -95,7 +95,7 @@ listenForPageToolEvents();
 
 const openWelcome = () => chrome.tabs.create({ url: chrome.runtime.getURL(WELCOME_PAGE) });
 
-applyUpdatesWhenIdle(chrome.runtime, () => client.whenIdle());
+applyUpdatesWhenIdle(chrome.runtime, client);
 
 chrome.runtime.onInstalled.addListener(({ reason, previousVersion }) => {
   if (reason === 'install') {
