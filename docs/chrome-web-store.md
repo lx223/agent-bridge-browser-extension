@@ -94,3 +94,17 @@ Which countries can install the extension is a separate setting under Distributi
 6. Verify that the dashboard reports Pending review. Submission does not mean the update is already published.
 
 The MCP server is released separately through the Publish npm package workflow and any approval required on npm's staged packages page, after the new extension version is live in every store it is published in. See [npm publishing](npm-publishing.md#release-order) for the release order and its trusted publisher configuration.
+
+## 0.7.0 submission
+
+Submitted on 22 November 2026 with automatic publication after approval. The dashboard confirmed that the extension was submitted for review. Distribution remains unlisted.
+
+- Official package: [Release v0.7.0](https://github.com/lx223/agent-bridge-browser-extension/releases/tag/v0.7.0), built from main commit `3aa7439785b2a8628e15ebe4a8ac29420cc15d42`.
+- ZIP SHA-256: `d341681c98744aae6a837850dd55e9d0d6e149e81b909117ffc2b16f60a9ca7e`.
+- Manifest version and permission list verified before upload; permissions match 0.6.0.
+- Refreshed four global English screenshots, both promo tiles and the store icon. The listing uses the English description as the fallback for other languages. A promo video was not uploaded.
+- Updated the English description with browser chat, added the project homepage and issue tracker, expanded the storage explanation and disclosed Personal communications for chat. The sidePanel explanation is recorded in the submission copy.
+- Added reviewer instructions with the matching 0.7.0 Claude Desktop bundle and a separate npm option.
+- Validation: type checking and 587 unit tests passed locally. The release PR passed unit, build, browser end-to-end and Safari build checks. The official Publish Release workflow completed successfully.
+
+The MCP server's npm publication follows the store release order described above.

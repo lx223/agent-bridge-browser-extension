@@ -1,6 +1,6 @@
 # Chrome Web Store Submission
 
-Copy for the dashboard. The data usage disclosures record the 0.3.0 submission. Review against the package and [privacy policy](../../PRIVACY.md) before each submission. Release procedure: [Chrome Web Store releases](../../docs/chrome-web-store.md).
+Copy for the dashboard. The data usage disclosures record the 0.7.0 submission. Review against the package and [privacy policy](../../PRIVACY.md) before each submission. Release procedure: [Chrome Web Store releases](../../docs/chrome-web-store.md).
 
 ## Description (16,000 char limit)
 
@@ -47,7 +47,7 @@ Read and update Chrome tab groups, including names, colours, collapsed state and
 
 ### storage
 
-Store the previous tab and group layout in session storage for undo. Local storage retains the browser instance identifier, analytics preference, random analytics installation identifier and analytics timing state across service-worker restarts.
+Store the previous tab and group layout and agent chat conversations in session storage for undo and in-browser chat. Local storage retains the browser instance identifier, analytics preference, random analytics installation identifier and analytics timing state across service-worker restarts.
 
 ### history
 
@@ -99,13 +99,14 @@ Extension scripts and dependencies are bundled in the package. PostHog is used f
 
 ## Data Usage Disclosures
 
-The submitted 0.3.0 dashboard selected Web history, User activity and Website content:
+The submitted 0.7.0 dashboard selected Web history, User activity, Website content and Personal communications:
 
 - Web history: tab titles, URLs and window/tab metadata are returned to the connected agent through the local bridge.
 - User activity: release builds send usage events, tool names, success/failure, timing and counts to PostHog EU. Analytics excludes tab titles, URLs, page contents and tool parameters/results.
 - Website content: page tools return accessibility trees, form values, screenshots, JavaScript results and DevTools Protocol results to the connected agent.
+- Personal communications: agent chat messages are kept in Chrome session storage and user replies are returned to the connected agent through the local bridge. Chat text is excluded from analytics.
 
-Review additional categories before the next submission: analytics uses a persistent random installation identifier and the service receives an IP address. Page tools can also return personal communications, account details, financial or health information, authentication information and other sensitive data present in the requested page. The three selections above record what was submitted, not a claim that other categories can never be processed.
+Review additional categories before the next submission: analytics uses a persistent random installation identifier and the service receives an IP address. Page tools can also return account details, financial or health information, authentication information and other sensitive data present in the requested page. The four selections above record what was submitted, not a claim that other categories can never be processed.
 
 Analytics is on by default in configured release builds and can be disabled on the setup page. Browser information goes to the local bridge and the user's chosen agent; that agent or its model provider may transmit or retain it under its own policies.
 
@@ -115,30 +116,19 @@ The dashboard declarations state that data is not sold or transferred outside ap
 
 ## Reviewer Test Instructions
 
-No extension account is required. Use Chrome 116 or later and Node.js 20 or later. An MCP-compatible agent and the separate local bridge server are required.
+No extension account or login is required. The extension needs a separate local MCP bridge and an MCP-compatible agent.
 
-1. Install the extension and open its toolbar setup page.
-2. Add the server to your agent's MCP configuration:
+1. Install this extension in Chrome 116 or later. Open its toolbar setup page.
+2. For the matching 0.7.0 server, download [the Claude Desktop bundle](https://github.com/lx223/agent-bridge-browser-extension/releases/download/v0.7.0/agent-browser-bridge.mcpb) and open it in Claude Desktop. Alternatively, with Node.js 20 or later, configure an MCP client to run `npx -y agent-browser-bridge-mcp@latest` (the npm server is released separately).
+3. Start the agent and confirm that the setup page shows Connected.
+4. Open https://example.com and ask the agent to list Chrome tabs. Confirm the page title and URL appear.
+5. Ask it to preview a tab grouping plan, apply it, and undo it. Confirm the groups and tab positions change and restore.
+6. Ask it to inspect the example.com page and follow its More information link. Chrome shows a debugging banner during page control. Cancel the banner to detach.
+7. With the matching 0.7.0 server, ask to continue the conversation in the browser. Read and reply in the extension side panel. Ask the agent to request confirmation in the page and respond to the popover.
+8. Open the extension's Options (setup page) to test profile naming and the Share anonymous usage statistics control.
 
-   ```json
-   {
-     "mcpServers": {
-       "agent-browser-bridge": {
-         "command": "npx",
-         "args": ["-y", "agent-browser-bridge-mcp@0.3.0"]
-       }
-     }
-   }
-   ```
+Page control cannot operate on chrome:// pages, extension pages, DevTools or the Chrome Web Store. WebMCP is optional and needs a compatible page and browser; ordinary inspection and clicks do not require it.
 
-3. Restart the agent. The setup page and toolbar indicator show a connected agent.
-4. Open https://example.com in a tab. Ask the agent to list Chrome tabs and confirm the title and URL appear.
-5. Ask the agent to preview a tab grouping plan, apply it, then undo it. Confirm groups and tab positions change and restore.
-6. Ask the agent to inspect the example.com tab with `chrome_snapshot_page`, then click its More information link using the returned reference. Chrome displays a debugging banner while attached.
-7. Call `chrome_detach_debugger` for that tab and confirm the banner disappears.
-8. Open the extension options (the setup page) and turn off Share anonymous usage statistics to test the analytics control.
-
-Page control cannot operate on chrome:// pages, extension pages, DevTools or the Chrome Web Store. WebMCP tools require a page that registers them and a Chrome build with WebMCP enabled; they are not required for ordinary page inspection or clicks.
 
 ## Permission Audit
 
