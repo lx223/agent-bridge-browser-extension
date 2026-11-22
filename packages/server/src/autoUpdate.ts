@@ -6,6 +6,7 @@ import { newSessionEnv } from './session.ts';
 import pkg from '../package.json' with { type: 'json' };
 
 const log = (msg: string) => process.stderr.write(`[agent-browser-bridge] ${msg}\n`);
+const describe = (reason: unknown) => (reason instanceof Error ? (reason.stack ?? reason.message) : String(reason));
 const sessionEnv = newSessionEnv();
 
 const workerCommand = (version: string | null): [string, string[]] =>
@@ -41,4 +42,7 @@ export function runLauncher() {
   launcher.scheduleUpdateChecks();
   process.on('SIGINT', () => launcher.shutdown());
   process.on('SIGTERM', () => launcher.shutdown());
+  process.stdout.on('error', () => launcher.shutdown());
+  process.on('uncaughtException', (err) => log(`Unexpected error in the launcher: ${err.stack ?? err.message}`));
+  process.on('unhandledRejection', (reason) => log(`Unhandled rejection in the launcher: ${describe(reason)}`));
 }

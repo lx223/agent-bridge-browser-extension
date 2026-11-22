@@ -121,6 +121,8 @@ function harness(make: (version: string | null) => FakeWorker = (version) => fak
     initTimeoutMs: 200,
     drainTimeoutMs: 500,
     stopTimeoutMs: 200,
+    restartDelayMs: 20,
+    maxRestartDelayMs: 100,
   });
   launchers.push(launcher);
   return {
@@ -270,10 +272,84 @@ describe('Launcher', () => {
     expect(h.exits).toEqual([]);
   });
 
-  it('exits with the server when it stops on its own', async () => {
-    const h = await initializedHarness();
-    h.workers[0]!.exit(3);
-    await expect.poll(() => h.exits).toEqual([3]);
+  describe('when the server stops on its own', () => {
+    it('restarts it without the client reconnecting', async () => {
+      const h = await initializedHarness();
+      h.workers[0]!.exit(3);
+      await expect.poll(() => h.workers.length).toBe(2);
+      expect(h.spawned).toEqual([null, null]);
+      await expect.poll(() => h.workers[1]!.received.map((msg) => msg.method)).toEqual(['initialize', 'notifications/initialized']);
+      expect(h.workers[1]!.received[0]).toMatchObject({ id: LAUNCHER_INIT_ID, params: initialize.params });
+      h.send(call(5));
+      await expect.poll(() => h.output.find((msg) => msg.id === 5)).toMatchObject({ result: { from: '1.0.0' } });
+      expect(h.exits).toEqual([]);
+      expect(h.output.filter((msg) => msg.id === LAUNCHER_INIT_ID)).toEqual([]);
+    });
+
+    it('answers a tool call it cut off with an error and repeats other requests', async () => {
+      let spawnedSoFar = 0;
+      const h = await initializedHarness((version) => fakeWorker(version ?? '1.0.0', { holdCalls: spawnedSoFar++ === 0 }));
+      const [first] = h.workers;
+      h.send(call(1));
+      h.send({ id: 2, method: 'tools/list' });
+      await expect.poll(() => first!.held.length).toBe(2);
+      first!.exit(1);
+      await expect.poll(() => h.output.find((msg) => msg.id === 1)).toMatchObject({ error: { message: expect.stringMatching(/may or may not have taken effect/) } });
+      await expect.poll(() => h.output.find((msg) => msg.id === 2)).toMatchObject({ result: { method: 'tools/list' } });
+      expect(h.workers[1]!.received.some((msg) => msg.id === 1)).toBe(false);
+    });
+
+    it('holds requests that arrive while it restarts and sends them on', async () => {
+      const h = await initializedHarness();
+      h.workers[0]!.exit(1);
+      await new Promise((resolve) => setTimeout(resolve, 5));
+      h.send(call(6));
+      await expect.poll(() => h.output.find((msg) => msg.id === 6)).toMatchObject({ result: { from: '1.0.0' } });
+      expect(h.workers).toHaveLength(2);
+      expect(h.workers[0]!.received.some((msg) => msg.id === 6)).toBe(false);
+    });
+
+    it('answers held requests with an error when a restart attempt fails, and keeps trying', async () => {
+      let spawnedSoFar = 0;
+      const h = await initializedHarness((version) => fakeWorker(version ?? '1.0.0', { silent: spawnedSoFar++ === 1 }));
+      h.workers[0]!.exit(1);
+      await new Promise((resolve) => setTimeout(resolve, 5));
+      h.send(call(7));
+      await expect.poll(() => h.output.find((msg) => msg.id === 7)).toMatchObject({ error: { message: expect.stringMatching(/restarting/) } });
+      await expect.poll(() => h.workers.length).toBe(3);
+      h.send(call(8));
+      await expect.poll(() => h.output.find((msg) => msg.id === 8)).toMatchObject({ result: { from: '1.0.0' } });
+    });
+
+    it('falls back to the bundled version when an updated server keeps stopping', async () => {
+      const h = await initializedHarness((version) => fakeWorker(version ?? '1.0.0'));
+      await h.launcher.upgradeTo('1.1.0');
+      h.workers[1]!.exit(1);
+      await expect.poll(() => h.launcher.version).toBe('1.1.0');
+      await expect.poll(() => h.workers.length).toBe(3);
+      await expect.poll(() => h.workers[2]!.received.length).toBe(2);
+      h.workers[2]!.exit(1);
+      await expect.poll(() => h.spawned).toEqual([null, '1.1.0', '1.1.0', null]);
+      await expect.poll(() => h.launcher.version).toBe('1.0.0');
+      await expect.poll(() => h.output.at(-1)).toEqual({ jsonrpc: '2.0', method: 'notifications/tools/list_changed' });
+      h.send(call(9));
+      await expect.poll(() => h.output.find((msg) => msg.id === 9)).toMatchObject({ result: { from: '1.0.0' } });
+    });
+
+    it('restarts it before the client has initialized', async () => {
+      const h = harness();
+      h.workers[0]!.exit(1);
+      await expect.poll(() => h.workers.length).toBe(2);
+      h.send(initialize);
+      await expect.poll(() => h.output.find((msg) => msg.id === 0)).toMatchObject({ result: {} });
+    });
+
+    it('exits cleanly when the client goes away during a restart', async () => {
+      const h = await initializedHarness();
+      h.workers[0]!.exit(1);
+      h.endInput();
+      await expect.poll(() => h.exits).toEqual([0]);
+    });
   });
 
   it('stops the server and exits cleanly when the client goes away', async () => {

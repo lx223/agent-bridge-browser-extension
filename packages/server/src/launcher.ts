@@ -22,6 +22,9 @@ export interface LauncherOptions {
   initTimeoutMs?: number;
   drainTimeoutMs?: number;
   stopTimeoutMs?: number;
+  restartDelayMs?: number;
+  maxRestartDelayMs?: number;
+  stableAfterMs?: number;
 }
 
 type JsonRpcId = string | number;
@@ -32,17 +35,30 @@ interface JsonRpcMessage {
   params?: { requestId?: JsonRpcId } & Record<string, unknown>;
 }
 
+interface ClientRequest {
+  line: string;
+  method: string;
+}
+
 interface Worker {
   process: WorkerProcess;
+  spawnVersion: string | null;
   version: string;
   state: 'warming' | 'active' | 'draining' | 'gone';
-  clientRequests: Set<string>;
+  clientRequests: Map<string, ClientRequest>;
   serverRequests: Set<string>;
+  activeSince?: number;
   onInitialized?: (ok: boolean) => void;
 }
 
 export const LAUNCHER_INIT_ID = 'agent-browser-bridge-launcher-initialize';
-const RESTARTED_DURING_UPDATE = -32603;
+const INTERNAL_ERROR = -32603;
+const UPDATED_MESSAGE = 'The browser bridge server was updated while handling this request; please retry.';
+const RESTARTED_DURING_TOOL_MESSAGE =
+  'The browser bridge server restarted while running this tool, so it may or may not have taken effect; check before trying again.';
+const RESTARTING_MESSAGE = 'The browser bridge server is restarting after an error; please retry in a few seconds.';
+
+const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const keyOf = (id: JsonRpcId) => `${typeof id}:${id}`;
 const isRequestId = (id: unknown): id is JsonRpcId => typeof id === 'string' || typeof id === 'number';
@@ -62,13 +78,17 @@ export class Launcher {
   private initializeRequest?: JsonRpcMessage;
   private initializedNotification?: string;
   private updating = false;
+  private restarting = false;
   private closing = false;
+  private crashStreak = 0;
+  private readonly queued: string[] = [];
   private readonly timers: NodeJS.Timeout[] = [];
   private readonly log: (msg: string) => void;
 
   constructor(private readonly opts: LauncherOptions) {
     this.log = opts.log ?? (() => {});
     this.active = this.startWorker(null, opts.version, 'active');
+    this.active.activeSince = Date.now();
     createInterface({ input: opts.input, crlfDelay: Infinity }).on('line', (line) => this.fromClient(line));
     opts.input.on('end', () => this.shutdown());
     opts.input.on('close', () => this.shutdown());
@@ -87,15 +107,16 @@ export class Launcher {
   }
 
   async checkForUpdate(): Promise<boolean> {
-    if (this.updating || this.closing || !this.initializeRequest) return false;
+    if (this.updating || this.restarting || this.closing || !this.initializeRequest) return false;
     const latest = await this.opts.latestVersion().catch(() => undefined);
     if (!latest || !isNewerVersion(latest, this.active.version)) return false;
     return this.upgradeTo(latest);
   }
 
   async upgradeTo(version: string): Promise<boolean> {
-    if (this.updating || this.closing || !this.initializeRequest) return false;
+    if (this.updating || this.restarting || this.closing || !this.initializeRequest) return false;
     this.updating = true;
+    let switched = false;
     try {
       this.log(`Starting agent-browser-bridge-mcp ${version} alongside ${this.active.version}`);
       const next = this.startWorker(version, version, 'warming');
@@ -106,21 +127,74 @@ export class Launcher {
         return false;
       }
       const previous = this.active;
-      next.state = 'active';
-      this.active = next;
-      this.drain(previous);
+      this.activate(next);
+      if (previous.state === 'active') this.drain(previous);
       this.toClient(JSON.stringify({ jsonrpc: '2.0', method: 'notifications/tools/list_changed' }));
       this.log(`Switched to agent-browser-bridge-mcp ${version}`);
+      switched = true;
       return true;
     } finally {
       this.updating = false;
+      if (!switched && this.active.state === 'gone' && !this.closing) void this.restart(this.active);
+    }
+  }
+
+  private activate(worker: Worker) {
+    worker.state = 'active';
+    worker.activeSince = Date.now();
+    this.active = worker;
+    for (const line of this.queued.splice(0)) this.fromClient(line);
+  }
+
+  private async restart(crashed: Worker) {
+    if (this.restarting || this.closing) return;
+    this.restarting = true;
+    try {
+      const quickCrash = crashed.activeSince !== undefined && Date.now() - crashed.activeSince < (this.opts.stableAfterMs ?? 60_000);
+      this.crashStreak = quickCrash ? this.crashStreak + 1 : 0;
+      for (let attempt = 0; !this.closing; attempt++) {
+        const failures = this.crashStreak + attempt;
+        if (failures > 0) {
+          const base = this.opts.restartDelayMs ?? 1_000;
+          await delay(Math.min(base * 2 ** (failures - 1), this.opts.maxRestartDelayMs ?? 30_000));
+          if (this.closing) return;
+        }
+        const spawnVersion = failures < 2 ? crashed.spawnVersion : null;
+        const version = spawnVersion ?? this.opts.version;
+        this.log(`Restarting agent-browser-bridge-mcp ${version}`);
+        if (!this.initializeRequest || this.queued.some((line) => parse(line)?.method === 'initialize')) {
+          this.activate(this.startWorker(spawnVersion, version, 'active'));
+          return;
+        }
+        const next = this.startWorker(spawnVersion, version, 'warming');
+        if (await this.warmUp(next)) {
+          this.activate(next);
+          if (version !== crashed.version) this.toClient(JSON.stringify({ jsonrpc: '2.0', method: 'notifications/tools/list_changed' }));
+          this.log(`Restarted agent-browser-bridge-mcp ${version}`);
+          return;
+        }
+        next.state = 'gone';
+        next.process.kill();
+        this.log(`agent-browser-bridge-mcp ${version} did not start; trying again`);
+        this.rejectQueued(RESTARTING_MESSAGE);
+      }
+    } finally {
+      this.restarting = false;
+    }
+  }
+
+  private rejectQueued(message: string) {
+    for (const line of this.queued.splice(0)) {
+      const msg = parse(line);
+      if (msg?.method && isRequestId(msg.id)) this.toClient(JSON.stringify({ jsonrpc: '2.0', id: msg.id, error: { code: INTERNAL_ERROR, message } }));
     }
   }
 
   private startWorker(spawnVersion: string | null, version: string, state: Worker['state']): Worker {
     const child = this.opts.spawnWorker(spawnVersion);
-    const worker: Worker = { process: child, version, state, clientRequests: new Set(), serverRequests: new Set() };
+    const worker: Worker = { process: child, spawnVersion, version, state, clientRequests: new Map(), serverRequests: new Set() };
     child.stdin.on('error', () => {});
+    child.stdout.on('error', () => {});
     createInterface({ input: child.stdout, crlfDelay: Infinity }).on('line', (line) => this.fromWorker(worker, line));
     void child.exited.then((code) => this.workerExited(worker, code));
     return worker;
@@ -172,17 +246,21 @@ export class Launcher {
     const msg = parse(line);
     if (msg?.method === 'initialize') this.initializeRequest = msg;
     if (msg?.method === 'notifications/initialized') this.initializedNotification = line;
-    this.send(this.routeClientMessage(msg), line);
+    if (this.active.state !== 'active') {
+      this.queued.push(line);
+      return;
+    }
+    this.send(this.routeClientMessage(msg, line), line);
   }
 
-  private routeClientMessage(msg: JsonRpcMessage | undefined): Worker {
+  private routeClientMessage(msg: JsonRpcMessage | undefined, line: string): Worker {
     if (!msg) return this.active;
     if (msg.method === 'notifications/cancelled' && isRequestId(msg.params?.requestId)) {
       return this.ownerOf(keyOf(msg.params.requestId), 'clientRequests') ?? this.active;
     }
     if (!isRequestId(msg.id)) return this.active;
     if (msg.method) {
-      this.active.clientRequests.add(keyOf(msg.id));
+      this.active.clientRequests.set(keyOf(msg.id), { line, method: msg.method });
       return this.active;
     }
     const owner = this.ownerOf(keyOf(msg.id), 'serverRequests') ?? this.active;
@@ -219,27 +297,47 @@ export class Launcher {
       return;
     }
     if (worker !== this.active) {
-      this.failOutstanding(worker);
+      this.failOutstanding(worker, UPDATED_MESSAGE);
       return;
     }
-    if (!this.closing) this.log(`agent-browser-bridge-mcp ${worker.version} exited with code ${code}`);
-    this.finish(code ?? 1);
+    if (this.closing) {
+      this.finish(0);
+      return;
+    }
+    this.log(`agent-browser-bridge-mcp ${worker.version} exited with code ${code}; restarting it`);
+    this.requeueOutstanding(worker);
+    if (!this.updating) void this.restart(worker);
   }
 
-  private failOutstanding(worker: Worker) {
-    for (const key of worker.clientRequests) {
-      const raw = key.slice(key.indexOf(':') + 1);
-      const id = key.startsWith('number:') ? Number(raw) : raw;
-      const error = { code: RESTARTED_DURING_UPDATE, message: 'The browser bridge server was updated while handling this request; please retry.' };
-      this.toClient(JSON.stringify({ jsonrpc: '2.0', id, error }));
+  private requeueOutstanding(worker: Worker) {
+    const replay: string[] = [];
+    for (const [key, request] of worker.clientRequests) {
+      if (request.method === 'tools/call') this.answerWithError(key, RESTARTED_DURING_TOOL_MESSAGE);
+      else replay.push(request.line);
     }
     worker.clientRequests.clear();
+    this.queued.unshift(...replay);
+  }
+
+  private failOutstanding(worker: Worker, message: string) {
+    for (const key of worker.clientRequests.keys()) this.answerWithError(key, message);
+    worker.clientRequests.clear();
+  }
+
+  private answerWithError(key: string, message: string) {
+    const raw = key.slice(key.indexOf(':') + 1);
+    const id = key.startsWith('number:') ? Number(raw) : raw;
+    this.toClient(JSON.stringify({ jsonrpc: '2.0', id, error: { code: INTERNAL_ERROR, message } }));
   }
 
   shutdown() {
     if (this.closing) return;
     this.closing = true;
     for (const timer of this.timers) clearTimeout(timer);
+    if (this.active.state === 'gone') {
+      this.finish(0);
+      return;
+    }
     for (const worker of [this.active, ...this.draining]) this.stopWorker(worker);
   }
 
@@ -254,6 +352,10 @@ export class Launcher {
   }
 
   private toClient(line: string) {
-    this.opts.output.write(`${line}\n`);
+    try {
+      this.opts.output.write(`${line}\n`);
+    } catch {
+      this.shutdown();
+    }
   }
 }

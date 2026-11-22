@@ -134,6 +134,7 @@ export function createMcpServer(bridge: ExtensionBridge, version: string, { prog
         async ({ instance, ...params }: { instance?: string }, extra: ToolExtra) => {
           const format = formatters['output' in def ? def.output : 'json'];
           try {
+            await bridge.ready(browser);
             const selected = selector.select(browser, instance);
             const result = format(await reportingProgress(extra, progressIntervalMs, bridge.request(browser, method, params, undefined, selected.instance)));
             return await withChatNote(selected.answeredBy ? { content: [...result.content, answeredBy(selected.answeredBy)] } : result);
