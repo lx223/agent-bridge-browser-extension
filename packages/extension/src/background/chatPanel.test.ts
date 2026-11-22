@@ -1,6 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import type { AgentInfo, AgentSession } from '@agent-browser-bridge/protocol';
 import { CHAT_PANEL_PORT, ChatPanel } from './chatPanel.ts';
+import { englishI18n } from '../test/englishI18n.ts';
 
 type Listener<T extends unknown[]> = (...args: T) => void;
 
@@ -15,6 +16,7 @@ function installChrome() {
   const connectListeners: Listener<[FakePort]>[] = [];
   const clickListeners: Listener<[string]>[] = [];
   const fake = {
+    i18n: englishI18n,
     storage: {
       session: {
         get: async (key: string) => (key in items ? { [key]: structuredClone(items[key]) } : {}),
@@ -77,7 +79,7 @@ describe('ChatPanel', () => {
     const panel = new ChatPanel();
     await panel.store.agentSays(agent('a'), 'What next?');
     expect(chrome.fake.action.setBadgeText).toHaveBeenLastCalledWith({ text: '1' });
-    await panel.handle({ type: 'CHAT_SEEN', sessionId: 'a' });
+    await panel.handle({ type: 'CHAT_SEEN', key: 'a' });
     expect(chrome.fake.action.setBadgeText).toHaveBeenLastCalledWith({ text: '' });
   });
 
@@ -87,7 +89,7 @@ describe('ChatPanel', () => {
     expect(chrome.fake.sidePanel.setPanelBehavior).toHaveBeenLastCalledWith({ openPanelOnActionClick: false });
     panel.agentsChanged([session('a')]);
     expect(chrome.fake.sidePanel.setPanelBehavior).toHaveBeenLastCalledWith({ openPanelOnActionClick: true });
-    await panel.handle({ type: 'CHAT_END', sessionId: 'a' });
+    await panel.handle({ type: 'CHAT_END', key: 'a' });
     expect(chrome.fake.sidePanel.setPanelBehavior).toHaveBeenLastCalledWith({ openPanelOnActionClick: false });
   });
 
@@ -123,12 +125,12 @@ describe('ChatPanel', () => {
 
   it('accepts only well-formed panel messages', async () => {
     const panel = new ChatPanel();
-    expect(panel.handles({ type: 'CHAT_POST', sessionId: 'a', text: 'hi' })).toBe(true);
-    expect(panel.handles({ type: 'CHAT_POST', sessionId: '', text: 'hi' })).toBe(false);
+    expect(panel.handles({ type: 'CHAT_POST', key: 'a', text: 'hi' })).toBe(true);
+    expect(panel.handles({ type: 'CHAT_POST', key: '', text: 'hi' })).toBe(false);
     expect(panel.handles({ type: 'GET_STATUS' })).toBe(false);
     await panel.store.agentSays(agent('a'), 'What next?');
-    await panel.handle({ type: 'CHAT_POST', sessionId: 'a', text: 'Group my tabs' });
-    await panel.handle({ type: 'CHAT_REMOVE', sessionId: 'a' });
+    await panel.handle({ type: 'CHAT_POST', key: 'a', text: 'Group my tabs' });
+    await panel.handle({ type: 'CHAT_REMOVE', key: 'a' });
     expect(await panel.store.conversations()).toEqual({});
   });
 });

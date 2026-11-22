@@ -1,10 +1,14 @@
 export interface PopoverContent {
   askId: string;
-  from: string;
+  heading: string;
   title?: string;
   message: string;
   confirmLabel: string;
   cancelLabel: string;
+  confirmedText: string;
+  cancelledText: string;
+  dragHint: string;
+  dir: 'ltr' | 'rtl';
 }
 
 export type PopoverAnswer = 'pending' | 'confirmed' | 'cancelled' | 'gone';
@@ -23,7 +27,7 @@ export function showPopover(content: PopoverContent): void {
     'all: initial',
     'position: fixed',
     'top: 16px',
-    'right: 16px',
+    `${content.dir === 'rtl' ? 'left' : 'right'}: 16px`,
     'z-index: 2147483647',
     'display: block',
     'width: min(340px, calc(100vw - 32px))',
@@ -132,8 +136,8 @@ export function showPopover(content: PopoverContent): void {
       .done[hidden] { display: none; }
       .done svg { width: 14px; height: 14px; color: var(--brand); }
     </style>
-    <section class="card" role="dialog" aria-modal="false" aria-labelledby="ask-from" aria-describedby="ask-message">
-      <div class="bar" title="Drag to move">
+    <section class="card" dir="${content.dir}" role="dialog" aria-modal="false" aria-labelledby="ask-from" aria-describedby="ask-message">
+      <div class="bar">
         <span class="mark" aria-hidden="true">
           <svg viewBox="0 0 128 128"><path d="M34 102 L64 26 L94 102 M45 76 H83" fill="none" stroke="#fff" stroke-width="17" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </span>
@@ -162,7 +166,8 @@ export function showPopover(content: PopoverContent): void {
   const confirm = find<HTMLButtonElement>('.confirm');
   const cancel = find<HTMLButtonElement>('.cancel');
 
-  find<HTMLElement>('.from').textContent = `${content.from} asks`;
+  bar.title = content.dragHint;
+  find<HTMLElement>('.from').textContent = content.heading;
   find<HTMLElement>('.message').textContent = content.message;
   if (content.title) {
     title.textContent = content.title;
@@ -181,7 +186,7 @@ export function showPopover(content: PopoverContent): void {
       choice === 'confirmed'
         ? '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5"/></svg>'
         : '';
-    done.append(choice === 'confirmed' ? `Confirmed. ${content.from} will go ahead.` : `Cancelled. ${content.from} will not go ahead.`);
+    done.append(choice === 'confirmed' ? content.confirmedText : content.cancelledText);
     setTimeout(() => {
       card.classList.add('closing');
       setTimeout(() => host.remove(), 200);
@@ -191,11 +196,13 @@ export function showPopover(content: PopoverContent): void {
   cancel.addEventListener('click', answer('cancelled'));
 
   const clamp = (value: number, max: number) => Math.min(Math.max(value, edge), Math.max(edge, max - edge));
+  let moved = false;
   const place = (left: number, top: number) => {
     const box = host.getBoundingClientRect();
     host.style.setProperty('left', `${clamp(left, window.innerWidth - box.width)}px`, 'important');
     host.style.setProperty('top', `${clamp(top, window.innerHeight - box.height)}px`, 'important');
     host.style.setProperty('right', 'auto', 'important');
+    moved = true;
   };
   let grab: { x: number; y: number } | undefined;
   bar.addEventListener('pointerdown', (event) => {
@@ -216,7 +223,7 @@ export function showPopover(content: PopoverContent): void {
   bar.addEventListener('pointerup', release);
   bar.addEventListener('pointercancel', release);
   window.addEventListener('resize', () => {
-    if (host.style.getPropertyValue('right') !== 'auto') return;
+    if (!moved) return;
     const box = host.getBoundingClientRect();
     place(box.left, box.top);
   });

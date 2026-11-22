@@ -20,8 +20,8 @@ export const askShowParams = z.object({
   tabId: z.number().int().nonnegative().optional(),
   title: z.string().trim().min(1).max(MAX_ASK_TITLE_LENGTH).optional(),
   message: z.string().trim().min(1).max(MAX_ASK_MESSAGE_LENGTH),
-  confirmLabel: z.string().trim().min(1).max(MAX_ASK_LABEL_LENGTH).default('Confirm'),
-  cancelLabel: z.string().trim().min(1).max(MAX_ASK_LABEL_LENGTH).default('Cancel'),
+  confirmLabel: z.string().trim().min(1).max(MAX_ASK_LABEL_LENGTH).optional(),
+  cancelLabel: z.string().trim().min(1).max(MAX_ASK_LABEL_LENGTH).optional(),
 });
 
 export const askTab = z.object({ id: z.number().int(), title: z.string(), url: z.string() });

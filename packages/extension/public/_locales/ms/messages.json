@@ -1,0 +1,317 @@
+{
+  "locale": {
+    "message": "ms"
+  },
+  "extDescription": {
+    "message": "Kawal penyemak imbas anda sendiri dengan mana-mana ejen AI pilihan anda: susun tab dan kendalikan halaman web melalui MCP."
+  },
+  "actionTitle": {
+    "message": "Agent Browser Bridge: persediaan dan status"
+  },
+  "actionTitleDisconnected": {
+    "message": "Agent Browser Bridge: tiada ejen disambungkan"
+  },
+  "actionTitleConnected": {
+    "message": "Agent Browser Bridge: ejen disambungkan"
+  },
+  "actionTitleConnectedTo": {
+    "message": "Agent Browser Bridge: disambungkan kepada $1"
+  },
+  "notificationReply": {
+    "message": "Klik butang Agent Browser Bridge pada bar alat untuk membalas"
+  },
+  "statusChecking": {
+    "message": "Menyemak sambungan…"
+  },
+  "statusLooking": {
+    "message": "Mencari ejen anda…"
+  },
+  "welcomeLede": {
+    "message": "Biarkan ejen AI anda menyusun tab dan mengendalikan halaman web."
+  },
+  "welcomeLedeSafari": {
+    "message": "Biarkan ejen AI anda mencari, membuka, mengalihkan dan menutup tab Safari anda."
+  },
+  "profileLabel": {
+    "message": "Profil ini"
+  },
+  "profilePlaceholder": {
+    "message": "Berikan nama"
+  },
+  "profileHint": {
+    "message": "Ejen menggunakan nama ini untuk membezakan penyemak imbas dan profil anda, jadi anda boleh meminta penyemak imbas Kerja anda."
+  },
+  "profileSaved": {
+    "message": "Disimpan"
+  },
+  "profileNameRemoved": {
+    "message": "Nama dialih keluar"
+  },
+  "statusNotConnected": {
+    "message": "Belum disambungkan"
+  },
+  "statusSetUpHint": {
+    "message": "Sambungkan ejen anda di bawah, kemudian mulakan sesi baharu dalamnya."
+  },
+  "statusConnected": {
+    "message": "Disambungkan"
+  },
+  "statusConnectedMany_one": {
+    "message": "Disambungkan kepada $1 sesi ejen"
+  },
+  "statusConnectedMany_other": {
+    "message": "Disambungkan kepada $1 sesi ejen"
+  },
+  "statusConnectedHint": {
+    "message": "Ejen anda boleh menggunakan penyemak imbas ini. Cuba salah satu gesaan di bawah."
+  },
+  "welcomeStepConnect": {
+    "message": "Sambungkan ejen anda"
+  },
+  "stepDone": {
+    "message": "Selesai"
+  },
+  "welcomePickAgent": {
+    "message": "Pilih ejen yang anda gunakan."
+  },
+  "welcomeAgentTabs": {
+    "message": "Ejen anda"
+  },
+  "welcomeTabOther": {
+    "message": "Lain-lain"
+  },
+  "welcomeClaudeCodeSteps": {
+    "message": "Jalankan ini sekali dalam terminal, kemudian mulakan sesi Claude Code baharu."
+  },
+  "welcomeClaudeDesktopSteps": {
+    "message": "Muat turun sambungan dan buka fail tersebut. Claude Desktop memasangnya untuk anda, Node.js tidak diperlukan."
+  },
+  "welcomeOpensToConfirm": {
+    "message": "$1 dibuka dan meminta anda mengesahkan."
+  },
+  "welcomeOtherAgentsSteps": {
+    "message": "Tambahkan ini pada konfigurasi MCP ejen, kemudian mulakan semula ejen."
+  },
+  "welcomeAgentSetupHint": {
+    "message": "Tampalkan gesaan ini ke dalam ejen yang boleh menjalankan arahan, seperti Claude Code, Cursor atau Codex. Gesaan ini menyemak Node.js dan menambahkan pelayan."
+  },
+  "showPrompt": {
+    "message": "Tunjukkan gesaan"
+  },
+  "welcomeServerFootnote": {
+    "message": "Ejen anda menjalankan pelayan setempat yang kecil, $1, yang disambungkan oleh sambungan ini."
+  },
+  "welcomeStepAsk": {
+    "message": "Tanya ejen sesuatu"
+  },
+  "welcomeUndoFootnote": {
+    "message": "Berubah fikiran? Perubahan yang dibuat dengan $1 boleh dibatalkan dengan meminta ejen membuat asal."
+  },
+  "welcomeSafariFootnote": {
+    "message": "Dalam Safari, ejen anda boleh membuka, mengatur dan menutup tetingkap, serta membuka, menavigasi, menukar, menyemat, meredam, menduakan, mengalihkan dan menutup tab. Kumpulan tab, sejarah, penanda halaman dan kawalan halaman tersedia dalam Chrome. Jika tajuk dan alamat tab tiada, berikan sambungan akses tapak web dalam Safari di bawah Seting > Sambungan."
+  },
+  "welcomeAnalyticsHint": {
+    "message": "Ciri yang digunakan dan versi sambungan, untuk membantu menambah baik sambungan ini."
+  },
+  "instanceId": {
+    "message": "ID tika: $1"
+  },
+  "welcomeAgentSetupTitle": {
+    "message": "Biarkan ejen anda menyediakannya"
+  },
+  "copyPrompt": {
+    "message": "Salin gesaan"
+  },
+  "copy": {
+    "message": "Salin"
+  },
+  "copied": {
+    "message": "Disalin"
+  },
+  "welcomeAddTo": {
+    "message": "Tambahkan pada $1"
+  },
+  "welcomeDownloadFor": {
+    "message": "Muat turun untuk $1"
+  },
+  "welcomeTryIntro": {
+    "message": "Semasa Chrome dibuka, minta ejen anda:"
+  },
+  "welcomeTryTabs": {
+    "message": "Susun tab saya yang terbuka ke dalam kumpulan mengikut topik. Tunjukkan rancangannya dahulu."
+  },
+  "welcomeTryPage": {
+    "message": "Buka nota keluaran Chrome dan ringkaskan perubahan dalam versi terkini."
+  },
+  "welcomeTryIntroSafari": {
+    "message": "Semasa Safari dibuka, minta ejen anda:"
+  },
+  "welcomeTryDuplicatesSafari": {
+    "message": "Tab apakah yang saya buka dalam Safari? Tutup yang pendua, tetapi tanya saya dahulu."
+  },
+  "welcomeTrySortSafari": {
+    "message": "Susun tab Safari saya mengikut tapak."
+  },
+  "welcomePrivacyHeading": {
+    "message": "Privasi"
+  },
+  "welcomePrivacy": {
+    "message": "Data penyemakan imbas anda kekal pada komputer anda: sambungan ini hanya berhubung dengan $1. Ejen anda boleh membaca tajuk dan URL tab, menyusun semula, mengumpulkan atau menutup tab, serta membaca dan bertindak dalam halaman web apabila anda memintanya. Chrome memaparkan sepanduk penyahpepijatan semasa ejen bekerja dalam halaman. Tajuk tab, URL dan kandungan halaman tidak sekali-kali dihantar ke tempat lain oleh sambungan ini."
+  },
+  "welcomePrivacySafari": {
+    "message": "Data penyemakan imbas anda kekal pada komputer anda: sambungan ini hanya berhubung dengan $1. Ejen anda boleh membaca tajuk dan URL tab, serta membuka, mengatur atau menutup tetingkap dan tab apabila anda memintanya. Ejen tidak boleh membaca atau bertindak dalam halaman web dalam Safari. Tajuk tab dan URL tidak sekali-kali dihantar ke tempat lain oleh sambungan ini."
+  },
+  "analyticsTitle": {
+    "message": "Kongsi statistik penggunaan tanpa nama"
+  },
+  "privacyPolicy": {
+    "message": "Dasar privasi"
+  },
+  "agentStartingUp": {
+    "message": "Ejen sedang dimulakan"
+  },
+  "sessionInProject": {
+    "message": "$1 dalam $2"
+  },
+  "sessionStarted": {
+    "message": "Dimulakan $1"
+  },
+  "sessionLastUsed_one": {
+    "message": "Kali terakhir menggunakan $2 $3, $1 panggilan"
+  },
+  "sessionLastUsed_other": {
+    "message": "Kali terakhir menggunakan $2 $3, $1 panggilan"
+  },
+  "sessionUnused": {
+    "message": "Belum menggunakan penyemak imbas"
+  },
+  "sessionId": {
+    "message": "Sesi $1"
+  },
+  "serverVersion": {
+    "message": "pelayan $1"
+  },
+  "instanceThisBrowser": {
+    "message": "$1, penyemak imbas ini"
+  },
+  "justNow": {
+    "message": "sebentar tadi"
+  },
+  "chatTitle": {
+    "message": "Sembang ejen"
+  },
+  "chatSetup": {
+    "message": "Persediaan"
+  },
+  "chatConversation": {
+    "message": "Perbualan"
+  },
+  "chatEmptyHeading": {
+    "message": "Bercakap dengan ejen anda dari sini"
+  },
+  "chatEmptyBody": {
+    "message": "Minta ejen anda meneruskan dalam penyemak imbas, atau jalankan gesaan $1. Mesej ejen dipaparkan di sini, dan balasan anda terus dihantar kembali kepadanya."
+  },
+  "chatEmptyHint": {
+    "message": "Setiap sesi ejen mempunyai perbualannya sendiri."
+  },
+  "chatInput": {
+    "message": "Hantar mesej kepada ejen"
+  },
+  "chatEnd": {
+    "message": "Tamatkan sembang"
+  },
+  "chatRemove": {
+    "message": "Alih keluar"
+  },
+  "chatSend": {
+    "message": "Hantar"
+  },
+  "chatError": {
+    "message": "Kesilapan telah berlaku."
+  },
+  "chatUnseen_one": {
+    "message": "$2 ($1 baharu)"
+  },
+  "chatUnseen_other": {
+    "message": "$2 ($1 baharu)"
+  },
+  "chatStatusWaiting": {
+    "message": "Menunggu balasan anda"
+  },
+  "chatStatusWorking": {
+    "message": "Sedang bekerja"
+  },
+  "chatStatusWorkingTool": {
+    "message": "Sedang bekerja: menggunakan $1 $2"
+  },
+  "chatStatusDisconnected": {
+    "message": "Ejen diputuskan sambungan"
+  },
+  "chatStatusReconnecting": {
+    "message": "Ejen sedang menyambung semula"
+  },
+  "chatStatusEnded": {
+    "message": "Sembang ditamatkan"
+  },
+  "chatHintWaiting": {
+    "message": "Enter untuk menghantar, Shift+Enter untuk baris baharu."
+  },
+  "chatHintWorking": {
+    "message": "Ejen akan membaca mesej anda apabila menyemak sembang nanti."
+  },
+  "chatHintDisconnected": {
+    "message": "Sesi ejen ini telah ditutup."
+  },
+  "chatHintReconnecting": {
+    "message": "Sambungan ejen terputus. Mesej anda menunggu di sini sehingga ejen bersambung semula."
+  },
+  "chatHintEnded": {
+    "message": "Minta ejen meneruskan dalam penyemak imbas untuk bersembang semula."
+  },
+  "chatReadByAgent": {
+    "message": "dibaca oleh ejen"
+  },
+  "chatNotReadYet": {
+    "message": "belum dibaca"
+  },
+  "chatEndedNotice": {
+    "message": "Anda telah menamatkan sembang."
+  },
+  "chatConversationGone": {
+    "message": "Perbualan ini tidak wujud lagi."
+  },
+  "chatEndedError": {
+    "message": "Sembang ini telah tamat. Minta ejen meneruskan dalam penyemak imbas untuk memulakannya semula."
+  },
+  "chatTooLong_one": {
+    "message": "Mesej boleh mengandungi paling banyak $1 aksara."
+  },
+  "chatTooLong_other": {
+    "message": "Mesej boleh mengandungi paling banyak $1 aksara."
+  },
+  "askYourAgent": {
+    "message": "Ejen anda"
+  },
+  "askFrom": {
+    "message": "$1 bertanya"
+  },
+  "askConfirm": {
+    "message": "Sahkan"
+  },
+  "askCancel": {
+    "message": "Batal"
+  },
+  "askConfirmed": {
+    "message": "Disahkan. $1 akan meneruskan."
+  },
+  "askCancelled": {
+    "message": "Dibatalkan. $1 tidak akan meneruskan."
+  },
+  "askDragHint": {
+    "message": "Seret untuk alih"
+  },
+  "askNotificationTitle": {
+    "message": "$1 menunggu jawapan anda"
+  }
+}

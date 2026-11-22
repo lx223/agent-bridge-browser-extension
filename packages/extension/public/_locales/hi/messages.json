@@ -1,0 +1,317 @@
+{
+  "locale": {
+    "message": "hi"
+  },
+  "extDescription": {
+    "message": "अपनी पसंद के किसी भी AI एजेंट से अपना ब्राउज़र कंट्रोल करें: MCP के ज़रिए टैब व्यवस्थित करें और वेब पेज चलाएं।"
+  },
+  "actionTitle": {
+    "message": "Agent Browser Bridge: सेटअप और स्थिति"
+  },
+  "actionTitleDisconnected": {
+    "message": "Agent Browser Bridge: कोई एजेंट कनेक्ट नहीं है"
+  },
+  "actionTitleConnected": {
+    "message": "Agent Browser Bridge: एजेंट कनेक्ट है"
+  },
+  "actionTitleConnectedTo": {
+    "message": "Agent Browser Bridge: $1 से कनेक्ट है"
+  },
+  "notificationReply": {
+    "message": "जवाब देने के लिए, टूलबार में Agent Browser Bridge बटन पर क्लिक करें"
+  },
+  "statusChecking": {
+    "message": "कनेक्शन की जांच की जा रही है…"
+  },
+  "statusLooking": {
+    "message": "आपका एजेंट खोजा जा रहा है…"
+  },
+  "welcomeLede": {
+    "message": "अपने AI एजेंट को अपने टैब व्यवस्थित करने और वेब पेज चलाने दें।"
+  },
+  "welcomeLedeSafari": {
+    "message": "अपने AI एजेंट को अपने Safari टैब ढूंढने, खोलने, एक जगह से दूसरी जगह ले जाने और बंद करने दें।"
+  },
+  "profileLabel": {
+    "message": "यह प्रोफ़ाइल"
+  },
+  "profilePlaceholder": {
+    "message": "इसे कोई नाम दें"
+  },
+  "profileHint": {
+    "message": "एजेंट इस नाम से आपके ब्राउज़र और प्रोफ़ाइल को अलग-अलग पहचानते हैं, ताकि आप अपने ऑफ़िस वाले ब्राउज़र के बारे में कह सकें।"
+  },
+  "profileSaved": {
+    "message": "सेव हो गया"
+  },
+  "profileNameRemoved": {
+    "message": "नाम हटा दिया गया"
+  },
+  "statusNotConnected": {
+    "message": "अभी कनेक्ट नहीं है"
+  },
+  "statusSetUpHint": {
+    "message": "नीचे अपना एजेंट कनेक्ट करें, फिर उसमें नया सेशन शुरू करें।"
+  },
+  "statusConnected": {
+    "message": "कनेक्ट है"
+  },
+  "statusConnectedMany_one": {
+    "message": "$1 एजेंट सेशन से कनेक्ट है"
+  },
+  "statusConnectedMany_other": {
+    "message": "$1 एजेंट सेशन से कनेक्ट है"
+  },
+  "statusConnectedHint": {
+    "message": "आपका एजेंट इस ब्राउज़र का इस्तेमाल कर सकता है। नीचे दिए गए किसी प्रॉम्प्ट को आज़माकर देखें।"
+  },
+  "welcomeStepConnect": {
+    "message": "अपना एजेंट कनेक्ट करें"
+  },
+  "stepDone": {
+    "message": "हो गया"
+  },
+  "welcomePickAgent": {
+    "message": "वह एजेंट चुनें जिसका आप इस्तेमाल करते हैं।"
+  },
+  "welcomeAgentTabs": {
+    "message": "आपका एजेंट"
+  },
+  "welcomeTabOther": {
+    "message": "अन्य"
+  },
+  "welcomeClaudeCodeSteps": {
+    "message": "इसे टर्मिनल में एक बार चलाएं, फिर नया Claude Code सेशन शुरू करें।"
+  },
+  "welcomeClaudeDesktopSteps": {
+    "message": "एक्सटेंशन डाउनलोड करें और फ़ाइल खोलें। Claude Desktop इसे आपके लिए इंस्टॉल कर देता है, Node.js की ज़रूरत नहीं है।"
+  },
+  "welcomeOpensToConfirm": {
+    "message": "$1 खुलता है और आपसे पुष्टि करने के लिए कहता है।"
+  },
+  "welcomeOtherAgentsSteps": {
+    "message": "इसे एजेंट के MCP कॉन्फ़िगरेशन में जोड़ें, फिर एजेंट को रीस्टार्ट करें।"
+  },
+  "welcomeAgentSetupHint": {
+    "message": "यह प्रॉम्प्ट ऐसे किसी एजेंट में चिपकाएं जो कमांड चला सकता हो, जैसे कि Claude Code, Cursor या Codex। यह Node.js की जांच करता है और सर्वर जोड़ता है।"
+  },
+  "showPrompt": {
+    "message": "प्रॉम्प्ट दिखाएं"
+  },
+  "welcomeServerFootnote": {
+    "message": "आपका एजेंट एक छोटा लोकल सर्वर, $1, चलाता है, जिससे यह एक्सटेंशन कनेक्ट होता है।"
+  },
+  "welcomeStepAsk": {
+    "message": "इससे कुछ पूछें"
+  },
+  "welcomeUndoFootnote": {
+    "message": "मन बदल गया? $1 से किए गए बदलावों को, एजेंट से पहले जैसा करने के लिए कहकर वापस लिया जा सकता है।"
+  },
+  "welcomeSafariFootnote": {
+    "message": "Safari में आपका एजेंट विंडो खोल सकता है, व्यवस्थित कर सकता है और बंद कर सकता है। साथ ही, यह टैब खोल सकता है, उनमें पेज खोल सकता है, उनके बीच स्विच कर सकता है, उन्हें पिन, म्यूट, डुप्लिकेट कर सकता है, उनकी जगह बदल सकता है और उन्हें बंद कर सकता है। टैब ग्रुप, इतिहास, बुकमार्क और पेज कंट्रोल की सुविधा Chrome में उपलब्ध है। अगर टैब के टाइटल और पते नहीं दिख रहे हैं, तो Safari में सेटिंग्ज़ > एक्सटेंशन में जाकर एक्सटेंशन को वेबसाइट का ऐक्सेस दें।"
+  },
+  "welcomeAnalyticsHint": {
+    "message": "कौनसी सुविधाएं इस्तेमाल की जाती हैं और एक्सटेंशन का वर्शन, ताकि एक्सटेंशन को बेहतर बनाने में मदद मिले।"
+  },
+  "instanceId": {
+    "message": "इंस्टेंस आईडी: $1"
+  },
+  "welcomeAgentSetupTitle": {
+    "message": "अपने एजेंट से सेट अप कराएं"
+  },
+  "copyPrompt": {
+    "message": "प्रॉम्प्ट कॉपी करें"
+  },
+  "copy": {
+    "message": "कॉपी करें"
+  },
+  "copied": {
+    "message": "कॉपी किया गया"
+  },
+  "welcomeAddTo": {
+    "message": "$1 में जोड़ें"
+  },
+  "welcomeDownloadFor": {
+    "message": "$1 के लिए डाउनलोड करें"
+  },
+  "welcomeTryIntro": {
+    "message": "Chrome खुला रखें और अपने एजेंट से कहें:"
+  },
+  "welcomeTryTabs": {
+    "message": "मेरे खुले टैब को विषय के हिसाब से ग्रुप में व्यवस्थित कर दो। पहले मुझे प्लान दिखाओ।"
+  },
+  "welcomeTryPage": {
+    "message": "Chrome के रिलीज़ नोट्स खोलो और बताओ कि नए वर्शन में क्या-क्या बदला है।"
+  },
+  "welcomeTryIntroSafari": {
+    "message": "Safari खुला रखें और अपने एजेंट से कहें:"
+  },
+  "welcomeTryDuplicatesSafari": {
+    "message": "Safari में मेरे कौन-कौनसे टैब खुले हैं? डुप्लिकेट टैब बंद कर दो, लेकिन पहले मुझसे पूछ लेना।"
+  },
+  "welcomeTrySortSafari": {
+    "message": "मेरे Safari टैब को साइट के हिसाब से क्रम में लगा दो।"
+  },
+  "welcomePrivacyHeading": {
+    "message": "निजता"
+  },
+  "welcomePrivacy": {
+    "message": "आपका ब्राउज़िंग डेटा आपके कंप्यूटर पर ही रहता है: यह एक्सटेंशन सिर्फ़ $1 से कनेक्ट होता है। आपके कहने पर, आपका एजेंट टैब के टाइटल और यूआरएल पढ़ सकता है, टैब का क्रम बदल सकता है, उन्हें ग्रुप में रख सकता है या बंद कर सकता है, और वेब पेज पढ़कर उन पर कार्रवाई कर सकता है। जब यह किसी पेज पर काम करता है, तब Chrome डीबगिंग बैनर दिखाता है। यह एक्सटेंशन टैब के टाइटल, यूआरएल और पेज का कॉन्टेंट कहीं और नहीं भेजता।"
+  },
+  "welcomePrivacySafari": {
+    "message": "आपका ब्राउज़िंग डेटा आपके कंप्यूटर पर ही रहता है: यह एक्सटेंशन सिर्फ़ $1 से कनेक्ट होता है। आपके कहने पर, आपका एजेंट टैब के टाइटल और यूआरएल पढ़ सकता है, और विंडो व टैब खोल सकता है, व्यवस्थित कर सकता है या बंद कर सकता है। यह Safari में वेब पेज न तो पढ़ सकता है और न ही उन पर कार्रवाई कर सकता है। यह एक्सटेंशन टैब के टाइटल और यूआरएल कहीं और नहीं भेजता।"
+  },
+  "analyticsTitle": {
+    "message": "इस्तेमाल से जुड़े गुमनाम आंकड़े शेयर करें"
+  },
+  "privacyPolicy": {
+    "message": "निजता नीति"
+  },
+  "agentStartingUp": {
+    "message": "एजेंट शुरू हो रहा है"
+  },
+  "sessionInProject": {
+    "message": "$2 में $1"
+  },
+  "sessionStarted": {
+    "message": "$1 शुरू हुआ"
+  },
+  "sessionLastUsed_one": {
+    "message": "आखिरी बार $3 $2 इस्तेमाल किया, $1 कॉल"
+  },
+  "sessionLastUsed_other": {
+    "message": "आखिरी बार $3 $2 इस्तेमाल किया, $1 कॉल"
+  },
+  "sessionUnused": {
+    "message": "अभी तक किसी ब्राउज़र का इस्तेमाल नहीं किया है"
+  },
+  "sessionId": {
+    "message": "सेशन $1"
+  },
+  "serverVersion": {
+    "message": "सर्वर $1"
+  },
+  "instanceThisBrowser": {
+    "message": "$1, यह ब्राउज़र"
+  },
+  "justNow": {
+    "message": "अभी-अभी"
+  },
+  "chatTitle": {
+    "message": "एजेंट चैट"
+  },
+  "chatSetup": {
+    "message": "सेटअप"
+  },
+  "chatConversation": {
+    "message": "बातचीत"
+  },
+  "chatEmptyHeading": {
+    "message": "यहां से अपने एजेंट से बात करें"
+  },
+  "chatEmptyBody": {
+    "message": "अपने एजेंट से ब्राउज़र में जारी रखने के लिए कहें या उसका $1 प्रॉम्प्ट चलाएं। उसके मैसेज यहां दिखते हैं और आपके जवाब सीधे उसी के पास जाते हैं।"
+  },
+  "chatEmptyHint": {
+    "message": "हर एजेंट सेशन की अपनी अलग बातचीत होती है।"
+  },
+  "chatInput": {
+    "message": "एजेंट को मैसेज भेजें"
+  },
+  "chatEnd": {
+    "message": "चैट खत्म करें"
+  },
+  "chatRemove": {
+    "message": "हटाएं"
+  },
+  "chatSend": {
+    "message": "भेजें"
+  },
+  "chatError": {
+    "message": "कोई गड़बड़ी हुई।"
+  },
+  "chatUnseen_one": {
+    "message": "$2 ($1 नया)"
+  },
+  "chatUnseen_other": {
+    "message": "$2 ($1 नए)"
+  },
+  "chatStatusWaiting": {
+    "message": "आपके जवाब का इंतज़ार है"
+  },
+  "chatStatusWorking": {
+    "message": "काम कर रहा है"
+  },
+  "chatStatusWorkingTool": {
+    "message": "काम कर रहा है: $2 $1 इस्तेमाल किया"
+  },
+  "chatStatusDisconnected": {
+    "message": "एजेंट डिसकनेक्ट हो गया"
+  },
+  "chatStatusReconnecting": {
+    "message": "एजेंट फिर से कनेक्ट हो रहा है"
+  },
+  "chatStatusEnded": {
+    "message": "चैट खत्म हो गई"
+  },
+  "chatHintWaiting": {
+    "message": "भेजने के लिए Enter दबाएं, नई लाइन के लिए Shift+Enter दबाएं।"
+  },
+  "chatHintWorking": {
+    "message": "एजेंट अगली बार चैट देखने पर आपका मैसेज पढ़ेगा।"
+  },
+  "chatHintDisconnected": {
+    "message": "यह एजेंट सेशन बंद हो गया है।"
+  },
+  "chatHintReconnecting": {
+    "message": "एजेंट का कनेक्शन टूट गया। फिर से कनेक्ट होने तक आपके संदेश यहाँ इंतज़ार करेंगे।"
+  },
+  "chatHintEnded": {
+    "message": "फिर से चैट करने के लिए, एजेंट से ब्राउज़र में जारी रखने के लिए कहें।"
+  },
+  "chatReadByAgent": {
+    "message": "एजेंट ने पढ़ लिया"
+  },
+  "chatNotReadYet": {
+    "message": "अभी तक नहीं पढ़ा गया"
+  },
+  "chatEndedNotice": {
+    "message": "आपने चैट खत्म कर दी।"
+  },
+  "chatConversationGone": {
+    "message": "यह बातचीत अब मौजूद नहीं है।"
+  },
+  "chatEndedError": {
+    "message": "यह चैट खत्म हो चुकी है। इसे फिर से शुरू करने के लिए, एजेंट से ब्राउज़र में जारी रखने के लिए कहें।"
+  },
+  "chatTooLong_one": {
+    "message": "मैसेज में ज़्यादा से ज़्यादा $1 वर्ण हो सकता है।"
+  },
+  "chatTooLong_other": {
+    "message": "मैसेज में ज़्यादा से ज़्यादा $1 वर्ण हो सकते हैं।"
+  },
+  "askYourAgent": {
+    "message": "आपका एजेंट"
+  },
+  "askFrom": {
+    "message": "$1 पूछ रहा है"
+  },
+  "askConfirm": {
+    "message": "पुष्टि करें"
+  },
+  "askCancel": {
+    "message": "रद्द करें"
+  },
+  "askConfirmed": {
+    "message": "पुष्टि हो गई। $1 आगे बढ़ेगा।"
+  },
+  "askCancelled": {
+    "message": "रद्द किया गया। $1 आगे नहीं बढ़ेगा।"
+  },
+  "askDragHint": {
+    "message": "खिसकाने के लिए खींचें"
+  },
+  "askNotificationTitle": {
+    "message": "$1 आपके जवाब का इंतज़ार कर रहा है"
+  }
+}

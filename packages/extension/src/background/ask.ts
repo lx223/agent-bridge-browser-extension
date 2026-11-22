@@ -15,6 +15,7 @@ import {
   type AskState,
   type AskWaitParams,
 } from '@agent-browser-bridge/protocol';
+import { t, textDirection } from '../i18n/messages.ts';
 import { readPopover, removePopover, showPopover, type PopoverAnswer, type PopoverContent } from './popover.ts';
 
 export interface PagePrompt {
@@ -129,7 +130,7 @@ const POLL_MS = 250;
 const KEEP_FINISHED_MS = 10 * 60_000;
 const UNSUPPORTED = 'This browser cannot show questions in its pages. Ask the user in the browser chat or in your own window instead.';
 
-const agentName = (agent: AgentInfo | null) => agent?.client?.name ?? 'Your agent';
+const agentName = (agent: AgentInfo | null) => agent?.client?.name ?? t('askYourAgent');
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 function parse<T>(schema: { safeParse: (value: unknown) => { success: true; data: T } | { success: false; error: { message: string } } }, method: string, params: unknown): T {
@@ -189,10 +190,14 @@ export class AskManager {
     const from = agentName(agent);
     await prompt.show(tab.id!, {
       askId,
-      from,
+      heading: t('askFrom', from),
       message: params.message,
-      confirmLabel: params.confirmLabel,
-      cancelLabel: params.cancelLabel,
+      confirmLabel: params.confirmLabel ?? t('askConfirm'),
+      cancelLabel: params.cancelLabel ?? t('askCancel'),
+      confirmedText: t('askConfirmed', from),
+      cancelledText: t('askCancelled', from),
+      dragHint: t('askDragHint'),
+      dir: textDirection(),
       ...(params.title !== undefined && { title: params.title }),
     });
     this.asks.set(askId, { askId, tabId: tab.id!, answer: 'pending' });
@@ -275,7 +280,7 @@ export function chromeAskNotifier(notifications: typeof chrome.notifications, re
         .create(`${NOTIFICATION_PREFIX}${askId}`, {
           type: 'basic',
           iconUrl: chrome.runtime.getURL(NOTIFICATION_ICON),
-          title: `${from} needs your answer`,
+          title: t('askNotificationTitle', from),
           message: title ?? message,
           contextMessage: hostOf(url),
           requireInteraction: true,

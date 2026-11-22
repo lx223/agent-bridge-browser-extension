@@ -106,8 +106,8 @@ const askInput = {
   browser: z.enum(askBrowsers).describe(`Which browser shows the question: the one whose tab you mean. ${Object.values(browserLabels).join(' and ')} are supported.`),
   message: z.string().trim().min(1).max(MAX_ASK_MESSAGE_LENGTH).describe('What you are asking, in plain words. Say what will happen if they confirm.'),
   title: z.string().trim().min(1).max(MAX_ASK_TITLE_LENGTH).optional().describe('A short question shown in bold above the message, such as "Submit the order?".'),
-  confirmLabel: z.string().trim().min(1).max(MAX_ASK_LABEL_LENGTH).optional().describe('Text of the confirm button, such as "Submit order". Defaults to "Confirm".'),
-  cancelLabel: z.string().trim().min(1).max(MAX_ASK_LABEL_LENGTH).optional().describe('Text of the cancel button. Defaults to "Cancel".'),
+  confirmLabel: z.string().trim().min(1).max(MAX_ASK_LABEL_LENGTH).optional().describe('Text of the confirm button, such as "Submit order". Defaults to Confirm in the user\'s language.'),
+  cancelLabel: z.string().trim().min(1).max(MAX_ASK_LABEL_LENGTH).optional().describe('Text of the cancel button. Defaults to Cancel in the user\'s language.'),
   tabId: z.number().int().nonnegative().optional().describe('The tab to ask in. Defaults to the active tab.'),
   instance: z
     .string()

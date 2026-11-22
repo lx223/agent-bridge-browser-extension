@@ -1,0 +1,341 @@
+{
+  "locale": {
+    "message": "cs"
+  },
+  "extDescription": {
+    "message": "Ovládejte svůj prohlížeč libovolným AI agentem: uspořádejte karty a pracujte s webovými stránkami přes MCP."
+  },
+  "actionTitle": {
+    "message": "Agent Browser Bridge: nastavení a stav"
+  },
+  "actionTitleDisconnected": {
+    "message": "Agent Browser Bridge: není připojen žádný agent"
+  },
+  "actionTitleConnected": {
+    "message": "Agent Browser Bridge: agent připojen"
+  },
+  "actionTitleConnectedTo": {
+    "message": "Agent Browser Bridge, připojeno: $1"
+  },
+  "notificationReply": {
+    "message": "Chcete-li odpovědět, klikněte na tlačítko Agent Browser Bridge na panelu nástrojů"
+  },
+  "statusChecking": {
+    "message": "Kontrola připojení…"
+  },
+  "statusLooking": {
+    "message": "Hledání agenta…"
+  },
+  "welcomeLede": {
+    "message": "Nechte AI agenta uspořádat vaše karty a pracovat s webovými stránkami."
+  },
+  "welcomeLedeSafari": {
+    "message": "Nechte AI agenta vyhledávat, otevírat, přesouvat a zavírat vaše karty v Safari."
+  },
+  "profileLabel": {
+    "message": "Tento profil"
+  },
+  "profilePlaceholder": {
+    "message": "Pojmenujte ho"
+  },
+  "profileHint": {
+    "message": "Podle tohoto názvu agenti rozlišují vaše prohlížeče a profily, takže můžete požádat o prohlížeč „Práce“."
+  },
+  "profileSaved": {
+    "message": "Uloženo"
+  },
+  "profileNameRemoved": {
+    "message": "Název odstraněn"
+  },
+  "statusNotConnected": {
+    "message": "Zatím nepřipojeno"
+  },
+  "statusSetUpHint": {
+    "message": "Níže připojte svého agenta a pak v něm spusťte novou relaci."
+  },
+  "statusConnected": {
+    "message": "Připojeno"
+  },
+  "statusConnectedMany_one": {
+    "message": "Připojeno k $1 relaci agenta"
+  },
+  "statusConnectedMany_few": {
+    "message": "Připojeno k $1 relacím agenta"
+  },
+  "statusConnectedMany_many": {
+    "message": "Připojeno k $1 relace agenta"
+  },
+  "statusConnectedMany_other": {
+    "message": "Připojeno k $1 relacím agenta"
+  },
+  "statusConnectedHint": {
+    "message": "Agent může používat tento prohlížeč. Vyzkoušejte některý z promptů níže."
+  },
+  "welcomeStepConnect": {
+    "message": "Připojte svého agenta"
+  },
+  "stepDone": {
+    "message": "Hotovo"
+  },
+  "welcomePickAgent": {
+    "message": "Vyberte agenta, kterého používáte."
+  },
+  "welcomeAgentTabs": {
+    "message": "Váš agent"
+  },
+  "welcomeTabOther": {
+    "message": "Ostatní"
+  },
+  "welcomeClaudeCodeSteps": {
+    "message": "Jednou to spusťte v terminálu a pak zahajte novou relaci Claude Code."
+  },
+  "welcomeClaudeDesktopSteps": {
+    "message": "Stáhněte rozšíření a otevřete soubor. Claude Desktop ho nainstaluje za vás, Node.js není potřeba."
+  },
+  "welcomeOpensToConfirm": {
+    "message": "Otevře se $1 a požádá vás o potvrzení."
+  },
+  "welcomeOtherAgentsSteps": {
+    "message": "Přidejte toto do konfigurace MCP agenta a pak ho restartujte."
+  },
+  "welcomeAgentSetupHint": {
+    "message": "Vložte tento prompt do agenta, který umí spouštět příkazy, například Claude Code, Cursor nebo Codex. Zkontroluje Node.js a přidá server."
+  },
+  "showPrompt": {
+    "message": "Zobrazit prompt"
+  },
+  "welcomeServerFootnote": {
+    "message": "Agent spouští malý místní server, $1, ke kterému se toto rozšíření připojuje."
+  },
+  "welcomeStepAsk": {
+    "message": "Na něco se ho zeptejte"
+  },
+  "welcomeUndoFootnote": {
+    "message": "Rozmysleli jste si to? Změny provedené pomocí $1 můžete vrátit – stačí o to agenta požádat."
+  },
+  "welcomeSafariFootnote": {
+    "message": "V Safari může agent otevírat, uspořádávat a zavírat okna a také otevírat, přepínat, připínat, ztlumovat, duplikovat, přesouvat a zavírat karty a otevírat v nich adresy. Skupiny karet, historie, záložky a ovládání stránek jsou k dispozici v Chromu. Pokud chybí názvy a adresy karet, udělte rozšíření přístup k webům v Safari v části Nastavení > Rozšíření."
+  },
+  "welcomeAnalyticsHint": {
+    "message": "Které funkce se používají a verze rozšíření, aby bylo možné rozšíření zlepšovat."
+  },
+  "instanceId": {
+    "message": "ID instance: $1"
+  },
+  "welcomeAgentSetupTitle": {
+    "message": "Nechte nastavení na agentovi"
+  },
+  "copyPrompt": {
+    "message": "Kopírovat prompt"
+  },
+  "copy": {
+    "message": "Kopírovat"
+  },
+  "copied": {
+    "message": "Zkopírováno"
+  },
+  "welcomeAddTo": {
+    "message": "Přidat do $1"
+  },
+  "welcomeDownloadFor": {
+    "message": "Stáhnout pro $1"
+  },
+  "welcomeTryIntro": {
+    "message": "Mějte otevřený Chrome a požádejte agenta:"
+  },
+  "welcomeTryTabs": {
+    "message": "Rozděl moje otevřené karty do skupin podle témat. Nejdřív mi ukaž plán."
+  },
+  "welcomeTryPage": {
+    "message": "Otevři poznámky k verzi Chromu a shrň, co se změnilo v nejnovější verzi."
+  },
+  "welcomeTryIntroSafari": {
+    "message": "Mějte otevřené Safari a požádejte agenta:"
+  },
+  "welcomeTryDuplicatesSafari": {
+    "message": "Jaké karty mám otevřené v Safari? Zavři duplicity, ale nejdřív se mě zeptej."
+  },
+  "welcomeTrySortSafari": {
+    "message": "Seřaď moje karty v Safari podle webů."
+  },
+  "welcomePrivacyHeading": {
+    "message": "Ochrana soukromí"
+  },
+  "welcomePrivacy": {
+    "message": "Údaje o prohlížení zůstávají ve vašem počítači: rozšíření komunikuje pouze s $1. Agent může číst názvy a adresy URL karet, měnit jejich pořadí, seskupovat nebo zavírat karty a také číst webové stránky a provádět v nich akce, když ho o to požádáte. Zatímco agent pracuje na stránce, Chrome zobrazuje banner ladění. Toto rozšíření nikdy nikam jinam neodesílá názvy karet, adresy URL ani obsah stránek."
+  },
+  "welcomePrivacySafari": {
+    "message": "Údaje o prohlížení zůstávají ve vašem počítači: rozšíření komunikuje pouze s $1. Agent může číst názvy a adresy URL karet a také otevírat, uspořádávat nebo zavírat okna a karty, když ho o to požádáte. V Safari nemůže číst webové stránky ani v nich provádět akce. Toto rozšíření nikdy nikam jinam neodesílá názvy karet ani adresy URL."
+  },
+  "analyticsTitle": {
+    "message": "Sdílet anonymní statistiky využití"
+  },
+  "privacyPolicy": {
+    "message": "Zásady ochrany soukromí"
+  },
+  "agentStartingUp": {
+    "message": "Agent se spouští"
+  },
+  "sessionInProject": {
+    "message": "$1 v $2"
+  },
+  "sessionStarted": {
+    "message": "Zahájeno $1"
+  },
+  "sessionLastUsed_one": {
+    "message": "Naposledy použito $2 $3, $1 volání"
+  },
+  "sessionLastUsed_few": {
+    "message": "Naposledy použito $2 $3, $1 volání"
+  },
+  "sessionLastUsed_many": {
+    "message": "Naposledy použito $2 $3, $1 volání"
+  },
+  "sessionLastUsed_other": {
+    "message": "Naposledy použito $2 $3, $1 volání"
+  },
+  "sessionUnused": {
+    "message": "Prohlížeč zatím nepoužila"
+  },
+  "sessionId": {
+    "message": "Relace $1"
+  },
+  "serverVersion": {
+    "message": "server $1"
+  },
+  "instanceThisBrowser": {
+    "message": "$1, tento prohlížeč"
+  },
+  "justNow": {
+    "message": "právě teď"
+  },
+  "chatTitle": {
+    "message": "Chat s agentem"
+  },
+  "chatSetup": {
+    "message": "Nastavení"
+  },
+  "chatConversation": {
+    "message": "Konverzace"
+  },
+  "chatEmptyHeading": {
+    "message": "Mluvte s agentem přímo tady"
+  },
+  "chatEmptyBody": {
+    "message": "Požádejte agenta, aby pokračoval v prohlížeči, nebo spusťte jeho prompt $1. Jeho zprávy se zobrazí tady a vaše odpovědi půjdou přímo k němu."
+  },
+  "chatEmptyHint": {
+    "message": "Každá relace agenta má vlastní konverzaci."
+  },
+  "chatInput": {
+    "message": "Napište agentovi"
+  },
+  "chatEnd": {
+    "message": "Ukončit chat"
+  },
+  "chatRemove": {
+    "message": "Odstranit"
+  },
+  "chatSend": {
+    "message": "Odeslat"
+  },
+  "chatError": {
+    "message": "Něco se pokazilo."
+  },
+  "chatUnseen_one": {
+    "message": "$2 (nové: $1)"
+  },
+  "chatUnseen_few": {
+    "message": "$2 (nové: $1)"
+  },
+  "chatUnseen_many": {
+    "message": "$2 (nové: $1)"
+  },
+  "chatUnseen_other": {
+    "message": "$2 (nové: $1)"
+  },
+  "chatStatusWaiting": {
+    "message": "Čeká na vaši odpověď"
+  },
+  "chatStatusWorking": {
+    "message": "Pracuje"
+  },
+  "chatStatusWorkingTool": {
+    "message": "Pracuje: použil $1 $2"
+  },
+  "chatStatusDisconnected": {
+    "message": "Agent odpojen"
+  },
+  "chatStatusReconnecting": {
+    "message": "Agent se znovu připojuje"
+  },
+  "chatStatusEnded": {
+    "message": "Chat ukončen"
+  },
+  "chatHintWaiting": {
+    "message": "Enter odešle zprávu, Shift+Enter vloží nový řádek."
+  },
+  "chatHintWorking": {
+    "message": "Agent si vaši zprávu přečte, až příště zkontroluje chat."
+  },
+  "chatHintDisconnected": {
+    "message": "Tato relace agenta byla ukončena."
+  },
+  "chatHintReconnecting": {
+    "message": "Spojení s agentem se přerušilo. Vaše zprávy tu počkají, dokud se znovu nepřipojí."
+  },
+  "chatHintEnded": {
+    "message": "Chcete-li znovu chatovat, požádejte agenta, aby pokračoval v prohlížeči."
+  },
+  "chatReadByAgent": {
+    "message": "přečteno agentem"
+  },
+  "chatNotReadYet": {
+    "message": "zatím nepřečteno"
+  },
+  "chatEndedNotice": {
+    "message": "Ukončili jste chat."
+  },
+  "chatConversationGone": {
+    "message": "Tato konverzace už neexistuje."
+  },
+  "chatEndedError": {
+    "message": "Tento chat byl ukončen. Chcete-li ho znovu zahájit, požádejte agenta, aby pokračoval v prohlížeči."
+  },
+  "chatTooLong_one": {
+    "message": "Zpráva může mít nejvýše $1 znak."
+  },
+  "chatTooLong_few": {
+    "message": "Zpráva může mít nejvýše $1 znaky."
+  },
+  "chatTooLong_many": {
+    "message": "Zpráva může mít nejvýše $1 znaku."
+  },
+  "chatTooLong_other": {
+    "message": "Zpráva může mít nejvýše $1 znaků."
+  },
+  "askYourAgent": {
+    "message": "Váš agent"
+  },
+  "askFrom": {
+    "message": "$1 se ptá"
+  },
+  "askConfirm": {
+    "message": "Potvrdit"
+  },
+  "askCancel": {
+    "message": "Zrušit"
+  },
+  "askConfirmed": {
+    "message": "Potvrzeno. $1 bude pokračovat."
+  },
+  "askCancelled": {
+    "message": "Zrušeno. $1 nebude pokračovat."
+  },
+  "askDragHint": {
+    "message": "Přetažením přesunete"
+  },
+  "askNotificationTitle": {
+    "message": "$1 potřebuje vaši odpověď"
+  }
+}

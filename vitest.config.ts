@@ -5,7 +5,7 @@ export default defineConfig({
     projects: [
       { test: { name: 'protocol', root: 'packages/protocol', environment: 'node' } },
       { test: { name: 'server', root: 'packages/server', environment: 'node' } },
-      { test: { name: 'extension', root: 'packages/extension', environment: 'node' } },
+      { test: { name: 'extension', root: 'packages/extension', environment: 'node', setupFiles: ['src/test/englishI18n.ts'] } },
       { test: { name: 'store', root: 'store', environment: 'node' } },
       { test: { name: 'plugins', root: 'plugins', environment: 'node' } },
     ],
@@ -21,7 +21,6 @@ export default defineConfig({
         'packages/extension/src/background/navigation.ts',
         'packages/extension/src/background/popover.ts',
         'packages/extension/src/background/serialize.ts',
-        'packages/extension/src/options/**',
         'packages/extension/src/settings/**',
         'packages/extension/src/welcome/main.ts',
         'packages/extension/src/sidepanel/main.ts',

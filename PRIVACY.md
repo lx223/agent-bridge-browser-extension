@@ -18,9 +18,9 @@ The extension uses Chrome session storage to keep the previous tab and group lay
 
 When an agent asks you to confirm something with `browser_ask_user`, the extension brings the tab to the front and shows the question in a popover inside that page. In Chrome it uses the `debugger` permission to add the popover, and also shows a desktop notification; in Safari it uses the `scripting` permission. The extension sends back only your answer, the tab's identifier, title and URL. It does not read the page for this. The question is part of the page while it shows, so the website can read its text.
 
-When an agent uses the chat panel, the extension keeps that conversation in Chrome session storage: the messages the agent and you write, when they were sent, and the name of the agent session. Each message you send also includes the title and URL of the tab you were looking at. Your messages go only to the agent session the conversation belongs to, through the local bridge. Chrome clears the conversations when the browser session ends or the extension updates or reloads, and you can remove a conversation from the panel. Chat messages are not included in usage analytics.
+When an agent uses the chat panel, the extension keeps that conversation in Chrome session storage: the messages the agent and you write, when they were sent, the name of the agent session, and the id and name the agent chose for the conversation. Each message you send also includes the title and URL of the tab you were looking at. Your messages go only to the agent session the conversation belongs to, through the local bridge. Chrome clears the conversations when the browser session ends or the extension updates or reloads, and you can remove a conversation from the panel. Chat messages are not included in usage analytics.
 
-The local bridge also tells the extension which agent sessions are connected, so the setup and options pages can list them. For each session this includes the name and version the agent reports for itself, a random session identifier, when the session started, the name and path of the project folder the agent is working in, the last browser tool it used and when, how many tool calls it made, and which browser profiles it used. The extension only shows this on its own pages; it is not stored and not included in usage analytics.
+The local bridge also tells the extension which agent sessions are connected, so the setup page can list them. For each session this includes the name and version the agent reports for itself, a random session identifier, when the session started, the name and path of the project folder the agent is working in, the last browser tool it used and when, how many tool calls it made, and which browser profiles it used. The extension only shows this on its own pages; it is not stored and not included in usage analytics.
 
 ### Safari
 
@@ -47,7 +47,7 @@ Events also include the extension version, the MCP server version, and the name 
 
 When analytics is on, uninstalling the extension may open a short optional PostHog survey asking why you left, linked to the same random identifier.
 
-Usage analytics are on by default. You can turn them off at any time with the "Share anonymous usage statistics" checkbox on the setup page (click the toolbar icon) or on the extension's options page (in Chrome, right-click the toolbar icon and choose Options). Builds made from source without a PostHog key send no analytics.
+Usage analytics are on by default. You can turn them off at any time with the "Share anonymous usage statistics" checkbox on the setup page (click the toolbar icon, or in Chrome right-click it and choose Options). Builds made from source without a PostHog key send no analytics.
 
 ## Use and sharing
 

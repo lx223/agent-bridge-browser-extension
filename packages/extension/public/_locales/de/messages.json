@@ -1,0 +1,317 @@
+{
+  "locale": {
+    "message": "de"
+  },
+  "extDescription": {
+    "message": "Steuern Sie Ihren Browser mit einem KI-Agenten Ihrer Wahl: Tabs organisieren und Webseiten über MCP bedienen."
+  },
+  "actionTitle": {
+    "message": "Agent Browser Bridge: Einrichtung und Status"
+  },
+  "actionTitleDisconnected": {
+    "message": "Agent Browser Bridge: kein Agent verbunden"
+  },
+  "actionTitleConnected": {
+    "message": "Agent Browser Bridge: Agent verbunden"
+  },
+  "actionTitleConnectedTo": {
+    "message": "Agent Browser Bridge: verbunden mit $1"
+  },
+  "notificationReply": {
+    "message": "Klicken Sie zum Antworten in der Symbolleiste auf die Schaltfläche „Agent Browser Bridge“"
+  },
+  "statusChecking": {
+    "message": "Verbindung wird geprüft…"
+  },
+  "statusLooking": {
+    "message": "Ihr Agent wird gesucht…"
+  },
+  "welcomeLede": {
+    "message": "Lassen Sie Ihren KI-Agenten Ihre Tabs organisieren und Webseiten bedienen."
+  },
+  "welcomeLedeSafari": {
+    "message": "Lassen Sie Ihren KI-Agenten Ihre Safari-Tabs finden, öffnen, verschieben und schließen."
+  },
+  "profileLabel": {
+    "message": "Dieses Profil"
+  },
+  "profilePlaceholder": {
+    "message": "Namen vergeben"
+  },
+  "profileHint": {
+    "message": "Anhand dieses Namens unterscheiden Agenten Ihre Browser und Profile. So können Sie nach Ihrem Browser „Arbeit“ fragen."
+  },
+  "profileSaved": {
+    "message": "Gespeichert"
+  },
+  "profileNameRemoved": {
+    "message": "Name entfernt"
+  },
+  "statusNotConnected": {
+    "message": "Noch nicht verbunden"
+  },
+  "statusSetUpHint": {
+    "message": "Verbinden Sie unten Ihren Agenten und starten Sie dann darin eine neue Sitzung."
+  },
+  "statusConnected": {
+    "message": "Verbunden"
+  },
+  "statusConnectedMany_one": {
+    "message": "Mit $1 Agent-Sitzung verbunden"
+  },
+  "statusConnectedMany_other": {
+    "message": "Mit $1 Agent-Sitzungen verbunden"
+  },
+  "statusConnectedHint": {
+    "message": "Ihr Agent kann diesen Browser verwenden. Probieren Sie einen der Prompts unten aus."
+  },
+  "welcomeStepConnect": {
+    "message": "Agenten verbinden"
+  },
+  "stepDone": {
+    "message": "Erledigt"
+  },
+  "welcomePickAgent": {
+    "message": "Wählen Sie den Agenten aus, den Sie verwenden."
+  },
+  "welcomeAgentTabs": {
+    "message": "Ihr Agent"
+  },
+  "welcomeTabOther": {
+    "message": "Andere"
+  },
+  "welcomeClaudeCodeSteps": {
+    "message": "Führen Sie dies einmal in einem Terminal aus und starten Sie dann eine neue Claude Code-Sitzung."
+  },
+  "welcomeClaudeDesktopSteps": {
+    "message": "Laden Sie die Erweiterung herunter und öffnen Sie die Datei. Claude Desktop installiert sie für Sie, Node.js ist nicht erforderlich."
+  },
+  "welcomeOpensToConfirm": {
+    "message": "$1 wird geöffnet und bittet Sie um Bestätigung."
+  },
+  "welcomeOtherAgentsSteps": {
+    "message": "Fügen Sie dies der MCP-Konfiguration des Agenten hinzu und starten Sie ihn dann neu."
+  },
+  "welcomeAgentSetupHint": {
+    "message": "Fügen Sie diesen Prompt in einen Agenten ein, der Befehle ausführen kann, etwa Claude Code, Cursor oder Codex. Er prüft, ob Node.js vorhanden ist, und fügt den Server hinzu."
+  },
+  "showPrompt": {
+    "message": "Prompt anzeigen"
+  },
+  "welcomeServerFootnote": {
+    "message": "Ihr Agent führt einen kleinen lokalen Server aus, $1, mit dem sich diese Erweiterung verbindet."
+  },
+  "welcomeStepAsk": {
+    "message": "Agenten etwas fragen"
+  },
+  "welcomeUndoFootnote": {
+    "message": "Doch anders entschieden? Mit $1 vorgenommene Änderungen lassen sich rückgängig machen, wenn Sie den Agenten darum bitten."
+  },
+  "welcomeSafariFootnote": {
+    "message": "In Safari kann Ihr Agent Fenster öffnen, anordnen und schließen sowie Tabs öffnen, darin Seiten aufrufen, zwischen ihnen wechseln, sie anpinnen, stummschalten, duplizieren, verschieben und schließen. Tabgruppen, Verlauf, Lesezeichen und die Steuerung von Webseiten sind in Chrome verfügbar. Wenn Tab-Titel und Adressen fehlen, erlauben Sie der Erweiterung in Safari unter „Einstellungen > Erweiterungen“ den Zugriff auf Websites."
+  },
+  "welcomeAnalyticsHint": {
+    "message": "Welche Funktionen genutzt werden und die Version der Erweiterung, um die Erweiterung zu verbessern."
+  },
+  "instanceId": {
+    "message": "Instanz-ID: $1"
+  },
+  "welcomeAgentSetupTitle": {
+    "message": "Vom Agenten einrichten lassen"
+  },
+  "copyPrompt": {
+    "message": "Prompt kopieren"
+  },
+  "copy": {
+    "message": "Kopieren"
+  },
+  "copied": {
+    "message": "Kopiert"
+  },
+  "welcomeAddTo": {
+    "message": "Zu $1 hinzufügen"
+  },
+  "welcomeDownloadFor": {
+    "message": "Für $1 herunterladen"
+  },
+  "welcomeTryIntro": {
+    "message": "Öffnen Sie Chrome und fragen Sie Ihren Agenten:"
+  },
+  "welcomeTryTabs": {
+    "message": "Ordne meine offenen Tabs nach Thema in Gruppen. Zeig mir zuerst den Plan."
+  },
+  "welcomeTryPage": {
+    "message": "Öffne die Versionshinweise von Chrome und fasse zusammen, was sich in der neuesten Version geändert hat."
+  },
+  "welcomeTryIntroSafari": {
+    "message": "Öffnen Sie Safari und fragen Sie Ihren Agenten:"
+  },
+  "welcomeTryDuplicatesSafari": {
+    "message": "Welche Tabs habe ich in Safari offen? Schließ die Duplikate, aber frag mich vorher."
+  },
+  "welcomeTrySortSafari": {
+    "message": "Sortiere meine Safari-Tabs nach Website."
+  },
+  "welcomePrivacyHeading": {
+    "message": "Datenschutz"
+  },
+  "welcomePrivacy": {
+    "message": "Ihre Browserdaten bleiben auf Ihrem Computer: Die Erweiterung kommuniziert nur mit $1. Ihr Agent kann Tab-Titel und URLs lesen, Tabs neu anordnen, gruppieren oder schließen sowie Webseiten lesen und darin handeln, wenn Sie ihn darum bitten. Chrome zeigt einen Debugging-Hinweis an, während der Agent in einer Seite arbeitet. Tab-Titel, URLs und Seiteninhalte werden von dieser Erweiterung nie an andere Stellen gesendet."
+  },
+  "welcomePrivacySafari": {
+    "message": "Ihre Browserdaten bleiben auf Ihrem Computer: Die Erweiterung kommuniziert nur mit $1. Ihr Agent kann Tab-Titel und URLs lesen sowie Fenster und Tabs öffnen, anordnen oder schließen, wenn Sie ihn darum bitten. In Safari kann er keine Webseiten lesen oder darin handeln. Tab-Titel und URLs werden von dieser Erweiterung nie an andere Stellen gesendet."
+  },
+  "analyticsTitle": {
+    "message": "Anonyme Nutzungsstatistiken senden"
+  },
+  "privacyPolicy": {
+    "message": "Datenschutzerklärung"
+  },
+  "agentStartingUp": {
+    "message": "Agent wird gestartet"
+  },
+  "sessionInProject": {
+    "message": "$1 in $2"
+  },
+  "sessionStarted": {
+    "message": "Gestartet $1"
+  },
+  "sessionLastUsed_one": {
+    "message": "Zuletzt verwendet: $2 $3, $1 Aufruf"
+  },
+  "sessionLastUsed_other": {
+    "message": "Zuletzt verwendet: $2 $3, $1 Aufrufe"
+  },
+  "sessionUnused": {
+    "message": "Hat noch keinen Browser verwendet"
+  },
+  "sessionId": {
+    "message": "Sitzung $1"
+  },
+  "serverVersion": {
+    "message": "Server $1"
+  },
+  "instanceThisBrowser": {
+    "message": "$1, dieser Browser"
+  },
+  "justNow": {
+    "message": "gerade eben"
+  },
+  "chatTitle": {
+    "message": "Agent-Chat"
+  },
+  "chatSetup": {
+    "message": "Einrichtung"
+  },
+  "chatConversation": {
+    "message": "Unterhaltung"
+  },
+  "chatEmptyHeading": {
+    "message": "Chatten Sie hier mit Ihrem Agenten"
+  },
+  "chatEmptyBody": {
+    "message": "Bitten Sie Ihren Agenten, im Browser weiterzumachen, oder führen Sie seinen Prompt $1 aus. Seine Nachrichten erscheinen hier, und Ihre Antworten gehen direkt an ihn zurück."
+  },
+  "chatEmptyHint": {
+    "message": "Jede Agent-Sitzung erhält eine eigene Unterhaltung."
+  },
+  "chatInput": {
+    "message": "Nachricht an den Agenten"
+  },
+  "chatEnd": {
+    "message": "Chat beenden"
+  },
+  "chatRemove": {
+    "message": "Entfernen"
+  },
+  "chatSend": {
+    "message": "Senden"
+  },
+  "chatError": {
+    "message": "Ein Fehler ist aufgetreten."
+  },
+  "chatUnseen_one": {
+    "message": "$2 ($1 neu)"
+  },
+  "chatUnseen_other": {
+    "message": "$2 ($1 neu)"
+  },
+  "chatStatusWaiting": {
+    "message": "Wartet auf Ihre Antwort"
+  },
+  "chatStatusWorking": {
+    "message": "Arbeitet"
+  },
+  "chatStatusWorkingTool": {
+    "message": "Arbeitet: $1 $2 verwendet"
+  },
+  "chatStatusDisconnected": {
+    "message": "Agent getrennt"
+  },
+  "chatStatusReconnecting": {
+    "message": "Agent verbindet sich neu"
+  },
+  "chatStatusEnded": {
+    "message": "Chat beendet"
+  },
+  "chatHintWaiting": {
+    "message": "Eingabetaste zum Senden, Umschalt + Eingabetaste für eine neue Zeile."
+  },
+  "chatHintWorking": {
+    "message": "Der Agent liest Ihre Nachricht, wenn er das nächste Mal den Chat prüft."
+  },
+  "chatHintDisconnected": {
+    "message": "Diese Agent-Sitzung wurde geschlossen."
+  },
+  "chatHintReconnecting": {
+    "message": "Die Verbindung zum Agenten ist abgebrochen. Ihre Nachrichten warten hier, bis er wieder verbunden ist."
+  },
+  "chatHintEnded": {
+    "message": "Bitten Sie den Agenten, im Browser weiterzumachen, um wieder zu chatten."
+  },
+  "chatReadByAgent": {
+    "message": "vom Agenten gelesen"
+  },
+  "chatNotReadYet": {
+    "message": "noch nicht gelesen"
+  },
+  "chatEndedNotice": {
+    "message": "Sie haben den Chat beendet."
+  },
+  "chatConversationGone": {
+    "message": "Diese Unterhaltung existiert nicht mehr."
+  },
+  "chatEndedError": {
+    "message": "Dieser Chat wurde beendet. Bitten Sie den Agenten, im Browser weiterzumachen, um ihn neu zu starten."
+  },
+  "chatTooLong_one": {
+    "message": "Nachrichten dürfen höchstens $1 Zeichen lang sein."
+  },
+  "chatTooLong_other": {
+    "message": "Nachrichten dürfen höchstens $1 Zeichen lang sein."
+  },
+  "askYourAgent": {
+    "message": "Ihr Agent"
+  },
+  "askFrom": {
+    "message": "$1 fragt"
+  },
+  "askConfirm": {
+    "message": "Bestätigen"
+  },
+  "askCancel": {
+    "message": "Abbrechen"
+  },
+  "askConfirmed": {
+    "message": "Bestätigt. $1 macht weiter."
+  },
+  "askCancelled": {
+    "message": "Abgebrochen. $1 macht nicht weiter."
+  },
+  "askDragHint": {
+    "message": "Zum Verschieben ziehen"
+  },
+  "askNotificationTitle": {
+    "message": "$1 braucht Ihre Antwort"
+  }
+}

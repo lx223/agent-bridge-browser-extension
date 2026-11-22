@@ -2,6 +2,7 @@ import { describe, expect, it, vi } from 'vitest';
 import { ASK_CANCEL_METHOD, ASK_SHOW_METHOD, ASK_WAIT_METHOD, type AgentInfo } from '@agent-browser-bridge/protocol';
 import { AskManager, chromeAskNotifier, debuggerPrompt, scriptingPrompt, type AskNotifier, type AskTabs, type PagePrompt } from './ask.ts';
 import type { PopoverAnswer, PopoverContent } from './popover.ts';
+import '../test/englishI18n.ts';
 
 const agent = { client: { name: 'claude-code', version: '2.0.0' } } as AgentInfo;
 
@@ -53,11 +54,15 @@ describe('AskManager', () => {
     expect(focusWindow).toHaveBeenCalledWith(1);
     expect(page.prompt.show).toHaveBeenCalledWith(1, {
       askId: 'ask-1',
-      from: 'claude-code',
+      heading: 'claude-code asks',
       title: 'Submit?',
       message: 'This sends the form.',
       confirmLabel: 'Confirm',
       cancelLabel: 'Cancel',
+      confirmedText: 'Confirmed. claude-code will go ahead.',
+      cancelledText: 'Cancelled. claude-code will not go ahead.',
+      dragHint: 'Drag to move',
+      dir: 'ltr',
     });
     expect(notifier.show).toHaveBeenCalledWith('ask-1', 'claude-code', { title: 'Submit?', message: 'This sends the form.', url: 'https://example.com/1' });
   });
@@ -67,7 +72,15 @@ describe('AskManager', () => {
 
     await manager.dispatch(ASK_SHOW_METHOD, { message: 'Go?' }, null);
 
-    expect(page.prompt.show).toHaveBeenCalledWith(2, expect.objectContaining({ from: 'Your agent' }));
+    expect(page.prompt.show).toHaveBeenCalledWith(2, expect.objectContaining({ heading: 'Your agent asks', confirmedText: 'Confirmed. Your agent will go ahead.' }));
+  });
+
+  it('uses the button labels the agent chose', async () => {
+    const { manager, page } = setup();
+
+    await manager.dispatch(ASK_SHOW_METHOD, { tabId: 1, message: 'Pay?', confirmLabel: 'Pay £42', cancelLabel: 'Not now' }, agent);
+
+    expect(page.prompt.show).toHaveBeenCalledWith(1, expect.objectContaining({ confirmLabel: 'Pay £42', cancelLabel: 'Not now' }));
   });
 
   it('waits until the user answers, then clears the notification', async () => {
@@ -154,7 +167,17 @@ describe('AskManager', () => {
   });
 });
 
-const content: PopoverContent = { askId: 'ask-1', from: 'claude-code', message: 'Go?', confirmLabel: 'Confirm', cancelLabel: 'Cancel' };
+const content: PopoverContent = {
+  askId: 'ask-1',
+  heading: 'claude-code asks',
+  message: 'Go?',
+  confirmLabel: 'Confirm',
+  cancelLabel: 'Cancel',
+  confirmedText: 'Confirmed. claude-code will go ahead.',
+  cancelledText: 'Cancelled. claude-code will not go ahead.',
+  dragHint: 'Drag to move',
+  dir: 'ltr',
+};
 
 describe('debuggerPrompt', () => {
   function fakeDebugger(value: unknown = 'pending') {
@@ -230,7 +253,7 @@ describe('scriptingPrompt', () => {
 
 describe('chromeAskNotifier', () => {
   it('keeps a notification up until the question is answered and reveals the tab when clicked', async () => {
-    vi.stubGlobal('chrome', { runtime: { getURL: (path: string) => `chrome-extension://id/${path}` } });
+    vi.stubGlobal('chrome', { ...globalThis.chrome, runtime: { getURL: (path: string) => `chrome-extension://id/${path}` } });
     let clicked: ((id: string) => void) | undefined;
     const notifications = {
       create: vi.fn(async () => 'id'),

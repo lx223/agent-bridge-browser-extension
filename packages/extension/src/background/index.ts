@@ -2,6 +2,7 @@ import { DEFAULT_PORT, isAskMethod, isChatMethod, type AgentInfo } from '@agent-
 import { Analytics, ANALYTICS_ENABLED_KEY, isPageEvent, type Properties } from './analytics.ts';
 import { sessionTitle } from '../settings/sessionList.ts';
 import { AskManager, chromeAskNotifier, debuggerPrompt, scriptingPrompt, type PagePrompt } from './ask.ts';
+import { t } from '../i18n/messages.ts';
 import { BridgeClient, type ConnectionStatus } from './bridgeClient.ts';
 import { ChatPanel } from './chatPanel.ts';
 import { restoreAfterReload, saveForReload } from './carryOver.ts';
@@ -17,9 +18,9 @@ const RECONNECT_ALARM = 'agent-browser-bridge-reconnect';
 const BRIDGE_PORT = Number(import.meta.env.VITE_BRIDGE_PORT || DEFAULT_PORT);
 
 const statusTitle = ({ state, agents }: ConnectionStatus) => {
-  if (state !== 'connected') return 'Agent Browser Bridge: no agent connected';
-  if (!agents.length) return 'Agent Browser Bridge: agent connected';
-  return `Agent Browser Bridge: connected to ${agents.map(sessionTitle).join(', ')}`;
+  if (state !== 'connected') return t('actionTitleDisconnected');
+  if (!agents.length) return t('actionTitleConnected');
+  return t('actionTitleConnectedTo', agents.map(sessionTitle).join(', '));
 };
 
 const showStatus = (status: ConnectionStatus) => {

@@ -19,10 +19,10 @@ npm run screenshots -- --out ~/Desktop/store-screenshots
 | --- | --- |
 | `1-tabs.png` | An agent grouping open tabs by topic with `chrome_plan_apply` |
 | `2-pages.png` | An agent filling in and submitting a booking form, with the page captured by `chrome_page_screenshot` |
-| `3-profiles.png` | An agent naming the browser profile, and the options popup showing the name |
+| `3-profiles.png` | An agent naming the browser profile, and the setup page showing the name |
 | `4-setup.png` | The setup page with an agent connected |
 
-The script uses the end-to-end harness (`e2e/support/harness.ts`). Each screenshot comes from a real session: the built MCP server, the built extension in headless Chromium, and demo pages served on `127.0.0.1`. The tab groups, form contents, tool names and extension pages are what the extension actually produced. The caption, the chat transcript and the window frame around each capture are drawn by the script. Chromium starts with the locale's language, so the demo pages and the browser use it too. The extension's own pages are English only, because the extension is not localised yet.
+The script uses the end-to-end harness (`e2e/support/harness.ts`). Each screenshot comes from a real session: the built MCP server, the built extension in headless Chromium, and demo pages served on `127.0.0.1`. The tab groups, form contents, tool names and extension pages are what the extension actually produced. The caption, the chat transcript and the window frame around each capture are drawn by the script. Chromium starts with the locale's language, so the demo pages, the browser and the extension's own pages use it too. See [Localisation](localisation.md) for the extension's translations.
 
 Like the end-to-end tests, the script needs port 17373 free and Playwright's Chromium installed. Japanese and Chinese need CJK fonts on the machine. macOS and Windows have them; on Linux install a package such as `fonts-noto-cjk`.
 
@@ -37,6 +37,14 @@ The translations other than English were written without a native speaker review
 ### Layout
 
 `store/screenshots/scenes.ts` drives each scene through MCP tool calls and returns the content for the frame. `store/screenshots/frame.ts` holds the caption, chat and window templates and their sizes. `store/screenshots/demo.ts` serves the demo pages built from the locale strings. To add a scene, add its name to `sceneNames` in `store/screenshots/locale.ts`, a caption for it in every locale file, and a capture function in `scenes.ts`.
+
+## Languages and regions
+
+The package ships translations for every language the store supports (see [Localisation](localisation.md)). The store reads the extension's name and summary from the package for each language. The detailed description and screenshots are per language in the dashboard under Store listing; a language without its own description shows the English one.
+
+The detailed description for each language other than English is in [`store/chrome/descriptions/`](../store/chrome/descriptions), one file per locale code, such as `de.md` or `pt_BR.md`. Paste each file into that language's Store listing. The English text is in the [submission copy](../store/chrome/submission.md). The translations had no native speaker review; they use the same terms as the extension's `messages.json` for each language, so the open questions in [Localisation](localisation.md#review) apply to them too. When the English description changes, update every file.
+
+Which countries can install the extension is a separate setting under Distribution > Regions, and does not depend on the languages. Keep it on all regions.
 
 ## Release steps
 

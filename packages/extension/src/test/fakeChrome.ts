@@ -1,3 +1,5 @@
+import { englishI18n } from './englishI18n.ts';
+
 /**
  * Minimal in-memory model of chrome.tabs / chrome.tabGroups / chrome.storage.session,
  * enough to exercise plan logic. Tab order within a window is the array order.
@@ -48,6 +50,7 @@ export function installFakeChrome(tabs: Partial<FakeTab>[], groups: Partial<Fake
   };
 
   const fake = {
+    i18n: englishI18n,
     tabs: {
       query: async (q: { windowId?: number }) => indexed().filter((t) => q.windowId === undefined || t.windowId === q.windowId),
       group: async (opts: { tabIds: number[]; groupId?: number; createProperties?: { windowId?: number } }) => {

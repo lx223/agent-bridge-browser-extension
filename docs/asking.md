@@ -7,12 +7,12 @@ The agent uses it for yes or no decisions about what it is about to do, such as 
 ## What you see
 
 - The tab comes to the front and its window gets focus.
-- A popover appears in the top right corner of the page. It shows which agent is asking, the question and two buttons: **Cancel** and a confirm button, which the agent can label, such as **Submit order**.
+- A popover appears in the top right corner of the page, or the top left in right-to-left languages. It shows which agent is asking, the question and two buttons: **Cancel** and a confirm button, which the agent can label, such as **Submit order**.
 - In Chrome, a desktop notification also appears and stays until you answer. Clicking it brings you to the tab.
 - Drag the popover by its top bar to move it out of the way.
 - After you click, the popover says what was sent to the agent, then closes.
 
-The popover follows your system's light or dark mode, not the website's.
+The popover follows your system's light or dark mode, not the website's. Its own text, such as "claude-code asks" and the default button labels, is in the extension's language (see [Localisation](localisation.md)). The question and any button labels the agent chose are in whatever language the agent wrote them.
 
 The buttons ignore clicks for the first moment after the popover appears, so a click meant for the page does not land on them by accident.
 
@@ -38,7 +38,7 @@ Each answer comes with a `next` line telling the agent what to do with it.
 | `browser` | `chrome` or `safari`. Required, because tab ids only mean something within one browser. Instance names are per browser too, so `instance` alone cannot pick the browser. |
 | `message` | The question, saying what will happen on confirm. |
 | `title` | Optional short question shown in bold above the message. |
-| `confirmLabel`, `cancelLabel` | Optional button labels. Default **Confirm** and **Cancel**. |
+| `confirmLabel`, `cancelLabel` | Optional button labels. Default **Confirm** and **Cancel** in the extension's language. |
 | `tabId` | Optional. Defaults to the active tab. |
 | `instance` | Optional, as for the other tools, when several instances of the browser are connected. |
 | `timeoutSeconds` | Optional, 1 to 600. |
@@ -49,7 +49,7 @@ A tab shows one question at a time. Asking again in a tab that is still waiting 
 
 The server shows the question with `ask.show`, then asks the extension for the answer with `ask.wait` in rounds of up to 20 seconds, sending MCP progress notifications in between so the agent's client keeps waiting. When the agent's call is cancelled or times out, the server sends `ask.cancel` and the popover is removed.
 
-The popover is a closed shadow root at the end of the page. Its script runs in an isolated world, separate from the page's own scripts, and keeps the answer there. The page's scripts cannot read the answer or set it, and the buttons only accept clicks that the browser marks as coming from the user (`event.isTrusted`), so a page cannot confirm for you. `packages/extension/src/background/popover.ts` holds the popover and `ask.ts` the rest.
+The popover is a closed shadow root at the end of the page. Its script runs in an isolated world, separate from the page's own scripts, and keeps the answer there. The page's scripts cannot read the answer or set it, and the buttons only accept clicks that the browser marks as coming from the user (`event.isTrusted`), so a page cannot confirm for you. `packages/extension/src/background/popover.ts` holds the popover and `ask.ts` the rest. The popover's script runs in the page, where it cannot call `chrome.i18n`, so `ask.ts` translates its text with `t()` and passes it in, together with the text direction.
 
 - **Chrome** creates the isolated world with the `debugger` permission the page tools already use (`Page.createIsolatedWorld`), so Chrome shows its debugging banner while the question is up. It needs no new permission.
 - **Safari** has no debugger, so it injects the same functions with `scripting.executeScript`, which also runs in an isolated world. The Safari build adds the `scripting` permission and asks for access to websites (`<all_urls>`), which Safari lets you grant per website. A question in a tab on a website you have not allowed fails.

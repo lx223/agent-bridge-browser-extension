@@ -1,0 +1,329 @@
+{
+  "locale": {
+    "message": "ro"
+  },
+  "extDescription": {
+    "message": "Controlați propriul browser cu orice agent AI doriți: organizați filele și operați pagini web prin MCP."
+  },
+  "actionTitle": {
+    "message": "Agent Browser Bridge: configurare și stare"
+  },
+  "actionTitleDisconnected": {
+    "message": "Agent Browser Bridge: niciun agent conectat"
+  },
+  "actionTitleConnected": {
+    "message": "Agent Browser Bridge: agent conectat"
+  },
+  "actionTitleConnectedTo": {
+    "message": "Agent Browser Bridge: conectat la $1"
+  },
+  "notificationReply": {
+    "message": "Dați clic pe butonul Agent Browser Bridge din bara de instrumente pentru a răspunde"
+  },
+  "statusChecking": {
+    "message": "Se verifică conexiunea…"
+  },
+  "statusLooking": {
+    "message": "Se caută agentul…"
+  },
+  "welcomeLede": {
+    "message": "Lăsați agentul AI să vă organizeze filele și să opereze pagini web."
+  },
+  "welcomeLedeSafari": {
+    "message": "Lăsați agentul AI să găsească, să deschidă, să mute și să închidă filele din Safari."
+  },
+  "profileLabel": {
+    "message": "Acest profil"
+  },
+  "profilePlaceholder": {
+    "message": "Dați-i un nume"
+  },
+  "profileHint": {
+    "message": "Agenții folosesc acest nume pentru a deosebi browserele și profilurile dvs., astfel încât puteți cere browserul „Serviciu”."
+  },
+  "profileSaved": {
+    "message": "Salvat"
+  },
+  "profileNameRemoved": {
+    "message": "Nume eliminat"
+  },
+  "statusNotConnected": {
+    "message": "Încă nu este conectat"
+  },
+  "statusSetUpHint": {
+    "message": "Conectați agentul mai jos, apoi începeți o sesiune nouă în el."
+  },
+  "statusConnected": {
+    "message": "Conectat"
+  },
+  "statusConnectedMany_one": {
+    "message": "Conectat la $1 sesiune de agent"
+  },
+  "statusConnectedMany_few": {
+    "message": "Conectat la $1 sesiuni de agent"
+  },
+  "statusConnectedMany_other": {
+    "message": "Conectat la $1 de sesiuni de agent"
+  },
+  "statusConnectedHint": {
+    "message": "Agentul poate folosi acest browser. Încercați unul dintre prompturile de mai jos."
+  },
+  "welcomeStepConnect": {
+    "message": "Conectați agentul"
+  },
+  "stepDone": {
+    "message": "Gata"
+  },
+  "welcomePickAgent": {
+    "message": "Alegeți agentul pe care îl folosiți."
+  },
+  "welcomeAgentTabs": {
+    "message": "Agentul dvs."
+  },
+  "welcomeTabOther": {
+    "message": "Altul"
+  },
+  "welcomeClaudeCodeSteps": {
+    "message": "Rulați o singură dată într-un terminal, apoi începeți o sesiune nouă de Claude Code."
+  },
+  "welcomeClaudeDesktopSteps": {
+    "message": "Descărcați extensia și deschideți fișierul. Claude Desktop o instalează pentru dvs., fără să fie nevoie de Node.js."
+  },
+  "welcomeOpensToConfirm": {
+    "message": "$1 se deschide și vă cere confirmarea."
+  },
+  "welcomeOtherAgentsSteps": {
+    "message": "Adăugați acest fragment în configurația MCP a agentului, apoi reporniți-l."
+  },
+  "welcomeAgentSetupHint": {
+    "message": "Inserați acest prompt într-un agent care poate rula comenzi, cum ar fi Claude Code, Cursor sau Codex. Agentul verifică dacă există Node.js, apoi adaugă serverul."
+  },
+  "showPrompt": {
+    "message": "Afișați promptul"
+  },
+  "welcomeServerFootnote": {
+    "message": "Agentul rulează un mic server local, $1, la care se conectează această extensie."
+  },
+  "welcomeStepAsk": {
+    "message": "Cereți-i ceva"
+  },
+  "welcomeUndoFootnote": {
+    "message": "V-ați răzgândit? Modificările făcute cu $1 pot fi anulate dacă îi cereți agentului acest lucru."
+  },
+  "welcomeSafariFootnote": {
+    "message": "În Safari, agentul poate deschide, aranja și închide ferestre și poate deschide, naviga, comuta, fixa, duplica, muta și închide file sau le poate dezactiva sunetul. Grupurile de file, istoricul, marcajele și controlul paginilor sunt disponibile în Chrome. Dacă lipsesc titlurile și adresele filelor, acordați extensiei acces la site-uri în Safari, din Configurări > Extensii."
+  },
+  "welcomeAnalyticsHint": {
+    "message": "Ce funcții se folosesc și versiunea extensiei, pentru a ajuta la îmbunătățirea extensiei."
+  },
+  "instanceId": {
+    "message": "ID instanță: $1"
+  },
+  "welcomeAgentSetupTitle": {
+    "message": "Lăsați agentul să facă configurarea"
+  },
+  "copyPrompt": {
+    "message": "Copiați promptul"
+  },
+  "copy": {
+    "message": "Copiați"
+  },
+  "copied": {
+    "message": "Copiat"
+  },
+  "welcomeAddTo": {
+    "message": "Adăugați în $1"
+  },
+  "welcomeDownloadFor": {
+    "message": "Descărcați pentru $1"
+  },
+  "welcomeTryIntro": {
+    "message": "Cu Chrome deschis, cereți-i agentului:"
+  },
+  "welcomeTryTabs": {
+    "message": "Organizează filele deschise în grupuri după subiect. Arată-mi mai întâi planul."
+  },
+  "welcomeTryPage": {
+    "message": "Deschide notele de lansare Chrome și rezumă ce s-a schimbat în cea mai recentă versiune."
+  },
+  "welcomeTryIntroSafari": {
+    "message": "Cu Safari deschis, cereți-i agentului:"
+  },
+  "welcomeTryDuplicatesSafari": {
+    "message": "Ce file am deschise în Safari? Închide duplicatele, dar întreabă-mă mai întâi."
+  },
+  "welcomeTrySortSafari": {
+    "message": "Ordonează filele din Safari după site."
+  },
+  "welcomePrivacyHeading": {
+    "message": "Confidențialitate"
+  },
+  "welcomePrivacy": {
+    "message": "Datele de navigare rămân pe computerul dvs.: extensia comunică doar cu $1. Agentul poate citi titlurile și adresele URL ale filelor, poate rearanja, grupa sau închide file și poate citi și acționa în pagini web atunci când îi cereți. Chrome afișează un banner de depanare cât timp agentul lucrează într-o pagină. Această extensie nu trimite niciodată în altă parte titlurile filelor, adresele URL sau conținutul paginilor."
+  },
+  "welcomePrivacySafari": {
+    "message": "Datele de navigare rămân pe computerul dvs.: extensia comunică doar cu $1. Agentul poate citi titlurile și adresele URL ale filelor și poate deschide, aranja sau închide ferestre și file atunci când îi cereți. În Safari nu poate citi pagini web și nici nu poate acționa în ele. Această extensie nu trimite niciodată în altă parte titlurile filelor sau adresele URL."
+  },
+  "analyticsTitle": {
+    "message": "Trimiteți statistici de utilizare anonime"
+  },
+  "privacyPolicy": {
+    "message": "Politica de confidențialitate"
+  },
+  "agentStartingUp": {
+    "message": "Agentul pornește"
+  },
+  "sessionInProject": {
+    "message": "$1 în $2"
+  },
+  "sessionStarted": {
+    "message": "Pornită $1"
+  },
+  "sessionLastUsed_one": {
+    "message": "Ultima utilizare: $2 $3, $1 apel"
+  },
+  "sessionLastUsed_few": {
+    "message": "Ultima utilizare: $2 $3, $1 apeluri"
+  },
+  "sessionLastUsed_other": {
+    "message": "Ultima utilizare: $2 $3, $1 de apeluri"
+  },
+  "sessionUnused": {
+    "message": "Nu a folosit încă niciun browser"
+  },
+  "sessionId": {
+    "message": "Sesiunea $1"
+  },
+  "serverVersion": {
+    "message": "server $1"
+  },
+  "instanceThisBrowser": {
+    "message": "$1, acest browser"
+  },
+  "justNow": {
+    "message": "chiar acum"
+  },
+  "chatTitle": {
+    "message": "Chat cu agentul"
+  },
+  "chatSetup": {
+    "message": "Configurare"
+  },
+  "chatConversation": {
+    "message": "Conversație"
+  },
+  "chatEmptyHeading": {
+    "message": "Vorbiți cu agentul de aici"
+  },
+  "chatEmptyBody": {
+    "message": "Cereți-i agentului să continue în browser sau rulați promptul $1 al acestuia. Mesajele agentului apar aici, iar răspunsurile dvs. ajung direct la el."
+  },
+  "chatEmptyHint": {
+    "message": "Fiecare sesiune de agent are propria conversație."
+  },
+  "chatInput": {
+    "message": "Trimiteți un mesaj agentului"
+  },
+  "chatEnd": {
+    "message": "Încheiați chatul"
+  },
+  "chatRemove": {
+    "message": "Eliminați"
+  },
+  "chatSend": {
+    "message": "Trimiteți"
+  },
+  "chatError": {
+    "message": "A apărut o eroare."
+  },
+  "chatUnseen_one": {
+    "message": "$2 ($1 nou)"
+  },
+  "chatUnseen_few": {
+    "message": "$2 ($1 noi)"
+  },
+  "chatUnseen_other": {
+    "message": "$2 ($1 noi)"
+  },
+  "chatStatusWaiting": {
+    "message": "Se așteaptă răspunsul dvs."
+  },
+  "chatStatusWorking": {
+    "message": "Lucrează"
+  },
+  "chatStatusWorkingTool": {
+    "message": "Lucrează: a folosit $1 $2"
+  },
+  "chatStatusDisconnected": {
+    "message": "Agent deconectat"
+  },
+  "chatStatusReconnecting": {
+    "message": "Agentul se reconectează"
+  },
+  "chatStatusEnded": {
+    "message": "Chat încheiat"
+  },
+  "chatHintWaiting": {
+    "message": "Enter pentru a trimite, Shift+Enter pentru un rând nou."
+  },
+  "chatHintWorking": {
+    "message": "Agentul vă va citi mesajul când verifică din nou chatul."
+  },
+  "chatHintDisconnected": {
+    "message": "Această sesiune de agent s-a închis."
+  },
+  "chatHintReconnecting": {
+    "message": "Conexiunea cu agentul s-a întrerupt. Mesajele tale așteaptă aici până se reconectează."
+  },
+  "chatHintEnded": {
+    "message": "Cereți-i agentului să continue în browser pentru a discuta din nou."
+  },
+  "chatReadByAgent": {
+    "message": "citit de agent"
+  },
+  "chatNotReadYet": {
+    "message": "necitit încă"
+  },
+  "chatEndedNotice": {
+    "message": "Ați încheiat chatul."
+  },
+  "chatConversationGone": {
+    "message": "Această conversație nu mai există."
+  },
+  "chatEndedError": {
+    "message": "Acest chat s-a încheiat. Cereți-i agentului să continue în browser pentru a-l relua."
+  },
+  "chatTooLong_one": {
+    "message": "Mesajele pot avea cel mult $1 caracter."
+  },
+  "chatTooLong_few": {
+    "message": "Mesajele pot avea cel mult $1 caractere."
+  },
+  "chatTooLong_other": {
+    "message": "Mesajele pot avea cel mult $1 de caractere."
+  },
+  "askYourAgent": {
+    "message": "Agentul dvs."
+  },
+  "askFrom": {
+    "message": "$1 întreabă"
+  },
+  "askConfirm": {
+    "message": "Confirmați"
+  },
+  "askCancel": {
+    "message": "Anulați"
+  },
+  "askConfirmed": {
+    "message": "Confirmat. $1 va continua."
+  },
+  "askCancelled": {
+    "message": "Anulat. $1 nu va continua."
+  },
+  "askDragHint": {
+    "message": "Trageți pentru a muta"
+  },
+  "askNotificationTitle": {
+    "message": "$1 așteaptă răspunsul dvs."
+  }
+}

@@ -1,0 +1,317 @@
+{
+  "locale": {
+    "message": "sw"
+  },
+  "extDescription": {
+    "message": "Dhibiti kivinjari chako ukitumia wakala yeyote wa AI unayempenda: panga vichupo na utumie kurasa za wavuti kupitia MCP."
+  },
+  "actionTitle": {
+    "message": "Agent Browser Bridge: mipangilio na hali"
+  },
+  "actionTitleDisconnected": {
+    "message": "Agent Browser Bridge: hakuna wakala aliyeunganishwa"
+  },
+  "actionTitleConnected": {
+    "message": "Agent Browser Bridge: wakala ameunganishwa"
+  },
+  "actionTitleConnectedTo": {
+    "message": "Agent Browser Bridge: imeunganishwa na $1"
+  },
+  "notificationReply": {
+    "message": "Bofya kitufe cha Agent Browser Bridge kwenye upau wa vidhibiti ili ujibu"
+  },
+  "statusChecking": {
+    "message": "Inakagua muunganisho…"
+  },
+  "statusLooking": {
+    "message": "Inamtafuta wakala wako…"
+  },
+  "welcomeLede": {
+    "message": "Ruhusu wakala wako wa AI apange vichupo vyako na atumie kurasa za wavuti."
+  },
+  "welcomeLedeSafari": {
+    "message": "Ruhusu wakala wako wa AI atafute, afungue, ahamishe na afunge vichupo vyako vya Safari."
+  },
+  "profileLabel": {
+    "message": "Wasifu huu"
+  },
+  "profilePlaceholder": {
+    "message": "Ipe jina"
+  },
+  "profileHint": {
+    "message": "Mawakala hutumia jina hili kutofautisha vivinjari na wasifu wako, kwa hivyo unaweza kuomba kivinjari chako cha Kazini."
+  },
+  "profileSaved": {
+    "message": "Imehifadhiwa"
+  },
+  "profileNameRemoved": {
+    "message": "Jina limeondolewa"
+  },
+  "statusNotConnected": {
+    "message": "Bado haijaunganishwa"
+  },
+  "statusSetUpHint": {
+    "message": "Unganisha wakala wako hapa chini, kisha uanzishe kipindi kipya ndani yake."
+  },
+  "statusConnected": {
+    "message": "Imeunganishwa"
+  },
+  "statusConnectedMany_one": {
+    "message": "Imeunganishwa kwenye kipindi $1 cha wakala"
+  },
+  "statusConnectedMany_other": {
+    "message": "Imeunganishwa kwenye vipindi $1 vya wakala"
+  },
+  "statusConnectedHint": {
+    "message": "Wakala wako anaweza kutumia kivinjari hiki. Jaribu mojawapo ya maagizo yaliyo hapa chini."
+  },
+  "welcomeStepConnect": {
+    "message": "Unganisha wakala wako"
+  },
+  "stepDone": {
+    "message": "Imekamilika"
+  },
+  "welcomePickAgent": {
+    "message": "Chagua wakala unayemtumia."
+  },
+  "welcomeAgentTabs": {
+    "message": "Wakala wako"
+  },
+  "welcomeTabOther": {
+    "message": "Nyingine"
+  },
+  "welcomeClaudeCodeSteps": {
+    "message": "Tekeleza hii mara moja kwenye terminal, kisha uanzishe kipindi kipya cha Claude Code."
+  },
+  "welcomeClaudeDesktopSteps": {
+    "message": "Pakua kiendelezi na ufungue faili. Claude Desktop itakusakinishia, huhitaji Node.js."
+  },
+  "welcomeOpensToConfirm": {
+    "message": "$1 hufunguka na kukuomba uthibitishe."
+  },
+  "welcomeOtherAgentsSteps": {
+    "message": "Ongeza hii kwenye mipangilio ya MCP ya wakala, kisha umzime na umwashe tena."
+  },
+  "welcomeAgentSetupHint": {
+    "message": "Bandika maagizo haya kwenye wakala anayeweza kutekeleza amri, kama vile Claude Code, Cursor au Codex. Yanakagua kama kuna Node.js, kisha yanaongeza seva."
+  },
+  "showPrompt": {
+    "message": "Onyesha maagizo"
+  },
+  "welcomeServerFootnote": {
+    "message": "Wakala wako huendesha seva ndogo ya karibu, $1, ambayo kiendelezi hiki huunganisha nayo."
+  },
+  "welcomeStepAsk": {
+    "message": "Muulize jambo"
+  },
+  "welcomeUndoFootnote": {
+    "message": "Umebadilisha nia? Mabadiliko yaliyofanywa kwa $1 yanaweza kutenduliwa kwa kumwomba wakala ayatendue."
+  },
+  "welcomeSafariFootnote": {
+    "message": "Kwenye Safari, wakala wako anaweza kufungua, kupanga na kufunga madirisha, na pia kufungua, kuelekeza, kubadilisha, kubandika, kuzima sauti, kunakili, kuhamisha na kufunga vichupo. Vikundi vya vichupo, historia, alamisho na udhibiti wa kurasa vinapatikana kwenye Chrome. Ikiwa majina na anwani za vichupo hazionekani, kipe kiendelezi ruhusa ya kufikia tovuti kwenye Safari katika Settings > Extensions."
+  },
+  "welcomeAnalyticsHint": {
+    "message": "Vipengele vinavyotumiwa na toleo la kiendelezi, ili kusaidia kuboresha kiendelezi."
+  },
+  "instanceId": {
+    "message": "Kitambulisho cha tukio: $1"
+  },
+  "welcomeAgentSetupTitle": {
+    "message": "Ruhusu wakala wako aiweke"
+  },
+  "copyPrompt": {
+    "message": "Nakili maagizo"
+  },
+  "copy": {
+    "message": "Nakili"
+  },
+  "copied": {
+    "message": "Imenakiliwa"
+  },
+  "welcomeAddTo": {
+    "message": "Ongeza kwenye $1"
+  },
+  "welcomeDownloadFor": {
+    "message": "Pakua kwa ajili ya $1"
+  },
+  "welcomeTryIntro": {
+    "message": "Chrome ikiwa imefunguliwa, muulize wakala wako:"
+  },
+  "welcomeTryTabs": {
+    "message": "Panga vichupo vyangu vilivyofunguliwa katika vikundi kulingana na mada. Nionyeshe mpango kwanza."
+  },
+  "welcomeTryPage": {
+    "message": "Fungua maelezo ya toleo la Chrome na unifupishie kilichobadilika katika toleo jipya zaidi."
+  },
+  "welcomeTryIntroSafari": {
+    "message": "Safari ikiwa imefunguliwa, muulize wakala wako:"
+  },
+  "welcomeTryDuplicatesSafari": {
+    "message": "Nimefungua vichupo gani kwenye Safari? Funga vilivyorudiwa, lakini uniulize kwanza."
+  },
+  "welcomeTrySortSafari": {
+    "message": "Panga vichupo vyangu vya Safari kulingana na tovuti."
+  },
+  "welcomePrivacyHeading": {
+    "message": "Faragha"
+  },
+  "welcomePrivacy": {
+    "message": "Data yako ya kuvinjari hubaki kwenye kompyuta yako: kiendelezi huwasiliana na $1 pekee. Wakala wako anaweza kusoma majina na URL za vichupo, kupanga upya, kuweka katika vikundi au kufunga vichupo, na kusoma na kuchukua hatua kwenye kurasa za wavuti unapomwomba. Chrome huonyesha bango la utatuzi wakala anapofanya kazi kwenye ukurasa. Kiendelezi hiki hakitumi kamwe majina ya vichupo, URL wala maudhui ya kurasa popote pengine."
+  },
+  "welcomePrivacySafari": {
+    "message": "Data yako ya kuvinjari hubaki kwenye kompyuta yako: kiendelezi huwasiliana na $1 pekee. Wakala wako anaweza kusoma majina na URL za vichupo, na kufungua, kupanga au kufunga madirisha na vichupo unapomwomba. Hawezi kusoma wala kuchukua hatua kwenye kurasa za wavuti katika Safari. Kiendelezi hiki hakitumi kamwe majina ya vichupo wala URL popote pengine."
+  },
+  "analyticsTitle": {
+    "message": "Shiriki takwimu za matumizi bila kutambulisha"
+  },
+  "privacyPolicy": {
+    "message": "Sera ya faragha"
+  },
+  "agentStartingUp": {
+    "message": "Wakala anaanza"
+  },
+  "sessionInProject": {
+    "message": "$1 katika $2"
+  },
+  "sessionStarted": {
+    "message": "Kilianza $1"
+  },
+  "sessionLastUsed_one": {
+    "message": "Mara ya mwisho kilitumia $2 $3, ombi $1"
+  },
+  "sessionLastUsed_other": {
+    "message": "Mara ya mwisho kilitumia $2 $3, maombi $1"
+  },
+  "sessionUnused": {
+    "message": "Bado hakijatumia kivinjari"
+  },
+  "sessionId": {
+    "message": "Kipindi $1"
+  },
+  "serverVersion": {
+    "message": "seva $1"
+  },
+  "instanceThisBrowser": {
+    "message": "$1, kivinjari hiki"
+  },
+  "justNow": {
+    "message": "sasa hivi"
+  },
+  "chatTitle": {
+    "message": "Gumzo na wakala"
+  },
+  "chatSetup": {
+    "message": "Mipangilio"
+  },
+  "chatConversation": {
+    "message": "Mazungumzo"
+  },
+  "chatEmptyHeading": {
+    "message": "Zungumza na wakala wako ukiwa hapa"
+  },
+  "chatEmptyBody": {
+    "message": "Mwombe wakala wako aendelee kwenye kivinjari, au utekeleze maagizo yake ya $1. Ujumbe wake utaonekana hapa, na majibu yako yatamfikia moja kwa moja."
+  },
+  "chatEmptyHint": {
+    "message": "Kila kipindi cha wakala kina mazungumzo yake."
+  },
+  "chatInput": {
+    "message": "Mtumie wakala ujumbe"
+  },
+  "chatEnd": {
+    "message": "Maliza gumzo"
+  },
+  "chatRemove": {
+    "message": "Ondoa"
+  },
+  "chatSend": {
+    "message": "Tuma"
+  },
+  "chatError": {
+    "message": "Hitilafu fulani imetokea."
+  },
+  "chatUnseen_one": {
+    "message": "$2 ($1 mpya)"
+  },
+  "chatUnseen_other": {
+    "message": "$2 ($1 mpya)"
+  },
+  "chatStatusWaiting": {
+    "message": "Inasubiri jibu lako"
+  },
+  "chatStatusWorking": {
+    "message": "Inafanya kazi"
+  },
+  "chatStatusWorkingTool": {
+    "message": "Inafanya kazi: ilitumia $1 $2"
+  },
+  "chatStatusDisconnected": {
+    "message": "Wakala ametenganishwa"
+  },
+  "chatStatusReconnecting": {
+    "message": "Wakala anaunganishwa upya"
+  },
+  "chatStatusEnded": {
+    "message": "Gumzo limeisha"
+  },
+  "chatHintWaiting": {
+    "message": "Enter ili kutuma, Shift+Enter kwa mstari mpya."
+  },
+  "chatHintWorking": {
+    "message": "Wakala atasoma ujumbe wako atakapoangalia gumzo tena."
+  },
+  "chatHintDisconnected": {
+    "message": "Kipindi hiki cha wakala kimefungwa."
+  },
+  "chatHintReconnecting": {
+    "message": "Muunganisho wa wakala umekatika. Ujumbe wako utasubiri hapa hadi aunganishwe tena."
+  },
+  "chatHintEnded": {
+    "message": "Mwombe wakala aendelee kwenye kivinjari ili mpige gumzo tena."
+  },
+  "chatReadByAgent": {
+    "message": "imesomwa na wakala"
+  },
+  "chatNotReadYet": {
+    "message": "bado haijasomwa"
+  },
+  "chatEndedNotice": {
+    "message": "Umemaliza gumzo."
+  },
+  "chatConversationGone": {
+    "message": "Mazungumzo haya hayapo tena."
+  },
+  "chatEndedError": {
+    "message": "Gumzo hili limeisha. Mwombe wakala aendelee kwenye kivinjari ili kulianzisha tena."
+  },
+  "chatTooLong_one": {
+    "message": "Ujumbe hauwezi kuzidi herufi $1."
+  },
+  "chatTooLong_other": {
+    "message": "Ujumbe hauwezi kuzidi herufi $1."
+  },
+  "askYourAgent": {
+    "message": "Wakala wako"
+  },
+  "askFrom": {
+    "message": "$1 anauliza"
+  },
+  "askConfirm": {
+    "message": "Thibitisha"
+  },
+  "askCancel": {
+    "message": "Ghairi"
+  },
+  "askConfirmed": {
+    "message": "Imethibitishwa. $1 ataendelea."
+  },
+  "askCancelled": {
+    "message": "Imeghairiwa. $1 hataendelea."
+  },
+  "askDragHint": {
+    "message": "Buruta ili kusogeza"
+  },
+  "askNotificationTitle": {
+    "message": "$1 anasubiri jibu lako"
+  }
+}

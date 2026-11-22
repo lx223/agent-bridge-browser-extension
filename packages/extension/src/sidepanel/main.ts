@@ -3,11 +3,15 @@ import type { ConnectionStatus } from '../background/bridgeClient.ts';
 import { CHAT_STORAGE_KEY, type Conversations } from '../background/chat.ts';
 import { CHAT_PANEL_PORT, type ChatPanelMessage } from '../background/chatPanel.ts';
 import { panelView, type MessageView } from './view.ts';
+import { t } from '../i18n/messages.ts';
+import { localizePage } from '../i18n/page.ts';
 
 const REFRESH_MS = 5_000;
 const RECONNECT_MS = 1_000;
 
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
+
+localizePage();
 
 const title = $('title');
 const picker = $<HTMLSelectElement>('conversation');
@@ -31,7 +35,7 @@ let renderedMessages = '';
 
 async function post(message: ChatPanelMessage) {
   const answer = (await chrome.runtime.sendMessage(message)) as { ok: boolean; error?: string } | undefined;
-  if (answer && !answer.ok) throw new Error(answer.error ?? 'Something went wrong.');
+  if (answer && !answer.ok) throw new Error(answer.error ?? t('chatError'));
 }
 
 function showError(error: unknown) {
@@ -71,9 +75,9 @@ function render() {
   picker.replaceChildren(
     ...view.options.map((option) => {
       const element = document.createElement('option');
-      element.value = option.sessionId;
+      element.value = option.key;
       element.textContent = option.label;
-      element.selected = option.sessionId === view.selected;
+      element.selected = option.key === view.selected;
       return element;
     }),
   );
@@ -95,7 +99,7 @@ function markSeen() {
   const conversation = conversations[selected];
   const latestAgent = conversation?.messages.filter((message) => message.from === 'agent').at(-1)?.seq ?? 0;
   if (!conversation || latestAgent <= conversation.seenByUser) return;
-  void post({ type: 'CHAT_SEEN', sessionId: selected }).catch(() => undefined);
+  void post({ type: 'CHAT_SEEN', key: selected }).catch(() => undefined);
 }
 
 async function currentTab(): Promise<ChatTab | undefined> {
@@ -111,7 +115,7 @@ async function send() {
   render();
   try {
     const tab = await currentTab();
-    await post({ type: 'CHAT_POST', sessionId: selected, text, ...(tab && { tab }) });
+    await post({ type: 'CHAT_POST', key: selected, text, ...(tab && { tab }) });
     input.value = '';
   } catch (error) {
     showError(error);
@@ -146,14 +150,14 @@ picker.addEventListener('change', () => {
 
 endButton.addEventListener('click', () => {
   if (selected === undefined) return;
-  void post({ type: 'CHAT_END', sessionId: selected }).catch(showError);
+  void post({ type: 'CHAT_END', key: selected }).catch(showError);
 });
 
 removeButton.addEventListener('click', () => {
   if (selected === undefined) return;
   const removing = selected;
   chosen = undefined;
-  void post({ type: 'CHAT_REMOVE', sessionId: removing }).catch(showError);
+  void post({ type: 'CHAT_REMOVE', key: removing }).catch(showError);
 });
 
 document.addEventListener('visibilitychange', markSeen);

@@ -24,7 +24,7 @@ Tests live next to the code as `*.test.ts` and run with Vitest in a Node environ
 
 `npm run test:coverage` prints a table and writes an HTML report to `coverage/`. Thresholds are set in `vitest.config.ts` a little below the current numbers, so a change that removes tests or adds untested logic fails presubmit. Raise them when coverage rises.
 
-Files that only wire things to the browser are excluded from the unit coverage numbers because the end-to-end suite is what exercises them: the service worker entry, the `chrome.*` handlers, navigation, serialisation, the welcome and options pages, and the server entry points (`index.ts`, `standalone.ts`, `worker.ts` and the process wiring in `autoUpdate.ts`). The end-to-end suite starts the server through the launcher, so it runs that wiring too.
+Files that only wire things to the browser are excluded from the unit coverage numbers because the end-to-end suite is what exercises them: the service worker entry, the `chrome.*` handlers, navigation, serialisation, the welcome page, and the server entry points (`index.ts`, `standalone.ts`, `worker.ts` and the process wiring in `autoUpdate.ts`). The end-to-end suite starts the server through the launcher, so it runs that wiring too.
 
 ## End-to-end tests
 
@@ -38,7 +38,7 @@ The tests are grouped by what a user does with the bridge, one folder each. `e2e
 
 | Folder | File | What it covers |
 | --- | --- | --- |
-| `connection/` | `extension.test.ts` | The built manifest and its files, the welcome and options pages, and reconnecting to a new server session. |
+| `connection/` | `extension.test.ts` | The built manifest and its files, the welcome page, and reconnecting to a new server session. |
 | | `status.test.ts` | The status tool, the full tool list, addressing the browser by instance id, identifying and naming a profile, and Safari reported as not connected. |
 | | `profiles.test.ts` | Two Chrome profiles connected at once: separate instance ids, asking which one to use, routing calls and staying on the chosen one, addressing a profile by name, and dropping a profile whose browser closes. |
 | | `sessions.test.ts` | Several agent sessions sharing one browser: a second session relaying through the first, and the others carrying on when the session hosting the bridge ends. |
@@ -50,6 +50,7 @@ The tests are grouped by what a user does with the bridge, one folder each. `e2e
 | | `browserData.test.ts` | The Reading List, bookmarks, downloads, most visited sites, searching with the default search engine and notifications. Playwright saves downloads under random names in its own folder, so the download test finds its file by URL rather than by name. |
 | `chat/` | `chat.test.ts` | The side panel chat: the empty state, the toolbar badge, replies typed in the panel reaching the agent, the unread note on other tools, and ending the chat. |
 | `ask/` | `ask.test.ts` | Asking the user in a page: the popover's text, confirming and cancelling with real clicks inside its closed shadow root, asking in the active tab, bringing the tab to the front, `navigated` after a navigation, a page script that can neither see the answer nor click for the user, the timeout removing the popover, and one question per tab. |
+| `localisation/` | `localisation.test.ts` | The setup page in German and in Arabic: translated text, code and links kept inside translated sentences, and the right-to-left layout. |
 | `resilience/` | `serverRestart.test.ts` | Killing the MCP server process mid-session: the launcher starts a new one, the agent's next call still reaches the browser, and a tool call the crash cut off is reported as possibly not finished. It needs the launcher, so it does not run against the Claude Desktop bundle. |
 | `safari/` | `safari.test.ts` | The built extension in a simulated Safari instead of Chromium. See [Safari](#safari). |
 
@@ -135,7 +136,7 @@ When the message says Safari has the API but the simulation does not, add it to 
 
 The simulation cannot drift into offering more than Safari does. A test compares every API it offers with MDN's browser compatibility data (the `@mdn/browser-compat-data` package) and fails if one is missing from Safari or newer than `SAFARI_VERSION` in `simulatedSafari.ts`. That constant is the Safari version the extension needs. It is 27 because `tabs.move`, which `safari_tabs_move` uses, arrived in Safari 27. Update the package now and then to pick up MDN's corrections.
 
-What the simulation does not prove: that real Safari behaves the way MDN and the simulation say, how Safari handles website access for tab titles and URLs, how long it keeps the background script alive, and how Safari itself lays out the setup and options pages.
+What the simulation does not prove: that real Safari behaves the way MDN and the simulation say, how Safari handles website access for tab titles and URLs, how long it keeps the background script alive, and how Safari itself lays out the setup page.
 
 ### Safari app build
 

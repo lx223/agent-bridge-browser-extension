@@ -1,0 +1,317 @@
+{
+  "locale": {
+    "message": "gu"
+  },
+  "extDescription": {
+    "message": "તમારી પસંદના કોઈપણ AI એજન્ટ વડે તમારું બ્રાઉઝર નિયંત્રિત કરો: MCP મારફતે ટૅબ ગોઠવો અને વેબ પેજ ચલાવો."
+  },
+  "actionTitle": {
+    "message": "Agent Browser Bridge: સેટઅપ અને સ્ટેટસ"
+  },
+  "actionTitleDisconnected": {
+    "message": "Agent Browser Bridge: કોઈ એજન્ટ કનેક્ટ થયેલો નથી"
+  },
+  "actionTitleConnected": {
+    "message": "Agent Browser Bridge: એજન્ટ કનેક્ટ થયેલો છે"
+  },
+  "actionTitleConnectedTo": {
+    "message": "Agent Browser Bridge: $1 સાથે કનેક્ટ થયેલું છે"
+  },
+  "notificationReply": {
+    "message": "જવાબ આપવા માટે ટૂલબારમાં Agent Browser Bridge બટન પર ક્લિક કરો"
+  },
+  "statusChecking": {
+    "message": "કનેક્શન ચેક કરી રહ્યાં છીએ…"
+  },
+  "statusLooking": {
+    "message": "તમારા એજન્ટને શોધી રહ્યાં છીએ…"
+  },
+  "welcomeLede": {
+    "message": "તમારા AI એજન્ટને તમારી ટૅબ ગોઠવવા અને વેબ પેજ ચલાવવા દો."
+  },
+  "welcomeLedeSafari": {
+    "message": "તમારા AI એજન્ટને તમારી Safari ટૅબ શોધવા, ખોલવા, ખસેડવા અને બંધ કરવા દો."
+  },
+  "profileLabel": {
+    "message": "આ પ્રોફાઇલ"
+  },
+  "profilePlaceholder": {
+    "message": "તેને નામ આપો"
+  },
+  "profileHint": {
+    "message": "એજન્ટ આ નામથી તમારા બ્રાઉઝર અને પ્રોફાઇલને અલગ ઓળખે છે, જેથી તમે તમારું ઑફિસ બ્રાઉઝર માગી શકો."
+  },
+  "profileSaved": {
+    "message": "સાચવ્યું"
+  },
+  "profileNameRemoved": {
+    "message": "નામ કાઢી નાખ્યું"
+  },
+  "statusNotConnected": {
+    "message": "હજી કનેક્ટ થયેલ નથી"
+  },
+  "statusSetUpHint": {
+    "message": "નીચે તમારા એજન્ટને કનેક્ટ કરો, પછી તેમાં નવું સત્ર શરૂ કરો."
+  },
+  "statusConnected": {
+    "message": "કનેક્ટ થયેલ છે"
+  },
+  "statusConnectedMany_one": {
+    "message": "$1 એજન્ટ સત્ર સાથે કનેક્ટ થયેલ છે"
+  },
+  "statusConnectedMany_other": {
+    "message": "$1 એજન્ટ સત્રો સાથે કનેક્ટ થયેલ છે"
+  },
+  "statusConnectedHint": {
+    "message": "તમારો એજન્ટ આ બ્રાઉઝરનો ઉપયોગ કરી શકે છે. નીચેના પ્રૉમ્પ્ટમાંથી કોઈ એક અજમાવી જુઓ."
+  },
+  "welcomeStepConnect": {
+    "message": "તમારા એજન્ટને કનેક્ટ કરો"
+  },
+  "stepDone": {
+    "message": "થઈ ગયું"
+  },
+  "welcomePickAgent": {
+    "message": "તમે જે એજન્ટનો ઉપયોગ કરો છો તે પસંદ કરો."
+  },
+  "welcomeAgentTabs": {
+    "message": "તમારો એજન્ટ"
+  },
+  "welcomeTabOther": {
+    "message": "અન્ય"
+  },
+  "welcomeClaudeCodeSteps": {
+    "message": "ટર્મિનલમાં આ એક વાર ચલાવો, પછી નવું Claude Code સત્ર શરૂ કરો."
+  },
+  "welcomeClaudeDesktopSteps": {
+    "message": "એક્સ્ટેંશન ડાઉનલોડ કરો અને ફાઇલ ખોલો. Claude Desktop તેને તમારા માટે ઇન્સ્ટૉલ કરે છે, Node.jsની જરૂર નથી."
+  },
+  "welcomeOpensToConfirm": {
+    "message": "$1 ખૂલે છે અને તમને કન્ફર્મ કરવાનું કહે છે."
+  },
+  "welcomeOtherAgentsSteps": {
+    "message": "આને એજન્ટની MCP ગોઠવણીમાં ઉમેરો, પછી એજન્ટને ફરી શરૂ કરો."
+  },
+  "welcomeAgentSetupHint": {
+    "message": "કમાન્ડ ચલાવી શકે એવા એજન્ટમાં આ પ્રૉમ્પ્ટ પેસ્ટ કરો, જેમ કે Claude Code, Cursor અથવા Codex. તે Node.js છે કે નહીં તે ચેક કરે છે, પછી સર્વર ઉમેરે છે."
+  },
+  "showPrompt": {
+    "message": "પ્રૉમ્પ્ટ બતાવો"
+  },
+  "welcomeServerFootnote": {
+    "message": "તમારો એજન્ટ એક નાનું સ્થાનિક સર્વર, $1, ચલાવે છે, જેની સાથે આ એક્સ્ટેંશન કનેક્ટ થાય છે."
+  },
+  "welcomeStepAsk": {
+    "message": "તેને કંઈક પૂછો"
+  },
+  "welcomeUndoFootnote": {
+    "message": "વિચાર બદલાયો? $1 વડે કરેલા ફેરફારો એજન્ટને પૂર્વવત્ કરવાનું કહીને પાછા ફેરવી શકાય છે."
+  },
+  "welcomeSafariFootnote": {
+    "message": "Safariમાં તમારો એજન્ટ વિન્ડો ખોલી, ગોઠવી અને બંધ કરી શકે છે, તેમજ ટૅબ ખોલી, નેવિગેટ કરી, સ્વિચ કરી, પિન કરી, મ્યૂટ કરી, ડુપ્લિકેટ કરી, ખસેડી અને બંધ કરી શકે છે. ટૅબ ગ્રૂપ, ઇતિહાસ, બુકમાર્ક અને પેજ નિયંત્રણ Chromeમાં ઉપલબ્ધ છે. જો ટૅબના શીર્ષકો અને સરનામાં ન દેખાતાં હોય, તો Safariમાં સેટિંગ > એક્સ્ટેંશનમાં જઈને એક્સ્ટેંશનને વેબસાઇટનો ઍક્સેસ આપો."
+  },
+  "welcomeAnalyticsHint": {
+    "message": "કઈ સુવિધાઓનો ઉપયોગ થાય છે અને એક્સ્ટેંશનનું વર્ઝન, જેથી એક્સ્ટેંશનને બહેતર બનાવવામાં સહાય મળે."
+  },
+  "instanceId": {
+    "message": "ઇન્સ્ટન્સ ID: $1"
+  },
+  "welcomeAgentSetupTitle": {
+    "message": "તમારા એજન્ટ પાસે સેટઅપ કરાવો"
+  },
+  "copyPrompt": {
+    "message": "પ્રૉમ્પ્ટ કૉપિ કરો"
+  },
+  "copy": {
+    "message": "કૉપિ કરો"
+  },
+  "copied": {
+    "message": "કૉપિ કર્યું"
+  },
+  "welcomeAddTo": {
+    "message": "$1માં ઉમેરો"
+  },
+  "welcomeDownloadFor": {
+    "message": "$1 માટે ડાઉનલોડ કરો"
+  },
+  "welcomeTryIntro": {
+    "message": "Chrome ખુલ્લું રાખીને તમારા એજન્ટને કહો:"
+  },
+  "welcomeTryTabs": {
+    "message": "મારી ખુલ્લી ટૅબને વિષય પ્રમાણે ગ્રૂપમાં ગોઠવો. પહેલાં મને પ્લાન બતાવો."
+  },
+  "welcomeTryPage": {
+    "message": "Chromeની રિલીઝ નોટ્સ ખોલો અને નવા વર્ઝનમાં શું બદલાયું છે તેનો સારાંશ આપો."
+  },
+  "welcomeTryIntroSafari": {
+    "message": "Safari ખુલ્લું રાખીને તમારા એજન્ટને કહો:"
+  },
+  "welcomeTryDuplicatesSafari": {
+    "message": "Safariમાં મારી કઈ કઈ ટૅબ ખુલ્લી છે? ડુપ્લિકેટ ટૅબ બંધ કરો, પણ પહેલાં મને પૂછજો."
+  },
+  "welcomeTrySortSafari": {
+    "message": "મારી Safari ટૅબને સાઇટ પ્રમાણે ક્રમમાં ગોઠવો."
+  },
+  "welcomePrivacyHeading": {
+    "message": "ગોપનીયતા"
+  },
+  "welcomePrivacy": {
+    "message": "તમારો બ્રાઉઝિંગ ડેટા તમારા કમ્પ્યૂટર પર જ રહે છે: એક્સ્ટેંશન માત્ર $1 સાથે જ વાતચીત કરે છે. તમે કહો ત્યારે તમારો એજન્ટ ટૅબના શીર્ષકો અને URL વાંચી શકે છે, ટૅબને ફરીથી ગોઠવી શકે છે, તેનું ગ્રૂપ બનાવી શકે છે કે તેને બંધ કરી શકે છે, અને વેબ પેજ વાંચીને તેમાં ક્રિયાઓ કરી શકે છે. તે કોઈ પેજમાં કામ કરતો હોય ત્યારે Chrome ડિબગિંગ બૅનર બતાવે છે. આ એક્સ્ટેંશન ટૅબના શીર્ષકો, URL અને પેજનું કન્ટેન્ટ ક્યારેય બીજે ક્યાંય મોકલતું નથી."
+  },
+  "welcomePrivacySafari": {
+    "message": "તમારો બ્રાઉઝિંગ ડેટા તમારા કમ્પ્યૂટર પર જ રહે છે: એક્સ્ટેંશન માત્ર $1 સાથે જ વાતચીત કરે છે. તમે કહો ત્યારે તમારો એજન્ટ ટૅબના શીર્ષકો અને URL વાંચી શકે છે, તેમજ વિન્ડો અને ટૅબ ખોલી, ગોઠવી કે બંધ કરી શકે છે. તે Safariમાં વેબ પેજ વાંચી શકતો નથી કે તેમાં ક્રિયાઓ કરી શકતો નથી. આ એક્સ્ટેંશન ટૅબના શીર્ષકો અને URL ક્યારેય બીજે ક્યાંય મોકલતું નથી."
+  },
+  "analyticsTitle": {
+    "message": "વપરાશના અનામી આંકડા શેર કરો"
+  },
+  "privacyPolicy": {
+    "message": "ગોપનીયતા નીતિ"
+  },
+  "agentStartingUp": {
+    "message": "એજન્ટ શરૂ થઈ રહ્યો છે"
+  },
+  "sessionInProject": {
+    "message": "$2માં $1"
+  },
+  "sessionStarted": {
+    "message": "$1 શરૂ થયું"
+  },
+  "sessionLastUsed_one": {
+    "message": "છેલ્લે $3 $2નો ઉપયોગ કર્યો, $1 કૉલ"
+  },
+  "sessionLastUsed_other": {
+    "message": "છેલ્લે $3 $2નો ઉપયોગ કર્યો, $1 કૉલ"
+  },
+  "sessionUnused": {
+    "message": "હજી સુધી બ્રાઉઝરનો ઉપયોગ કર્યો નથી"
+  },
+  "sessionId": {
+    "message": "સત્ર $1"
+  },
+  "serverVersion": {
+    "message": "સર્વર $1"
+  },
+  "instanceThisBrowser": {
+    "message": "$1, આ બ્રાઉઝર"
+  },
+  "justNow": {
+    "message": "હમણાં જ"
+  },
+  "chatTitle": {
+    "message": "એજન્ટ ચૅટ"
+  },
+  "chatSetup": {
+    "message": "સેટઅપ"
+  },
+  "chatConversation": {
+    "message": "વાતચીત"
+  },
+  "chatEmptyHeading": {
+    "message": "અહીંથી તમારા એજન્ટ સાથે વાત કરો"
+  },
+  "chatEmptyBody": {
+    "message": "તમારા એજન્ટને બ્રાઉઝરમાં આગળ વધવાનું કહો અથવા તેનો $1 પ્રૉમ્પ્ટ ચલાવો. તેના મેસેજ અહીં દેખાય છે અને તમારા જવાબ સીધા તેની પાસે જાય છે."
+  },
+  "chatEmptyHint": {
+    "message": "દરેક એજન્ટ સત્રની પોતાની અલગ વાતચીત હોય છે."
+  },
+  "chatInput": {
+    "message": "એજન્ટને મેસેજ મોકલો"
+  },
+  "chatEnd": {
+    "message": "ચૅટ સમાપ્ત કરો"
+  },
+  "chatRemove": {
+    "message": "કાઢી નાખો"
+  },
+  "chatSend": {
+    "message": "મોકલો"
+  },
+  "chatError": {
+    "message": "કંઈક ખોટું થયું."
+  },
+  "chatUnseen_one": {
+    "message": "$2 ($1 નવો)"
+  },
+  "chatUnseen_other": {
+    "message": "$2 ($1 નવા)"
+  },
+  "chatStatusWaiting": {
+    "message": "તમારા જવાબની રાહ જોઈ રહ્યો છે"
+  },
+  "chatStatusWorking": {
+    "message": "કામ કરી રહ્યો છે"
+  },
+  "chatStatusWorkingTool": {
+    "message": "કામ કરી રહ્યો છે: $2 $1નો ઉપયોગ કર્યો"
+  },
+  "chatStatusDisconnected": {
+    "message": "એજન્ટ ડિસ્કનેક્ટ થયો"
+  },
+  "chatStatusReconnecting": {
+    "message": "એજન્ટ ફરી કનેક્ટ થઈ રહ્યો છે"
+  },
+  "chatStatusEnded": {
+    "message": "ચૅટ સમાપ્ત થઈ"
+  },
+  "chatHintWaiting": {
+    "message": "મોકલવા માટે Enter, નવી લાઇન માટે Shift+Enter દબાવો."
+  },
+  "chatHintWorking": {
+    "message": "એજન્ટ આગલી વખતે ચૅટ ચેક કરશે ત્યારે તમારો મેસેજ વાંચશે."
+  },
+  "chatHintDisconnected": {
+    "message": "આ એજન્ટ સત્ર બંધ થઈ ગયું છે."
+  },
+  "chatHintReconnecting": {
+    "message": "એજન્ટનું કનેક્શન તૂટી ગયું. તે ફરી કનેક્ટ થાય ત્યાં સુધી તમારા સંદેશા અહીં રાહ જોશે."
+  },
+  "chatHintEnded": {
+    "message": "ફરીથી ચૅટ કરવા માટે એજન્ટને બ્રાઉઝરમાં આગળ વધવાનું કહો."
+  },
+  "chatReadByAgent": {
+    "message": "એજન્ટે વાંચ્યો"
+  },
+  "chatNotReadYet": {
+    "message": "હજી વાંચ્યો નથી"
+  },
+  "chatEndedNotice": {
+    "message": "તમે ચૅટ સમાપ્ત કરી."
+  },
+  "chatConversationGone": {
+    "message": "આ વાતચીત હવે અસ્તિત્વમાં નથી."
+  },
+  "chatEndedError": {
+    "message": "આ ચૅટ સમાપ્ત થઈ ગઈ છે. તેને ફરી શરૂ કરવા માટે એજન્ટને બ્રાઉઝરમાં આગળ વધવાનું કહો."
+  },
+  "chatTooLong_one": {
+    "message": "મેસેજમાં વધુમાં વધુ $1 અક્ષર હોઈ શકે છે."
+  },
+  "chatTooLong_other": {
+    "message": "મેસેજમાં વધુમાં વધુ $1 અક્ષરો હોઈ શકે છે."
+  },
+  "askYourAgent": {
+    "message": "તમારો એજન્ટ"
+  },
+  "askFrom": {
+    "message": "$1 પૂછે છે"
+  },
+  "askConfirm": {
+    "message": "પુષ્ટિ કરો"
+  },
+  "askCancel": {
+    "message": "રદ કરો"
+  },
+  "askConfirmed": {
+    "message": "પુષ્ટિ થઈ. $1 આગળ વધશે."
+  },
+  "askCancelled": {
+    "message": "રદ થયું. $1 આગળ નહીં વધે."
+  },
+  "askDragHint": {
+    "message": "ખસેડવા માટે ખેંચો"
+  },
+  "askNotificationTitle": {
+    "message": "$1 તમારા જવાબની રાહ જુએ છે"
+  }
+}
