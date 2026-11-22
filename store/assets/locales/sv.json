@@ -1,0 +1,60 @@
+{
+  "captions": {
+    "tabs": {
+      "headline": "Låt din AI-agent städa bland dina flikar",
+      "subline": "Förhandsgranska en grupperingsplan, tillämpa den i ett steg och ångra den om du ändrar dig."
+    },
+    "pages": {
+      "headline": "Din agent arbetar på riktiga webbsidor",
+      "subline": "Den läser sidan, fyller i formulär och klickar på knappar i webbläsaren du redan använder."
+    },
+    "profiles": {
+      "headline": "Namnge dina webbläsarprofiler",
+      "subline": "Be om webbläsaren Jobb så väljer din agent rätt Chrome-profil."
+    },
+    "setup": {
+      "headline": "Anslut agenten du redan använder",
+      "subline": "Claude Code, Cursor, VS Code, Claude Desktop eller valfri MCP-klient. Allt körs på din dator."
+    }
+  },
+  "chat": {
+    "you": "Du",
+    "agent": "Agent"
+  },
+  "tabs": {
+    "prompt": "Ordna mina öppna flikar i grupper efter ämne.",
+    "reply": "Klart. Jag ordnade {tabs} flikar i {groups} grupper. Be mig ångra om du vill ha tillbaka den gamla ordningen.",
+    "groups": {
+      "travel": "Lissabonresa",
+      "work": "Q3-rapport",
+      "recipes": "Middagsidéer"
+    },
+    "pages": {
+      "travel": ["Flyg till Lissabon – jämför priser", "Hotell i Alfama", "Lissabon: 10 saker att göra"],
+      "work": ["Intäktsöversikt Q3", "Utkast till Q3-rapport", "Anteckningar från teammötet"],
+      "recipes": ["Enkel vardagspasta", "Ugnsrostade grönsaker i långpanna"]
+    }
+  },
+  "booking": {
+    "prompt": "Boka ett bord för 4 på Casa Azul i kväll i namnet Ada Lovelace.",
+    "reply": "Klart. Casa Azul har bekräftat ett bord för 4 i namnet Ada Lovelace.",
+    "restaurant": "Casa Azul",
+    "heading": "Boka bord",
+    "name": "Namn",
+    "guests": "Antal gäster",
+    "when": "När",
+    "tonight": "I kväll, 19.30",
+    "submit": "Boka bord",
+    "confirmation": "Bord för {guests} bokat i namnet {name}. Välkommen i kväll!",
+    "guestName": "Ada Lovelace"
+  },
+  "profiles": {
+    "prompt": "Den här Chrome-profilen är för jobbet. Kalla den Jobb.",
+    "reply": "Klart. När du ber om webbläsaren Jobb använder jag den här profilen.",
+    "name": "Jobb"
+  },
+  "video": {
+    "tagline": "Låt din AI-agent använda webbläsaren du redan använder.",
+    "closing": "Fungerar med Claude Code, Cursor, VS Code och alla MCP-klienter. Gratis och öppen källkod."
+  }
+}

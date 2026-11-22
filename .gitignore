@@ -35,8 +35,8 @@ coverage/
 # Copied from the root at pack time
 packages/server/LICENSE
 
-# Generated Chrome Web Store screenshots
-store/screenshots/out/
+# Generated store screenshots, videos and promo images
+store/assets/out/
 
 # Claude Desktop extension bundle
 packages/server/mcpb-dist/

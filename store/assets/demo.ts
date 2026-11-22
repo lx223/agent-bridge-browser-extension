@@ -1,6 +1,6 @@
 import { createServer } from 'node:http';
 import { escapeHtml } from './html.ts';
-import { topics, type Locale, type Topic } from './locale.ts';
+import { textDirection, topics, type Locale, type Topic } from './locale.ts';
 
 export interface DemoSite {
   url(path: string): string;
@@ -12,7 +12,7 @@ const tabPath = (topic: Topic, index: number) => `/tab/${topic}/${index}`;
 
 function articlePage(locale: Locale, title: string) {
   return `<!doctype html>
-<html lang="${locale.languageTag}">
+<html lang="${locale.languageTag}" dir="${textDirection(locale.languageTag)}">
   <head>
     <meta charset="utf-8" />
     <title>${escapeHtml(title)}</title>
@@ -34,7 +34,7 @@ function articlePage(locale: Locale, title: string) {
 function bookingPage(locale: Locale) {
   const text = locale.strings.booking;
   return `<!doctype html>
-<html lang="${locale.languageTag}">
+<html lang="${locale.languageTag}" dir="${textDirection(locale.languageTag)}">
   <head>
     <meta charset="utf-8" />
     <title>${escapeHtml(text.restaurant)}</title>

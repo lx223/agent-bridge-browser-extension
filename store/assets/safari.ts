@@ -1,15 +1,12 @@
-import { mkdirSync, readFileSync } from 'node:fs';
-import { join, relative } from 'node:path';
-import { chromium, type Browser } from 'playwright';
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import type { AgentSession } from '@agent-browser-bridge/protocol';
 import { EXTENSION_DIST } from '../../e2e/support/harness.ts';
 import { openSetupPageAsSafari } from '../../e2e/support/safari/setupPage.ts';
-import { chatCard, FRAME, frameHtml, FULL_WINDOW, scaled, screenshotBody, SIDE_WINDOW, windowCard, type ChatMessage } from './frame.ts';
+import { FULL_WINDOW, PRODUCT_NAME, scaled, screenshotBody, SIDE_WINDOW, type ChatMessage, type Slide, type Stage } from './frame.ts';
 import { escapeHtml } from './html.ts';
-import { loadLocale, type Caption } from './locale.ts';
+import type { Caption } from './locale.ts';
 
-const OUT = join(import.meta.dirname, 'out', 'safari');
-const PRODUCT_NAME = 'Agent Browser Bridge';
 const WELCOME_PAGE_SCALE = 0.8;
 const CAPTURE_SCALE = 2;
 const EXTENSION_ORIGIN = 'safari-web-extension://5f0c2b7e-8d4a-4c1e-9b63-2a7d1e4f8c90';
@@ -27,11 +24,22 @@ const CAPTIONS = {
   },
 } satisfies Record<string, Caption>;
 
+export const SAFARI_VIDEO = {
+  tagline: 'Let your AI agent use the Safari you already use.',
+  closing: 'Works with Claude Code, Cursor, VS Code and any MCP client. Everything runs on your Mac.',
+};
+
+const SEARCH_COLOR = '#8e8e93';
+
 const TABS = {
   prompt: 'Open the Lisbon trip pages and close the old search tabs.',
   reply: 'Done. I opened 3 pages for your Lisbon trip and closed 2 old search tabs.',
   createdUrl: 'https://flights.example.com/lisbon',
   closed: '2 tabs',
+  searches: [
+    { title: 'lisbon flights – Search', url: 'search.example.com/?q=lisbon+flights', color: SEARCH_COLOR, active: true },
+    { title: 'alfama hotels – Search', url: 'search.example.com/?q=alfama+hotels', color: SEARCH_COLOR, active: false },
+  ],
   pages: [
     { title: 'Flights to Lisbon – compare prices', url: 'flights.example.com/lisbon', color: '#0a84ff', active: true },
     { title: 'Hotels in Alfama', url: 'stays.example.com/lisbon/alfama', color: '#30a46c', active: false },
@@ -110,14 +118,13 @@ async function setup() {
     }
     if (setupPage.errors.length) throw new Error(`The setup page reported errors: ${setupPage.errors.join('; ')}`);
     const png = await page.screenshot();
-    return windowCard({ title: PRODUCT_NAME, size: FULL_WINDOW, body: screenshotBody(png, FULL_WINDOW) });
+    return { messages: [], window: { title: PRODUCT_NAME, size: FULL_WINDOW, states: [{ step: 0, body: screenshotBody(png, FULL_WINDOW) }] } } satisfies Stage;
   } finally {
     await setupPage.close();
   }
 }
 
-async function tabs() {
-  const { chat } = loadLocale('en').strings;
+function tabs(): Stage {
   const messages: ChatMessage[] = [
     { kind: 'user', text: TABS.prompt },
     { kind: 'tool', name: 'safari_tabs_list' },
@@ -125,51 +132,24 @@ async function tabs() {
     { kind: 'tool', name: 'safari_tabs_close', detail: TABS.closed },
     { kind: 'agent', text: TABS.reply },
   ];
-  return chatCard(chat, messages) + windowCard({ title: 'Safari', size: SIDE_WINDOW, body: safariTabsBody(TABS.pages) });
+  const inactive = (tab: SafariTabView) => ({ ...tab, active: false });
+  return {
+    messages,
+    window: {
+      title: 'Safari',
+      size: SIDE_WINDOW,
+      states: [
+        { step: 0, body: safariTabsBody(TABS.searches) },
+        { step: 2, body: safariTabsBody([...TABS.searches.map(inactive), ...TABS.pages]) },
+        { step: 3, body: safariTabsBody(TABS.pages) },
+      ],
+    },
+  };
 }
 
-const scenes = [
-  { file: '1-setup.png', caption: CAPTIONS.setup, render: setup },
-  { file: '2-tabs.png', caption: CAPTIONS.tabs, render: tabs },
-];
-
-async function renderFrame(browser: Browser, caption: Caption, stage: string, file: string) {
-  const context = await browser.newContext({ viewport: FRAME, deviceScaleFactor: 1, locale: 'en', colorScheme: 'light' });
-  try {
-    const page = await context.newPage();
-    await page.setContent(frameHtml({ languageTag: 'en', caption, stage }), { waitUntil: 'load' });
-    await page.evaluate(() => document.fonts.ready);
-    const overflowing = await page.locator('[data-fit]').evaluateAll((elements) =>
-      elements.filter((element) => element.scrollHeight > element.clientHeight + 1 || element.scrollWidth > element.clientWidth + 1).map((element) => element.className || element.tagName.toLowerCase()),
-    );
-    await page.screenshot({ path: file });
-    return overflowing;
-  } finally {
-    await context.close();
-  }
+export async function safariSlides(): Promise<Array<Slide & { file: string }>> {
+  return [
+    { file: '1-setup', caption: CAPTIONS.setup, stage: await setup() },
+    { file: '2-tabs', caption: CAPTIONS.tabs, stage: tabs() },
+  ];
 }
-
-async function main() {
-  mkdirSync(OUT, { recursive: true });
-  const browser = await chromium.launch();
-  const warnings: string[] = [];
-  try {
-    for (const scene of scenes) {
-      const file = join(OUT, scene.file);
-      const overflowing = await renderFrame(browser, scene.caption, await scene.render(), file);
-      if (overflowing.length) warnings.push(`${scene.file}: text does not fit in ${overflowing.join(', ')}`);
-      console.log(`  ${relative(process.cwd(), file)}`);
-    }
-  } finally {
-    await browser.close();
-  }
-  if (warnings.length) {
-    console.warn(`\nShorten these strings, then run again:\n  ${warnings.join('\n  ')}`);
-    process.exitCode = 1;
-  }
-}
-
-await main().catch((error: unknown) => {
-  console.error(error instanceof Error ? error.message : error);
-  process.exitCode = 1;
-});

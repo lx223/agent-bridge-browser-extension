@@ -1,0 +1,60 @@
+{
+  "captions": {
+    "tabs": {
+      "headline": "Hayaang ayusin ng AI agent ang mga tab mo",
+      "subline": "I-preview ang plano ng pagpapangkat, ilapat ito sa isang hakbang, at i-undo kung magbago ang isip mo."
+    },
+    "pages": {
+      "headline": "Gumagana ang agent mo sa totoong web page",
+      "subline": "Binabasa nito ang page, pinupunan ang mga form at nagki-click ng mga button sa browser na gamit mo na."
+    },
+    "profiles": {
+      "headline": "Pangalanan ang mga browser profile mo",
+      "subline": "Hilingin ang browser mo sa Trabaho at pipiliin ng agent mo ang tamang Chrome profile."
+    },
+    "setup": {
+      "headline": "Ikonekta ang agent na gamit mo na",
+      "subline": "Claude Code, Cursor, VS Code, Claude Desktop o anumang agent na compatible sa MCP. Tumatakbo ang lahat sa computer mo."
+    }
+  },
+  "chat": {
+    "you": "Ikaw",
+    "agent": "Agent"
+  },
+  "tabs": {
+    "prompt": "Pagpangkat-pangkatin ang mga nakabukas kong tab ayon sa paksa.",
+    "reply": "Tapos na. Inayos ko ang {tabs} tab sa {groups} grupo. Sabihin mo lang kung gusto mong i-undo ito para maibalik ang dating ayos.",
+    "groups": {
+      "travel": "Biyahe sa Lisbon",
+      "work": "Q3 report",
+      "recipes": "Ideya sa hapunan"
+    },
+    "pages": {
+      "travel": ["Flight papuntang Lisbon – ihambing ang presyo", "Mga hotel sa Alfama", "Lisbon: top 10 na puwedeng gawin"],
+      "work": ["Q3 revenue dashboard", "Draft ng Q3 report", "Notes sa team meeting"],
+      "recipes": ["Madaling pasta para sa weeknight", "Inihaw na gulay sa tray"]
+    }
+  },
+  "booking": {
+    "prompt": "Mag-book ng table para sa 4 sa Casa Azul ngayong gabi para kay Ada Lovelace.",
+    "reply": "Tapos na. Kumpirmado sa Casa Azul ang table para sa 4 ni Ada Lovelace.",
+    "restaurant": "Casa Azul",
+    "heading": "Magpareserba ng table",
+    "name": "Pangalan",
+    "guests": "Bisita",
+    "when": "Kailan",
+    "tonight": "Ngayong gabi, 7:30 PM",
+    "submit": "I-book ang table",
+    "confirmation": "Naka-book ang table para sa {guests} sa pangalang {name}. Kita tayo mamaya!",
+    "guestName": "Ada Lovelace"
+  },
+  "profiles": {
+    "prompt": "Pang-trabaho ang Chrome profile na ito. Tawagin itong Trabaho.",
+    "reply": "Tapos na. Kapag hiniling mo ang browser mo sa Trabaho, gagamitin ko ang profile na ito.",
+    "name": "Trabaho"
+  },
+  "video": {
+    "tagline": "Hayaang gamitin ng AI agent mo ang browser na gamit mo na.",
+    "closing": "Gumagana sa Claude Code, Cursor, VS Code at anumang MCP client. Libre at open source."
+  }
+}

@@ -1,7 +1,8 @@
 import { IDENTIFY_INSTANCES_TOOL, NAME_INSTANCE_TOOL } from '@agent-browser-bridge/protocol';
+import type { Page } from 'playwright';
 import { refOf, type Harness, type Tab, type TabGroup } from '../../e2e/support/harness.ts';
 import type { DemoSite } from './demo.ts';
-import { chatCard, FULL_WINDOW, popupBody, scaled, screenshotBody, SIDE_WINDOW, tabGroupsBody, windowCard, type ChatMessage, type Size } from './frame.ts';
+import { FULL_WINDOW, popupBody, PRODUCT_NAME, scaled, screenshotBody, SIDE_WINDOW, tabGroupsBody, tabListBody, type ChatMessage, type Size, type Stage } from './frame.ts';
 import { fill, topics, type Locale, type SceneName, type Topic } from './locale.ts';
 
 export interface SceneContext {
@@ -10,13 +11,12 @@ export interface SceneContext {
   locale: Locale;
 }
 
-export type SceneCapture = (context: SceneContext) => Promise<string>;
+export type SceneCapture = (context: SceneContext) => Promise<Stage>;
 
-const PRODUCT_NAME = 'Agent Browser Bridge';
 const PROFILE_CARD_VIEWPORT = 560;
 const PROFILE_CARD_SCALE = 1.2;
 const WELCOME_PAGE_SCALE = 0.8;
-const TOPIC_COLORS: Record<Topic, string> = { travel: 'blue', work: 'purple', recipes: 'orange' };
+export const TOPIC_COLORS: Record<Topic, string> = { travel: 'blue', work: 'purple', recipes: 'orange' };
 
 const extensionUrl = ({ harness }: SceneContext, path: string) => `chrome-extension://${harness.extensionId}/${path}`;
 
@@ -57,6 +57,8 @@ async function tabs(context: SceneContext) {
     const tab = await harness.agent.call<Tab>('chrome_tabs_create', { url: demo.url(demo.tabPath(topic, index)), active: false });
     opened.set(tab.id, topic);
   }
+  const openedTitles = new Map((await harness.agent.call<Tab[]>('chrome_tabs_list')).map((tab) => [tab.id, tab.title]));
+  const before = tabListBody([...opened.keys()].map((id) => openedTitles.get(id)!));
 
   const plan = topics.map((topic) => ({
     title: text.groups[topic],
@@ -79,7 +81,33 @@ async function tabs(context: SceneContext) {
     { kind: 'tool', name: 'chrome_plan_apply', detail: views.map((view) => view.title).join(' · ') },
     { kind: 'agent', text: fill(text.reply, { tabs: opened.size, groups: views.length }) },
   ];
-  return chatCard(locale.strings.chat, messages) + windowCard({ size: SIDE_WINDOW, body: tabGroupsBody(views) });
+  return {
+    messages,
+    window: {
+      size: SIDE_WINDOW,
+      states: [
+        { step: 0, body: before },
+        { step: 2, body: tabGroupsBody(views) },
+      ],
+    },
+  };
+}
+
+async function tabPage({ harness }: SceneContext, url: string) {
+  for (let attempt = 0; attempt < 100; attempt += 1) {
+    const page = harness.context.pages().find((candidate) => candidate.url() === url);
+    if (page) {
+      await page.waitForLoadState();
+      return page;
+    }
+    await new Promise((done) => setTimeout(done, 100));
+  }
+  throw new Error(`The tab for ${url} did not open.`);
+}
+
+async function pageScreenshot(page: Page) {
+  await page.evaluate(() => document.fonts.ready);
+  return screenshotBody(await page.screenshot({ caret: 'initial' }), SIDE_WINDOW);
 }
 
 async function pages(context: SceneContext) {
@@ -87,7 +115,7 @@ async function pages(context: SceneContext) {
   const text = locale.strings.booking;
   const url = demo.url('/booking');
   const tab = await harness.agent.call<Tab>('chrome_tabs_create', { url });
-  const page = harness.context.pages().find((candidate) => candidate.url() === url)!;
+  const page = await tabPage(context, url);
   await page.setViewportSize(SIDE_WINDOW);
 
   const snapshot = await harness.agent.text('chrome_page_snapshot', { tabId: tab.id });
@@ -101,45 +129,45 @@ async function pages(context: SceneContext) {
     { kind: 'user', text: text.prompt },
     { kind: 'tool', name: 'chrome_page_snapshot', detail: text.restaurant },
   ];
+  const states = [{ step: 0, body: await pageScreenshot(page) }];
   for (const field of fields) {
     await harness.agent.call('chrome_page_type', { tabId: tab.id, ref: refOf(snapshot, field.pattern), text: field.value });
     messages.push({ kind: 'tool', name: 'chrome_page_type', detail: `${snapshotLine(snapshot, field.pattern)} ← "${field.value}"` });
+    states.push({ step: messages.length - 1, body: await pageScreenshot(page) });
   }
   await harness.agent.call('chrome_page_click', { tabId: tab.id, ref: refOf(snapshot, submit) });
   messages.push({ kind: 'tool', name: 'chrome_page_click', detail: snapshotLine(snapshot, submit) });
   await page.waitForSelector('#confirmation:not([hidden])');
+  states.push({ step: messages.length - 1, body: await pageScreenshot(page) });
   messages.push({ kind: 'agent', text: text.reply });
-
-  const shot = await harness.agent.raw('chrome_page_screenshot', { tabId: tab.id });
-  const image = shot.content.find((item) => item.type === 'image');
-  if (shot.isError || !image?.data) throw new Error(`chrome_page_screenshot failed: ${shot.text}`);
   await closeDemoTabs(context);
 
-  return chatCard(locale.strings.chat, messages) + windowCard({ title: text.restaurant, size: SIDE_WINDOW, body: screenshotBody(Buffer.from(image.data, 'base64'), SIDE_WINDOW) });
+  return { messages, window: { title: text.restaurant, size: SIDE_WINDOW, states } };
+}
+
+async function profileCard(context: SceneContext, name: string) {
+  const page = await context.harness.context.newPage();
+  try {
+    await page.setViewportSize({ width: PROFILE_CARD_VIEWPORT, height: 800 });
+    await page.goto(extensionUrl(context, 'src/welcome/index.html'));
+    await page.waitForSelector('#status[data-state="connected"] ~ #agents li');
+    await page.waitForFunction((expected) => (document.getElementById('instance-name') as HTMLInputElement | null)?.value === expected, name);
+    const connection = page.locator('section.connection');
+    const box = (await connection.boundingBox())!;
+    return { png: await connection.screenshot(), size: { width: Math.ceil(box.width), height: Math.ceil(box.height) } };
+  } finally {
+    await page.close();
+  }
 }
 
 async function profiles(context: SceneContext) {
   const { harness, locale } = context;
   const text = locale.strings.profiles;
+  const unnamed = await profileCard(context, '');
   const { instances } = await harness.agent.call<{ instances: Array<{ instanceId: string }> }>(IDENTIFY_INSTANCES_TOOL, { sampleSize: 5 });
   const instance = instances[0]!.instanceId;
   await harness.agent.call(NAME_INSTANCE_TOOL, { browser: 'chrome', instance, name: text.name });
-
-  const page = await harness.context.newPage();
-  let card: Buffer;
-  let cardSize: Size;
-  try {
-    await page.setViewportSize({ width: PROFILE_CARD_VIEWPORT, height: 800 });
-    await page.goto(extensionUrl(context, 'src/welcome/index.html'));
-    await page.waitForSelector('#status[data-state="connected"] ~ #agents li');
-    await page.waitForFunction((name) => (document.getElementById('instance-name') as HTMLInputElement | null)?.value === name, text.name);
-    const connection = page.locator('section.connection');
-    const box = (await connection.boundingBox())!;
-    cardSize = { width: Math.ceil(box.width), height: Math.ceil(box.height) };
-    card = await connection.screenshot();
-  } finally {
-    await page.close();
-  }
+  const named = await profileCard(context, text.name);
 
   const messages: ChatMessage[] = [
     { kind: 'user', text: text.prompt },
@@ -147,14 +175,24 @@ async function profiles(context: SceneContext) {
     { kind: 'tool', name: NAME_INSTANCE_TOOL, detail: `"${text.name}"` },
     { kind: 'agent', text: text.reply },
   ];
-  const size = scaled(cardSize, PROFILE_CARD_SCALE);
-  return chatCard(locale.strings.chat, messages) + windowCard({ title: PRODUCT_NAME, size: SIDE_WINDOW, body: popupBody(card, size) });
+  const body = (card: { png: Buffer; size: Size }) => popupBody(card.png, scaled(card.size, PROFILE_CARD_SCALE));
+  return {
+    messages,
+    window: {
+      title: PRODUCT_NAME,
+      size: SIDE_WINDOW,
+      states: [
+        { step: 0, body: body(unnamed) },
+        { step: 2, body: body(named) },
+      ],
+    },
+  };
 }
 
 async function setup(context: SceneContext) {
   const viewport = scaled(FULL_WINDOW, 1 / WELCOME_PAGE_SCALE);
   const png = await capturePage(context, extensionUrl(context, 'src/welcome/index.html'), viewport, '#status[data-state="connected"] ~ #agents li');
-  return windowCard({ title: PRODUCT_NAME, size: FULL_WINDOW, body: screenshotBody(png, FULL_WINDOW) });
+  return { messages: [], window: { title: PRODUCT_NAME, size: FULL_WINDOW, states: [{ step: 0, body: screenshotBody(png, FULL_WINDOW) }] } };
 }
 
 export const scenes: Record<SceneName, SceneCapture> = { tabs, pages, profiles, setup };

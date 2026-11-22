@@ -1,0 +1,60 @@
+{
+  "captions": {
+    "tabs": {
+      "headline": "Naj agent UI uredi vaše zavihke",
+      "subline": "Oglejte si načrt razvrščanja v skupine, ga uporabite v enem koraku in ga razveljavite, če si premislite."
+    },
+    "pages": {
+      "headline": "Vaš agent dela na pravih spletnih straneh",
+      "subline": "Bere stran, izpolnjuje obrazce in klika gumbe v brskalniku, ki ga že uporabljate."
+    },
+    "profiles": {
+      "headline": "Poimenujte profile brskalnika",
+      "subline": "Zahtevajte brskalnik Služba in vaš agent izbere pravi profil v Chromu."
+    },
+    "setup": {
+      "headline": "Povežite agenta, ki ga že uporabljate",
+      "subline": "Claude Code, Cursor, VS Code, Claude Desktop ali kateri koli odjemalec MCP. Vse teče v vašem računalniku."
+    }
+  },
+  "chat": {
+    "you": "Vi",
+    "agent": "Agent"
+  },
+  "tabs": {
+    "prompt": "Razvrsti moje odprte zavihke v skupine po temah.",
+    "reply": "Končano. {tabs} zavihkov sem razvrstil v {groups} skupine. Če želite prejšnjo razporeditev, me prosite, naj razveljavim.",
+    "groups": {
+      "travel": "Izlet v Lizbono",
+      "work": "Poročilo za Q3",
+      "recipes": "Ideje za večerjo"
+    },
+    "pages": {
+      "travel": ["Leti v Lizbono – primerjava cen", "Hoteli v Alfami", "Lizbona: 10 najboljših znamenitosti"],
+      "work": ["Nadzorna plošča prihodkov za Q3", "Osnutek poročila za Q3", "Zapiski s sestanka ekipe"],
+      "recipes": ["Hitre testenine za med tednom", "Pečena zelenjava s pekača"]
+    }
+  },
+  "booking": {
+    "prompt": "Rezerviraj mizo za 4 osebe v Casa Azul za nocoj na ime Ada Lovelace.",
+    "reply": "Končano. Casa Azul je potrdila mizo za 4 osebe na ime Ada Lovelace.",
+    "restaurant": "Casa Azul",
+    "heading": "Rezervirajte mizo",
+    "name": "Ime",
+    "guests": "Število oseb",
+    "when": "Kdaj",
+    "tonight": "Nocoj, 19.30",
+    "submit": "Rezerviraj mizo",
+    "confirmation": "Miza za {guests} osebe na ime {name} je rezervirana. Se vidimo nocoj!",
+    "guestName": "Ada Lovelace"
+  },
+  "profiles": {
+    "prompt": "Ta profil Chrome je za službo. Poimenuj ga Služba.",
+    "reply": "Končano. Ko boste zahtevali brskalnik Služba, bom uporabil ta profil.",
+    "name": "Služba"
+  },
+  "video": {
+    "tagline": "Naj vaš agent UI uporablja brskalnik, ki ga že uporabljate.",
+    "closing": "Deluje s Claude Code, Cursor, VS Code in katerim koli odjemalcem MCP. Brezplačno in odprtokodno."
+  }
+}

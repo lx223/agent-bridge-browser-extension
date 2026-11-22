@@ -1,0 +1,60 @@
+{
+  "captions": {
+    "tabs": {
+      "headline": "Deixe seu agente de IA organizar suas guias",
+      "subline": "Veja um plano de agrupamento, aplique em uma etapa e desfaça se mudar de ideia."
+    },
+    "pages": {
+      "headline": "Seu agente trabalha em páginas reais",
+      "subline": "Ele lê a página, preenche formulários e clica em botões no navegador que você já usa."
+    },
+    "profiles": {
+      "headline": "Dê nomes aos seus perfis do navegador",
+      "subline": "Peça o navegador do Trabalho e seu agente escolhe o perfil certo do Chrome."
+    },
+    "setup": {
+      "headline": "Conecte o agente que você já usa",
+      "subline": "Claude Code, Cursor, VS Code, Claude Desktop ou qualquer cliente MCP. Tudo roda no seu computador."
+    }
+  },
+  "chat": {
+    "you": "Você",
+    "agent": "Agente"
+  },
+  "tabs": {
+    "prompt": "Organize minhas guias abertas em grupos por assunto.",
+    "reply": "Pronto. Agrupei {tabs} guias em {groups} grupos. Peça para desfazer se quiser o layout anterior de volta.",
+    "groups": {
+      "travel": "Viagem a Lisboa",
+      "work": "Relatório do T3",
+      "recipes": "Ideias para o jantar"
+    },
+    "pages": {
+      "travel": ["Voos para Lisboa – compare preços", "Hotéis em Alfama", "Lisboa: 10 passeios imperdíveis"],
+      "work": ["Painel de receita do T3", "Rascunho do relatório do T3", "Notas da reunião da equipe"],
+      "recipes": ["Macarrão rápido para o dia a dia", "Legumes assados na assadeira"]
+    }
+  },
+  "booking": {
+    "prompt": "Reserve uma mesa para 4 no Casa Azul hoje à noite em nome de Ada Lovelace.",
+    "reply": "Pronto. O Casa Azul confirmou uma mesa para 4 em nome de Ada Lovelace.",
+    "restaurant": "Casa Azul",
+    "heading": "Reserve uma mesa",
+    "name": "Nome",
+    "guests": "Pessoas",
+    "when": "Quando",
+    "tonight": "Hoje à noite, 19h30",
+    "submit": "Reservar mesa",
+    "confirmation": "Mesa para {guests} reservada em nome de {name}. Até a noite!",
+    "guestName": "Ada Lovelace"
+  },
+  "profiles": {
+    "prompt": "Este perfil do Chrome é para o trabalho. Chame-o de Trabalho.",
+    "reply": "Pronto. Quando você pedir o navegador do Trabalho, vou usar este perfil.",
+    "name": "Trabalho"
+  },
+  "video": {
+    "tagline": "Deixe seu agente de IA usar o navegador que você já usa.",
+    "closing": "Funciona com Claude Code, Cursor, VS Code e qualquer cliente MCP. Gratuito e de código aberto."
+  }
+}

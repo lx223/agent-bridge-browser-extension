@@ -1,20 +1,20 @@
 {
   "captions": {
     "tabs": {
-      "headline": "让 AI 智能体整理你的标签页",
+      "headline": "让 AI 智能体整理您的标签页",
       "subline": "先预览分组方案，一步应用，改变主意还能撤销。"
     },
     "pages": {
       "headline": "智能体直接操作真实网页",
-      "subline": "读取页面、填写表单、点击按钮，就在你日常使用的浏览器里。"
+      "subline": "读取页面、填写表单、点击按钮，就在您日常使用的浏览器里。"
     },
     "profiles": {
       "headline": "为浏览器配置文件命名",
       "subline": "说一声“用工作浏览器”，智能体就会选中正确的 Chrome 配置文件。"
     },
     "setup": {
-      "headline": "连接你已在用的智能体",
-      "subline": "支持 Claude Code、Cursor、VS Code、Claude Desktop 及任何 MCP 客户端。一切都在你的电脑上运行。"
+      "headline": "连接您已在用的智能体",
+      "subline": "支持 Claude Code、Cursor、VS Code、Claude Desktop 及任何 MCP 客户端。一切都在您的电脑上运行。"
     }
   },
   "chat": {
@@ -50,7 +50,11 @@
   },
   "profiles": {
     "prompt": "这个 Chrome 配置文件用于工作，把它命名为“工作”。",
-    "reply": "已完成。以后你说要用工作浏览器，我就会使用这个配置文件。",
+    "reply": "已完成。以后您说要用工作浏览器，我就会使用这个配置文件。",
     "name": "工作"
+  },
+  "video": {
+    "tagline": "让 AI 智能体使用您常用的浏览器。",
+    "closing": "支持 Claude Code、Cursor、VS Code 及任何 MCP 客户端。免费且开源。"
   }
 }

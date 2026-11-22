@@ -89,11 +89,12 @@ The extension connects to a local MCP server on 127.0.0.1:17373, which the user'
 4. Run safari_tabs_list to see the open Safari tabs, then safari_tabs_create with a URL such as https://example.com to open a tab. The extension's toolbar icon turns green while connected; click it to see the setup page and the connected session.
 ```
 
-## Screenshots
+## Screenshots and app preview
 
-`npm run screenshots:safari` writes the two 1280x800 screenshots to `store/screenshots/out/safari/`; upload both under the macOS version's App Previews and Screenshots. Do not reuse the Chrome Web Store screenshots: they show tab groups and page tools that Safari does not have.
+`npm run store:assets -- --store safari` writes these files to `store/assets/out/safari/`. Upload them under the macOS version's App Previews and Screenshots. Do not reuse the Chrome Web Store files: they show tab groups and page tools that Safari does not have.
 
-- `1-setup.png`: the built setup page in its Safari wording, connected to one agent session.
-- `2-tabs.png`: an agent opening and closing Safari tabs with the `safari_*` tools.
+- `1-setup.png`: 1280x800, the built setup page in its Safari wording, connected to one agent session.
+- `2-tabs.png`: 1280x800, an agent opening and closing Safari tabs with the `safari_*` tools.
+- `app-preview.mp4`: 1920x1080 H.264 with a silent stereo AAC track, about 20 seconds. It plays both scenes between an opening and a closing title card. App Store previews must last 15 to 30 seconds, and the script fails if the video falls outside that range. Pick a poster frame from the first scene after uploading.
 
-The script needs neither the bridge nor a running agent. It loads the real built setup page in Playwright's Chromium, posing as Safari through `e2e/safari/setupPage.ts`, with a stubbed background that reports one connected session. The tabs screenshot is drawn in HTML from fixed text. Both use the caption, window and chat styles of the Chrome Web Store screenshots in `store/screenshots/frame.ts`.
+The script needs neither the bridge nor a running agent. It loads the real built setup page in Playwright's Chromium, posing as Safari through `e2e/support/safari/setupPage.ts`, with a stubbed background that reports one connected session. The tabs scene is drawn in HTML from fixed text in `store/assets/safari.ts`, in three states: the old search tabs, the new pages opened beside them, and the new pages alone. Both use the caption, window, chat and video templates of the Chrome Web Store assets; see [Store assets](../../docs/chrome-web-store.md#store-assets).

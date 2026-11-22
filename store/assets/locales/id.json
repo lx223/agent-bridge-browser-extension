@@ -1,0 +1,60 @@
+{
+  "captions": {
+    "tabs": {
+      "headline": "Biarkan agen AI merapikan tab Anda",
+      "subline": "Pratinjau rencana pengelompokan, terapkan dalam satu langkah, dan urungkan jika berubah pikiran."
+    },
+    "pages": {
+      "headline": "Agen Anda bekerja di halaman web sungguhan",
+      "subline": "Agen membaca halaman, mengisi formulir, dan mengklik tombol di browser yang sudah Anda gunakan."
+    },
+    "profiles": {
+      "headline": "Beri nama profil browser Anda",
+      "subline": "Minta browser Kantor dan agen Anda memilih profil Chrome yang tepat."
+    },
+    "setup": {
+      "headline": "Hubungkan agen yang sudah Anda gunakan",
+      "subline": "Claude Code, Cursor, VS Code, Claude Desktop, atau klien MCP apa pun. Semuanya berjalan di komputer Anda."
+    }
+  },
+  "chat": {
+    "you": "Anda",
+    "agent": "Agen"
+  },
+  "tabs": {
+    "prompt": "Kelompokkan tab yang terbuka berdasarkan topik.",
+    "reply": "Selesai. Saya mengelompokkan {tabs} tab ke dalam {groups} grup. Minta saya mengurungkannya jika ingin tata letak lama kembali.",
+    "groups": {
+      "travel": "Liburan ke Lisbon",
+      "work": "Laporan Q3",
+      "recipes": "Ide makan malam"
+    },
+    "pages": {
+      "travel": ["Penerbangan ke Lisbon – bandingkan harga", "Hotel di Alfama", "Lisbon: 10 tempat wajib dikunjungi"],
+      "work": ["Dasbor pendapatan Q3", "Draf laporan Q3", "Catatan rapat tim"],
+      "recipes": ["Pasta praktis hari kerja", "Sayur panggang loyang"]
+    }
+  },
+  "booking": {
+    "prompt": "Pesan meja untuk 4 orang di Casa Azul malam ini atas nama Ada Lovelace.",
+    "reply": "Selesai. Casa Azul mengonfirmasi meja untuk 4 orang atas nama Ada Lovelace.",
+    "restaurant": "Casa Azul",
+    "heading": "Pesan meja",
+    "name": "Nama",
+    "guests": "Jumlah tamu",
+    "when": "Waktu",
+    "tonight": "Malam ini, 19.30",
+    "submit": "Pesan meja",
+    "confirmation": "Meja untuk {guests} orang dipesan atas nama {name}. Sampai jumpa malam ini!",
+    "guestName": "Ada Lovelace"
+  },
+  "profiles": {
+    "prompt": "Profil Chrome ini untuk urusan kantor. Beri nama Kantor.",
+    "reply": "Selesai. Saat Anda meminta browser Kantor, saya akan memakai profil ini.",
+    "name": "Kantor"
+  },
+  "video": {
+    "tagline": "Biarkan agen AI Anda memakai browser yang sudah Anda gunakan.",
+    "closing": "Bekerja dengan Claude Code, Cursor, VS Code, dan klien MCP apa pun. Gratis dan open source."
+  }
+}

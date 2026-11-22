@@ -1,0 +1,60 @@
+{
+  "captions": {
+    "tabs": {
+      "headline": "Lăsați agentul AI să vă organizeze filele",
+      "subline": "Previzualizați un plan de grupare, aplicați-l într-un singur pas și anulați-l dacă vă răzgândiți."
+    },
+    "pages": {
+      "headline": "Agentul lucrează în pagini web reale",
+      "subline": "Citește pagina, completează formulare și dă clic pe butoane în browserul pe care îl folosiți deja."
+    },
+    "profiles": {
+      "headline": "Dați nume profilurilor de browser",
+      "subline": "Cereți browserul Serviciu, iar agentul alege profilul Chrome potrivit."
+    },
+    "setup": {
+      "headline": "Conectați agentul pe care îl folosiți deja",
+      "subline": "Claude Code, Cursor, VS Code, Claude Desktop sau orice client MCP. Totul rulează pe computerul dvs."
+    }
+  },
+  "chat": {
+    "you": "Dvs.",
+    "agent": "Agent"
+  },
+  "tabs": {
+    "prompt": "Organizează filele deschise în grupuri după subiect.",
+    "reply": "Gata. Am grupat {tabs} file în {groups} grupuri. Cereți-mi să anulez dacă doriți să reveniți la aranjamentul anterior.",
+    "groups": {
+      "travel": "Excursie la Lisabona",
+      "work": "Raport T3",
+      "recipes": "Idei de cină"
+    },
+    "pages": {
+      "travel": ["Zboruri spre Lisabona – compară prețurile", "Hoteluri în Alfama", "Lisabona: top 10 lucruri de făcut"],
+      "work": ["Tablou de bord venituri T3", "Ciornă raport T3", "Note de la ședința echipei"],
+      "recipes": ["Paste rapide pentru zilele lucrătoare", "Legume coapte la cuptor"]
+    }
+  },
+  "booking": {
+    "prompt": "Rezervă o masă pentru 4 la Casa Azul diseară, pe numele Ada Lovelace.",
+    "reply": "Gata. Casa Azul a confirmat o masă pentru 4 pe numele Ada Lovelace.",
+    "restaurant": "Casa Azul",
+    "heading": "Rezervați o masă",
+    "name": "Nume",
+    "guests": "Persoane",
+    "when": "Când",
+    "tonight": "Diseară, 19:30",
+    "submit": "Rezervați masa",
+    "confirmation": "Masă pentru {guests} rezervată pe numele {name}. Ne vedem diseară!",
+    "guestName": "Ada Lovelace"
+  },
+  "profiles": {
+    "prompt": "Acest profil Chrome este pentru serviciu. Numește-l Serviciu.",
+    "reply": "Gata. Când cereți browserul Serviciu, voi folosi acest profil.",
+    "name": "Serviciu"
+  },
+  "video": {
+    "tagline": "Lăsați agentul AI să folosească browserul pe care îl aveți deja.",
+    "closing": "Funcționează cu Claude Code, Cursor, VS Code și orice client MCP. Gratuit și open source."
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "captions": {
+    "tabs": {
+      "headline": "Anna tekoälyagentin siivota välilehtesi",
+      "subline": "Esikatsele ryhmittelysuunnitelmaa, toteuta se yhdellä kertaa ja kumoa, jos muutat mielesi."
+    },
+    "pages": {
+      "headline": "Agenttisi toimii oikeilla verkkosivuilla",
+      "subline": "Se lukee sivun, täyttää lomakkeita ja klikkaa painikkeita selaimessa, jota jo käytät."
+    },
+    "profiles": {
+      "headline": "Nimeä selainprofiilisi",
+      "subline": "Pyydä Työ-selainta, niin agenttisi valitsee oikean Chrome-profiilin."
+    },
+    "setup": {
+      "headline": "Yhdistä agentti, jota jo käytät",
+      "subline": "Claude Code, Cursor, VS Code, Claude Desktop tai muu MCP-yhteensopiva agentti. Kaikki toimii omalla koneellasi."
+    }
+  },
+  "chat": {
+    "you": "Sinä",
+    "agent": "Agentti"
+  },
+  "tabs": {
+    "prompt": "Järjestä avoimet välilehteni ryhmiin aiheen mukaan.",
+    "reply": "Valmis. Ryhmittelin {tabs} välilehteä {groups} ryhmään. Pyydä minua kumoamaan se, jos haluat vanhan asettelun takaisin.",
+    "groups": {
+      "travel": "Lissabonin matka",
+      "work": "Q3-raportti",
+      "recipes": "Illallisideoita"
+    },
+    "pages": {
+      "travel": ["Lennot Lissaboniin – vertaa hintoja", "Hotellit Alfamassa", "Lissabon: 10 parasta nähtävyyttä"],
+      "work": ["Q3-liikevaihdon koontinäyttö", "Q3-raportin luonnos", "Tiimipalaverin muistiinpanot"],
+      "recipes": ["Helppo arkipasta", "Uunikasvikset pellillä"]
+    }
+  },
+  "booking": {
+    "prompt": "Varaa tälle illalle pöytä 4 hengelle Casa Azulista nimellä Ada Lovelace.",
+    "reply": "Valmis. Casa Azul vahvisti pöydän 4 hengelle nimellä Ada Lovelace.",
+    "restaurant": "Casa Azul",
+    "heading": "Varaa pöytä",
+    "name": "Nimi",
+    "guests": "Henkilömäärä",
+    "when": "Milloin",
+    "tonight": "Tänään klo 19.30",
+    "submit": "Varaa",
+    "confirmation": "Pöytä {guests} hengelle varattu nimellä {name}. Nähdään tänä iltana!",
+    "guestName": "Ada Lovelace"
+  },
+  "profiles": {
+    "prompt": "Tämä Chrome-profiili on työkäyttöön. Nimeä se Työ.",
+    "reply": "Valmis. Kun pyydät Työ-selainta, käytän tätä profiilia.",
+    "name": "Työ"
+  },
+  "video": {
+    "tagline": "Anna tekoälyagenttisi käyttää selainta, jota jo käytät.",
+    "closing": "Toimii Claude Coden, Cursorin, VS Coden ja muiden MCP-agenttien kanssa. Ilmainen ja avointa lähdekoodia."
+  }
+}
