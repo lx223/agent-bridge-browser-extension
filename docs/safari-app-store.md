@@ -53,5 +53,6 @@ Add `--no-upload` to write the signed package to `packages/extension/safari-rele
 5. In App Store Connect, add a macOS version with the same version number as `packages/extension/package.json`, choose the build, add the screenshots and What's New text, and check the rest against the [submission copy](../store/safari/submission.md).
 6. Submit for review. Choose manual release if the Chrome and Safari releases should go out together.
 7. Once the app is live, update the Safari install steps in the [README](../README.md#safari) to link to it.
+8. Once both the Chrome and Safari versions are live, publish the MCP server; see [Release order](npm-publishing.md#release-order).
 
 The Mac App Store updates the app, and with it the extension, by itself.

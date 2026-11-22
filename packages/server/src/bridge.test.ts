@@ -15,7 +15,7 @@ afterEach(async () => {
 });
 
 async function startBridge(opts: Partial<ConstructorParameters<typeof ExtensionBridge>[0]> = {}) {
-  bridge = new ExtensionBridge({ port: 0, ...opts });
+  bridge = new ExtensionBridge({ port: 0, reconnectGraceMs: 0, reloadGraceMs: 0, hostChangeGraceMs: 0, ...opts });
   return bridge.start();
 }
 
@@ -630,6 +630,128 @@ describe('ExtensionBridge', () => {
       await closed;
       expect(browsersOf(bridge!)).toEqual(['chrome']);
       await expect(bridge!.request('chrome', 'tabs.list', {})).resolves.toBe('second');
+    });
+  });
+
+  describe('when an extension reconnects', () => {
+    async function connectSilent(port: number, instanceId: string) {
+      const ws = await connect(port, EXT_ORIGIN);
+      const received: string[] = [];
+      ws.on('message', (raw) => {
+        const msg = JSON.parse(raw.toString());
+        if (msg.type === 'request') received.push(msg.method);
+      });
+      ws.send(JSON.stringify({ type: 'hello', protocolVersion: PROTOCOL_VERSION, extensionVersion: '0.1.0', userAgent: 'test', instanceId }));
+      await expect.poll(() => instancesOf(bridge!)).toContain(instanceId);
+      return { ws, received };
+    }
+
+    async function reload(ws: WebSocket) {
+      ws.send(JSON.stringify({ type: 'reloading' }));
+      await expect.poll(() => instancesOf(bridge!).length).toBeGreaterThan(0);
+      const closed = new Promise((resolve) => ws.once('close', resolve));
+      ws.close();
+      await closed;
+    }
+
+    it('holds a call while the extension reloads for an update and sends it once it is back', async () => {
+      const port = await startBridge({ reloadGraceMs: 5_000 });
+      const ext = await connectExtension(port, () => 'old', { instanceId: 'aaaa1111' });
+      await reload(ext);
+      await expect.poll(() => instancesOf(bridge!)).toEqual([]);
+      const call = bridge!.request('chrome', 'tabs.list', {});
+      await new Promise((resolve) => setTimeout(resolve, 50));
+      await connectExtension(port, () => 'updated', { instanceId: 'aaaa1111' });
+      await expect(call).resolves.toBe('updated');
+    });
+
+    it('waits only briefly after an unexpected disconnect', async () => {
+      const port = await startBridge({ reconnectGraceMs: 200, reloadGraceMs: 5_000 });
+      const ext = await connectExtension(port, () => 'ok', { instanceId: 'aaaa1111' });
+      ext.close();
+      await expect.poll(() => instancesOf(bridge!)).toEqual([]);
+      const started = Date.now();
+      await expect(bridge!.request('chrome', 'tabs.list', {})).rejects.toThrow(/not connected/);
+      expect(Date.now() - started).toBeGreaterThanOrEqual(100);
+      expect(Date.now() - started).toBeLessThan(2_000);
+    });
+
+    it('does not wait for an instance once it is back', async () => {
+      const port = await startBridge({ reloadGraceMs: 60_000 });
+      const ext = await connectExtension(port, () => 'old', { instanceId: 'aaaa1111' });
+      await reload(ext);
+      await connectExtension(port, () => 'back', { instanceId: 'aaaa1111' });
+      await expect(bridge!.ready('chrome')).resolves.toBeUndefined();
+      await expect(bridge!.request('chrome', 'tabs.list', {})).resolves.toBe('back');
+    });
+
+    it('repeats a read-only call that a reload cut off', async () => {
+      const port = await startBridge({ reloadGraceMs: 5_000 });
+      const { ws, received } = await connectSilent(port, 'aaaa1111');
+      const call = bridge!.request('chrome', 'tabs.list', {});
+      await expect.poll(() => received).toEqual(['tabs.list']);
+      await reload(ws);
+      await connectExtension(port, () => 'answered after the update', { instanceId: 'aaaa1111' });
+      await expect(call).resolves.toBe('answered after the update');
+    });
+
+    it('does not repeat an action that a reload cut off, and says it may have happened', async () => {
+      const port = await startBridge({ reloadGraceMs: 5_000 });
+      const { ws, received } = await connectSilent(port, 'aaaa1111');
+      const call = bridge!.request('chrome', 'tabs.close', { tabIds: [1] }).catch((err: Error) => err);
+      await expect.poll(() => received).toEqual(['tabs.close']);
+      await reload(ws);
+      await expect(call).resolves.toHaveProperty(
+        'message',
+        'The browser extension in chrome reloaded to install an update. It was running chrome_tabs_close, which may or may not have taken effect; check before trying again.',
+      );
+    });
+
+    it('lets relayed sessions wait for the reload too', async () => {
+      const port = await startBridge({ reloadGraceMs: 5_000 });
+      const ext = await connectExtension(port, () => 'old', { instanceId: 'aaaa1111' });
+      const second = new ExtensionBridge({ port });
+      try {
+        await second.start();
+        await expect.poll(() => instancesOf(second)).toEqual(['aaaa1111']);
+        await reload(ext);
+        await expect.poll(() => instancesOf(second)).toEqual([]);
+        const call = second.request('chrome', 'tabs.list', {});
+        await new Promise((resolve) => setTimeout(resolve, 50));
+        await connectExtension(port, () => 'updated', { instanceId: 'aaaa1111' });
+        await expect(call).resolves.toBe('updated');
+      } finally {
+        await second.stop();
+      }
+    });
+
+    it('repeats a read-only call through a relay whose host exited', async () => {
+      const port = await startBridge();
+      const { received } = await connectSilent(port, 'aaaa1111');
+      const second = new ExtensionBridge({ port, hostChangeGraceMs: 5_000, reconnectGraceMs: 0 });
+      try {
+        await second.start();
+        await expect.poll(() => instancesOf(second)).toEqual(['aaaa1111']);
+        const call = second.request('chrome', 'tabs.list', {});
+        await expect.poll(() => received).toEqual(['tabs.list']);
+        await bridge!.stop();
+        bridge = second;
+        await expect.poll(() => second.status()).toMatchObject({ role: 'host' });
+        await connectExtension(port, () => 'answered by the new host', { instanceId: 'aaaa1111' });
+        await expect(call).resolves.toBe('answered by the new host');
+      } finally {
+        await second.stop();
+      }
+    });
+
+    it('survives a connection that sends a broken frame', async () => {
+      const port = await startBridge();
+      const broken = await connect(port, EXT_ORIGIN);
+      const closed = new Promise((resolve) => broken.once('close', resolve));
+      (broken as unknown as { _socket: { write(data: Buffer): void } })._socket.write(Buffer.from([0x8f, 0x80, 0, 0, 0, 0]));
+      await closed;
+      await connectExtension(port, () => 'still working');
+      await expect(bridge!.request('chrome', 'tabs.list', {})).resolves.toBe('still working');
     });
   });
 });

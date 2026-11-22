@@ -39,7 +39,7 @@ function browser() {
             resolve();
           },
         },
-        async () => {},
+        { whenIdle: async () => {}, announceReload: async () => {} },
         { beforeReload: () => saveForReload(session, local, now()) },
       ),
     );

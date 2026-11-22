@@ -59,10 +59,12 @@ export const responseMessage = z.discriminatedUnion('ok', [
 export const pingMessage = z.object({ type: z.literal('ping') });
 export const pongMessage = z.object({ type: z.literal('pong') });
 
+export const reloadingMessage = z.object({ type: z.literal('reloading') });
+
 /** Server → extension: every agent session sharing the bridge, resent whenever it changes. */
 export const agentsMessage = z.object({ type: z.literal('agents'), agents: z.array(agentSession) });
 
-export const extensionToServer = z.union([helloMessage, responseMessage, pingMessage]);
+export const extensionToServer = z.union([helloMessage, responseMessage, pingMessage, reloadingMessage]);
 export const serverToExtension = z.union([requestMessage, pongMessage, agentsMessage]);
 
 export type HelloMessage = z.infer<typeof helloMessage>;
@@ -77,10 +79,17 @@ export type ResponseMessage = z.infer<typeof responseMessage>;
 export type ExtensionToServer = z.infer<typeof extensionToServer>;
 export type ServerToExtension = z.infer<typeof serverToExtension>;
 
+export const reconnectingInstance = z.object({
+  browser: z.string(),
+  instanceId: z.string().optional(),
+  waitMs: z.number(),
+});
+
 export const relayStatusMessage = z.object({
   type: z.literal('status'),
   extension: helloMessage.nullable(),
   extensions: z.array(helloMessage).optional(),
+  reconnecting: z.array(reconnectingInstance).optional(),
 });
 
 /** Relay → host: the relaying agent session, sent on joining and whenever it changes. */
@@ -92,5 +101,6 @@ export const relayToHost = z.union([requestMessage, relayAgentMessage]);
 export const hostToRelay = z.union([responseMessage, relayStatusMessage, relayHandoverMessage]);
 
 export type RelayStatusMessage = z.infer<typeof relayStatusMessage>;
+export type ReconnectingInstance = z.infer<typeof reconnectingInstance>;
 export type HostToRelay = z.infer<typeof hostToRelay>;
 export type RelayToHost = z.infer<typeof relayToHost>;

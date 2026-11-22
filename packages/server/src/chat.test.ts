@@ -35,7 +35,7 @@ type Request = (browser: string, method: string, params: Record<string, unknown>
 
 async function connect(request: Request, browsers: HelloMessage[] = [hello('chrome', 'aaaa1111')]) {
   const status = (): BridgeStatus => ({ state: 'connected', role: 'host', port: 17373, browsers });
-  const bridge = { status, request: vi.fn(request) };
+  const bridge = { status, request: vi.fn(request), ready: async () => {} };
   const server = createMcpServer(bridge as unknown as ExtensionBridge, '1.2.3');
   const client = new Client({ name: 'chat-test', version: '0.0.0' });
   const [clientTransport, serverTransport] = InMemoryTransport.createLinkedPair();

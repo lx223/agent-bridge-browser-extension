@@ -8,7 +8,15 @@ import pkg from '../package.json' with { type: 'json' };
 
 const log = (msg: string) => process.stderr.write(`[agent-browser-bridge] ${msg}\n`);
 
+const describe = (reason: unknown) => (reason instanceof Error ? (reason.stack ?? reason.message) : String(reason));
+
+function keepRunningOnErrors() {
+  process.on('uncaughtException', (err) => log(`Unexpected error, still running: ${describe(err)}`));
+  process.on('unhandledRejection', (reason) => log(`Unhandled rejection, still running: ${describe(reason)}`));
+}
+
 export async function runWorker() {
+  keepRunningOnErrors();
   const port = Number(process.env.AGENT_BROWSER_BRIDGE_PORT ?? DEFAULT_PORT);
   const { sessionId, startedAt } = sessionIdentity(process.env);
   const home = homedir();

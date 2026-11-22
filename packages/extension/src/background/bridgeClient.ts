@@ -20,6 +20,7 @@ export interface ConnectionStatus {
 
 const KEEPALIVE_MS = 20_000; // < 30s idle limit for MV3 service workers
 const MAX_BACKOFF_MS = 10_000;
+const RELOAD_ANNOUNCE_WAIT_MS = 500;
 
 /**
  * Keeps a WebSocket open to the local MCP server. The server only exists while
@@ -50,6 +51,16 @@ export class BridgeClient {
   whenIdle(): Promise<void> {
     if (this.inFlight === 0) return Promise.resolve();
     return new Promise((resolve) => this.idleWaiters.push(resolve));
+  }
+
+  async announceReload(): Promise<void> {
+    const ws = this.ws;
+    if (ws?.readyState !== WebSocket.OPEN) return;
+    this.send({ type: 'reloading' });
+    const deadline = Date.now() + RELOAD_ANNOUNCE_WAIT_MS;
+    while (ws.readyState === WebSocket.OPEN && ws.bufferedAmount > 0 && Date.now() < deadline) {
+      await new Promise((resolve) => setTimeout(resolve, 10));
+    }
   }
 
   connect() {

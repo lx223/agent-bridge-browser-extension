@@ -225,6 +225,20 @@ describe('BridgeClient', () => {
     expect(client.status.agents).toEqual([]);
   });
 
+  it('tells the server before it reloads for an update', async () => {
+    const { client, peer } = await connected();
+    const announced = client.announceReload();
+    await vi.advanceTimersByTimeAsync(500);
+    await announced;
+    await until(() => peer.received.length === 2);
+    expect(peer.received[1]).toEqual({ type: 'reloading' });
+  });
+
+  it('has nothing to announce while disconnected', async () => {
+    const { client } = createClient(1);
+    await expect(client.announceReload()).resolves.toBeUndefined();
+  });
+
   it('pings every 20 seconds to keep the service worker alive', async () => {
     const { peer } = await connected();
     await vi.advanceTimersByTimeAsync(19_999);
