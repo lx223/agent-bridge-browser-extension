@@ -8,101 +8,138 @@
   </head>
   <body>
     <main>
-      <header>
-        <h1>Agent Browser Bridge</h1>
-        <p class="lede" data-browser="chrome">Let your AI agent organise your tabs and operate web pages.</p>
-        <p class="lede" data-browser="safari" hidden>Let your AI agent find, open, move and close your Safari tabs.</p>
-        <div id="status" class="status" data-state="disconnected">
-          <span class="dot"></span>
-          <span id="status-text">Checking connection…</span>
-        </div>
-        <ul id="agents" class="agents" hidden></ul>
-        <div class="instance-name">
-          <label for="instance-name">Name this browser profile</label>
-          <input id="instance-name" type="text" placeholder="For example Work or Personal" autocomplete="off" spellcheck="false" />
-          <p class="hint">Agents use this name to tell your browsers and profiles apart, so you can ask for your Work browser. <span id="instance-id"></span></p>
+      <header class="masthead">
+        <img class="logo" src="/icons/icon-48.png" alt="" width="40" height="40" />
+        <div>
+          <h1>Agent Browser Bridge</h1>
+          <p class="lede" data-browser="chrome">Let your AI agent organise your tabs and operate web pages.</p>
+          <p class="lede" data-browser="safari" hidden>Let your AI agent find, open, move and close your Safari tabs.</p>
         </div>
       </header>
 
-      <section>
-        <h2>1. Add it to your agent</h2>
-        <p class="hint">Your agent starts a small local server (<code>npx -y <span data-pkg></span></code>) that this extension connects to. Pick your agent:</p>
-
-        <div class="cards">
-          <article class="card wide">
-            <h3>Let your agent set it up</h3>
-            <p>Paste this prompt into any agent that can run commands and edit its own settings, such as Claude Code, Cursor or Codex. It checks for Node.js, then adds the server.</p>
-            <div class="snippet block"><pre id="agent-prompt" class="wrap"></pre><button data-copy="agent-prompt">Copy prompt</button></div>
-          </article>
-
-          <article class="card">
-            <h3>Claude Code</h3>
-            <p>Run once in a terminal:</p>
-            <div class="snippet"><code id="claude-code-cmd"></code><button data-copy="claude-code-cmd">Copy</button></div>
-          </article>
-
-          <article class="card">
-            <h3>Cursor</h3>
-            <p>Opens Cursor and asks you to confirm.</p>
-            <a id="cursor-link" class="button">Add to Cursor</a>
-          </article>
-
-          <article class="card">
-            <h3>VS Code</h3>
-            <p>Opens VS Code and asks you to confirm.</p>
-            <a id="vscode-link" class="button">Add to VS Code</a>
-          </article>
-
-          <article class="card">
-            <h3>Claude Desktop</h3>
-            <p>Download the extension, then open the file to install it. No Node.js needed.</p>
-            <a id="claude-desktop-link" class="button">Download for Claude Desktop</a>
-          </article>
-
-          <article class="card wide">
-            <h3>Other agents</h3>
-            <p>Add this to the agent's MCP config, then restart it.</p>
-            <div class="snippet block"><pre id="json-config"></pre><button data-copy="json-config">Copy</button></div>
-          </article>
+      <section class="connection" aria-live="polite">
+        <div id="status" class="status" data-state="disconnected">
+          <span class="dot" aria-hidden="true"></span>
+          <div>
+            <strong id="status-text">Checking connection…</strong>
+            <p id="status-hint" class="hint"></p>
+          </div>
         </div>
+        <ul id="agents" class="agents" hidden></ul>
       </section>
 
-      <section>
-        <h2>2. Try it</h2>
-        <div data-browser="chrome">
-          <p>With Chrome open, ask your agent:</p>
-          <blockquote>Organise my open tabs into groups by topic. Show me the plan first.</blockquote>
-          <blockquote>Open the Chrome release notes and summarise what changed in the latest version.</blockquote>
-          <p class="hint">The status above turns green once your agent's server is running. Changes made with <code>chrome_plan_apply</code> can be reverted by asking the agent to undo.</p>
+      <details id="setup" class="step" open>
+        <summary>
+          <span class="step-number" aria-hidden="true">1</span>
+          <h2>Connect your agent</h2>
+          <span class="step-done">Done</span>
+        </summary>
+        <div class="step-body">
+          <p class="hint">Pick the agent you use.</p>
+          <div class="tabs" role="tablist" aria-label="Your agent">
+            <button role="tab" id="tab-claude-code" aria-controls="panel-claude-code" data-agent="claude-code">Claude Code</button>
+            <button role="tab" id="tab-claude-desktop" aria-controls="panel-claude-desktop" data-agent="claude-desktop">Claude Desktop</button>
+            <button role="tab" id="tab-cursor" aria-controls="panel-cursor" data-agent="cursor">Cursor</button>
+            <button role="tab" id="tab-vscode" aria-controls="panel-vscode" data-agent="vscode">VS Code</button>
+            <button role="tab" id="tab-other" aria-controls="panel-other" data-agent="other">Other</button>
+          </div>
+
+          <div class="panel" role="tabpanel" id="panel-claude-code" aria-labelledby="tab-claude-code">
+            <p>Run this once in a terminal, then start a new Claude Code session.</p>
+            <div class="snippet"><code id="claude-code-cmd"></code><button class="secondary" data-copy="claude-code-cmd">Copy</button></div>
+          </div>
+
+          <div class="panel" role="tabpanel" id="panel-claude-desktop" aria-labelledby="tab-claude-desktop" hidden>
+            <p>Download the extension and open the file. Claude Desktop installs it for you, no Node.js needed.</p>
+            <a id="claude-desktop-link" class="button">Download for Claude Desktop</a>
+          </div>
+
+          <div class="panel" role="tabpanel" id="panel-cursor" aria-labelledby="tab-cursor" hidden>
+            <p>Cursor opens and asks you to confirm.</p>
+            <a id="cursor-link" class="button">Add to Cursor</a>
+          </div>
+
+          <div class="panel" role="tabpanel" id="panel-vscode" aria-labelledby="tab-vscode" hidden>
+            <p>VS Code opens and asks you to confirm.</p>
+            <a id="vscode-link" class="button">Add to VS Code</a>
+          </div>
+
+          <div class="panel" role="tabpanel" id="panel-other" aria-labelledby="tab-other" hidden>
+            <p>Add this to your agent's MCP config, then restart it.</p>
+            <div class="snippet block"><pre id="json-config"></pre><button class="secondary" data-copy="json-config">Copy</button></div>
+          </div>
+
+          <div class="assist">
+            <div>
+              <strong>Let your agent set itself up</strong>
+              <p class="hint">Paste this prompt into an agent that can run commands, such as Claude Code, Cursor or Codex. It checks for Node.js and adds the server.</p>
+              <details class="preview">
+                <summary>Show prompt</summary>
+                <pre id="agent-prompt"></pre>
+              </details>
+            </div>
+            <button class="secondary" data-copy="agent-prompt">Copy prompt</button>
+          </div>
+
+          <p class="footnote">Your agent runs a small local server, <code>npx -y <span data-pkg></span></code>, that this extension connects to.</p>
         </div>
-        <div data-browser="safari" hidden>
+      </details>
+
+      <section class="step">
+        <div class="step-head">
+          <span class="step-number" aria-hidden="true">2</span>
+          <h2>Ask it something</h2>
+        </div>
+        <div class="step-body" data-browser="chrome">
+          <p>With Chrome open, ask your agent:</p>
+          <ul class="prompts">
+            <li><span id="try-chrome-tabs">Organise my open tabs into groups by topic. Show me the plan first.</span><button class="ghost" data-copy="try-chrome-tabs">Copy</button></li>
+            <li><span id="try-chrome-page">Open the Chrome release notes and summarise what changed in the latest version.</span><button class="ghost" data-copy="try-chrome-page">Copy</button></li>
+          </ul>
+          <p class="footnote">Changed your mind? Changes made with <code>chrome_plan_apply</code> can be reverted by asking the agent to undo.</p>
+        </div>
+        <div class="step-body" data-browser="safari" hidden>
           <p>With Safari open, ask your agent:</p>
-          <blockquote>Which tabs do I have open in Safari? Close the duplicates, but ask me first.</blockquote>
-          <blockquote>Put my Safari tabs in order by site.</blockquote>
-          <p class="hint">
-            The status above turns green once your agent's server is running. In Safari your agent can open, arrange and close windows, and open,
-            navigate, switch, pin, mute, duplicate, move and close tabs. If tab titles and addresses are missing, give the extension website access in Safari under Settings &gt; Extensions.
-            Tab groups, history, bookmarks and page control are available in Chrome.
+          <ul class="prompts">
+            <li><span id="try-safari-duplicates">Which tabs do I have open in Safari? Close the duplicates, but ask me first.</span><button class="ghost" data-copy="try-safari-duplicates">Copy</button></li>
+            <li><span id="try-safari-order">Put my Safari tabs in order by site.</span><button class="ghost" data-copy="try-safari-order">Copy</button></li>
+          </ul>
+          <p class="footnote">
+            In Safari your agent can open, arrange and close windows, and open, navigate, switch, pin, mute, duplicate, move and close tabs.
+            Tab groups, history, bookmarks and page control are available in Chrome. If tab titles and addresses are missing, give the extension
+            website access in Safari under Settings &gt; Extensions.
           </p>
         </div>
       </section>
 
-      <section>
-        <h2>Privacy</h2>
-        <p class="hint" data-browser="chrome">
-          Your browsing data stays on your computer: the extension only talks to <code>127.0.0.1</code>. Your agent can read tab titles and URLs,
-          rearrange, group or close tabs, and read and act in web pages when you ask it to. Chrome shows a debugging banner while it
-          works in a page. Tab titles, URLs and page contents are never sent anywhere else by this extension.
-        </p>
-        <p class="hint" data-browser="safari" hidden>
-          Your browsing data stays on your computer: the extension only talks to <code>127.0.0.1</code>. Your agent can read tab titles and URLs,
-          and open, arrange or close windows and tabs when you ask it to. It cannot read or act in web pages in Safari. Tab titles and URLs are never
-          sent anywhere else by this extension.
-        </p>
-        <label id="analytics-setting" class="hint toggle">
+      <section class="settings">
+        <h2>Settings</h2>
+        <div class="setting">
+          <label for="instance-name">Name this browser profile</label>
+          <input id="instance-name" type="text" placeholder="For example Work or Personal" autocomplete="off" spellcheck="false" />
+          <p class="hint">Agents use this name to tell your browsers and profiles apart, so you can ask for your Work browser. <span id="instance-id" class="instance-id"></span></p>
+        </div>
+        <label id="analytics-setting" class="setting toggle">
           <input type="checkbox" id="analytics-enabled" checked />
-          Share anonymous usage statistics (which features are used, extension version) to help improve the extension.
+          <span>
+            <strong>Share anonymous usage statistics</strong>
+            <span class="hint">Which features are used and the extension version, to help improve the extension.</span>
+          </span>
         </label>
+        <div class="setting privacy">
+          <strong>Privacy</strong>
+          <p class="hint" data-browser="chrome">
+            Your browsing data stays on your computer: the extension only talks to <code>127.0.0.1</code>. Your agent can read tab titles and URLs,
+            rearrange, group or close tabs, and read and act in web pages when you ask it to. Chrome shows a debugging banner while it works in a page.
+            Tab titles, URLs and page contents are never sent anywhere else by this extension.
+          </p>
+          <p class="hint" data-browser="safari" hidden>
+            Your browsing data stays on your computer: the extension only talks to <code>127.0.0.1</code>. Your agent can read tab titles and URLs,
+            and open, arrange or close windows and tabs when you ask it to. It cannot read or act in web pages in Safari. Tab titles and URLs are never
+            sent anywhere else by this extension.
+          </p>
+          <p class="hint"><a id="privacy-link" target="_blank" rel="noopener">Privacy policy</a></p>
+        </div>
       </section>
     </main>
     <script type="module" src="./main.ts"></script>

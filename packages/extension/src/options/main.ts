@@ -2,8 +2,7 @@ import type { ConnectionStatus } from '../background/bridgeClient.ts';
 import { renderSessionList } from '../settings/sessionList.ts';
 import { analyticsAvailable, bindAnalyticsToggle } from '../settings/analyticsToggle.ts';
 import { bindInstanceName } from '../settings/instanceName.ts';
-
-const PRIVACY_URL = 'https://github.com/lx223/agent-bridge-browser-extension/blob/main/PRIVACY.md';
+import { PRIVACY_URL } from '../settings/privacy.ts';
 
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 
