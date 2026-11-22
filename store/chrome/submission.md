@@ -4,6 +4,8 @@ Copy for the dashboard. The data usage disclosures record the 0.3.0 submission. 
 
 ## Description (16,000 char limit)
 
+Other languages: [descriptions](descriptions/), one file per locale.
+
 ### English (United Kingdom)
 
 Control your own browser with any AI agent you like.

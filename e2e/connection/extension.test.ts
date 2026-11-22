@@ -64,6 +64,23 @@ describe('the packaged extension', () => {
     await page.close();
   });
 
+  it('names this browser profile from the top of the welcome page', async () => {
+    const { page, errors } = await openExtensionPage('src/welcome/index.html');
+    const name = page.locator('#instance-name');
+    await name.fill('Home');
+    await name.press('Enter');
+    expect(await page.textContent('#profile-saved')).toBe('Saved');
+    expect(await page.textContent('#profile-avatar')).toBe('H');
+    await expect.poll(async () => (await harness.agent.raw('chrome_windows_list', { instance: 'home' })).isError).toBe(false);
+
+    await name.fill('');
+    await name.press('Enter');
+    expect(await page.textContent('#profile-saved')).toBe('Name removed');
+    expect(await page.textContent('#profile-avatar')).toBe('');
+    expect(errors).toEqual([]);
+    await page.close();
+  });
+
   it('renders the options page', async () => {
     const { page, errors } = await openExtensionPage('src/options/index.html');
     await page.waitForSelector('#connection[data-state="connected"] #agents li.session');

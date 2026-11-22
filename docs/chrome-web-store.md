@@ -39,7 +39,7 @@ The Chrome files go to `store/assets/out/chrome/`:
 
 Upload the screenshots for each language under Store listing in the developer dashboard. The number at the start of each file name gives its position in the listing. The promo tiles cannot be localised, so they are English only. The dashboard takes the promo video as a YouTube URL, so upload `promo-video.mp4` to YouTube and paste its link.
 
-The script uses the end-to-end harness (`e2e/support/harness.ts`). Each scene comes from a real session: the built MCP server, the built extension in headless Chromium, and demo pages served on `127.0.0.1`. The tab groups, form contents, tool names and extension pages are what the extension actually produced, and every window state the video shows was captured at that point in the session. The caption, the chat transcript and the window frame around each capture are drawn by the script. Chromium starts with the locale's language, so the demo pages and the browser use it too. The extension's own pages are English only, because the extension is not localised yet.
+The script uses the end-to-end harness (`e2e/support/harness.ts`). Each scene comes from a real session: the built MCP server, the built extension in headless Chromium, and demo pages served on `127.0.0.1`. The tab groups, form contents, tool names and extension pages are what the extension actually produced, and every window state the video shows was captured at that point in the session. The caption, the chat transcript and the window frame around each capture are drawn by the script. Chromium starts with the locale's language, so the demo pages, the browser and the extension's own pages use it too. See [Localisation](localisation.md) for the extension's translations.
 
 Like the end-to-end tests, the script needs Playwright's Chromium installed. Videos also need `ffmpeg` with `libx264` on the `PATH`; leave out `--kind video` to skip them. Chinese, Japanese and Korean need CJK fonts on the machine. macOS and Windows have them; on Linux install a package such as `fonts-noto-cjk`. A full run takes about twenty minutes, most of it one Chrome video per locale; use `--locale` to render only the languages you are updating.
 
@@ -92,6 +92,14 @@ The translations other than English were written without a native speaker review
 | `store/assets/demo.ts` | The demo pages, built from the locale strings |
 
 To add a Chrome scene, add its name to `sceneNames` in `store/assets/locale.ts`, a caption for it in every locale file, and a capture function in `scenes.ts`. It then appears in the screenshots and the video.
+
+## Languages and regions
+
+The package ships translations for every language the store supports (see [Localisation](localisation.md)). The store reads the extension's name and summary from the package for each language. The detailed description and screenshots are per language in the dashboard under Store listing; a language without its own description shows the English one.
+
+The detailed description for each language other than English is in [`store/chrome/descriptions/`](../store/chrome/descriptions), one file per locale code, such as `de.md` or `pt_BR.md`. Paste each file into that language's Store listing. The English text is in the [submission copy](../store/chrome/submission.md). The translations had no native speaker review; they use the same terms as the extension's `messages.json` for each language, so the open questions in [Localisation](localisation.md#review) apply to them too. When the English description changes, update every file.
+
+Which countries can install the extension is a separate setting under Distribution > Regions, and does not depend on the languages. Keep it on all regions.
 
 ## Release steps
 

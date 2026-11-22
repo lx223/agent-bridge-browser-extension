@@ -1,6 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import type { AgentInfo, AgentSession } from '@agent-browser-bridge/protocol';
 import { CHAT_PANEL_PORT, ChatPanel } from './chatPanel.ts';
+import { englishI18n } from '../test/englishI18n.ts';
 
 type Listener<T extends unknown[]> = (...args: T) => void;
 
@@ -15,6 +16,7 @@ function installChrome() {
   const connectListeners: Listener<[FakePort]>[] = [];
   const clickListeners: Listener<[string]>[] = [];
   const fake = {
+    i18n: englishI18n,
     storage: {
       session: {
         get: async (key: string) => (key in items ? { [key]: structuredClone(items[key]) } : {}),

@@ -1,0 +1,15 @@
+Controla tu propio navegador con el agente de IA que prefieras.
+
+Conecta tu agente de programación con IA al navegador Chrome que usas a diario mediante Model Context Protocol (MCP).
+
+Agent Browser Bridge permite a un agente conectado listar, abrir, poner en primer plano y cerrar ventanas y pestañas; organizar pestañas en grupos con nombre y color; mover, fijar, silenciar y duplicar pestañas o liberarlas de la memoria, y cerrar pestañas cuando se lo pidas. Previsualiza un plan de agrupación antes de aplicarlo y deshaz el último plan para restaurar la distribución anterior.
+
+Los agentes también pueden ayudarte a retomar lo que estabas haciendo: buscar en tu historial de navegación, listar las pestañas cerradas recientemente y las pestañas abiertas en tus otros dispositivos con la sesión iniciada, y volver a abrirlas. Pueden buscar y organizar tus marcadores y tu lista de lectura, encontrar e iniciar descargas, ver los sitios que más visitas, buscar con tu buscador predeterminado y avisarte cuando termine una tarea.
+
+Los agentes conectados también pueden examinar páginas web y actuar en ellas: navegar, hacer clic, escribir y usar las herramientas WebMCP que proporcionan las páginas. El permiso de depuración hace posible este control de páginas mediante Chrome DevTools Protocol. Conecta solo agentes de confianza: pueden recibir los títulos de las pestañas, las URL y el contenido de las páginas, e interactuar con las páginas en tu nombre.
+
+Un panel lateral te permite chatear con tu agente desde Chrome, para que no tengas que volver a la ventana del agente entre un paso y otro.
+
+La página de configuración muestra el estado de la conexión y ofrece opciones de configuración para Cursor, VS Code, Claude Code y otros agentes compatibles con MCP. Se necesita un servidor MCP local de Agent Browser Bridge independiente. La extensión se conecta a ese servidor en tu ordenador.
+
+Las estadísticas de uso anónimas del producto se pueden desactivar en la configuración de la extensión. Consulta la política de privacidad para obtener más información.

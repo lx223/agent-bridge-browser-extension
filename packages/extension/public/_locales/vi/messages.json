@@ -1,0 +1,320 @@
+{
+  "locale": {
+    "message": "vi"
+  },
+  "extDescription": {
+    "message": "Điều khiển trình duyệt của bạn bằng bất kỳ tác nhân AI nào bạn thích: sắp xếp thẻ và thao tác trên trang web qua MCP."
+  },
+  "actionTitle": {
+    "message": "Agent Browser Bridge: thiết lập và trạng thái"
+  },
+  "actionTitleDisconnected": {
+    "message": "Agent Browser Bridge: chưa có tác nhân nào kết nối"
+  },
+  "actionTitleConnected": {
+    "message": "Agent Browser Bridge: tác nhân đã kết nối"
+  },
+  "actionTitleConnectedTo": {
+    "message": "Agent Browser Bridge: đã kết nối với $1"
+  },
+  "notificationReply": {
+    "message": "Nhấp vào nút Agent Browser Bridge trên thanh công cụ để trả lời"
+  },
+  "optionsTitle": {
+    "message": "Tùy chọn Agent Browser Bridge"
+  },
+  "statusChecking": {
+    "message": "Đang kiểm tra kết nối…"
+  },
+  "statusLooking": {
+    "message": "Đang tìm tác nhân của bạn…"
+  },
+  "welcomeLede": {
+    "message": "Để tác nhân AI của bạn sắp xếp thẻ và thao tác trên trang web."
+  },
+  "welcomeLedeSafari": {
+    "message": "Để tác nhân AI của bạn tìm, mở, di chuyển và đóng thẻ Safari."
+  },
+  "profileLabel": {
+    "message": "Hồ sơ này"
+  },
+  "profilePlaceholder": {
+    "message": "Đặt tên"
+  },
+  "profileHint": {
+    "message": "Tác nhân dùng tên này để phân biệt các trình duyệt và hồ sơ của bạn, nhờ đó bạn có thể yêu cầu dùng trình duyệt Công việc."
+  },
+  "profileSaved": {
+    "message": "Đã lưu"
+  },
+  "profileNameRemoved": {
+    "message": "Đã xóa tên"
+  },
+  "statusNotConnected": {
+    "message": "Chưa kết nối"
+  },
+  "statusSetUpHint": {
+    "message": "Kết nối tác nhân của bạn bên dưới, rồi bắt đầu một phiên mới trong tác nhân đó."
+  },
+  "statusConnected": {
+    "message": "Đã kết nối"
+  },
+  "statusConnectedMany_one": {
+    "message": "Đã kết nối với $1 phiên tác nhân"
+  },
+  "statusConnectedMany_other": {
+    "message": "Đã kết nối với $1 phiên tác nhân"
+  },
+  "statusConnectedHint": {
+    "message": "Tác nhân của bạn có thể sử dụng trình duyệt này. Hãy thử một trong các câu lệnh bên dưới."
+  },
+  "welcomeStepConnect": {
+    "message": "Kết nối tác nhân của bạn"
+  },
+  "stepDone": {
+    "message": "Xong"
+  },
+  "welcomePickAgent": {
+    "message": "Chọn tác nhân bạn dùng."
+  },
+  "welcomeAgentTabs": {
+    "message": "Tác nhân của bạn"
+  },
+  "welcomeTabOther": {
+    "message": "Khác"
+  },
+  "welcomeClaudeCodeSteps": {
+    "message": "Chạy lệnh này một lần trong cửa sổ dòng lệnh, rồi bắt đầu một phiên Claude Code mới."
+  },
+  "welcomeClaudeDesktopSteps": {
+    "message": "Tải tiện ích xuống và mở tệp. Claude Desktop sẽ cài đặt giúp bạn, không cần Node.js."
+  },
+  "welcomeOpensToConfirm": {
+    "message": "$1 sẽ mở ra và yêu cầu bạn xác nhận."
+  },
+  "welcomeOtherAgentsSteps": {
+    "message": "Thêm đoạn này vào cấu hình MCP của tác nhân, rồi khởi động lại tác nhân."
+  },
+  "welcomeAgentSetupHint": {
+    "message": "Dán câu lệnh này vào một tác nhân có thể chạy lệnh, chẳng hạn như Claude Code, Cursor hoặc Codex. Tác nhân sẽ kiểm tra Node.js, rồi thêm máy chủ."
+  },
+  "showPrompt": {
+    "message": "Hiện câu lệnh"
+  },
+  "welcomeServerFootnote": {
+    "message": "Tác nhân của bạn chạy một máy chủ cục bộ nhỏ, $1, để tiện ích này kết nối."
+  },
+  "welcomeStepAsk": {
+    "message": "Hỏi thử tác nhân"
+  },
+  "welcomeUndoFootnote": {
+    "message": "Đổi ý? Bạn có thể hoàn tác các thay đổi được thực hiện bằng $1 bằng cách yêu cầu tác nhân hoàn tác."
+  },
+  "welcomeSafariFootnote": {
+    "message": "Trong Safari, tác nhân của bạn có thể mở, sắp xếp và đóng cửa sổ, cũng như mở, điều hướng, chuyển đổi, ghim, tắt tiếng, nhân bản, di chuyển và đóng thẻ. Nhóm thẻ, lịch sử, dấu trang và điều khiển trang có trong Chrome. Nếu thiếu tiêu đề và địa chỉ của thẻ, hãy cấp cho tiện ích quyền truy cập trang web trong Safari tại Cài đặt > Tiện ích mở rộng."
+  },
+  "welcomeAnalyticsHint": {
+    "message": "Tính năng nào được dùng và phiên bản tiện ích, để giúp cải thiện tiện ích."
+  },
+  "instanceNameLabel": {
+    "message": "Đặt tên cho hồ sơ trình duyệt này"
+  },
+  "instanceNamePlaceholder": {
+    "message": "Ví dụ: Công việc hoặc Cá nhân"
+  },
+  "optionsInstanceNameHint": {
+    "message": "Tác nhân dùng tên này để phân biệt các trình duyệt và hồ sơ của bạn. $1"
+  },
+  "instanceId": {
+    "message": "Mã phiên bản: $1"
+  },
+  "welcomeAgentSetupTitle": {
+    "message": "Để tác nhân tự thiết lập"
+  },
+  "copyPrompt": {
+    "message": "Sao chép câu lệnh"
+  },
+  "copy": {
+    "message": "Sao chép"
+  },
+  "copied": {
+    "message": "Đã sao chép"
+  },
+  "welcomeAddTo": {
+    "message": "Thêm vào $1"
+  },
+  "welcomeDownloadFor": {
+    "message": "Tải xuống cho $1"
+  },
+  "welcomeTryIntro": {
+    "message": "Khi Chrome đang mở, hãy yêu cầu tác nhân:"
+  },
+  "welcomeTryTabs": {
+    "message": "Sắp xếp các thẻ đang mở thành nhóm theo chủ đề. Cho tôi xem kế hoạch trước."
+  },
+  "welcomeTryPage": {
+    "message": "Mở ghi chú phát hành của Chrome và tóm tắt những thay đổi trong phiên bản mới nhất."
+  },
+  "welcomeTryIntroSafari": {
+    "message": "Khi Safari đang mở, hãy yêu cầu tác nhân:"
+  },
+  "welcomeTryDuplicatesSafari": {
+    "message": "Tôi đang mở những thẻ nào trong Safari? Đóng các thẻ trùng lặp, nhưng hỏi tôi trước."
+  },
+  "welcomeTrySortSafari": {
+    "message": "Sắp xếp các thẻ Safari của tôi theo trang web."
+  },
+  "welcomePrivacyHeading": {
+    "message": "Quyền riêng tư"
+  },
+  "welcomePrivacy": {
+    "message": "Dữ liệu duyệt web của bạn vẫn ở trên máy tính của bạn: tiện ích chỉ giao tiếp với $1. Tác nhân có thể đọc tiêu đề và URL của thẻ, sắp xếp lại, nhóm hoặc đóng thẻ, cũng như đọc và thao tác trên trang web khi bạn yêu cầu. Chrome hiển thị biểu ngữ gỡ lỗi khi tác nhân thao tác trên một trang. Tiện ích này không bao giờ gửi tiêu đề thẻ, URL hay nội dung trang đến bất kỳ nơi nào khác."
+  },
+  "welcomePrivacySafari": {
+    "message": "Dữ liệu duyệt web của bạn vẫn ở trên máy tính của bạn: tiện ích chỉ giao tiếp với $1. Tác nhân có thể đọc tiêu đề và URL của thẻ, cũng như mở, sắp xếp hoặc đóng cửa sổ và thẻ khi bạn yêu cầu. Tác nhân không thể đọc hoặc thao tác trên trang web trong Safari. Tiện ích này không bao giờ gửi tiêu đề thẻ hay URL đến bất kỳ nơi nào khác."
+  },
+  "analyticsTitle": {
+    "message": "Chia sẻ số liệu thống kê sử dụng ẩn danh"
+  },
+  "analyticsHint": {
+    "message": "Tính năng nào được dùng, có thành công hay không, cùng phiên bản của tiện ích và tác nhân. Không bao giờ gồm tiêu đề thẻ, URL hay nội dung trang. $1"
+  },
+  "privacyPolicy": {
+    "message": "Chính sách quyền riêng tư"
+  },
+  "analyticsUnavailable": {
+    "message": "Bản dựng này không thu thập số liệu thống kê sử dụng."
+  },
+  "openSetup": {
+    "message": "Mở trang thiết lập và trạng thái kết nối"
+  },
+  "optionsConnected": {
+    "message": "Tác nhân đã kết nối"
+  },
+  "optionsConnectedMany_one": {
+    "message": "$1 phiên tác nhân đã kết nối"
+  },
+  "optionsConnectedMany_other": {
+    "message": "$1 phiên tác nhân đã kết nối"
+  },
+  "optionsDisconnected": {
+    "message": "Chưa có tác nhân nào kết nối"
+  },
+  "agentStartingUp": {
+    "message": "Tác nhân đang khởi động"
+  },
+  "sessionInProject": {
+    "message": "$1 trong $2"
+  },
+  "sessionStarted": {
+    "message": "Bắt đầu $1"
+  },
+  "sessionLastUsed_one": {
+    "message": "Dùng $2 lần cuối $3, $1 lệnh gọi"
+  },
+  "sessionLastUsed_other": {
+    "message": "Dùng $2 lần cuối $3, $1 lệnh gọi"
+  },
+  "sessionUnused": {
+    "message": "Chưa dùng trình duyệt"
+  },
+  "sessionId": {
+    "message": "Phiên $1"
+  },
+  "serverVersion": {
+    "message": "máy chủ $1"
+  },
+  "instanceThisBrowser": {
+    "message": "$1, trình duyệt này"
+  },
+  "justNow": {
+    "message": "vừa xong"
+  },
+  "chatTitle": {
+    "message": "Trò chuyện với tác nhân"
+  },
+  "chatSetup": {
+    "message": "Thiết lập"
+  },
+  "chatConversation": {
+    "message": "Cuộc trò chuyện"
+  },
+  "chatEmptyHeading": {
+    "message": "Trò chuyện với tác nhân của bạn tại đây"
+  },
+  "chatEmptyBody": {
+    "message": "Yêu cầu tác nhân tiếp tục trong trình duyệt hoặc chạy câu lệnh $1 của tác nhân. Tin nhắn của tác nhân sẽ xuất hiện ở đây và câu trả lời của bạn sẽ được gửi thẳng lại cho tác nhân."
+  },
+  "chatEmptyHint": {
+    "message": "Mỗi phiên tác nhân có cuộc trò chuyện riêng."
+  },
+  "chatInput": {
+    "message": "Nhắn tin cho tác nhân"
+  },
+  "chatEnd": {
+    "message": "Kết thúc trò chuyện"
+  },
+  "chatRemove": {
+    "message": "Xóa"
+  },
+  "chatSend": {
+    "message": "Gửi"
+  },
+  "chatError": {
+    "message": "Đã xảy ra lỗi."
+  },
+  "chatUnseen_one": {
+    "message": "$2 ($1 tin mới)"
+  },
+  "chatUnseen_other": {
+    "message": "$2 ($1 tin mới)"
+  },
+  "chatStatusWaiting": {
+    "message": "Đang chờ bạn trả lời"
+  },
+  "chatStatusWorking": {
+    "message": "Đang làm việc"
+  },
+  "chatStatusWorkingTool": {
+    "message": "Đang làm việc: đã dùng $1 $2"
+  },
+  "chatStatusDisconnected": {
+    "message": "Tác nhân đã ngắt kết nối"
+  },
+  "chatStatusEnded": {
+    "message": "Đã kết thúc trò chuyện"
+  },
+  "chatHintWaiting": {
+    "message": "Nhấn Enter để gửi, Shift+Enter để xuống dòng."
+  },
+  "chatHintWorking": {
+    "message": "Tác nhân sẽ đọc tin nhắn của bạn vào lần kiểm tra cuộc trò chuyện tiếp theo."
+  },
+  "chatHintDisconnected": {
+    "message": "Phiên tác nhân này đã đóng."
+  },
+  "chatHintEnded": {
+    "message": "Yêu cầu tác nhân tiếp tục trong trình duyệt để trò chuyện lại."
+  },
+  "chatReadByAgent": {
+    "message": "tác nhân đã đọc"
+  },
+  "chatNotReadYet": {
+    "message": "chưa đọc"
+  },
+  "chatEndedNotice": {
+    "message": "Bạn đã kết thúc cuộc trò chuyện."
+  },
+  "chatConversationGone": {
+    "message": "Cuộc trò chuyện này không còn nữa."
+  },
+  "chatEndedError": {
+    "message": "Cuộc trò chuyện này đã kết thúc. Hãy yêu cầu tác nhân tiếp tục trong trình duyệt để bắt đầu lại."
+  },
+  "chatTooLong_one": {
+    "message": "Tin nhắn chỉ được dài tối đa $1 ký tự."
+  },
+  "chatTooLong_other": {
+    "message": "Tin nhắn chỉ được dài tối đa $1 ký tự."
+  }
+}

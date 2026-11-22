@@ -2,18 +2,21 @@ import type { ConnectionStatus } from '../background/bridgeClient.ts';
 import { renderSessionList } from '../settings/sessionList.ts';
 import { analyticsAvailable, bindAnalyticsToggle } from '../settings/analyticsToggle.ts';
 import { bindInstanceName } from '../settings/instanceName.ts';
-
-const PRIVACY_URL = 'https://github.com/lx223/agent-bridge-browser-extension/blob/main/PRIVACY.md';
+import { plural, t } from '../i18n/messages.ts';
+import { localizePage } from '../i18n/page.ts';
+import { PRIVACY_URL } from '../settings/privacy.ts';
 
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
+
+localizePage();
 
 $<HTMLAnchorElement>('privacy-link').href = PRIVACY_URL;
 bindInstanceName($<HTMLInputElement>('instance-name'), $('instance-id'));
 
-const STATUS_TEXT: Record<ConnectionStatus['state'], string> = {
-  connected: 'Agent connected',
-  connecting: 'Looking for your agent…',
-  disconnected: 'No agent connected',
+const STATUS_TEXT: Record<ConnectionStatus['state'], () => string> = {
+  connected: () => t('optionsConnected'),
+  connecting: () => t('statusLooking'),
+  disconnected: () => t('optionsDisconnected'),
 };
 
 let latest: ConnectionStatus | undefined;
@@ -23,7 +26,7 @@ function render(status: ConnectionStatus | undefined) {
   const state = status?.state ?? 'disconnected';
   const sessions = status?.agents.length ?? 0;
   $('connection').dataset.state = state;
-  $('status-text').textContent = state === 'connected' && sessions > 1 ? `${sessions} agent sessions connected` : STATUS_TEXT[state];
+  $('status-text').textContent = state === 'connected' && sessions > 1 ? plural('optionsConnectedMany', sessions) : STATUS_TEXT[state]();
   renderSessionList($('agents'), status?.agents ?? [], status?.instanceId);
 }
 
