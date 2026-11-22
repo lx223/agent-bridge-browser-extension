@@ -9,7 +9,7 @@ Start it from the agent, once:
 - run the server's `continue_in_browser` prompt (in Claude Code, type `/continue_in_browser` and pick it from the list), or
 - tell the agent "let's continue in the browser chat".
 
-The agent posts a message with `browser_chat_send`. The toolbar button shows a badge with the number of messages you haven't read. If no chat panel is open, Chrome also shows a desktop notification. Click the toolbar button to open the panel: while a chat is open, the button opens the chat panel instead of the setup page. The panel's **Setup** link still opens the setup page.
+The agent posts a message with `browser_chat_send`. The toolbar button shows a badge with the number of messages you haven't read. If no chat panel is open, Chrome also shows a desktop notification. Click the toolbar button to open the panel: while a chat is open, the button opens the chat panel instead of the setup page. The gear button at the top of the panel still opens the setup page.
 
 Chrome only lets an extension open its side panel after you click something, so the agent can't open the panel for you.
 
@@ -31,12 +31,17 @@ Older servers send no `agentSessionId`. Their conversations are keyed by the bri
 
 ## Talking in the panel
 
-- **Enter** sends your message and **Shift+Enter** starts a new line.
+- **Enter** or the send button sends your message and **Shift+Enter** starts a new line. The message box grows as you write.
 - The status line under the title shows whether the agent is **waiting for your reply**, **working**, **reconnecting** (its connection dropped a moment ago), **disconnected** (its session has closed) or the chat has **ended**. While it works, it also shows the last browser tool it used.
 - You can write while the agent is working. Messages wait until it next checks the chat. Each one shows **not read yet** until the agent reads it, then **read by the agent**.
-- Each agent session has its own conversation. With several, pick one from the list under the title; the list shows how many new messages each has.
+- Each agent session has its own conversation. With several, the title becomes a list: pick a conversation from it. The list shows how many new messages each has.
+- The button next to the title is **End chat** while the chat runs and **Remove** once it is over. Once a chat is over, the message box is replaced by a note on how to chat again.
 - **End chat** tells the agent the chat is over. It stops using the chat tools and finishes its turn in its own window. Asking the agent to continue in the browser starts the conversation again.
 - **Remove** deletes a conversation that has ended or whose agent has disconnected.
+
+## Appearance
+
+The chat panel and the setup page follow the system's light or dark setting, which Chrome also passes to its side panel. They share one set of colours, defined in `packages/extension/src/theme.css`.
 
 ## How the agent hears you
 

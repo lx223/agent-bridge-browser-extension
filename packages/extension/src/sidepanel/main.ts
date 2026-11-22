@@ -2,7 +2,7 @@ import type { AgentSession, ChatTab } from '@agent-browser-bridge/protocol';
 import type { ConnectionStatus } from '../background/bridgeClient.ts';
 import { CHAT_STORAGE_KEY, type Conversations } from '../background/chat.ts';
 import { CHAT_PANEL_PORT, type ChatPanelMessage } from '../background/chatPanel.ts';
-import { panelView, type MessageView } from './view.ts';
+import { canSubmit, panelView, type MessageView, type PanelView } from './view.ts';
 import { t } from '../i18n/messages.ts';
 import { localizePage } from '../i18n/page.ts';
 
@@ -14,11 +14,13 @@ const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as 
 localizePage();
 
 const title = $('title');
+const pickerBox = $('picker');
 const picker = $<HTMLSelectElement>('conversation');
 const status = $('status');
 const empty = $('empty');
 const list = $<HTMLOListElement>('messages');
 const composer = $<HTMLFormElement>('composer');
+const field = $('field');
 const input = $<HTMLTextAreaElement>('input');
 const hint = $('composer-hint');
 const endButton = $<HTMLButtonElement>('end');
@@ -32,6 +34,7 @@ let chosen: string | undefined;
 let selected: string | undefined;
 let sending = false;
 let renderedMessages = '';
+let view: PanelView | undefined;
 
 async function post(message: ChatPanelMessage) {
   const answer = (await chrome.runtime.sendMessage(message)) as { ok: boolean; error?: string } | undefined;
@@ -65,19 +68,29 @@ function renderMessages(messages: MessageView[]) {
   if (atBottom || messages.at(-1)?.from === 'user') list.scrollTop = list.scrollHeight;
 }
 
+function fitInput() {
+  input.style.height = 'auto';
+  input.style.height = `${input.scrollHeight}px`;
+}
+
+function updateSendButton() {
+  sendButton.disabled = !view || !canSubmit(view, input.value, sending);
+}
+
 function render() {
-  const view = panelView(conversations, agents, Date.now(), chosen);
+  view = panelView(conversations, agents, Date.now(), chosen);
   selected = view.selected;
   document.body.dataset.state = view.state ?? 'none';
   title.textContent = view.title;
   title.title = view.title;
-  picker.hidden = view.options.length < 2;
+  title.hidden = view.pickConversation;
+  pickerBox.hidden = !view.pickConversation;
   picker.replaceChildren(
     ...view.options.map((option) => {
       const element = document.createElement('option');
       element.value = option.key;
       element.textContent = option.label;
-      element.selected = option.key === view.selected;
+      element.selected = option.key === selected;
       return element;
     }),
   );
@@ -87,7 +100,8 @@ function render() {
   composer.hidden = view.selected === undefined;
   renderMessages(view.messages);
   input.disabled = !view.canSend;
-  sendButton.disabled = !view.canSend || sending;
+  field.hidden = !view.canSend;
+  updateSendButton();
   hint.textContent = view.composerHint;
   endButton.hidden = !view.canEnd;
   removeButton.hidden = !view.canRemove;
@@ -109,7 +123,7 @@ async function currentTab(): Promise<ChatTab | undefined> {
 
 async function send() {
   const text = input.value.trim();
-  if (!text || selected === undefined || sending) return;
+  if (!view || !canSubmit(view, text, sending) || selected === undefined) return;
   sending = true;
   errorText.hidden = true;
   render();
@@ -117,6 +131,7 @@ async function send() {
     const tab = await currentTab();
     await post({ type: 'CHAT_POST', key: selected, text, ...(tab && { tab }) });
     input.value = '';
+    fitInput();
   } catch (error) {
     showError(error);
   } finally {
@@ -134,6 +149,11 @@ function connectPort() {
 composer.addEventListener('submit', (event) => {
   event.preventDefault();
   void send();
+});
+
+input.addEventListener('input', () => {
+  fitInput();
+  updateSendButton();
 });
 
 input.addEventListener('keydown', (event) => {
