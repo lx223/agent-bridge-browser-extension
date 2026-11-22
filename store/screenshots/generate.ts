@@ -2,7 +2,7 @@ import { mkdirSync } from 'node:fs';
 import { join, relative, resolve } from 'node:path';
 import { parseArgs } from 'node:util';
 import { chromium, type Browser } from 'playwright';
-import { startHarness } from '../../e2e/harness.ts';
+import { startHarness } from '../../e2e/support/harness.ts';
 import { serveDemo } from './demo.ts';
 import { FRAME, frameHtml } from './frame.ts';
 import { availableLocales, loadLocale, sceneNames, type Locale, type SceneName } from './locale.ts';

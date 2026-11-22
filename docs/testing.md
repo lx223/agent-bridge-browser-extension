@@ -28,22 +28,35 @@ Files that only wire things to the browser are excluded from the unit coverage n
 
 ## End-to-end tests
 
-`npm run test:e2e` builds both packages, picks a free port and makes a test copy of `packages/extension/dist` that connects to it (see [Bridge port](#bridge-port)), then for each file in `e2e/`:
+`npm run test:e2e` builds both packages, picks a free port and makes a test copy of `packages/extension/dist` that connects to it (see [Bridge port](#bridge-port)), then for each test file under `e2e/`:
 
 1. starts the built MCP server (`packages/server/dist/index.js`) over stdio with a real MCP client and `AGENT_BROWSER_BRIDGE_PORT` set to that port,
 2. launches headless Chromium with the test copy loaded as an unpacked extension,
-3. waits for the extension to connect, then drives it only through MCP tool calls against pages served from `e2e/fixtures/`.
+3. waits for the extension to connect, then drives it only through MCP tool calls against pages served from `e2e/support/fixtures/`.
 
-The files are:
+The tests are grouped by what a user does with the bridge, one folder each. `e2e/support/` holds the shared harness, fixtures and Safari simulation and has no tests.
 
-- `e2e/tabs.test.ts`: connection status, listing and filtering tabs, grouping, moving, updating, duplicating, closing, creating, updating and closing windows, tab plans with undo, error reporting, and a second agent session relaying through the first.
-- `e2e/history.test.ts`: searching history, listing visits, listing and restoring recently closed tabs by session id and without one, the empty device list without sync, and an unknown session id.
-- `e2e/browserData.test.ts`: the Reading List, bookmarks, downloads, most visited sites, searching with the default search engine and notifications. Playwright saves downloads under random names in its own folder, so the download test finds its file by URL rather than by name.
-- `e2e/discard.test.ts`: discarding tabs, the per-tab failure for a tab that is already discarded, and filtering discarded tabs. It starts Chromium as a plain process instead of through Playwright, because Chromium closes once a tab is discarded while Playwright is attached to the browser. Playwright's attachment also gives discarded tabs new ids, which does not happen otherwise.
-- `e2e/page.test.ts`: snapshots, click, hover, typing, keys, scrolling, screenshots, waiting, evaluate, navigation, back and forward after a click and directly after a URL navigation, raw CDP, detaching, and the stale ref hint.
-- `e2e/extension.test.ts`: the built manifest and its files, the welcome and options pages, and reconnecting to a new server session.
-- `e2e/pageTools.test.ts`: listing and calling WebMCP tools that `e2e/fixtures/tools.html` registers, a throwing tool, an unknown tool, a timeout, and the empty list after navigating away. The harness starts Chromium with `--enable-features=WebMCP` for this.
-- `e2e/safari.test.ts`: the built extension in a simulated Safari instead of Chromium. See [Safari](#safari).
+| Folder | File | What it covers |
+| --- | --- | --- |
+| `connection/` | `extension.test.ts` | The built manifest and its files, the welcome and options pages, and reconnecting to a new server session. |
+| | `status.test.ts` | The status tool, the full tool list, addressing the browser by instance id, identifying and naming a profile, and Safari reported as not connected. |
+| | `profiles.test.ts` | Two Chrome profiles connected at once: separate instance ids, asking which one to use, routing calls and staying on the chosen one, addressing a profile by name, and dropping a profile whose browser closes. |
+| | `sessions.test.ts` | Several agent sessions sharing one browser: a second session relaying through the first, and the others carrying on when the session hosting the bridge ends. |
+| `tabs/` | `tabs.test.ts` | Listing and filtering tabs, grouping, moving, updating, duplicating, closing, waiting for a tab, creating, updating and closing windows, tab plans with undo, and error reporting. |
+| | `discard.test.ts` | Discarding tabs, the per-tab failure for a tab that is already discarded, and filtering discarded tabs. It starts Chromium as a plain process instead of through Playwright, because Chromium closes once a tab is discarded while Playwright is attached to the browser. Playwright's attachment also gives discarded tabs new ids, which does not happen otherwise. |
+| `page/` | `page.test.ts` | Snapshots, click, hover, typing, keys, scrolling, screenshots, waiting, evaluate, navigation, back and forward after a click and directly after a URL navigation, raw CDP, detaching, and the stale ref hint. |
+| | `pageTools.test.ts` | Listing and calling WebMCP tools that `e2e/support/fixtures/tools.html` registers, a throwing tool, an unknown tool, a timeout, and the empty list after navigating away. The harness starts Chromium with `--enable-features=WebMCP` for this. |
+| `browserData/` | `history.test.ts` | Searching history, listing visits, listing and restoring recently closed tabs by session id and without one, the empty device list without sync, and an unknown session id. |
+| | `browserData.test.ts` | The Reading List, bookmarks, downloads, most visited sites, searching with the default search engine and notifications. Playwright saves downloads under random names in its own folder, so the download test finds its file by URL rather than by name. |
+| `chat/` | `chat.test.ts` | The side panel chat: the empty state, the toolbar badge, replies typed in the panel reaching the agent, the unread note on other tools, and ending the chat. |
+| `resilience/` | `serverRestart.test.ts` | Killing the MCP server process mid-session: the launcher starts a new one, the agent's next call still reaches the browser, and a tool call the crash cut off is reported as possibly not finished. It needs the launcher, so it does not run against the Claude Desktop bundle. |
+| `safari/` | `safari.test.ts` | The built extension in a simulated Safari instead of Chromium. See [Safari](#safari). |
+
+Some behaviour is covered only by unit tests, because the end-to-end harness cannot produce it:
+
+- **An extension reloading to install an update.** Chromium does not reload an extension loaded with `--disable-extensions-except`, which the harness needs: after `chrome.runtime.reload()` the extension stays unloaded. `packages/server/src/bridge.test.ts` covers the server holding and repeating calls across a reload over real WebSockets, and `packages/extension/src/background/update.test.ts` and `carryOver.test.ts` cover the extension's side.
+- **Handing the bridge over to a newer server version.** Every server in a run is the same build. `bridge.test.ts` covers it.
+- **An extension older than the server.** `bridge.test.ts` and `outdated.test.ts` cover the messages.
 
 `npm run test:e2e:mcpb` runs the same suite against the Claude Desktop extension bundle (`packages/server/mcpb-dist/server/index.js`) instead of the npm build. The bundle inlines every dependency, so this catches bundling problems that only show up once the extension connects. Set `E2E_SERVER_ENTRY` to point the suite at any other server entry.
 
@@ -51,9 +64,9 @@ The files are:
 
 Release builds connect to port 17373, the server's default. The extension reads the port from `VITE_BRIDGE_PORT` at build time and falls back to 17373 when it is not set, so a release build only changes if that variable is set while building.
 
-`createTestBridge()` in `e2e/harness.ts` picks a free port other than 17373. It copies `packages/extension/dist` to a temporary folder and rebuilds only `background.js` into it with `VITE_BRIDGE_PORT` set to that port, using `packages/extension/vite.background.config.ts`, then checks that the rebuilt script contains the new port and not 17373.
+`createTestBridge()` in `e2e/support/harness.ts` picks a free port other than 17373. It copies `packages/extension/dist` to a temporary folder and rebuilds only `background.js` into it with `VITE_BRIDGE_PORT` set to that port, using `packages/extension/vite.background.config.ts`, then checks that the rebuilt script contains the new port and not 17373.
 
-`e2e/globalSetup.ts` does this once per Vitest run, passes the port and folder to the test files in `E2E_BRIDGE_PORT` and `E2E_EXTENSION_DIR`, and deletes the folder when the run ends. Outside Vitest, as in `npm run screenshots`, `testBridge()` makes its own copy and deletes it when the process exits. `startAgent` starts every server with `AGENT_BROWSER_BRIDGE_PORT` set to that port, and Chromium, the simulated Safari and the Safari setup page all load the test copy.
+`e2e/support/globalSetup.ts` does this once per Vitest run, passes the port and folder to the test files in `E2E_BRIDGE_PORT` and `E2E_EXTENSION_DIR`, and deletes the folder when the run ends. Outside Vitest, as in `npm run screenshots`, `testBridge()` makes its own copy and deletes it when the process exits. `startAgent` starts every server with `AGENT_BROWSER_BRIDGE_PORT` set to that port, and Chromium, the simulated Safari and the Safari setup page all load the test copy.
 
 This keeps the tests away from a real agent session on the same machine in both directions. A real browser extension connects only to 17373, so it never reaches a test server, and the test extension connects only to its own port, so it never reaches the real server. The suite therefore runs while an agent session holds 17373, and so do `npm run test:e2e:mcpb` and `npm run screenshots`.
 
@@ -67,7 +80,7 @@ VITE_BRIDGE_PORT=17374 npm run build -w agent-browser-bridge-extension
 AGENT_BROWSER_BRIDGE_PORT=17374 node packages/server/dist/index.js
 ```
 
-`e2e/harness.ts` holds the shared setup. Add fixtures as plain HTML files in `e2e/fixtures/`. `startHarness` also takes a browser locale, device scale factor, colour scheme and the MCP client name and version the agent reports. The tests use the defaults; the [store screenshot generator](chrome-web-store.md#screenshots) sets them.
+`e2e/support/harness.ts` holds the shared setup. Add fixtures as plain HTML files in `e2e/support/fixtures/`. Put a new test file in the folder for the use case it covers, or start a new folder for a new one. `startHarness` returns `openAnotherProfile()` to launch a second Chromium profile with the extension, and also takes a browser locale, device scale factor, colour scheme and the MCP client name and version the agent reports. The tests use the defaults; the [store screenshot generator](chrome-web-store.md#screenshots) sets them.
 
 ### Stale element refs
 
@@ -88,7 +101,7 @@ A hidden element gets the same hint as a removed one. It is absent from a new sn
 - The test browser cannot resolve any host other than `127.0.0.1`, so nothing leaves the machine, including analytics if your local build has a key.
 - Locally you need Playwright's Chromium once: `npx playwright install chromium`.
 - To run against an existing build without rebuilding: `npx vitest run --config vitest.e2e.config.ts`.
-- To watch the browser, change `headless` to `false` in `e2e/harness.ts`.
+- To watch the browser, change `headless` to `false` in `e2e/support/harness.ts`.
 
 ## Safari
 
@@ -98,7 +111,7 @@ Safari only loads an extension from a signed app, or from an unsigned one after 
 
 ### Simulated Safari
 
-`e2e/safari.test.ts` runs as part of `npm run test:e2e`, on Linux as well as macOS. It starts the built MCP server like the Chromium tests do, but instead of a browser it uses `e2e/safari/simulatedSafari.ts`:
+`e2e/safari/safari.test.ts` runs as part of `npm run test:e2e`, on Linux as well as macOS. It starts the built MCP server like the Chromium tests do, but instead of a browser it uses `e2e/support/safari/simulatedSafari.ts`:
 
 1. It reads `manifest.json` from the test copy of `packages/extension/dist`, turns it into the Safari manifest with `safariManifest` (`packages/extension/src/safariManifest.ts`), and runs the background script as a classic script. It refuses a manifest whose background is a service worker: Safari 27 lists such a worker under **Develop > Web Extension Background Content** but never runs it, so the extension never connects. The Safari build runs the same `background.js` as a non-persistent background page instead.
 2. The script gets a `chrome` object that has only what Safari offers: no `chrome.debugger`, `chrome.tabGroups` or `runtime.onUpdateAvailable`, and tabs without `groupId`, `discarded` or `lastAccessed`.
@@ -107,7 +120,7 @@ Safari only loads an extension from a signed app, or from an unsigned one after 
 
 The tests then call the `safari_*` tools through MCP and compare the results with the simulated browser's own state. They cover connecting as Safari, the setup page opening on install and from the toolbar button, the toolbar icon and title, every Safari tool, naming the Safari instance, and reconnecting to a new agent session.
 
-One test opens the built setup page the way Safari would (`e2e/safari/setupPage.ts`). Chromium renders it, but the page gets a `safari-web-extension://` extension URL and its messages go to the simulated Safari's background script. The test checks that the page shows the Safari wording and the connection, and none of the Chrome wording. The setup page marks wording for one browser with `data-browser="chrome"` or `data-browser="safari"`, and `packages/extension/src/settings/browserContent.ts` hides the other.
+One test opens the built setup page the way Safari would (`e2e/support/safari/setupPage.ts`). Chromium renders it, but the page gets a `safari-web-extension://` extension URL and its messages go to the simulated Safari's background script. The test checks that the page shows the Safari wording and the connection, and none of the Chrome wording. The setup page marks wording for one browser with `data-browser="chrome"` or `data-browser="safari"`, and `packages/extension/src/settings/browserContent.ts` hides the other.
 
 This catches code that Safari cannot run. If the background script reaches for an API the simulation does not have, the test fails and says which one and what MDN knows about it:
 
@@ -117,7 +130,7 @@ Extension APIs it looked for that the simulated Safari does not offer:
 - runtime.onUpdateAvailable: MDN lists it as not supported in Safari
 ```
 
-When the message says Safari has the API but the simulation does not, add it to the `api` object in `e2e/safari/simulatedSafari.ts`. When it says Safari does not support it, guard the call in the extension.
+When the message says Safari has the API but the simulation does not, add it to the `api` object in `e2e/support/safari/simulatedSafari.ts`. When it says Safari does not support it, guard the call in the extension.
 
 The simulation cannot drift into offering more than Safari does. A test compares every API it offers with MDN's browser compatibility data (the `@mdn/browser-compat-data` package) and fails if one is missing from Safari or newer than `SAFARI_VERSION` in `simulatedSafari.ts`. That constant is the Safari version the extension needs. It is 27 because `tabs.move`, which `safari_tabs_move` uses, arrived in Safari 27. Update the package now and then to pick up MDN's corrections.
 

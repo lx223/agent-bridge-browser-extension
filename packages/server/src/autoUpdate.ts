@@ -1,6 +1,6 @@
 import { spawn } from 'node:child_process';
 import { SERVER_PACKAGE } from '@agent-browser-bridge/protocol';
-import { Launcher, type WorkerProcess } from './launcher.ts';
+import { Launcher, type WorkerProcess, type WorkerStartReason } from './launcher.ts';
 import { latestPublishedVersion } from './registry.ts';
 import { newSessionEnv } from './session.ts';
 import pkg from '../package.json' with { type: 'json' };
@@ -12,11 +12,11 @@ const sessionEnv = newSessionEnv();
 const workerCommand = (version: string | null): [string, string[]] =>
   version === null ? [process.execPath, [process.argv[1]!]] : ['npx', ['-y', `${SERVER_PACKAGE}@${version}`]];
 
-function spawnWorker(version: string | null): WorkerProcess {
+function spawnWorker(version: string | null, reason: WorkerStartReason): WorkerProcess {
   const [command, args] = workerCommand(version);
   const child = spawn(command, args, {
     stdio: ['pipe', 'pipe', 'inherit'],
-    env: { ...process.env, ...sessionEnv, AGENT_BROWSER_BRIDGE_WORKER: '1' },
+    env: { ...process.env, ...sessionEnv, AGENT_BROWSER_BRIDGE_WORKER: '1', AGENT_BROWSER_BRIDGE_WORKER_REASON: reason },
     shell: version !== null && process.platform === 'win32',
   });
   const exited = new Promise<number | null>((resolve) => {

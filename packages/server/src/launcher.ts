@@ -2,6 +2,8 @@ import { createInterface } from 'node:readline';
 import type { Readable, Writable } from 'node:stream';
 import { isNewerVersion } from './version.ts';
 
+export type WorkerStartReason = 'start' | 'update' | 'restart';
+
 export interface WorkerProcess {
   stdin: Writable;
   stdout: Readable;
@@ -13,7 +15,7 @@ export interface LauncherOptions {
   input: Readable;
   output: Writable;
   version: string;
-  spawnWorker: (version: string | null) => WorkerProcess;
+  spawnWorker: (version: string | null, reason: WorkerStartReason) => WorkerProcess;
   latestVersion: () => Promise<string | undefined>;
   exit: (code: number) => void;
   log?: (msg: string) => void;
@@ -87,7 +89,7 @@ export class Launcher {
 
   constructor(private readonly opts: LauncherOptions) {
     this.log = opts.log ?? (() => {});
-    this.active = this.startWorker(null, opts.version, 'active');
+    this.active = this.startWorker(null, opts.version, 'active', 'start');
     this.active.activeSince = Date.now();
     createInterface({ input: opts.input, crlfDelay: Infinity }).on('line', (line) => this.fromClient(line));
     opts.input.on('end', () => this.shutdown());
@@ -119,7 +121,7 @@ export class Launcher {
     let switched = false;
     try {
       this.log(`Starting agent-browser-bridge-mcp ${version} alongside ${this.active.version}`);
-      const next = this.startWorker(version, version, 'warming');
+      const next = this.startWorker(version, version, 'warming', 'update');
       if (!(await this.warmUp(next))) {
         this.log(`agent-browser-bridge-mcp ${version} did not start; staying on ${this.active.version}`);
         next.state = 'gone';
@@ -163,10 +165,10 @@ export class Launcher {
         const version = spawnVersion ?? this.opts.version;
         this.log(`Restarting agent-browser-bridge-mcp ${version}`);
         if (!this.initializeRequest || this.queued.some((line) => parse(line)?.method === 'initialize')) {
-          this.activate(this.startWorker(spawnVersion, version, 'active'));
+          this.activate(this.startWorker(spawnVersion, version, 'active', 'restart'));
           return;
         }
-        const next = this.startWorker(spawnVersion, version, 'warming');
+        const next = this.startWorker(spawnVersion, version, 'warming', 'restart');
         if (await this.warmUp(next)) {
           this.activate(next);
           if (version !== crashed.version) this.toClient(JSON.stringify({ jsonrpc: '2.0', method: 'notifications/tools/list_changed' }));
@@ -190,8 +192,8 @@ export class Launcher {
     }
   }
 
-  private startWorker(spawnVersion: string | null, version: string, state: Worker['state']): Worker {
-    const child = this.opts.spawnWorker(spawnVersion);
+  private startWorker(spawnVersion: string | null, version: string, state: Worker['state'], reason: WorkerStartReason): Worker {
+    const child = this.opts.spawnWorker(spawnVersion, reason);
     const worker: Worker = { process: child, spawnVersion, version, state, clientRequests: new Map(), serverRequests: new Set() };
     child.stdin.on('error', () => {});
     child.stdout.on('error', () => {});

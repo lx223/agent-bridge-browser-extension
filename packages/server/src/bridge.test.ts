@@ -744,6 +744,22 @@ describe('ExtensionBridge', () => {
       }
     });
 
+    it('waits for browsers to connect when it took over from a server that stopped', async () => {
+      const port = await startBridge({ startupGraceMs: 5_000 });
+      const call = bridge!.request('chrome', 'tabs.list', {});
+      await new Promise((resolve) => setTimeout(resolve, 50));
+      await connectExtension(port, () => 'connected after the restart');
+      await expect(call).resolves.toBe('connected after the restart');
+    });
+
+    it('stops waiting for a browser once its start-up grace has passed', async () => {
+      await startBridge({ startupGraceMs: 100 });
+      await new Promise((resolve) => setTimeout(resolve, 150));
+      const started = Date.now();
+      await expect(bridge!.request('chrome', 'tabs.list', {})).rejects.toThrow(/not connected/);
+      expect(Date.now() - started).toBeLessThan(50);
+    });
+
     it('survives a connection that sends a broken frame', async () => {
       const port = await startBridge();
       const broken = await connect(port, EXT_ORIGIN);

@@ -80,6 +80,7 @@ interface Harness {
   launcher: Launcher;
   workers: FakeWorker[];
   spawned: (string | null)[];
+  reasons: string[];
   output: Message[];
   exits: number[];
   send(msg: Message): void;
@@ -105,13 +106,15 @@ function harness(make: (version: string | null) => FakeWorker = (version) => fak
   });
   const workers: FakeWorker[] = [];
   const spawned: (string | null)[] = [];
+  const reasons: string[] = [];
   const exits: number[] = [];
   const launcher = new Launcher({
     input,
     output: outputStream,
     version: '1.0.0',
-    spawnWorker: (version) => {
+    spawnWorker: (version, reason) => {
       spawned.push(version);
+      reasons.push(reason);
       const worker = make(version);
       workers.push(worker);
       return worker;
@@ -129,6 +132,7 @@ function harness(make: (version: string | null) => FakeWorker = (version) => fak
     launcher,
     workers,
     spawned,
+    reasons,
     output,
     exits,
     send: (msg) => input.write(`${JSON.stringify({ jsonrpc: '2.0', ...msg })}\n`),
@@ -188,6 +192,7 @@ describe('Launcher', () => {
     const h = await initializedHarness((version) => fakeWorker(version ?? '1.0.0'), async () => '1.1.0');
     await expect(h.launcher.checkForUpdate()).resolves.toBe(true);
     expect(h.spawned).toEqual([null, '1.1.0']);
+    expect(h.reasons).toEqual(['start', 'update']);
     expect(h.launcher.version).toBe('1.1.0');
 
     const [, next] = h.workers;
@@ -278,6 +283,7 @@ describe('Launcher', () => {
       h.workers[0]!.exit(3);
       await expect.poll(() => h.workers.length).toBe(2);
       expect(h.spawned).toEqual([null, null]);
+      expect(h.reasons).toEqual(['start', 'restart']);
       await expect.poll(() => h.workers[1]!.received.map((msg) => msg.method)).toEqual(['initialize', 'notifications/initialized']);
       expect(h.workers[1]!.received[0]).toMatchObject({ id: LAUNCHER_INIT_ID, params: initialize.params });
       h.send(call(5));

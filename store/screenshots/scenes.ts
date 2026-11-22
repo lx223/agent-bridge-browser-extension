@@ -1,5 +1,5 @@
 import { IDENTIFY_INSTANCES_TOOL, NAME_INSTANCE_TOOL } from '@agent-browser-bridge/protocol';
-import { refOf, type Harness, type Tab, type TabGroup } from '../../e2e/harness.ts';
+import { refOf, type Harness, type Tab, type TabGroup } from '../../e2e/support/harness.ts';
 import type { DemoSite } from './demo.ts';
 import { chatCard, FULL_WINDOW, popupBody, scaled, screenshotBody, SIDE_WINDOW, tabGroupsBody, windowCard, type ChatMessage, type Size } from './frame.ts';
 import { fill, topics, type Locale, type SceneName, type Topic } from './locale.ts';

@@ -97,6 +97,8 @@ If the active worker exits while the agent session is still open, the launcher s
 2. Requests that arrive while the new worker starts wait for it.
 3. The new worker gets the agent's `initialize` request and `notifications/initialized` replayed, as in an update.
 
+A new worker started by a restart or an update does not yet know which browsers were connected, and the extension takes a few seconds to reconnect to it. For its first 10 seconds, a call for a browser that has no connected instance waits for one instead of failing with "not connected". The launcher tells the worker why it started in `AGENT_BROWSER_BRIDGE_WORKER_REASON` (`start`, `update` or `restart`), and only `update` and `restart` get this wait, so a fresh session still reports a missing extension straight away.
+
 A worker that ran for more than a minute is restarted at once. When one stops within a minute of starting, the launcher waits before the next attempt, starting at one second and doubling up to 30 seconds. If a worker started from a newer version on npm keeps stopping, the launcher goes back to the version it was started with. If a restart attempt fails, waiting requests get an error asking the agent to retry in a few seconds, and the launcher keeps trying. The launcher exits only when the agent closes its connection.
 
 ### Errors that do not stop the server

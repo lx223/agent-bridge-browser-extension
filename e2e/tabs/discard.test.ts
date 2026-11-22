@@ -4,7 +4,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { chromium } from 'playwright';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
-import { LOCAL_ONLY, startAgent, testBridge, type Agent, type Tab } from './harness.ts';
+import { LOCAL_ONLY, startAgent, testBridge, type Agent, type Tab } from '../support/harness.ts';
 
 let agent: Agent;
 let browser: ChildProcess;
@@ -26,16 +26,16 @@ beforeAll(async () => {
       LOCAL_ONLY,
       'about:blank',
     ],
-    { stdio: 'ignore' },
+    { stdio: 'ignore', detached: true },
   );
   await agent.waitUntilConnected();
 });
 
 afterAll(async () => {
   await agent?.close();
-  if (browser && browser.exitCode === null) {
+  if (browser?.pid !== undefined && browser.exitCode === null) {
     const exited = new Promise((done) => browser.once('exit', done));
-    browser.kill();
+    process.kill(-browser.pid, 'SIGKILL');
     await exited;
   }
   if (profile) rmSync(profile, { recursive: true, force: true, maxRetries: 10, retryDelay: 200 });

@@ -22,7 +22,7 @@ npm run screenshots -- --out ~/Desktop/store-screenshots
 | `3-profiles.png` | An agent naming the browser profile, and the options popup showing the name |
 | `4-setup.png` | The setup page with an agent connected |
 
-The script uses the end-to-end harness (`e2e/harness.ts`). Each screenshot comes from a real session: the built MCP server, the built extension in headless Chromium, and demo pages served on `127.0.0.1`. The tab groups, form contents, tool names and extension pages are what the extension actually produced. The caption, the chat transcript and the window frame around each capture are drawn by the script. Chromium starts with the locale's language, so the demo pages and the browser use it too. The extension's own pages are English only, because the extension is not localised yet.
+The script uses the end-to-end harness (`e2e/support/harness.ts`). Each screenshot comes from a real session: the built MCP server, the built extension in headless Chromium, and demo pages served on `127.0.0.1`. The tab groups, form contents, tool names and extension pages are what the extension actually produced. The caption, the chat transcript and the window frame around each capture are drawn by the script. Chromium starts with the locale's language, so the demo pages and the browser use it too. The extension's own pages are English only, because the extension is not localised yet.
 
 Like the end-to-end tests, the script needs port 17373 free and Playwright's Chromium installed. Japanese and Chinese need CJK fonts on the machine. macOS and Windows have them; on Linux install a package such as `fonts-noto-cjk`.
 

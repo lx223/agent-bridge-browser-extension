@@ -1,5 +1,5 @@
 import { afterAll, beforeAll, beforeEach, describe, expect, it } from 'vitest';
-import { refOf, startHarness, type Harness, type Tab } from './harness.ts';
+import { refOf, startHarness, type Harness, type Tab } from '../support/harness.ts';
 
 let harness: Harness;
 let tabId: number;

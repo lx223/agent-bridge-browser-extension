@@ -8,6 +8,8 @@ import pkg from '../package.json' with { type: 'json' };
 
 const log = (msg: string) => process.stderr.write(`[agent-browser-bridge] ${msg}\n`);
 
+const TAKES_OVER_SESSION = new Set(['update', 'restart']);
+const TAKE_OVER_GRACE_MS = 10_000;
 const describe = (reason: unknown) => (reason instanceof Error ? (reason.stack ?? reason.message) : String(reason));
 
 function keepRunningOnErrors() {
@@ -24,6 +26,7 @@ export async function runWorker() {
   const bridge = new ExtensionBridge({
     port,
     extensionId: process.env.AGENT_BROWSER_BRIDGE_EXTENSION_ID || undefined,
+    ...(TAKES_OVER_SESSION.has(process.env.AGENT_BROWSER_BRIDGE_WORKER_REASON ?? '') && { startupGraceMs: TAKE_OVER_GRACE_MS }),
     log,
     version: pkg.version,
     agentInfo: () => {
