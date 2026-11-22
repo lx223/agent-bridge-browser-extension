@@ -3,6 +3,7 @@ import { Analytics, ANALYTICS_ENABLED_KEY, isPageEvent, type Properties } from '
 import { sessionTitle } from '../settings/sessionList.ts';
 import { BridgeClient, type ConnectionStatus } from './bridgeClient.ts';
 import { ChatPanel } from './chatPanel.ts';
+import { restoreAfterReload, saveForReload } from './carryOver.ts';
 import { INSTANCE_NAME_KEY } from './browser.ts';
 import { listenForDetach } from './debugger.ts';
 import { listenForPageToolEvents } from './pageTools.ts';
@@ -43,9 +44,12 @@ const usage = new UsageTracker({
   },
 });
 
-const chatPanel = chrome.sidePanel ? new ChatPanel() : undefined;
+const carriedOver = restoreAfterReload(chrome.storage.session, chrome.storage.local).catch(() => undefined);
+
+const chatPanel = chrome.sidePanel ? new ChatPanel(carriedOver) : undefined;
 
 const trackedDispatch = async (method: string, params: unknown, agent: AgentInfo | null) => {
+  await carriedOver;
   if (isChatMethod(method)) {
     if (!chatPanel) throw new Error('This browser has no chat panel yet. Continue in your own window.');
     return chatPanel.store.dispatch(method, params, agent);
@@ -95,7 +99,9 @@ listenForPageToolEvents();
 
 const openWelcome = () => chrome.tabs.create({ url: chrome.runtime.getURL(WELCOME_PAGE) });
 
-applyUpdatesWhenIdle(chrome.runtime, client);
+applyUpdatesWhenIdle(chrome.runtime, client, {
+  beforeReload: () => saveForReload(chrome.storage.session, chrome.storage.local),
+});
 
 chrome.runtime.onInstalled.addListener(({ reason, previousVersion }) => {
   if (reason === 'install') {

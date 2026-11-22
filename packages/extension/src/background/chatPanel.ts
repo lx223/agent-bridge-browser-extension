@@ -28,8 +28,9 @@ export class ChatPanel {
   private liveSessions = new Set<string>();
   private latest: Conversations = {};
 
-  constructor() {
+  constructor(ready?: Promise<void>) {
     this.store = new ChatStore(chrome.storage.session, {
+      ready,
       onChange: (all) => this.reflect(all),
       onAgentMessage: (conversation, message) => this.announce(conversation, message),
     });

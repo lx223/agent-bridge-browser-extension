@@ -3,7 +3,7 @@ import { toChromeColor } from './color.ts';
 
 type PlanParams = ParamsOf<'plan.apply'>;
 const NO_GROUP = -1;
-const SNAPSHOT_KEY = 'lastPlanSnapshot';
+export const PLAN_SNAPSHOT_KEY = 'lastPlanSnapshot';
 
 interface Snapshot {
   takenAt: number;
@@ -68,7 +68,7 @@ export async function applyPlan(plan: PlanParams) {
   const { actions, warnings } = await resolvePlan(plan);
   if (plan.dryRun) return { dryRun: true, actions, warnings };
 
-  await chrome.storage.session.set({ [SNAPSHOT_KEY]: await takeSnapshot() });
+  await chrome.storage.session.set({ [PLAN_SNAPSHOT_KEY]: await takeSnapshot() });
 
   const groups: { title: string; groupId: number; tabCount: number }[] = [];
   for (const step of actions) {
@@ -93,7 +93,7 @@ export async function applyPlan(plan: PlanParams) {
 }
 
 export async function undoLastPlan() {
-  const stored = (await chrome.storage.session.get(SNAPSHOT_KEY))[SNAPSHOT_KEY] as Snapshot | undefined;
+  const stored = (await chrome.storage.session.get(PLAN_SNAPSHOT_KEY))[PLAN_SNAPSHOT_KEY] as Snapshot | undefined;
   if (!stored) throw new Error('Nothing to undo: no chrome_plan_apply has run since the browser started.');
 
   const current = await chrome.tabs.query({});
@@ -128,6 +128,6 @@ export async function undoLastPlan() {
     restoredGroups++;
   }
 
-  await chrome.storage.session.remove(SNAPSHOT_KEY);
+  await chrome.storage.session.remove(PLAN_SNAPSHOT_KEY);
   return { restored: true, tabs: tabs.length, groups: restoredGroups, warnings };
 }

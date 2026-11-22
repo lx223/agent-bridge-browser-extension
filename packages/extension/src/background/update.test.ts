@@ -50,6 +50,38 @@ describe('applyUpdatesWhenIdle', () => {
     expect(runtime.reload).toHaveBeenCalledTimes(1);
   });
 
+  it('saves state before announcing the reload, once requests have finished', async () => {
+    const runtime = fakeRuntime();
+    const order: string[] = [];
+    runtime.reload.mockImplementation(() => order.push('reload'));
+    let idle: () => void = () => {};
+    const client = fakeClient(() => new Promise((resolve) => (idle = resolve)));
+    client.announceReload.mockImplementation(async () => {
+      order.push('announce');
+    });
+    applyUpdatesWhenIdle(runtime, client, {
+      beforeReload: async () => {
+        order.push('save');
+      },
+    });
+    runtime.announceUpdate();
+    await flush();
+    expect(order).toEqual([]);
+    idle();
+    await flush();
+    expect(order).toEqual(['save', 'announce', 'reload']);
+  });
+
+  it('reloads even when saving state fails', async () => {
+    const runtime = fakeRuntime();
+    const client = fakeClient();
+    applyUpdatesWhenIdle(runtime, client, { beforeReload: () => Promise.reject(new Error('quota exceeded')) });
+    runtime.announceUpdate();
+    await flush();
+    expect(client.announceReload).toHaveBeenCalledTimes(1);
+    expect(runtime.reload).toHaveBeenCalledTimes(1);
+  });
+
   it('reloads once when the update is announced again', async () => {
     const runtime = fakeRuntime();
     applyUpdatesWhenIdle(runtime, fakeClient());

@@ -10,13 +10,20 @@ export interface ReloadingClient {
   announceReload(): Promise<void>;
 }
 
-export function applyUpdatesWhenIdle(runtime: UpdatableRuntime, client: ReloadingClient, maxWaitMs = MAX_UPDATE_WAIT_MS) {
+export interface UpdateOptions {
+  beforeReload?: () => Promise<void>;
+  maxWaitMs?: number;
+}
+
+export function applyUpdatesWhenIdle(runtime: UpdatableRuntime, client: ReloadingClient, { beforeReload, maxWaitMs = MAX_UPDATE_WAIT_MS }: UpdateOptions = {}) {
   let waiting = false;
   runtime.onUpdateAvailable?.addListener(() => {
     if (waiting) return;
     waiting = true;
     const timeout = new Promise<void>((resolve) => setTimeout(resolve, maxWaitMs));
     void Promise.race([client.whenIdle(), timeout])
+      .then(() => beforeReload?.())
+      .catch(() => undefined)
       .then(() => client.announceReload())
       .catch(() => undefined)
       .then(() => runtime.reload());
