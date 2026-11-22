@@ -8,6 +8,7 @@ export default defineConfig({
       { test: { name: 'extension', root: 'packages/extension', environment: 'node', css: true, setupFiles: ['src/test/englishI18n.ts'] } },
       { test: { name: 'store', root: 'store', environment: 'node' } },
       { test: { name: 'plugins', root: 'plugins', environment: 'node' } },
+      { test: { name: 'site', root: 'site', environment: 'node' } },
     ],
     coverage: {
       provider: 'v8',
