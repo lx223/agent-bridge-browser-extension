@@ -281,6 +281,9 @@
   "chatStatusDisconnected": {
     "message": "ഏജന്റ് വിച്ഛേദിക്കപ്പെട്ടു"
   },
+  "chatStatusReconnecting": {
+    "message": "ഏജന്റ് വീണ്ടും കണക്റ്റ് ചെയ്യുന്നു"
+  },
   "chatStatusEnded": {
     "message": "ചാറ്റ് അവസാനിച്ചു"
   },
@@ -292,6 +295,9 @@
   },
   "chatHintDisconnected": {
     "message": "ഈ ഏജന്റ് സെഷൻ അവസാനിച്ചു."
+  },
+  "chatHintReconnecting": {
+    "message": "ഏജന്റിന്റെ കണക്ഷൻ നഷ്ടപ്പെട്ടു. വീണ്ടും കണക്റ്റ് ചെയ്യുന്നതുവരെ നിങ്ങളുടെ സന്ദേശങ്ങൾ ഇവിടെ കാത്തിരിക്കും."
   },
   "chatHintEnded": {
     "message": "വീണ്ടും ചാറ്റ് ചെയ്യാൻ, ബ്രൗസറിൽ തുടരാൻ ഏജന്റിനോട് ആവശ്യപ്പെടുക."

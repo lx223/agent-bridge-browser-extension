@@ -281,6 +281,9 @@
   "chatStatusDisconnected": {
     "message": "এজেন্টের কানেকশন বিচ্ছিন্ন হয়েছে"
   },
+  "chatStatusReconnecting": {
+    "message": "এজেন্ট আবার সংযুক্ত হচ্ছে"
+  },
   "chatStatusEnded": {
     "message": "চ্যাট শেষ হয়েছে"
   },
@@ -292,6 +295,9 @@
   },
   "chatHintDisconnected": {
     "message": "এই এজেন্ট সেশন বন্ধ হয়ে গেছে।"
+  },
+  "chatHintReconnecting": {
+    "message": "এজেন্টের সংযোগ বিচ্ছিন্ন হয়েছে। আবার সংযুক্ত না হওয়া পর্যন্ত আপনার বার্তাগুলি এখানে অপেক্ষা করবে।"
   },
   "chatHintEnded": {
     "message": "আবার চ্যাট করতে এজেন্টকে ব্রাউজারে চালিয়ে যেতে বলুন।"

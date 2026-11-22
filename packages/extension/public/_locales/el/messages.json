@@ -281,6 +281,9 @@
   "chatStatusDisconnected": {
     "message": "Ο πράκτορας αποσυνδέθηκε"
   },
+  "chatStatusReconnecting": {
+    "message": "Ο πράκτορας επανασυνδέεται"
+  },
   "chatStatusEnded": {
     "message": "Η συνομιλία τερματίστηκε"
   },
@@ -292,6 +295,9 @@
   },
   "chatHintDisconnected": {
     "message": "Αυτή η συνεδρία πράκτορα έκλεισε."
+  },
+  "chatHintReconnecting": {
+    "message": "Η σύνδεση του πράκτορα διακόπηκε. Τα μηνύματά σας περιμένουν εδώ μέχρι να επανασυνδεθεί."
   },
   "chatHintEnded": {
     "message": "Για να συνομιλήσετε ξανά, ζητήστε από τον πράκτορα να συνεχίσει στο πρόγραμμα περιήγησης."

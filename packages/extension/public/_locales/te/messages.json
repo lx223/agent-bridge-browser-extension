@@ -281,6 +281,9 @@
   "chatStatusDisconnected": {
     "message": "ఏజెంట్ డిస్‌కనెక్ట్ అయింది"
   },
+  "chatStatusReconnecting": {
+    "message": "ఏజెంట్ మళ్లీ కనెక్ట్ అవుతోంది"
+  },
   "chatStatusEnded": {
     "message": "చాట్ ముగిసింది"
   },
@@ -292,6 +295,9 @@
   },
   "chatHintDisconnected": {
     "message": "ఈ ఏజెంట్ సెషన్ మూసివేయబడింది."
+  },
+  "chatHintReconnecting": {
+    "message": "ఏజెంట్ కనెక్షన్ తెగిపోయింది. మళ్లీ కనెక్ట్ అయ్యే వరకు మీ సందేశాలు ఇక్కడ వేచి ఉంటాయి."
   },
   "chatHintEnded": {
     "message": "మళ్లీ చాట్ చేయడానికి, బ్రౌజర్‌లో కొనసాగించమని ఏజెంట్‌ను అడగండి."

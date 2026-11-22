@@ -293,6 +293,9 @@
   "chatStatusDisconnected": {
     "message": "Agent desconnectat"
   },
+  "chatStatusReconnecting": {
+    "message": "L'agent s'està tornant a connectar"
+  },
   "chatStatusEnded": {
     "message": "Xat finalitzat"
   },
@@ -304,6 +307,9 @@
   },
   "chatHintDisconnected": {
     "message": "Aquesta sessió d'agent s'ha tancat."
+  },
+  "chatHintReconnecting": {
+    "message": "La connexió de l'agent s'ha interromput. Els teus missatges esperen aquí fins que es torni a connectar."
   },
   "chatHintEnded": {
     "message": "Demana a l'agent que continuï al navegador per tornar a xatejar."

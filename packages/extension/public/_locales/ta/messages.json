@@ -281,6 +281,9 @@
   "chatStatusDisconnected": {
     "message": "ஏஜென்ட் துண்டிக்கப்பட்டது"
   },
+  "chatStatusReconnecting": {
+    "message": "முகவர் மீண்டும் இணைகிறது"
+  },
   "chatStatusEnded": {
     "message": "அரட்டை முடிந்தது"
   },
@@ -292,6 +295,9 @@
   },
   "chatHintDisconnected": {
     "message": "இந்த ஏஜென்ட் அமர்வு மூடப்பட்டது."
+  },
+  "chatHintReconnecting": {
+    "message": "முகவருடனான இணைப்பு துண்டிக்கப்பட்டது. மீண்டும் இணையும் வரை உங்கள் செய்திகள் இங்கே காத்திருக்கும்."
   },
   "chatHintEnded": {
     "message": "மீண்டும் அரட்டையடிக்க, உலாவியில் தொடருமாறு ஏஜென்ட்டிடம் கேளுங்கள்."

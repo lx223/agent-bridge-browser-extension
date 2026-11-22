@@ -281,6 +281,9 @@
   "chatStatusDisconnected": {
     "message": "Ajanın bağlantısı kesildi"
   },
+  "chatStatusReconnecting": {
+    "message": "Ajan yeniden bağlanıyor"
+  },
   "chatStatusEnded": {
     "message": "Sohbet sona erdi"
   },
@@ -292,6 +295,9 @@
   },
   "chatHintDisconnected": {
     "message": "Bu ajan oturumu kapandı."
+  },
+  "chatHintReconnecting": {
+    "message": "Ajanla bağlantı koptu. Mesajlarınız yeniden bağlanana kadar burada bekler."
   },
   "chatHintEnded": {
     "message": "Yeniden sohbet etmek için ajandan tarayıcıda devam etmesini isteyin."

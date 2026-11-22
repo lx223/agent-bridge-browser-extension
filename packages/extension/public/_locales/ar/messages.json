@@ -329,6 +329,9 @@
   "chatStatusDisconnected": {
     "message": "انقطع اتصال الوكيل"
   },
+  "chatStatusReconnecting": {
+    "message": "جارٍ إعادة اتصال الوكيل"
+  },
   "chatStatusEnded": {
     "message": "انتهت الدردشة"
   },
@@ -340,6 +343,9 @@
   },
   "chatHintDisconnected": {
     "message": "تم إغلاق جلسة الوكيل هذه."
+  },
+  "chatHintReconnecting": {
+    "message": "انقطع اتصال الوكيل. تنتظر رسائلك هنا حتى يعود الاتصال."
   },
   "chatHintEnded": {
     "message": "اطلب من الوكيل المتابعة في المتصفح للدردشة مرة أخرى."

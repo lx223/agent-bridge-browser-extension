@@ -281,6 +281,9 @@
   "chatStatusDisconnected": {
     "message": "代理程式已中斷連線"
   },
+  "chatStatusReconnecting": {
+    "message": "代理程式正在重新連線"
+  },
   "chatStatusEnded": {
     "message": "聊天已結束"
   },
@@ -292,6 +295,9 @@
   },
   "chatHintDisconnected": {
     "message": "這個代理程式工作階段已關閉。"
+  },
+  "chatHintReconnecting": {
+    "message": "與代理程式的連線已中斷。你的訊息會在這裡等候，直到它重新連線。"
   },
   "chatHintEnded": {
     "message": "如要再次聊天，請代理程式在瀏覽器中繼續。"

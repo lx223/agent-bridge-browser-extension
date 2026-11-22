@@ -281,6 +281,9 @@
   "chatStatusDisconnected": {
     "message": "エージェントとの接続が切れました"
   },
+  "chatStatusReconnecting": {
+    "message": "エージェントが再接続しています"
+  },
   "chatStatusEnded": {
     "message": "チャットは終了しました"
   },
@@ -292,6 +295,9 @@
   },
   "chatHintDisconnected": {
     "message": "このエージェントセッションは終了しました。"
+  },
+  "chatHintReconnecting": {
+    "message": "エージェントとの接続が途切れました。再接続するまで、メッセージはここで待機します。"
   },
   "chatHintEnded": {
     "message": "もう一度チャットするには、ブラウザで続けるようエージェントに頼んでください。"

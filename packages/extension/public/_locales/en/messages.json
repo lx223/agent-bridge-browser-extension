@@ -375,6 +375,10 @@
     "message": "Agent disconnected",
     "description": "The agent session has closed."
   },
+  "chatStatusReconnecting": {
+    "message": "Agent reconnecting",
+    "description": "The agent's connection dropped, usually because its MCP client restarted the server. It comes back when the agent uses its next tool."
+  },
   "chatStatusEnded": {
     "message": "Chat ended",
     "description": "The conversation has ended."
@@ -389,6 +393,10 @@
   },
   "chatHintDisconnected": {
     "message": "This agent session has closed.",
+    "description": "Hint under the message box."
+  },
+  "chatHintReconnecting": {
+    "message": "The agent's connection dropped. Your messages wait here until it reconnects.",
     "description": "Hint under the message box."
   },
   "chatHintEnded": {

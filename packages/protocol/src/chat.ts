@@ -21,17 +21,25 @@ export const chatBrowsers = ['chrome'] as const;
 
 export const MAX_CHAT_MESSAGE_LENGTH = 20_000;
 export const MAX_CHAT_RECEIVE_WAIT_MS = 20_000;
+export const MAX_CHAT_AGENT_SESSION_ID_LENGTH = 200;
+export const MAX_CHAT_AGENT_SESSION_NAME_LENGTH = 100;
 
 const cursor = z.number().int().nonnegative().optional();
 const conversationId = z.string().optional();
 
-export const chatSendParams = z.object({ text: z.string().min(1).max(MAX_CHAT_MESSAGE_LENGTH) });
+export const chatAgentSession = z.object({
+  id: z.string().min(1).max(MAX_CHAT_AGENT_SESSION_ID_LENGTH),
+  name: z.string().min(1).max(MAX_CHAT_AGENT_SESSION_NAME_LENGTH).optional(),
+});
+
+export const chatSendParams = z.object({ text: z.string().min(1).max(MAX_CHAT_MESSAGE_LENGTH), agentSession: chatAgentSession.optional() });
 export const chatReceiveParams = z.object({
   waitMs: z.number().int().min(0).max(MAX_CHAT_RECEIVE_WAIT_MS).default(0),
   after: cursor,
   conversation: conversationId,
+  agentSession: chatAgentSession.optional(),
 });
-export const chatPeekParams = z.object({ after: cursor, conversation: conversationId });
+export const chatPeekParams = z.object({ after: cursor, conversation: conversationId, agentSession: chatAgentSession.optional() });
 
 export const chatTab = z.object({ title: z.string(), url: z.string() });
 
@@ -54,6 +62,7 @@ export const chatPeek = z.object({
   conversation: conversationId,
 });
 
+export type ChatAgentSession = z.infer<typeof chatAgentSession>;
 export type ChatTab = z.infer<typeof chatTab>;
 export type ChatUserMessage = z.infer<typeof chatUserMessage>;
 export type ChatInbox = z.infer<typeof chatInbox>;

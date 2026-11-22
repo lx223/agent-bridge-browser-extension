@@ -281,6 +281,9 @@
   "chatStatusDisconnected": {
     "message": "เอเจนต์ยกเลิกการเชื่อมต่อแล้ว"
   },
+  "chatStatusReconnecting": {
+    "message": "กำลังเชื่อมต่อเอเจนต์อีกครั้ง"
+  },
   "chatStatusEnded": {
     "message": "จบแชทแล้ว"
   },
@@ -292,6 +295,9 @@
   },
   "chatHintDisconnected": {
     "message": "เซสชันเอเจนต์นี้ปิดแล้ว"
+  },
+  "chatHintReconnecting": {
+    "message": "การเชื่อมต่อกับเอเจนต์ขาดหาย ข้อความของคุณจะรออยู่ที่นี่จนกว่าจะเชื่อมต่อได้อีกครั้ง"
   },
   "chatHintEnded": {
     "message": "ขอให้เอเจนต์ทำงานต่อในเบราว์เซอร์เพื่อแชทอีกครั้ง"

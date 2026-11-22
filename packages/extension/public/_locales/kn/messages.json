@@ -281,6 +281,9 @@
   "chatStatusDisconnected": {
     "message": "ಏಜೆಂಟ್ ಡಿಸ್‌ಕನೆಕ್ಟ್ ಆಗಿದೆ"
   },
+  "chatStatusReconnecting": {
+    "message": "ಏಜೆಂಟ್ ಮರುಸಂಪರ್ಕಗೊಳ್ಳುತ್ತಿದೆ"
+  },
   "chatStatusEnded": {
     "message": "ಚಾಟ್ ಕೊನೆಗೊಂಡಿದೆ"
   },
@@ -292,6 +295,9 @@
   },
   "chatHintDisconnected": {
     "message": "ಈ ಏಜೆಂಟ್ ಸೆಷನ್ ಮುಚ್ಚಿಹೋಗಿದೆ."
+  },
+  "chatHintReconnecting": {
+    "message": "ಏಜೆಂಟ್ ಸಂಪರ್ಕ ಕಡಿದುಹೋಗಿದೆ. ಅದು ಮರುಸಂಪರ್ಕಗೊಳ್ಳುವವರೆಗೆ ನಿಮ್ಮ ಸಂದೇಶಗಳು ಇಲ್ಲಿ ಕಾಯುತ್ತವೆ."
   },
   "chatHintEnded": {
     "message": "ಮತ್ತೆ ಚಾಟ್ ಮಾಡಲು, ಬ್ರೌಸರ್‌ನಲ್ಲಿ ಮುಂದುವರಿಸುವಂತೆ ಏಜೆಂಟ್‌ಗೆ ಕೇಳಿ."

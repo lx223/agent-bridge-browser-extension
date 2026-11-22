@@ -281,6 +281,9 @@
   "chatStatusDisconnected": {
     "message": "Tác nhân đã ngắt kết nối"
   },
+  "chatStatusReconnecting": {
+    "message": "Tác nhân đang kết nối lại"
+  },
   "chatStatusEnded": {
     "message": "Đã kết thúc trò chuyện"
   },
@@ -292,6 +295,9 @@
   },
   "chatHintDisconnected": {
     "message": "Phiên tác nhân này đã đóng."
+  },
+  "chatHintReconnecting": {
+    "message": "Kết nối với tác nhân bị gián đoạn. Tin nhắn của bạn sẽ chờ ở đây cho đến khi tác nhân kết nối lại."
   },
   "chatHintEnded": {
     "message": "Yêu cầu tác nhân tiếp tục trong trình duyệt để trò chuyện lại."

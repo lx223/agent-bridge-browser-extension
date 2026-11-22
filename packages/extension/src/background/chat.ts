@@ -7,6 +7,7 @@ import {
   chatSendParams,
   MAX_CHAT_MESSAGE_LENGTH,
   type AgentInfo,
+  type ChatAgentSession,
   type ChatInbox,
   type ChatPeek,
   type ChatPeekParams,
@@ -20,6 +21,7 @@ export const CHAT_STORAGE_KEY = 'chat.conversations';
 export const MAX_MESSAGES_PER_CONVERSATION = 500;
 export const MAX_CONVERSATIONS = 20;
 const LISTEN_GRACE_MS = 5_000;
+export const RECONNECT_GRACE_MS = 10 * 60_000;
 
 export type ChatAuthor = 'agent' | 'user' | 'notice';
 
@@ -31,10 +33,19 @@ export interface ChatMessage {
   tab?: ChatTab;
 }
 
+export interface ConversationAgent {
+  client?: string;
+  project?: string;
+}
+
 export interface Conversation {
   id: string;
+  key: string;
   sessionId: string;
+  agentSessionId?: string;
   title: string;
+  agent?: ConversationAgent;
+  goneAt?: number;
   messages: ChatMessage[];
   nextSeq: number;
   acknowledged: number;
@@ -64,15 +75,32 @@ const sessionKey = (agent: AgentInfo | null) => {
   return agent.sessionId;
 };
 
+export const agentSessionKey = (agentSessionId: string) => `agent-session:${agentSessionId}`;
+
+const conversationKey = (agent: AgentInfo | null, agentSession: ChatAgentSession | undefined) => {
+  const session = sessionKey(agent);
+  return agentSession ? agentSessionKey(agentSession.id) : session;
+};
+
 export const isListening = (conversation: Conversation, now: number) => !conversation.ended && conversation.listeningUntil > now;
+
+export const isReconnecting = (conversation: Conversation, now: number) =>
+  !conversation.ended && conversation.goneAt !== undefined && now - conversation.goneAt < RECONNECT_GRACE_MS;
+
+const agentOf = (agent: AgentInfo | null): ConversationAgent => ({
+  ...(agent?.client && { client: agent.client.name }),
+  ...(agent?.project && { project: agent.project.path }),
+});
+
+const sameAgent = (a: ConversationAgent | undefined, b: ConversationAgent) => a !== undefined && a.client !== undefined && a.client === b.client && a.project === b.project;
 
 export const unseenCount = (conversation: Conversation) =>
   conversation.messages.filter((message) => message.from === 'agent' && message.seq > conversation.seenByUser).length;
 
 export const totalUnseen = (conversations: Conversations) => Object.values(conversations).reduce((sum, conversation) => sum + unseenCount(conversation), 0);
 
-export const hasOpenConversation = (conversations: Conversations, liveSessions: ReadonlySet<string>) =>
-  Object.values(conversations).some((conversation) => !conversation.ended && liveSessions.has(conversation.sessionId));
+export const hasOpenConversation = (conversations: Conversations, liveSessions: ReadonlySet<string>, now = Date.now()) =>
+  Object.values(conversations).some((conversation) => !conversation.ended && (liveSessions.has(conversation.sessionId) || isReconnecting(conversation, now)));
 
 const userMessagesAfter = (conversation: Conversation, after: number) =>
   conversation.messages.filter((message) => message.from === 'user' && message.seq > after);
@@ -84,18 +112,24 @@ const withId = (conversation: Conversation) => {
   return conversation;
 };
 
+const withKeys = (all: Conversations) => {
+  for (const [key, conversation] of Object.entries(all)) conversation.key ??= key;
+  return all;
+};
+
 const cursorMatches = (conversation: Conversation, after: number, cursorConversation: string | undefined) =>
   cursorConversation === undefined ? after < conversation.nextSeq : cursorConversation === conversation.id;
 
 const pruneConversations = (all: Conversations) => {
   const sessions = Object.values(all).sort((a, b) => b.updatedAt - a.updatedAt);
-  for (const stale of sessions.slice(MAX_CONVERSATIONS)) delete all[stale.sessionId];
+  for (const stale of sessions.slice(MAX_CONVERSATIONS)) delete all[stale.key];
 };
 
 export class ChatStore {
   private cache?: Promise<Conversations>;
   private queue: Promise<unknown> = Promise.resolve();
   private waiters = new Map<string, Set<() => void>>();
+  private live?: ReadonlySet<string>;
   private readonly now: () => number;
 
   constructor(
@@ -109,10 +143,22 @@ export class ChatStore {
     return this.load().then((all) => structuredClone(all));
   }
 
+  async sessionsChanged(live: ReadonlySet<string>): Promise<void> {
+    this.live = live;
+    await this.update((all) => {
+      for (const conversation of Object.values(all)) {
+        if (live.has(conversation.sessionId) || conversation.ended) delete conversation.goneAt;
+        else conversation.goneAt ??= this.now();
+      }
+    });
+  }
+
   async dispatch(method: string, params: unknown, agent: AgentInfo | null): Promise<unknown> {
     switch (method) {
-      case CHAT_SEND_METHOD:
-        return this.agentSays(agent, parse(chatSendParams, method, params).text);
+      case CHAT_SEND_METHOD: {
+        const { text, agentSession } = parse(chatSendParams, method, params);
+        return this.agentSays(agent, text, agentSession);
+      }
       case CHAT_RECEIVE_METHOD:
         return this.receive(agent, parse(chatReceiveParams, method, params));
       case CHAT_PEEK_METHOD:
@@ -122,10 +168,10 @@ export class ChatStore {
     }
   }
 
-  async agentSays(agent: AgentInfo | null, text: string): Promise<{ seq: number }> {
-    const key = sessionKey(agent);
+  async agentSays(agent: AgentInfo | null, text: string, agentSession?: ChatAgentSession): Promise<{ seq: number }> {
+    const key = conversationKey(agent, agentSession);
     const { conversation, message } = await this.update((all) => {
-      const conversation = this.ensure(all, key, agent);
+      const conversation = this.ensure(all, key, agent, agentSession);
       conversation.ended = false;
       const message = this.append(conversation, 'agent', text);
       return { conversation: structuredClone(conversation), message };
@@ -134,12 +180,13 @@ export class ChatStore {
     return { seq: message.seq };
   }
 
-  async receive(agent: AgentInfo | null, { waitMs, after, conversation: cursorConversation }: ChatReceiveParams): Promise<ChatInbox> {
-    const key = sessionKey(agent);
+  async receive(agent: AgentInfo | null, { waitMs, after, conversation: cursorConversation, agentSession }: ChatReceiveParams): Promise<ChatInbox> {
+    const key = conversationKey(agent, agentSession);
     const deadline = this.now() + waitMs;
     for (;;) {
       const inbox = await this.update((all) => {
-        const conversation = this.ensure(all, key, agent);
+        if (!agentSession && !all[key] && this.isGone(key)) return this.now() >= deadline ? { messages: [], ended: false } : undefined;
+        const conversation = this.ensure(all, key, agent, agentSession);
         const from = this.acknowledge(conversation, after, cursorConversation);
         const messages = userMessagesAfter(conversation, from);
         const answered = messages.length > 0 || conversation.ended;
@@ -158,8 +205,8 @@ export class ChatStore {
     }
   }
 
-  async peek(agent: AgentInfo | null, { after, conversation: cursorConversation }: ChatPeekParams): Promise<ChatPeek> {
-    const key = sessionKey(agent);
+  async peek(agent: AgentInfo | null, { after, conversation: cursorConversation, agentSession }: ChatPeekParams): Promise<ChatPeek> {
+    const key = conversationKey(agent, agentSession);
     return this.update((all) => {
       const conversation = all[key];
       if (!conversation) return { unread: 0, ended: false };
@@ -168,40 +215,40 @@ export class ChatStore {
     });
   }
 
-  async userSays(sessionId: string, text: string, tab?: ChatTab): Promise<void> {
+  async userSays(key: string, text: string, tab?: ChatTab): Promise<void> {
     const trimmed = text.trim();
     if (!trimmed) return;
     if (trimmed.length > MAX_CHAT_MESSAGE_LENGTH) throw new Error(plural('chatTooLong', MAX_CHAT_MESSAGE_LENGTH));
     await this.update((all) => {
-      const conversation = all[sessionId];
+      const conversation = all[key];
       if (!conversation) throw new Error(t('chatConversationGone'));
       if (conversation.ended) throw new Error(t('chatEndedError'));
       this.append(conversation, 'user', trimmed, tab);
     });
-    this.wake(sessionId);
+    this.wake(key);
   }
 
-  async end(sessionId: string): Promise<void> {
+  async end(key: string): Promise<void> {
     await this.update((all) => {
-      const conversation = all[sessionId];
+      const conversation = all[key];
       if (!conversation || conversation.ended) return;
       conversation.ended = true;
       conversation.listeningUntil = 0;
       this.append(conversation, 'notice', t('chatEndedNotice'));
     });
-    this.wake(sessionId);
+    this.wake(key);
   }
 
-  async remove(sessionId: string): Promise<void> {
+  async remove(key: string): Promise<void> {
     await this.update((all) => {
-      delete all[sessionId];
+      delete all[key];
     });
-    this.wake(sessionId);
+    this.wake(key);
   }
 
-  async markSeen(sessionId: string): Promise<void> {
+  async markSeen(key: string): Promise<void> {
     await this.update((all) => {
-      const conversation = all[sessionId];
+      const conversation = all[key];
       if (!conversation) return;
       const latest = conversation.messages.filter((message) => message.from === 'agent').at(-1)?.seq ?? 0;
       if (latest <= conversation.seenByUser) return false;
@@ -213,7 +260,7 @@ export class ChatStore {
     this.cache ??= Promise.resolve(this.options.ready)
       .catch(() => undefined)
       .then(() => this.storage.get(CHAT_STORAGE_KEY))
-      .then((items) => (items[CHAT_STORAGE_KEY] ?? {}) as Conversations)
+      .then((items) => withKeys((items[CHAT_STORAGE_KEY] ?? {}) as Conversations))
       .catch(() => ({}));
     return this.cache;
   }
@@ -234,17 +281,24 @@ export class ChatStore {
     return run;
   }
 
-  private ensure(all: Conversations, key: string, agent: AgentInfo | null): Conversation {
-    const title = agent ? sessionTitle(agent) : 'Agent';
-    const existing = all[key];
+  private ensure(all: Conversations, key: string, agent: AgentInfo | null, agentSession: ChatAgentSession | undefined): Conversation {
+    const title = agentSession?.name ?? (agent ? sessionTitle(agent) : 'Agent');
+    const sessionId = sessionKey(agent);
+    const existing = all[key] ?? (agentSession ? undefined : this.adopt(all, key, agentOf(agent)));
     if (existing) {
-      existing.title = title;
+      existing.title = agentSession?.name ?? (existing.agentSessionId === undefined ? title : existing.title);
+      existing.sessionId = sessionId;
+      existing.agent = agentOf(agent);
+      delete existing.goneAt;
       return withId(existing);
     }
     const created: Conversation = {
       id: newConversationId(),
-      sessionId: key,
+      key,
+      sessionId,
+      ...(agentSession && { agentSessionId: agentSession.id }),
       title,
+      agent: agentOf(agent),
       messages: [],
       nextSeq: 1,
       acknowledged: 0,
@@ -256,6 +310,28 @@ export class ChatStore {
     };
     all[key] = created;
     return created;
+  }
+
+  private isGone(key: string) {
+    return this.live !== undefined && !this.live.has(key);
+  }
+
+  private adopt(all: Conversations, key: string, agent: ConversationAgent): Conversation | undefined {
+    const live = this.live;
+    if (!live) return undefined;
+    const now = this.now();
+    const previous = Object.values(all)
+      .filter(
+        (conversation) =>
+          conversation.agentSessionId === undefined && !live.has(conversation.sessionId) && isReconnecting(conversation, now) && sameAgent(conversation.agent, agent),
+      )
+      .sort((a, b) => b.updatedAt - a.updatedAt)[0];
+    if (!previous) return undefined;
+    delete all[previous.key];
+    previous.key = key;
+    previous.sessionId = key;
+    all[key] = previous;
+    return previous;
   }
 
   private acknowledge(conversation: Conversation, after: number | undefined, cursorConversation: string | undefined): number {

@@ -281,6 +281,9 @@
   "chatStatusDisconnected": {
     "message": "የወኪሉ ግንኙነት ተቋርጧል"
   },
+  "chatStatusReconnecting": {
+    "message": "ወኪሉ እንደገና እየተገናኘ ነው"
+  },
   "chatStatusEnded": {
     "message": "ውይይቱ አብቅቷል"
   },
@@ -292,6 +295,9 @@
   },
   "chatHintDisconnected": {
     "message": "ይህ የወኪል ክፍለ-ጊዜ ተዘግቷል።"
+  },
+  "chatHintReconnecting": {
+    "message": "የወኪሉ ግንኙነት ተቋርጧል። መልዕክቶችዎ እንደገና እስኪገናኝ ድረስ እዚህ ይጠብቃሉ።"
   },
   "chatHintEnded": {
     "message": "እንደገና ለመወያየት ወኪሉ በአሳሹ ውስጥ እንዲቀጥል ይጠይቁት።"

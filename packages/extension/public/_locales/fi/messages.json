@@ -281,6 +281,9 @@
   "chatStatusDisconnected": {
     "message": "Agentin yhteys katkesi"
   },
+  "chatStatusReconnecting": {
+    "message": "Agentti yhdistää uudelleen"
+  },
   "chatStatusEnded": {
     "message": "Keskustelu päättyi"
   },
@@ -292,6 +295,9 @@
   },
   "chatHintDisconnected": {
     "message": "Tämä agentti-istunto on suljettu."
+  },
+  "chatHintReconnecting": {
+    "message": "Yhteys agenttiin katkesi. Viestisi odottavat täällä, kunnes yhteys palaa."
   },
   "chatHintEnded": {
     "message": "Pyydä agenttia jatkamaan selaimessa, niin voit keskustella taas."

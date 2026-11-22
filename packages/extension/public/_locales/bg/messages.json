@@ -281,6 +281,9 @@
   "chatStatusDisconnected": {
     "message": "Агентът прекъсна връзката"
   },
+  "chatStatusReconnecting": {
+    "message": "Агентът се свързва отново"
+  },
   "chatStatusEnded": {
     "message": "Чатът приключи"
   },
@@ -292,6 +295,9 @@
   },
   "chatHintDisconnected": {
     "message": "Тази сесия на агента е затворена."
+  },
+  "chatHintReconnecting": {
+    "message": "Връзката с агента прекъсна. Съобщенията ви чакат тук, докато се свърже отново."
   },
   "chatHintEnded": {
     "message": "За да чатите отново, помолете агента да продължи в браузъра."

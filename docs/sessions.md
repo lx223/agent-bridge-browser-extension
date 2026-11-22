@@ -23,6 +23,12 @@ Hovering over a card shows the session id and the bridge server version.
 - It starts again when another server takes over hosting.
 - It is forgotten when the session disconnects.
 
+## Claude Desktop
+
+Claude Desktop starts one bridge server for its chat and one for all of its Code sessions, rather than one for each session. Every Code session in the app therefore appears as the same agent session, with the same card. Desktop also restarts that server after a tool call fails or times out, which gives it a new session id. The browser chat copes with both because each agent passes its own `agentSessionId` on chat calls, as [chat.md](chat.md#which-agent-a-conversation-belongs-to) explains.
+
+Desktop's Code sessions also keep the tool list they got when Desktop started the server. They ignore the `notifications/tools/list_changed` that the server sends after updating itself, so new tools appear only after the server restarts, for example after turning the extension off and on under **Settings → Extensions**.
+
 ## Privacy
 
 Session details stay on your computer: the bridge sends them to the extension over `127.0.0.1`, and the extension only displays them. Usage analytics still include only the agent's name and version, never the project or session id. See [PRIVACY.md](../PRIVACY.md).
