@@ -1,0 +1,290 @@
+{
+  "locale": {
+    "message": "fi"
+  },
+  "extDescription": {
+    "message": "Ohjaa omaa selaintasi millä tahansa tekoälyagentilla: järjestä välilehtiä ja käytä verkkosivuja MCP:n kautta."
+  },
+  "actionTitle": {
+    "message": "Agent Browser Bridge: käyttöönotto ja tila"
+  },
+  "actionTitleDisconnected": {
+    "message": "Agent Browser Bridge: ei yhdistettyä agenttia"
+  },
+  "actionTitleConnected": {
+    "message": "Agent Browser Bridge: agentti yhdistetty"
+  },
+  "actionTitleConnectedTo": {
+    "message": "Agent Browser Bridge: yhdistetty ($1)"
+  },
+  "notificationReply": {
+    "message": "Vastaa klikkaamalla työkalupalkin Agent Browser Bridge ‑painiketta"
+  },
+  "optionsTitle": {
+    "message": "Agent Browser Bridge – asetukset"
+  },
+  "statusChecking": {
+    "message": "Tarkistetaan yhteyttä…"
+  },
+  "statusLooking": {
+    "message": "Etsitään agenttiasi…"
+  },
+  "welcomeLede": {
+    "message": "Anna tekoälyagenttisi järjestää välilehtesi ja käyttää verkkosivuja."
+  },
+  "welcomeLedeSafari": {
+    "message": "Anna tekoälyagenttisi etsiä, avata, siirtää ja sulkea Safari-välilehtiäsi."
+  },
+  "welcomeConnected": {
+    "message": "Yhdistetty: agenttisi voi käyttää selainta."
+  },
+  "welcomeConnectedMany_one": {
+    "message": "Yhdistetty: $1 agentti-istunto voi käyttää selainta."
+  },
+  "welcomeConnectedMany_other": {
+    "message": "Yhdistetty: $1 agentti-istuntoa voi käyttää selainta."
+  },
+  "welcomeDisconnected": {
+    "message": "Odotetaan agenttiasi. Määritä se alla ja aloita sitten istunto."
+  },
+  "instanceNameLabel": {
+    "message": "Nimeä tämä selainprofiili"
+  },
+  "instanceNamePlaceholder": {
+    "message": "Esimerkiksi Työ tai Oma"
+  },
+  "welcomeInstanceNameHint": {
+    "message": "Agentit erottavat selaimesi ja profiilisi toisistaan tämän nimen avulla, joten voit pyytää esimerkiksi Työ-selainta. $1"
+  },
+  "optionsInstanceNameHint": {
+    "message": "Agentit erottavat selaimesi ja profiilisi toisistaan tämän nimen avulla. $1"
+  },
+  "instanceId": {
+    "message": "Instanssin tunnus: $1"
+  },
+  "welcomeStepAdd": {
+    "message": "1. Lisää se agenttiisi"
+  },
+  "welcomeStepAddHint": {
+    "message": "Agenttisi käynnistää pienen paikallisen palvelimen ($1), johon tämä laajennus yhdistää. Valitse agenttisi:"
+  },
+  "welcomeAgentSetupTitle": {
+    "message": "Anna agentin määrittää se"
+  },
+  "welcomeAgentSetupBody": {
+    "message": "Liitä tämä kehote mihin tahansa agenttiin, joka voi suorittaa komentoja ja muokata omia asetuksiaan, kuten Claude Code, Cursor tai Codex. Se tarkistaa, onko Node.js asennettu, ja lisää sitten palvelimen."
+  },
+  "copyPrompt": {
+    "message": "Kopioi kehote"
+  },
+  "copy": {
+    "message": "Kopioi"
+  },
+  "copied": {
+    "message": "Kopioitu"
+  },
+  "welcomeClaudeCodeBody": {
+    "message": "Suorita kerran päätteessä:"
+  },
+  "welcomeOpensAndConfirms": {
+    "message": "Avaa sovelluksen ja pyytää sinua vahvistamaan."
+  },
+  "welcomeAddTo": {
+    "message": "Lisää: $1"
+  },
+  "welcomeClaudeDesktopBody": {
+    "message": "Lataa laajennus ja asenna se avaamalla tiedosto. Node.js:ää ei tarvita."
+  },
+  "welcomeDownloadFor": {
+    "message": "Lataa: $1"
+  },
+  "welcomeOtherAgentsTitle": {
+    "message": "Muut agentit"
+  },
+  "welcomeOtherAgentsBody": {
+    "message": "Lisää tämä agentin MCP-määrityksiin ja käynnistä agentti uudelleen."
+  },
+  "welcomeStepTry": {
+    "message": "2. Kokeile"
+  },
+  "welcomeTryIntro": {
+    "message": "Kun Chrome on auki, pyydä agenttiasi:"
+  },
+  "welcomeTryTabs": {
+    "message": "Järjestä avoimet välilehteni ryhmiin aiheen mukaan. Näytä suunnitelma ensin."
+  },
+  "welcomeTryPage": {
+    "message": "Avaa Chromen julkaisutiedot ja tee yhteenveto siitä, mitä uusimmassa versiossa muuttui."
+  },
+  "welcomeTryHint": {
+    "message": "Yllä oleva tila muuttuu vihreäksi, kun agenttisi palvelin on käynnissä. Työkalulla $1 tehdyt muutokset voi perua pyytämällä agenttia kumoamaan ne."
+  },
+  "welcomeTryIntroSafari": {
+    "message": "Kun Safari on auki, pyydä agenttiasi:"
+  },
+  "welcomeTryDuplicatesSafari": {
+    "message": "Mitä välilehtiä minulla on auki Safarissa? Sulje kaksoiskappaleet, mutta kysy minulta ensin."
+  },
+  "welcomeTrySortSafari": {
+    "message": "Järjestä Safari-välilehteni sivuston mukaan."
+  },
+  "welcomeTryHintSafari": {
+    "message": "Yllä oleva tila muuttuu vihreäksi, kun agenttisi palvelin on käynnissä. Safarissa agenttisi voi avata, järjestää ja sulkea ikkunoita sekä avata välilehtiä, siirtyä niissä sivulta toiselle, vaihtaa niiden välillä, kiinnittää, mykistää, monistaa, siirtää ja sulkea niitä. Jos välilehtien otsikot ja osoitteet puuttuvat, anna laajennukselle verkkosivustojen käyttöoikeus Safarissa kohdassa Asetukset > Laajennukset. Välilehtiryhmät, historia, kirjanmerkit ja sivujen ohjaus ovat käytettävissä Chromessa."
+  },
+  "welcomePrivacyHeading": {
+    "message": "Tietosuoja"
+  },
+  "welcomePrivacy": {
+    "message": "Selaustietosi pysyvät tietokoneellasi: laajennus on yhteydessä vain osoitteeseen $1. Agenttisi voi lukea välilehtien otsikoita ja URL-osoitteita, järjestellä, ryhmitellä tai sulkea välilehtiä sekä lukea verkkosivuja ja toimia niillä, kun pyydät. Chrome näyttää virheenkorjausbanneria, kun agentti toimii sivulla. Tämä laajennus ei koskaan lähetä välilehtien otsikoita, URL-osoitteita tai sivujen sisältöä minnekään muualle."
+  },
+  "welcomePrivacySafari": {
+    "message": "Selaustietosi pysyvät tietokoneellasi: laajennus on yhteydessä vain osoitteeseen $1. Agenttisi voi lukea välilehtien otsikoita ja URL-osoitteita sekä avata, järjestää tai sulkea ikkunoita ja välilehtiä, kun pyydät. Se ei voi lukea verkkosivuja eikä toimia niillä Safarissa. Tämä laajennus ei koskaan lähetä välilehtien otsikoita tai URL-osoitteita minnekään muualle."
+  },
+  "welcomeAnalytics": {
+    "message": "Jaa nimettömiä käyttötilastoja (käytetyt ominaisuudet, laajennuksen versio) laajennuksen kehittämiseksi."
+  },
+  "analyticsTitle": {
+    "message": "Jaa nimettömiä käyttötilastoja"
+  },
+  "analyticsHint": {
+    "message": "Mitä ominaisuuksia käytetään, onnistuvatko ne sekä laajennuksen ja agentin versiot. Ei koskaan välilehtien otsikoita, URL-osoitteita tai sivujen sisältöä. $1"
+  },
+  "privacyPolicy": {
+    "message": "Tietosuojakäytäntö"
+  },
+  "analyticsUnavailable": {
+    "message": "Tämä versio ei kerää käyttötilastoja."
+  },
+  "openSetup": {
+    "message": "Avaa käyttöönotto ja yhteyden tila"
+  },
+  "optionsConnected": {
+    "message": "Agentti yhdistetty"
+  },
+  "optionsConnectedMany_one": {
+    "message": "$1 agentti-istunto yhdistetty"
+  },
+  "optionsConnectedMany_other": {
+    "message": "$1 agentti-istuntoa yhdistetty"
+  },
+  "optionsDisconnected": {
+    "message": "Ei yhdistettyä agenttia"
+  },
+  "agentStartingUp": {
+    "message": "Agentti käynnistyy"
+  },
+  "sessionInProject": {
+    "message": "$1 projektissa $2"
+  },
+  "sessionStarted": {
+    "message": "Aloitettu $1"
+  },
+  "sessionLastUsed_one": {
+    "message": "Viimeksi käytetty $2 $3, $1 kutsu"
+  },
+  "sessionLastUsed_other": {
+    "message": "Viimeksi käytetty $2 $3, $1 kutsua"
+  },
+  "sessionUnused": {
+    "message": "Ei ole vielä käyttänyt selainta"
+  },
+  "sessionId": {
+    "message": "Istunto $1"
+  },
+  "serverVersion": {
+    "message": "palvelin $1"
+  },
+  "instanceThisBrowser": {
+    "message": "$1, tämä selain"
+  },
+  "justNow": {
+    "message": "juuri nyt"
+  },
+  "chatTitle": {
+    "message": "Agenttikeskustelu"
+  },
+  "chatSetup": {
+    "message": "Käyttöönotto"
+  },
+  "chatConversation": {
+    "message": "Keskustelu"
+  },
+  "chatEmptyHeading": {
+    "message": "Keskustele agenttisi kanssa täällä"
+  },
+  "chatEmptyBody": {
+    "message": "Pyydä agenttiasi jatkamaan selaimessa tai suorita sen kehote $1. Sen viestit näkyvät täällä, ja vastauksesi menevät suoraan sille."
+  },
+  "chatEmptyHint": {
+    "message": "Jokaisella agentti-istunnolla on oma keskustelunsa."
+  },
+  "chatInput": {
+    "message": "Viesti agentille"
+  },
+  "chatEnd": {
+    "message": "Lopeta keskustelu"
+  },
+  "chatRemove": {
+    "message": "Poista"
+  },
+  "chatSend": {
+    "message": "Lähetä"
+  },
+  "chatError": {
+    "message": "Jokin meni vikaan."
+  },
+  "chatUnseen_one": {
+    "message": "$2 ($1 uusi)"
+  },
+  "chatUnseen_other": {
+    "message": "$2 ($1 uutta)"
+  },
+  "chatStatusWaiting": {
+    "message": "Odottaa vastaustasi"
+  },
+  "chatStatusWorking": {
+    "message": "Työskentelee"
+  },
+  "chatStatusWorkingTool": {
+    "message": "Työskentelee: käytti työkalua $1 $2"
+  },
+  "chatStatusDisconnected": {
+    "message": "Agentin yhteys katkesi"
+  },
+  "chatStatusEnded": {
+    "message": "Keskustelu päättyi"
+  },
+  "chatHintWaiting": {
+    "message": "Enter lähettää, Shift+Enter lisää rivinvaihdon."
+  },
+  "chatHintWorking": {
+    "message": "Agentti lukee viestisi, kun se seuraavan kerran tarkistaa keskustelun."
+  },
+  "chatHintDisconnected": {
+    "message": "Tämä agentti-istunto on suljettu."
+  },
+  "chatHintEnded": {
+    "message": "Pyydä agenttia jatkamaan selaimessa, niin voit keskustella taas."
+  },
+  "chatReadByAgent": {
+    "message": "agentti luki"
+  },
+  "chatNotReadYet": {
+    "message": "ei vielä luettu"
+  },
+  "chatEndedNotice": {
+    "message": "Lopetit keskustelun."
+  },
+  "chatConversationGone": {
+    "message": "Tätä keskustelua ei enää ole."
+  },
+  "chatEndedError": {
+    "message": "Tämä keskustelu on päättynyt. Aloita se uudelleen pyytämällä agenttia jatkamaan selaimessa."
+  },
+  "chatTooLong_one": {
+    "message": "Viestissä voi olla enintään $1 merkki."
+  },
+  "chatTooLong_other": {
+    "message": "Viestissä voi olla enintään $1 merkkiä."
+  }
+}

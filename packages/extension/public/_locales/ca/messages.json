@@ -1,0 +1,305 @@
+{
+  "locale": {
+    "message": "ca"
+  },
+  "extDescription": {
+    "message": "Controla el teu navegador amb l'agent d'IA que vulguis: organitza les pestanyes i actua en pàgines web mitjançant MCP."
+  },
+  "actionTitle": {
+    "message": "Agent Browser Bridge: configuració i estat"
+  },
+  "actionTitleDisconnected": {
+    "message": "Agent Browser Bridge: cap agent connectat"
+  },
+  "actionTitleConnected": {
+    "message": "Agent Browser Bridge: agent connectat"
+  },
+  "actionTitleConnectedTo": {
+    "message": "Agent Browser Bridge: connectat a $1"
+  },
+  "notificationReply": {
+    "message": "Fes clic al botó d'Agent Browser Bridge de la barra d'eines per respondre"
+  },
+  "optionsTitle": {
+    "message": "Opcions d'Agent Browser Bridge"
+  },
+  "statusChecking": {
+    "message": "S'està comprovant la connexió…"
+  },
+  "statusLooking": {
+    "message": "S'està cercant el teu agent…"
+  },
+  "welcomeLede": {
+    "message": "Deixa que el teu agent d'IA organitzi les pestanyes i actuï en pàgines web."
+  },
+  "welcomeLedeSafari": {
+    "message": "Deixa que el teu agent d'IA trobi, obri, mogui i tanqui les teves pestanyes de Safari."
+  },
+  "welcomeConnected": {
+    "message": "Connectat: el teu agent pot utilitzar el navegador."
+  },
+  "welcomeConnectedMany_one": {
+    "message": "Connectat: $1 sessió d'agent pot utilitzar el navegador."
+  },
+  "welcomeConnectedMany_other": {
+    "message": "Connectat: $1 sessions d'agent poden utilitzar el navegador."
+  },
+  "welcomeConnectedMany_many": {
+    "message": "Connectat: $1 sessions d'agent poden utilitzar el navegador."
+  },
+  "welcomeDisconnected": {
+    "message": "S'està esperant el teu agent. Configura'l a continuació i, després, inicia una sessió."
+  },
+  "instanceNameLabel": {
+    "message": "Posa nom a aquest perfil del navegador"
+  },
+  "instanceNamePlaceholder": {
+    "message": "Per exemple, Feina o Personal"
+  },
+  "welcomeInstanceNameHint": {
+    "message": "Els agents fan servir aquest nom per distingir els teus navegadors i perfils, així pots demanar el navegador «Feina». $1"
+  },
+  "optionsInstanceNameHint": {
+    "message": "Els agents fan servir aquest nom per distingir els teus navegadors i perfils. $1"
+  },
+  "instanceId": {
+    "message": "ID de la instància: $1"
+  },
+  "welcomeStepAdd": {
+    "message": "1. Afegeix-lo al teu agent"
+  },
+  "welcomeStepAddHint": {
+    "message": "El teu agent inicia un petit servidor local ($1) al qual es connecta aquesta extensió. Tria el teu agent:"
+  },
+  "welcomeAgentSetupTitle": {
+    "message": "Deixa que el teu agent ho configuri"
+  },
+  "welcomeAgentSetupBody": {
+    "message": "Enganxa aquesta indicació en qualsevol agent que pugui executar ordres i editar la seva pròpia configuració, com ara Claude Code, Cursor o Codex. Comprova si hi ha Node.js i, després, afegeix el servidor."
+  },
+  "copyPrompt": {
+    "message": "Copia la indicació"
+  },
+  "copy": {
+    "message": "Copia"
+  },
+  "copied": {
+    "message": "Copiat"
+  },
+  "welcomeClaudeCodeBody": {
+    "message": "Executa-ho una vegada en un terminal:"
+  },
+  "welcomeOpensAndConfirms": {
+    "message": "Obre l'aplicació i et demana que ho confirmis."
+  },
+  "welcomeAddTo": {
+    "message": "Afegeix a $1"
+  },
+  "welcomeClaudeDesktopBody": {
+    "message": "Baixa l'extensió i obre el fitxer per instal·lar-la. No cal Node.js."
+  },
+  "welcomeDownloadFor": {
+    "message": "Baixa per a $1"
+  },
+  "welcomeOtherAgentsTitle": {
+    "message": "Altres agents"
+  },
+  "welcomeOtherAgentsBody": {
+    "message": "Afegeix això a la configuració MCP de l'agent i, després, reinicia'l."
+  },
+  "welcomeStepTry": {
+    "message": "2. Prova-ho"
+  },
+  "welcomeTryIntro": {
+    "message": "Amb Chrome obert, demana al teu agent:"
+  },
+  "welcomeTryTabs": {
+    "message": "Organitza les meves pestanyes obertes en grups per tema. Primer mostra'm el pla."
+  },
+  "welcomeTryPage": {
+    "message": "Obre les notes de la versió de Chrome i resumeix què ha canviat a la darrera versió."
+  },
+  "welcomeTryHint": {
+    "message": "L'estat de dalt es posa verd quan el servidor del teu agent està en marxa. Els canvis fets amb $1 es poden revertir demanant a l'agent que els desfaci."
+  },
+  "welcomeTryIntroSafari": {
+    "message": "Amb Safari obert, demana al teu agent:"
+  },
+  "welcomeTryDuplicatesSafari": {
+    "message": "Quines pestanyes tinc obertes a Safari? Tanca les duplicades, però pregunta-m'ho abans."
+  },
+  "welcomeTrySortSafari": {
+    "message": "Ordena les meves pestanyes de Safari per lloc web."
+  },
+  "welcomeTryHintSafari": {
+    "message": "L'estat de dalt es posa verd quan el servidor del teu agent està en marxa. A Safari, el teu agent pot obrir, organitzar i tancar finestres, i també obrir pestanyes, navegar-hi, canviar entre elles, fixar-les, silenciar-les, duplicar-les, moure-les i tancar-les. Si falten els títols i les adreces de les pestanyes, dona a l'extensió accés als llocs web a Safari, a Configuració > Extensions. Els grups de pestanyes, l'historial, les adreces d'interès i el control de pàgines estan disponibles a Chrome."
+  },
+  "welcomePrivacyHeading": {
+    "message": "Privadesa"
+  },
+  "welcomePrivacy": {
+    "message": "Les teves dades de navegació es queden a l'ordinador: l'extensió només es comunica amb $1. El teu agent pot llegir els títols i els URL de les pestanyes; reorganitzar, agrupar o tancar pestanyes, i llegir pàgines web i actuar-hi quan li ho demanis. Chrome mostra un avís de depuració mentre l'agent treballa en una pàgina. Aquesta extensió no envia mai enlloc més els títols de les pestanyes, els URL ni el contingut de les pàgines."
+  },
+  "welcomePrivacySafari": {
+    "message": "Les teves dades de navegació es queden a l'ordinador: l'extensió només es comunica amb $1. El teu agent pot llegir els títols i els URL de les pestanyes, i obrir, organitzar o tancar finestres i pestanyes quan li ho demanis. A Safari no pot llegir pàgines web ni actuar-hi. Aquesta extensió no envia mai enlloc més els títols ni els URL de les pestanyes."
+  },
+  "welcomeAnalytics": {
+    "message": "Comparteix estadístiques d'ús anònimes (quines funcions es fan servir i la versió de l'extensió) per ajudar a millorar l'extensió."
+  },
+  "analyticsTitle": {
+    "message": "Comparteix estadístiques d'ús anònimes"
+  },
+  "analyticsHint": {
+    "message": "Quines funcions es fan servir, si funcionen correctament i les versions de l'extensió i de l'agent. Mai els títols de les pestanyes, els URL ni el contingut de les pàgines. $1"
+  },
+  "privacyPolicy": {
+    "message": "Política de privadesa"
+  },
+  "analyticsUnavailable": {
+    "message": "Aquesta versió no recull estadístiques d'ús."
+  },
+  "openSetup": {
+    "message": "Obre la configuració i l'estat de la connexió"
+  },
+  "optionsConnected": {
+    "message": "Agent connectat"
+  },
+  "optionsConnectedMany_one": {
+    "message": "$1 sessió d'agent connectada"
+  },
+  "optionsConnectedMany_other": {
+    "message": "$1 sessions d'agent connectades"
+  },
+  "optionsConnectedMany_many": {
+    "message": "$1 sessions d'agent connectades"
+  },
+  "optionsDisconnected": {
+    "message": "Cap agent connectat"
+  },
+  "agentStartingUp": {
+    "message": "L'agent s'està iniciant"
+  },
+  "sessionInProject": {
+    "message": "$1 a $2"
+  },
+  "sessionStarted": {
+    "message": "Iniciada $1"
+  },
+  "sessionLastUsed_one": {
+    "message": "Darrer ús: $2 $3, $1 crida"
+  },
+  "sessionLastUsed_other": {
+    "message": "Darrer ús: $2 $3, $1 crides"
+  },
+  "sessionLastUsed_many": {
+    "message": "Darrer ús: $2 $3, $1 crides"
+  },
+  "sessionUnused": {
+    "message": "Encara no ha utilitzat cap navegador"
+  },
+  "sessionId": {
+    "message": "Sessió $1"
+  },
+  "serverVersion": {
+    "message": "servidor $1"
+  },
+  "instanceThisBrowser": {
+    "message": "$1, aquest navegador"
+  },
+  "justNow": {
+    "message": "fa un moment"
+  },
+  "chatTitle": {
+    "message": "Xat amb l'agent"
+  },
+  "chatSetup": {
+    "message": "Configuració"
+  },
+  "chatConversation": {
+    "message": "Conversa"
+  },
+  "chatEmptyHeading": {
+    "message": "Parla amb el teu agent des d'aquí"
+  },
+  "chatEmptyBody": {
+    "message": "Demana al teu agent que continuï al navegador o executa la seva indicació $1. Els seus missatges apareixen aquí i les teves respostes li arriben directament."
+  },
+  "chatEmptyHint": {
+    "message": "Cada sessió d'agent té la seva pròpia conversa."
+  },
+  "chatInput": {
+    "message": "Escriu a l'agent"
+  },
+  "chatEnd": {
+    "message": "Finalitza el xat"
+  },
+  "chatRemove": {
+    "message": "Elimina"
+  },
+  "chatSend": {
+    "message": "Envia"
+  },
+  "chatError": {
+    "message": "S'ha produït un error."
+  },
+  "chatUnseen_one": {
+    "message": "$2 ($1 nou)"
+  },
+  "chatUnseen_other": {
+    "message": "$2 ($1 nous)"
+  },
+  "chatUnseen_many": {
+    "message": "$2 ($1 nous)"
+  },
+  "chatStatusWaiting": {
+    "message": "S'està esperant la teva resposta"
+  },
+  "chatStatusWorking": {
+    "message": "Treballant"
+  },
+  "chatStatusWorkingTool": {
+    "message": "Treballant: darrer ús de $1 $2"
+  },
+  "chatStatusDisconnected": {
+    "message": "Agent desconnectat"
+  },
+  "chatStatusEnded": {
+    "message": "Xat finalitzat"
+  },
+  "chatHintWaiting": {
+    "message": "Retorn per enviar, Maj+Retorn per a una línia nova."
+  },
+  "chatHintWorking": {
+    "message": "L'agent llegirà el teu missatge la propera vegada que consulti el xat."
+  },
+  "chatHintDisconnected": {
+    "message": "Aquesta sessió d'agent s'ha tancat."
+  },
+  "chatHintEnded": {
+    "message": "Demana a l'agent que continuï al navegador per tornar a xatejar."
+  },
+  "chatReadByAgent": {
+    "message": "llegit per l'agent"
+  },
+  "chatNotReadYet": {
+    "message": "encara no llegit"
+  },
+  "chatEndedNotice": {
+    "message": "Has finalitzat el xat."
+  },
+  "chatConversationGone": {
+    "message": "Aquesta conversa ja no existeix."
+  },
+  "chatEndedError": {
+    "message": "Aquest xat ha finalitzat. Demana a l'agent que continuï al navegador per reprendre'l."
+  },
+  "chatTooLong_one": {
+    "message": "Els missatges poden tenir com a màxim $1 caràcter."
+  },
+  "chatTooLong_other": {
+    "message": "Els missatges poden tenir com a màxim $1 caràcters."
+  },
+  "chatTooLong_many": {
+    "message": "Els missatges poden tenir com a màxim $1 caràcters."
+  }
+}

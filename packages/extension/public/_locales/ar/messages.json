@@ -1,0 +1,350 @@
+{
+  "locale": {
+    "message": "ar"
+  },
+  "extDescription": {
+    "message": "تحكّم في متصفحك باستخدام أي وكيل ذكاء اصطناعي تريده: نظّم علامات التبويب وتعامل مع صفحات الويب عبر MCP."
+  },
+  "actionTitle": {
+    "message": "Agent Browser Bridge: الإعداد والحالة"
+  },
+  "actionTitleDisconnected": {
+    "message": "Agent Browser Bridge: لا يوجد وكيل متصل"
+  },
+  "actionTitleConnected": {
+    "message": "Agent Browser Bridge: الوكيل متصل"
+  },
+  "actionTitleConnectedTo": {
+    "message": "Agent Browser Bridge: متصل بـ $1"
+  },
+  "notificationReply": {
+    "message": "انقر على زر Agent Browser Bridge في شريط الأدوات للرد"
+  },
+  "optionsTitle": {
+    "message": "خيارات Agent Browser Bridge"
+  },
+  "statusChecking": {
+    "message": "جارٍ التحقق من الاتصال…"
+  },
+  "statusLooking": {
+    "message": "جارٍ البحث عن الوكيل…"
+  },
+  "welcomeLede": {
+    "message": "دع وكيل الذكاء الاصطناعي ينظّم علامات التبويب ويتعامل مع صفحات الويب نيابةً عنك."
+  },
+  "welcomeLedeSafari": {
+    "message": "دع وكيل الذكاء الاصطناعي يبحث عن علامات التبويب في Safari ويفتحها وينقلها ويغلقها."
+  },
+  "welcomeConnected": {
+    "message": "متصل: يمكن للوكيل استخدام المتصفح."
+  },
+  "welcomeConnectedMany_one": {
+    "message": "متصل: $1 جلسة وكيل تستطيع استخدام المتصفح."
+  },
+  "welcomeConnectedMany_other": {
+    "message": "متصل: $1 جلسة وكيل تستطيع استخدام المتصفح."
+  },
+  "welcomeConnectedMany_zero": {
+    "message": "متصل: $1 جلسة وكيل تستطيع استخدام المتصفح."
+  },
+  "welcomeConnectedMany_two": {
+    "message": "متصل: $1 جلستا وكيل تستطيعان استخدام المتصفح."
+  },
+  "welcomeConnectedMany_few": {
+    "message": "متصل: $1 جلسات وكيل تستطيع استخدام المتصفح."
+  },
+  "welcomeConnectedMany_many": {
+    "message": "متصل: $1 جلسة وكيل تستطيع استخدام المتصفح."
+  },
+  "welcomeDisconnected": {
+    "message": "في انتظار الوكيل. أعدّه أدناه، ثم ابدأ جلسة."
+  },
+  "instanceNameLabel": {
+    "message": "اختر اسمًا لهذا الملف الشخصي في المتصفح"
+  },
+  "instanceNamePlaceholder": {
+    "message": "مثلاً العمل أو الشخصي"
+  },
+  "welcomeInstanceNameHint": {
+    "message": "يستخدم الوكلاء هذا الاسم للتمييز بين متصفحاتك وملفاتك الشخصية، لذا يمكنك أن تطلب متصفح «العمل». $1"
+  },
+  "optionsInstanceNameHint": {
+    "message": "يستخدم الوكلاء هذا الاسم للتمييز بين متصفحاتك وملفاتك الشخصية. $1"
+  },
+  "instanceId": {
+    "message": "معرّف النسخة: $1"
+  },
+  "welcomeStepAdd": {
+    "message": "1. أضِفه إلى الوكيل"
+  },
+  "welcomeStepAddHint": {
+    "message": "يشغّل الوكيل خادمًا محليًا صغيرًا ($1) تتصل به هذه الإضافة. اختر الوكيل:"
+  },
+  "welcomeAgentSetupTitle": {
+    "message": "دع الوكيل يتولى الإعداد"
+  },
+  "welcomeAgentSetupBody": {
+    "message": "الصق هذه المطالبة في أي وكيل يمكنه تشغيل الأوامر وتعديل إعداداته، مثل Claude Code أو Cursor أو Codex. يتحقق أولاً من وجود Node.js، ثم يضيف الخادم."
+  },
+  "copyPrompt": {
+    "message": "نسخ المطالبة"
+  },
+  "copy": {
+    "message": "نسخ"
+  },
+  "copied": {
+    "message": "تم النسخ"
+  },
+  "welcomeClaudeCodeBody": {
+    "message": "شغّل هذا الأمر مرة واحدة في الوحدة الطرفية:"
+  },
+  "welcomeOpensAndConfirms": {
+    "message": "يفتح التطبيق ويطلب منك التأكيد."
+  },
+  "welcomeAddTo": {
+    "message": "إضافة إلى $1"
+  },
+  "welcomeClaudeDesktopBody": {
+    "message": "نزّل الإضافة، ثم افتح الملف لتثبيتها. لا حاجة إلى Node.js."
+  },
+  "welcomeDownloadFor": {
+    "message": "تنزيل لتطبيق $1"
+  },
+  "welcomeOtherAgentsTitle": {
+    "message": "وكلاء آخرون"
+  },
+  "welcomeOtherAgentsBody": {
+    "message": "أضِف هذا إلى إعدادات MCP الخاصة بالوكيل، ثم أعِد تشغيله."
+  },
+  "welcomeStepTry": {
+    "message": "2. جرّبه"
+  },
+  "welcomeTryIntro": {
+    "message": "بعد فتح Chrome، اطلب من الوكيل:"
+  },
+  "welcomeTryTabs": {
+    "message": "نظّم علامات التبويب المفتوحة في مجموعات حسب الموضوع. اعرض عليّ الخطة أولاً."
+  },
+  "welcomeTryPage": {
+    "message": "افتح ملاحظات إصدار Chrome ولخّص ما تغيّر في أحدث إصدار."
+  },
+  "welcomeTryHint": {
+    "message": "تتحول الحالة أعلاه إلى اللون الأخضر بمجرد تشغيل خادم الوكيل. يمكنك التراجع عن التغييرات التي أُجريت باستخدام $1 بأن تطلب من الوكيل التراجع عنها."
+  },
+  "welcomeTryIntroSafari": {
+    "message": "بعد فتح Safari، اطلب من الوكيل:"
+  },
+  "welcomeTryDuplicatesSafari": {
+    "message": "ما علامات التبويب المفتوحة لديّ في Safari؟ أغلق المكررة منها، لكن اسألني أولاً."
+  },
+  "welcomeTrySortSafari": {
+    "message": "رتّب علامات التبويب في Safari حسب الموقع."
+  },
+  "welcomeTryHintSafari": {
+    "message": "تتحول الحالة أعلاه إلى اللون الأخضر بمجرد تشغيل خادم الوكيل. في Safari، يمكن للوكيل فتح النوافذ وترتيبها وإغلاقها، وفتح علامات التبويب والانتقال فيها إلى صفحات أخرى والتبديل بينها وتثبيتها وكتم صوتها وتكرارها ونقلها وإغلاقها. إذا لم تظهر عناوين علامات التبويب وعناوين URL الخاصة بها، فامنح الإضافة إذن الوصول إلى مواقع الويب في Safari من الإعدادات > الامتدادات. تتوفر مجموعات علامات التبويب والسجلّ والإشارات المرجعية والتحكم في الصفحات في Chrome."
+  },
+  "welcomePrivacyHeading": {
+    "message": "الخصوصية"
+  },
+  "welcomePrivacy": {
+    "message": "تبقى بيانات التصفح على جهاز الكمبيوتر: لا تتواصل الإضافة إلا مع $1. يمكن للوكيل قراءة عناوين علامات التبويب وعناوين URL، وإعادة ترتيب علامات التبويب أو تجميعها أو إغلاقها، وقراءة صفحات الويب والتفاعل معها عندما تطلب منه ذلك. يعرض Chrome شريطًا لتصحيح الأخطاء أثناء عمل الوكيل في صفحة. لا ترسل هذه الإضافة عناوين علامات التبويب أو عناوين URL أو محتوى الصفحات إلى أي مكان آخر مطلقًا."
+  },
+  "welcomePrivacySafari": {
+    "message": "تبقى بيانات التصفح على جهاز الكمبيوتر: لا تتواصل الإضافة إلا مع $1. يمكن للوكيل قراءة عناوين علامات التبويب وعناوين URL، وفتح النوافذ وعلامات التبويب وترتيبها وإغلاقها عندما تطلب منه ذلك. ولا يمكنه قراءة صفحات الويب أو التفاعل معها في Safari. لا ترسل هذه الإضافة عناوين علامات التبويب أو عناوين URL إلى أي مكان آخر مطلقًا."
+  },
+  "welcomeAnalytics": {
+    "message": "مشاركة إحصاءات استخدام مجهولة الهوية (الميزات المستخدَمة وإصدار الإضافة) للمساعدة في تحسين الإضافة."
+  },
+  "analyticsTitle": {
+    "message": "مشاركة إحصاءات استخدام مجهولة الهوية"
+  },
+  "analyticsHint": {
+    "message": "الميزات المستخدَمة ومدى نجاحها وإصدارا الإضافة والوكيل. لا تتم مشاركة عناوين علامات التبويب أو عناوين URL أو محتوى الصفحات أبدًا. $1"
+  },
+  "privacyPolicy": {
+    "message": "سياسة الخصوصية"
+  },
+  "analyticsUnavailable": {
+    "message": "لا يجمع هذا الإصدار إحصاءات الاستخدام."
+  },
+  "openSetup": {
+    "message": "فتح صفحة الإعداد وحالة الاتصال"
+  },
+  "optionsConnected": {
+    "message": "الوكيل متصل"
+  },
+  "optionsConnectedMany_one": {
+    "message": "$1 جلسة وكيل متصلة"
+  },
+  "optionsConnectedMany_other": {
+    "message": "$1 جلسة وكيل متصلة"
+  },
+  "optionsConnectedMany_zero": {
+    "message": "$1 جلسة وكيل متصلة"
+  },
+  "optionsConnectedMany_two": {
+    "message": "$1 جلستا وكيل متصلتان"
+  },
+  "optionsConnectedMany_few": {
+    "message": "$1 جلسات وكيل متصلة"
+  },
+  "optionsConnectedMany_many": {
+    "message": "$1 جلسة وكيل متصلة"
+  },
+  "optionsDisconnected": {
+    "message": "لا يوجد وكيل متصل"
+  },
+  "agentStartingUp": {
+    "message": "جارٍ بدء تشغيل الوكيل"
+  },
+  "sessionInProject": {
+    "message": "$1 في $2"
+  },
+  "sessionStarted": {
+    "message": "بدأت $1"
+  },
+  "sessionLastUsed_one": {
+    "message": "آخر استخدام: $2 $3، $1 استدعاء"
+  },
+  "sessionLastUsed_other": {
+    "message": "آخر استخدام: $2 $3، $1 استدعاء"
+  },
+  "sessionLastUsed_zero": {
+    "message": "آخر استخدام: $2 $3، $1 استدعاء"
+  },
+  "sessionLastUsed_two": {
+    "message": "آخر استخدام: $2 $3، $1 استدعاءان"
+  },
+  "sessionLastUsed_few": {
+    "message": "آخر استخدام: $2 $3، $1 استدعاءات"
+  },
+  "sessionLastUsed_many": {
+    "message": "آخر استخدام: $2 $3، $1 استدعاءً"
+  },
+  "sessionUnused": {
+    "message": "لم تستخدم أي متصفح بعد"
+  },
+  "sessionId": {
+    "message": "الجلسة $1"
+  },
+  "serverVersion": {
+    "message": "الخادم $1"
+  },
+  "instanceThisBrowser": {
+    "message": "$1، هذا المتصفح"
+  },
+  "justNow": {
+    "message": "الآن"
+  },
+  "chatTitle": {
+    "message": "الدردشة مع الوكيل"
+  },
+  "chatSetup": {
+    "message": "الإعداد"
+  },
+  "chatConversation": {
+    "message": "المحادثة"
+  },
+  "chatEmptyHeading": {
+    "message": "تحدّث مع الوكيل من هنا"
+  },
+  "chatEmptyBody": {
+    "message": "اطلب من الوكيل المتابعة في المتصفح، أو شغّل المطالبة $1 الخاصة به. تظهر رسائله هنا، وتصل ردودك إليه مباشرةً."
+  },
+  "chatEmptyHint": {
+    "message": "لكل جلسة وكيل محادثة خاصة بها."
+  },
+  "chatInput": {
+    "message": "رسالة إلى الوكيل"
+  },
+  "chatEnd": {
+    "message": "إنهاء الدردشة"
+  },
+  "chatRemove": {
+    "message": "إزالة"
+  },
+  "chatSend": {
+    "message": "إرسال"
+  },
+  "chatError": {
+    "message": "حدث خطأ ما."
+  },
+  "chatUnseen_one": {
+    "message": "$2 ($1 جديدة)"
+  },
+  "chatUnseen_other": {
+    "message": "$2 ($1 جديدة)"
+  },
+  "chatUnseen_zero": {
+    "message": "$2 ($1 جديدة)"
+  },
+  "chatUnseen_two": {
+    "message": "$2 ($1 جديدتان)"
+  },
+  "chatUnseen_few": {
+    "message": "$2 ($1 جديدة)"
+  },
+  "chatUnseen_many": {
+    "message": "$2 ($1 جديدة)"
+  },
+  "chatStatusWaiting": {
+    "message": "في انتظار ردك"
+  },
+  "chatStatusWorking": {
+    "message": "جارٍ العمل"
+  },
+  "chatStatusWorkingTool": {
+    "message": "جارٍ العمل: استخدم $1 $2"
+  },
+  "chatStatusDisconnected": {
+    "message": "انقطع اتصال الوكيل"
+  },
+  "chatStatusEnded": {
+    "message": "انتهت الدردشة"
+  },
+  "chatHintWaiting": {
+    "message": "اضغط Enter للإرسال وShift+Enter لإضافة سطر جديد."
+  },
+  "chatHintWorking": {
+    "message": "سيقرأ الوكيل رسالتك عندما يتحقق من الدردشة في المرة القادمة."
+  },
+  "chatHintDisconnected": {
+    "message": "تم إغلاق جلسة الوكيل هذه."
+  },
+  "chatHintEnded": {
+    "message": "اطلب من الوكيل المتابعة في المتصفح للدردشة مرة أخرى."
+  },
+  "chatReadByAgent": {
+    "message": "قرأها الوكيل"
+  },
+  "chatNotReadYet": {
+    "message": "لم تُقرأ بعد"
+  },
+  "chatEndedNotice": {
+    "message": "لقد أنهيت الدردشة."
+  },
+  "chatConversationGone": {
+    "message": "لم تعد هذه المحادثة موجودة."
+  },
+  "chatEndedError": {
+    "message": "انتهت هذه الدردشة. اطلب من الوكيل المتابعة في المتصفح لبدئها من جديد."
+  },
+  "chatTooLong_one": {
+    "message": "الحد الأقصى لطول الرسالة $1 حرف."
+  },
+  "chatTooLong_other": {
+    "message": "الحد الأقصى لطول الرسالة $1 حرف."
+  },
+  "chatTooLong_zero": {
+    "message": "الحد الأقصى لطول الرسالة $1 حرف."
+  },
+  "chatTooLong_two": {
+    "message": "الحد الأقصى لطول الرسالة $1 حرفان."
+  },
+  "chatTooLong_few": {
+    "message": "الحد الأقصى لطول الرسالة $1 أحرف."
+  },
+  "chatTooLong_many": {
+    "message": "الحد الأقصى لطول الرسالة $1 حرفًا."
+  }
+}

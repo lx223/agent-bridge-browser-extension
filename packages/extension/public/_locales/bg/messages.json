@@ -1,0 +1,290 @@
+{
+  "locale": {
+    "message": "bg"
+  },
+  "extDescription": {
+    "message": "Управлявайте браузъра си с ИИ агент по ваш избор: подреждайте раздели и работете с уеб страници чрез MCP."
+  },
+  "actionTitle": {
+    "message": "Agent Browser Bridge: настройка и състояние"
+  },
+  "actionTitleDisconnected": {
+    "message": "Agent Browser Bridge: няма свързан агент"
+  },
+  "actionTitleConnected": {
+    "message": "Agent Browser Bridge: агентът е свързан"
+  },
+  "actionTitleConnectedTo": {
+    "message": "Agent Browser Bridge, свързано: $1"
+  },
+  "notificationReply": {
+    "message": "За да отговорите, кликнете върху бутона Agent Browser Bridge в лентата с инструменти"
+  },
+  "optionsTitle": {
+    "message": "Опции на Agent Browser Bridge"
+  },
+  "statusChecking": {
+    "message": "Връзката се проверява…"
+  },
+  "statusLooking": {
+    "message": "Търси се агентът ви…"
+  },
+  "welcomeLede": {
+    "message": "Позволете на ИИ агента си да подрежда разделите ви и да работи с уеб страници."
+  },
+  "welcomeLedeSafari": {
+    "message": "Позволете на ИИ агента си да намира, отваря, премества и затваря разделите ви в Safari."
+  },
+  "welcomeConnected": {
+    "message": "Свързано: агентът ви може да използва браузъра."
+  },
+  "welcomeConnectedMany_one": {
+    "message": "Свързано: $1 сесия на агент може да използва браузъра."
+  },
+  "welcomeConnectedMany_other": {
+    "message": "Свързано: $1 сесии на агенти могат да използват браузъра."
+  },
+  "welcomeDisconnected": {
+    "message": "Изчаква се агентът ви. Настройте го по-долу, след което започнете сесия."
+  },
+  "instanceNameLabel": {
+    "message": "Наименувайте този потребителски профил на браузъра"
+  },
+  "instanceNamePlaceholder": {
+    "message": "Например Работа или Лично"
+  },
+  "welcomeInstanceNameHint": {
+    "message": "Агентите използват това име, за да различават браузърите и потребителските ви профили, така че можете да поискате браузъра „Работа“. $1"
+  },
+  "optionsInstanceNameHint": {
+    "message": "Агентите използват това име, за да различават браузърите и потребителските ви профили. $1"
+  },
+  "instanceId": {
+    "message": "ИД на екземпляра: $1"
+  },
+  "welcomeStepAdd": {
+    "message": "1. Добавете го към агента си"
+  },
+  "welcomeStepAddHint": {
+    "message": "Агентът ви стартира малък локален сървър ($1), към който се свързва това разширение. Изберете агента си:"
+  },
+  "welcomeAgentSetupTitle": {
+    "message": "Оставете агента да го настрои"
+  },
+  "welcomeAgentSetupBody": {
+    "message": "Поставете този промпт в агент, който може да изпълнява команди и да редактира собствените си настройки, например Claude Code, Cursor или Codex. Той проверява за Node.js, след което добавя сървъра."
+  },
+  "copyPrompt": {
+    "message": "Копиране на промпта"
+  },
+  "copy": {
+    "message": "Копиране"
+  },
+  "copied": {
+    "message": "Копирано"
+  },
+  "welcomeClaudeCodeBody": {
+    "message": "Изпълнете веднъж в терминал:"
+  },
+  "welcomeOpensAndConfirms": {
+    "message": "Отваря приложението и ви моли за потвърждение."
+  },
+  "welcomeAddTo": {
+    "message": "Добавяне към $1"
+  },
+  "welcomeClaudeDesktopBody": {
+    "message": "Изтеглете разширението, след което отворете файла, за да го инсталирате. Не е нужен Node.js."
+  },
+  "welcomeDownloadFor": {
+    "message": "Изтегляне за $1"
+  },
+  "welcomeOtherAgentsTitle": {
+    "message": "Други агенти"
+  },
+  "welcomeOtherAgentsBody": {
+    "message": "Добавете това в конфигурацията за MCP на агента, след което го рестартирайте."
+  },
+  "welcomeStepTry": {
+    "message": "2. Изпробвайте"
+  },
+  "welcomeTryIntro": {
+    "message": "Докато Chrome е отворен, помолете агента си:"
+  },
+  "welcomeTryTabs": {
+    "message": "Подреди отворените ми раздели в групи по теми. Първо ми покажи плана."
+  },
+  "welcomeTryPage": {
+    "message": "Отвори бележките към версията на Chrome и обобщи какво се е променило в последната версия."
+  },
+  "welcomeTryHint": {
+    "message": "Състоянието по-горе става зелено, щом сървърът на агента ви заработи. Промените, направени с $1, могат да бъдат отменени – просто помолете агента."
+  },
+  "welcomeTryIntroSafari": {
+    "message": "Докато Safari е отворен, помолете агента си:"
+  },
+  "welcomeTryDuplicatesSafari": {
+    "message": "Кои раздели имам отворени в Safari? Затвори дубликатите, но първо ме попитай."
+  },
+  "welcomeTrySortSafari": {
+    "message": "Подреди разделите ми в Safari по сайтове."
+  },
+  "welcomeTryHintSafari": {
+    "message": "Състоянието по-горе става зелено, щом сървърът на агента ви заработи. В Safari агентът може да отваря, подрежда и затваря прозорци, както и да отваря, превключва, фиксира, заглушава, дублира, премества и затваря раздели и да отваря адреси в тях. Ако заглавията и адресите на разделите липсват, дайте на разширението достъп до уебсайтове в Safari от „Настройки“ > „Разширения“. Групите раздели, историята, отметките и управлението на страници са налични в Chrome."
+  },
+  "welcomePrivacyHeading": {
+    "message": "Поверителност"
+  },
+  "welcomePrivacy": {
+    "message": "Данните ви от сърфирането остават на компютъра ви: разширението комуникира само с $1. Агентът ви може да чете заглавията и URL адресите на разделите, да пренарежда, групира или затваря раздели, както и да чете уеб страници и да извършва действия в тях, когато го помолите. Докато агентът работи в страница, Chrome показва банер за отстраняване на грешки. Това разширение никога не изпраща заглавия на раздели, URL адреси или съдържание на страници никъде другаде."
+  },
+  "welcomePrivacySafari": {
+    "message": "Данните ви от сърфирането остават на компютъра ви: разширението комуникира само с $1. Агентът ви може да чете заглавията и URL адресите на разделите, както и да отваря, подрежда или затваря прозорци и раздели, когато го помолите. В Safari той не може да чете уеб страници или да извършва действия в тях. Това разширение никога не изпраща заглавия на раздели или URL адреси никъде другаде."
+  },
+  "welcomeAnalytics": {
+    "message": "Споделяне на анонимни статистически данни за използването (кои функции се използват, версия на разширението), за да помогнете за подобряването му."
+  },
+  "analyticsTitle": {
+    "message": "Споделяне на анонимни статистически данни за използването"
+  },
+  "analyticsHint": {
+    "message": "Кои функции се използват, дали работят успешно, както и версиите на разширението и агента. Никога заглавия на раздели, URL адреси или съдържание на страници. $1"
+  },
+  "privacyPolicy": {
+    "message": "Декларация за поверителност"
+  },
+  "analyticsUnavailable": {
+    "message": "Тази компилация не събира статистически данни за използването."
+  },
+  "openSetup": {
+    "message": "Отваряне на настройката и състоянието на връзката"
+  },
+  "optionsConnected": {
+    "message": "Агентът е свързан"
+  },
+  "optionsConnectedMany_one": {
+    "message": "Свързана е $1 сесия на агент"
+  },
+  "optionsConnectedMany_other": {
+    "message": "Свързани са $1 сесии на агенти"
+  },
+  "optionsDisconnected": {
+    "message": "Няма свързан агент"
+  },
+  "agentStartingUp": {
+    "message": "Агентът стартира"
+  },
+  "sessionInProject": {
+    "message": "$1 в $2"
+  },
+  "sessionStarted": {
+    "message": "Стартирана $1"
+  },
+  "sessionLastUsed_one": {
+    "message": "Последно използвано: $2 $3, $1 извикване"
+  },
+  "sessionLastUsed_other": {
+    "message": "Последно използвано: $2 $3, $1 извиквания"
+  },
+  "sessionUnused": {
+    "message": "Браузърът още не е използван"
+  },
+  "sessionId": {
+    "message": "Сесия $1"
+  },
+  "serverVersion": {
+    "message": "сървър $1"
+  },
+  "instanceThisBrowser": {
+    "message": "$1, този браузър"
+  },
+  "justNow": {
+    "message": "току-що"
+  },
+  "chatTitle": {
+    "message": "Чат с агента"
+  },
+  "chatSetup": {
+    "message": "Настройка"
+  },
+  "chatConversation": {
+    "message": "Разговор"
+  },
+  "chatEmptyHeading": {
+    "message": "Говорете с агента си оттук"
+  },
+  "chatEmptyBody": {
+    "message": "Помолете агента си да продължи в браузъра или изпълнете промпта му $1. Съобщенията му се показват тук, а отговорите ви отиват директно при него."
+  },
+  "chatEmptyHint": {
+    "message": "Всяка сесия на агент има собствен разговор."
+  },
+  "chatInput": {
+    "message": "Съобщение до агента"
+  },
+  "chatEnd": {
+    "message": "Край на чата"
+  },
+  "chatRemove": {
+    "message": "Премахване"
+  },
+  "chatSend": {
+    "message": "Изпращане"
+  },
+  "chatError": {
+    "message": "Нещо се обърка."
+  },
+  "chatUnseen_one": {
+    "message": "$2 ($1 ново)"
+  },
+  "chatUnseen_other": {
+    "message": "$2 ($1 нови)"
+  },
+  "chatStatusWaiting": {
+    "message": "Изчаква вашия отговор"
+  },
+  "chatStatusWorking": {
+    "message": "Работи"
+  },
+  "chatStatusWorkingTool": {
+    "message": "Работи: извика $1 $2"
+  },
+  "chatStatusDisconnected": {
+    "message": "Агентът прекъсна връзката"
+  },
+  "chatStatusEnded": {
+    "message": "Чатът приключи"
+  },
+  "chatHintWaiting": {
+    "message": "Enter за изпращане, Shift+Enter за нов ред."
+  },
+  "chatHintWorking": {
+    "message": "Агентът ще прочете съобщението ви, когато следващия път провери чата."
+  },
+  "chatHintDisconnected": {
+    "message": "Тази сесия на агента е затворена."
+  },
+  "chatHintEnded": {
+    "message": "За да чатите отново, помолете агента да продължи в браузъра."
+  },
+  "chatReadByAgent": {
+    "message": "прочетено от агента"
+  },
+  "chatNotReadYet": {
+    "message": "още не е прочетено"
+  },
+  "chatEndedNotice": {
+    "message": "Приключихте чата."
+  },
+  "chatConversationGone": {
+    "message": "Този разговор вече не съществува."
+  },
+  "chatEndedError": {
+    "message": "Този чат приключи. За да го започнете отново, помолете агента да продължи в браузъра."
+  },
+  "chatTooLong_one": {
+    "message": "Съобщенията могат да съдържат най-много $1 знак."
+  },
+  "chatTooLong_other": {
+    "message": "Съобщенията могат да съдържат най-много $1 знака."
+  }
+}

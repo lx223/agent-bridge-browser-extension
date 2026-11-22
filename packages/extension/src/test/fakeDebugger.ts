@@ -1,3 +1,5 @@
+import { englishI18n } from './englishI18n.ts';
+
 type Responder = (params: Record<string, unknown>) => unknown;
 
 export function installFakeDebugger(responders: Record<string, Responder> = {}) {
@@ -8,6 +10,7 @@ export function installFakeDebugger(responders: Record<string, Responder> = {}) 
     for (const listener of eventListeners) listener({ tabId }, method, params);
   };
   const fake = {
+    i18n: englishI18n,
     debugger: {
       onEvent: { addListener: (listener: (source: { tabId: number }, method: string, params?: object) => void) => eventListeners.add(listener) },
       attach: async ({ tabId }: { tabId: number }) => {

@@ -1,0 +1,290 @@
+{
+  "locale": {
+    "message": "hu"
+  },
+  "extDescription": {
+    "message": "Irányítsa saját böngészőjét bármely MI-ügynökkel: rendszerezze a lapokat, és kezelje a weboldalakat MCP-n keresztül."
+  },
+  "actionTitle": {
+    "message": "Agent Browser Bridge: beállítás és állapot"
+  },
+  "actionTitleDisconnected": {
+    "message": "Agent Browser Bridge: nincs csatlakoztatott ügynök"
+  },
+  "actionTitleConnected": {
+    "message": "Agent Browser Bridge: ügynök csatlakoztatva"
+  },
+  "actionTitleConnectedTo": {
+    "message": "Agent Browser Bridge: csatlakoztatva ($1)"
+  },
+  "notificationReply": {
+    "message": "A válaszadáshoz kattintson az eszköztár Agent Browser Bridge gombjára"
+  },
+  "optionsTitle": {
+    "message": "Agent Browser Bridge – beállítások"
+  },
+  "statusChecking": {
+    "message": "Kapcsolat ellenőrzése…"
+  },
+  "statusLooking": {
+    "message": "Ügynök keresése…"
+  },
+  "welcomeLede": {
+    "message": "Bízza MI-ügynökére a lapok rendszerezését és a weboldalak kezelését."
+  },
+  "welcomeLedeSafari": {
+    "message": "Bízza MI-ügynökére Safari-lapjai megkeresését, megnyitását, áthelyezését és bezárását."
+  },
+  "welcomeConnected": {
+    "message": "Csatlakoztatva: az ügynök használhatja a böngészőt."
+  },
+  "welcomeConnectedMany_one": {
+    "message": "Csatlakoztatva: $1 ügynök-munkamenet használhatja a böngészőt."
+  },
+  "welcomeConnectedMany_other": {
+    "message": "Csatlakoztatva: $1 ügynök-munkamenet használhatja a böngészőt."
+  },
+  "welcomeDisconnected": {
+    "message": "Várakozás az ügynökre. Állítsa be alább, majd indítson munkamenetet."
+  },
+  "instanceNameLabel": {
+    "message": "Adjon nevet ennek a böngészőprofilnak"
+  },
+  "instanceNamePlaceholder": {
+    "message": "Például Munka vagy Személyes"
+  },
+  "welcomeInstanceNameHint": {
+    "message": "Az ügynökök ezzel a névvel különböztetik meg a böngészőit és profiljait, így kérheti például a Munka böngészőt. $1"
+  },
+  "optionsInstanceNameHint": {
+    "message": "Az ügynökök ezzel a névvel különböztetik meg a böngészőit és profiljait. $1"
+  },
+  "instanceId": {
+    "message": "Példányazonosító: $1"
+  },
+  "welcomeStepAdd": {
+    "message": "1. Adja hozzá az ügynökéhez"
+  },
+  "welcomeStepAddHint": {
+    "message": "Az ügynök elindít egy kis helyi szervert ($1), amelyhez ez a bővítmény csatlakozik. Válassza ki az ügynökét:"
+  },
+  "welcomeAgentSetupTitle": {
+    "message": "Bízza a beállítást az ügynökre"
+  },
+  "welcomeAgentSetupBody": {
+    "message": "Illessze be ezt a promptot bármely olyan ügynökbe, amely parancsokat tud futtatni és a saját beállításait módosítani, például a Claude Code, a Cursor vagy a Codex. Ellenőrzi, hogy telepítve van-e a Node.js, majd hozzáadja a szervert."
+  },
+  "copyPrompt": {
+    "message": "Prompt másolása"
+  },
+  "copy": {
+    "message": "Másolás"
+  },
+  "copied": {
+    "message": "Másolva"
+  },
+  "welcomeClaudeCodeBody": {
+    "message": "Futtassa egyszer egy terminálban:"
+  },
+  "welcomeOpensAndConfirms": {
+    "message": "Megnyitja az alkalmazást, és megerősítést kér."
+  },
+  "welcomeAddTo": {
+    "message": "Hozzáadás: $1"
+  },
+  "welcomeClaudeDesktopBody": {
+    "message": "Töltse le a bővítményt, majd a telepítéshez nyissa meg a fájlt. Node.js nem szükséges."
+  },
+  "welcomeDownloadFor": {
+    "message": "Letöltés: $1"
+  },
+  "welcomeOtherAgentsTitle": {
+    "message": "Egyéb ügynökök"
+  },
+  "welcomeOtherAgentsBody": {
+    "message": "Adja hozzá ezt az ügynök MCP-konfigurációjához, majd indítsa újra az ügynököt."
+  },
+  "welcomeStepTry": {
+    "message": "2. Próbálja ki"
+  },
+  "welcomeTryIntro": {
+    "message": "Amikor a Chrome meg van nyitva, írja ezt az ügynökének:"
+  },
+  "welcomeTryTabs": {
+    "message": "Rendezd téma szerint csoportokba a megnyitott lapjaimat. Előbb mutasd meg a tervet."
+  },
+  "welcomeTryPage": {
+    "message": "Nyisd meg a Chrome kiadási megjegyzéseit, és foglald össze, mi változott a legújabb verzióban."
+  },
+  "welcomeTryHint": {
+    "message": "A fenti állapot zöldre vált, amint fut az ügynök szervere. A $1 eszközzel végzett módosítások visszavonhatók, ha megkéri rá az ügynököt."
+  },
+  "welcomeTryIntroSafari": {
+    "message": "Amikor a Safari meg van nyitva, írja ezt az ügynökének:"
+  },
+  "welcomeTryDuplicatesSafari": {
+    "message": "Milyen lapok vannak megnyitva a Safariban? Zárd be az ismétlődőket, de előbb kérdezz meg."
+  },
+  "welcomeTrySortSafari": {
+    "message": "Rendezd webhely szerint a Safari-lapjaimat."
+  },
+  "welcomeTryHintSafari": {
+    "message": "A fenti állapot zöldre vált, amint fut az ügynök szervere. A Safariban az ügynök ablakokat nyithat meg, rendezhet el és zárhat be, valamint lapokat nyithat meg, navigálhat bennük, válthat közöttük, rögzítheti, némíthatja, duplikálhatja, áthelyezheti és bezárhatja őket. Ha hiányoznak a lapok címei és webcímei, adjon webhely-hozzáférést a bővítménynek a Safari Beállítások > Bővítmények részében. A lapcsoportok, az előzmények, a könyvjelzők és az oldalvezérlés a Chrome-ban érhetők el."
+  },
+  "welcomePrivacyHeading": {
+    "message": "Adatvédelem"
+  },
+  "welcomePrivacy": {
+    "message": "Böngészési adatai a számítógépén maradnak: a bővítmény csak a következő címmel kommunikál: $1. Az ügynök olvashatja a lapok címét és URL-jét, átrendezheti, csoportosíthatja vagy bezárhatja a lapokat, valamint kérésére olvashatja a weboldalakat, és műveleteket végezhet rajtuk. Amíg az ügynök egy oldalon dolgozik, a Chrome hibakeresési szalagot jelenít meg. Ez a bővítmény soha nem küldi el máshová a lapcímeket, URL-eket vagy oldaltartalmakat."
+  },
+  "welcomePrivacySafari": {
+    "message": "Böngészési adatai a számítógépén maradnak: a bővítmény csak a következő címmel kommunikál: $1. Az ügynök olvashatja a lapok címét és URL-jét, valamint kérésére ablakokat és lapokat nyithat meg, rendezhet el vagy zárhat be. A Safariban nem tudja olvasni a weboldalakat, és nem végezhet rajtuk műveleteket. Ez a bővítmény soha nem küldi el máshová a lapcímeket vagy URL-eket."
+  },
+  "welcomeAnalytics": {
+    "message": "Névtelen használati statisztikák megosztása (mely funkciókat használják, a bővítmény verziója) a bővítmény fejlesztéséhez."
+  },
+  "analyticsTitle": {
+    "message": "Névtelen használati statisztikák megosztása"
+  },
+  "analyticsHint": {
+    "message": "Mely funkciókat használják, sikeresek-e, valamint a bővítmény és az ügynök verziója. Lapcímeket, URL-eket és oldaltartalmakat soha. $1"
+  },
+  "privacyPolicy": {
+    "message": "Adatvédelmi irányelvek"
+  },
+  "analyticsUnavailable": {
+    "message": "Ez a verzió nem gyűjt használati statisztikákat."
+  },
+  "openSetup": {
+    "message": "Beállítás és kapcsolat állapotának megnyitása"
+  },
+  "optionsConnected": {
+    "message": "Ügynök csatlakoztatva"
+  },
+  "optionsConnectedMany_one": {
+    "message": "$1 ügynök-munkamenet csatlakoztatva"
+  },
+  "optionsConnectedMany_other": {
+    "message": "$1 ügynök-munkamenet csatlakoztatva"
+  },
+  "optionsDisconnected": {
+    "message": "Nincs csatlakoztatott ügynök"
+  },
+  "agentStartingUp": {
+    "message": "Az ügynök indul"
+  },
+  "sessionInProject": {
+    "message": "$1 – projekt: $2"
+  },
+  "sessionStarted": {
+    "message": "Elindítva: $1"
+  },
+  "sessionLastUsed_one": {
+    "message": "Legutóbb: $2 ($3), $1 hívás"
+  },
+  "sessionLastUsed_other": {
+    "message": "Legutóbb: $2 ($3), $1 hívás"
+  },
+  "sessionUnused": {
+    "message": "Még nem használt böngészőt"
+  },
+  "sessionId": {
+    "message": "Munkamenet: $1"
+  },
+  "serverVersion": {
+    "message": "szerver: $1"
+  },
+  "instanceThisBrowser": {
+    "message": "$1, ez a böngésző"
+  },
+  "justNow": {
+    "message": "az imént"
+  },
+  "chatTitle": {
+    "message": "Csevegés az ügynökkel"
+  },
+  "chatSetup": {
+    "message": "Beállítás"
+  },
+  "chatConversation": {
+    "message": "Beszélgetés"
+  },
+  "chatEmptyHeading": {
+    "message": "Beszélgessen itt az ügynökével"
+  },
+  "chatEmptyBody": {
+    "message": "Kérje meg az ügynököt, hogy folytassa a böngészőben, vagy futtassa a következő promptját: $1. Az ügynök üzenetei itt jelennek meg, az Ön válaszai pedig közvetlenül hozzá jutnak."
+  },
+  "chatEmptyHint": {
+    "message": "Minden ügynök-munkamenet saját beszélgetést kap."
+  },
+  "chatInput": {
+    "message": "Üzenet az ügynöknek"
+  },
+  "chatEnd": {
+    "message": "Csevegés befejezése"
+  },
+  "chatRemove": {
+    "message": "Eltávolítás"
+  },
+  "chatSend": {
+    "message": "Küldés"
+  },
+  "chatError": {
+    "message": "Hiba történt."
+  },
+  "chatUnseen_one": {
+    "message": "$2 ($1 új)"
+  },
+  "chatUnseen_other": {
+    "message": "$2 ($1 új)"
+  },
+  "chatStatusWaiting": {
+    "message": "Az Ön válaszára vár"
+  },
+  "chatStatusWorking": {
+    "message": "Dolgozik"
+  },
+  "chatStatusWorkingTool": {
+    "message": "Dolgozik – legutóbb: $1 ($2)"
+  },
+  "chatStatusDisconnected": {
+    "message": "Az ügynök kapcsolata megszakadt"
+  },
+  "chatStatusEnded": {
+    "message": "A csevegés véget ért"
+  },
+  "chatHintWaiting": {
+    "message": "Küldés: Enter, új sor: Shift+Enter."
+  },
+  "chatHintWorking": {
+    "message": "Az ügynök akkor olvassa el az üzenetét, amikor legközelebb ellenőrzi a csevegést."
+  },
+  "chatHintDisconnected": {
+    "message": "Ez az ügynök-munkamenet lezárult."
+  },
+  "chatHintEnded": {
+    "message": "Ha újra csevegni szeretne, kérje meg az ügynököt, hogy folytassa a böngészőben."
+  },
+  "chatReadByAgent": {
+    "message": "az ügynök elolvasta"
+  },
+  "chatNotReadYet": {
+    "message": "még nincs elolvasva"
+  },
+  "chatEndedNotice": {
+    "message": "Befejezte a csevegést."
+  },
+  "chatConversationGone": {
+    "message": "Ez a beszélgetés már nem létezik."
+  },
+  "chatEndedError": {
+    "message": "Ez a csevegés véget ért. Az újraindításhoz kérje meg az ügynököt, hogy folytassa a böngészőben."
+  },
+  "chatTooLong_one": {
+    "message": "Az üzenet legfeljebb $1 karakter hosszú lehet."
+  },
+  "chatTooLong_other": {
+    "message": "Az üzenet legfeljebb $1 karakter hosszú lehet."
+  }
+}

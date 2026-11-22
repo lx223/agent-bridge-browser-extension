@@ -3,11 +3,15 @@ import type { ConnectionStatus } from '../background/bridgeClient.ts';
 import { CHAT_STORAGE_KEY, type Conversations } from '../background/chat.ts';
 import { CHAT_PANEL_PORT, type ChatPanelMessage } from '../background/chatPanel.ts';
 import { panelView, type MessageView } from './view.ts';
+import { t } from '../i18n/messages.ts';
+import { localizePage } from '../i18n/page.ts';
 
 const REFRESH_MS = 5_000;
 const RECONNECT_MS = 1_000;
 
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
+
+localizePage();
 
 const title = $('title');
 const picker = $<HTMLSelectElement>('conversation');
@@ -31,7 +35,7 @@ let renderedMessages = '';
 
 async function post(message: ChatPanelMessage) {
   const answer = (await chrome.runtime.sendMessage(message)) as { ok: boolean; error?: string } | undefined;
-  if (answer && !answer.ok) throw new Error(answer.error ?? 'Something went wrong.');
+  if (answer && !answer.ok) throw new Error(answer.error ?? t('chatError'));
 }
 
 function showError(error: unknown) {

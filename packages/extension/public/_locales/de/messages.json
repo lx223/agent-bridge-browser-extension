@@ -1,0 +1,290 @@
+{
+  "locale": {
+    "message": "de"
+  },
+  "extDescription": {
+    "message": "Steuern Sie Ihren Browser mit einem KI-Agenten Ihrer Wahl: Tabs organisieren und Webseiten über MCP bedienen."
+  },
+  "actionTitle": {
+    "message": "Agent Browser Bridge: Einrichtung und Status"
+  },
+  "actionTitleDisconnected": {
+    "message": "Agent Browser Bridge: kein Agent verbunden"
+  },
+  "actionTitleConnected": {
+    "message": "Agent Browser Bridge: Agent verbunden"
+  },
+  "actionTitleConnectedTo": {
+    "message": "Agent Browser Bridge: verbunden mit $1"
+  },
+  "notificationReply": {
+    "message": "Klicken Sie zum Antworten in der Symbolleiste auf die Schaltfläche „Agent Browser Bridge“"
+  },
+  "optionsTitle": {
+    "message": "Agent Browser Bridge – Optionen"
+  },
+  "statusChecking": {
+    "message": "Verbindung wird geprüft…"
+  },
+  "statusLooking": {
+    "message": "Ihr Agent wird gesucht…"
+  },
+  "welcomeLede": {
+    "message": "Lassen Sie Ihren KI-Agenten Ihre Tabs organisieren und Webseiten bedienen."
+  },
+  "welcomeLedeSafari": {
+    "message": "Lassen Sie Ihren KI-Agenten Ihre Safari-Tabs finden, öffnen, verschieben und schließen."
+  },
+  "welcomeConnected": {
+    "message": "Verbunden: Ihr Agent kann den Browser verwenden."
+  },
+  "welcomeConnectedMany_one": {
+    "message": "Verbunden: $1 Agent-Sitzung kann den Browser verwenden."
+  },
+  "welcomeConnectedMany_other": {
+    "message": "Verbunden: $1 Agent-Sitzungen können den Browser verwenden."
+  },
+  "welcomeDisconnected": {
+    "message": "Warten auf Ihren Agenten. Richten Sie ihn unten ein und starten Sie dann eine Sitzung."
+  },
+  "instanceNameLabel": {
+    "message": "Name für dieses Browserprofil"
+  },
+  "instanceNamePlaceholder": {
+    "message": "Zum Beispiel Arbeit oder Privat"
+  },
+  "welcomeInstanceNameHint": {
+    "message": "Anhand dieses Namens unterscheiden Agenten Ihre Browser und Profile. So können Sie nach Ihrem Browser „Arbeit“ fragen. $1"
+  },
+  "optionsInstanceNameHint": {
+    "message": "Anhand dieses Namens unterscheiden Agenten Ihre Browser und Profile. $1"
+  },
+  "instanceId": {
+    "message": "Instanz-ID: $1"
+  },
+  "welcomeStepAdd": {
+    "message": "1. Zum Agenten hinzufügen"
+  },
+  "welcomeStepAddHint": {
+    "message": "Ihr Agent startet einen kleinen lokalen Server ($1), mit dem sich diese Erweiterung verbindet. Wählen Sie Ihren Agenten aus:"
+  },
+  "welcomeAgentSetupTitle": {
+    "message": "Vom Agenten einrichten lassen"
+  },
+  "welcomeAgentSetupBody": {
+    "message": "Fügen Sie diesen Prompt in einen Agenten ein, der Befehle ausführen und seine eigenen Einstellungen bearbeiten kann, etwa Claude Code, Cursor oder Codex. Er prüft, ob Node.js vorhanden ist, und fügt dann den Server hinzu."
+  },
+  "copyPrompt": {
+    "message": "Prompt kopieren"
+  },
+  "copy": {
+    "message": "Kopieren"
+  },
+  "copied": {
+    "message": "Kopiert"
+  },
+  "welcomeClaudeCodeBody": {
+    "message": "Einmal in einem Terminal ausführen:"
+  },
+  "welcomeOpensAndConfirms": {
+    "message": "Öffnet die App und bittet Sie um Bestätigung."
+  },
+  "welcomeAddTo": {
+    "message": "Zu $1 hinzufügen"
+  },
+  "welcomeClaudeDesktopBody": {
+    "message": "Laden Sie die Erweiterung herunter und öffnen Sie die Datei, um sie zu installieren. Node.js ist nicht erforderlich."
+  },
+  "welcomeDownloadFor": {
+    "message": "Für $1 herunterladen"
+  },
+  "welcomeOtherAgentsTitle": {
+    "message": "Andere Agenten"
+  },
+  "welcomeOtherAgentsBody": {
+    "message": "Fügen Sie dies der MCP-Konfiguration des Agenten hinzu und starten Sie ihn dann neu."
+  },
+  "welcomeStepTry": {
+    "message": "2. Ausprobieren"
+  },
+  "welcomeTryIntro": {
+    "message": "Öffnen Sie Chrome und fragen Sie Ihren Agenten:"
+  },
+  "welcomeTryTabs": {
+    "message": "Ordne meine offenen Tabs nach Thema in Gruppen. Zeig mir zuerst den Plan."
+  },
+  "welcomeTryPage": {
+    "message": "Öffne die Versionshinweise von Chrome und fasse zusammen, was sich in der neuesten Version geändert hat."
+  },
+  "welcomeTryHint": {
+    "message": "Der Status oben wird grün, sobald der Server Ihres Agenten läuft. Mit $1 vorgenommene Änderungen lassen sich rückgängig machen, wenn Sie den Agenten darum bitten."
+  },
+  "welcomeTryIntroSafari": {
+    "message": "Öffnen Sie Safari und fragen Sie Ihren Agenten:"
+  },
+  "welcomeTryDuplicatesSafari": {
+    "message": "Welche Tabs habe ich in Safari offen? Schließ die Duplikate, aber frag mich vorher."
+  },
+  "welcomeTrySortSafari": {
+    "message": "Sortiere meine Safari-Tabs nach Website."
+  },
+  "welcomeTryHintSafari": {
+    "message": "Der Status oben wird grün, sobald der Server Ihres Agenten läuft. In Safari kann Ihr Agent Fenster öffnen, anordnen und schließen sowie Tabs öffnen, darin Seiten aufrufen, zwischen ihnen wechseln, sie anpinnen, stummschalten, duplizieren, verschieben und schließen. Wenn Tab-Titel und Adressen fehlen, erlauben Sie der Erweiterung in Safari unter „Einstellungen > Erweiterungen“ den Zugriff auf Websites. Tabgruppen, Verlauf, Lesezeichen und die Steuerung von Webseiten sind in Chrome verfügbar."
+  },
+  "welcomePrivacyHeading": {
+    "message": "Datenschutz"
+  },
+  "welcomePrivacy": {
+    "message": "Ihre Browserdaten bleiben auf Ihrem Computer: Die Erweiterung kommuniziert nur mit $1. Ihr Agent kann Tab-Titel und URLs lesen, Tabs neu anordnen, gruppieren oder schließen sowie Webseiten lesen und darin handeln, wenn Sie ihn darum bitten. Chrome zeigt einen Debugging-Hinweis an, während der Agent in einer Seite arbeitet. Tab-Titel, URLs und Seiteninhalte werden von dieser Erweiterung nie an andere Stellen gesendet."
+  },
+  "welcomePrivacySafari": {
+    "message": "Ihre Browserdaten bleiben auf Ihrem Computer: Die Erweiterung kommuniziert nur mit $1. Ihr Agent kann Tab-Titel und URLs lesen sowie Fenster und Tabs öffnen, anordnen oder schließen, wenn Sie ihn darum bitten. In Safari kann er keine Webseiten lesen oder darin handeln. Tab-Titel und URLs werden von dieser Erweiterung nie an andere Stellen gesendet."
+  },
+  "welcomeAnalytics": {
+    "message": "Anonyme Nutzungsstatistiken senden (welche Funktionen genutzt werden, Version der Erweiterung), um die Erweiterung zu verbessern."
+  },
+  "analyticsTitle": {
+    "message": "Anonyme Nutzungsstatistiken senden"
+  },
+  "analyticsHint": {
+    "message": "Welche Funktionen genutzt werden, ob sie erfolgreich sind, sowie die Versionen von Erweiterung und Agent. Niemals Tab-Titel, URLs oder Seiteninhalte. $1"
+  },
+  "privacyPolicy": {
+    "message": "Datenschutzerklärung"
+  },
+  "analyticsUnavailable": {
+    "message": "Diese Version erfasst keine Nutzungsstatistiken."
+  },
+  "openSetup": {
+    "message": "Einrichtung und Verbindungsstatus öffnen"
+  },
+  "optionsConnected": {
+    "message": "Agent verbunden"
+  },
+  "optionsConnectedMany_one": {
+    "message": "$1 Agent-Sitzung verbunden"
+  },
+  "optionsConnectedMany_other": {
+    "message": "$1 Agent-Sitzungen verbunden"
+  },
+  "optionsDisconnected": {
+    "message": "Kein Agent verbunden"
+  },
+  "agentStartingUp": {
+    "message": "Agent wird gestartet"
+  },
+  "sessionInProject": {
+    "message": "$1 in $2"
+  },
+  "sessionStarted": {
+    "message": "Gestartet $1"
+  },
+  "sessionLastUsed_one": {
+    "message": "Zuletzt verwendet: $2 $3, $1 Aufruf"
+  },
+  "sessionLastUsed_other": {
+    "message": "Zuletzt verwendet: $2 $3, $1 Aufrufe"
+  },
+  "sessionUnused": {
+    "message": "Hat noch keinen Browser verwendet"
+  },
+  "sessionId": {
+    "message": "Sitzung $1"
+  },
+  "serverVersion": {
+    "message": "Server $1"
+  },
+  "instanceThisBrowser": {
+    "message": "$1, dieser Browser"
+  },
+  "justNow": {
+    "message": "gerade eben"
+  },
+  "chatTitle": {
+    "message": "Agent-Chat"
+  },
+  "chatSetup": {
+    "message": "Einrichtung"
+  },
+  "chatConversation": {
+    "message": "Unterhaltung"
+  },
+  "chatEmptyHeading": {
+    "message": "Chatten Sie hier mit Ihrem Agenten"
+  },
+  "chatEmptyBody": {
+    "message": "Bitten Sie Ihren Agenten, im Browser weiterzumachen, oder führen Sie seinen Prompt $1 aus. Seine Nachrichten erscheinen hier, und Ihre Antworten gehen direkt an ihn zurück."
+  },
+  "chatEmptyHint": {
+    "message": "Jede Agent-Sitzung erhält eine eigene Unterhaltung."
+  },
+  "chatInput": {
+    "message": "Nachricht an den Agenten"
+  },
+  "chatEnd": {
+    "message": "Chat beenden"
+  },
+  "chatRemove": {
+    "message": "Entfernen"
+  },
+  "chatSend": {
+    "message": "Senden"
+  },
+  "chatError": {
+    "message": "Ein Fehler ist aufgetreten."
+  },
+  "chatUnseen_one": {
+    "message": "$2 ($1 neu)"
+  },
+  "chatUnseen_other": {
+    "message": "$2 ($1 neu)"
+  },
+  "chatStatusWaiting": {
+    "message": "Wartet auf Ihre Antwort"
+  },
+  "chatStatusWorking": {
+    "message": "Arbeitet"
+  },
+  "chatStatusWorkingTool": {
+    "message": "Arbeitet: $1 $2 verwendet"
+  },
+  "chatStatusDisconnected": {
+    "message": "Agent getrennt"
+  },
+  "chatStatusEnded": {
+    "message": "Chat beendet"
+  },
+  "chatHintWaiting": {
+    "message": "Eingabetaste zum Senden, Umschalt + Eingabetaste für eine neue Zeile."
+  },
+  "chatHintWorking": {
+    "message": "Der Agent liest Ihre Nachricht, wenn er das nächste Mal den Chat prüft."
+  },
+  "chatHintDisconnected": {
+    "message": "Diese Agent-Sitzung wurde geschlossen."
+  },
+  "chatHintEnded": {
+    "message": "Bitten Sie den Agenten, im Browser weiterzumachen, um wieder zu chatten."
+  },
+  "chatReadByAgent": {
+    "message": "vom Agenten gelesen"
+  },
+  "chatNotReadYet": {
+    "message": "noch nicht gelesen"
+  },
+  "chatEndedNotice": {
+    "message": "Sie haben den Chat beendet."
+  },
+  "chatConversationGone": {
+    "message": "Diese Unterhaltung existiert nicht mehr."
+  },
+  "chatEndedError": {
+    "message": "Dieser Chat wurde beendet. Bitten Sie den Agenten, im Browser weiterzumachen, um ihn neu zu starten."
+  },
+  "chatTooLong_one": {
+    "message": "Nachrichten dürfen höchstens $1 Zeichen lang sein."
+  },
+  "chatTooLong_other": {
+    "message": "Nachrichten dürfen höchstens $1 Zeichen lang sein."
+  }
+}

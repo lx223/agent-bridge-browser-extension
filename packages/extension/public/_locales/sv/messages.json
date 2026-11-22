@@ -1,0 +1,290 @@
+{
+  "locale": {
+    "message": "sv"
+  },
+  "extDescription": {
+    "message": "Styr din egen webbläsare med valfri AI-agent: organisera flikar och använd webbsidor via MCP."
+  },
+  "actionTitle": {
+    "message": "Agent Browser Bridge: konfiguration och status"
+  },
+  "actionTitleDisconnected": {
+    "message": "Agent Browser Bridge: ingen agent ansluten"
+  },
+  "actionTitleConnected": {
+    "message": "Agent Browser Bridge: agent ansluten"
+  },
+  "actionTitleConnectedTo": {
+    "message": "Agent Browser Bridge: ansluten till $1"
+  },
+  "notificationReply": {
+    "message": "Klicka på knappen Agent Browser Bridge i verktygsfältet för att svara"
+  },
+  "optionsTitle": {
+    "message": "Alternativ för Agent Browser Bridge"
+  },
+  "statusChecking": {
+    "message": "Kontrollerar anslutningen…"
+  },
+  "statusLooking": {
+    "message": "Letar efter din agent…"
+  },
+  "welcomeLede": {
+    "message": "Låt din AI-agent organisera dina flikar och använda webbsidor åt dig."
+  },
+  "welcomeLedeSafari": {
+    "message": "Låt din AI-agent hitta, öppna, flytta och stänga dina Safari-flikar."
+  },
+  "welcomeConnected": {
+    "message": "Ansluten: din agent kan använda webbläsaren."
+  },
+  "welcomeConnectedMany_one": {
+    "message": "Ansluten: $1 agentsession kan använda webbläsaren."
+  },
+  "welcomeConnectedMany_other": {
+    "message": "Ansluten: $1 agentsessioner kan använda webbläsaren."
+  },
+  "welcomeDisconnected": {
+    "message": "Väntar på din agent. Konfigurera den nedan och starta sedan en session."
+  },
+  "instanceNameLabel": {
+    "message": "Namnge den här webbläsarprofilen"
+  },
+  "instanceNamePlaceholder": {
+    "message": "Till exempel Jobb eller Privat"
+  },
+  "welcomeInstanceNameHint": {
+    "message": "Agenter använder namnet för att skilja dina webbläsare och profiler åt, så att du kan be om webbläsaren Jobb. $1"
+  },
+  "optionsInstanceNameHint": {
+    "message": "Agenter använder namnet för att skilja dina webbläsare och profiler åt. $1"
+  },
+  "instanceId": {
+    "message": "Instans-id: $1"
+  },
+  "welcomeStepAdd": {
+    "message": "1. Lägg till det i din agent"
+  },
+  "welcomeStepAddHint": {
+    "message": "Din agent startar en liten lokal server ($1) som det här tillägget ansluter till. Välj din agent:"
+  },
+  "welcomeAgentSetupTitle": {
+    "message": "Låt agenten konfigurera det"
+  },
+  "welcomeAgentSetupBody": {
+    "message": "Klistra in den här prompten i en agent som kan köra kommandon och redigera sina egna inställningar, till exempel Claude Code, Cursor eller Codex. Den kontrollerar att Node.js finns och lägger sedan till servern."
+  },
+  "copyPrompt": {
+    "message": "Kopiera prompt"
+  },
+  "copy": {
+    "message": "Kopiera"
+  },
+  "copied": {
+    "message": "Kopierat"
+  },
+  "welcomeClaudeCodeBody": {
+    "message": "Kör en gång i en terminal:"
+  },
+  "welcomeOpensAndConfirms": {
+    "message": "Öppnar appen och ber dig bekräfta."
+  },
+  "welcomeAddTo": {
+    "message": "Lägg till i $1"
+  },
+  "welcomeClaudeDesktopBody": {
+    "message": "Ladda ned tillägget och öppna sedan filen för att installera det. Node.js behövs inte."
+  },
+  "welcomeDownloadFor": {
+    "message": "Ladda ned för $1"
+  },
+  "welcomeOtherAgentsTitle": {
+    "message": "Andra agenter"
+  },
+  "welcomeOtherAgentsBody": {
+    "message": "Lägg till det här i agentens MCP-konfiguration och starta sedan om den."
+  },
+  "welcomeStepTry": {
+    "message": "2. Testa"
+  },
+  "welcomeTryIntro": {
+    "message": "Öppna Chrome och be din agent:"
+  },
+  "welcomeTryTabs": {
+    "message": "Ordna mina öppna flikar i grupper efter ämne. Visa mig planen först."
+  },
+  "welcomeTryPage": {
+    "message": "Öppna Chromes versionsinformation och sammanfatta vad som ändrats i den senaste versionen."
+  },
+  "welcomeTryHint": {
+    "message": "Statusen ovan blir grön när agentens server körs. Ändringar som görs med $1 kan återställas om du ber agenten att ångra dem."
+  },
+  "welcomeTryIntroSafari": {
+    "message": "Öppna Safari och be din agent:"
+  },
+  "welcomeTryDuplicatesSafari": {
+    "message": "Vilka flikar har jag öppna i Safari? Stäng dubbletterna, men fråga mig först."
+  },
+  "welcomeTrySortSafari": {
+    "message": "Sortera mina Safari-flikar efter webbplats."
+  },
+  "welcomeTryHintSafari": {
+    "message": "Statusen ovan blir grön när agentens server körs. I Safari kan agenten öppna, ordna och stänga fönster samt öppna flikar, läsa in sidor i dem, växla mellan dem och fästa, stänga av ljudet för, duplicera, flytta och stänga dem. Om flikarnas titlar och adresser saknas ger du tillägget åtkomst till webbplatser i Safari under Inställningar > Tillägg. Flikgrupper, historik, bokmärken och sidstyrning finns i Chrome."
+  },
+  "welcomePrivacyHeading": {
+    "message": "Integritet"
+  },
+  "welcomePrivacy": {
+    "message": "Din webbinformation stannar på datorn: tillägget kommunicerar bara med $1. Agenten kan läsa fliktitlar och webbadresser, ordna om, gruppera eller stänga flikar samt läsa och agera på webbsidor när du ber den om det. Chrome visar en felsökningsbanner medan agenten arbetar på en sida. Det här tillägget skickar aldrig fliktitlar, webbadresser eller sidinnehåll någon annanstans."
+  },
+  "welcomePrivacySafari": {
+    "message": "Din webbinformation stannar på datorn: tillägget kommunicerar bara med $1. Agenten kan läsa fliktitlar och webbadresser samt öppna, ordna eller stänga fönster och flikar när du ber den om det. I Safari kan den inte läsa eller agera på webbsidor. Det här tillägget skickar aldrig fliktitlar eller webbadresser någon annanstans."
+  },
+  "welcomeAnalytics": {
+    "message": "Dela anonym användningsstatistik (vilka funktioner som används, tilläggets version) för att hjälpa till att förbättra tillägget."
+  },
+  "analyticsTitle": {
+    "message": "Dela anonym användningsstatistik"
+  },
+  "analyticsHint": {
+    "message": "Vilka funktioner som används, om de lyckas samt versionerna av tillägget och agenten. Aldrig fliktitlar, webbadresser eller sidinnehåll. $1"
+  },
+  "privacyPolicy": {
+    "message": "Integritetspolicy"
+  },
+  "analyticsUnavailable": {
+    "message": "Den här versionen samlar inte in användningsstatistik."
+  },
+  "openSetup": {
+    "message": "Öppna konfiguration och anslutningsstatus"
+  },
+  "optionsConnected": {
+    "message": "Agent ansluten"
+  },
+  "optionsConnectedMany_one": {
+    "message": "$1 agentsession ansluten"
+  },
+  "optionsConnectedMany_other": {
+    "message": "$1 agentsessioner anslutna"
+  },
+  "optionsDisconnected": {
+    "message": "Ingen agent ansluten"
+  },
+  "agentStartingUp": {
+    "message": "Agenten startar"
+  },
+  "sessionInProject": {
+    "message": "$1 i $2"
+  },
+  "sessionStarted": {
+    "message": "Startades $1"
+  },
+  "sessionLastUsed_one": {
+    "message": "Senast använt: $2 $3, $1 anrop"
+  },
+  "sessionLastUsed_other": {
+    "message": "Senast använt: $2 $3, $1 anrop"
+  },
+  "sessionUnused": {
+    "message": "Har inte använt någon webbläsare än"
+  },
+  "sessionId": {
+    "message": "Session $1"
+  },
+  "serverVersion": {
+    "message": "server $1"
+  },
+  "instanceThisBrowser": {
+    "message": "$1, den här webbläsaren"
+  },
+  "justNow": {
+    "message": "nyss"
+  },
+  "chatTitle": {
+    "message": "Agentchatt"
+  },
+  "chatSetup": {
+    "message": "Konfiguration"
+  },
+  "chatConversation": {
+    "message": "Konversation"
+  },
+  "chatEmptyHeading": {
+    "message": "Prata med din agent här"
+  },
+  "chatEmptyBody": {
+    "message": "Be agenten att fortsätta i webbläsaren eller kör dess prompt $1. Agentens meddelanden visas här och dina svar går direkt tillbaka till den."
+  },
+  "chatEmptyHint": {
+    "message": "Varje agentsession får en egen konversation."
+  },
+  "chatInput": {
+    "message": "Skriv till agenten"
+  },
+  "chatEnd": {
+    "message": "Avsluta chatten"
+  },
+  "chatRemove": {
+    "message": "Ta bort"
+  },
+  "chatSend": {
+    "message": "Skicka"
+  },
+  "chatError": {
+    "message": "Något gick fel."
+  },
+  "chatUnseen_one": {
+    "message": "$2 ($1 ny)"
+  },
+  "chatUnseen_other": {
+    "message": "$2 ($1 nya)"
+  },
+  "chatStatusWaiting": {
+    "message": "Väntar på ditt svar"
+  },
+  "chatStatusWorking": {
+    "message": "Arbetar"
+  },
+  "chatStatusWorkingTool": {
+    "message": "Arbetar: använde $1 $2"
+  },
+  "chatStatusDisconnected": {
+    "message": "Agenten är frånkopplad"
+  },
+  "chatStatusEnded": {
+    "message": "Chatten är avslutad"
+  },
+  "chatHintWaiting": {
+    "message": "Enter skickar, Skift+Enter ger en ny rad."
+  },
+  "chatHintWorking": {
+    "message": "Agenten läser ditt meddelande nästa gång den kollar chatten."
+  },
+  "chatHintDisconnected": {
+    "message": "Den här agentsessionen har stängts."
+  },
+  "chatHintEnded": {
+    "message": "Be agenten att fortsätta i webbläsaren för att chatta igen."
+  },
+  "chatReadByAgent": {
+    "message": "läst av agenten"
+  },
+  "chatNotReadYet": {
+    "message": "inte läst än"
+  },
+  "chatEndedNotice": {
+    "message": "Du avslutade chatten."
+  },
+  "chatConversationGone": {
+    "message": "Den här konversationen finns inte längre."
+  },
+  "chatEndedError": {
+    "message": "Den här chatten har avslutats. Be agenten att fortsätta i webbläsaren för att starta den igen."
+  },
+  "chatTooLong_one": {
+    "message": "Meddelanden får vara högst $1 tecken långa."
+  },
+  "chatTooLong_other": {
+    "message": "Meddelanden får vara högst $1 tecken långa."
+  }
+}

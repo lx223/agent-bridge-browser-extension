@@ -10,76 +10,76 @@
     <main>
       <header>
         <h1>Agent Browser Bridge</h1>
-        <p class="lede" data-browser="chrome">Let your AI agent organise your tabs and operate web pages.</p>
-        <p class="lede" data-browser="safari" hidden>Let your AI agent find, open, move and close your Safari tabs.</p>
+        <p class="lede" data-browser="chrome" data-i18n="welcomeLede">Let your AI agent organise your tabs and operate web pages.</p>
+        <p class="lede" data-browser="safari" data-i18n="welcomeLedeSafari" hidden>Let your AI agent find, open, move and close your Safari tabs.</p>
         <div id="status" class="status" data-state="disconnected">
           <span class="dot"></span>
-          <span id="status-text">Checking connection…</span>
+          <span id="status-text" data-i18n="statusChecking">Checking connection…</span>
         </div>
         <ul id="agents" class="agents" hidden></ul>
         <div class="instance-name">
-          <label for="instance-name">Name this browser profile</label>
-          <input id="instance-name" type="text" placeholder="For example Work or Personal" autocomplete="off" spellcheck="false" />
-          <p class="hint">Agents use this name to tell your browsers and profiles apart, so you can ask for your Work browser. <span id="instance-id"></span></p>
+          <label for="instance-name" data-i18n="instanceNameLabel">Name this browser profile</label>
+          <input id="instance-name" type="text" placeholder="For example Work or Personal" data-i18n-placeholder="instanceNamePlaceholder" autocomplete="off" spellcheck="false" />
+          <p class="hint" data-i18n="welcomeInstanceNameHint">Agents use this name to tell your browsers and profiles apart, so you can ask for your Work browser. <span id="instance-id"></span></p>
         </div>
       </header>
 
       <section>
-        <h2>1. Add it to your agent</h2>
-        <p class="hint">Your agent starts a small local server (<code>npx -y <span data-pkg></span></code>) that this extension connects to. Pick your agent:</p>
+        <h2 data-i18n="welcomeStepAdd">1. Add it to your agent</h2>
+        <p class="hint" data-i18n="welcomeStepAddHint">Your agent starts a small local server (<code>npx -y <span data-pkg></span></code>) that this extension connects to. Pick your agent:</p>
 
         <div class="cards">
           <article class="card wide">
-            <h3>Let your agent set it up</h3>
-            <p>Paste this prompt into any agent that can run commands and edit its own settings, such as Claude Code, Cursor or Codex. It checks for Node.js, then adds the server.</p>
-            <div class="snippet block"><pre id="agent-prompt" class="wrap"></pre><button data-copy="agent-prompt">Copy prompt</button></div>
+            <h3 data-i18n="welcomeAgentSetupTitle">Let your agent set it up</h3>
+            <p data-i18n="welcomeAgentSetupBody">Paste this prompt into any agent that can run commands and edit its own settings, such as Claude Code, Cursor or Codex. It checks for Node.js, then adds the server.</p>
+            <div class="snippet block"><pre id="agent-prompt" class="wrap"></pre><button data-copy="agent-prompt" data-i18n="copyPrompt">Copy prompt</button></div>
           </article>
 
           <article class="card">
             <h3>Claude Code</h3>
-            <p>Run once in a terminal:</p>
-            <div class="snippet"><code id="claude-code-cmd"></code><button data-copy="claude-code-cmd">Copy</button></div>
+            <p data-i18n="welcomeClaudeCodeBody">Run once in a terminal:</p>
+            <div class="snippet"><code id="claude-code-cmd"></code><button data-copy="claude-code-cmd" data-i18n="copy">Copy</button></div>
           </article>
 
           <article class="card">
             <h3>Cursor</h3>
-            <p>Opens Cursor and asks you to confirm.</p>
-            <a id="cursor-link" class="button">Add to Cursor</a>
+            <p data-i18n="welcomeOpensAndConfirms">Opens the app and asks you to confirm.</p>
+            <a id="cursor-link" class="button" data-i18n="welcomeAddTo" data-i18n-arg="Cursor">Add to Cursor</a>
           </article>
 
           <article class="card">
             <h3>VS Code</h3>
-            <p>Opens VS Code and asks you to confirm.</p>
-            <a id="vscode-link" class="button">Add to VS Code</a>
+            <p data-i18n="welcomeOpensAndConfirms">Opens the app and asks you to confirm.</p>
+            <a id="vscode-link" class="button" data-i18n="welcomeAddTo" data-i18n-arg="VS Code">Add to VS Code</a>
           </article>
 
           <article class="card">
             <h3>Claude Desktop</h3>
-            <p>Download the extension, then open the file to install it. No Node.js needed.</p>
-            <a id="claude-desktop-link" class="button">Download for Claude Desktop</a>
+            <p data-i18n="welcomeClaudeDesktopBody">Download the extension, then open the file to install it. No Node.js needed.</p>
+            <a id="claude-desktop-link" class="button" data-i18n="welcomeDownloadFor" data-i18n-arg="Claude Desktop">Download for Claude Desktop</a>
           </article>
 
           <article class="card wide">
-            <h3>Other agents</h3>
-            <p>Add this to the agent's MCP config, then restart it.</p>
-            <div class="snippet block"><pre id="json-config"></pre><button data-copy="json-config">Copy</button></div>
+            <h3 data-i18n="welcomeOtherAgentsTitle">Other agents</h3>
+            <p data-i18n="welcomeOtherAgentsBody">Add this to the agent's MCP config, then restart it.</p>
+            <div class="snippet block"><pre id="json-config"></pre><button data-copy="json-config" data-i18n="copy">Copy</button></div>
           </article>
         </div>
       </section>
 
       <section>
-        <h2>2. Try it</h2>
+        <h2 data-i18n="welcomeStepTry">2. Try it</h2>
         <div data-browser="chrome">
-          <p>With Chrome open, ask your agent:</p>
-          <blockquote>Organise my open tabs into groups by topic. Show me the plan first.</blockquote>
-          <blockquote>Open the Chrome release notes and summarise what changed in the latest version.</blockquote>
-          <p class="hint">The status above turns green once your agent's server is running. Changes made with <code>chrome_plan_apply</code> can be reverted by asking the agent to undo.</p>
+          <p data-i18n="welcomeTryIntro">With Chrome open, ask your agent:</p>
+          <blockquote data-i18n="welcomeTryTabs">Organise my open tabs into groups by topic. Show me the plan first.</blockquote>
+          <blockquote data-i18n="welcomeTryPage">Open the Chrome release notes and summarise what changed in the latest version.</blockquote>
+          <p class="hint" data-i18n="welcomeTryHint">The status above turns green once your agent's server is running. Changes made with <code>chrome_plan_apply</code> can be reverted by asking the agent to undo.</p>
         </div>
         <div data-browser="safari" hidden>
-          <p>With Safari open, ask your agent:</p>
-          <blockquote>Which tabs do I have open in Safari? Close the duplicates, but ask me first.</blockquote>
-          <blockquote>Put my Safari tabs in order by site.</blockquote>
-          <p class="hint">
+          <p data-i18n="welcomeTryIntroSafari">With Safari open, ask your agent:</p>
+          <blockquote data-i18n="welcomeTryDuplicatesSafari">Which tabs do I have open in Safari? Close the duplicates, but ask me first.</blockquote>
+          <blockquote data-i18n="welcomeTrySortSafari">Put my Safari tabs in order by site.</blockquote>
+          <p class="hint" data-i18n="welcomeTryHintSafari">
             The status above turns green once your agent's server is running. In Safari your agent can open, arrange and close windows, and open,
             navigate, switch, pin, mute, duplicate, move and close tabs. If tab titles and addresses are missing, give the extension website access in Safari under Settings &gt; Extensions.
             Tab groups, history, bookmarks and page control are available in Chrome.
@@ -88,20 +88,20 @@
       </section>
 
       <section>
-        <h2>Privacy</h2>
-        <p class="hint" data-browser="chrome">
+        <h2 data-i18n="welcomePrivacyHeading">Privacy</h2>
+        <p class="hint" data-browser="chrome" data-i18n="welcomePrivacy">
           Your browsing data stays on your computer: the extension only talks to <code>127.0.0.1</code>. Your agent can read tab titles and URLs,
           rearrange, group or close tabs, and read and act in web pages when you ask it to. Chrome shows a debugging banner while it
           works in a page. Tab titles, URLs and page contents are never sent anywhere else by this extension.
         </p>
-        <p class="hint" data-browser="safari" hidden>
+        <p class="hint" data-browser="safari" data-i18n="welcomePrivacySafari" hidden>
           Your browsing data stays on your computer: the extension only talks to <code>127.0.0.1</code>. Your agent can read tab titles and URLs,
           and open, arrange or close windows and tabs when you ask it to. It cannot read or act in web pages in Safari. Tab titles and URLs are never
           sent anywhere else by this extension.
         </p>
         <label id="analytics-setting" class="hint toggle">
           <input type="checkbox" id="analytics-enabled" checked />
-          Share anonymous usage statistics (which features are used, extension version) to help improve the extension.
+          <span data-i18n="welcomeAnalytics">Share anonymous usage statistics (which features are used, extension version) to help improve the extension.</span>
         </label>
       </section>
     </main>

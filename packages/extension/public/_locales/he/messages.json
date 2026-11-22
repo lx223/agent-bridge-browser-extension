@@ -1,0 +1,305 @@
+{
+  "locale": {
+    "message": "he"
+  },
+  "extDescription": {
+    "message": "שליטה בדפדפן שלך בעזרת כל סוכן AI שבוחרים: ארגון כרטיסיות ותפעול דפי אינטרנט דרך MCP."
+  },
+  "actionTitle": {
+    "message": "Agent Browser Bridge: הגדרה וסטטוס"
+  },
+  "actionTitleDisconnected": {
+    "message": "Agent Browser Bridge: אין סוכן מחובר"
+  },
+  "actionTitleConnected": {
+    "message": "Agent Browser Bridge: סוכן מחובר"
+  },
+  "actionTitleConnectedTo": {
+    "message": "Agent Browser Bridge: מחובר אל $1"
+  },
+  "notificationReply": {
+    "message": "כדי להשיב, יש ללחוץ על הלחצן של Agent Browser Bridge בסרגל הכלים"
+  },
+  "optionsTitle": {
+    "message": "אפשרויות של Agent Browser Bridge"
+  },
+  "statusChecking": {
+    "message": "בודק את החיבור…"
+  },
+  "statusLooking": {
+    "message": "מחפש את הסוכן שלך…"
+  },
+  "welcomeLede": {
+    "message": "סוכן ה-AI שלך יכול לארגן את הכרטיסיות ולתפעל דפי אינטרנט."
+  },
+  "welcomeLedeSafari": {
+    "message": "סוכן ה-AI שלך יכול למצוא, לפתוח, להעביר ולסגור כרטיסיות ב-Safari."
+  },
+  "welcomeConnected": {
+    "message": "מחובר: הסוכן שלך יכול להשתמש בדפדפן."
+  },
+  "welcomeConnectedMany_one": {
+    "message": "מחובר: $1 סשן של סוכן יכול להשתמש בדפדפן."
+  },
+  "welcomeConnectedMany_other": {
+    "message": "מחובר: $1 סשנים של סוכנים יכולים להשתמש בדפדפן."
+  },
+  "welcomeConnectedMany_two": {
+    "message": "מחובר: $1 סשנים של סוכנים יכולים להשתמש בדפדפן."
+  },
+  "welcomeDisconnected": {
+    "message": "ממתין לסוכן. יש להגדיר אותו למטה ואז להתחיל סשן."
+  },
+  "instanceNameLabel": {
+    "message": "מתן שם לפרופיל הדפדפן הזה"
+  },
+  "instanceNamePlaceholder": {
+    "message": "לדוגמה: עבודה או אישי"
+  },
+  "welcomeInstanceNameHint": {
+    "message": "סוכנים משתמשים בשם הזה כדי להבחין בין הדפדפנים והפרופילים שלך, כך שאפשר לבקש מהם את דפדפן העבודה. $1"
+  },
+  "optionsInstanceNameHint": {
+    "message": "סוכנים משתמשים בשם הזה כדי להבחין בין הדפדפנים והפרופילים שלך. $1"
+  },
+  "instanceId": {
+    "message": "מזהה מופע: $1"
+  },
+  "welcomeStepAdd": {
+    "message": "1. הוספה לסוכן"
+  },
+  "welcomeStepAddHint": {
+    "message": "הסוכן מפעיל שרת מקומי קטן ($1) שהתוסף הזה מתחבר אליו. יש לבחור את הסוכן:"
+  },
+  "welcomeAgentSetupTitle": {
+    "message": "הגדרה על ידי הסוכן"
+  },
+  "welcomeAgentSetupBody": {
+    "message": "יש להדביק את ההנחיה הזו בכל סוכן שיכול להריץ פקודות ולערוך את ההגדרות של עצמו, כמו Claude Code, Cursor או Codex. היא בודקת ש-Node.js מותקן ואז מוסיפה את השרת."
+  },
+  "copyPrompt": {
+    "message": "העתקת ההנחיה"
+  },
+  "copy": {
+    "message": "העתקה"
+  },
+  "copied": {
+    "message": "הועתק"
+  },
+  "welcomeClaudeCodeBody": {
+    "message": "יש להריץ פעם אחת בטרמינל:"
+  },
+  "welcomeOpensAndConfirms": {
+    "message": "האפליקציה תיפתח ותבקש אישור."
+  },
+  "welcomeAddTo": {
+    "message": "הוספה ל-$1"
+  },
+  "welcomeClaudeDesktopBody": {
+    "message": "יש להוריד את התוסף ואז לפתוח את הקובץ כדי להתקין אותו. אין צורך ב-Node.js."
+  },
+  "welcomeDownloadFor": {
+    "message": "הורדה עבור $1"
+  },
+  "welcomeOtherAgentsTitle": {
+    "message": "סוכנים אחרים"
+  },
+  "welcomeOtherAgentsBody": {
+    "message": "יש להוסיף את זה להגדרות ה-MCP של הסוכן ואז להפעיל אותו מחדש."
+  },
+  "welcomeStepTry": {
+    "message": "2. התנסות"
+  },
+  "welcomeTryIntro": {
+    "message": "כש-Chrome פתוח, אפשר לבקש מהסוכן:"
+  },
+  "welcomeTryTabs": {
+    "message": "תארגן את הכרטיסיות הפתוחות שלי בקבוצות לפי נושא. קודם תראה לי את התוכנית."
+  },
+  "welcomeTryPage": {
+    "message": "תפתח את הערות הגרסה של Chrome ותסכם מה השתנה בגרסה האחרונה."
+  },
+  "welcomeTryHint": {
+    "message": "הסטטוס שלמעלה יהפוך לירוק כשהשרת של הסוכן יפעל. אפשר לבטל שינויים שבוצעו באמצעות $1 על ידי בקשה מהסוכן לבטל אותם."
+  },
+  "welcomeTryIntroSafari": {
+    "message": "כש-Safari פתוח, אפשר לבקש מהסוכן:"
+  },
+  "welcomeTryDuplicatesSafari": {
+    "message": "אילו כרטיסיות פתוחות אצלי ב-Safari? תסגור את הכפולות, אבל קודם תשאל אותי."
+  },
+  "welcomeTrySortSafari": {
+    "message": "תסדר את הכרטיסיות שלי ב-Safari לפי אתר."
+  },
+  "welcomeTryHintSafari": {
+    "message": "הסטטוס שלמעלה יהפוך לירוק כשהשרת של הסוכן יפעל. ב-Safari הסוכן יכול לפתוח, לסדר ולסגור חלונות, וגם לפתוח כרטיסיות, לנווט בהן, לעבור ביניהן, להצמיד, להשתיק, לשכפל, להעביר ולסגור אותן. אם הכותרות והכתובות של הכרטיסיות חסרות, יש לתת לתוסף גישה לאתרים ב-Safari בהגדרות > הרחבות. קבוצות כרטיסיות, היסטוריה, סימניות ושליטה בדפים זמינות ב-Chrome."
+  },
+  "welcomePrivacyHeading": {
+    "message": "פרטיות"
+  },
+  "welcomePrivacy": {
+    "message": "נתוני הגלישה שלך נשארים במחשב שלך: התוסף מתקשר רק עם $1. הסוכן יכול לקרוא כותרות של כרטיסיות וכתובות URL, לסדר מחדש, לקבץ או לסגור כרטיסיות, ולקרוא דפי אינטרנט ולפעול בהם כשמבקשים ממנו. בזמן שהוא פועל בדף, Chrome מציג באנר של ניפוי באגים. התוסף הזה אף פעם לא שולח לשום מקום אחר כותרות של כרטיסיות, כתובות URL או תוכן של דפים."
+  },
+  "welcomePrivacySafari": {
+    "message": "נתוני הגלישה שלך נשארים במחשב שלך: התוסף מתקשר רק עם $1. הסוכן יכול לקרוא כותרות של כרטיסיות וכתובות URL, ולפתוח, לסדר או לסגור חלונות וכרטיסיות כשמבקשים ממנו. ב-Safari הוא לא יכול לקרוא דפי אינטרנט או לפעול בהם. התוסף הזה אף פעם לא שולח לשום מקום אחר כותרות של כרטיסיות או כתובות URL."
+  },
+  "welcomeAnalytics": {
+    "message": "שיתוף נתונים סטטיסטיים אנונימיים על השימוש (באילו תכונות משתמשים, גרסת התוסף) כדי לעזור לשפר את התוסף."
+  },
+  "analyticsTitle": {
+    "message": "שיתוף נתונים סטטיסטיים אנונימיים על השימוש"
+  },
+  "analyticsHint": {
+    "message": "באילו תכונות משתמשים, אם הן מצליחות, והגרסאות של התוסף והסוכן. אף פעם לא כותרות של כרטיסיות, כתובות URL או תוכן של דפים. $1"
+  },
+  "privacyPolicy": {
+    "message": "מדיניות הפרטיות"
+  },
+  "analyticsUnavailable": {
+    "message": "הגרסה הזו לא אוספת נתונים סטטיסטיים על השימוש."
+  },
+  "openSetup": {
+    "message": "פתיחת ההגדרה ומצב החיבור"
+  },
+  "optionsConnected": {
+    "message": "סוכן מחובר"
+  },
+  "optionsConnectedMany_one": {
+    "message": "$1 סשן של סוכן מחובר"
+  },
+  "optionsConnectedMany_other": {
+    "message": "$1 סשנים של סוכנים מחוברים"
+  },
+  "optionsConnectedMany_two": {
+    "message": "$1 סשנים של סוכנים מחוברים"
+  },
+  "optionsDisconnected": {
+    "message": "אין סוכן מחובר"
+  },
+  "agentStartingUp": {
+    "message": "הסוכן מופעל"
+  },
+  "sessionInProject": {
+    "message": "$1 ב-$2"
+  },
+  "sessionStarted": {
+    "message": "התחיל $1"
+  },
+  "sessionLastUsed_one": {
+    "message": "שימוש אחרון: $2 $3, $1 קריאה"
+  },
+  "sessionLastUsed_other": {
+    "message": "שימוש אחרון: $2 $3, $1 קריאות"
+  },
+  "sessionLastUsed_two": {
+    "message": "שימוש אחרון: $2 $3, $1 קריאות"
+  },
+  "sessionUnused": {
+    "message": "עדיין לא השתמש בדפדפן"
+  },
+  "sessionId": {
+    "message": "סשן $1"
+  },
+  "serverVersion": {
+    "message": "שרת $1"
+  },
+  "instanceThisBrowser": {
+    "message": "$1, הדפדפן הזה"
+  },
+  "justNow": {
+    "message": "עכשיו"
+  },
+  "chatTitle": {
+    "message": "צ'אט עם הסוכן"
+  },
+  "chatSetup": {
+    "message": "הגדרה"
+  },
+  "chatConversation": {
+    "message": "שיחה"
+  },
+  "chatEmptyHeading": {
+    "message": "אפשר לדבר עם הסוכן מכאן"
+  },
+  "chatEmptyBody": {
+    "message": "אפשר לבקש מהסוכן להמשיך בדפדפן או להריץ את ההנחיה $1 שלו. ההודעות שלו יופיעו כאן, והתשובות שלך יגיעו ישירות אליו."
+  },
+  "chatEmptyHint": {
+    "message": "לכל סשן של סוכן יש שיחה משלו."
+  },
+  "chatInput": {
+    "message": "הודעה לסוכן"
+  },
+  "chatEnd": {
+    "message": "סיום הצ'אט"
+  },
+  "chatRemove": {
+    "message": "הסרה"
+  },
+  "chatSend": {
+    "message": "שליחה"
+  },
+  "chatError": {
+    "message": "משהו השתבש."
+  },
+  "chatUnseen_one": {
+    "message": "$2 ($1 חדשה)"
+  },
+  "chatUnseen_other": {
+    "message": "$2 ($1 חדשות)"
+  },
+  "chatUnseen_two": {
+    "message": "$2 ($1 חדשות)"
+  },
+  "chatStatusWaiting": {
+    "message": "ממתין לתשובה שלך"
+  },
+  "chatStatusWorking": {
+    "message": "עובד"
+  },
+  "chatStatusWorkingTool": {
+    "message": "עובד: השתמש ב-$1 $2"
+  },
+  "chatStatusDisconnected": {
+    "message": "הסוכן התנתק"
+  },
+  "chatStatusEnded": {
+    "message": "הצ'אט הסתיים"
+  },
+  "chatHintWaiting": {
+    "message": "Enter לשליחה, Shift+Enter לשורה חדשה."
+  },
+  "chatHintWorking": {
+    "message": "הסוכן יקרא את ההודעה שלך בפעם הבאה שהוא יבדוק את הצ'אט."
+  },
+  "chatHintDisconnected": {
+    "message": "הסשן של הסוכן הזה נסגר."
+  },
+  "chatHintEnded": {
+    "message": "כדי לשוחח שוב, אפשר לבקש מהסוכן להמשיך בדפדפן."
+  },
+  "chatReadByAgent": {
+    "message": "נקראה על ידי הסוכן"
+  },
+  "chatNotReadYet": {
+    "message": "עדיין לא נקראה"
+  },
+  "chatEndedNotice": {
+    "message": "סיימת את הצ'אט."
+  },
+  "chatConversationGone": {
+    "message": "השיחה הזו כבר לא קיימת."
+  },
+  "chatEndedError": {
+    "message": "הצ'אט הזה הסתיים. כדי להתחיל אותו מחדש, אפשר לבקש מהסוכן להמשיך בדפדפן."
+  },
+  "chatTooLong_one": {
+    "message": "הודעה יכולה להכיל עד $1 תו."
+  },
+  "chatTooLong_other": {
+    "message": "הודעה יכולה להכיל עד $1 תווים."
+  },
+  "chatTooLong_two": {
+    "message": "הודעה יכולה להכיל עד $1 תווים."
+  }
+}

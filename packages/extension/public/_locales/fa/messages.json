@@ -1,0 +1,290 @@
+{
+  "locale": {
+    "message": "fa"
+  },
+  "extDescription": {
+    "message": "مرورگرتان را با هر عامل هوش مصنوعی دلخواه کنترل کنید: برگه‌ها را مرتب کنید و صفحه‌های وب را از طریق MCP به کار بگیرید."
+  },
+  "actionTitle": {
+    "message": "Agent Browser Bridge: راه‌اندازی و وضعیت"
+  },
+  "actionTitleDisconnected": {
+    "message": "Agent Browser Bridge: هیچ عاملی متصل نیست"
+  },
+  "actionTitleConnected": {
+    "message": "Agent Browser Bridge: عامل متصل است"
+  },
+  "actionTitleConnectedTo": {
+    "message": "Agent Browser Bridge: متصل به $1"
+  },
+  "notificationReply": {
+    "message": "برای پاسخ دادن، روی دکمه Agent Browser Bridge در نوار ابزار کلیک کنید"
+  },
+  "optionsTitle": {
+    "message": "گزینه‌های Agent Browser Bridge"
+  },
+  "statusChecking": {
+    "message": "در حال بررسی اتصال…"
+  },
+  "statusLooking": {
+    "message": "در حال جستجوی عامل شما…"
+  },
+  "welcomeLede": {
+    "message": "بگذارید عامل هوش مصنوعی‌تان برگه‌ها را مرتب کند و با صفحه‌های وب کار کند."
+  },
+  "welcomeLedeSafari": {
+    "message": "بگذارید عامل هوش مصنوعی‌تان برگه‌های Safari را پیدا کند، باز کند، جابه‌جا کند و ببندد."
+  },
+  "welcomeConnected": {
+    "message": "متصل: عامل شما می‌تواند از مرورگر استفاده کند."
+  },
+  "welcomeConnectedMany_one": {
+    "message": "متصل: $1 جلسه عامل می‌تواند از مرورگر استفاده کند."
+  },
+  "welcomeConnectedMany_other": {
+    "message": "متصل: $1 جلسه عامل می‌توانند از مرورگر استفاده کنند."
+  },
+  "welcomeDisconnected": {
+    "message": "در انتظار عامل شما. آن را در پایین راه‌اندازی کنید، سپس یک جلسه را شروع کنید."
+  },
+  "instanceNameLabel": {
+    "message": "برای این نمایه مرورگر نام بگذارید"
+  },
+  "instanceNamePlaceholder": {
+    "message": "مثلاً کار یا شخصی"
+  },
+  "welcomeInstanceNameHint": {
+    "message": "عامل‌ها با این نام مرورگرها و نمایه‌های شما را از هم تشخیص می‌دهند، بنابراین می‌توانید مرورگر «کار» را درخواست کنید. $1"
+  },
+  "optionsInstanceNameHint": {
+    "message": "عامل‌ها با این نام مرورگرها و نمایه‌های شما را از هم تشخیص می‌دهند. $1"
+  },
+  "instanceId": {
+    "message": "شناسه نمونه: $1"
+  },
+  "welcomeStepAdd": {
+    "message": "۱. آن را به عامل خود اضافه کنید"
+  },
+  "welcomeStepAddHint": {
+    "message": "عامل شما یک سرور محلی کوچک ($1) را اجرا می‌کند که این افزونه به آن وصل می‌شود. عامل خود را انتخاب کنید:"
+  },
+  "welcomeAgentSetupTitle": {
+    "message": "راه‌اندازی را به عامل بسپارید"
+  },
+  "welcomeAgentSetupBody": {
+    "message": "این پرامپت را در هر عاملی که می‌تواند فرمان اجرا کند و تنظیمات خودش را ویرایش کند، مانند Claude Code، Cursor یا Codex، جای‌گذاری کنید. ابتدا وجود Node.js را بررسی می‌کند، سپس سرور را اضافه می‌کند."
+  },
+  "copyPrompt": {
+    "message": "کپی پرامپت"
+  },
+  "copy": {
+    "message": "کپی"
+  },
+  "copied": {
+    "message": "کپی شد"
+  },
+  "welcomeClaudeCodeBody": {
+    "message": "یک بار در ترمینال اجرا کنید:"
+  },
+  "welcomeOpensAndConfirms": {
+    "message": "برنامه را باز می‌کند و از شما تأیید می‌خواهد."
+  },
+  "welcomeAddTo": {
+    "message": "افزودن به $1"
+  },
+  "welcomeClaudeDesktopBody": {
+    "message": "افزونه را بارگیری کنید، سپس فایل را باز کنید تا نصب شود. به Node.js نیازی نیست."
+  },
+  "welcomeDownloadFor": {
+    "message": "بارگیری برای $1"
+  },
+  "welcomeOtherAgentsTitle": {
+    "message": "عامل‌های دیگر"
+  },
+  "welcomeOtherAgentsBody": {
+    "message": "این را به پیکربندی MCP عامل اضافه کنید، سپس آن را دوباره راه‌اندازی کنید."
+  },
+  "welcomeStepTry": {
+    "message": "۲. امتحان کنید"
+  },
+  "welcomeTryIntro": {
+    "message": "در حالی که Chrome باز است، از عامل خود بخواهید:"
+  },
+  "welcomeTryTabs": {
+    "message": "برگه‌های بازم را بر اساس موضوع گروه‌بندی کن. اول برنامه را نشانم بده."
+  },
+  "welcomeTryPage": {
+    "message": "یادداشت‌های انتشار Chrome را باز کن و خلاصه کن که در آخرین نسخه چه چیزهایی تغییر کرده است."
+  },
+  "welcomeTryHint": {
+    "message": "وقتی سرور عامل شما اجرا شود، وضعیت بالا سبز می‌شود. تغییراتی را که با $1 انجام شده‌اند می‌توانید با درخواست واگرد از عامل برگردانید."
+  },
+  "welcomeTryIntroSafari": {
+    "message": "در حالی که Safari باز است، از عامل خود بخواهید:"
+  },
+  "welcomeTryDuplicatesSafari": {
+    "message": "چه برگه‌هایی در Safari باز دارم؟ برگه‌های تکراری را ببند، ولی اول از من بپرس."
+  },
+  "welcomeTrySortSafari": {
+    "message": "برگه‌های Safari من را بر اساس سایت مرتب کن."
+  },
+  "welcomeTryHintSafari": {
+    "message": "وقتی سرور عامل شما اجرا شود، وضعیت بالا سبز می‌شود. در Safari عامل شما می‌تواند پنجره‌ها را باز کند، مرتب کند و ببندد، و برگه‌ها را باز کند، به نشانی دیگری ببرد، بین آن‌ها جابه‌جا شود، سنجاق کند، بی‌صدا کند، تکثیر کند، منتقل کند و ببندد. اگر عنوان و نشانی برگه‌ها نمایش داده نمی‌شود، در Safari از Settings > Extensions به افزونه اجازه دسترسی به وب‌سایت‌ها را بدهید. گروه‌های برگه، سابقه، نشانک‌ها و کنترل صفحه در Chrome در دسترس هستند."
+  },
+  "welcomePrivacyHeading": {
+    "message": "حریم خصوصی"
+  },
+  "welcomePrivacy": {
+    "message": "داده‌های مرور شما روی رایانه خودتان می‌ماند: این افزونه فقط با $1 ارتباط دارد. عامل شما می‌تواند عنوان و نشانی وب برگه‌ها را بخواند، برگه‌ها را جابه‌جا، گروه‌بندی یا بسته کند، و هر وقت از آن بخواهید صفحه‌های وب را بخواند و در آن‌ها کار کند. وقتی عامل در صفحه‌ای کار می‌کند، Chrome یک نوار اشکال‌زدایی نشان می‌دهد. این افزونه هرگز عنوان برگه‌ها، نشانی‌های وب یا محتوای صفحه‌ها را به جای دیگری نمی‌فرستد."
+  },
+  "welcomePrivacySafari": {
+    "message": "داده‌های مرور شما روی رایانه خودتان می‌ماند: این افزونه فقط با $1 ارتباط دارد. عامل شما می‌تواند عنوان و نشانی وب برگه‌ها را بخواند، و هر وقت از آن بخواهید پنجره‌ها و برگه‌ها را باز کند، مرتب کند یا ببندد. در Safari نمی‌تواند صفحه‌های وب را بخواند یا در آن‌ها کار کند. این افزونه هرگز عنوان برگه‌ها یا نشانی‌های وب را به جای دیگری نمی‌فرستد."
+  },
+  "welcomeAnalytics": {
+    "message": "اشتراک‌گذاری آمار استفاده ناشناس (کدام ویژگی‌ها استفاده می‌شوند، نسخه افزونه) برای کمک به بهبود افزونه."
+  },
+  "analyticsTitle": {
+    "message": "اشتراک‌گذاری آمار استفاده ناشناس"
+  },
+  "analyticsHint": {
+    "message": "کدام ویژگی‌ها استفاده می‌شوند، آیا موفق هستند، و نسخه‌های افزونه و عامل. هرگز شامل عنوان برگه‌ها، نشانی‌های وب یا محتوای صفحه‌ها نمی‌شود. $1"
+  },
+  "privacyPolicy": {
+    "message": "خط‌مشی حریم خصوصی"
+  },
+  "analyticsUnavailable": {
+    "message": "این نسخه آمار استفاده را جمع‌آوری نمی‌کند."
+  },
+  "openSetup": {
+    "message": "باز کردن راه‌اندازی و وضعیت اتصال"
+  },
+  "optionsConnected": {
+    "message": "عامل متصل است"
+  },
+  "optionsConnectedMany_one": {
+    "message": "$1 جلسه عامل متصل است"
+  },
+  "optionsConnectedMany_other": {
+    "message": "$1 جلسه عامل متصل است"
+  },
+  "optionsDisconnected": {
+    "message": "هیچ عاملی متصل نیست"
+  },
+  "agentStartingUp": {
+    "message": "عامل در حال راه‌اندازی است"
+  },
+  "sessionInProject": {
+    "message": "$1 در $2"
+  },
+  "sessionStarted": {
+    "message": "شروع: $1"
+  },
+  "sessionLastUsed_one": {
+    "message": "آخرین استفاده: $2 $3، $1 فراخوانی"
+  },
+  "sessionLastUsed_other": {
+    "message": "آخرین استفاده: $2 $3، $1 فراخوانی"
+  },
+  "sessionUnused": {
+    "message": "هنوز از مرورگری استفاده نکرده است"
+  },
+  "sessionId": {
+    "message": "جلسه $1"
+  },
+  "serverVersion": {
+    "message": "سرور $1"
+  },
+  "instanceThisBrowser": {
+    "message": "$1، همین مرورگر"
+  },
+  "justNow": {
+    "message": "همین حالا"
+  },
+  "chatTitle": {
+    "message": "گفتگو با عامل"
+  },
+  "chatSetup": {
+    "message": "راه‌اندازی"
+  },
+  "chatConversation": {
+    "message": "گفتگو"
+  },
+  "chatEmptyHeading": {
+    "message": "از همین‌جا با عامل خود گفتگو کنید"
+  },
+  "chatEmptyBody": {
+    "message": "از عامل خود بخواهید در مرورگر ادامه دهد، یا پرامپت $1 آن را اجرا کنید. پیام‌های آن اینجا نمایش داده می‌شوند و پاسخ‌های شما مستقیم به آن می‌رسند."
+  },
+  "chatEmptyHint": {
+    "message": "هر جلسه عامل گفتگوی جداگانه‌ای دارد."
+  },
+  "chatInput": {
+    "message": "پیام به عامل"
+  },
+  "chatEnd": {
+    "message": "پایان گفتگو"
+  },
+  "chatRemove": {
+    "message": "حذف"
+  },
+  "chatSend": {
+    "message": "ارسال"
+  },
+  "chatError": {
+    "message": "مشکلی پیش آمد."
+  },
+  "chatUnseen_one": {
+    "message": "$2 ($1 جدید)"
+  },
+  "chatUnseen_other": {
+    "message": "$2 ($1 جدید)"
+  },
+  "chatStatusWaiting": {
+    "message": "در انتظار پاسخ شما"
+  },
+  "chatStatusWorking": {
+    "message": "در حال کار"
+  },
+  "chatStatusWorkingTool": {
+    "message": "در حال کار: $2 از $1 استفاده کرد"
+  },
+  "chatStatusDisconnected": {
+    "message": "اتصال عامل قطع شد"
+  },
+  "chatStatusEnded": {
+    "message": "گفتگو پایان یافت"
+  },
+  "chatHintWaiting": {
+    "message": "Enter برای ارسال، Shift+Enter برای خط جدید."
+  },
+  "chatHintWorking": {
+    "message": "عامل دفعه بعد که گفتگو را بررسی کند، پیام شما را می‌خواند."
+  },
+  "chatHintDisconnected": {
+    "message": "این جلسه عامل بسته شده است."
+  },
+  "chatHintEnded": {
+    "message": "برای گفتگوی دوباره، از عامل بخواهید در مرورگر ادامه دهد."
+  },
+  "chatReadByAgent": {
+    "message": "عامل خواند"
+  },
+  "chatNotReadYet": {
+    "message": "هنوز خوانده نشده"
+  },
+  "chatEndedNotice": {
+    "message": "گفتگو را پایان دادید."
+  },
+  "chatConversationGone": {
+    "message": "این گفتگو دیگر وجود ندارد."
+  },
+  "chatEndedError": {
+    "message": "این گفتگو پایان یافته است. برای شروع دوباره، از عامل بخواهید در مرورگر ادامه دهد."
+  },
+  "chatTooLong_one": {
+    "message": "پیام‌ها حداکثر می‌توانند $1 نویسه داشته باشند."
+  },
+  "chatTooLong_other": {
+    "message": "پیام‌ها حداکثر می‌توانند $1 نویسه داشته باشند."
+  }
+}

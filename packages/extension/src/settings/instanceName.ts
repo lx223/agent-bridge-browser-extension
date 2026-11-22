@@ -1,3 +1,4 @@
+import { t } from '../i18n/messages.ts';
 import { INSTANCE_KEY, INSTANCE_NAME_KEY, MAX_INSTANCE_NAME_LENGTH, normalizeInstanceName, saveInstanceName } from '../background/browser.ts';
 
 export function bindInstanceName(input: HTMLInputElement, idLabel: HTMLElement) {
@@ -7,7 +8,7 @@ export function bindInstanceName(input: HTMLInputElement, idLabel: HTMLElement) 
     if (document.activeElement !== input) input.value = normalizeInstanceName(value) ?? '';
   };
   const renderId = (value: unknown) => {
-    idLabel.textContent = typeof value === 'string' && value ? `Instance id: ${value}` : '';
+    idLabel.textContent = typeof value === 'string' && value ? t('instanceId', value) : '';
   };
 
   void chrome.storage.local.get([INSTANCE_NAME_KEY, INSTANCE_KEY]).then((stored) => {

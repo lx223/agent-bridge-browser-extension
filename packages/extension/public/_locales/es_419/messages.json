@@ -1,0 +1,305 @@
+{
+  "locale": {
+    "message": "es_419"
+  },
+  "extDescription": {
+    "message": "Controla tu navegador con el agente de IA que prefieras: organiza pestañas y maneja páginas web mediante MCP."
+  },
+  "actionTitle": {
+    "message": "Agent Browser Bridge: configuración y estado"
+  },
+  "actionTitleDisconnected": {
+    "message": "Agent Browser Bridge: ningún agente conectado"
+  },
+  "actionTitleConnected": {
+    "message": "Agent Browser Bridge: agente conectado"
+  },
+  "actionTitleConnectedTo": {
+    "message": "Agent Browser Bridge: conectado a $1"
+  },
+  "notificationReply": {
+    "message": "Haz clic en el botón de Agent Browser Bridge de la barra de herramientas para responder"
+  },
+  "optionsTitle": {
+    "message": "Opciones de Agent Browser Bridge"
+  },
+  "statusChecking": {
+    "message": "Verificando la conexión…"
+  },
+  "statusLooking": {
+    "message": "Buscando tu agente…"
+  },
+  "welcomeLede": {
+    "message": "Deja que tu agente de IA organice tus pestañas y maneje páginas web."
+  },
+  "welcomeLedeSafari": {
+    "message": "Deja que tu agente de IA busque, abra, mueva y cierre tus pestañas de Safari."
+  },
+  "welcomeConnected": {
+    "message": "Conectado: tu agente puede usar el navegador."
+  },
+  "welcomeConnectedMany_one": {
+    "message": "Conectado: $1 sesión de agente puede usar el navegador."
+  },
+  "welcomeConnectedMany_other": {
+    "message": "Conectado: $1 sesiones de agente pueden usar el navegador."
+  },
+  "welcomeConnectedMany_many": {
+    "message": "Conectado: $1 sesiones de agente pueden usar el navegador."
+  },
+  "welcomeDisconnected": {
+    "message": "Esperando a tu agente. Configúralo abajo y luego inicia una sesión."
+  },
+  "instanceNameLabel": {
+    "message": "Asígnale un nombre a este perfil del navegador"
+  },
+  "instanceNamePlaceholder": {
+    "message": "Por ejemplo, Trabajo o Personal"
+  },
+  "welcomeInstanceNameHint": {
+    "message": "Los agentes usan este nombre para distinguir tus navegadores y perfiles, así puedes pedir tu navegador \"Trabajo\". $1"
+  },
+  "optionsInstanceNameHint": {
+    "message": "Los agentes usan este nombre para distinguir tus navegadores y perfiles. $1"
+  },
+  "instanceId": {
+    "message": "ID de instancia: $1"
+  },
+  "welcomeStepAdd": {
+    "message": "1. Agrégalo a tu agente"
+  },
+  "welcomeStepAddHint": {
+    "message": "Tu agente inicia un pequeño servidor local ($1) al que se conecta esta extensión. Elige tu agente:"
+  },
+  "welcomeAgentSetupTitle": {
+    "message": "Deja que tu agente lo configure"
+  },
+  "welcomeAgentSetupBody": {
+    "message": "Pega este prompt en cualquier agente que pueda ejecutar comandos y editar su propia configuración, como Claude Code, Cursor o Codex. Verifica si está Node.js y luego agrega el servidor."
+  },
+  "copyPrompt": {
+    "message": "Copiar prompt"
+  },
+  "copy": {
+    "message": "Copiar"
+  },
+  "copied": {
+    "message": "Copiado"
+  },
+  "welcomeClaudeCodeBody": {
+    "message": "Ejecuta una vez en una terminal:"
+  },
+  "welcomeOpensAndConfirms": {
+    "message": "Abre la app y te pide que confirmes."
+  },
+  "welcomeAddTo": {
+    "message": "Agregar a $1"
+  },
+  "welcomeClaudeDesktopBody": {
+    "message": "Descarga la extensión y abre el archivo para instalarla. No necesitas Node.js."
+  },
+  "welcomeDownloadFor": {
+    "message": "Descargar para $1"
+  },
+  "welcomeOtherAgentsTitle": {
+    "message": "Otros agentes"
+  },
+  "welcomeOtherAgentsBody": {
+    "message": "Agrega esto a la configuración MCP del agente y reinícialo."
+  },
+  "welcomeStepTry": {
+    "message": "2. Pruébalo"
+  },
+  "welcomeTryIntro": {
+    "message": "Con Chrome abierto, pídele a tu agente:"
+  },
+  "welcomeTryTabs": {
+    "message": "Organiza mis pestañas abiertas en grupos por tema. Muéstrame primero el plan."
+  },
+  "welcomeTryPage": {
+    "message": "Abre las notas de la versión de Chrome y resume qué cambió en la última versión."
+  },
+  "welcomeTryHint": {
+    "message": "El estado de arriba se pone verde cuando el servidor de tu agente está en ejecución. Los cambios hechos con $1 se pueden revertir pidiéndole al agente que los deshaga."
+  },
+  "welcomeTryIntroSafari": {
+    "message": "Con Safari abierto, pídele a tu agente:"
+  },
+  "welcomeTryDuplicatesSafari": {
+    "message": "¿Qué pestañas tengo abiertas en Safari? Cierra las duplicadas, pero pregúntame antes."
+  },
+  "welcomeTrySortSafari": {
+    "message": "Ordena mis pestañas de Safari por sitio web."
+  },
+  "welcomeTryHintSafari": {
+    "message": "El estado de arriba se pone verde cuando el servidor de tu agente está en ejecución. En Safari, tu agente puede abrir, organizar y cerrar ventanas, y abrir pestañas, navegar en ellas, cambiar entre ellas, fijarlas, silenciarlas, duplicarlas, moverlas y cerrarlas. Si faltan los títulos y las direcciones de las pestañas, dale a la extensión acceso a sitios web en Safari, en Configuración > Extensiones. Los grupos de pestañas, el historial, los favoritos y el control de páginas están disponibles en Chrome."
+  },
+  "welcomePrivacyHeading": {
+    "message": "Privacidad"
+  },
+  "welcomePrivacy": {
+    "message": "Tus datos de navegación se quedan en tu computadora: la extensión solo se comunica con $1. Tu agente puede leer los títulos y las URL de las pestañas, reorganizar, agrupar o cerrar pestañas, y leer páginas web y actuar en ellas cuando se lo pidas. Chrome muestra un aviso de depuración mientras el agente trabaja en una página. Esta extensión nunca envía a ningún otro lugar los títulos de las pestañas, las URL ni el contenido de las páginas."
+  },
+  "welcomePrivacySafari": {
+    "message": "Tus datos de navegación se quedan en tu computadora: la extensión solo se comunica con $1. Tu agente puede leer los títulos y las URL de las pestañas, y abrir, organizar o cerrar ventanas y pestañas cuando se lo pidas. En Safari no puede leer páginas web ni actuar en ellas. Esta extensión nunca envía a ningún otro lugar los títulos ni las URL de las pestañas."
+  },
+  "welcomeAnalytics": {
+    "message": "Compartir estadísticas de uso anónimas (qué funciones se usan y la versión de la extensión) para ayudar a mejorar la extensión."
+  },
+  "analyticsTitle": {
+    "message": "Compartir estadísticas de uso anónimas"
+  },
+  "analyticsHint": {
+    "message": "Qué funciones se usan, si funcionan correctamente y las versiones de la extensión y del agente. Nunca los títulos de las pestañas, las URL ni el contenido de las páginas. $1"
+  },
+  "privacyPolicy": {
+    "message": "Política de privacidad"
+  },
+  "analyticsUnavailable": {
+    "message": "Esta versión no recopila estadísticas de uso."
+  },
+  "openSetup": {
+    "message": "Abrir la configuración y el estado de la conexión"
+  },
+  "optionsConnected": {
+    "message": "Agente conectado"
+  },
+  "optionsConnectedMany_one": {
+    "message": "$1 sesión de agente conectada"
+  },
+  "optionsConnectedMany_other": {
+    "message": "$1 sesiones de agente conectadas"
+  },
+  "optionsConnectedMany_many": {
+    "message": "$1 sesiones de agente conectadas"
+  },
+  "optionsDisconnected": {
+    "message": "Ningún agente conectado"
+  },
+  "agentStartingUp": {
+    "message": "Agente iniciándose"
+  },
+  "sessionInProject": {
+    "message": "$1 en $2"
+  },
+  "sessionStarted": {
+    "message": "Iniciada $1"
+  },
+  "sessionLastUsed_one": {
+    "message": "Último uso: $2 $3, $1 llamada"
+  },
+  "sessionLastUsed_other": {
+    "message": "Último uso: $2 $3, $1 llamadas"
+  },
+  "sessionLastUsed_many": {
+    "message": "Último uso: $2 $3, $1 llamadas"
+  },
+  "sessionUnused": {
+    "message": "Todavía no usó ningún navegador"
+  },
+  "sessionId": {
+    "message": "Sesión $1"
+  },
+  "serverVersion": {
+    "message": "servidor $1"
+  },
+  "instanceThisBrowser": {
+    "message": "$1, este navegador"
+  },
+  "justNow": {
+    "message": "hace un momento"
+  },
+  "chatTitle": {
+    "message": "Chat con el agente"
+  },
+  "chatSetup": {
+    "message": "Configuración"
+  },
+  "chatConversation": {
+    "message": "Conversación"
+  },
+  "chatEmptyHeading": {
+    "message": "Habla con tu agente desde aquí"
+  },
+  "chatEmptyBody": {
+    "message": "Pídele a tu agente que continúe en el navegador o ejecuta su prompt $1. Sus mensajes aparecen aquí y tus respuestas le llegan directamente."
+  },
+  "chatEmptyHint": {
+    "message": "Cada sesión de agente tiene su propia conversación."
+  },
+  "chatInput": {
+    "message": "Escríbele al agente"
+  },
+  "chatEnd": {
+    "message": "Finalizar chat"
+  },
+  "chatRemove": {
+    "message": "Quitar"
+  },
+  "chatSend": {
+    "message": "Enviar"
+  },
+  "chatError": {
+    "message": "Se produjo un error."
+  },
+  "chatUnseen_one": {
+    "message": "$2 ($1 nuevo)"
+  },
+  "chatUnseen_other": {
+    "message": "$2 ($1 nuevos)"
+  },
+  "chatUnseen_many": {
+    "message": "$2 ($1 nuevos)"
+  },
+  "chatStatusWaiting": {
+    "message": "Esperando tu respuesta"
+  },
+  "chatStatusWorking": {
+    "message": "Trabajando"
+  },
+  "chatStatusWorkingTool": {
+    "message": "Trabajando: último uso de $1 $2"
+  },
+  "chatStatusDisconnected": {
+    "message": "Agente desconectado"
+  },
+  "chatStatusEnded": {
+    "message": "Chat finalizado"
+  },
+  "chatHintWaiting": {
+    "message": "Enter para enviar, Mayúscula+Enter para una nueva línea."
+  },
+  "chatHintWorking": {
+    "message": "El agente leerá tu mensaje la próxima vez que revise el chat."
+  },
+  "chatHintDisconnected": {
+    "message": "Esta sesión de agente se cerró."
+  },
+  "chatHintEnded": {
+    "message": "Pídele al agente que continúe en el navegador para volver a chatear."
+  },
+  "chatReadByAgent": {
+    "message": "leído por el agente"
+  },
+  "chatNotReadYet": {
+    "message": "aún no leído"
+  },
+  "chatEndedNotice": {
+    "message": "Finalizaste el chat."
+  },
+  "chatConversationGone": {
+    "message": "Esta conversación ya no existe."
+  },
+  "chatEndedError": {
+    "message": "Este chat finalizó. Pídele al agente que continúe en el navegador para reanudarlo."
+  },
+  "chatTooLong_one": {
+    "message": "Los mensajes pueden tener $1 carácter como máximo."
+  },
+  "chatTooLong_other": {
+    "message": "Los mensajes pueden tener $1 caracteres como máximo."
+  },
+  "chatTooLong_many": {
+    "message": "Los mensajes pueden tener $1 caracteres como máximo."
+  }
+}

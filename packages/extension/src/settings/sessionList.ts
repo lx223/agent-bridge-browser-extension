@@ -1,21 +1,11 @@
 import type { AgentInfo, AgentInstanceUse, AgentSession } from '@agent-browser-bridge/protocol';
+import { plural, relativeTime, t } from '../i18n/messages.ts';
 
-export const agentLabel = (agent: AgentInfo) => (agent.client ? `${agent.client.name} ${agent.client.version}` : 'Agent starting up');
+export const agentLabel = (agent: AgentInfo) => (agent.client ? `${agent.client.name} ${agent.client.version}` : t('agentStartingUp'));
 
-export const sessionTitle = (agent: AgentInfo) => (agent.project ? `${agentLabel(agent)} in ${agent.project.name}` : agentLabel(agent));
+export const sessionTitle = (agent: AgentInfo) => (agent.project ? t('sessionInProject', agentLabel(agent), agent.project.name) : agentLabel(agent));
 
 const MINUTE = 60_000;
-const HOUR = 60 * MINUTE;
-const DAY = 24 * HOUR;
-
-export function relativeTime(at: number, now: number): string {
-  const elapsed = Math.max(0, now - at);
-  if (elapsed < 45_000) return 'just now';
-  if (elapsed < 90 * MINUTE) return `${Math.max(1, Math.round(elapsed / MINUTE))} min ago`;
-  if (elapsed < 36 * HOUR) return `${Math.round(elapsed / HOUR)} h ago`;
-  const days = Math.floor(elapsed / DAY);
-  return `${days} ${days === 1 ? 'day' : 'days'} ago`;
-}
 
 export interface InstanceChip {
   text: string;
@@ -49,10 +39,10 @@ export function sessionViews(agents: AgentSession[], now: number, ownInstanceId?
     .map((agent, index) => {
       const { activity } = agent;
       const details = [
-        ...(agent.startedAt !== undefined ? [`Started ${relativeTime(agent.startedAt, now)}`] : []),
+        ...(agent.startedAt !== undefined ? [t('sessionStarted', relativeTime(agent.startedAt, now))] : []),
         activity
-          ? `Last used ${activity.lastTool} ${relativeTime(activity.lastUsedAt, now)}, ${activity.calls} ${activity.calls === 1 ? 'call' : 'calls'}`
-          : 'Has not used a browser yet',
+          ? plural('sessionLastUsed', activity.calls, activity.lastTool, relativeTime(activity.lastUsedAt, now))
+          : t('sessionUnused'),
       ];
       return {
         key: agent.sessionId ?? `session-${index}`,
@@ -74,7 +64,7 @@ function renderSession(view: SessionView): HTMLLIElement {
   const item = document.createElement('li');
   item.className = 'session';
   item.dataset.active = String(view.active);
-  item.title = [view.sessionId && `Session ${view.sessionId}`, `server ${view.serverVersion}`].filter(Boolean).join(' · ');
+  item.title = [view.sessionId && t('sessionId', view.sessionId), t('serverVersion', view.serverVersion)].filter(Boolean).join(' · ');
 
   const head = document.createElement('div');
   head.className = 'session-head';
@@ -100,7 +90,7 @@ function renderSession(view: SessionView): HTMLLIElement {
     for (const chip of view.instances) {
       const element = document.createElement('span');
       element.className = chip.current ? 'chip current' : 'chip';
-      element.textContent = chip.current ? `${chip.text}, this browser` : chip.text;
+      element.textContent = chip.current ? t('instanceThisBrowser', chip.text) : chip.text;
       instances.append(element);
     }
     item.append(instances);

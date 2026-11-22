@@ -1,0 +1,290 @@
+{
+  "locale": {
+    "message": "id"
+  },
+  "extDescription": {
+    "message": "Kendalikan browser Anda sendiri dengan agen AI pilihan Anda: atur tab dan operasikan halaman web melalui MCP."
+  },
+  "actionTitle": {
+    "message": "Agent Browser Bridge: penyiapan dan status"
+  },
+  "actionTitleDisconnected": {
+    "message": "Agent Browser Bridge: tidak ada agen yang terhubung"
+  },
+  "actionTitleConnected": {
+    "message": "Agent Browser Bridge: agen terhubung"
+  },
+  "actionTitleConnectedTo": {
+    "message": "Agent Browser Bridge: terhubung ke $1"
+  },
+  "notificationReply": {
+    "message": "Klik tombol Agent Browser Bridge di toolbar untuk membalas"
+  },
+  "optionsTitle": {
+    "message": "Opsi Agent Browser Bridge"
+  },
+  "statusChecking": {
+    "message": "Memeriksa koneksi…"
+  },
+  "statusLooking": {
+    "message": "Mencari agen Anda…"
+  },
+  "welcomeLede": {
+    "message": "Biarkan agen AI Anda mengatur tab dan mengoperasikan halaman web."
+  },
+  "welcomeLedeSafari": {
+    "message": "Biarkan agen AI Anda menemukan, membuka, memindahkan, dan menutup tab Safari Anda."
+  },
+  "welcomeConnected": {
+    "message": "Terhubung: agen Anda dapat menggunakan browser."
+  },
+  "welcomeConnectedMany_one": {
+    "message": "Terhubung: $1 sesi agen dapat menggunakan browser."
+  },
+  "welcomeConnectedMany_other": {
+    "message": "Terhubung: $1 sesi agen dapat menggunakan browser."
+  },
+  "welcomeDisconnected": {
+    "message": "Menunggu agen Anda. Siapkan di bawah, lalu mulai sesi."
+  },
+  "instanceNameLabel": {
+    "message": "Beri nama profil browser ini"
+  },
+  "instanceNamePlaceholder": {
+    "message": "Misalnya Kantor atau Pribadi"
+  },
+  "welcomeInstanceNameHint": {
+    "message": "Agen menggunakan nama ini untuk membedakan browser dan profil Anda, sehingga Anda dapat meminta browser Kantor. $1"
+  },
+  "optionsInstanceNameHint": {
+    "message": "Agen menggunakan nama ini untuk membedakan browser dan profil Anda. $1"
+  },
+  "instanceId": {
+    "message": "ID instance: $1"
+  },
+  "welcomeStepAdd": {
+    "message": "1. Tambahkan ke agen Anda"
+  },
+  "welcomeStepAddHint": {
+    "message": "Agen Anda menjalankan server lokal kecil ($1) yang dihubungi oleh ekstensi ini. Pilih agen Anda:"
+  },
+  "welcomeAgentSetupTitle": {
+    "message": "Biarkan agen Anda menyiapkannya"
+  },
+  "welcomeAgentSetupBody": {
+    "message": "Tempel prompt ini ke agen apa pun yang dapat menjalankan perintah dan mengubah setelannya sendiri, seperti Claude Code, Cursor, atau Codex. Prompt ini memeriksa Node.js, lalu menambahkan server."
+  },
+  "copyPrompt": {
+    "message": "Salin prompt"
+  },
+  "copy": {
+    "message": "Salin"
+  },
+  "copied": {
+    "message": "Disalin"
+  },
+  "welcomeClaudeCodeBody": {
+    "message": "Jalankan sekali di terminal:"
+  },
+  "welcomeOpensAndConfirms": {
+    "message": "Membuka aplikasi dan meminta konfirmasi Anda."
+  },
+  "welcomeAddTo": {
+    "message": "Tambahkan ke $1"
+  },
+  "welcomeClaudeDesktopBody": {
+    "message": "Download ekstensi, lalu buka filenya untuk menginstalnya. Tidak perlu Node.js."
+  },
+  "welcomeDownloadFor": {
+    "message": "Download untuk $1"
+  },
+  "welcomeOtherAgentsTitle": {
+    "message": "Agen lain"
+  },
+  "welcomeOtherAgentsBody": {
+    "message": "Tambahkan ini ke konfigurasi MCP agen, lalu mulai ulang agen."
+  },
+  "welcomeStepTry": {
+    "message": "2. Coba"
+  },
+  "welcomeTryIntro": {
+    "message": "Saat Chrome terbuka, minta agen Anda:"
+  },
+  "welcomeTryTabs": {
+    "message": "Kelompokkan tab yang terbuka berdasarkan topik. Tunjukkan rencananya dulu."
+  },
+  "welcomeTryPage": {
+    "message": "Buka catatan rilis Chrome dan rangkum apa saja yang berubah di versi terbaru."
+  },
+  "welcomeTryHint": {
+    "message": "Status di atas berubah menjadi hijau setelah server agen Anda berjalan. Perubahan yang dibuat dengan $1 dapat dibatalkan dengan meminta agen untuk mengurungkannya."
+  },
+  "welcomeTryIntroSafari": {
+    "message": "Saat Safari terbuka, minta agen Anda:"
+  },
+  "welcomeTryDuplicatesSafari": {
+    "message": "Tab apa saja yang terbuka di Safari? Tutup yang duplikat, tapi tanya saya dulu."
+  },
+  "welcomeTrySortSafari": {
+    "message": "Urutkan tab Safari saya berdasarkan situs."
+  },
+  "welcomeTryHintSafari": {
+    "message": "Status di atas berubah menjadi hijau setelah server agen Anda berjalan. Di Safari, agen Anda dapat membuka, mengatur, dan menutup jendela, serta membuka, menavigasi, beralih, menyematkan, membisukan, menduplikasi, memindahkan, dan menutup tab. Jika judul dan alamat tab tidak muncul, beri ekstensi akses situs web di Safari melalui Pengaturan > Ekstensi. Grup tab, histori, bookmark, dan kontrol halaman tersedia di Chrome."
+  },
+  "welcomePrivacyHeading": {
+    "message": "Privasi"
+  },
+  "welcomePrivacy": {
+    "message": "Data penjelajahan Anda tetap di komputer Anda: ekstensi hanya berkomunikasi dengan $1. Agen Anda dapat membaca judul dan URL tab, menata ulang, mengelompokkan, atau menutup tab, serta membaca dan bertindak di halaman web jika Anda memintanya. Chrome menampilkan banner debugging saat agen bekerja di halaman. Judul tab, URL, dan konten halaman tidak pernah dikirim ke tempat lain oleh ekstensi ini."
+  },
+  "welcomePrivacySafari": {
+    "message": "Data penjelajahan Anda tetap di komputer Anda: ekstensi hanya berkomunikasi dengan $1. Agen Anda dapat membaca judul dan URL tab, serta membuka, mengatur, atau menutup jendela dan tab jika Anda memintanya. Agen tidak dapat membaca atau bertindak di halaman web di Safari. Judul tab dan URL tidak pernah dikirim ke tempat lain oleh ekstensi ini."
+  },
+  "welcomeAnalytics": {
+    "message": "Bagikan statistik penggunaan anonim (fitur yang digunakan, versi ekstensi) untuk membantu meningkatkan ekstensi."
+  },
+  "analyticsTitle": {
+    "message": "Bagikan statistik penggunaan anonim"
+  },
+  "analyticsHint": {
+    "message": "Fitur yang digunakan, apakah berhasil, serta versi ekstensi dan agen. Tidak pernah judul tab, URL, atau konten halaman. $1"
+  },
+  "privacyPolicy": {
+    "message": "Kebijakan privasi"
+  },
+  "analyticsUnavailable": {
+    "message": "Build ini tidak mengumpulkan statistik penggunaan."
+  },
+  "openSetup": {
+    "message": "Buka penyiapan dan status koneksi"
+  },
+  "optionsConnected": {
+    "message": "Agen terhubung"
+  },
+  "optionsConnectedMany_one": {
+    "message": "$1 sesi agen terhubung"
+  },
+  "optionsConnectedMany_other": {
+    "message": "$1 sesi agen terhubung"
+  },
+  "optionsDisconnected": {
+    "message": "Tidak ada agen yang terhubung"
+  },
+  "agentStartingUp": {
+    "message": "Agen sedang dimulai"
+  },
+  "sessionInProject": {
+    "message": "$1 di $2"
+  },
+  "sessionStarted": {
+    "message": "Dimulai $1"
+  },
+  "sessionLastUsed_one": {
+    "message": "Terakhir menggunakan $2 $3, $1 panggilan"
+  },
+  "sessionLastUsed_other": {
+    "message": "Terakhir menggunakan $2 $3, $1 panggilan"
+  },
+  "sessionUnused": {
+    "message": "Belum menggunakan browser"
+  },
+  "sessionId": {
+    "message": "Sesi $1"
+  },
+  "serverVersion": {
+    "message": "server $1"
+  },
+  "instanceThisBrowser": {
+    "message": "$1, browser ini"
+  },
+  "justNow": {
+    "message": "baru saja"
+  },
+  "chatTitle": {
+    "message": "Chat agen"
+  },
+  "chatSetup": {
+    "message": "Penyiapan"
+  },
+  "chatConversation": {
+    "message": "Percakapan"
+  },
+  "chatEmptyHeading": {
+    "message": "Bicara dengan agen Anda dari sini"
+  },
+  "chatEmptyBody": {
+    "message": "Minta agen Anda untuk melanjutkan di browser, atau jalankan prompt $1. Pesan agen muncul di sini, dan balasan Anda langsung dikirim kembali kepadanya."
+  },
+  "chatEmptyHint": {
+    "message": "Setiap sesi agen memiliki percakapannya sendiri."
+  },
+  "chatInput": {
+    "message": "Kirim pesan ke agen"
+  },
+  "chatEnd": {
+    "message": "Akhiri chat"
+  },
+  "chatRemove": {
+    "message": "Hapus"
+  },
+  "chatSend": {
+    "message": "Kirim"
+  },
+  "chatError": {
+    "message": "Terjadi masalah."
+  },
+  "chatUnseen_one": {
+    "message": "$2 ($1 baru)"
+  },
+  "chatUnseen_other": {
+    "message": "$2 ($1 baru)"
+  },
+  "chatStatusWaiting": {
+    "message": "Menunggu balasan Anda"
+  },
+  "chatStatusWorking": {
+    "message": "Sedang bekerja"
+  },
+  "chatStatusWorkingTool": {
+    "message": "Sedang bekerja: menggunakan $1 $2"
+  },
+  "chatStatusDisconnected": {
+    "message": "Agen terputus"
+  },
+  "chatStatusEnded": {
+    "message": "Chat berakhir"
+  },
+  "chatHintWaiting": {
+    "message": "Enter untuk mengirim, Shift+Enter untuk baris baru."
+  },
+  "chatHintWorking": {
+    "message": "Agen akan membaca pesan Anda saat memeriksa chat lagi."
+  },
+  "chatHintDisconnected": {
+    "message": "Sesi agen ini telah ditutup."
+  },
+  "chatHintEnded": {
+    "message": "Minta agen untuk melanjutkan di browser agar dapat chat lagi."
+  },
+  "chatReadByAgent": {
+    "message": "dibaca oleh agen"
+  },
+  "chatNotReadYet": {
+    "message": "belum dibaca"
+  },
+  "chatEndedNotice": {
+    "message": "Anda mengakhiri chat."
+  },
+  "chatConversationGone": {
+    "message": "Percakapan ini sudah tidak ada."
+  },
+  "chatEndedError": {
+    "message": "Chat ini telah berakhir. Minta agen untuk melanjutkan di browser agar dapat memulainya lagi."
+  },
+  "chatTooLong_one": {
+    "message": "Pesan maksimal $1 karakter."
+  },
+  "chatTooLong_other": {
+    "message": "Pesan maksimal $1 karakter."
+  }
+}

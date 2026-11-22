@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { chatTab, type AgentSession } from '@agent-browser-bridge/protocol';
+import { t } from '../i18n/messages.ts';
 import { ChatStore, hasOpenConversation, totalUnseen, type ChatMessage, type Conversation, type Conversations } from './chat.ts';
 
 export const CHAT_PANEL_PORT = 'chat-panel';
@@ -90,7 +91,7 @@ export class ChatPanel {
         iconUrl: chrome.runtime.getURL(NOTIFICATION_ICON),
         title: conversation.title,
         message: preview,
-        contextMessage: 'Click the Agent Browser Bridge toolbar button to reply',
+        contextMessage: t('notificationReply'),
       })
       .catch(() => undefined);
   }

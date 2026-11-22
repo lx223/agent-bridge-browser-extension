@@ -1,0 +1,290 @@
+{
+  "locale": {
+    "message": "ko"
+  },
+  "extDescription": {
+    "message": "원하는 AI 에이전트로 내 브라우저를 제어하세요. MCP로 탭을 정리하고 웹페이지를 조작할 수 있습니다."
+  },
+  "actionTitle": {
+    "message": "Agent Browser Bridge: 설정 및 상태"
+  },
+  "actionTitleDisconnected": {
+    "message": "Agent Browser Bridge: 연결된 에이전트 없음"
+  },
+  "actionTitleConnected": {
+    "message": "Agent Browser Bridge: 에이전트 연결됨"
+  },
+  "actionTitleConnectedTo": {
+    "message": "Agent Browser Bridge: $1에 연결됨"
+  },
+  "notificationReply": {
+    "message": "답장하려면 툴바의 Agent Browser Bridge 버튼을 클릭하세요"
+  },
+  "optionsTitle": {
+    "message": "Agent Browser Bridge 옵션"
+  },
+  "statusChecking": {
+    "message": "연결 확인 중…"
+  },
+  "statusLooking": {
+    "message": "에이전트를 찾는 중…"
+  },
+  "welcomeLede": {
+    "message": "AI 에이전트에게 탭 정리와 웹페이지 조작을 맡기세요."
+  },
+  "welcomeLedeSafari": {
+    "message": "AI 에이전트가 Safari 탭을 찾고, 열고, 옮기고, 닫을 수 있습니다."
+  },
+  "welcomeConnected": {
+    "message": "연결됨: 에이전트가 브라우저를 사용할 수 있습니다."
+  },
+  "welcomeConnectedMany_one": {
+    "message": "연결됨: 에이전트 세션 $1개가 브라우저를 사용할 수 있습니다."
+  },
+  "welcomeConnectedMany_other": {
+    "message": "연결됨: 에이전트 세션 $1개가 브라우저를 사용할 수 있습니다."
+  },
+  "welcomeDisconnected": {
+    "message": "에이전트를 기다리는 중입니다. 아래에서 설정한 다음 세션을 시작하세요."
+  },
+  "instanceNameLabel": {
+    "message": "이 브라우저 프로필의 이름 지정"
+  },
+  "instanceNamePlaceholder": {
+    "message": "예: 업무 또는 개인"
+  },
+  "welcomeInstanceNameHint": {
+    "message": "에이전트가 이 이름으로 브라우저와 프로필을 구분하므로 '업무 브라우저에서'처럼 요청할 수 있습니다. $1"
+  },
+  "optionsInstanceNameHint": {
+    "message": "에이전트가 이 이름으로 브라우저와 프로필을 구분합니다. $1"
+  },
+  "instanceId": {
+    "message": "인스턴스 ID: $1"
+  },
+  "welcomeStepAdd": {
+    "message": "1. 에이전트에 추가하기"
+  },
+  "welcomeStepAddHint": {
+    "message": "에이전트가 작은 로컬 서버($1)를 시작하면 이 확장 프로그램이 서버에 연결됩니다. 사용하는 에이전트를 선택하세요."
+  },
+  "welcomeAgentSetupTitle": {
+    "message": "에이전트에게 설정 맡기기"
+  },
+  "welcomeAgentSetupBody": {
+    "message": "Claude Code, Cursor, Codex처럼 명령을 실행하고 자체 설정을 수정할 수 있는 에이전트에 이 프롬프트를 붙여넣으세요. Node.js가 있는지 확인한 다음 서버를 추가합니다."
+  },
+  "copyPrompt": {
+    "message": "프롬프트 복사"
+  },
+  "copy": {
+    "message": "복사"
+  },
+  "copied": {
+    "message": "복사됨"
+  },
+  "welcomeClaudeCodeBody": {
+    "message": "터미널에서 한 번 실행하세요."
+  },
+  "welcomeOpensAndConfirms": {
+    "message": "앱이 열리고 확인을 요청합니다."
+  },
+  "welcomeAddTo": {
+    "message": "$1에 추가"
+  },
+  "welcomeClaudeDesktopBody": {
+    "message": "확장 프로그램을 다운로드한 다음 파일을 열어 설치하세요. Node.js는 필요하지 않습니다."
+  },
+  "welcomeDownloadFor": {
+    "message": "$1용 다운로드"
+  },
+  "welcomeOtherAgentsTitle": {
+    "message": "기타 에이전트"
+  },
+  "welcomeOtherAgentsBody": {
+    "message": "에이전트의 MCP 구성에 이 내용을 추가한 다음 에이전트를 다시 시작하세요."
+  },
+  "welcomeStepTry": {
+    "message": "2. 사용해 보기"
+  },
+  "welcomeTryIntro": {
+    "message": "Chrome을 연 상태에서 에이전트에게 요청해 보세요."
+  },
+  "welcomeTryTabs": {
+    "message": "열려 있는 탭을 주제별로 그룹으로 묶어 줘. 계획부터 먼저 보여 줘."
+  },
+  "welcomeTryPage": {
+    "message": "Chrome 출시 노트를 열고 최신 버전에서 바뀐 점을 요약해 줘."
+  },
+  "welcomeTryHint": {
+    "message": "에이전트의 서버가 실행되면 위의 상태가 녹색으로 바뀝니다. $1(으)로 변경한 내용은 에이전트에게 실행취소를 요청하면 되돌릴 수 있습니다."
+  },
+  "welcomeTryIntroSafari": {
+    "message": "Safari를 연 상태에서 에이전트에게 요청해 보세요."
+  },
+  "welcomeTryDuplicatesSafari": {
+    "message": "Safari에 어떤 탭이 열려 있어? 중복된 탭은 닫아 줘. 단, 닫기 전에 먼저 물어봐."
+  },
+  "welcomeTrySortSafari": {
+    "message": "Safari 탭을 사이트별로 정렬해 줘."
+  },
+  "welcomeTryHintSafari": {
+    "message": "에이전트의 서버가 실행되면 위의 상태가 녹색으로 바뀝니다. Safari에서 에이전트는 창을 열고, 정렬하고, 닫을 수 있으며, 탭을 열고, 페이지를 이동하고, 전환하고, 고정하고, 음소거하고, 복제하고, 옮기고, 닫을 수 있습니다. 탭 제목과 주소가 표시되지 않으면 Safari의 설정 > 확장 프로그램에서 이 확장 프로그램에 웹사이트 접근 권한을 허용하세요. 탭 그룹, 방문 기록, 북마크, 페이지 제어는 Chrome에서 사용할 수 있습니다."
+  },
+  "welcomePrivacyHeading": {
+    "message": "개인정보 보호"
+  },
+  "welcomePrivacy": {
+    "message": "브라우징 데이터는 내 컴퓨터에만 남습니다. 이 확장 프로그램은 $1에만 연결합니다. 요청하면 에이전트가 탭 제목과 URL을 읽고, 탭을 재정렬하거나 그룹으로 묶거나 닫고, 웹페이지를 읽고 조작할 수 있습니다. 에이전트가 페이지에서 작업하는 동안 Chrome에 디버깅 배너가 표시됩니다. 이 확장 프로그램은 탭 제목, URL, 페이지 콘텐츠를 다른 곳으로 절대 보내지 않습니다."
+  },
+  "welcomePrivacySafari": {
+    "message": "브라우징 데이터는 내 컴퓨터에만 남습니다. 이 확장 프로그램은 $1에만 연결합니다. 요청하면 에이전트가 탭 제목과 URL을 읽고, 창과 탭을 열거나 정렬하거나 닫을 수 있습니다. Safari에서는 웹페이지를 읽거나 조작할 수 없습니다. 이 확장 프로그램은 탭 제목과 URL을 다른 곳으로 절대 보내지 않습니다."
+  },
+  "welcomeAnalytics": {
+    "message": "익명 사용 통계(사용된 기능, 확장 프로그램 버전)를 공유하여 확장 프로그램 개선에 참여합니다."
+  },
+  "analyticsTitle": {
+    "message": "익명 사용 통계 공유"
+  },
+  "analyticsHint": {
+    "message": "사용된 기능, 성공 여부, 확장 프로그램 및 에이전트 버전이 포함됩니다. 탭 제목, URL, 페이지 콘텐츠는 절대 포함되지 않습니다. $1"
+  },
+  "privacyPolicy": {
+    "message": "개인정보처리방침"
+  },
+  "analyticsUnavailable": {
+    "message": "이 빌드는 사용 통계를 수집하지 않습니다."
+  },
+  "openSetup": {
+    "message": "설정 및 연결 상태 열기"
+  },
+  "optionsConnected": {
+    "message": "에이전트 연결됨"
+  },
+  "optionsConnectedMany_one": {
+    "message": "에이전트 세션 $1개 연결됨"
+  },
+  "optionsConnectedMany_other": {
+    "message": "에이전트 세션 $1개 연결됨"
+  },
+  "optionsDisconnected": {
+    "message": "연결된 에이전트 없음"
+  },
+  "agentStartingUp": {
+    "message": "에이전트 시작 중"
+  },
+  "sessionInProject": {
+    "message": "$2의 $1"
+  },
+  "sessionStarted": {
+    "message": "$1 시작"
+  },
+  "sessionLastUsed_one": {
+    "message": "마지막 사용: $2($3), 호출 $1회"
+  },
+  "sessionLastUsed_other": {
+    "message": "마지막 사용: $2($3), 호출 $1회"
+  },
+  "sessionUnused": {
+    "message": "아직 브라우저를 사용하지 않음"
+  },
+  "sessionId": {
+    "message": "세션 $1"
+  },
+  "serverVersion": {
+    "message": "서버 $1"
+  },
+  "instanceThisBrowser": {
+    "message": "$1(이 브라우저)"
+  },
+  "justNow": {
+    "message": "방금"
+  },
+  "chatTitle": {
+    "message": "에이전트 채팅"
+  },
+  "chatSetup": {
+    "message": "설정"
+  },
+  "chatConversation": {
+    "message": "대화"
+  },
+  "chatEmptyHeading": {
+    "message": "여기에서 에이전트와 대화하세요"
+  },
+  "chatEmptyBody": {
+    "message": "에이전트에게 브라우저에서 계속하라고 요청하거나 $1 프롬프트를 실행하세요. 에이전트의 메시지가 여기에 표시되고, 내 답장은 에이전트에게 바로 전달됩니다."
+  },
+  "chatEmptyHint": {
+    "message": "에이전트 세션마다 별도의 대화가 생성됩니다."
+  },
+  "chatInput": {
+    "message": "에이전트에게 메시지 보내기"
+  },
+  "chatEnd": {
+    "message": "채팅 종료"
+  },
+  "chatRemove": {
+    "message": "삭제"
+  },
+  "chatSend": {
+    "message": "보내기"
+  },
+  "chatError": {
+    "message": "문제가 발생했습니다."
+  },
+  "chatUnseen_one": {
+    "message": "$2(새 메시지 $1개)"
+  },
+  "chatUnseen_other": {
+    "message": "$2(새 메시지 $1개)"
+  },
+  "chatStatusWaiting": {
+    "message": "답장을 기다리는 중"
+  },
+  "chatStatusWorking": {
+    "message": "작업 중"
+  },
+  "chatStatusWorkingTool": {
+    "message": "작업 중: $2 $1 사용"
+  },
+  "chatStatusDisconnected": {
+    "message": "에이전트 연결 끊김"
+  },
+  "chatStatusEnded": {
+    "message": "채팅 종료됨"
+  },
+  "chatHintWaiting": {
+    "message": "Enter를 누르면 전송, Shift+Enter를 누르면 줄바꿈됩니다."
+  },
+  "chatHintWorking": {
+    "message": "에이전트가 다음에 채팅을 확인할 때 메시지를 읽습니다."
+  },
+  "chatHintDisconnected": {
+    "message": "이 에이전트 세션은 종료되었습니다."
+  },
+  "chatHintEnded": {
+    "message": "다시 채팅하려면 에이전트에게 브라우저에서 계속하라고 요청하세요."
+  },
+  "chatReadByAgent": {
+    "message": "에이전트가 읽음"
+  },
+  "chatNotReadYet": {
+    "message": "아직 읽지 않음"
+  },
+  "chatEndedNotice": {
+    "message": "채팅을 종료했습니다."
+  },
+  "chatConversationGone": {
+    "message": "이 대화는 더 이상 존재하지 않습니다."
+  },
+  "chatEndedError": {
+    "message": "종료된 채팅입니다. 다시 시작하려면 에이전트에게 브라우저에서 계속하라고 요청하세요."
+  },
+  "chatTooLong_one": {
+    "message": "메시지는 최대 $1자까지 입력할 수 있습니다."
+  },
+  "chatTooLong_other": {
+    "message": "메시지는 최대 $1자까지 입력할 수 있습니다."
+  }
+}

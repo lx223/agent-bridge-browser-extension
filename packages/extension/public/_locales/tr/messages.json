@@ -1,0 +1,290 @@
+{
+  "locale": {
+    "message": "tr"
+  },
+  "extDescription": {
+    "message": "Kendi tarayıcınızı istediğiniz yapay zeka ajanıyla kontrol edin: MCP üzerinden sekmeleri düzenleyin ve web sayfalarını kullanın."
+  },
+  "actionTitle": {
+    "message": "Agent Browser Bridge: kurulum ve durum"
+  },
+  "actionTitleDisconnected": {
+    "message": "Agent Browser Bridge: bağlı ajan yok"
+  },
+  "actionTitleConnected": {
+    "message": "Agent Browser Bridge: ajan bağlı"
+  },
+  "actionTitleConnectedTo": {
+    "message": "Agent Browser Bridge: bağlı ($1)"
+  },
+  "notificationReply": {
+    "message": "Yanıtlamak için araç çubuğundaki Agent Browser Bridge düğmesini tıklayın"
+  },
+  "optionsTitle": {
+    "message": "Agent Browser Bridge seçenekleri"
+  },
+  "statusChecking": {
+    "message": "Bağlantı kontrol ediliyor…"
+  },
+  "statusLooking": {
+    "message": "Ajanınız aranıyor…"
+  },
+  "welcomeLede": {
+    "message": "Yapay zeka ajanınız sekmelerinizi düzenlesin ve web sayfalarını kullansın."
+  },
+  "welcomeLedeSafari": {
+    "message": "Yapay zeka ajanınız Safari sekmelerinizi bulsun, açsın, taşısın ve kapatsın."
+  },
+  "welcomeConnected": {
+    "message": "Bağlı: Ajanınız tarayıcıyı kullanabilir."
+  },
+  "welcomeConnectedMany_one": {
+    "message": "Bağlı: $1 ajan oturumu tarayıcıyı kullanabilir."
+  },
+  "welcomeConnectedMany_other": {
+    "message": "Bağlı: $1 ajan oturumu tarayıcıyı kullanabilir."
+  },
+  "welcomeDisconnected": {
+    "message": "Ajanınız bekleniyor. Aşağıdan kurun, ardından bir oturum başlatın."
+  },
+  "instanceNameLabel": {
+    "message": "Bu tarayıcı profiline ad verin"
+  },
+  "instanceNamePlaceholder": {
+    "message": "Örneğin İş veya Kişisel"
+  },
+  "welcomeInstanceNameHint": {
+    "message": "Ajanlar, tarayıcılarınızı ve profillerinizi birbirinden ayırt etmek için bu adı kullanır. Böylece İş tarayıcınızı isteyebilirsiniz. $1"
+  },
+  "optionsInstanceNameHint": {
+    "message": "Ajanlar, tarayıcılarınızı ve profillerinizi birbirinden ayırt etmek için bu adı kullanır. $1"
+  },
+  "instanceId": {
+    "message": "Örnek kimliği: $1"
+  },
+  "welcomeStepAdd": {
+    "message": "1. Ajanınıza ekleyin"
+  },
+  "welcomeStepAddHint": {
+    "message": "Ajanınız, bu uzantının bağlandığı küçük bir yerel sunucu ($1) başlatır. Ajanınızı seçin:"
+  },
+  "welcomeAgentSetupTitle": {
+    "message": "Kurulumu ajanınıza bırakın"
+  },
+  "welcomeAgentSetupBody": {
+    "message": "Bu istemi, komut çalıştırabilen ve kendi ayarlarını düzenleyebilen herhangi bir ajana yapıştırın (örneğin Claude Code, Cursor veya Codex). İstem önce Node.js kontrolü yapar, ardından sunucuyu ekler."
+  },
+  "copyPrompt": {
+    "message": "İstemi kopyala"
+  },
+  "copy": {
+    "message": "Kopyala"
+  },
+  "copied": {
+    "message": "Kopyalandı"
+  },
+  "welcomeClaudeCodeBody": {
+    "message": "Terminalde bir kez çalıştırın:"
+  },
+  "welcomeOpensAndConfirms": {
+    "message": "Uygulamayı açar ve onaylamanızı ister."
+  },
+  "welcomeAddTo": {
+    "message": "$1 uygulamasına ekle"
+  },
+  "welcomeClaudeDesktopBody": {
+    "message": "Uzantıyı indirin, ardından yüklemek için dosyayı açın. Node.js gerekmez."
+  },
+  "welcomeDownloadFor": {
+    "message": "$1 için indir"
+  },
+  "welcomeOtherAgentsTitle": {
+    "message": "Diğer ajanlar"
+  },
+  "welcomeOtherAgentsBody": {
+    "message": "Bunu ajanın MCP yapılandırmasına ekleyin, ardından ajanı yeniden başlatın."
+  },
+  "welcomeStepTry": {
+    "message": "2. Deneyin"
+  },
+  "welcomeTryIntro": {
+    "message": "Chrome açıkken ajanınızdan şunu isteyin:"
+  },
+  "welcomeTryTabs": {
+    "message": "Açık sekmelerimi konuya göre gruplara ayır. Önce bana planı göster."
+  },
+  "welcomeTryPage": {
+    "message": "Chrome sürüm notlarını aç ve son sürümde nelerin değiştiğini özetle."
+  },
+  "welcomeTryHint": {
+    "message": "Ajanınızın sunucusu çalışmaya başladığında yukarıdaki durum yeşile döner. $1 ile yapılan değişiklikleri, ajandan geri almasını isteyerek geri alabilirsiniz."
+  },
+  "welcomeTryIntroSafari": {
+    "message": "Safari açıkken ajanınızdan şunu isteyin:"
+  },
+  "welcomeTryDuplicatesSafari": {
+    "message": "Safari'de hangi sekmeler açık? Yinelenenleri kapat ama önce bana sor."
+  },
+  "welcomeTrySortSafari": {
+    "message": "Safari sekmelerimi siteye göre sırala."
+  },
+  "welcomeTryHintSafari": {
+    "message": "Ajanınızın sunucusu çalışmaya başladığında yukarıdaki durum yeşile döner. Safari'de ajanınız pencereleri açabilir, düzenleyebilir ve kapatabilir; sekmeleri açabilir, başka adreslere yönlendirebilir, sekmeler arasında geçiş yapabilir, sabitleyebilir, sesini kapatabilir, çoğaltabilir, taşıyabilir ve kapatabilir. Sekme başlıkları ve adresleri görünmüyorsa Safari'de Ayarlar > Uzantılar bölümünden uzantıya web sitesi erişimi verin. Sekme grupları, geçmiş, yer işaretleri ve sayfa kontrolü Chrome'da kullanılabilir."
+  },
+  "welcomePrivacyHeading": {
+    "message": "Gizlilik"
+  },
+  "welcomePrivacy": {
+    "message": "Tarama verileriniz bilgisayarınızda kalır: Uzantı yalnızca $1 ile iletişim kurar. Ajanınız, siz istediğinizde sekme başlıklarını ve URL'leri okuyabilir, sekmeleri yeniden düzenleyebilir, gruplandırabilir veya kapatabilir, web sayfalarını okuyup bu sayfalarda işlem yapabilir. Ajan bir sayfada çalışırken Chrome bir hata ayıklama uyarısı gösterir. Sekme başlıkları, URL'ler ve sayfa içerikleri bu uzantı tarafından hiçbir zaman başka bir yere gönderilmez."
+  },
+  "welcomePrivacySafari": {
+    "message": "Tarama verileriniz bilgisayarınızda kalır: Uzantı yalnızca $1 ile iletişim kurar. Ajanınız, siz istediğinizde sekme başlıklarını ve URL'leri okuyabilir; pencereleri ve sekmeleri açabilir, düzenleyebilir veya kapatabilir. Safari'de web sayfalarını okuyamaz ve bu sayfalarda işlem yapamaz. Sekme başlıkları ve URL'ler bu uzantı tarafından hiçbir zaman başka bir yere gönderilmez."
+  },
+  "welcomeAnalytics": {
+    "message": "Uzantının geliştirilmesine yardımcı olmak için anonim kullanım istatistiklerini (hangi özelliklerin kullanıldığı, uzantı sürümü) paylaşın."
+  },
+  "analyticsTitle": {
+    "message": "Anonim kullanım istatistiklerini paylaşın"
+  },
+  "analyticsHint": {
+    "message": "Hangi özelliklerin kullanıldığı, başarılı olup olmadıkları ve uzantı ile ajan sürümleri. Sekme başlıkları, URL'ler veya sayfa içerikleri asla paylaşılmaz. $1"
+  },
+  "privacyPolicy": {
+    "message": "Gizlilik politikası"
+  },
+  "analyticsUnavailable": {
+    "message": "Bu derleme kullanım istatistiği toplamaz."
+  },
+  "openSetup": {
+    "message": "Kurulumu ve bağlantı durumunu aç"
+  },
+  "optionsConnected": {
+    "message": "Ajan bağlı"
+  },
+  "optionsConnectedMany_one": {
+    "message": "$1 ajan oturumu bağlı"
+  },
+  "optionsConnectedMany_other": {
+    "message": "$1 ajan oturumu bağlı"
+  },
+  "optionsDisconnected": {
+    "message": "Bağlı ajan yok"
+  },
+  "agentStartingUp": {
+    "message": "Ajan başlatılıyor"
+  },
+  "sessionInProject": {
+    "message": "$2 projesinde $1"
+  },
+  "sessionStarted": {
+    "message": "$1 başladı"
+  },
+  "sessionLastUsed_one": {
+    "message": "Son kullanım: $2, $3, $1 çağrı"
+  },
+  "sessionLastUsed_other": {
+    "message": "Son kullanım: $2, $3, $1 çağrı"
+  },
+  "sessionUnused": {
+    "message": "Henüz tarayıcı kullanmadı"
+  },
+  "sessionId": {
+    "message": "Oturum $1"
+  },
+  "serverVersion": {
+    "message": "sunucu $1"
+  },
+  "instanceThisBrowser": {
+    "message": "$1, bu tarayıcı"
+  },
+  "justNow": {
+    "message": "az önce"
+  },
+  "chatTitle": {
+    "message": "Ajan sohbeti"
+  },
+  "chatSetup": {
+    "message": "Kurulum"
+  },
+  "chatConversation": {
+    "message": "Konuşma"
+  },
+  "chatEmptyHeading": {
+    "message": "Ajanınızla buradan konuşun"
+  },
+  "chatEmptyBody": {
+    "message": "Ajanınızdan tarayıcıda devam etmesini isteyin veya $1 istemini çalıştırın. Ajanın mesajları burada görünür, yanıtlarınız doğrudan ajana iletilir."
+  },
+  "chatEmptyHint": {
+    "message": "Her ajan oturumunun kendi konuşması olur."
+  },
+  "chatInput": {
+    "message": "Ajana mesaj gönderin"
+  },
+  "chatEnd": {
+    "message": "Sohbeti sonlandır"
+  },
+  "chatRemove": {
+    "message": "Kaldır"
+  },
+  "chatSend": {
+    "message": "Gönder"
+  },
+  "chatError": {
+    "message": "Bir sorun oluştu."
+  },
+  "chatUnseen_one": {
+    "message": "$2 ($1 yeni)"
+  },
+  "chatUnseen_other": {
+    "message": "$2 ($1 yeni)"
+  },
+  "chatStatusWaiting": {
+    "message": "Yanıtınız bekleniyor"
+  },
+  "chatStatusWorking": {
+    "message": "Çalışıyor"
+  },
+  "chatStatusWorkingTool": {
+    "message": "Çalışıyor: $2 $1 kullanıldı"
+  },
+  "chatStatusDisconnected": {
+    "message": "Ajanın bağlantısı kesildi"
+  },
+  "chatStatusEnded": {
+    "message": "Sohbet sona erdi"
+  },
+  "chatHintWaiting": {
+    "message": "Göndermek için Enter, yeni satır için Shift+Enter."
+  },
+  "chatHintWorking": {
+    "message": "Ajan, sohbeti bir sonraki kontrol edişinde mesajınızı okur."
+  },
+  "chatHintDisconnected": {
+    "message": "Bu ajan oturumu kapandı."
+  },
+  "chatHintEnded": {
+    "message": "Yeniden sohbet etmek için ajandan tarayıcıda devam etmesini isteyin."
+  },
+  "chatReadByAgent": {
+    "message": "ajan okudu"
+  },
+  "chatNotReadYet": {
+    "message": "henüz okunmadı"
+  },
+  "chatEndedNotice": {
+    "message": "Sohbeti sonlandırdınız."
+  },
+  "chatConversationGone": {
+    "message": "Bu konuşma artık mevcut değil."
+  },
+  "chatEndedError": {
+    "message": "Bu sohbet sona erdi. Yeniden başlatmak için ajandan tarayıcıda devam etmesini isteyin."
+  },
+  "chatTooLong_one": {
+    "message": "Mesajlar en fazla $1 karakter olabilir."
+  },
+  "chatTooLong_other": {
+    "message": "Mesajlar en fazla $1 karakter olabilir."
+  }
+}

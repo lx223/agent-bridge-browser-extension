@@ -49,6 +49,7 @@ The tests are grouped by what a user does with the bridge, one folder each. `e2e
 | `browserData/` | `history.test.ts` | Searching history, listing visits, listing and restoring recently closed tabs by session id and without one, the empty device list without sync, and an unknown session id. |
 | | `browserData.test.ts` | The Reading List, bookmarks, downloads, most visited sites, searching with the default search engine and notifications. Playwright saves downloads under random names in its own folder, so the download test finds its file by URL rather than by name. |
 | `chat/` | `chat.test.ts` | The side panel chat: the empty state, the toolbar badge, replies typed in the panel reaching the agent, the unread note on other tools, and ending the chat. |
+| `localisation/` | `localisation.test.ts` | The setup page in German and in Arabic: translated text, code and links kept inside translated sentences, and the right-to-left layout. |
 | `resilience/` | `serverRestart.test.ts` | Killing the MCP server process mid-session: the launcher starts a new one, the agent's next call still reaches the browser, and a tool call the crash cut off is reported as possibly not finished. It needs the launcher, so it does not run against the Claude Desktop bundle. |
 | `safari/` | `safari.test.ts` | The built extension in a simulated Safari instead of Chromium. See [Safari](#safari). |
 

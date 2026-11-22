@@ -1,0 +1,290 @@
+{
+  "locale": {
+    "message": "am"
+  },
+  "extDescription": {
+    "message": "የራስዎን አሳሽ በመረጡት ማንኛውም የAI ወኪል ይቆጣጠሩ፦ ትሮችን ያደራጁ እና ድረ-ገጾችን በMCP በኩል ይጠቀሙ።"
+  },
+  "actionTitle": {
+    "message": "Agent Browser Bridge: ማዋቀር እና ሁኔታ"
+  },
+  "actionTitleDisconnected": {
+    "message": "Agent Browser Bridge: ምንም ወኪል አልተገናኘም"
+  },
+  "actionTitleConnected": {
+    "message": "Agent Browser Bridge: ወኪል ተገናኝቷል"
+  },
+  "actionTitleConnectedTo": {
+    "message": "Agent Browser Bridge: ከ$1 ጋር ተገናኝቷል"
+  },
+  "notificationReply": {
+    "message": "ምላሽ ለመስጠት በመሣሪያ አሞሌው ላይ ያለውን የAgent Browser Bridge አዝራር ጠቅ ያድርጉ"
+  },
+  "optionsTitle": {
+    "message": "የAgent Browser Bridge አማራጮች"
+  },
+  "statusChecking": {
+    "message": "ግንኙነትን በመፈተሽ ላይ…"
+  },
+  "statusLooking": {
+    "message": "ወኪልዎን በመፈለግ ላይ…"
+  },
+  "welcomeLede": {
+    "message": "የAI ወኪልዎ ትሮችዎን እንዲያደራጅ እና ድረ-ገጾችን እንዲጠቀም ይፍቀዱ።"
+  },
+  "welcomeLedeSafari": {
+    "message": "የAI ወኪልዎ የSafari ትሮችዎን እንዲያገኝ፣ እንዲከፍት፣ እንዲያንቀሳቅስ እና እንዲዘጋ ይፍቀዱ።"
+  },
+  "welcomeConnected": {
+    "message": "ተገናኝቷል፦ ወኪልዎ አሳሹን መጠቀም ይችላል።"
+  },
+  "welcomeConnectedMany_one": {
+    "message": "ተገናኝቷል፦ $1 የወኪል ክፍለ-ጊዜ አሳሹን መጠቀም ይችላል።"
+  },
+  "welcomeConnectedMany_other": {
+    "message": "ተገናኝቷል፦ $1 የወኪል ክፍለ-ጊዜዎች አሳሹን መጠቀም ይችላሉ።"
+  },
+  "welcomeDisconnected": {
+    "message": "ወኪልዎን በመጠበቅ ላይ። ከታች ያዋቅሩት፣ ከዚያ ክፍለ-ጊዜ ይጀምሩ።"
+  },
+  "instanceNameLabel": {
+    "message": "ይህን የአሳሽ መገለጫ ይሰይሙ"
+  },
+  "instanceNamePlaceholder": {
+    "message": "ለምሳሌ ሥራ ወይም የግል"
+  },
+  "welcomeInstanceNameHint": {
+    "message": "ወኪሎች አሳሾችዎን እና መገለጫዎችዎን ለመለየት ይህን ስም ይጠቀማሉ፣ ስለዚህ የሥራ አሳሽዎን መጠየቅ ይችላሉ። $1"
+  },
+  "optionsInstanceNameHint": {
+    "message": "ወኪሎች አሳሾችዎን እና መገለጫዎችዎን ለመለየት ይህን ስም ይጠቀማሉ። $1"
+  },
+  "instanceId": {
+    "message": "የአሳሽ መታወቂያ: $1"
+  },
+  "welcomeStepAdd": {
+    "message": "1. ወደ ወኪልዎ ያክሉት"
+  },
+  "welcomeStepAddHint": {
+    "message": "ወኪልዎ ይህ ቅጥያ የሚገናኝበትን ትንሽ አካባቢያዊ አገልጋይ ($1) ያስጀምራል። ወኪልዎን ይምረጡ፦"
+  },
+  "welcomeAgentSetupTitle": {
+    "message": "ወኪልዎ እንዲያዋቅረው ይፍቀዱ"
+  },
+  "welcomeAgentSetupBody": {
+    "message": "ይህን ጥያቄ ትዕዛዞችን ማሄድ እና የራሱን ቅንብሮች ማርትዕ በሚችል ማንኛውም ወኪል ውስጥ ይለጥፉ፣ ለምሳሌ Claude Code፣ Cursor ወይም Codex። Node.js መኖሩን ያረጋግጣል፣ ከዚያ አገልጋዩን ያክላል።"
+  },
+  "copyPrompt": {
+    "message": "ጥያቄውን ቅዳ"
+  },
+  "copy": {
+    "message": "ቅዳ"
+  },
+  "copied": {
+    "message": "ተቀድቷል"
+  },
+  "welcomeClaudeCodeBody": {
+    "message": "በተርሚናል ውስጥ አንድ ጊዜ ያሂዱ፦"
+  },
+  "welcomeOpensAndConfirms": {
+    "message": "መተግበሪያውን ይከፍታል እና እንዲያረጋግጡ ይጠይቅዎታል።"
+  },
+  "welcomeAddTo": {
+    "message": "ወደ $1 አክል"
+  },
+  "welcomeClaudeDesktopBody": {
+    "message": "ቅጥያውን ያውርዱ፣ ከዚያ ለመጫን ፋይሉን ይክፈቱ። Node.js አያስፈልግም።"
+  },
+  "welcomeDownloadFor": {
+    "message": "ለ$1 አውርድ"
+  },
+  "welcomeOtherAgentsTitle": {
+    "message": "ሌሎች ወኪሎች"
+  },
+  "welcomeOtherAgentsBody": {
+    "message": "ይህን ወደ ወኪሉ የMCP ውቅር ያክሉ፣ ከዚያ ወኪሉን ዳግም ያስጀምሩ።"
+  },
+  "welcomeStepTry": {
+    "message": "2. ይሞክሩት"
+  },
+  "welcomeTryIntro": {
+    "message": "Chrome ተከፍቶ ሳለ፣ ወኪልዎን ይጠይቁ፦"
+  },
+  "welcomeTryTabs": {
+    "message": "የተከፈቱ ትሮቼን በርዕስ በቡድን አደራጅ። መጀመሪያ ዕቅዱን አሳየኝ።"
+  },
+  "welcomeTryPage": {
+    "message": "የChrome የልቀት ማስታወሻዎችን ክፈት እና በአዲሱ ስሪት ምን እንደተቀየረ አጠቃልልኝ።"
+  },
+  "welcomeTryHint": {
+    "message": "የወኪልዎ አገልጋይ መሥራት ሲጀምር ከላይ ያለው ሁኔታ ወደ አረንጓዴ ይቀየራል። በ$1 የተደረጉ ለውጦችን ወኪሉ እንዲቀለብሳቸው በመጠየቅ መመለስ ይቻላል።"
+  },
+  "welcomeTryIntroSafari": {
+    "message": "Safari ተከፍቶ ሳለ፣ ወኪልዎን ይጠይቁ፦"
+  },
+  "welcomeTryDuplicatesSafari": {
+    "message": "በSafari ውስጥ የትኞቹ ትሮች ተከፍተዋል? የተባዙትን ዝጋ፣ ግን መጀመሪያ ጠይቀኝ።"
+  },
+  "welcomeTrySortSafari": {
+    "message": "የSafari ትሮቼን በጣቢያ ደርድር።"
+  },
+  "welcomeTryHintSafari": {
+    "message": "የወኪልዎ አገልጋይ መሥራት ሲጀምር ከላይ ያለው ሁኔታ ወደ አረንጓዴ ይቀየራል። በSafari ውስጥ ወኪልዎ መስኮቶችን መክፈት፣ ማደራጀት እና መዝጋት፣ እንዲሁም ትሮችን መክፈት፣ ማሰስ፣ መቀየር፣ መሰካት፣ ድምፅ ማጥፋት፣ ማባዛት፣ ማንቀሳቀስ እና መዝጋት ይችላል። የትር ርዕሶች እና አድራሻዎች የማይታዩ ከሆነ፣ በSafari ውስጥ በSettings > Extensions ስር ለቅጥያው የድር ጣቢያ መዳረሻ ይስጡ። የትር ቡድኖች፣ ታሪክ፣ ዕልባቶች እና የገጽ ቁጥጥር በChrome ውስጥ ይገኛሉ።"
+  },
+  "welcomePrivacyHeading": {
+    "message": "ግላዊነት"
+  },
+  "welcomePrivacy": {
+    "message": "የአሰሳ ውሂብዎ በኮምፒውተርዎ ላይ ይቆያል፦ ቅጥያው የሚገናኘው ከ$1 ጋር ብቻ ነው። ሲጠይቁት ወኪልዎ የትር ርዕሶችን እና ዩአርኤሎችን ማንበብ፣ ትሮችን እንደገና ማስተካከል፣ በቡድን ማድረግ ወይም መዝጋት፣ እንዲሁም ድረ-ገጾችን ማንበብ እና በእነሱ ላይ እርምጃ መውሰድ ይችላል። ወኪሉ በአንድ ገጽ ላይ ሲሠራ Chrome የማረሚያ ሰንደቅ ያሳያል። የትር ርዕሶች፣ ዩአርኤሎች እና የገጽ ይዘቶች በዚህ ቅጥያ በጭራሽ ወደ ሌላ ቦታ አይላኩም።"
+  },
+  "welcomePrivacySafari": {
+    "message": "የአሰሳ ውሂብዎ በኮምፒውተርዎ ላይ ይቆያል፦ ቅጥያው የሚገናኘው ከ$1 ጋር ብቻ ነው። ሲጠይቁት ወኪልዎ የትር ርዕሶችን እና ዩአርኤሎችን ማንበብ፣ እንዲሁም መስኮቶችን እና ትሮችን መክፈት፣ ማደራጀት ወይም መዝጋት ይችላል። በSafari ውስጥ ድረ-ገጾችን ማንበብ ወይም በእነሱ ላይ እርምጃ መውሰድ አይችልም። የትር ርዕሶች እና ዩአርኤሎች በዚህ ቅጥያ በጭራሽ ወደ ሌላ ቦታ አይላኩም።"
+  },
+  "welcomeAnalytics": {
+    "message": "ቅጥያውን ለማሻሻል እንዲረዳ ስም-አልባ የአጠቃቀም ስታቲስቲክስ (የትኞቹ ባህሪያት ጥቅም ላይ እንደሚውሉ፣ የቅጥያ ስሪት) ያጋሩ።"
+  },
+  "analyticsTitle": {
+    "message": "ስም-አልባ የአጠቃቀም ስታቲስቲክስ ያጋሩ"
+  },
+  "analyticsHint": {
+    "message": "የትኞቹ ባህሪያት ጥቅም ላይ እንደሚውሉ፣ ይሳኩ እንደሆነ፣ እና የቅጥያ እና የወኪል ስሪቶች። የትር ርዕሶች፣ ዩአርኤሎች ወይም የገጽ ይዘቶች በጭራሽ አይካተቱም። $1"
+  },
+  "privacyPolicy": {
+    "message": "የግላዊነት መመሪያ"
+  },
+  "analyticsUnavailable": {
+    "message": "ይህ ግንብ የአጠቃቀም ስታቲስቲክስ አይሰበስብም።"
+  },
+  "openSetup": {
+    "message": "ማዋቀርን እና የግንኙነት ሁኔታን ክፈት"
+  },
+  "optionsConnected": {
+    "message": "ወኪል ተገናኝቷል"
+  },
+  "optionsConnectedMany_one": {
+    "message": "$1 የወኪል ክፍለ-ጊዜ ተገናኝቷል"
+  },
+  "optionsConnectedMany_other": {
+    "message": "$1 የወኪል ክፍለ-ጊዜዎች ተገናኝተዋል"
+  },
+  "optionsDisconnected": {
+    "message": "ምንም ወኪል አልተገናኘም"
+  },
+  "agentStartingUp": {
+    "message": "ወኪል በመጀመር ላይ"
+  },
+  "sessionInProject": {
+    "message": "$1 በ$2 ውስጥ"
+  },
+  "sessionStarted": {
+    "message": "የተጀመረው $1"
+  },
+  "sessionLastUsed_one": {
+    "message": "$2ን ለመጨረሻ ጊዜ የተጠቀመው $3፣ $1 ጥሪ"
+  },
+  "sessionLastUsed_other": {
+    "message": "$2ን ለመጨረሻ ጊዜ የተጠቀመው $3፣ $1 ጥሪዎች"
+  },
+  "sessionUnused": {
+    "message": "እስካሁን አሳሽ አልተጠቀመም"
+  },
+  "sessionId": {
+    "message": "ክፍለ-ጊዜ $1"
+  },
+  "serverVersion": {
+    "message": "አገልጋይ $1"
+  },
+  "instanceThisBrowser": {
+    "message": "$1፣ ይህ አሳሽ"
+  },
+  "justNow": {
+    "message": "አሁን"
+  },
+  "chatTitle": {
+    "message": "የወኪል ውይይት"
+  },
+  "chatSetup": {
+    "message": "ማዋቀር"
+  },
+  "chatConversation": {
+    "message": "ውይይት"
+  },
+  "chatEmptyHeading": {
+    "message": "ከዚህ ሆነው ከወኪልዎ ጋር ይነጋገሩ"
+  },
+  "chatEmptyBody": {
+    "message": "ወኪልዎ በአሳሹ ውስጥ እንዲቀጥል ይጠይቁት፣ ወይም የ$1 ጥያቄውን ያሂዱ። መልዕክቶቹ እዚህ ይታያሉ፣ ምላሾችዎም በቀጥታ ወደ እሱ ይመለሳሉ።"
+  },
+  "chatEmptyHint": {
+    "message": "እያንዳንዱ የወኪል ክፍለ-ጊዜ የራሱ ውይይት አለው።"
+  },
+  "chatInput": {
+    "message": "ለወኪሉ መልዕክት ይላኩ"
+  },
+  "chatEnd": {
+    "message": "ውይይቱን ጨርስ"
+  },
+  "chatRemove": {
+    "message": "አስወግድ"
+  },
+  "chatSend": {
+    "message": "ላክ"
+  },
+  "chatError": {
+    "message": "የሆነ ችግር ተፈጥሯል።"
+  },
+  "chatUnseen_one": {
+    "message": "$2 ($1 አዲስ)"
+  },
+  "chatUnseen_other": {
+    "message": "$2 ($1 አዲስ)"
+  },
+  "chatStatusWaiting": {
+    "message": "የእርስዎን ምላሽ በመጠበቅ ላይ"
+  },
+  "chatStatusWorking": {
+    "message": "በመሥራት ላይ"
+  },
+  "chatStatusWorkingTool": {
+    "message": "በመሥራት ላይ፦ $1ን $2 ተጠቅሟል"
+  },
+  "chatStatusDisconnected": {
+    "message": "የወኪሉ ግንኙነት ተቋርጧል"
+  },
+  "chatStatusEnded": {
+    "message": "ውይይቱ አብቅቷል"
+  },
+  "chatHintWaiting": {
+    "message": "ለመላክ Enter፣ ለአዲስ መስመር Shift+Enter።"
+  },
+  "chatHintWorking": {
+    "message": "ወኪሉ ውይይቱን በሚቀጥለው ጊዜ ሲፈትሽ መልዕክትዎን ያነባል።"
+  },
+  "chatHintDisconnected": {
+    "message": "ይህ የወኪል ክፍለ-ጊዜ ተዘግቷል።"
+  },
+  "chatHintEnded": {
+    "message": "እንደገና ለመወያየት ወኪሉ በአሳሹ ውስጥ እንዲቀጥል ይጠይቁት።"
+  },
+  "chatReadByAgent": {
+    "message": "በወኪሉ ተነብቧል"
+  },
+  "chatNotReadYet": {
+    "message": "ገና አልተነበበም"
+  },
+  "chatEndedNotice": {
+    "message": "ውይይቱን ጨርሰዋል።"
+  },
+  "chatConversationGone": {
+    "message": "ይህ ውይይት ከእንግዲህ የለም።"
+  },
+  "chatEndedError": {
+    "message": "ይህ ውይይት አብቅቷል። እንደገና ለመጀመር ወኪሉ በአሳሹ ውስጥ እንዲቀጥል ይጠይቁት።"
+  },
+  "chatTooLong_one": {
+    "message": "አንድ መልዕክት ቢበዛ $1 ቁምፊ ሊኖረው ይችላል።"
+  },
+  "chatTooLong_other": {
+    "message": "አንድ መልዕክት ቢበዛ $1 ቁምፊዎች ሊኖረው ይችላል።"
+  }
+}

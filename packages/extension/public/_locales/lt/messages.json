@@ -1,0 +1,320 @@
+{
+  "locale": {
+    "message": "lt"
+  },
+  "extDescription": {
+    "message": "Valdykite savo naršyklę bet kuriuo DI agentu: tvarkykite skirtukus ir veikite tinklalapiuose per MCP."
+  },
+  "actionTitle": {
+    "message": "Agent Browser Bridge: sąranka ir būsena"
+  },
+  "actionTitleDisconnected": {
+    "message": "Agent Browser Bridge: neprijungtas joks agentas"
+  },
+  "actionTitleConnected": {
+    "message": "Agent Browser Bridge: agentas prijungtas"
+  },
+  "actionTitleConnectedTo": {
+    "message": "Agent Browser Bridge: prijungta ($1)"
+  },
+  "notificationReply": {
+    "message": "Norėdami atsakyti, įrankių juostoje spustelėkite mygtuką Agent Browser Bridge"
+  },
+  "optionsTitle": {
+    "message": "Agent Browser Bridge parinktys"
+  },
+  "statusChecking": {
+    "message": "Tikrinamas ryšys…"
+  },
+  "statusLooking": {
+    "message": "Ieškoma jūsų agento…"
+  },
+  "welcomeLede": {
+    "message": "Leiskite DI agentui tvarkyti jūsų skirtukus ir veikti tinklalapiuose."
+  },
+  "welcomeLedeSafari": {
+    "message": "Leiskite DI agentui rasti, atidaryti, perkelti ir uždaryti jūsų Safari skirtukus."
+  },
+  "welcomeConnected": {
+    "message": "Prijungta: jūsų agentas gali naudoti naršyklę."
+  },
+  "welcomeConnectedMany_one": {
+    "message": "Prijungta: naršyklę gali naudoti $1 agento sesija."
+  },
+  "welcomeConnectedMany_other": {
+    "message": "Prijungta: naršyklę gali naudoti $1 agento sesijų."
+  },
+  "welcomeConnectedMany_few": {
+    "message": "Prijungta: naršyklę gali naudoti $1 agento sesijos."
+  },
+  "welcomeConnectedMany_many": {
+    "message": "Prijungta: naršyklę gali naudoti $1 agento sesijos."
+  },
+  "welcomeDisconnected": {
+    "message": "Laukiama jūsų agento. Nustatykite jį toliau, tada pradėkite sesiją."
+  },
+  "instanceNameLabel": {
+    "message": "Pavadinkite šį naršyklės profilį"
+  },
+  "instanceNamePlaceholder": {
+    "message": "Pavyzdžiui, Darbas arba Asmeninis"
+  },
+  "welcomeInstanceNameHint": {
+    "message": "Pagal šį pavadinimą agentai atskiria jūsų naršykles ir profilius, todėl galite paprašyti, pavyzdžiui, naršyklės Darbas. $1"
+  },
+  "optionsInstanceNameHint": {
+    "message": "Pagal šį pavadinimą agentai atskiria jūsų naršykles ir profilius. $1"
+  },
+  "instanceId": {
+    "message": "Egzemplioriaus ID: $1"
+  },
+  "welcomeStepAdd": {
+    "message": "1. Pridėkite jį prie savo agento"
+  },
+  "welcomeStepAddHint": {
+    "message": "Jūsų agentas paleidžia nedidelį vietinį serverį ($1), prie kurio jungiasi šis plėtinys. Pasirinkite savo agentą:"
+  },
+  "welcomeAgentSetupTitle": {
+    "message": "Leiskite agentui viską nustatyti"
+  },
+  "welcomeAgentSetupBody": {
+    "message": "Įklijuokite šį raginimą į bet kurį agentą, kuris gali vykdyti komandas ir keisti savo nustatymus, pvz., Claude Code, Cursor ar Codex. Jis patikrina, ar įdiegta Node.js, tada prideda serverį."
+  },
+  "copyPrompt": {
+    "message": "Kopijuoti raginimą"
+  },
+  "copy": {
+    "message": "Kopijuoti"
+  },
+  "copied": {
+    "message": "Nukopijuota"
+  },
+  "welcomeClaudeCodeBody": {
+    "message": "Vieną kartą paleiskite terminale:"
+  },
+  "welcomeOpensAndConfirms": {
+    "message": "Atidaroma programa ir prašoma patvirtinti."
+  },
+  "welcomeAddTo": {
+    "message": "Pridėti: $1"
+  },
+  "welcomeClaudeDesktopBody": {
+    "message": "Atsisiųskite plėtinį, tada atidarykite failą, kad jį įdiegtumėte. Node.js nereikia."
+  },
+  "welcomeDownloadFor": {
+    "message": "Atsisiųsti: $1"
+  },
+  "welcomeOtherAgentsTitle": {
+    "message": "Kiti agentai"
+  },
+  "welcomeOtherAgentsBody": {
+    "message": "Pridėkite tai prie agento MCP konfigūracijos, tada paleiskite agentą iš naujo."
+  },
+  "welcomeStepTry": {
+    "message": "2. Išbandykite"
+  },
+  "welcomeTryIntro": {
+    "message": "Kai Chrome atidaryta, parašykite savo agentui:"
+  },
+  "welcomeTryTabs": {
+    "message": "Sugrupuok mano atidarytus skirtukus pagal temas. Pirma parodyk man planą."
+  },
+  "welcomeTryPage": {
+    "message": "Atidaryk Chrome versijos naujienas ir apibendrink, kas pasikeitė naujausioje versijoje."
+  },
+  "welcomeTryHint": {
+    "message": "Būsena viršuje tampa žalia, kai veikia jūsų agento serveris. Naudojant $1 atliktus pakeitimus galima atšaukti paprašius agento juos anuliuoti."
+  },
+  "welcomeTryIntroSafari": {
+    "message": "Kai Safari atidaryta, parašykite savo agentui:"
+  },
+  "welcomeTryDuplicatesSafari": {
+    "message": "Kokie skirtukai atidaryti Safari? Uždaryk dublikatus, bet pirma manęs paklausk."
+  },
+  "welcomeTrySortSafari": {
+    "message": "Surikiuok mano Safari skirtukus pagal svetainę."
+  },
+  "welcomeTryHintSafari": {
+    "message": "Būsena viršuje tampa žalia, kai veikia jūsų agento serveris. Safari agentas gali atidaryti, išdėstyti ir uždaryti langus, taip pat atidaryti skirtukus, juose naršyti, juos perjungti, prisegti, nutildyti, dublikuoti, perkelti ir uždaryti. Jei trūksta skirtukų pavadinimų ir adresų, suteikite plėtiniui prieigą prie svetainių Safari skiltyje Settings > Extensions. Skirtukų grupės, istorija, žymės ir puslapių valdymas pasiekiami Chrome."
+  },
+  "welcomePrivacyHeading": {
+    "message": "Privatumas"
+  },
+  "welcomePrivacy": {
+    "message": "Jūsų naršymo duomenys lieka jūsų kompiuteryje: plėtinys bendrauja tik su $1. Jūsų agentas gali skaityti skirtukų pavadinimus ir URL, pertvarkyti, grupuoti ar uždaryti skirtukus, taip pat skaityti tinklalapius ir juose veikti, kai to paprašote. Kol agentas dirba puslapyje, Chrome rodo derinimo reklamjuostę. Šis plėtinys niekur kitur nesiunčia skirtukų pavadinimų, URL ar puslapių turinio."
+  },
+  "welcomePrivacySafari": {
+    "message": "Jūsų naršymo duomenys lieka jūsų kompiuteryje: plėtinys bendrauja tik su $1. Jūsų agentas gali skaityti skirtukų pavadinimus ir URL, taip pat atidaryti, išdėstyti ar uždaryti langus ir skirtukus, kai to paprašote. Safari jis negali skaityti tinklalapių ar juose veikti. Šis plėtinys niekur kitur nesiunčia skirtukų pavadinimų ar URL."
+  },
+  "welcomeAnalytics": {
+    "message": "Bendrinti anoniminę naudojimo statistiką (kurios funkcijos naudojamos, plėtinio versija), kad padėtumėte tobulinti plėtinį."
+  },
+  "analyticsTitle": {
+    "message": "Bendrinti anoniminę naudojimo statistiką"
+  },
+  "analyticsHint": {
+    "message": "Kurios funkcijos naudojamos, ar jos veikia sėkmingai, plėtinio ir agento versijos. Niekada skirtukų pavadinimų, URL ar puslapių turinio. $1"
+  },
+  "privacyPolicy": {
+    "message": "Privatumo politika"
+  },
+  "analyticsUnavailable": {
+    "message": "Ši versija nerenka naudojimo statistikos."
+  },
+  "openSetup": {
+    "message": "Atidaryti sąranką ir ryšio būseną"
+  },
+  "optionsConnected": {
+    "message": "Agentas prijungtas"
+  },
+  "optionsConnectedMany_one": {
+    "message": "Prijungta $1 agento sesija"
+  },
+  "optionsConnectedMany_other": {
+    "message": "Prijungta $1 agento sesijų"
+  },
+  "optionsConnectedMany_few": {
+    "message": "Prijungtos $1 agento sesijos"
+  },
+  "optionsConnectedMany_many": {
+    "message": "Prijungta $1 agento sesijos"
+  },
+  "optionsDisconnected": {
+    "message": "Neprijungtas joks agentas"
+  },
+  "agentStartingUp": {
+    "message": "Agentas paleidžiamas"
+  },
+  "sessionInProject": {
+    "message": "$1 projekte $2"
+  },
+  "sessionStarted": {
+    "message": "Pradėta $1"
+  },
+  "sessionLastUsed_one": {
+    "message": "Paskutinį kartą naudota $2 $3, $1 iškvietimas"
+  },
+  "sessionLastUsed_other": {
+    "message": "Paskutinį kartą naudota $2 $3, $1 iškvietimų"
+  },
+  "sessionLastUsed_few": {
+    "message": "Paskutinį kartą naudota $2 $3, $1 iškvietimai"
+  },
+  "sessionLastUsed_many": {
+    "message": "Paskutinį kartą naudota $2 $3, $1 iškvietimo"
+  },
+  "sessionUnused": {
+    "message": "Dar nenaudojo naršyklės"
+  },
+  "sessionId": {
+    "message": "Sesija $1"
+  },
+  "serverVersion": {
+    "message": "serveris $1"
+  },
+  "instanceThisBrowser": {
+    "message": "$1, ši naršyklė"
+  },
+  "justNow": {
+    "message": "ką tik"
+  },
+  "chatTitle": {
+    "message": "Pokalbis su agentu"
+  },
+  "chatSetup": {
+    "message": "Sąranka"
+  },
+  "chatConversation": {
+    "message": "Pokalbis"
+  },
+  "chatEmptyHeading": {
+    "message": "Bendraukite su agentu čia"
+  },
+  "chatEmptyBody": {
+    "message": "Paprašykite agento tęsti naršyklėje arba paleiskite jo raginimą $1. Jo žinutės rodomos čia, o jūsų atsakymai keliauja tiesiai jam."
+  },
+  "chatEmptyHint": {
+    "message": "Kiekviena agento sesija turi savo pokalbį."
+  },
+  "chatInput": {
+    "message": "Žinutė agentui"
+  },
+  "chatEnd": {
+    "message": "Baigti pokalbį"
+  },
+  "chatRemove": {
+    "message": "Pašalinti"
+  },
+  "chatSend": {
+    "message": "Siųsti"
+  },
+  "chatError": {
+    "message": "Kažkas nepavyko."
+  },
+  "chatUnseen_one": {
+    "message": "$2 ($1 nauja)"
+  },
+  "chatUnseen_other": {
+    "message": "$2 ($1 naujų)"
+  },
+  "chatUnseen_few": {
+    "message": "$2 ($1 naujos)"
+  },
+  "chatUnseen_many": {
+    "message": "$2 ($1 naujos)"
+  },
+  "chatStatusWaiting": {
+    "message": "Laukia jūsų atsakymo"
+  },
+  "chatStatusWorking": {
+    "message": "Dirba"
+  },
+  "chatStatusWorkingTool": {
+    "message": "Dirba: naudojo $1 $2"
+  },
+  "chatStatusDisconnected": {
+    "message": "Agentas atsijungė"
+  },
+  "chatStatusEnded": {
+    "message": "Pokalbis baigtas"
+  },
+  "chatHintWaiting": {
+    "message": "Enter – siųsti, Shift+Enter – nauja eilutė."
+  },
+  "chatHintWorking": {
+    "message": "Agentas perskaitys jūsų žinutę, kai kitą kartą patikrins pokalbį."
+  },
+  "chatHintDisconnected": {
+    "message": "Ši agento sesija baigta."
+  },
+  "chatHintEnded": {
+    "message": "Norėdami vėl kalbėtis, paprašykite agento tęsti naršyklėje."
+  },
+  "chatReadByAgent": {
+    "message": "agentas perskaitė"
+  },
+  "chatNotReadYet": {
+    "message": "dar neperskaityta"
+  },
+  "chatEndedNotice": {
+    "message": "Baigėte pokalbį."
+  },
+  "chatConversationGone": {
+    "message": "Šio pokalbio nebėra."
+  },
+  "chatEndedError": {
+    "message": "Šis pokalbis baigtas. Norėdami jį vėl pradėti, paprašykite agento tęsti naršyklėje."
+  },
+  "chatTooLong_one": {
+    "message": "Žinutėje gali būti ne daugiau kaip $1 simbolis."
+  },
+  "chatTooLong_other": {
+    "message": "Žinutėje gali būti ne daugiau kaip $1 simbolių."
+  },
+  "chatTooLong_few": {
+    "message": "Žinutėje gali būti ne daugiau kaip $1 simboliai."
+  },
+  "chatTooLong_many": {
+    "message": "Žinutėje gali būti ne daugiau kaip $1 simbolio."
+  }
+}

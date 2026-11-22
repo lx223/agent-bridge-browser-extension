@@ -1,0 +1,320 @@
+{
+  "locale": {
+    "message": "uk"
+  },
+  "extDescription": {
+    "message": "Керуйте власним браузером за допомогою будь-якого ШІ-агента: упорядковуйте вкладки й працюйте з вебсторінками через MCP."
+  },
+  "actionTitle": {
+    "message": "Agent Browser Bridge: налаштування і стан"
+  },
+  "actionTitleDisconnected": {
+    "message": "Agent Browser Bridge: агента не підключено"
+  },
+  "actionTitleConnected": {
+    "message": "Agent Browser Bridge: агента підключено"
+  },
+  "actionTitleConnectedTo": {
+    "message": "Agent Browser Bridge, підключено: $1"
+  },
+  "notificationReply": {
+    "message": "Щоб відповісти, натисніть кнопку Agent Browser Bridge на панелі інструментів"
+  },
+  "optionsTitle": {
+    "message": "Параметри Agent Browser Bridge"
+  },
+  "statusChecking": {
+    "message": "Перевірка з’єднання…"
+  },
+  "statusLooking": {
+    "message": "Пошук агента…"
+  },
+  "welcomeLede": {
+    "message": "Дозвольте ШІ-агенту впорядковувати ваші вкладки й працювати з вебсторінками."
+  },
+  "welcomeLedeSafari": {
+    "message": "Дозвольте ШІ-агенту знаходити, відкривати, переміщувати й закривати ваші вкладки Safari."
+  },
+  "welcomeConnected": {
+    "message": "Підключено: агент може користуватися браузером."
+  },
+  "welcomeConnectedMany_one": {
+    "message": "Підключено: $1 сеанс агента може користуватися браузером."
+  },
+  "welcomeConnectedMany_other": {
+    "message": "Підключено: $1 сеансу агента можуть користуватися браузером."
+  },
+  "welcomeConnectedMany_few": {
+    "message": "Підключено: $1 сеанси агента можуть користуватися браузером."
+  },
+  "welcomeConnectedMany_many": {
+    "message": "Підключено: $1 сеансів агента можуть користуватися браузером."
+  },
+  "welcomeDisconnected": {
+    "message": "Очікування агента. Налаштуйте його нижче, а потім почніть сеанс."
+  },
+  "instanceNameLabel": {
+    "message": "Назвіть цей профіль браузера"
+  },
+  "instanceNamePlaceholder": {
+    "message": "Наприклад, Робота або Особисте"
+  },
+  "welcomeInstanceNameHint": {
+    "message": "За цією назвою агенти розрізняють ваші браузери та профілі, тож можна попросити, наприклад, браузер «Робота». $1"
+  },
+  "optionsInstanceNameHint": {
+    "message": "За цією назвою агенти розрізняють ваші браузери та профілі. $1"
+  },
+  "instanceId": {
+    "message": "ID екземпляра: $1"
+  },
+  "welcomeStepAdd": {
+    "message": "1. Додайте його до свого агента"
+  },
+  "welcomeStepAddHint": {
+    "message": "Агент запускає невеликий локальний сервер ($1), до якого підключається це розширення. Виберіть свого агента:"
+  },
+  "welcomeAgentSetupTitle": {
+    "message": "Доручіть налаштування агенту"
+  },
+  "welcomeAgentSetupBody": {
+    "message": "Вставте цей промпт у будь-якого агента, який уміє виконувати команди й змінювати власні налаштування, наприклад Claude Code, Cursor чи Codex. Він перевірить наявність Node.js, а потім додасть сервер."
+  },
+  "copyPrompt": {
+    "message": "Копіювати промпт"
+  },
+  "copy": {
+    "message": "Копіювати"
+  },
+  "copied": {
+    "message": "Скопійовано"
+  },
+  "welcomeClaudeCodeBody": {
+    "message": "Виконайте один раз у терміналі:"
+  },
+  "welcomeOpensAndConfirms": {
+    "message": "Відкриє застосунок і попросить підтвердження."
+  },
+  "welcomeAddTo": {
+    "message": "Додати в $1"
+  },
+  "welcomeClaudeDesktopBody": {
+    "message": "Завантажте розширення, а потім відкрийте файл, щоб установити його. Node.js не потрібен."
+  },
+  "welcomeDownloadFor": {
+    "message": "Завантажити для $1"
+  },
+  "welcomeOtherAgentsTitle": {
+    "message": "Інші агенти"
+  },
+  "welcomeOtherAgentsBody": {
+    "message": "Додайте це до конфігурації MCP агента, а потім перезапустіть його."
+  },
+  "welcomeStepTry": {
+    "message": "2. Спробуйте"
+  },
+  "welcomeTryIntro": {
+    "message": "Відкрийте Chrome і попросіть агента:"
+  },
+  "welcomeTryTabs": {
+    "message": "Розбий мої відкриті вкладки на групи за темами. Спершу покажи план."
+  },
+  "welcomeTryPage": {
+    "message": "Відкрий нотатки до випуску Chrome і коротко підсумуй, що змінилося в останній версії."
+  },
+  "welcomeTryHint": {
+    "message": "Стан угорі стане зеленим, щойно сервер агента запуститься. Зміни, внесені за допомогою $1, можна скасувати — просто попросіть агента."
+  },
+  "welcomeTryIntroSafari": {
+    "message": "Відкрийте Safari і попросіть агента:"
+  },
+  "welcomeTryDuplicatesSafari": {
+    "message": "Які вкладки в мене відкриті в Safari? Закрий дублікати, але спершу запитай мене."
+  },
+  "welcomeTrySortSafari": {
+    "message": "Впорядкуй мої вкладки Safari за сайтами."
+  },
+  "welcomeTryHintSafari": {
+    "message": "Стан угорі стане зеленим, щойно сервер агента запуститься. У Safari агент може відкривати, упорядковувати й закривати вікна, а також відкривати, перемикати, закріплювати, дублювати, переміщувати й закривати вкладки, відкривати в них адреси та вимикати в них звук. Якщо назви й адреси вкладок не відображаються, надайте розширенню доступ до вебсайтів у Safari: «Параметри» > «Розширення». Групи вкладок, історія, закладки й керування сторінками доступні в Chrome."
+  },
+  "welcomePrivacyHeading": {
+    "message": "Конфіденційність"
+  },
+  "welcomePrivacy": {
+    "message": "Дані веб-перегляду залишаються на вашому комп’ютері: розширення обмінюється даними лише з $1. Агент може читати назви й URL-адреси вкладок, змінювати їх порядок, групувати чи закривати вкладки, а також читати вебсторінки й виконувати на них дії, коли ви його про це попросите. Поки агент працює на сторінці, Chrome показує банер налагодження. Це розширення ніколи нікуди більше не надсилає назви вкладок, URL-адреси та вміст сторінок."
+  },
+  "welcomePrivacySafari": {
+    "message": "Дані веб-перегляду залишаються на вашому комп’ютері: розширення обмінюється даними лише з $1. Агент може читати назви й URL-адреси вкладок, а також відкривати, упорядковувати чи закривати вікна й вкладки, коли ви його про це попросите. У Safari він не може читати вебсторінки чи виконувати на них дії. Це розширення ніколи нікуди більше не надсилає назви та URL-адреси вкладок."
+  },
+  "welcomeAnalytics": {
+    "message": "Надсилати анонімну статистику використання (які функції використовуються, версія розширення), щоб допомогти покращити розширення."
+  },
+  "analyticsTitle": {
+    "message": "Надсилати анонімну статистику використання"
+  },
+  "analyticsHint": {
+    "message": "Які функції використовуються, чи успішно вони спрацьовують, а також версії розширення й агента. Назви вкладок, URL-адреси та вміст сторінок не надсилаються ніколи. $1"
+  },
+  "privacyPolicy": {
+    "message": "Політика конфіденційності"
+  },
+  "analyticsUnavailable": {
+    "message": "Ця збірка не збирає статистику використання."
+  },
+  "openSetup": {
+    "message": "Відкрити налаштування і стан підключення"
+  },
+  "optionsConnected": {
+    "message": "Агента підключено"
+  },
+  "optionsConnectedMany_one": {
+    "message": "Підключено $1 сеанс агента"
+  },
+  "optionsConnectedMany_other": {
+    "message": "Підключено $1 сеансу агента"
+  },
+  "optionsConnectedMany_few": {
+    "message": "Підключено $1 сеанси агента"
+  },
+  "optionsConnectedMany_many": {
+    "message": "Підключено $1 сеансів агента"
+  },
+  "optionsDisconnected": {
+    "message": "Агента не підключено"
+  },
+  "agentStartingUp": {
+    "message": "Агент запускається"
+  },
+  "sessionInProject": {
+    "message": "$1 у $2"
+  },
+  "sessionStarted": {
+    "message": "Розпочато $1"
+  },
+  "sessionLastUsed_one": {
+    "message": "Останній виклик: $2 $3, усього $1 виклик"
+  },
+  "sessionLastUsed_other": {
+    "message": "Останній виклик: $2 $3, усього $1 виклику"
+  },
+  "sessionLastUsed_few": {
+    "message": "Останній виклик: $2 $3, усього $1 виклики"
+  },
+  "sessionLastUsed_many": {
+    "message": "Останній виклик: $2 $3, усього $1 викликів"
+  },
+  "sessionUnused": {
+    "message": "Браузер ще не використовувався"
+  },
+  "sessionId": {
+    "message": "Сеанс $1"
+  },
+  "serverVersion": {
+    "message": "сервер $1"
+  },
+  "instanceThisBrowser": {
+    "message": "$1, цей браузер"
+  },
+  "justNow": {
+    "message": "щойно"
+  },
+  "chatTitle": {
+    "message": "Чат з агентом"
+  },
+  "chatSetup": {
+    "message": "Налаштування"
+  },
+  "chatConversation": {
+    "message": "Розмова"
+  },
+  "chatEmptyHeading": {
+    "message": "Спілкуйтеся з агентом прямо тут"
+  },
+  "chatEmptyBody": {
+    "message": "Попросіть агента продовжити в браузері або запустіть його промпт $1. Його повідомлення з’являтимуться тут, а ваші відповіді надходитимуть одразу йому."
+  },
+  "chatEmptyHint": {
+    "message": "Кожен сеанс агента має власну розмову."
+  },
+  "chatInput": {
+    "message": "Повідомлення агенту"
+  },
+  "chatEnd": {
+    "message": "Завершити чат"
+  },
+  "chatRemove": {
+    "message": "Видалити"
+  },
+  "chatSend": {
+    "message": "Надіслати"
+  },
+  "chatError": {
+    "message": "Щось пішло не так."
+  },
+  "chatUnseen_one": {
+    "message": "$2 (нових: $1)"
+  },
+  "chatUnseen_other": {
+    "message": "$2 (нових: $1)"
+  },
+  "chatUnseen_few": {
+    "message": "$2 (нових: $1)"
+  },
+  "chatUnseen_many": {
+    "message": "$2 (нових: $1)"
+  },
+  "chatStatusWaiting": {
+    "message": "Чекає на вашу відповідь"
+  },
+  "chatStatusWorking": {
+    "message": "Працює"
+  },
+  "chatStatusWorkingTool": {
+    "message": "Працює: викликав $1 $2"
+  },
+  "chatStatusDisconnected": {
+    "message": "Агент від’єднався"
+  },
+  "chatStatusEnded": {
+    "message": "Чат завершено"
+  },
+  "chatHintWaiting": {
+    "message": "Enter — надіслати, Shift+Enter — новий рядок."
+  },
+  "chatHintWorking": {
+    "message": "Агент прочитає ваше повідомлення, коли наступного разу перевірить чат."
+  },
+  "chatHintDisconnected": {
+    "message": "Цей сеанс агента закрито."
+  },
+  "chatHintEnded": {
+    "message": "Щоб знову поспілкуватися, попросіть агента продовжити в браузері."
+  },
+  "chatReadByAgent": {
+    "message": "прочитано агентом"
+  },
+  "chatNotReadYet": {
+    "message": "ще не прочитано"
+  },
+  "chatEndedNotice": {
+    "message": "Ви завершили чат."
+  },
+  "chatConversationGone": {
+    "message": "Цієї розмови більше не існує."
+  },
+  "chatEndedError": {
+    "message": "Цей чат завершено. Щоб почати його знову, попросіть агента продовжити в браузері."
+  },
+  "chatTooLong_one": {
+    "message": "Повідомлення може містити не більше $1 символу."
+  },
+  "chatTooLong_other": {
+    "message": "Повідомлення може містити не більше $1 символу."
+  },
+  "chatTooLong_few": {
+    "message": "Повідомлення може містити не більше $1 символів."
+  },
+  "chatTooLong_many": {
+    "message": "Повідомлення може містити не більше $1 символів."
+  }
+}

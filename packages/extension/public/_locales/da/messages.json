@@ -1,0 +1,290 @@
+{
+  "locale": {
+    "message": "da"
+  },
+  "extDescription": {
+    "message": "Styr din egen browser med den AI-agent, du foretrækker: Organiser faner, og betjen websider via MCP."
+  },
+  "actionTitle": {
+    "message": "Agent Browser Bridge: opsætning og status"
+  },
+  "actionTitleDisconnected": {
+    "message": "Agent Browser Bridge: ingen agent forbundet"
+  },
+  "actionTitleConnected": {
+    "message": "Agent Browser Bridge: agent forbundet"
+  },
+  "actionTitleConnectedTo": {
+    "message": "Agent Browser Bridge: forbundet med $1"
+  },
+  "notificationReply": {
+    "message": "Klik på knappen Agent Browser Bridge på værktøjslinjen for at svare"
+  },
+  "optionsTitle": {
+    "message": "Indstillinger for Agent Browser Bridge"
+  },
+  "statusChecking": {
+    "message": "Tjekker forbindelsen…"
+  },
+  "statusLooking": {
+    "message": "Leder efter din agent…"
+  },
+  "welcomeLede": {
+    "message": "Lad din AI-agent organisere dine faner og betjene websider."
+  },
+  "welcomeLedeSafari": {
+    "message": "Lad din AI-agent finde, åbne, flytte og lukke dine Safari-faner."
+  },
+  "welcomeConnected": {
+    "message": "Forbundet: Din agent kan bruge browseren."
+  },
+  "welcomeConnectedMany_one": {
+    "message": "Forbundet: $1 agentsession kan bruge browseren."
+  },
+  "welcomeConnectedMany_other": {
+    "message": "Forbundet: $1 agentsessioner kan bruge browseren."
+  },
+  "welcomeDisconnected": {
+    "message": "Venter på din agent. Konfigurer den nedenfor, og start derefter en session."
+  },
+  "instanceNameLabel": {
+    "message": "Giv denne browserprofil et navn"
+  },
+  "instanceNamePlaceholder": {
+    "message": "F.eks. Arbejde eller Privat"
+  },
+  "welcomeInstanceNameHint": {
+    "message": "Agenter bruger navnet til at skelne mellem dine browsere og profiler, så du kan bede om browseren Arbejde. $1"
+  },
+  "optionsInstanceNameHint": {
+    "message": "Agenter bruger navnet til at skelne mellem dine browsere og profiler. $1"
+  },
+  "instanceId": {
+    "message": "Instans-id: $1"
+  },
+  "welcomeStepAdd": {
+    "message": "1. Føj den til din agent"
+  },
+  "welcomeStepAddHint": {
+    "message": "Din agent starter en lille lokal server ($1), som denne udvidelse forbinder til. Vælg din agent:"
+  },
+  "welcomeAgentSetupTitle": {
+    "message": "Lad din agent sætte det op"
+  },
+  "welcomeAgentSetupBody": {
+    "message": "Indsæt denne prompt i en agent, der kan køre kommandoer og redigere sine egne indstillinger, f.eks. Claude Code, Cursor eller Codex. Den tjekker, om Node.js er installeret, og tilføjer derefter serveren."
+  },
+  "copyPrompt": {
+    "message": "Kopiér prompt"
+  },
+  "copy": {
+    "message": "Kopiér"
+  },
+  "copied": {
+    "message": "Kopieret"
+  },
+  "welcomeClaudeCodeBody": {
+    "message": "Kør én gang i en terminal:"
+  },
+  "welcomeOpensAndConfirms": {
+    "message": "Åbner appen og beder dig bekræfte."
+  },
+  "welcomeAddTo": {
+    "message": "Føj til $1"
+  },
+  "welcomeClaudeDesktopBody": {
+    "message": "Download udvidelsen, og åbn derefter filen for at installere den. Node.js er ikke nødvendigt."
+  },
+  "welcomeDownloadFor": {
+    "message": "Download til $1"
+  },
+  "welcomeOtherAgentsTitle": {
+    "message": "Andre agenter"
+  },
+  "welcomeOtherAgentsBody": {
+    "message": "Føj dette til agentens MCP-konfiguration, og genstart den derefter."
+  },
+  "welcomeStepTry": {
+    "message": "2. Prøv det"
+  },
+  "welcomeTryIntro": {
+    "message": "Åbn Chrome, og spørg din agent:"
+  },
+  "welcomeTryTabs": {
+    "message": "Organiser mine åbne faner i grupper efter emne. Vis mig planen først."
+  },
+  "welcomeTryPage": {
+    "message": "Åbn Chromes versionsnoter, og opsummer, hvad der er ændret i den nyeste version."
+  },
+  "welcomeTryHint": {
+    "message": "Statussen ovenfor bliver grøn, når din agents server kører. Ændringer foretaget med $1 kan fortrydes ved at bede agenten om at fortryde dem."
+  },
+  "welcomeTryIntroSafari": {
+    "message": "Åbn Safari, og spørg din agent:"
+  },
+  "welcomeTryDuplicatesSafari": {
+    "message": "Hvilke faner har jeg åbne i Safari? Luk dubletterne, men spørg mig først."
+  },
+  "welcomeTrySortSafari": {
+    "message": "Sortér mine Safari-faner efter websted."
+  },
+  "welcomeTryHintSafari": {
+    "message": "Statussen ovenfor bliver grøn, når din agents server kører. I Safari kan din agent åbne, arrangere og lukke vinduer samt åbne faner, indlæse sider i dem, skifte mellem dem og fastgøre, slå lyden fra, duplikere, flytte og lukke dem. Hvis fanernes titler og adresser mangler, skal du give udvidelsen adgang til websteder i Safari under Indstillinger > Udvidelser. Fanegrupper, historik, bogmærker og sidestyring er tilgængelige i Chrome."
+  },
+  "welcomePrivacyHeading": {
+    "message": "Privatliv"
+  },
+  "welcomePrivacy": {
+    "message": "Dine browserdata forbliver på din computer: Udvidelsen kommunikerer kun med $1. Din agent kan læse fanetitler og webadresser, omarrangere, gruppere eller lukke faner samt læse og handle på websider, når du beder den om det. Chrome viser et fejlfindingsbanner, mens agenten arbejder på en side. Denne udvidelse sender aldrig fanetitler, webadresser eller sideindhold andre steder hen."
+  },
+  "welcomePrivacySafari": {
+    "message": "Dine browserdata forbliver på din computer: Udvidelsen kommunikerer kun med $1. Din agent kan læse fanetitler og webadresser samt åbne, arrangere eller lukke vinduer og faner, når du beder den om det. I Safari kan den ikke læse eller handle på websider. Denne udvidelse sender aldrig fanetitler eller webadresser andre steder hen."
+  },
+  "welcomeAnalytics": {
+    "message": "Del anonyme brugsstatistikker (hvilke funktioner der bruges, udvidelsens version) for at hjælpe med at forbedre udvidelsen."
+  },
+  "analyticsTitle": {
+    "message": "Del anonyme brugsstatistikker"
+  },
+  "analyticsHint": {
+    "message": "Hvilke funktioner der bruges, om de lykkes, og udvidelsens og agentens versioner. Aldrig fanetitler, webadresser eller sideindhold. $1"
+  },
+  "privacyPolicy": {
+    "message": "Privatlivspolitik"
+  },
+  "analyticsUnavailable": {
+    "message": "Denne version indsamler ikke brugsstatistikker."
+  },
+  "openSetup": {
+    "message": "Åbn opsætning og forbindelsesstatus"
+  },
+  "optionsConnected": {
+    "message": "Agent forbundet"
+  },
+  "optionsConnectedMany_one": {
+    "message": "$1 agentsession forbundet"
+  },
+  "optionsConnectedMany_other": {
+    "message": "$1 agentsessioner forbundet"
+  },
+  "optionsDisconnected": {
+    "message": "Ingen agent forbundet"
+  },
+  "agentStartingUp": {
+    "message": "Agenten starter"
+  },
+  "sessionInProject": {
+    "message": "$1 i $2"
+  },
+  "sessionStarted": {
+    "message": "Startet $1"
+  },
+  "sessionLastUsed_one": {
+    "message": "Sidst brugt: $2 $3, $1 kald"
+  },
+  "sessionLastUsed_other": {
+    "message": "Sidst brugt: $2 $3, $1 kald"
+  },
+  "sessionUnused": {
+    "message": "Har ikke brugt en browser endnu"
+  },
+  "sessionId": {
+    "message": "Session $1"
+  },
+  "serverVersion": {
+    "message": "server $1"
+  },
+  "instanceThisBrowser": {
+    "message": "$1, denne browser"
+  },
+  "justNow": {
+    "message": "lige nu"
+  },
+  "chatTitle": {
+    "message": "Agentchat"
+  },
+  "chatSetup": {
+    "message": "Opsætning"
+  },
+  "chatConversation": {
+    "message": "Samtale"
+  },
+  "chatEmptyHeading": {
+    "message": "Tal med din agent herfra"
+  },
+  "chatEmptyBody": {
+    "message": "Bed din agent om at fortsætte i browseren, eller kør dens prompt $1. Dens beskeder vises her, og dine svar går direkte tilbage til den."
+  },
+  "chatEmptyHint": {
+    "message": "Hver agentsession får sin egen samtale."
+  },
+  "chatInput": {
+    "message": "Skriv til agenten"
+  },
+  "chatEnd": {
+    "message": "Afslut chat"
+  },
+  "chatRemove": {
+    "message": "Fjern"
+  },
+  "chatSend": {
+    "message": "Send"
+  },
+  "chatError": {
+    "message": "Noget gik galt."
+  },
+  "chatUnseen_one": {
+    "message": "$2 ($1 ny)"
+  },
+  "chatUnseen_other": {
+    "message": "$2 ($1 nye)"
+  },
+  "chatStatusWaiting": {
+    "message": "Venter på dit svar"
+  },
+  "chatStatusWorking": {
+    "message": "Arbejder"
+  },
+  "chatStatusWorkingTool": {
+    "message": "Arbejder: brugte $1 $2"
+  },
+  "chatStatusDisconnected": {
+    "message": "Agenten er afbrudt"
+  },
+  "chatStatusEnded": {
+    "message": "Chatten er afsluttet"
+  },
+  "chatHintWaiting": {
+    "message": "Enter sender, Skift+Enter giver en ny linje."
+  },
+  "chatHintWorking": {
+    "message": "Agenten læser din besked, næste gang den tjekker chatten."
+  },
+  "chatHintDisconnected": {
+    "message": "Denne agentsession er lukket."
+  },
+  "chatHintEnded": {
+    "message": "Bed agenten om at fortsætte i browseren for at chatte igen."
+  },
+  "chatReadByAgent": {
+    "message": "læst af agenten"
+  },
+  "chatNotReadYet": {
+    "message": "ikke læst endnu"
+  },
+  "chatEndedNotice": {
+    "message": "Du afsluttede chatten."
+  },
+  "chatConversationGone": {
+    "message": "Denne samtale findes ikke længere."
+  },
+  "chatEndedError": {
+    "message": "Denne chat er afsluttet. Bed agenten om at fortsætte i browseren for at starte den igen."
+  },
+  "chatTooLong_one": {
+    "message": "Beskeder må højst være på $1 tegn."
+  },
+  "chatTooLong_other": {
+    "message": "Beskeder må højst være på $1 tegn."
+  }
+}
