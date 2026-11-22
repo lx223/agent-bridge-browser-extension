@@ -12,7 +12,7 @@ The agent uses it for yes or no decisions about what it is about to do, such as 
 - Drag the popover by its top bar to move it out of the way.
 - After you click, the popover says what was sent to the agent, then closes.
 
-The popover follows your system's light or dark mode, not the website's. Its own text, such as "claude-code asks" and the default button labels, is in the extension's language (see [Localisation](localisation.md)). The question and any button labels the agent chose are in whatever language the agent wrote them.
+The popover follows your system's light or dark mode, not the website's, with the same colours as the setup page and chat panel. `ask.ts` passes it `packages/extension/src/theme.css` with `:root` changed to the card, so the website's own CSS cannot change those colours. Its own text, such as "claude-code asks" and the default button labels, is in the extension's language (see [Localisation](localisation.md)). The question and any button labels the agent chose are in whatever language the agent wrote them.
 
 The buttons ignore clicks for the first moment after the popover appears, so a click meant for the page does not land on them by accident.
 

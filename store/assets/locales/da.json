@@ -1,0 +1,60 @@
+{
+  "captions": {
+    "tabs": {
+      "headline": "Lad din AI-agent organisere dine faner",
+      "subline": "Se et eksempel på en grupperingsplan, anvend den i ét trin, og fortryd, hvis du ombestemmer dig."
+    },
+    "pages": {
+      "headline": "Din agent arbejder på rigtige websider",
+      "subline": "Den læser siden, udfylder formularer og klikker på knapper i den browser, du allerede bruger."
+    },
+    "profiles": {
+      "headline": "Giv dine browserprofiler navne",
+      "subline": "Bed om browseren Arbejde, så vælger din agent den rigtige Chrome-profil."
+    },
+    "setup": {
+      "headline": "Forbind den agent, du allerede bruger",
+      "subline": "Claude Code, Cursor, VS Code, Claude Desktop eller en hvilken som helst MCP-klient. Alt kører på din computer."
+    }
+  },
+  "chat": {
+    "you": "Du",
+    "agent": "Agent"
+  },
+  "tabs": {
+    "prompt": "Organiser mine åbne faner i grupper efter emne.",
+    "reply": "Færdig. Jeg har samlet {tabs} faner i {groups} grupper. Bed mig fortryde, hvis du vil have det gamle layout tilbage.",
+    "groups": {
+      "travel": "Lissabon-tur",
+      "work": "Q3-rapport",
+      "recipes": "Idéer til aftensmad"
+    },
+    "pages": {
+      "travel": ["Fly til Lissabon – sammenlign priser", "Hoteller i Alfama", "Lissabon: 10 ting, du skal opleve"],
+      "work": ["Q3-omsætningsdashboard", "Udkast til Q3-rapport", "Noter fra teammøde"],
+      "recipes": ["Nem hverdagspasta", "Ovnbagte grøntsager i fad"]
+    }
+  },
+  "booking": {
+    "prompt": "Book et bord til 4 på Casa Azul i aften i navnet Ada Lovelace.",
+    "reply": "Færdig. Casa Azul har bekræftet et bord til 4 i navnet Ada Lovelace.",
+    "restaurant": "Casa Azul",
+    "heading": "Reserver et bord",
+    "name": "Navn",
+    "guests": "Gæster",
+    "when": "Hvornår",
+    "tonight": "I aften kl. 19.30",
+    "submit": "Book bord",
+    "confirmation": "Bord til {guests} er booket i navnet {name}. Vi ses i aften!",
+    "guestName": "Ada Lovelace"
+  },
+  "profiles": {
+    "prompt": "Denne Chrome-profil er til arbejde. Kald den Arbejde.",
+    "reply": "Færdig. Når du beder om browseren Arbejde, bruger jeg denne profil.",
+    "name": "Arbejde"
+  },
+  "video": {
+    "tagline": "Lad din AI-agent bruge den browser, du allerede bruger.",
+    "closing": "Fungerer med Claude Code, Cursor, VS Code og alle MCP-klienter. Gratis og open source."
+  }
+}

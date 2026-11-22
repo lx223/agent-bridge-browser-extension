@@ -1,0 +1,60 @@
+{
+  "captions": {
+    "tabs": {
+      "headline": "Laat je AI-agent je tabbladen opruimen",
+      "subline": "Bekijk een groeperingsplan, pas het in één stap toe en draai het terug als je van gedachten verandert."
+    },
+    "pages": {
+      "headline": "Je agent werkt in echte webpagina's",
+      "subline": "Hij leest de pagina, vult formulieren in en klikt op knoppen in de browser die je al gebruikt."
+    },
+    "profiles": {
+      "headline": "Geef je browserprofielen een naam",
+      "subline": "Vraag om je Werk-browser en je agent kiest het juiste Chrome-profiel."
+    },
+    "setup": {
+      "headline": "Verbind de agent die je al gebruikt",
+      "subline": "Claude Code, Cursor, VS Code, Claude Desktop of elke MCP-client. Alles draait op je eigen computer."
+    }
+  },
+  "chat": {
+    "you": "Jij",
+    "agent": "Agent"
+  },
+  "tabs": {
+    "prompt": "Orden mijn open tabbladen in groepen per onderwerp.",
+    "reply": "Klaar. Ik heb {tabs} tabbladen in {groups} groepen ingedeeld. Vraag me om het ongedaan te maken als je de oude indeling terug wilt.",
+    "groups": {
+      "travel": "Reis naar Lissabon",
+      "work": "Q3-rapport",
+      "recipes": "Ideeën voor het diner"
+    },
+    "pages": {
+      "travel": ["Vluchten naar Lissabon – vergelijk prijzen", "Hotels in Alfama", "Lissabon: top 10 bezienswaardigheden"],
+      "work": ["Q3-omzetdashboard", "Concept Q3-rapport", "Notities teamoverleg"],
+      "recipes": ["Snelle pasta voor doordeweeks", "Groenten uit de oven"]
+    }
+  },
+  "booking": {
+    "prompt": "Reserveer vanavond een tafel voor 4 bij Casa Azul op naam van Ada Lovelace.",
+    "reply": "Klaar. Casa Azul heeft een tafel voor 4 op naam van Ada Lovelace bevestigd.",
+    "restaurant": "Casa Azul",
+    "heading": "Reserveer een tafel",
+    "name": "Naam",
+    "guests": "Personen",
+    "when": "Wanneer",
+    "tonight": "Vanavond, 19:30",
+    "submit": "Tafel reserveren",
+    "confirmation": "Tafel voor {guests} gereserveerd op naam van {name}. Tot vanavond!",
+    "guestName": "Ada Lovelace"
+  },
+  "profiles": {
+    "prompt": "Dit Chrome-profiel is voor werk. Noem het Werk.",
+    "reply": "Klaar. Als je om je Werk-browser vraagt, gebruik ik dit profiel.",
+    "name": "Werk"
+  },
+  "video": {
+    "tagline": "Laat je AI-agent de browser gebruiken die je al gebruikt.",
+    "closing": "Werkt met Claude Code, Cursor, VS Code en elke MCP-client. Gratis en open source."
+  }
+}

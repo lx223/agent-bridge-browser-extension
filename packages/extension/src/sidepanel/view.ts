@@ -18,6 +18,7 @@ export interface MessageView {
 
 export interface PanelView {
   options: ConversationOption[];
+  pickConversation: boolean;
   selected?: string;
   title: string;
   state?: ConversationState;
@@ -81,12 +82,13 @@ export function panelView(conversations: Conversations, agents: AgentSession[], 
     });
   const conversation = selected === undefined ? undefined : conversations[selected];
   if (!conversation) {
-    return { options, title: t('chatTitle'), status: '', messages: [], canSend: false, composerHint: '', canEnd: false, canRemove: false };
+    return { options, pickConversation: false, title: t('chatTitle'), status: '', messages: [], canSend: false, composerHint: '', canEnd: false, canRemove: false };
   }
   const state = conversationState(conversation, agents, now);
   const agent = agents.find((candidate) => candidate.sessionId === conversation.sessionId);
   return {
     options,
+    pickConversation: options.length > 1,
     selected,
     title: conversation.title,
     state,
@@ -103,3 +105,5 @@ export function panelView(conversations: Conversations, agents: AgentSession[], 
     canRemove: state === 'ended' || state === 'disconnected',
   };
 }
+
+export const canSubmit = (view: Pick<PanelView, 'canSend'>, draft: string, sending: boolean) => view.canSend && !sending && draft.trim() !== '';

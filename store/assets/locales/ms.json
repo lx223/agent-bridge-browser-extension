@@ -1,0 +1,60 @@
+{
+  "captions": {
+    "tabs": {
+      "headline": "Biarkan ejen AI anda menyusun tab anda",
+      "subline": "Pratonton rancangan pengumpulan, gunakannya dalam satu langkah dan buat asal jika berubah fikiran."
+    },
+    "pages": {
+      "headline": "Ejen anda bekerja dalam halaman web sebenar",
+      "subline": "Ia membaca halaman, mengisi borang dan mengklik butang dalam penyemak imbas yang sudah anda gunakan."
+    },
+    "profiles": {
+      "headline": "Namakan profil penyemak imbas anda",
+      "subline": "Minta penyemak imbas Kerja anda dan ejen akan memilih profil Chrome yang betul."
+    },
+    "setup": {
+      "headline": "Sambungkan ejen yang sudah anda gunakan",
+      "subline": "Claude Code, Cursor, VS Code, Claude Desktop atau mana-mana klien MCP. Semuanya berjalan pada komputer anda."
+    }
+  },
+  "chat": {
+    "you": "Anda",
+    "agent": "Ejen"
+  },
+  "tabs": {
+    "prompt": "Susun tab saya yang terbuka ke dalam kumpulan mengikut topik.",
+    "reply": "Selesai. Saya menyusun {tabs} tab ke dalam {groups} kumpulan. Minta saya buat asal jika mahu susun atur lama.",
+    "groups": {
+      "travel": "Percutian ke Lisbon",
+      "work": "Laporan Q3",
+      "recipes": "Idea makan malam"
+    },
+    "pages": {
+      "travel": ["Penerbangan ke Lisbon – bandingkan harga", "Hotel di Alfama", "Lisbon: 10 tempat menarik"],
+      "work": ["Papan pemuka hasil Q3", "Draf laporan Q3", "Nota mesyuarat pasukan"],
+      "recipes": ["Pasta mudah untuk hari bekerja", "Sayur panggang dalam dulang"]
+    }
+  },
+  "booking": {
+    "prompt": "Tempah meja untuk 4 orang di Casa Azul malam ini atas nama Ada Lovelace.",
+    "reply": "Selesai. Casa Azul mengesahkan meja untuk 4 orang atas nama Ada Lovelace.",
+    "restaurant": "Casa Azul",
+    "heading": "Tempah meja",
+    "name": "Nama",
+    "guests": "Tetamu",
+    "when": "Bila",
+    "tonight": "Malam ini, 7:30 malam",
+    "submit": "Tempah meja",
+    "confirmation": "Meja untuk {guests} orang telah ditempah atas nama {name}. Jumpa malam ini!",
+    "guestName": "Ada Lovelace"
+  },
+  "profiles": {
+    "prompt": "Profil Chrome ini untuk kerja. Namakannya Kerja.",
+    "reply": "Selesai. Apabila anda meminta penyemak imbas Kerja anda, saya akan menggunakan profil ini.",
+    "name": "Kerja"
+  },
+  "video": {
+    "tagline": "Biarkan ejen AI anda menggunakan penyemak imbas anda sendiri.",
+    "closing": "Berfungsi dengan Claude Code, Cursor, VS Code dan mana-mana klien MCP. Percuma dan sumber terbuka."
+  }
+}

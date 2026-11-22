@@ -48,8 +48,9 @@ The tests are grouped by what a user does with the bridge, one folder each. `e2e
 | | `pageTools.test.ts` | Listing and calling WebMCP tools that `e2e/support/fixtures/tools.html` registers, a throwing tool, an unknown tool, a timeout, and the empty list after navigating away. The harness starts Chromium with `--enable-features=WebMCP` for this. |
 | `browserData/` | `history.test.ts` | Searching history, listing visits, listing and restoring recently closed tabs by session id and without one, the empty device list without sync, and an unknown session id. |
 | | `browserData.test.ts` | The Reading List, bookmarks, downloads, most visited sites, searching with the default search engine and notifications. Playwright saves downloads under random names in its own folder, so the download test finds its file by URL rather than by name. |
-| `chat/` | `chat.test.ts` | The side panel chat: the empty state, the toolbar badge, replies typed in the panel reaching the agent, the unread note on other tools, and ending the chat. |
+| `chat/` | `chat.test.ts` | The side panel chat: the empty state, the toolbar badge, replies typed in the panel or sent with the send button reaching the agent, the send button staying off for a blank draft, the unread note on other tools, ending the chat, the header action switching from End chat to Remove, the message box growing with the draft, and picking and removing conversations. |
 | `ask/` | `ask.test.ts` | Asking the user in a page: the popover's text, confirming and cancelling with real clicks inside its closed shadow root, asking in the active tab, bringing the tab to the front, `navigated` after a navigation, a page script that can neither see the answer nor click for the user, the timeout removing the popover, and one question per tab. |
+| `theme/` | `theme.test.ts` | The chat panel and the setup page switching between light and dark with the system colour scheme, and both using the same colours. |
 | `localisation/` | `localisation.test.ts` | The setup page in German and in Arabic: translated text, code and links kept inside translated sentences, and the right-to-left layout. |
 | `resilience/` | `serverRestart.test.ts` | Killing the MCP server process mid-session: the launcher starts a new one, the agent's next call still reaches the browser, and a tool call the crash cut off is reported as possibly not finished. It needs the launcher, so it does not run against the Claude Desktop bundle. |
 | `safari/` | `safari.test.ts` | The built extension in a simulated Safari instead of Chromium. See [Safari](#safari). |
@@ -68,9 +69,9 @@ Release builds connect to port 17373, the server's default. The extension reads 
 
 `createTestBridge()` in `e2e/support/harness.ts` picks a free port other than 17373. It copies `packages/extension/dist` to a temporary folder and rebuilds only `background.js` into it with `VITE_BRIDGE_PORT` set to that port, using `packages/extension/vite.background.config.ts`, then checks that the rebuilt script contains the new port and not 17373.
 
-`e2e/support/globalSetup.ts` does this once per Vitest run, passes the port and folder to the test files in `E2E_BRIDGE_PORT` and `E2E_EXTENSION_DIR`, and deletes the folder when the run ends. Outside Vitest, as in `npm run screenshots`, `testBridge()` makes its own copy and deletes it when the process exits. `startAgent` starts every server with `AGENT_BROWSER_BRIDGE_PORT` set to that port, and Chromium, the simulated Safari and the Safari setup page all load the test copy.
+`e2e/support/globalSetup.ts` does this once per Vitest run, passes the port and folder to the test files in `E2E_BRIDGE_PORT` and `E2E_EXTENSION_DIR`, and deletes the folder when the run ends. Outside Vitest, as in `npm run store:assets`, `testBridge()` makes its own copy and deletes it when the process exits. `startAgent` starts every server with `AGENT_BROWSER_BRIDGE_PORT` set to that port, and Chromium, the simulated Safari and the Safari setup page all load the test copy.
 
-This keeps the tests away from a real agent session on the same machine in both directions. A real browser extension connects only to 17373, so it never reaches a test server, and the test extension connects only to its own port, so it never reaches the real server. The suite therefore runs while an agent session holds 17373, and so do `npm run test:e2e:mcpb` and `npm run screenshots`.
+This keeps the tests away from a real agent session on the same machine in both directions. A real browser extension connects only to 17373, so it never reaches a test server, and the test extension connects only to its own port, so it never reaches the real server. The suite therefore runs while an agent session holds 17373, and so do `npm run test:e2e:mcpb` and `npm run store:assets`.
 
 The same two variables run a development build beside a released one by hand:
 
@@ -82,7 +83,7 @@ VITE_BRIDGE_PORT=17374 npm run build -w agent-browser-bridge-extension
 AGENT_BROWSER_BRIDGE_PORT=17374 node packages/server/dist/index.js
 ```
 
-`e2e/support/harness.ts` holds the shared setup. Add fixtures as plain HTML files in `e2e/support/fixtures/`. Put a new test file in the folder for the use case it covers, or start a new folder for a new one. `startHarness` returns `openAnotherProfile()` to launch a second Chromium profile with the extension, and also takes a browser locale, device scale factor, colour scheme and the MCP client name and version the agent reports. The tests use the defaults; the [store screenshot generator](chrome-web-store.md#screenshots) sets them.
+`e2e/support/harness.ts` holds the shared setup. Add fixtures as plain HTML files in `e2e/support/fixtures/`. Put a new test file in the folder for the use case it covers, or start a new folder for a new one. `startHarness` returns `openAnotherProfile()` to launch a second Chromium profile with the extension, and also takes a browser locale, device scale factor, colour scheme and the MCP client name and version the agent reports. The tests use the defaults; the [store asset generator](chrome-web-store.md#store-assets) sets them.
 
 ### Stale element refs
 

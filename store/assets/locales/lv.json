@@ -1,0 +1,60 @@
+{
+  "captions": {
+    "tabs": {
+      "headline": "Ļaujiet MI aģentam sakārtot jūsu cilnes",
+      "subline": "Apskatiet grupēšanas plānu, lietojiet to vienā solī un atsauciet, ja pārdomājat."
+    },
+    "pages": {
+      "headline": "Jūsu aģents strādā īstās tīmekļa lapās",
+      "subline": "Tas lasa lapu, aizpilda veidlapas un noklikšķina uz pogām pārlūkprogrammā, ko jau izmantojat."
+    },
+    "profiles": {
+      "headline": "Nosauciet savus pārlūkprogrammas profilus",
+      "subline": "Palūdziet pārlūkprogrammu Darbs, un aģents izvēlēsies pareizo Chrome profilu."
+    },
+    "setup": {
+      "headline": "Pievienojiet aģentu, ko jau izmantojat",
+      "subline": "Claude Code, Cursor, VS Code, Claude Desktop vai jebkurš MCP klients. Viss darbojas jūsu datorā."
+    }
+  },
+  "chat": {
+    "you": "Jūs",
+    "agent": "Aģents"
+  },
+  "tabs": {
+    "prompt": "Sakārto manas atvērtās cilnes grupās pēc tēmas.",
+    "reply": "Gatavs. Sakārtoju {tabs} cilnes {groups} grupās. Ja vēlaties atgriezt iepriekšējo izkārtojumu, palūdziet to atsaukt.",
+    "groups": {
+      "travel": "Ceļojums uz Lisabonu",
+      "work": "Q3 pārskats",
+      "recipes": "Vakariņu idejas"
+    },
+    "pages": {
+      "travel": ["Lidojumi uz Lisabonu – salīdziniet cenas", "Viesnīcas Alfamā", "Lisabona: 10 labākās apskates vietas"],
+      "work": ["Q3 ieņēmumu panelis", "Q3 pārskata melnraksts", "Komandas sanāksmes piezīmes"],
+      "recipes": ["Ātri makaroni darba dienas vakaram", "Cepeškrāsnī cepti dārzeņi"]
+    }
+  },
+  "booking": {
+    "prompt": "Rezervē šovakar galdiņu 4 personām restorānā Casa Azul uz vārda Ada Lovelace.",
+    "reply": "Gatavs. Casa Azul apstiprināja galdiņu 4 personām uz vārda Ada Lovelace.",
+    "restaurant": "Casa Azul",
+    "heading": "Rezervēt galdiņu",
+    "name": "Vārds",
+    "guests": "Viesi",
+    "when": "Kad",
+    "tonight": "Šovakar, 19:30",
+    "submit": "Rezervēt",
+    "confirmation": "Galdiņš {guests} personām rezervēts uz vārda {name}. Tiekamies šovakar!",
+    "guestName": "Ada Lovelace"
+  },
+  "profiles": {
+    "prompt": "Šis Chrome profils ir darbam. Dod tam nosaukumu Darbs.",
+    "reply": "Gatavs. Kad lūgsiet pārlūkprogrammu Darbs, izmantošu šo profilu.",
+    "name": "Darbs"
+  },
+  "video": {
+    "tagline": "Ļaujiet MI aģentam strādāt jūsu ierastajā pārlūkprogrammā.",
+    "closing": "Darbojas ar Claude Code, Cursor, VS Code un jebkuru MCP klientu. Bezmaksas un atvērtā koda."
+  }
+}

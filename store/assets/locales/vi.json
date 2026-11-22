@@ -1,0 +1,60 @@
+{
+  "captions": {
+    "tabs": {
+      "headline": "Để tác nhân AI sắp xếp thẻ cho bạn",
+      "subline": "Xem trước kế hoạch nhóm thẻ, áp dụng trong một bước và hoàn tác nếu bạn đổi ý."
+    },
+    "pages": {
+      "headline": "Tác nhân làm việc trên trang web thật",
+      "subline": "Tác nhân đọc trang, điền biểu mẫu và nhấp nút ngay trong trình duyệt bạn đang dùng."
+    },
+    "profiles": {
+      "headline": "Đặt tên cho hồ sơ trình duyệt",
+      "subline": "Yêu cầu dùng trình duyệt Công việc và tác nhân sẽ chọn đúng hồ sơ Chrome."
+    },
+    "setup": {
+      "headline": "Kết nối tác nhân bạn đang dùng",
+      "subline": "Claude Code, Cursor, VS Code, Claude Desktop hoặc ứng dụng khách MCP bất kỳ. Mọi thứ chạy trên máy của bạn."
+    }
+  },
+  "chat": {
+    "you": "Bạn",
+    "agent": "Tác nhân"
+  },
+  "tabs": {
+    "prompt": "Sắp xếp các thẻ đang mở thành nhóm theo chủ đề.",
+    "reply": "Xong. Tôi đã xếp {tabs} thẻ vào {groups} nhóm. Nếu muốn quay lại bố cục cũ, hãy yêu cầu tôi hoàn tác.",
+    "groups": {
+      "travel": "Chuyến đi Lisbon",
+      "work": "Báo cáo Q3",
+      "recipes": "Ý tưởng bữa tối"
+    },
+    "pages": {
+      "travel": ["Vé máy bay đi Lisbon – so sánh giá", "Khách sạn ở Alfama", "Lisbon: 10 điều nên làm"],
+      "work": ["Bảng doanh thu Q3", "Bản nháp báo cáo Q3", "Ghi chú họp nhóm"],
+      "recipes": ["Mì Ý nhanh cho ngày thường", "Rau củ nướng khay"]
+    }
+  },
+  "booking": {
+    "prompt": "Đặt bàn cho 4 người tại Casa Azul tối nay, đứng tên Ada Lovelace.",
+    "reply": "Xong. Casa Azul đã xác nhận bàn cho 4 người, đứng tên Ada Lovelace.",
+    "restaurant": "Casa Azul",
+    "heading": "Đặt bàn",
+    "name": "Tên",
+    "guests": "Số khách",
+    "when": "Thời gian",
+    "tonight": "Tối nay, 19:30",
+    "submit": "Đặt bàn",
+    "confirmation": "Đã đặt bàn cho {guests} người, đứng tên {name}. Hẹn gặp bạn tối nay!",
+    "guestName": "Ada Lovelace"
+  },
+  "profiles": {
+    "prompt": "Hồ sơ Chrome này dùng cho công việc. Hãy đặt tên là Công việc.",
+    "reply": "Xong. Khi bạn yêu cầu trình duyệt Công việc, tôi sẽ dùng hồ sơ này.",
+    "name": "Công việc"
+  },
+  "video": {
+    "tagline": "Để tác nhân AI dùng trình duyệt bạn vẫn dùng hằng ngày.",
+    "closing": "Hoạt động với Claude Code, Cursor, VS Code và mọi ứng dụng khách MCP. Miễn phí và mã nguồn mở."
+  }
+}

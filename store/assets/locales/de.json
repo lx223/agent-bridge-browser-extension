@@ -1,0 +1,60 @@
+{
+  "captions": {
+    "tabs": {
+      "headline": "Lassen Sie Ihren KI-Agenten Ihre Tabs aufräumen",
+      "subline": "Gruppierungsplan ansehen, in einem Schritt anwenden und bei Bedarf rückgängig machen."
+    },
+    "pages": {
+      "headline": "Ihr Agent arbeitet in echten Webseiten",
+      "subline": "Er liest die Seite, füllt Formulare aus und klickt Schaltflächen – in dem Browser, den Sie schon nutzen."
+    },
+    "profiles": {
+      "headline": "Benennen Sie Ihre Browserprofile",
+      "subline": "Fragen Sie nach Ihrem Browser „Arbeit“, und Ihr Agent wählt das richtige Chrome-Profil."
+    },
+    "setup": {
+      "headline": "Verbinden Sie den Agenten, den Sie schon nutzen",
+      "subline": "Claude Code, Cursor, VS Code, Claude Desktop oder jeder MCP-Client. Alles läuft auf Ihrem Computer."
+    }
+  },
+  "chat": {
+    "you": "Sie",
+    "agent": "Agent"
+  },
+  "tabs": {
+    "prompt": "Ordne meine offenen Tabs nach Thema in Gruppen.",
+    "reply": "Erledigt. Ich habe {tabs} Tabs in {groups} Gruppen sortiert. Sagen Sie Bescheid, wenn ich es rückgängig machen soll.",
+    "groups": {
+      "travel": "Lissabon-Reise",
+      "work": "Q3-Bericht",
+      "recipes": "Kochideen"
+    },
+    "pages": {
+      "travel": ["Flüge nach Lissabon – Preise vergleichen", "Hotels in der Alfama", "Lissabon: die 10 besten Sehenswürdigkeiten"],
+      "work": ["Q3-Umsatz-Dashboard", "Entwurf Q3-Bericht", "Notizen zum Teammeeting"],
+      "recipes": ["Schnelle Pasta für unter der Woche", "Ofengemüse vom Blech"]
+    }
+  },
+  "booking": {
+    "prompt": "Reserviere heute Abend einen Tisch für 4 im Casa Azul auf den Namen Ada Lovelace.",
+    "reply": "Erledigt. Casa Azul hat einen Tisch für 4 auf den Namen Ada Lovelace bestätigt.",
+    "restaurant": "Casa Azul",
+    "heading": "Tisch reservieren",
+    "name": "Name",
+    "guests": "Personen",
+    "when": "Wann",
+    "tonight": "Heute, 19:30 Uhr",
+    "submit": "Tisch reservieren",
+    "confirmation": "Tisch für {guests} auf den Namen {name} reserviert. Bis heute Abend!",
+    "guestName": "Ada Lovelace"
+  },
+  "profiles": {
+    "prompt": "Dieses Chrome-Profil ist für die Arbeit. Nenn es Arbeit.",
+    "reply": "Erledigt. Wenn Sie nach Ihrem Browser „Arbeit“ fragen, nutze ich dieses Profil.",
+    "name": "Arbeit"
+  },
+  "video": {
+    "tagline": "Lassen Sie Ihren KI-Agenten den Browser nutzen, den Sie schon verwenden.",
+    "closing": "Funktioniert mit Claude Code, Cursor, VS Code und jedem MCP-Client. Kostenlos und Open Source."
+  }
+}

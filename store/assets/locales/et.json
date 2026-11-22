@@ -1,0 +1,60 @@
+{
+  "captions": {
+    "tabs": {
+      "headline": "Laske AI-agendil oma vahelehed korraldada",
+      "subline": "Vaadake rühmitamisplaani eelvaadet, rakendage see ühe sammuga ja võtke tagasi, kui meelt muudate."
+    },
+    "pages": {
+      "headline": "Teie agent töötab päris veebilehtedel",
+      "subline": "See loeb lehte, täidab vorme ja klõpsab nuppe brauseris, mida juba kasutate."
+    },
+    "profiles": {
+      "headline": "Pange brauseriprofiilidele nimed",
+      "subline": "Küsige brauserit Töö ja agent valib õige Chrome'i profiili."
+    },
+    "setup": {
+      "headline": "Ühendage agent, mida juba kasutate",
+      "subline": "Claude Code, Cursor, VS Code, Claude Desktop või mis tahes MCP-klient. Kõik töötab teie arvutis."
+    }
+  },
+  "chat": {
+    "you": "Teie",
+    "agent": "Agent"
+  },
+  "tabs": {
+    "prompt": "Korralda mu avatud vahelehed teemade kaupa rühmadesse.",
+    "reply": "Valmis. Jagasin {tabs} vahelehte {groups} rühma. Kui soovite eelmist paigutust tagasi, paluge mul see tühistada.",
+    "groups": {
+      "travel": "Lissaboni reis",
+      "work": "Q3 aruanne",
+      "recipes": "Õhtusöögi ideed"
+    },
+    "pages": {
+      "travel": ["Lennud Lissaboni – võrdle hindu", "Hotellid Alfamas", "Lissabon: 10 parimat tegevust"],
+      "work": ["Q3 tulude armatuurlaud", "Q3 aruande mustand", "Meeskonna koosoleku märkmed"],
+      "recipes": ["Lihtne argipäevapasta", "Ahjuköögiviljad plaadil"]
+    }
+  },
+  "booking": {
+    "prompt": "Broneeri täna õhtuks restoranis Casa Azul laud 4 inimesele nimele Ada Lovelace.",
+    "reply": "Valmis. Casa Azul kinnitas laua 4 inimesele nimele Ada Lovelace.",
+    "restaurant": "Casa Azul",
+    "heading": "Laua broneerimine",
+    "name": "Nimi",
+    "guests": "Inimesi",
+    "when": "Aeg",
+    "tonight": "Täna kell 19.30",
+    "submit": "Broneeri laud",
+    "confirmation": "Laud {guests} inimesele on broneeritud nimele {name}. Kohtumiseni õhtul!",
+    "guestName": "Ada Lovelace"
+  },
+  "profiles": {
+    "prompt": "See Chrome'i profiil on tööks. Pane selle nimeks Töö.",
+    "reply": "Valmis. Kui küsite brauserit Töö, kasutan seda profiili.",
+    "name": "Töö"
+  },
+  "video": {
+    "tagline": "Laske AI-agendil kasutada brauserit, mida te juba kasutate.",
+    "closing": "Töötab järgmistega: Claude Code, Cursor, VS Code ja mis tahes MCP-klient. Tasuta ja avatud lähtekoodiga."
+  }
+}

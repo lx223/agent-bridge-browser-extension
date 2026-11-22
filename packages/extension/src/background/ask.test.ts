@@ -2,7 +2,6 @@ import { describe, expect, it, vi } from 'vitest';
 import { ASK_CANCEL_METHOD, ASK_SHOW_METHOD, ASK_WAIT_METHOD, type AgentInfo } from '@agent-browser-bridge/protocol';
 import { AskManager, chromeAskNotifier, debuggerPrompt, scriptingPrompt, type AskNotifier, type AskTabs, type PagePrompt } from './ask.ts';
 import type { PopoverAnswer, PopoverContent } from './popover.ts';
-import '../test/englishI18n.ts';
 
 const agent = { client: { name: 'claude-code', version: '2.0.0' } } as AgentInfo;
 
@@ -63,6 +62,7 @@ describe('AskManager', () => {
       cancelledText: 'Cancelled. claude-code will not go ahead.',
       dragHint: 'Drag to move',
       dir: 'ltr',
+      themeCss: expect.stringMatching(/^\.card \{[\s\S]*--accent:[\s\S]*prefers-color-scheme: dark\) \{\n  \.card \{/),
     });
     expect(notifier.show).toHaveBeenCalledWith('ask-1', 'claude-code', { title: 'Submit?', message: 'This sends the form.', url: 'https://example.com/1' });
   });
@@ -177,6 +177,7 @@ const content: PopoverContent = {
   cancelledText: 'Cancelled. claude-code will not go ahead.',
   dragHint: 'Drag to move',
   dir: 'ltr',
+  themeCss: '.card { --accent: #2563eb; }',
 };
 
 describe('debuggerPrompt', () => {

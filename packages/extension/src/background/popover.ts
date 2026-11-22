@@ -9,6 +9,7 @@ export interface PopoverContent {
   cancelledText: string;
   dragHint: string;
   dir: 'ltr' | 'rtl';
+  themeCss: string;
 }
 
 export type PopoverAnswer = 'pending' | 'confirmed' | 'cancelled' | 'gone';
@@ -41,40 +42,22 @@ export function showPopover(content: PopoverContent): void {
   const root = host.attachShadow({ mode: 'closed' });
   root.innerHTML = `
     <style>
+      ${content.themeCss}
       :host { color-scheme: light dark; }
       .card {
-        --surface: #ffffff;
-        --bar: #f5f5f4;
-        --ink: #1c1917;
-        --soft: #57534e;
-        --line: #e7e5e4;
-        --brand: #4f46e5;
-        --brand-ink: #ffffff;
-        --brand-hover: #4338ca;
-        --shadow: 0 1px 2px rgb(28 25 23 / 0.08), 0 16px 40px -12px rgb(49 46 129 / 0.35);
-        box-sizing: border-box;
+        --lift: 0 1px 2px rgb(28 25 23 / 0.08), 0 16px 40px -12px rgb(28 25 23 / 0.3);
         margin: 0;
-        border: 1px solid var(--line);
+        border: 1px solid var(--border-strong);
         border-radius: 12px;
         background: var(--surface);
-        color: var(--ink);
-        box-shadow: var(--shadow);
-        font: 14px/1.45 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+        color: var(--fg);
+        box-shadow: var(--lift);
+        font: 14px/1.45 var(--font);
         overflow: hidden;
         animation: arrive 160ms ease-out;
       }
       @media (prefers-color-scheme: dark) {
-        .card {
-          --surface: #26272b;
-          --bar: #2e2f34;
-          --ink: #f5f5f4;
-          --soft: #b4b0ab;
-          --line: #3c3d42;
-          --brand: #a5b4fc;
-          --brand-ink: #1e1b4b;
-          --brand-hover: #c7d2fe;
-          --shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 16px 40px -12px rgb(0 0 0 / 0.7);
-        }
+        .card { --lift: 0 1px 2px rgb(0 0 0 / 0.4), 0 16px 40px -12px rgb(0 0 0 / 0.7); }
       }
       @keyframes arrive { from { opacity: 0; transform: translateY(-6px); } }
       @keyframes leave { to { opacity: 0; transform: translateY(-6px); } }
@@ -85,8 +68,8 @@ export function showPopover(content: PopoverContent): void {
         align-items: center;
         gap: 8px;
         padding: 8px 10px 8px 12px;
-        background: var(--bar);
-        border-bottom: 1px solid var(--line);
+        background: var(--subtle);
+        border-bottom: 1px solid var(--border);
         cursor: grab;
         user-select: none;
         touch-action: none;
@@ -105,36 +88,36 @@ export function showPopover(content: PopoverContent): void {
       .from {
         flex: 1;
         min-width: 0;
-        color: var(--soft);
+        color: var(--muted);
         font-size: 12.5px;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
       }
-      .grip { flex: none; color: var(--soft); opacity: 0.7; display: flex; }
+      .grip { flex: none; color: var(--muted); opacity: 0.7; display: flex; }
       .body { padding: 14px 16px 4px; }
       .title { margin: 0 0 4px; font-size: 15px; font-weight: 600; line-height: 1.35; }
       .message { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; max-height: 40vh; overflow-y: auto; }
-      .title:not([hidden]) + .message { color: var(--soft); }
+      .title:not([hidden]) + .message { color: var(--muted); }
       .title[hidden] { display: none; }
       .actions { display: flex; justify-content: flex-end; gap: 8px; padding: 14px 16px 16px; }
       .actions[hidden] { display: none; }
       button {
-        font: 500 13.5px/1 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+        font: 500 13.5px/1 var(--font);
         padding: 9px 14px;
         border-radius: 8px;
-        border: 1px solid var(--line);
+        border: 1px solid var(--border);
         background: transparent;
-        color: var(--ink);
+        color: var(--fg);
         cursor: pointer;
       }
-      button:hover { background: var(--bar); }
-      button:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
-      .confirm { background: var(--brand); border-color: var(--brand); color: var(--brand-ink); }
-      .confirm:hover { background: var(--brand-hover); border-color: var(--brand-hover); }
-      .done { margin: 0; padding: 14px 16px 16px; color: var(--soft); display: flex; align-items: center; gap: 6px; }
+      button:hover { background: var(--subtle); }
+      button:focus-visible { outline: 2px solid var(--accent-text); outline-offset: 2px; }
+      .confirm { background: var(--accent); border-color: var(--accent); color: var(--accent-fg); }
+      .confirm:hover { background: color-mix(in srgb, var(--accent) 88%, black); border-color: color-mix(in srgb, var(--accent) 88%, black); }
+      .done { margin: 0; padding: 14px 16px 16px; color: var(--muted); display: flex; align-items: center; gap: 6px; }
       .done[hidden] { display: none; }
-      .done svg { width: 14px; height: 14px; color: var(--brand); }
+      .done svg { width: 14px; height: 14px; color: var(--ok); }
     </style>
     <section class="card" dir="${content.dir}" role="dialog" aria-modal="false" aria-labelledby="ask-from" aria-describedby="ask-message">
       <div class="bar">

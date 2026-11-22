@@ -49,8 +49,8 @@ Add `--no-upload` to write the signed package to `packages/extension/safari-rele
 1. Run the [manual check in real Safari](testing.md#checking-real-safari-by-hand) on the commit you are releasing.
 2. On that main commit, run `npm run release:safari -w agent-browser-bridge-extension -- --team EV27867DV2`.
 3. Wait for App Store Connect to finish processing the build, which shows under TestFlight. Optionally install it through TestFlight on a Mac and check it once more.
-4. If the release changes what the extension looks like or does, run `npm run screenshots:safari` and upload the new screenshots; see [Screenshots](../store/safari/submission.md#screenshots).
-5. In App Store Connect, add a macOS version with the same version number as `packages/extension/package.json`, choose the build, add the screenshots and What's New text, and check the rest against the [submission copy](../store/safari/submission.md).
+4. If the release changes what the extension looks like or does, run `npm run store:assets -- --store safari` and upload the new screenshots and app preview; see [Screenshots and app preview](../store/safari/submission.md#screenshots-and-app-preview).
+5. In App Store Connect, add a macOS version with the same version number as `packages/extension/package.json`, choose the build, add the screenshots, app preview and What's New text, and check the rest against the [submission copy](../store/safari/submission.md).
 6. Submit for review. Choose manual release if the Chrome and Safari releases should go out together.
 7. Once the app is live, update the Safari install steps in the [README](../README.md#safari) to link to it.
 8. Once both the Chrome and Safari versions are live, publish the MCP server; see [Release order](npm-publishing.md#release-order).
