@@ -54,6 +54,7 @@ interface Worker {
 }
 
 export const LAUNCHER_INIT_ID = 'agent-browser-bridge-launcher-initialize';
+const LIST_CHANGED_NOTIFICATIONS = ['notifications/tools/list_changed', 'notifications/prompts/list_changed'];
 const INTERNAL_ERROR = -32603;
 const UPDATED_MESSAGE = 'The browser bridge server was updated while handling this request; please retry.';
 const RESTARTED_DURING_TOOL_MESSAGE =
@@ -131,7 +132,7 @@ export class Launcher {
       const previous = this.active;
       this.activate(next);
       if (previous.state === 'active') this.drain(previous);
-      this.toClient(JSON.stringify({ jsonrpc: '2.0', method: 'notifications/tools/list_changed' }));
+      this.announceListsChanged();
       this.log(`Switched to agent-browser-bridge-mcp ${version}`);
       switched = true;
       return true;
@@ -139,6 +140,10 @@ export class Launcher {
       this.updating = false;
       if (!switched && this.active.state === 'gone' && !this.closing) void this.restart(this.active);
     }
+  }
+
+  private announceListsChanged() {
+    for (const method of LIST_CHANGED_NOTIFICATIONS) this.toClient(JSON.stringify({ jsonrpc: '2.0', method }));
   }
 
   private activate(worker: Worker) {
@@ -171,7 +176,7 @@ export class Launcher {
         const next = this.startWorker(spawnVersion, version, 'warming', 'restart');
         if (await this.warmUp(next)) {
           this.activate(next);
-          if (version !== crashed.version) this.toClient(JSON.stringify({ jsonrpc: '2.0', method: 'notifications/tools/list_changed' }));
+          if (version !== crashed.version) this.announceListsChanged();
           this.log(`Restarted agent-browser-bridge-mcp ${version}`);
           return;
         }
