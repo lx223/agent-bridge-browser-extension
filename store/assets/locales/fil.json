@@ -36,8 +36,8 @@
     }
   },
   "booking": {
-    "prompt": "Mag-book ng table para sa 4 sa Casa Azul ngayong gabi sa pangalang Ada Lovelace.",
-    "reply": "Tapos na. Kinumpirma ng Casa Azul ang table para sa 4 sa pangalang Ada Lovelace.",
+    "prompt": "Mag-book ng table para sa 4 sa Casa Azul ngayong gabi para kay Ada Lovelace.",
+    "reply": "Tapos na. Kumpirmado sa Casa Azul ang table para sa 4 ni Ada Lovelace.",
     "restaurant": "Casa Azul",
     "heading": "Magpareserba ng table",
     "name": "Pangalan",

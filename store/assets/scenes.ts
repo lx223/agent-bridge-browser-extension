@@ -93,6 +93,18 @@ async function tabs(context: SceneContext) {
   };
 }
 
+async function tabPage({ harness }: SceneContext, url: string) {
+  for (let attempt = 0; attempt < 100; attempt += 1) {
+    const page = harness.context.pages().find((candidate) => candidate.url() === url);
+    if (page) {
+      await page.waitForLoadState();
+      return page;
+    }
+    await new Promise((done) => setTimeout(done, 100));
+  }
+  throw new Error(`The tab for ${url} did not open.`);
+}
+
 async function pageScreenshot(page: Page) {
   await page.evaluate(() => document.fonts.ready);
   return screenshotBody(await page.screenshot({ caret: 'initial' }), SIDE_WINDOW);
@@ -103,7 +115,7 @@ async function pages(context: SceneContext) {
   const text = locale.strings.booking;
   const url = demo.url('/booking');
   const tab = await harness.agent.call<Tab>('chrome_tabs_create', { url });
-  const page = harness.context.pages().find((candidate) => candidate.url() === url)!;
+  const page = await tabPage(context, url);
   await page.setViewportSize(SIDE_WINDOW);
 
   const snapshot = await harness.agent.text('chrome_page_snapshot', { tabId: tab.id });

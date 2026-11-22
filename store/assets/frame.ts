@@ -98,8 +98,8 @@ const styles = (layout: Layout, languageTag: string) => `
   header { position: absolute; left: 80px; right: 80px; top: 0; height: ${layout.stageTop}px; display: flex; gap: 22px; align-items: center; }
   header img { width: 60px; height: 60px; flex: none; border-radius: 14px; box-shadow: 0 6px 18px rgba(15, 23, 42, 0.35); }
   .caption { min-width: 0; flex: 1; }
-  h1 { margin: 0; color: #fff; font-size: 42px; line-height: 1.15; font-weight: 700; letter-spacing: -0.01em; max-height: 97px; overflow: hidden; }
-  .subline { margin: 12px 0 0; color: #e0e7ff; font-size: 21px; line-height: 1.4; max-height: 59px; overflow: hidden; }
+  h1 { margin: 0; color: #fff; font-size: 42px; line-height: 1.15; font-weight: 700; letter-spacing: -0.01em; max-height: 97px; overflow: hidden; text-wrap: pretty; }
+  .subline { margin: 12px 0 0; color: #e0e7ff; font-size: 21px; line-height: 1.4; max-height: 59px; overflow: hidden; text-wrap: pretty; }
   .stage { position: absolute; left: 80px; top: ${layout.stageTop}px; width: ${STAGE.width}px; height: ${STAGE.height}px; display: flex; gap: ${GAP}px; }
 
   .window { flex: none; height: 100%; background: #fff; border-radius: 14px; overflow: hidden; box-shadow: 0 24px 60px rgba(15, 23, 42, 0.45); display: flex; flex-direction: column; }
@@ -125,11 +125,11 @@ const styles = (layout: Layout, languageTag: string) => `
 
   .groups { padding: 18px 22px; display: flex; flex-direction: column; gap: 14px; background: #f8fafc; height: 100%; }
   .strip { display: flex; gap: 8px; padding-bottom: 14px; border-bottom: 1px solid #e2e8f0; }
-  .chip { color: #fff; font-size: 13px; font-weight: 600; padding: 4px 10px; border-radius: 8px; white-space: nowrap; }
+  .chip { color: #fff; font-size: 13px; line-height: 18px; font-weight: 600; padding: 4px 10px; border-radius: 8px; white-space: nowrap; }
   .group { border-inline-start: 4px solid; padding-inline-start: 14px; }
-  .group h3 { margin: 0 0 6px; font-size: 15px; }
+  .group h3 { margin: 0 0 6px; font-size: 15px; line-height: 20px; }
   .group ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 5px; }
-  .group li { display: flex; align-items: center; gap: 10px; font-size: 14px; color: #334155; background: #fff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 6px 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .group li { display: flex; align-items: center; gap: 10px; font-size: 14px; line-height: 20px; color: #334155; background: #fff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 6px 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .group.loose { border-color: #cbd5e1; }
   .group li i { flex: none; width: 18px; height: 18px; border-radius: 5px; color: #fff; font: 600 11px/18px system-ui, sans-serif; text-align: center; font-style: normal; }
 
