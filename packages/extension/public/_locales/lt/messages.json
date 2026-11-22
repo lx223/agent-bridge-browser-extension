@@ -20,9 +20,6 @@
   "notificationReply": {
     "message": "Norėdami atsakyti, įrankių juostoje spustelėkite mygtuką Agent Browser Bridge"
   },
-  "optionsTitle": {
-    "message": "Agent Browser Bridge parinktys"
-  },
   "statusChecking": {
     "message": "Tikrinamas ryšys…"
   },
@@ -122,15 +119,6 @@
   "welcomeAnalyticsHint": {
     "message": "Kurios funkcijos naudojamos ir plėtinio versija, kad būtų galima tobulinti plėtinį."
   },
-  "instanceNameLabel": {
-    "message": "Pavadinkite šį naršyklės profilį"
-  },
-  "instanceNamePlaceholder": {
-    "message": "Pavyzdžiui, Darbas arba Asmeninis"
-  },
-  "optionsInstanceNameHint": {
-    "message": "Pagal šį pavadinimą agentai atskiria jūsų naršykles ir profilius. $1"
-  },
   "instanceId": {
     "message": "Egzemplioriaus ID: $1"
   },
@@ -182,35 +170,8 @@
   "analyticsTitle": {
     "message": "Bendrinti anoniminę naudojimo statistiką"
   },
-  "analyticsHint": {
-    "message": "Kurios funkcijos naudojamos, ar jos veikia sėkmingai, plėtinio ir agento versijos. Niekada skirtukų pavadinimų, URL ar puslapių turinio. $1"
-  },
   "privacyPolicy": {
     "message": "Privatumo politika"
-  },
-  "analyticsUnavailable": {
-    "message": "Ši versija nerenka naudojimo statistikos."
-  },
-  "openSetup": {
-    "message": "Atidaryti sąranką ir ryšio būseną"
-  },
-  "optionsConnected": {
-    "message": "Agentas prijungtas"
-  },
-  "optionsConnectedMany_one": {
-    "message": "Prijungta $1 agento sesija"
-  },
-  "optionsConnectedMany_few": {
-    "message": "Prijungtos $1 agento sesijos"
-  },
-  "optionsConnectedMany_many": {
-    "message": "Prijungta $1 agento sesijos"
-  },
-  "optionsConnectedMany_other": {
-    "message": "Prijungta $1 agento sesijų"
-  },
-  "optionsDisconnected": {
-    "message": "Neprijungtas joks agentas"
   },
   "agentStartingUp": {
     "message": "Agentas paleidžiamas"

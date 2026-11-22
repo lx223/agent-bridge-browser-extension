@@ -20,9 +20,6 @@
   "notificationReply": {
     "message": "За да отговорите, кликнете върху бутона Agent Browser Bridge в лентата с инструменти"
   },
-  "optionsTitle": {
-    "message": "Опции на Agent Browser Bridge"
-  },
   "statusChecking": {
     "message": "Връзката се проверява…"
   },
@@ -116,15 +113,6 @@
   "welcomeAnalyticsHint": {
     "message": "Кои функции се използват и версията на разширението, за да помогнете за подобряването му."
   },
-  "instanceNameLabel": {
-    "message": "Наименувайте този потребителски профил на браузъра"
-  },
-  "instanceNamePlaceholder": {
-    "message": "Например Работа или Лично"
-  },
-  "optionsInstanceNameHint": {
-    "message": "Агентите използват това име, за да различават браузърите и потребителските ви профили. $1"
-  },
   "instanceId": {
     "message": "ИД на екземпляра: $1"
   },
@@ -176,29 +164,8 @@
   "analyticsTitle": {
     "message": "Споделяне на анонимни статистически данни за използването"
   },
-  "analyticsHint": {
-    "message": "Кои функции се използват, дали работят успешно, както и версиите на разширението и агента. Никога заглавия на раздели, URL адреси или съдържание на страници. $1"
-  },
   "privacyPolicy": {
     "message": "Декларация за поверителност"
-  },
-  "analyticsUnavailable": {
-    "message": "Тази компилация не събира статистически данни за използването."
-  },
-  "openSetup": {
-    "message": "Отваряне на настройката и състоянието на връзката"
-  },
-  "optionsConnected": {
-    "message": "Агентът е свързан"
-  },
-  "optionsConnectedMany_one": {
-    "message": "Свързана е $1 сесия на агент"
-  },
-  "optionsConnectedMany_other": {
-    "message": "Свързани са $1 сесии на агенти"
-  },
-  "optionsDisconnected": {
-    "message": "Няма свързан агент"
   },
   "agentStartingUp": {
     "message": "Агентът стартира"

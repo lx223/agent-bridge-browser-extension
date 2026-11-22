@@ -20,9 +20,6 @@
   "notificationReply": {
     "message": "Чтобы ответить, нажмите кнопку Agent Browser Bridge на панели инструментов"
   },
-  "optionsTitle": {
-    "message": "Параметры Agent Browser Bridge"
-  },
   "statusChecking": {
     "message": "Проверка подключения…"
   },
@@ -122,15 +119,6 @@
   "welcomeAnalyticsHint": {
     "message": "Какие функции используются и версия расширения — это помогает улучшать расширение."
   },
-  "instanceNameLabel": {
-    "message": "Назовите этот профиль браузера"
-  },
-  "instanceNamePlaceholder": {
-    "message": "Например, Работа или Личный"
-  },
-  "optionsInstanceNameHint": {
-    "message": "По этому имени агенты различают ваши браузеры и профили. $1"
-  },
   "instanceId": {
     "message": "ID экземпляра: $1"
   },
@@ -182,35 +170,8 @@
   "analyticsTitle": {
     "message": "Отправлять анонимную статистику использования"
   },
-  "analyticsHint": {
-    "message": "Какие функции используются, успешно ли они срабатывают, а также версии расширения и агента. Названия вкладок, URL и содержимое страниц не отправляются никогда. $1"
-  },
   "privacyPolicy": {
     "message": "Политика конфиденциальности"
-  },
-  "analyticsUnavailable": {
-    "message": "Эта сборка не собирает статистику использования."
-  },
-  "openSetup": {
-    "message": "Открыть настройку и статус подключения"
-  },
-  "optionsConnected": {
-    "message": "Агент подключен"
-  },
-  "optionsConnectedMany_one": {
-    "message": "Подключен $1 сеанс агента"
-  },
-  "optionsConnectedMany_few": {
-    "message": "Подключено $1 сеанса агента"
-  },
-  "optionsConnectedMany_many": {
-    "message": "Подключено $1 сеансов агента"
-  },
-  "optionsConnectedMany_other": {
-    "message": "Подключено $1 сеанса агента"
-  },
-  "optionsDisconnected": {
-    "message": "Агент не подключен"
   },
   "agentStartingUp": {
     "message": "Агент запускается"

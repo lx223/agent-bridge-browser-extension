@@ -20,9 +20,6 @@
   "notificationReply": {
     "message": "انقر على زر Agent Browser Bridge في شريط الأدوات للرد"
   },
-  "optionsTitle": {
-    "message": "خيارات Agent Browser Bridge"
-  },
   "statusChecking": {
     "message": "جارٍ التحقق من الاتصال…"
   },
@@ -128,15 +125,6 @@
   "welcomeAnalyticsHint": {
     "message": "الميزات المستخدَمة وإصدار الإضافة، للمساعدة في تحسين الإضافة."
   },
-  "instanceNameLabel": {
-    "message": "اختر اسمًا لهذا الملف الشخصي في المتصفح"
-  },
-  "instanceNamePlaceholder": {
-    "message": "مثلاً العمل أو الشخصي"
-  },
-  "optionsInstanceNameHint": {
-    "message": "يستخدم الوكلاء هذا الاسم للتمييز بين متصفحاتك وملفاتك الشخصية. $1"
-  },
   "instanceId": {
     "message": "معرّف النسخة: $1"
   },
@@ -188,41 +176,8 @@
   "analyticsTitle": {
     "message": "مشاركة إحصاءات استخدام مجهولة الهوية"
   },
-  "analyticsHint": {
-    "message": "الميزات المستخدَمة ومدى نجاحها وإصدارا الإضافة والوكيل. لا تتم مشاركة عناوين علامات التبويب أو عناوين URL أو محتوى الصفحات أبدًا. $1"
-  },
   "privacyPolicy": {
     "message": "سياسة الخصوصية"
-  },
-  "analyticsUnavailable": {
-    "message": "لا يجمع هذا الإصدار إحصاءات الاستخدام."
-  },
-  "openSetup": {
-    "message": "فتح صفحة الإعداد وحالة الاتصال"
-  },
-  "optionsConnected": {
-    "message": "الوكيل متصل"
-  },
-  "optionsConnectedMany_one": {
-    "message": "$1 جلسة وكيل متصلة"
-  },
-  "optionsConnectedMany_few": {
-    "message": "$1 جلسات وكيل متصلة"
-  },
-  "optionsConnectedMany_many": {
-    "message": "$1 جلسة وكيل متصلة"
-  },
-  "optionsConnectedMany_two": {
-    "message": "$1 جلستا وكيل متصلتان"
-  },
-  "optionsConnectedMany_zero": {
-    "message": "$1 جلسة وكيل متصلة"
-  },
-  "optionsConnectedMany_other": {
-    "message": "$1 جلسة وكيل متصلة"
-  },
-  "optionsDisconnected": {
-    "message": "لا يوجد وكيل متصل"
   },
   "agentStartingUp": {
     "message": "جارٍ بدء تشغيل الوكيل"

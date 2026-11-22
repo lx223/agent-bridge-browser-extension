@@ -20,7 +20,6 @@ export default defineConfig({
         'packages/extension/src/background/handlers.ts',
         'packages/extension/src/background/navigation.ts',
         'packages/extension/src/background/serialize.ts',
-        'packages/extension/src/options/**',
         'packages/extension/src/settings/**',
         'packages/extension/src/welcome/main.ts',
         'packages/extension/src/sidepanel/main.ts',

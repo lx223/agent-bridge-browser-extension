@@ -20,9 +20,6 @@
   "notificationReply": {
     "message": "Fes clic al botó d'Agent Browser Bridge de la barra d'eines per respondre"
   },
-  "optionsTitle": {
-    "message": "Opcions d'Agent Browser Bridge"
-  },
   "statusChecking": {
     "message": "S'està comprovant la connexió…"
   },
@@ -119,15 +116,6 @@
   "welcomeAnalyticsHint": {
     "message": "Quines funcions es fan servir i la versió de l'extensió, per ajudar a millorar l'extensió."
   },
-  "instanceNameLabel": {
-    "message": "Posa nom a aquest perfil del navegador"
-  },
-  "instanceNamePlaceholder": {
-    "message": "Per exemple, Feina o Personal"
-  },
-  "optionsInstanceNameHint": {
-    "message": "Els agents fan servir aquest nom per distingir els teus navegadors i perfils. $1"
-  },
   "instanceId": {
     "message": "ID de la instància: $1"
   },
@@ -179,32 +167,8 @@
   "analyticsTitle": {
     "message": "Comparteix estadístiques d'ús anònimes"
   },
-  "analyticsHint": {
-    "message": "Quines funcions es fan servir, si funcionen correctament i les versions de l'extensió i de l'agent. Mai els títols de les pestanyes, els URL ni el contingut de les pàgines. $1"
-  },
   "privacyPolicy": {
     "message": "Política de privadesa"
-  },
-  "analyticsUnavailable": {
-    "message": "Aquesta versió no recull estadístiques d'ús."
-  },
-  "openSetup": {
-    "message": "Obre la configuració i l'estat de la connexió"
-  },
-  "optionsConnected": {
-    "message": "Agent connectat"
-  },
-  "optionsConnectedMany_one": {
-    "message": "$1 sessió d'agent connectada"
-  },
-  "optionsConnectedMany_many": {
-    "message": "$1 sessions d'agent connectades"
-  },
-  "optionsConnectedMany_other": {
-    "message": "$1 sessions d'agent connectades"
-  },
-  "optionsDisconnected": {
-    "message": "Cap agent connectat"
   },
   "agentStartingUp": {
     "message": "L'agent s'està iniciant"

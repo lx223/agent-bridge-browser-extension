@@ -20,9 +20,6 @@
   "notificationReply": {
     "message": "Klicken Sie zum Antworten in der Symbolleiste auf die Schaltfläche „Agent Browser Bridge“"
   },
-  "optionsTitle": {
-    "message": "Agent Browser Bridge – Optionen"
-  },
   "statusChecking": {
     "message": "Verbindung wird geprüft…"
   },
@@ -116,15 +113,6 @@
   "welcomeAnalyticsHint": {
     "message": "Welche Funktionen genutzt werden und die Version der Erweiterung, um die Erweiterung zu verbessern."
   },
-  "instanceNameLabel": {
-    "message": "Name für dieses Browserprofil"
-  },
-  "instanceNamePlaceholder": {
-    "message": "Zum Beispiel Arbeit oder Privat"
-  },
-  "optionsInstanceNameHint": {
-    "message": "Anhand dieses Namens unterscheiden Agenten Ihre Browser und Profile. $1"
-  },
   "instanceId": {
     "message": "Instanz-ID: $1"
   },
@@ -176,29 +164,8 @@
   "analyticsTitle": {
     "message": "Anonyme Nutzungsstatistiken senden"
   },
-  "analyticsHint": {
-    "message": "Welche Funktionen genutzt werden, ob sie erfolgreich sind, sowie die Versionen von Erweiterung und Agent. Niemals Tab-Titel, URLs oder Seiteninhalte. $1"
-  },
   "privacyPolicy": {
     "message": "Datenschutzerklärung"
-  },
-  "analyticsUnavailable": {
-    "message": "Diese Version erfasst keine Nutzungsstatistiken."
-  },
-  "openSetup": {
-    "message": "Einrichtung und Verbindungsstatus öffnen"
-  },
-  "optionsConnected": {
-    "message": "Agent verbunden"
-  },
-  "optionsConnectedMany_one": {
-    "message": "$1 Agent-Sitzung verbunden"
-  },
-  "optionsConnectedMany_other": {
-    "message": "$1 Agent-Sitzungen verbunden"
-  },
-  "optionsDisconnected": {
-    "message": "Kein Agent verbunden"
   },
   "agentStartingUp": {
     "message": "Agent wird gestartet"

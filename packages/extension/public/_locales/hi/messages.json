@@ -20,9 +20,6 @@
   "notificationReply": {
     "message": "जवाब देने के लिए, टूलबार में Agent Browser Bridge बटन पर क्लिक करें"
   },
-  "optionsTitle": {
-    "message": "Agent Browser Bridge के विकल्प"
-  },
   "statusChecking": {
     "message": "कनेक्शन की जांच की जा रही है…"
   },
@@ -116,15 +113,6 @@
   "welcomeAnalyticsHint": {
     "message": "कौनसी सुविधाएं इस्तेमाल की जाती हैं और एक्सटेंशन का वर्शन, ताकि एक्सटेंशन को बेहतर बनाने में मदद मिले।"
   },
-  "instanceNameLabel": {
-    "message": "इस ब्राउज़र प्रोफ़ाइल को नाम दें"
-  },
-  "instanceNamePlaceholder": {
-    "message": "उदाहरण के लिए, ऑफ़िस या निजी"
-  },
-  "optionsInstanceNameHint": {
-    "message": "एजेंट इस नाम से आपके ब्राउज़र और प्रोफ़ाइल को अलग-अलग पहचानते हैं। $1"
-  },
   "instanceId": {
     "message": "इंस्टेंस आईडी: $1"
   },
@@ -176,29 +164,8 @@
   "analyticsTitle": {
     "message": "इस्तेमाल से जुड़े गुमनाम आंकड़े शेयर करें"
   },
-  "analyticsHint": {
-    "message": "कौनसी सुविधाएं इस्तेमाल की जाती हैं, वे काम करती हैं या नहीं, और एक्सटेंशन व एजेंट के वर्शन। टैब के टाइटल, यूआरएल या पेज का कॉन्टेंट कभी नहीं भेजा जाता। $1"
-  },
   "privacyPolicy": {
     "message": "निजता नीति"
-  },
-  "analyticsUnavailable": {
-    "message": "यह बिल्ड इस्तेमाल से जुड़े आंकड़े इकट्ठा नहीं करता।"
-  },
-  "openSetup": {
-    "message": "सेटअप और कनेक्शन की स्थिति खोलें"
-  },
-  "optionsConnected": {
-    "message": "एजेंट कनेक्ट है"
-  },
-  "optionsConnectedMany_one": {
-    "message": "$1 एजेंट सेशन कनेक्ट है"
-  },
-  "optionsConnectedMany_other": {
-    "message": "$1 एजेंट सेशन कनेक्ट हैं"
-  },
-  "optionsDisconnected": {
-    "message": "कोई एजेंट कनेक्ट नहीं है"
   },
   "agentStartingUp": {
     "message": "एजेंट शुरू हो रहा है"

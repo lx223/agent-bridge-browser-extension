@@ -20,9 +20,6 @@
   "notificationReply": {
     "message": "按一下工具列中的 Agent Browser Bridge 按鈕即可回覆"
   },
-  "optionsTitle": {
-    "message": "Agent Browser Bridge 選項"
-  },
   "statusChecking": {
     "message": "正在檢查連線…"
   },
@@ -116,15 +113,6 @@
   "welcomeAnalyticsHint": {
     "message": "使用了哪些功能以及擴充功能版本，用於協助改善這個擴充功能。"
   },
-  "instanceNameLabel": {
-    "message": "為這個瀏覽器設定檔命名"
-  },
-  "instanceNamePlaceholder": {
-    "message": "例如「工作」或「個人」"
-  },
-  "optionsInstanceNameHint": {
-    "message": "代理程式會用這個名稱區分你的各個瀏覽器和設定檔。$1"
-  },
   "instanceId": {
     "message": "執行個體 ID：$1"
   },
@@ -176,29 +164,8 @@
   "analyticsTitle": {
     "message": "分享匿名使用統計資料"
   },
-  "analyticsHint": {
-    "message": "包括使用了哪些功能、是否成功，以及擴充功能和代理程式的版本。絕不包括分頁標題、網址或網頁內容。$1"
-  },
   "privacyPolicy": {
     "message": "隱私權政策"
-  },
-  "analyticsUnavailable": {
-    "message": "這個版本不會收集使用統計資料。"
-  },
-  "openSetup": {
-    "message": "開啟設定和連線狀態"
-  },
-  "optionsConnected": {
-    "message": "代理程式已連線"
-  },
-  "optionsConnectedMany_one": {
-    "message": "已連線 $1 個代理程式工作階段"
-  },
-  "optionsConnectedMany_other": {
-    "message": "已連線 $1 個代理程式工作階段"
-  },
-  "optionsDisconnected": {
-    "message": "沒有已連線的代理程式"
   },
   "agentStartingUp": {
     "message": "代理程式正在啟動"

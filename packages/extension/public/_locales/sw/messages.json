@@ -20,9 +20,6 @@
   "notificationReply": {
     "message": "Bofya kitufe cha Agent Browser Bridge kwenye upau wa vidhibiti ili ujibu"
   },
-  "optionsTitle": {
-    "message": "Chaguo za Agent Browser Bridge"
-  },
   "statusChecking": {
     "message": "Inakagua muunganisho…"
   },
@@ -116,15 +113,6 @@
   "welcomeAnalyticsHint": {
     "message": "Vipengele vinavyotumiwa na toleo la kiendelezi, ili kusaidia kuboresha kiendelezi."
   },
-  "instanceNameLabel": {
-    "message": "Ipe jina wasifu huu wa kivinjari"
-  },
-  "instanceNamePlaceholder": {
-    "message": "Kwa mfano Kazini au Binafsi"
-  },
-  "optionsInstanceNameHint": {
-    "message": "Mawakala hutumia jina hili kutofautisha vivinjari na wasifu wako. $1"
-  },
   "instanceId": {
     "message": "Kitambulisho cha tukio: $1"
   },
@@ -176,29 +164,8 @@
   "analyticsTitle": {
     "message": "Shiriki takwimu za matumizi bila kutambulisha"
   },
-  "analyticsHint": {
-    "message": "Vipengele vinavyotumiwa, iwapo vinafanikiwa, na matoleo ya kiendelezi na wakala. Kamwe si majina ya vichupo, URL wala maudhui ya kurasa. $1"
-  },
   "privacyPolicy": {
     "message": "Sera ya faragha"
-  },
-  "analyticsUnavailable": {
-    "message": "Muundo huu haukusanyi takwimu za matumizi."
-  },
-  "openSetup": {
-    "message": "Fungua mipangilio na hali ya muunganisho"
-  },
-  "optionsConnected": {
-    "message": "Wakala ameunganishwa"
-  },
-  "optionsConnectedMany_one": {
-    "message": "Kipindi $1 cha wakala kimeunganishwa"
-  },
-  "optionsConnectedMany_other": {
-    "message": "Vipindi $1 vya wakala vimeunganishwa"
-  },
-  "optionsDisconnected": {
-    "message": "Hakuna wakala aliyeunganishwa"
   },
   "agentStartingUp": {
     "message": "Wakala anaanza"

@@ -20,9 +20,6 @@
   "notificationReply": {
     "message": "点击工具栏中的 Agent Browser Bridge 按钮即可回复"
   },
-  "optionsTitle": {
-    "message": "Agent Browser Bridge 选项"
-  },
   "statusChecking": {
     "message": "正在检查连接…"
   },
@@ -116,15 +113,6 @@
   "welcomeAnalyticsHint": {
     "message": "使用了哪些功能以及扩展程序版本，用于帮助改进此扩展程序。"
   },
-  "instanceNameLabel": {
-    "message": "为此浏览器配置文件命名"
-  },
-  "instanceNamePlaceholder": {
-    "message": "例如“工作”或“个人”"
-  },
-  "optionsInstanceNameHint": {
-    "message": "智能体通过此名称区分您的各个浏览器和配置文件。$1"
-  },
   "instanceId": {
     "message": "实例 ID：$1"
   },
@@ -176,29 +164,8 @@
   "analyticsTitle": {
     "message": "分享匿名使用统计信息"
   },
-  "analyticsHint": {
-    "message": "包括使用了哪些功能、是否成功，以及扩展程序和智能体的版本。绝不包括标签页标题、网址或网页内容。$1"
-  },
   "privacyPolicy": {
     "message": "隐私权政策"
-  },
-  "analyticsUnavailable": {
-    "message": "此版本不收集使用统计信息。"
-  },
-  "openSetup": {
-    "message": "打开设置和连接状态"
-  },
-  "optionsConnected": {
-    "message": "已连接智能体"
-  },
-  "optionsConnectedMany_one": {
-    "message": "已连接 $1 个智能体会话"
-  },
-  "optionsConnectedMany_other": {
-    "message": "已连接 $1 个智能体会话"
-  },
-  "optionsDisconnected": {
-    "message": "未连接智能体"
   },
   "agentStartingUp": {
     "message": "智能体正在启动"

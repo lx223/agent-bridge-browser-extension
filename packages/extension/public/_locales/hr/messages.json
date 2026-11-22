@@ -20,9 +20,6 @@
   "notificationReply": {
     "message": "Za odgovor kliknite gumb Agent Browser Bridge na alatnoj traci"
   },
-  "optionsTitle": {
-    "message": "Agent Browser Bridge – opcije"
-  },
   "statusChecking": {
     "message": "Provjera veze…"
   },
@@ -119,15 +116,6 @@
   "welcomeAnalyticsHint": {
     "message": "Koje se značajke upotrebljavaju i verzija proširenja, radi poboljšanja proširenja."
   },
-  "instanceNameLabel": {
-    "message": "Dajte naziv ovom profilu preglednika"
-  },
-  "instanceNamePlaceholder": {
-    "message": "Na primjer Posao ili Osobno"
-  },
-  "optionsInstanceNameHint": {
-    "message": "Agenti prema ovom nazivu razlikuju vaše preglednike i profile. $1"
-  },
   "instanceId": {
     "message": "ID instance: $1"
   },
@@ -179,32 +167,8 @@
   "analyticsTitle": {
     "message": "Dijeli anonimne statistike upotrebe"
   },
-  "analyticsHint": {
-    "message": "Koje se značajke upotrebljavaju, jesu li uspješne te verzije proširenja i agenta. Nikada naslovi kartica, URL-ovi ni sadržaj stranica. $1"
-  },
   "privacyPolicy": {
     "message": "Pravila o privatnosti"
-  },
-  "analyticsUnavailable": {
-    "message": "Ova verzija ne prikuplja statistike upotrebe."
-  },
-  "openSetup": {
-    "message": "Otvori postavljanje i status veze"
-  },
-  "optionsConnected": {
-    "message": "Agent je povezan"
-  },
-  "optionsConnectedMany_one": {
-    "message": "Povezana je $1 sesija agenta"
-  },
-  "optionsConnectedMany_few": {
-    "message": "Povezane su $1 sesije agenta"
-  },
-  "optionsConnectedMany_other": {
-    "message": "Povezano je $1 sesija agenta"
-  },
-  "optionsDisconnected": {
-    "message": "Nijedan agent nije povezan"
   },
   "agentStartingUp": {
     "message": "Agent se pokreće"

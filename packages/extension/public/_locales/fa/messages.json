@@ -20,9 +20,6 @@
   "notificationReply": {
     "message": "برای پاسخ دادن، روی دکمه Agent Browser Bridge در نوار ابزار کلیک کنید"
   },
-  "optionsTitle": {
-    "message": "گزینه‌های Agent Browser Bridge"
-  },
   "statusChecking": {
     "message": "در حال بررسی اتصال…"
   },
@@ -116,15 +113,6 @@
   "welcomeAnalyticsHint": {
     "message": "کدام ویژگی‌ها استفاده می‌شوند و نسخه افزونه، برای کمک به بهبود افزونه."
   },
-  "instanceNameLabel": {
-    "message": "برای این نمایه مرورگر نام بگذارید"
-  },
-  "instanceNamePlaceholder": {
-    "message": "مثلاً کار یا شخصی"
-  },
-  "optionsInstanceNameHint": {
-    "message": "عامل‌ها با این نام مرورگرها و نمایه‌های شما را از هم تشخیص می‌دهند. $1"
-  },
   "instanceId": {
     "message": "شناسه نمونه: $1"
   },
@@ -176,29 +164,8 @@
   "analyticsTitle": {
     "message": "اشتراک‌گذاری آمار استفاده ناشناس"
   },
-  "analyticsHint": {
-    "message": "کدام ویژگی‌ها استفاده می‌شوند، آیا موفق هستند، و نسخه‌های افزونه و عامل. هرگز شامل عنوان برگه‌ها، نشانی‌های وب یا محتوای صفحه‌ها نمی‌شود. $1"
-  },
   "privacyPolicy": {
     "message": "خط‌مشی حریم خصوصی"
-  },
-  "analyticsUnavailable": {
-    "message": "این نسخه آمار استفاده را جمع‌آوری نمی‌کند."
-  },
-  "openSetup": {
-    "message": "باز کردن راه‌اندازی و وضعیت اتصال"
-  },
-  "optionsConnected": {
-    "message": "عامل متصل است"
-  },
-  "optionsConnectedMany_one": {
-    "message": "$1 جلسه عامل متصل است"
-  },
-  "optionsConnectedMany_other": {
-    "message": "$1 جلسه عامل متصل است"
-  },
-  "optionsDisconnected": {
-    "message": "هیچ عاملی متصل نیست"
   },
   "agentStartingUp": {
     "message": "عامل در حال راه‌اندازی است"
