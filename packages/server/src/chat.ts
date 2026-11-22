@@ -96,6 +96,7 @@ export const unreadNote = (unread: number) =>
 export class BrowserChat {
   private target?: ChatTarget;
   private seen?: number;
+  private conversation?: string;
 
   constructor(
     private readonly bridge: ExtensionBridge,
@@ -121,6 +122,7 @@ export class BrowserChat {
     for (let round = 0; ; round++) {
       const waitMs = Math.max(0, Math.min(MAX_CHAT_RECEIVE_WAIT_MS, deadline - Date.now()));
       const inbox = chatInbox.parse(await this.call(target, CHAT_RECEIVE_METHOD, { waitMs, ...this.cursor() }));
+      this.follow(inbox.conversation);
       const done = inbox.messages.length > 0 || inbox.ended || Date.now() >= deadline || progress?.signal.aborted;
       if (done) {
         if (progress?.signal.aborted) return inbox;
@@ -141,6 +143,7 @@ export class BrowserChat {
       const answer = await Promise.race([request, timeout]);
       if (answer === undefined) return undefined;
       const peek = chatPeek.parse(answer);
+      this.follow(peek.conversation);
       if (peek.ended) {
         this.target = undefined;
         return `The user ended the browser chat. Finish this task and report back in your own window, not with ${CHAT_SEND_TOOL}.`;
@@ -152,7 +155,16 @@ export class BrowserChat {
   }
 
   private cursor() {
-    return this.seen === undefined ? {} : { after: this.seen };
+    return {
+      ...(this.seen !== undefined && { after: this.seen }),
+      ...(this.conversation !== undefined && { conversation: this.conversation }),
+    };
+  }
+
+  private follow(conversation: string | undefined) {
+    if (conversation === undefined || conversation === this.conversation) return;
+    this.conversation = conversation;
+    this.seen = undefined;
   }
 
   private acknowledge(inbox: ChatInbox) {
@@ -169,7 +181,10 @@ export class BrowserChat {
       throw new Error(`The browser chat panel is only available in Chrome for now, and only ${names} is connected. Continue in your own window.`);
     }
     const selected = this.selector.select(CHAT_BROWSER, instance);
-    if (selected.instance !== this.target?.instance) this.seen = undefined;
+    if (selected.instance !== this.target?.instance) {
+      this.seen = undefined;
+      this.conversation = undefined;
+    }
     return { browser: CHAT_BROWSER, ...(selected.instance !== undefined && { instance: selected.instance }) };
   }
 

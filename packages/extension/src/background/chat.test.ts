@@ -53,6 +53,7 @@ describe('ChatStore', () => {
       await expect(waiting).resolves.toEqual({
         messages: [{ seq: 2, text: 'Group my tabs', sentAt: 1_000, tab: { title: 'Inbox', url: 'https://mail.example/' } }],
         ended: false,
+        conversation: expect.any(String),
       });
     } finally {
       vi.useRealTimers();
@@ -80,7 +81,7 @@ describe('ChatStore', () => {
       const store = new ChatStore(memoryStorage());
       const waiting = store.receive(agent(), { waitMs: 5_000 });
       await vi.advanceTimersByTimeAsync(5_000);
-      await expect(waiting).resolves.toEqual({ messages: [], ended: false });
+      await expect(waiting).resolves.toEqual({ messages: [], ended: false, conversation: expect.any(String) });
     } finally {
       vi.useRealTimers();
     }
@@ -98,14 +99,63 @@ describe('ChatStore', () => {
     expect((await store.receive(agent(), { waitMs: 0 })).messages.map((m) => m.text)).toEqual(['second']);
   });
 
+  describe('when the agent read an earlier conversation for the same session', () => {
+    async function restarted() {
+      const { store, storage } = setup();
+      await store.agentSays(agent(), 'What next?');
+      await store.userSays('session-1', 'one');
+      await store.userSays('session-1', 'two');
+      const earlier = await store.receive(agent(), { waitMs: 0 });
+      await store.remove('session-1');
+      await store.agentSays(agent(), 'Still there?');
+      await store.userSays('session-1', 'yes');
+      return { store, storage, earlier };
+    }
+
+    it('gives a new id to the new conversation', async () => {
+      const { store, earlier } = await restarted();
+      const now = await store.receive(agent(), { waitMs: 0 });
+      expect(now.conversation).toEqual(expect.any(String));
+      expect(now.conversation).not.toBe(earlier.conversation);
+    });
+
+    it('ignores a cursor from the earlier conversation and hands over the new messages', async () => {
+      const { store, earlier } = await restarted();
+      const inbox = await store.receive(agent(), { waitMs: 0, after: 3, conversation: earlier.conversation });
+      expect(inbox.messages.map((m) => m.text)).toEqual(['yes']);
+      expect(await store.peek(agent(), { after: 3, conversation: earlier.conversation })).toMatchObject({ unread: 1 });
+    });
+
+    it('ignores a cursor past the end of the conversation from a server that sends no id', async () => {
+      const { store } = await restarted();
+      expect((await store.receive(agent(), { waitMs: 0, after: 3 })).messages.map((m) => m.text)).toEqual(['yes']);
+    });
+
+    it('still honours a cursor for the current conversation', async () => {
+      const { store } = await restarted();
+      const current = await store.receive(agent(), { waitMs: 0 });
+      await store.userSays('session-1', 'and then');
+      const inbox = await store.receive(agent(), { waitMs: 0, after: 2, conversation: current.conversation });
+      expect(inbox.messages.map((m) => m.text)).toEqual(['and then']);
+    });
+
+    it('gives a conversation saved without an id one', async () => {
+      const { store, storage } = setup();
+      await store.agentSays(agent(), 'What next?');
+      delete (storage.items[CHAT_STORAGE_KEY] as Record<string, { id?: string }>)['session-1']!.id;
+      const reloaded = new ChatStore(storage);
+      expect((await reloaded.receive(agent(), { waitMs: 0 })).conversation).toEqual(expect.any(String));
+    });
+  });
+
   it('counts unread messages for other tools to mention', async () => {
     const { store } = setup();
     expect(await store.dispatch(CHAT_PEEK_METHOD, {}, agent())).toEqual({ unread: 0, ended: false });
     await store.agentSays(agent(), 'Working on it');
     await store.userSays('session-1', 'also close the docs tabs');
     await store.userSays('session-1', 'and pin the inbox');
-    expect(await store.peek(agent(), {})).toEqual({ unread: 2, ended: false });
-    expect(await store.peek(agent(), { after: 2 })).toEqual({ unread: 1, ended: false });
+    expect(await store.peek(agent(), {})).toEqual({ unread: 2, ended: false, conversation: expect.any(String) });
+    expect(await store.peek(agent(), { after: 2 })).toEqual({ unread: 1, ended: false, conversation: expect.any(String) });
   });
 
   it('wakes the waiting agent when the user ends the chat, and reopens when the agent writes again', async () => {
@@ -116,12 +166,12 @@ describe('ChatStore', () => {
       const waiting = store.receive(agent(), { waitMs: 20_000 });
       await vi.advanceTimersByTimeAsync(10);
       await store.end('session-1');
-      await expect(waiting).resolves.toEqual({ messages: [], ended: true });
+      await expect(waiting).resolves.toEqual({ messages: [], ended: true, conversation: expect.any(String) });
     } finally {
       vi.useRealTimers();
     }
     await expect(store.userSays('session-1', 'too late')).rejects.toThrow(/chat has ended/);
-    expect(await store.peek(agent(), {})).toEqual({ unread: 0, ended: true });
+    expect(await store.peek(agent(), {})).toEqual({ unread: 0, ended: true, conversation: expect.any(String) });
     await store.agentSays(agent(), 'Back again');
     expect(stored(storage)['session-1']!.ended).toBe(false);
     expect(stored(storage)['session-1']!.messages.map((m) => m.from)).toEqual(['agent', 'notice', 'agent']);

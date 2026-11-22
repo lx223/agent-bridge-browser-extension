@@ -31,6 +31,7 @@ export interface ChatMessage {
 }
 
 export interface Conversation {
+  id: string;
   sessionId: string;
   title: string;
   messages: ChatMessage[];
@@ -74,6 +75,16 @@ export const hasOpenConversation = (conversations: Conversations, liveSessions: 
 
 const userMessagesAfter = (conversation: Conversation, after: number) =>
   conversation.messages.filter((message) => message.from === 'user' && message.seq > after);
+
+const newConversationId = () => crypto.randomUUID();
+
+const withId = (conversation: Conversation) => {
+  conversation.id ??= newConversationId();
+  return conversation;
+};
+
+const cursorMatches = (conversation: Conversation, after: number, cursorConversation: string | undefined) =>
+  cursorConversation === undefined ? after < conversation.nextSeq : cursorConversation === conversation.id;
 
 const pruneConversations = (all: Conversations) => {
   const sessions = Object.values(all).sort((a, b) => b.updatedAt - a.updatedAt);
@@ -122,32 +133,37 @@ export class ChatStore {
     return { seq: message.seq };
   }
 
-  async receive(agent: AgentInfo | null, { waitMs, after }: ChatReceiveParams): Promise<ChatInbox> {
+  async receive(agent: AgentInfo | null, { waitMs, after, conversation: cursorConversation }: ChatReceiveParams): Promise<ChatInbox> {
     const key = sessionKey(agent);
     const deadline = this.now() + waitMs;
     for (;;) {
       const inbox = await this.update((all) => {
         const conversation = this.ensure(all, key, agent);
-        const from = this.acknowledge(conversation, after);
+        const from = this.acknowledge(conversation, after, cursorConversation);
         const messages = userMessagesAfter(conversation, from);
         const answered = messages.length > 0 || conversation.ended;
         const ready = answered || this.now() >= deadline;
         conversation.listeningUntil = answered ? 0 : Math.max(deadline, this.now()) + LISTEN_GRACE_MS;
         if (messages.length) conversation.delivered = Math.max(conversation.delivered, messages.at(-1)!.seq);
-        return ready ? { messages: messages.map(({ seq, text, at, tab }) => ({ seq, text, sentAt: at, ...(tab && { tab }) })), ended: conversation.ended } : undefined;
+        if (!ready) return undefined;
+        return {
+          messages: messages.map(({ seq, text, at, tab }) => ({ seq, text, sentAt: at, ...(tab && { tab }) })),
+          ended: conversation.ended,
+          conversation: conversation.id,
+        };
       });
       if (inbox) return inbox;
       await this.waitForUser(key, deadline - this.now());
     }
   }
 
-  async peek(agent: AgentInfo | null, { after }: ChatPeekParams): Promise<ChatPeek> {
+  async peek(agent: AgentInfo | null, { after, conversation: cursorConversation }: ChatPeekParams): Promise<ChatPeek> {
     const key = sessionKey(agent);
     return this.update((all) => {
       const conversation = all[key];
       if (!conversation) return { unread: 0, ended: false };
-      const from = this.acknowledge(conversation, after);
-      return { unread: userMessagesAfter(conversation, from).length, ended: conversation.ended };
+      const from = this.acknowledge(withId(conversation), after, cursorConversation);
+      return { unread: userMessagesAfter(conversation, from).length, ended: conversation.ended, conversation: conversation.id };
     });
   }
 
@@ -222,9 +238,10 @@ export class ChatStore {
     const existing = all[key];
     if (existing) {
       existing.title = title;
-      return existing;
+      return withId(existing);
     }
     const created: Conversation = {
+      id: newConversationId(),
       sessionId: key,
       title,
       messages: [],
@@ -240,8 +257,8 @@ export class ChatStore {
     return created;
   }
 
-  private acknowledge(conversation: Conversation, after: number | undefined): number {
-    if (after === undefined) return conversation.acknowledged;
+  private acknowledge(conversation: Conversation, after: number | undefined, cursorConversation: string | undefined): number {
+    if (after === undefined || !cursorMatches(conversation, after, cursorConversation)) return conversation.acknowledged;
     conversation.acknowledged = Math.max(conversation.acknowledged, after);
     return after;
   }

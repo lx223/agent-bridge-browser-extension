@@ -32,6 +32,8 @@ MCP only lets the agent ask the server for things. The browser can't send the ag
 
 Behind the tools, the server asks the extension for new messages in rounds of up to 20 seconds and sends MCP progress notifications between rounds. A message is handed to the agent again until the server confirms the agent read it, so a cancelled tool call doesn't lose it.
 
+The server confirms what the agent read by sending a cursor: the number of the last message it read, and the id of the conversation that number belongs to. Each conversation gets a new id when it is created, so if Chrome restarts or the conversation is removed while the agent session keeps running, the extension sees that the cursor belongs to a conversation that is gone and hands over the new conversation's messages from the start. The server then follows the new id. A server that sends no id gets the same treatment when its cursor is past the last message in the conversation.
+
 ## Limits
 
 - **The agent must be listening.** If the agent ends its turn instead of calling a chat tool, your messages wait in the panel until something makes it check again: you, in its own window, or the next browser tool it uses. The panel then shows the agent as working rather than waiting.
@@ -42,7 +44,7 @@ Behind the tools, the server asks the extension for new messages in rounds of up
 
 ## Where messages are kept
 
-Conversations are kept in the extension's session storage. They stay in memory, and Chrome clears them when it quits or when the extension updates or reloads. Each conversation keeps its last 500 messages, and the extension keeps the 20 most recently used conversations.
+Conversations are kept in the extension's session storage. They stay in memory, and Chrome clears them when it quits. They are carried over when the extension updates itself, as [updates](updates.md#what-survives-an-update) describes. Each conversation keeps its last 500 messages, and the extension keeps the 20 most recently used conversations.
 
 Your messages go only to the agent session the conversation belongs to, through the local bridge. Each message includes the title and URL of the tab you were looking at when you sent it, so the agent knows what "this page" means. Chat text is never included in usage analytics. See the [privacy policy](../PRIVACY.md).
 
