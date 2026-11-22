@@ -35,20 +35,89 @@
   "welcomeLedeSafari": {
     "message": "Lăsați agentul AI să găsească, să deschidă, să mute și să închidă filele din Safari."
   },
-  "welcomeConnected": {
-    "message": "Conectat: agentul poate folosi browserul."
+  "profileLabel": {
+    "message": "Acest profil"
   },
-  "welcomeConnectedMany_one": {
-    "message": "Conectat: $1 sesiune de agent poate folosi browserul."
+  "profilePlaceholder": {
+    "message": "Dați-i un nume"
   },
-  "welcomeConnectedMany_other": {
-    "message": "Conectat: $1 de sesiuni de agent pot folosi browserul."
+  "profileHint": {
+    "message": "Agenții folosesc acest nume pentru a deosebi browserele și profilurile dvs., astfel încât puteți cere browserul „Serviciu”."
   },
-  "welcomeConnectedMany_few": {
-    "message": "Conectat: $1 sesiuni de agent pot folosi browserul."
+  "profileSaved": {
+    "message": "Salvat"
   },
-  "welcomeDisconnected": {
-    "message": "Se așteaptă agentul. Configurați-l mai jos, apoi începeți o sesiune."
+  "profileNameRemoved": {
+    "message": "Nume eliminat"
+  },
+  "statusNotConnected": {
+    "message": "Încă nu este conectat"
+  },
+  "statusSetUpHint": {
+    "message": "Conectați agentul mai jos, apoi începeți o sesiune nouă în el."
+  },
+  "statusConnected": {
+    "message": "Conectat"
+  },
+  "statusConnectedMany_one": {
+    "message": "Conectat la $1 sesiune de agent"
+  },
+  "statusConnectedMany_few": {
+    "message": "Conectat la $1 sesiuni de agent"
+  },
+  "statusConnectedMany_other": {
+    "message": "Conectat la $1 de sesiuni de agent"
+  },
+  "statusConnectedHint": {
+    "message": "Agentul poate folosi acest browser. Încercați unul dintre prompturile de mai jos."
+  },
+  "welcomeStepConnect": {
+    "message": "Conectați agentul"
+  },
+  "stepDone": {
+    "message": "Gata"
+  },
+  "welcomePickAgent": {
+    "message": "Alegeți agentul pe care îl folosiți."
+  },
+  "welcomeAgentTabs": {
+    "message": "Agentul dvs."
+  },
+  "welcomeTabOther": {
+    "message": "Altul"
+  },
+  "welcomeClaudeCodeSteps": {
+    "message": "Rulați o singură dată într-un terminal, apoi începeți o sesiune nouă de Claude Code."
+  },
+  "welcomeClaudeDesktopSteps": {
+    "message": "Descărcați extensia și deschideți fișierul. Claude Desktop o instalează pentru dvs., fără să fie nevoie de Node.js."
+  },
+  "welcomeOpensToConfirm": {
+    "message": "$1 se deschide și vă cere confirmarea."
+  },
+  "welcomeOtherAgentsSteps": {
+    "message": "Adăugați acest fragment în configurația MCP a agentului, apoi reporniți-l."
+  },
+  "welcomeAgentSetupHint": {
+    "message": "Inserați acest prompt într-un agent care poate rula comenzi, cum ar fi Claude Code, Cursor sau Codex. Agentul verifică dacă există Node.js, apoi adaugă serverul."
+  },
+  "showPrompt": {
+    "message": "Afișați promptul"
+  },
+  "welcomeServerFootnote": {
+    "message": "Agentul rulează un mic server local, $1, la care se conectează această extensie."
+  },
+  "welcomeStepAsk": {
+    "message": "Cereți-i ceva"
+  },
+  "welcomeUndoFootnote": {
+    "message": "V-ați răzgândit? Modificările făcute cu $1 pot fi anulate dacă îi cereți agentului acest lucru."
+  },
+  "welcomeSafariFootnote": {
+    "message": "În Safari, agentul poate deschide, aranja și închide ferestre și poate deschide, naviga, comuta, fixa, duplica, muta și închide file sau le poate dezactiva sunetul. Grupurile de file, istoricul, marcajele și controlul paginilor sunt disponibile în Chrome. Dacă lipsesc titlurile și adresele filelor, acordați extensiei acces la site-uri în Safari, din Configurări > Extensii."
+  },
+  "welcomeAnalyticsHint": {
+    "message": "Ce funcții se folosesc și versiunea extensiei, pentru a ajuta la îmbunătățirea extensiei."
   },
   "instanceNameLabel": {
     "message": "Denumiți acest profil de browser"
@@ -56,26 +125,14 @@
   "instanceNamePlaceholder": {
     "message": "De exemplu, Serviciu sau Personal"
   },
-  "welcomeInstanceNameHint": {
-    "message": "Agenții folosesc acest nume pentru a deosebi browserele și profilurile dvs., astfel încât puteți cere browserul „Serviciu”. $1"
-  },
   "optionsInstanceNameHint": {
     "message": "Agenții folosesc acest nume pentru a deosebi browserele și profilurile dvs. $1"
   },
   "instanceId": {
     "message": "ID instanță: $1"
   },
-  "welcomeStepAdd": {
-    "message": "1. Adăugați-l la agent"
-  },
-  "welcomeStepAddHint": {
-    "message": "Agentul pornește un mic server local ($1) la care se conectează această extensie. Alegeți agentul:"
-  },
   "welcomeAgentSetupTitle": {
     "message": "Lăsați agentul să facă configurarea"
-  },
-  "welcomeAgentSetupBody": {
-    "message": "Inserați acest prompt în orice agent care poate rula comenzi și își poate edita propriile setări, cum ar fi Claude Code, Cursor sau Codex. Agentul verifică dacă există Node.js, apoi adaugă serverul."
   },
   "copyPrompt": {
     "message": "Copiați promptul"
@@ -86,29 +143,11 @@
   "copied": {
     "message": "Copiat"
   },
-  "welcomeClaudeCodeBody": {
-    "message": "Rulați o singură dată într-un terminal:"
-  },
-  "welcomeOpensAndConfirms": {
-    "message": "Deschide aplicația și vă cere confirmarea."
-  },
   "welcomeAddTo": {
     "message": "Adăugați în $1"
   },
-  "welcomeClaudeDesktopBody": {
-    "message": "Descărcați extensia, apoi deschideți fișierul pentru a o instala. Nu este nevoie de Node.js."
-  },
   "welcomeDownloadFor": {
     "message": "Descărcați pentru $1"
-  },
-  "welcomeOtherAgentsTitle": {
-    "message": "Alți agenți"
-  },
-  "welcomeOtherAgentsBody": {
-    "message": "Adăugați acest fragment în configurația MCP a agentului, apoi reporniți-l."
-  },
-  "welcomeStepTry": {
-    "message": "2. Încercați"
   },
   "welcomeTryIntro": {
     "message": "Cu Chrome deschis, cereți-i agentului:"
@@ -119,9 +158,6 @@
   "welcomeTryPage": {
     "message": "Deschide notele de lansare Chrome și rezumă ce s-a schimbat în cea mai recentă versiune."
   },
-  "welcomeTryHint": {
-    "message": "Starea de mai sus devine verde după ce pornește serverul agentului. Modificările făcute cu $1 pot fi anulate dacă îi cereți agentului acest lucru."
-  },
   "welcomeTryIntroSafari": {
     "message": "Cu Safari deschis, cereți-i agentului:"
   },
@@ -131,9 +167,6 @@
   "welcomeTrySortSafari": {
     "message": "Ordonează filele din Safari după site."
   },
-  "welcomeTryHintSafari": {
-    "message": "Starea de mai sus devine verde după ce pornește serverul agentului. În Safari, agentul poate deschide, aranja și închide ferestre și poate deschide, naviga, comuta, fixa, duplica, muta și închide file sau le poate dezactiva sunetul. Dacă lipsesc titlurile și adresele filelor, acordați extensiei acces la site-uri în Safari, din Configurări > Extensii. Grupurile de file, istoricul, marcajele și controlul paginilor sunt disponibile în Chrome."
-  },
   "welcomePrivacyHeading": {
     "message": "Confidențialitate"
   },
@@ -142,9 +175,6 @@
   },
   "welcomePrivacySafari": {
     "message": "Datele de navigare rămân pe computerul dvs.: extensia comunică doar cu $1. Agentul poate citi titlurile și adresele URL ale filelor și poate deschide, aranja sau închide ferestre și file atunci când îi cereți. În Safari nu poate citi pagini web și nici nu poate acționa în ele. Această extensie nu trimite niciodată în altă parte titlurile filelor sau adresele URL."
-  },
-  "welcomeAnalytics": {
-    "message": "Trimiteți statistici de utilizare anonime (ce funcții se folosesc, versiunea extensiei) pentru a ajuta la îmbunătățirea extensiei."
   },
   "analyticsTitle": {
     "message": "Trimiteți statistici de utilizare anonime"
@@ -167,11 +197,11 @@
   "optionsConnectedMany_one": {
     "message": "$1 sesiune de agent conectată"
   },
-  "optionsConnectedMany_other": {
-    "message": "$1 de sesiuni de agent conectate"
-  },
   "optionsConnectedMany_few": {
     "message": "$1 sesiuni de agent conectate"
+  },
+  "optionsConnectedMany_other": {
+    "message": "$1 de sesiuni de agent conectate"
   },
   "optionsDisconnected": {
     "message": "Niciun agent conectat"
@@ -188,11 +218,11 @@
   "sessionLastUsed_one": {
     "message": "Ultima utilizare: $2 $3, $1 apel"
   },
-  "sessionLastUsed_other": {
-    "message": "Ultima utilizare: $2 $3, $1 de apeluri"
-  },
   "sessionLastUsed_few": {
     "message": "Ultima utilizare: $2 $3, $1 apeluri"
+  },
+  "sessionLastUsed_other": {
+    "message": "Ultima utilizare: $2 $3, $1 de apeluri"
   },
   "sessionUnused": {
     "message": "Nu a folosit încă niciun browser"
@@ -245,10 +275,10 @@
   "chatUnseen_one": {
     "message": "$2 ($1 nou)"
   },
-  "chatUnseen_other": {
+  "chatUnseen_few": {
     "message": "$2 ($1 noi)"
   },
-  "chatUnseen_few": {
+  "chatUnseen_other": {
     "message": "$2 ($1 noi)"
   },
   "chatStatusWaiting": {
@@ -296,10 +326,10 @@
   "chatTooLong_one": {
     "message": "Mesajele pot avea cel mult $1 caracter."
   },
-  "chatTooLong_other": {
-    "message": "Mesajele pot avea cel mult $1 de caractere."
-  },
   "chatTooLong_few": {
     "message": "Mesajele pot avea cel mult $1 caractere."
+  },
+  "chatTooLong_other": {
+    "message": "Mesajele pot avea cel mult $1 de caractere."
   }
 }

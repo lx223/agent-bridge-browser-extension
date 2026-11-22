@@ -4,8 +4,7 @@ import { analyticsAvailable, bindAnalyticsToggle } from '../settings/analyticsTo
 import { bindInstanceName } from '../settings/instanceName.ts';
 import { plural, t } from '../i18n/messages.ts';
 import { localizePage } from '../i18n/page.ts';
-
-const PRIVACY_URL = 'https://github.com/lx223/agent-bridge-browser-extension/blob/main/PRIVACY.md';
+import { PRIVACY_URL } from '../settings/privacy.ts';
 
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 

@@ -35,17 +35,86 @@
   "welcomeLedeSafari": {
     "message": "AI 에이전트가 Safari 탭을 찾고, 열고, 옮기고, 닫을 수 있습니다."
   },
-  "welcomeConnected": {
-    "message": "연결됨: 에이전트가 브라우저를 사용할 수 있습니다."
+  "profileLabel": {
+    "message": "이 프로필"
   },
-  "welcomeConnectedMany_one": {
-    "message": "연결됨: 에이전트 세션 $1개가 브라우저를 사용할 수 있습니다."
+  "profilePlaceholder": {
+    "message": "이름 지정"
   },
-  "welcomeConnectedMany_other": {
-    "message": "연결됨: 에이전트 세션 $1개가 브라우저를 사용할 수 있습니다."
+  "profileHint": {
+    "message": "에이전트가 이 이름으로 브라우저와 프로필을 구분하므로 '업무 브라우저에서'처럼 요청할 수 있습니다."
   },
-  "welcomeDisconnected": {
-    "message": "에이전트를 기다리는 중입니다. 아래에서 설정한 다음 세션을 시작하세요."
+  "profileSaved": {
+    "message": "저장됨"
+  },
+  "profileNameRemoved": {
+    "message": "이름 삭제됨"
+  },
+  "statusNotConnected": {
+    "message": "아직 연결되지 않음"
+  },
+  "statusSetUpHint": {
+    "message": "아래에서 에이전트를 연결한 다음 에이전트에서 새 세션을 시작하세요."
+  },
+  "statusConnected": {
+    "message": "연결됨"
+  },
+  "statusConnectedMany_one": {
+    "message": "에이전트 세션 $1개에 연결됨"
+  },
+  "statusConnectedMany_other": {
+    "message": "에이전트 세션 $1개에 연결됨"
+  },
+  "statusConnectedHint": {
+    "message": "에이전트가 이 브라우저를 사용할 수 있습니다. 아래 프롬프트 중 하나를 사용해 보세요."
+  },
+  "welcomeStepConnect": {
+    "message": "에이전트 연결하기"
+  },
+  "stepDone": {
+    "message": "완료"
+  },
+  "welcomePickAgent": {
+    "message": "사용하는 에이전트를 선택하세요."
+  },
+  "welcomeAgentTabs": {
+    "message": "사용하는 에이전트"
+  },
+  "welcomeTabOther": {
+    "message": "기타"
+  },
+  "welcomeClaudeCodeSteps": {
+    "message": "터미널에서 이 명령을 한 번 실행한 다음 새 Claude Code 세션을 시작하세요."
+  },
+  "welcomeClaudeDesktopSteps": {
+    "message": "확장 프로그램을 다운로드하고 파일을 여세요. Claude Desktop이 자동으로 설치하며 Node.js는 필요하지 않습니다."
+  },
+  "welcomeOpensToConfirm": {
+    "message": "$1이(가) 열리고 확인을 요청합니다."
+  },
+  "welcomeOtherAgentsSteps": {
+    "message": "에이전트의 MCP 구성에 이 내용을 추가한 다음 에이전트를 다시 시작하세요."
+  },
+  "welcomeAgentSetupHint": {
+    "message": "Claude Code, Cursor, Codex처럼 명령을 실행할 수 있는 에이전트에 이 프롬프트를 붙여넣으세요. Node.js가 있는지 확인하고 서버를 추가합니다."
+  },
+  "showPrompt": {
+    "message": "프롬프트 보기"
+  },
+  "welcomeServerFootnote": {
+    "message": "에이전트가 작은 로컬 서버($1)를 실행하면 이 확장 프로그램이 서버에 연결됩니다."
+  },
+  "welcomeStepAsk": {
+    "message": "에이전트에게 요청하기"
+  },
+  "welcomeUndoFootnote": {
+    "message": "마음이 바뀌셨나요? $1(으)로 변경한 내용은 에이전트에게 실행취소를 요청하면 되돌릴 수 있습니다."
+  },
+  "welcomeSafariFootnote": {
+    "message": "Safari에서 에이전트는 창을 열고, 정렬하고, 닫을 수 있으며, 탭을 열고, 페이지를 이동하고, 전환하고, 고정하고, 음소거하고, 복제하고, 옮기고, 닫을 수 있습니다. 탭 그룹, 방문 기록, 북마크, 페이지 제어는 Chrome에서 사용할 수 있습니다. 탭 제목과 주소가 표시되지 않으면 Safari의 설정 > 확장 프로그램에서 이 확장 프로그램에 웹사이트 접근 권한을 허용하세요."
+  },
+  "welcomeAnalyticsHint": {
+    "message": "확장 프로그램 개선을 위해 사용된 기능과 확장 프로그램 버전을 공유합니다."
   },
   "instanceNameLabel": {
     "message": "이 브라우저 프로필의 이름 지정"
@@ -53,26 +122,14 @@
   "instanceNamePlaceholder": {
     "message": "예: 업무 또는 개인"
   },
-  "welcomeInstanceNameHint": {
-    "message": "에이전트가 이 이름으로 브라우저와 프로필을 구분하므로 '업무 브라우저에서'처럼 요청할 수 있습니다. $1"
-  },
   "optionsInstanceNameHint": {
     "message": "에이전트가 이 이름으로 브라우저와 프로필을 구분합니다. $1"
   },
   "instanceId": {
     "message": "인스턴스 ID: $1"
   },
-  "welcomeStepAdd": {
-    "message": "1. 에이전트에 추가하기"
-  },
-  "welcomeStepAddHint": {
-    "message": "에이전트가 작은 로컬 서버($1)를 시작하면 이 확장 프로그램이 서버에 연결됩니다. 사용하는 에이전트를 선택하세요."
-  },
   "welcomeAgentSetupTitle": {
     "message": "에이전트에게 설정 맡기기"
-  },
-  "welcomeAgentSetupBody": {
-    "message": "Claude Code, Cursor, Codex처럼 명령을 실행하고 자체 설정을 수정할 수 있는 에이전트에 이 프롬프트를 붙여넣으세요. Node.js가 있는지 확인한 다음 서버를 추가합니다."
   },
   "copyPrompt": {
     "message": "프롬프트 복사"
@@ -83,29 +140,11 @@
   "copied": {
     "message": "복사됨"
   },
-  "welcomeClaudeCodeBody": {
-    "message": "터미널에서 한 번 실행하세요."
-  },
-  "welcomeOpensAndConfirms": {
-    "message": "앱이 열리고 확인을 요청합니다."
-  },
   "welcomeAddTo": {
     "message": "$1에 추가"
   },
-  "welcomeClaudeDesktopBody": {
-    "message": "확장 프로그램을 다운로드한 다음 파일을 열어 설치하세요. Node.js는 필요하지 않습니다."
-  },
   "welcomeDownloadFor": {
     "message": "$1용 다운로드"
-  },
-  "welcomeOtherAgentsTitle": {
-    "message": "기타 에이전트"
-  },
-  "welcomeOtherAgentsBody": {
-    "message": "에이전트의 MCP 구성에 이 내용을 추가한 다음 에이전트를 다시 시작하세요."
-  },
-  "welcomeStepTry": {
-    "message": "2. 사용해 보기"
   },
   "welcomeTryIntro": {
     "message": "Chrome을 연 상태에서 에이전트에게 요청해 보세요."
@@ -116,9 +155,6 @@
   "welcomeTryPage": {
     "message": "Chrome 출시 노트를 열고 최신 버전에서 바뀐 점을 요약해 줘."
   },
-  "welcomeTryHint": {
-    "message": "에이전트의 서버가 실행되면 위의 상태가 녹색으로 바뀝니다. $1(으)로 변경한 내용은 에이전트에게 실행취소를 요청하면 되돌릴 수 있습니다."
-  },
   "welcomeTryIntroSafari": {
     "message": "Safari를 연 상태에서 에이전트에게 요청해 보세요."
   },
@@ -128,9 +164,6 @@
   "welcomeTrySortSafari": {
     "message": "Safari 탭을 사이트별로 정렬해 줘."
   },
-  "welcomeTryHintSafari": {
-    "message": "에이전트의 서버가 실행되면 위의 상태가 녹색으로 바뀝니다. Safari에서 에이전트는 창을 열고, 정렬하고, 닫을 수 있으며, 탭을 열고, 페이지를 이동하고, 전환하고, 고정하고, 음소거하고, 복제하고, 옮기고, 닫을 수 있습니다. 탭 제목과 주소가 표시되지 않으면 Safari의 설정 > 확장 프로그램에서 이 확장 프로그램에 웹사이트 접근 권한을 허용하세요. 탭 그룹, 방문 기록, 북마크, 페이지 제어는 Chrome에서 사용할 수 있습니다."
-  },
   "welcomePrivacyHeading": {
     "message": "개인정보 보호"
   },
@@ -139,9 +172,6 @@
   },
   "welcomePrivacySafari": {
     "message": "브라우징 데이터는 내 컴퓨터에만 남습니다. 이 확장 프로그램은 $1에만 연결합니다. 요청하면 에이전트가 탭 제목과 URL을 읽고, 창과 탭을 열거나 정렬하거나 닫을 수 있습니다. Safari에서는 웹페이지를 읽거나 조작할 수 없습니다. 이 확장 프로그램은 탭 제목과 URL을 다른 곳으로 절대 보내지 않습니다."
-  },
-  "welcomeAnalytics": {
-    "message": "익명 사용 통계(사용된 기능, 확장 프로그램 버전)를 공유하여 확장 프로그램 개선에 참여합니다."
   },
   "analyticsTitle": {
     "message": "익명 사용 통계 공유"

@@ -35,17 +35,86 @@
   "welcomeLedeSafari": {
     "message": "Biarkan agen AI Anda menemukan, membuka, memindahkan, dan menutup tab Safari Anda."
   },
-  "welcomeConnected": {
-    "message": "Terhubung: agen Anda dapat menggunakan browser."
+  "profileLabel": {
+    "message": "Profil ini"
   },
-  "welcomeConnectedMany_one": {
-    "message": "Terhubung: $1 sesi agen dapat menggunakan browser."
+  "profilePlaceholder": {
+    "message": "Beri nama"
   },
-  "welcomeConnectedMany_other": {
-    "message": "Terhubung: $1 sesi agen dapat menggunakan browser."
+  "profileHint": {
+    "message": "Agen menggunakan nama ini untuk membedakan browser dan profil Anda, sehingga Anda dapat meminta browser Kantor."
   },
-  "welcomeDisconnected": {
-    "message": "Menunggu agen Anda. Siapkan di bawah, lalu mulai sesi."
+  "profileSaved": {
+    "message": "Disimpan"
+  },
+  "profileNameRemoved": {
+    "message": "Nama dihapus"
+  },
+  "statusNotConnected": {
+    "message": "Belum terhubung"
+  },
+  "statusSetUpHint": {
+    "message": "Hubungkan agen Anda di bawah, lalu mulai sesi baru di agen tersebut."
+  },
+  "statusConnected": {
+    "message": "Terhubung"
+  },
+  "statusConnectedMany_one": {
+    "message": "Terhubung ke $1 sesi agen"
+  },
+  "statusConnectedMany_other": {
+    "message": "Terhubung ke $1 sesi agen"
+  },
+  "statusConnectedHint": {
+    "message": "Agen Anda dapat menggunakan browser ini. Coba salah satu prompt di bawah."
+  },
+  "welcomeStepConnect": {
+    "message": "Hubungkan agen Anda"
+  },
+  "stepDone": {
+    "message": "Selesai"
+  },
+  "welcomePickAgent": {
+    "message": "Pilih agen yang Anda gunakan."
+  },
+  "welcomeAgentTabs": {
+    "message": "Agen Anda"
+  },
+  "welcomeTabOther": {
+    "message": "Lainnya"
+  },
+  "welcomeClaudeCodeSteps": {
+    "message": "Jalankan ini sekali di terminal, lalu mulai sesi Claude Code baru."
+  },
+  "welcomeClaudeDesktopSteps": {
+    "message": "Download ekstensi dan buka filenya. Claude Desktop akan menginstalnya untuk Anda, tidak perlu Node.js."
+  },
+  "welcomeOpensToConfirm": {
+    "message": "$1 akan terbuka dan meminta konfirmasi Anda."
+  },
+  "welcomeOtherAgentsSteps": {
+    "message": "Tambahkan ini ke konfigurasi MCP agen, lalu mulai ulang agen."
+  },
+  "welcomeAgentSetupHint": {
+    "message": "Tempel prompt ini ke agen yang dapat menjalankan perintah, seperti Claude Code, Cursor, atau Codex. Prompt ini memeriksa Node.js dan menambahkan server."
+  },
+  "showPrompt": {
+    "message": "Tampilkan prompt"
+  },
+  "welcomeServerFootnote": {
+    "message": "Agen Anda menjalankan server lokal kecil, $1, yang dihubungi oleh ekstensi ini."
+  },
+  "welcomeStepAsk": {
+    "message": "Tanyakan sesuatu"
+  },
+  "welcomeUndoFootnote": {
+    "message": "Berubah pikiran? Perubahan yang dibuat dengan $1 dapat dibatalkan dengan meminta agen untuk mengurungkannya."
+  },
+  "welcomeSafariFootnote": {
+    "message": "Di Safari, agen Anda dapat membuka, mengatur, dan menutup jendela, serta membuka, menavigasi, beralih, menyematkan, membisukan, menduplikasi, memindahkan, dan menutup tab. Grup tab, histori, bookmark, dan kontrol halaman tersedia di Chrome. Jika judul dan alamat tab tidak muncul, beri ekstensi akses situs web di Safari melalui Pengaturan > Ekstensi."
+  },
+  "welcomeAnalyticsHint": {
+    "message": "Fitur yang digunakan dan versi ekstensi, untuk membantu meningkatkan ekstensi."
   },
   "instanceNameLabel": {
     "message": "Beri nama profil browser ini"
@@ -53,26 +122,14 @@
   "instanceNamePlaceholder": {
     "message": "Misalnya Kantor atau Pribadi"
   },
-  "welcomeInstanceNameHint": {
-    "message": "Agen menggunakan nama ini untuk membedakan browser dan profil Anda, sehingga Anda dapat meminta browser Kantor. $1"
-  },
   "optionsInstanceNameHint": {
     "message": "Agen menggunakan nama ini untuk membedakan browser dan profil Anda. $1"
   },
   "instanceId": {
     "message": "ID instance: $1"
   },
-  "welcomeStepAdd": {
-    "message": "1. Tambahkan ke agen Anda"
-  },
-  "welcomeStepAddHint": {
-    "message": "Agen Anda menjalankan server lokal kecil ($1) yang dihubungi oleh ekstensi ini. Pilih agen Anda:"
-  },
   "welcomeAgentSetupTitle": {
     "message": "Biarkan agen Anda menyiapkannya"
-  },
-  "welcomeAgentSetupBody": {
-    "message": "Tempel prompt ini ke agen apa pun yang dapat menjalankan perintah dan mengubah setelannya sendiri, seperti Claude Code, Cursor, atau Codex. Prompt ini memeriksa Node.js, lalu menambahkan server."
   },
   "copyPrompt": {
     "message": "Salin prompt"
@@ -83,29 +140,11 @@
   "copied": {
     "message": "Disalin"
   },
-  "welcomeClaudeCodeBody": {
-    "message": "Jalankan sekali di terminal:"
-  },
-  "welcomeOpensAndConfirms": {
-    "message": "Membuka aplikasi dan meminta konfirmasi Anda."
-  },
   "welcomeAddTo": {
     "message": "Tambahkan ke $1"
   },
-  "welcomeClaudeDesktopBody": {
-    "message": "Download ekstensi, lalu buka filenya untuk menginstalnya. Tidak perlu Node.js."
-  },
   "welcomeDownloadFor": {
     "message": "Download untuk $1"
-  },
-  "welcomeOtherAgentsTitle": {
-    "message": "Agen lain"
-  },
-  "welcomeOtherAgentsBody": {
-    "message": "Tambahkan ini ke konfigurasi MCP agen, lalu mulai ulang agen."
-  },
-  "welcomeStepTry": {
-    "message": "2. Coba"
   },
   "welcomeTryIntro": {
     "message": "Saat Chrome terbuka, minta agen Anda:"
@@ -116,9 +155,6 @@
   "welcomeTryPage": {
     "message": "Buka catatan rilis Chrome dan rangkum apa saja yang berubah di versi terbaru."
   },
-  "welcomeTryHint": {
-    "message": "Status di atas berubah menjadi hijau setelah server agen Anda berjalan. Perubahan yang dibuat dengan $1 dapat dibatalkan dengan meminta agen untuk mengurungkannya."
-  },
   "welcomeTryIntroSafari": {
     "message": "Saat Safari terbuka, minta agen Anda:"
   },
@@ -128,9 +164,6 @@
   "welcomeTrySortSafari": {
     "message": "Urutkan tab Safari saya berdasarkan situs."
   },
-  "welcomeTryHintSafari": {
-    "message": "Status di atas berubah menjadi hijau setelah server agen Anda berjalan. Di Safari, agen Anda dapat membuka, mengatur, dan menutup jendela, serta membuka, menavigasi, beralih, menyematkan, membisukan, menduplikasi, memindahkan, dan menutup tab. Jika judul dan alamat tab tidak muncul, beri ekstensi akses situs web di Safari melalui Pengaturan > Ekstensi. Grup tab, histori, bookmark, dan kontrol halaman tersedia di Chrome."
-  },
   "welcomePrivacyHeading": {
     "message": "Privasi"
   },
@@ -139,9 +172,6 @@
   },
   "welcomePrivacySafari": {
     "message": "Data penjelajahan Anda tetap di komputer Anda: ekstensi hanya berkomunikasi dengan $1. Agen Anda dapat membaca judul dan URL tab, serta membuka, mengatur, atau menutup jendela dan tab jika Anda memintanya. Agen tidak dapat membaca atau bertindak di halaman web di Safari. Judul tab dan URL tidak pernah dikirim ke tempat lain oleh ekstensi ini."
-  },
-  "welcomeAnalytics": {
-    "message": "Bagikan statistik penggunaan anonim (fitur yang digunakan, versi ekstensi) untuk membantu meningkatkan ekstensi."
   },
   "analyticsTitle": {
     "message": "Bagikan statistik penggunaan anonim"

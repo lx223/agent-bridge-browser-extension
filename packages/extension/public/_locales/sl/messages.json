@@ -35,23 +35,92 @@
   "welcomeLedeSafari": {
     "message": "Naj vaš agent UI išče, odpira, premika in zapira vaše zavihke v Safariju."
   },
-  "welcomeConnected": {
-    "message": "Povezano: vaš agent lahko uporablja brskalnik."
+  "profileLabel": {
+    "message": "Ta profil"
   },
-  "welcomeConnectedMany_one": {
-    "message": "Povezano: $1 seja agenta lahko uporablja brskalnik."
+  "profilePlaceholder": {
+    "message": "Poimenujte ga"
   },
-  "welcomeConnectedMany_other": {
-    "message": "Povezano: $1 sej agenta lahko uporablja brskalnik."
+  "profileHint": {
+    "message": "Agenti po tem imenu razlikujejo vaše brskalnike in profile, zato lahko zahtevate na primer brskalnik Služba."
   },
-  "welcomeConnectedMany_two": {
-    "message": "Povezano: $1 seji agenta lahko uporabljata brskalnik."
+  "profileSaved": {
+    "message": "Shranjeno"
   },
-  "welcomeConnectedMany_few": {
-    "message": "Povezano: $1 seje agenta lahko uporabljajo brskalnik."
+  "profileNameRemoved": {
+    "message": "Ime odstranjeno"
   },
-  "welcomeDisconnected": {
-    "message": "Čakanje na vašega agenta. Nastavite ga spodaj in nato začnite sejo."
+  "statusNotConnected": {
+    "message": "Še ni povezano"
+  },
+  "statusSetUpHint": {
+    "message": "Spodaj povežite svojega agenta in nato v njem začnite novo sejo."
+  },
+  "statusConnected": {
+    "message": "Povezano"
+  },
+  "statusConnectedMany_one": {
+    "message": "Povezana je $1 seja agenta"
+  },
+  "statusConnectedMany_few": {
+    "message": "Povezane so $1 seje agenta"
+  },
+  "statusConnectedMany_two": {
+    "message": "Povezani sta $1 seji agenta"
+  },
+  "statusConnectedMany_other": {
+    "message": "Povezanih je $1 sej agenta"
+  },
+  "statusConnectedHint": {
+    "message": "Vaš agent lahko uporablja ta brskalnik. Preizkusite enega od spodnjih pozivov."
+  },
+  "welcomeStepConnect": {
+    "message": "Povežite svojega agenta"
+  },
+  "stepDone": {
+    "message": "Končano"
+  },
+  "welcomePickAgent": {
+    "message": "Izberite agenta, ki ga uporabljate."
+  },
+  "welcomeAgentTabs": {
+    "message": "Vaš agent"
+  },
+  "welcomeTabOther": {
+    "message": "Drugo"
+  },
+  "welcomeClaudeCodeSteps": {
+    "message": "Enkrat zaženite v terminalu in nato začnite novo sejo Claude Code."
+  },
+  "welcomeClaudeDesktopSteps": {
+    "message": "Prenesite razširitev in odprite datoteko. Claude Desktop jo namesti namesto vas, Node.js ni potreben."
+  },
+  "welcomeOpensToConfirm": {
+    "message": "$1 se odpre in vas prosi za potrditev."
+  },
+  "welcomeOtherAgentsSteps": {
+    "message": "To dodajte v konfiguracijo MCP agenta in ga nato znova zaženite."
+  },
+  "welcomeAgentSetupHint": {
+    "message": "Prilepite ta poziv v agenta, ki lahko izvaja ukaze, na primer Claude Code, Cursor ali Codex. Preveri, ali je Node.js nameščen, nato pa doda strežnik."
+  },
+  "showPrompt": {
+    "message": "Pokaži poziv"
+  },
+  "welcomeServerFootnote": {
+    "message": "Vaš agent zažene majhen lokalni strežnik $1, s katerim se poveže ta razširitev."
+  },
+  "welcomeStepAsk": {
+    "message": "Prosite ga za nekaj"
+  },
+  "welcomeUndoFootnote": {
+    "message": "Ste si premislili? Spremembe, narejene z orodjem $1, lahko razveljavite tako, da agenta prosite, naj jih razveljavi."
+  },
+  "welcomeSafariFootnote": {
+    "message": "V Safariju lahko agent odpira, razporeja in zapira okna ter odpira zavihke, v njih odpira druge strani, preklaplja med njimi, jih pripenja, utiša, podvaja, premika in zapira. Skupine zavihkov, zgodovina, zaznamki in upravljanje strani so na voljo v Chromu. Če manjkajo naslovi zavihkov in njihovi URL-ji, v Safariju v razdelku Settings > Extensions razširitvi omogočite dostop do spletnih mest."
+  },
+  "welcomeAnalyticsHint": {
+    "message": "Katere funkcije se uporabljajo in različica razširitve, da pomagate izboljšati razširitev."
   },
   "instanceNameLabel": {
     "message": "Poimenujte ta profil brskalnika"
@@ -59,26 +128,14 @@
   "instanceNamePlaceholder": {
     "message": "Na primer Služba ali Osebno"
   },
-  "welcomeInstanceNameHint": {
-    "message": "Agenti po tem imenu razlikujejo vaše brskalnike in profile, zato lahko zahtevate na primer brskalnik Služba. $1"
-  },
   "optionsInstanceNameHint": {
     "message": "Agenti po tem imenu razlikujejo vaše brskalnike in profile. $1"
   },
   "instanceId": {
     "message": "ID primerka: $1"
   },
-  "welcomeStepAdd": {
-    "message": "1. Dodajte ga svojemu agentu"
-  },
-  "welcomeStepAddHint": {
-    "message": "Vaš agent zažene majhen lokalni strežnik ($1), s katerim se poveže ta razširitev. Izberite svojega agenta:"
-  },
   "welcomeAgentSetupTitle": {
     "message": "Naj ga nastavi agent"
-  },
-  "welcomeAgentSetupBody": {
-    "message": "Prilepite ta poziv v katerega koli agenta, ki lahko izvaja ukaze in ureja svoje nastavitve, na primer Claude Code, Cursor ali Codex. Preveri, ali je Node.js nameščen, nato pa doda strežnik."
   },
   "copyPrompt": {
     "message": "Kopiraj poziv"
@@ -89,29 +146,11 @@
   "copied": {
     "message": "Kopirano"
   },
-  "welcomeClaudeCodeBody": {
-    "message": "Enkrat zaženite v terminalu:"
-  },
-  "welcomeOpensAndConfirms": {
-    "message": "Odpre aplikacijo in vas prosi za potrditev."
-  },
   "welcomeAddTo": {
     "message": "Dodaj v $1"
   },
-  "welcomeClaudeDesktopBody": {
-    "message": "Prenesite razširitev in nato odprite datoteko, da jo namestite. Node.js ni potreben."
-  },
   "welcomeDownloadFor": {
     "message": "Prenesi za $1"
-  },
-  "welcomeOtherAgentsTitle": {
-    "message": "Drugi agenti"
-  },
-  "welcomeOtherAgentsBody": {
-    "message": "To dodajte v konfiguracijo MCP agenta in ga nato znova zaženite."
-  },
-  "welcomeStepTry": {
-    "message": "2. Preizkusite"
   },
   "welcomeTryIntro": {
     "message": "Ko je Chrome odprt, napišite agentu:"
@@ -122,9 +161,6 @@
   "welcomeTryPage": {
     "message": "Odpri opombe ob izdaji za Chrome in povzemi, kaj se je spremenilo v najnovejši različici."
   },
-  "welcomeTryHint": {
-    "message": "Stanje zgoraj se obarva zeleno, ko se zažene strežnik vašega agenta. Spremembe, narejene z orodjem $1, lahko razveljavite tako, da agenta prosite, naj jih razveljavi."
-  },
   "welcomeTryIntroSafari": {
     "message": "Ko je Safari odprt, napišite agentu:"
   },
@@ -134,9 +170,6 @@
   "welcomeTrySortSafari": {
     "message": "Razvrsti moje zavihke v Safariju po spletnem mestu."
   },
-  "welcomeTryHintSafari": {
-    "message": "Stanje zgoraj se obarva zeleno, ko se zažene strežnik vašega agenta. V Safariju lahko agent odpira, razporeja in zapira okna ter odpira zavihke, v njih odpira druge strani, preklaplja med njimi, jih pripenja, utiša, podvaja, premika in zapira. Če manjkajo naslovi zavihkov in njihovi URL-ji, v Safariju v razdelku Settings > Extensions razširitvi omogočite dostop do spletnih mest. Skupine zavihkov, zgodovina, zaznamki in upravljanje strani so na voljo v Chromu."
-  },
   "welcomePrivacyHeading": {
     "message": "Zasebnost"
   },
@@ -145,9 +178,6 @@
   },
   "welcomePrivacySafari": {
     "message": "Podatki o brskanju ostanejo v vašem računalniku: razširitev komunicira samo z naslovom $1. Vaš agent lahko bere naslove in URL-je zavihkov ter na vašo zahtevo odpira, razporeja ali zapira okna in zavihke. V Safariju ne more brati spletnih strani ali na njih izvajati dejanj. Ta razširitev naslovov zavihkov ali URL-jev nikoli ne pošilja nikamor drugam."
-  },
-  "welcomeAnalytics": {
-    "message": "Deli anonimne statistične podatke o uporabi (katere funkcije se uporabljajo, različica razširitve), da pomagate izboljšati razširitev."
   },
   "analyticsTitle": {
     "message": "Deli anonimne statistične podatke o uporabi"
@@ -170,14 +200,14 @@
   "optionsConnectedMany_one": {
     "message": "Povezana je $1 seja agenta"
   },
-  "optionsConnectedMany_other": {
-    "message": "Povezanih je $1 sej agenta"
+  "optionsConnectedMany_few": {
+    "message": "Povezane so $1 seje agenta"
   },
   "optionsConnectedMany_two": {
     "message": "Povezani sta $1 seji agenta"
   },
-  "optionsConnectedMany_few": {
-    "message": "Povezane so $1 seje agenta"
+  "optionsConnectedMany_other": {
+    "message": "Povezanih je $1 sej agenta"
   },
   "optionsDisconnected": {
     "message": "Noben agent ni povezan"
@@ -194,14 +224,14 @@
   "sessionLastUsed_one": {
     "message": "Nazadnje uporabljeno $2 $3, $1 klic"
   },
-  "sessionLastUsed_other": {
-    "message": "Nazadnje uporabljeno $2 $3, $1 klicev"
+  "sessionLastUsed_few": {
+    "message": "Nazadnje uporabljeno $2 $3, $1 klici"
   },
   "sessionLastUsed_two": {
     "message": "Nazadnje uporabljeno $2 $3, $1 klica"
   },
-  "sessionLastUsed_few": {
-    "message": "Nazadnje uporabljeno $2 $3, $1 klici"
+  "sessionLastUsed_other": {
+    "message": "Nazadnje uporabljeno $2 $3, $1 klicev"
   },
   "sessionUnused": {
     "message": "Še ni uporabil brskalnika"
@@ -254,14 +284,14 @@
   "chatUnseen_one": {
     "message": "$2 ($1 novo)"
   },
-  "chatUnseen_other": {
-    "message": "$2 ($1 novih)"
+  "chatUnseen_few": {
+    "message": "$2 ($1 nova)"
   },
   "chatUnseen_two": {
     "message": "$2 ($1 novi)"
   },
-  "chatUnseen_few": {
-    "message": "$2 ($1 nova)"
+  "chatUnseen_other": {
+    "message": "$2 ($1 novih)"
   },
   "chatStatusWaiting": {
     "message": "Čaka na vaš odgovor"
@@ -308,13 +338,13 @@
   "chatTooLong_one": {
     "message": "Sporočilo ima lahko največ $1 znak."
   },
-  "chatTooLong_other": {
-    "message": "Sporočilo ima lahko največ $1 znakov."
+  "chatTooLong_few": {
+    "message": "Sporočilo ima lahko največ $1 znake."
   },
   "chatTooLong_two": {
     "message": "Sporočilo ima lahko največ $1 znaka."
   },
-  "chatTooLong_few": {
-    "message": "Sporočilo ima lahko največ $1 znake."
+  "chatTooLong_other": {
+    "message": "Sporočilo ima lahko največ $1 znakov."
   }
 }

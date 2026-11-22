@@ -35,17 +35,86 @@
   "welcomeLedeSafari": {
     "message": "Låt din AI-agent hitta, öppna, flytta och stänga dina Safari-flikar."
   },
-  "welcomeConnected": {
-    "message": "Ansluten: din agent kan använda webbläsaren."
+  "profileLabel": {
+    "message": "Den här profilen"
   },
-  "welcomeConnectedMany_one": {
-    "message": "Ansluten: $1 agentsession kan använda webbläsaren."
+  "profilePlaceholder": {
+    "message": "Ge den ett namn"
   },
-  "welcomeConnectedMany_other": {
-    "message": "Ansluten: $1 agentsessioner kan använda webbläsaren."
+  "profileHint": {
+    "message": "Agenter använder namnet för att skilja dina webbläsare och profiler åt, så att du kan be om webbläsaren Jobb."
   },
-  "welcomeDisconnected": {
-    "message": "Väntar på din agent. Konfigurera den nedan och starta sedan en session."
+  "profileSaved": {
+    "message": "Sparat"
+  },
+  "profileNameRemoved": {
+    "message": "Namnet borttaget"
+  },
+  "statusNotConnected": {
+    "message": "Inte ansluten än"
+  },
+  "statusSetUpHint": {
+    "message": "Anslut din agent nedan och starta sedan en ny session i den."
+  },
+  "statusConnected": {
+    "message": "Ansluten"
+  },
+  "statusConnectedMany_one": {
+    "message": "Ansluten till $1 agentsession"
+  },
+  "statusConnectedMany_other": {
+    "message": "Ansluten till $1 agentsessioner"
+  },
+  "statusConnectedHint": {
+    "message": "Din agent kan använda den här webbläsaren. Testa någon av prompterna nedan."
+  },
+  "welcomeStepConnect": {
+    "message": "Anslut din agent"
+  },
+  "stepDone": {
+    "message": "Klart"
+  },
+  "welcomePickAgent": {
+    "message": "Välj den agent du använder."
+  },
+  "welcomeAgentTabs": {
+    "message": "Din agent"
+  },
+  "welcomeTabOther": {
+    "message": "Annan"
+  },
+  "welcomeClaudeCodeSteps": {
+    "message": "Kör det här en gång i en terminal och starta sedan en ny Claude Code-session."
+  },
+  "welcomeClaudeDesktopSteps": {
+    "message": "Ladda ned tillägget och öppna filen. Claude Desktop installerar det åt dig, Node.js behövs inte."
+  },
+  "welcomeOpensToConfirm": {
+    "message": "$1 öppnas och ber dig bekräfta."
+  },
+  "welcomeOtherAgentsSteps": {
+    "message": "Lägg till det här i agentens MCP-konfiguration och starta sedan om den."
+  },
+  "welcomeAgentSetupHint": {
+    "message": "Klistra in den här prompten i en agent som kan köra kommandon, till exempel Claude Code, Cursor eller Codex. Den kontrollerar att Node.js finns och lägger sedan till servern."
+  },
+  "showPrompt": {
+    "message": "Visa prompt"
+  },
+  "welcomeServerFootnote": {
+    "message": "Din agent kör en liten lokal server, $1, som det här tillägget ansluter till."
+  },
+  "welcomeStepAsk": {
+    "message": "Be den om något"
+  },
+  "welcomeUndoFootnote": {
+    "message": "Ångrat dig? Ändringar som görs med $1 kan återställas om du ber agenten att ångra dem."
+  },
+  "welcomeSafariFootnote": {
+    "message": "I Safari kan agenten öppna, ordna och stänga fönster samt öppna flikar, läsa in sidor i dem, växla mellan dem och fästa, stänga av ljudet för, duplicera, flytta och stänga dem. Flikgrupper, historik, bokmärken och sidstyrning finns i Chrome. Om flikarnas titlar och adresser saknas ger du tillägget åtkomst till webbplatser i Safari under Inställningar > Tillägg."
+  },
+  "welcomeAnalyticsHint": {
+    "message": "Vilka funktioner som används och tilläggets version, för att hjälpa till att förbättra tillägget."
   },
   "instanceNameLabel": {
     "message": "Namnge den här webbläsarprofilen"
@@ -53,26 +122,14 @@
   "instanceNamePlaceholder": {
     "message": "Till exempel Jobb eller Privat"
   },
-  "welcomeInstanceNameHint": {
-    "message": "Agenter använder namnet för att skilja dina webbläsare och profiler åt, så att du kan be om webbläsaren Jobb. $1"
-  },
   "optionsInstanceNameHint": {
     "message": "Agenter använder namnet för att skilja dina webbläsare och profiler åt. $1"
   },
   "instanceId": {
     "message": "Instans-id: $1"
   },
-  "welcomeStepAdd": {
-    "message": "1. Lägg till det i din agent"
-  },
-  "welcomeStepAddHint": {
-    "message": "Din agent startar en liten lokal server ($1) som det här tillägget ansluter till. Välj din agent:"
-  },
   "welcomeAgentSetupTitle": {
     "message": "Låt agenten konfigurera det"
-  },
-  "welcomeAgentSetupBody": {
-    "message": "Klistra in den här prompten i en agent som kan köra kommandon och redigera sina egna inställningar, till exempel Claude Code, Cursor eller Codex. Den kontrollerar att Node.js finns och lägger sedan till servern."
   },
   "copyPrompt": {
     "message": "Kopiera prompt"
@@ -83,29 +140,11 @@
   "copied": {
     "message": "Kopierat"
   },
-  "welcomeClaudeCodeBody": {
-    "message": "Kör en gång i en terminal:"
-  },
-  "welcomeOpensAndConfirms": {
-    "message": "Öppnar appen och ber dig bekräfta."
-  },
   "welcomeAddTo": {
     "message": "Lägg till i $1"
   },
-  "welcomeClaudeDesktopBody": {
-    "message": "Ladda ned tillägget och öppna sedan filen för att installera det. Node.js behövs inte."
-  },
   "welcomeDownloadFor": {
     "message": "Ladda ned för $1"
-  },
-  "welcomeOtherAgentsTitle": {
-    "message": "Andra agenter"
-  },
-  "welcomeOtherAgentsBody": {
-    "message": "Lägg till det här i agentens MCP-konfiguration och starta sedan om den."
-  },
-  "welcomeStepTry": {
-    "message": "2. Testa"
   },
   "welcomeTryIntro": {
     "message": "Öppna Chrome och be din agent:"
@@ -116,9 +155,6 @@
   "welcomeTryPage": {
     "message": "Öppna Chromes versionsinformation och sammanfatta vad som ändrats i den senaste versionen."
   },
-  "welcomeTryHint": {
-    "message": "Statusen ovan blir grön när agentens server körs. Ändringar som görs med $1 kan återställas om du ber agenten att ångra dem."
-  },
   "welcomeTryIntroSafari": {
     "message": "Öppna Safari och be din agent:"
   },
@@ -128,9 +164,6 @@
   "welcomeTrySortSafari": {
     "message": "Sortera mina Safari-flikar efter webbplats."
   },
-  "welcomeTryHintSafari": {
-    "message": "Statusen ovan blir grön när agentens server körs. I Safari kan agenten öppna, ordna och stänga fönster samt öppna flikar, läsa in sidor i dem, växla mellan dem och fästa, stänga av ljudet för, duplicera, flytta och stänga dem. Om flikarnas titlar och adresser saknas ger du tillägget åtkomst till webbplatser i Safari under Inställningar > Tillägg. Flikgrupper, historik, bokmärken och sidstyrning finns i Chrome."
-  },
   "welcomePrivacyHeading": {
     "message": "Integritet"
   },
@@ -139,9 +172,6 @@
   },
   "welcomePrivacySafari": {
     "message": "Din webbinformation stannar på datorn: tillägget kommunicerar bara med $1. Agenten kan läsa fliktitlar och webbadresser samt öppna, ordna eller stänga fönster och flikar när du ber den om det. I Safari kan den inte läsa eller agera på webbsidor. Det här tillägget skickar aldrig fliktitlar eller webbadresser någon annanstans."
-  },
-  "welcomeAnalytics": {
-    "message": "Dela anonym användningsstatistik (vilka funktioner som används, tilläggets version) för att hjälpa till att förbättra tillägget."
   },
   "analyticsTitle": {
     "message": "Dela anonym användningsstatistik"

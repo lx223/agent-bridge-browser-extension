@@ -35,20 +35,89 @@
   "welcomeLedeSafari": {
     "message": "Deixa que el teu agent d'IA trobi, obri, mogui i tanqui les teves pestanyes de Safari."
   },
-  "welcomeConnected": {
-    "message": "Connectat: el teu agent pot utilitzar el navegador."
+  "profileLabel": {
+    "message": "Aquest perfil"
   },
-  "welcomeConnectedMany_one": {
-    "message": "Connectat: $1 sessió d'agent pot utilitzar el navegador."
+  "profilePlaceholder": {
+    "message": "Posa-li un nom"
   },
-  "welcomeConnectedMany_other": {
-    "message": "Connectat: $1 sessions d'agent poden utilitzar el navegador."
+  "profileHint": {
+    "message": "Els agents fan servir aquest nom per distingir els teus navegadors i perfils, així pots demanar el navegador «Feina»."
   },
-  "welcomeConnectedMany_many": {
-    "message": "Connectat: $1 sessions d'agent poden utilitzar el navegador."
+  "profileSaved": {
+    "message": "Desat"
   },
-  "welcomeDisconnected": {
-    "message": "S'està esperant el teu agent. Configura'l a continuació i, després, inicia una sessió."
+  "profileNameRemoved": {
+    "message": "Nom suprimit"
+  },
+  "statusNotConnected": {
+    "message": "Encara no connectat"
+  },
+  "statusSetUpHint": {
+    "message": "Connecta el teu agent a continuació i, després, inicia-hi una sessió nova."
+  },
+  "statusConnected": {
+    "message": "Connectat"
+  },
+  "statusConnectedMany_one": {
+    "message": "Connectat a $1 sessió d'agent"
+  },
+  "statusConnectedMany_many": {
+    "message": "Connectat a $1 sessions d'agent"
+  },
+  "statusConnectedMany_other": {
+    "message": "Connectat a $1 sessions d'agent"
+  },
+  "statusConnectedHint": {
+    "message": "El teu agent pot utilitzar aquest navegador. Prova una de les indicacions de més avall."
+  },
+  "welcomeStepConnect": {
+    "message": "Connecta el teu agent"
+  },
+  "stepDone": {
+    "message": "Fet"
+  },
+  "welcomePickAgent": {
+    "message": "Tria l'agent que fas servir."
+  },
+  "welcomeAgentTabs": {
+    "message": "El teu agent"
+  },
+  "welcomeTabOther": {
+    "message": "Altres"
+  },
+  "welcomeClaudeCodeSteps": {
+    "message": "Executa-ho una vegada en un terminal i, després, inicia una sessió nova de Claude Code."
+  },
+  "welcomeClaudeDesktopSteps": {
+    "message": "Baixa l'extensió i obre el fitxer. Claude Desktop la instal·la per tu, sense necessitat de Node.js."
+  },
+  "welcomeOpensToConfirm": {
+    "message": "$1 s'obre i et demana que ho confirmis."
+  },
+  "welcomeOtherAgentsSteps": {
+    "message": "Afegeix això a la configuració MCP de l'agent i, després, reinicia'l."
+  },
+  "welcomeAgentSetupHint": {
+    "message": "Enganxa aquesta indicació en un agent que pugui executar ordres, com ara Claude Code, Cursor o Codex. Comprova si hi ha Node.js i afegeix el servidor."
+  },
+  "showPrompt": {
+    "message": "Mostra la indicació"
+  },
+  "welcomeServerFootnote": {
+    "message": "El teu agent executa un petit servidor local, $1, al qual es connecta aquesta extensió."
+  },
+  "welcomeStepAsk": {
+    "message": "Demana-li alguna cosa"
+  },
+  "welcomeUndoFootnote": {
+    "message": "Has canviat d'opinió? Els canvis fets amb $1 es poden revertir demanant a l'agent que els desfaci."
+  },
+  "welcomeSafariFootnote": {
+    "message": "A Safari, el teu agent pot obrir, organitzar i tancar finestres, i també obrir pestanyes, navegar-hi, canviar entre elles, fixar-les, silenciar-les, duplicar-les, moure-les i tancar-les. Els grups de pestanyes, l'historial, les adreces d'interès i el control de pàgines estan disponibles a Chrome. Si falten els títols i les adreces de les pestanyes, dona a l'extensió accés als llocs web a Safari, a Configuració > Extensions."
+  },
+  "welcomeAnalyticsHint": {
+    "message": "Quines funcions es fan servir i la versió de l'extensió, per ajudar a millorar l'extensió."
   },
   "instanceNameLabel": {
     "message": "Posa nom a aquest perfil del navegador"
@@ -56,26 +125,14 @@
   "instanceNamePlaceholder": {
     "message": "Per exemple, Feina o Personal"
   },
-  "welcomeInstanceNameHint": {
-    "message": "Els agents fan servir aquest nom per distingir els teus navegadors i perfils, així pots demanar el navegador «Feina». $1"
-  },
   "optionsInstanceNameHint": {
     "message": "Els agents fan servir aquest nom per distingir els teus navegadors i perfils. $1"
   },
   "instanceId": {
     "message": "ID de la instància: $1"
   },
-  "welcomeStepAdd": {
-    "message": "1. Afegeix-lo al teu agent"
-  },
-  "welcomeStepAddHint": {
-    "message": "El teu agent inicia un petit servidor local ($1) al qual es connecta aquesta extensió. Tria el teu agent:"
-  },
   "welcomeAgentSetupTitle": {
     "message": "Deixa que el teu agent ho configuri"
-  },
-  "welcomeAgentSetupBody": {
-    "message": "Enganxa aquesta indicació en qualsevol agent que pugui executar ordres i editar la seva pròpia configuració, com ara Claude Code, Cursor o Codex. Comprova si hi ha Node.js i, després, afegeix el servidor."
   },
   "copyPrompt": {
     "message": "Copia la indicació"
@@ -86,29 +143,11 @@
   "copied": {
     "message": "Copiat"
   },
-  "welcomeClaudeCodeBody": {
-    "message": "Executa-ho una vegada en un terminal:"
-  },
-  "welcomeOpensAndConfirms": {
-    "message": "Obre l'aplicació i et demana que ho confirmis."
-  },
   "welcomeAddTo": {
     "message": "Afegeix a $1"
   },
-  "welcomeClaudeDesktopBody": {
-    "message": "Baixa l'extensió i obre el fitxer per instal·lar-la. No cal Node.js."
-  },
   "welcomeDownloadFor": {
     "message": "Baixa per a $1"
-  },
-  "welcomeOtherAgentsTitle": {
-    "message": "Altres agents"
-  },
-  "welcomeOtherAgentsBody": {
-    "message": "Afegeix això a la configuració MCP de l'agent i, després, reinicia'l."
-  },
-  "welcomeStepTry": {
-    "message": "2. Prova-ho"
   },
   "welcomeTryIntro": {
     "message": "Amb Chrome obert, demana al teu agent:"
@@ -119,9 +158,6 @@
   "welcomeTryPage": {
     "message": "Obre les notes de la versió de Chrome i resumeix què ha canviat a la darrera versió."
   },
-  "welcomeTryHint": {
-    "message": "L'estat de dalt es posa verd quan el servidor del teu agent està en marxa. Els canvis fets amb $1 es poden revertir demanant a l'agent que els desfaci."
-  },
   "welcomeTryIntroSafari": {
     "message": "Amb Safari obert, demana al teu agent:"
   },
@@ -131,9 +167,6 @@
   "welcomeTrySortSafari": {
     "message": "Ordena les meves pestanyes de Safari per lloc web."
   },
-  "welcomeTryHintSafari": {
-    "message": "L'estat de dalt es posa verd quan el servidor del teu agent està en marxa. A Safari, el teu agent pot obrir, organitzar i tancar finestres, i també obrir pestanyes, navegar-hi, canviar entre elles, fixar-les, silenciar-les, duplicar-les, moure-les i tancar-les. Si falten els títols i les adreces de les pestanyes, dona a l'extensió accés als llocs web a Safari, a Configuració > Extensions. Els grups de pestanyes, l'historial, les adreces d'interès i el control de pàgines estan disponibles a Chrome."
-  },
   "welcomePrivacyHeading": {
     "message": "Privadesa"
   },
@@ -142,9 +175,6 @@
   },
   "welcomePrivacySafari": {
     "message": "Les teves dades de navegació es queden a l'ordinador: l'extensió només es comunica amb $1. El teu agent pot llegir els títols i els URL de les pestanyes, i obrir, organitzar o tancar finestres i pestanyes quan li ho demanis. A Safari no pot llegir pàgines web ni actuar-hi. Aquesta extensió no envia mai enlloc més els títols ni els URL de les pestanyes."
-  },
-  "welcomeAnalytics": {
-    "message": "Comparteix estadístiques d'ús anònimes (quines funcions es fan servir i la versió de l'extensió) per ajudar a millorar l'extensió."
   },
   "analyticsTitle": {
     "message": "Comparteix estadístiques d'ús anònimes"
@@ -167,10 +197,10 @@
   "optionsConnectedMany_one": {
     "message": "$1 sessió d'agent connectada"
   },
-  "optionsConnectedMany_other": {
+  "optionsConnectedMany_many": {
     "message": "$1 sessions d'agent connectades"
   },
-  "optionsConnectedMany_many": {
+  "optionsConnectedMany_other": {
     "message": "$1 sessions d'agent connectades"
   },
   "optionsDisconnected": {
@@ -188,10 +218,10 @@
   "sessionLastUsed_one": {
     "message": "Darrer ús: $2 $3, $1 crida"
   },
-  "sessionLastUsed_other": {
+  "sessionLastUsed_many": {
     "message": "Darrer ús: $2 $3, $1 crides"
   },
-  "sessionLastUsed_many": {
+  "sessionLastUsed_other": {
     "message": "Darrer ús: $2 $3, $1 crides"
   },
   "sessionUnused": {
@@ -245,10 +275,10 @@
   "chatUnseen_one": {
     "message": "$2 ($1 nou)"
   },
-  "chatUnseen_other": {
+  "chatUnseen_many": {
     "message": "$2 ($1 nous)"
   },
-  "chatUnseen_many": {
+  "chatUnseen_other": {
     "message": "$2 ($1 nous)"
   },
   "chatStatusWaiting": {
@@ -296,10 +326,10 @@
   "chatTooLong_one": {
     "message": "Els missatges poden tenir com a màxim $1 caràcter."
   },
-  "chatTooLong_other": {
+  "chatTooLong_many": {
     "message": "Els missatges poden tenir com a màxim $1 caràcters."
   },
-  "chatTooLong_many": {
+  "chatTooLong_other": {
     "message": "Els missatges poden tenir com a màxim $1 caràcters."
   }
 }

@@ -35,17 +35,86 @@
   "welcomeLedeSafari": {
     "message": "讓 AI 代理程式幫你尋找、開啟、移動和關閉 Safari 分頁。"
   },
-  "welcomeConnected": {
-    "message": "已連線：你的代理程式可以使用瀏覽器了。"
+  "profileLabel": {
+    "message": "這個設定檔"
   },
-  "welcomeConnectedMany_one": {
-    "message": "已連線：$1 個代理程式工作階段可以使用瀏覽器。"
+  "profilePlaceholder": {
+    "message": "為它命名"
   },
-  "welcomeConnectedMany_other": {
-    "message": "已連線：$1 個代理程式工作階段可以使用瀏覽器。"
+  "profileHint": {
+    "message": "代理程式會用這個名稱區分你的各個瀏覽器和設定檔，因此你可以說「用工作瀏覽器」。"
   },
-  "welcomeDisconnected": {
-    "message": "正在等待你的代理程式。請先依照下方說明完成設定，然後開始工作階段。"
+  "profileSaved": {
+    "message": "已儲存"
+  },
+  "profileNameRemoved": {
+    "message": "已移除名稱"
+  },
+  "statusNotConnected": {
+    "message": "尚未連線"
+  },
+  "statusSetUpHint": {
+    "message": "請在下方將代理程式連線，然後在代理程式中開始新的工作階段。"
+  },
+  "statusConnected": {
+    "message": "已連線"
+  },
+  "statusConnectedMany_one": {
+    "message": "已連線 $1 個代理程式工作階段"
+  },
+  "statusConnectedMany_other": {
+    "message": "已連線 $1 個代理程式工作階段"
+  },
+  "statusConnectedHint": {
+    "message": "你的代理程式可以使用這個瀏覽器了。試試下方的其中一個提示吧。"
+  },
+  "welcomeStepConnect": {
+    "message": "連線你的代理程式"
+  },
+  "stepDone": {
+    "message": "完成"
+  },
+  "welcomePickAgent": {
+    "message": "選擇你使用的代理程式。"
+  },
+  "welcomeAgentTabs": {
+    "message": "你的代理程式"
+  },
+  "welcomeTabOther": {
+    "message": "其他"
+  },
+  "welcomeClaudeCodeSteps": {
+    "message": "在終端機中執行一次，然後開始新的 Claude Code 工作階段。"
+  },
+  "welcomeClaudeDesktopSteps": {
+    "message": "下載擴充功能並開啟檔案，Claude Desktop 會幫你安裝，不需要 Node.js。"
+  },
+  "welcomeOpensToConfirm": {
+    "message": "系統會開啟 $1 並要求你確認。"
+  },
+  "welcomeOtherAgentsSteps": {
+    "message": "將這段內容加入代理程式的 MCP 設定，然後重新啟動代理程式。"
+  },
+  "welcomeAgentSetupHint": {
+    "message": "將這段提示貼到能執行指令的代理程式中，例如 Claude Code、Cursor 或 Codex。它會先檢查 Node.js，然後新增伺服器。"
+  },
+  "showPrompt": {
+    "message": "顯示提示"
+  },
+  "welcomeServerFootnote": {
+    "message": "你的代理程式會執行一個小型本機伺服器（$1），這個擴充功能會連線至該伺服器。"
+  },
+  "welcomeStepAsk": {
+    "message": "向代理程式提問"
+  },
+  "welcomeUndoFootnote": {
+    "message": "改變主意了？透過 $1 所做的變更，只要請代理程式復原即可還原。"
+  },
+  "welcomeSafariFootnote": {
+    "message": "在 Safari 中，你的代理程式可以開啟、排列和關閉視窗，也可以開啟、瀏覽、切換、固定、靜音、複製、移動和關閉分頁。分頁群組、歷史記錄、書籤和網頁控制功能僅適用於 Chrome。如果看不到分頁標題和網址，請在 Safari 的「設定」>「延伸功能」中允許這個延伸功能存取網站。"
+  },
+  "welcomeAnalyticsHint": {
+    "message": "使用了哪些功能以及擴充功能版本，用於協助改善這個擴充功能。"
   },
   "instanceNameLabel": {
     "message": "為這個瀏覽器設定檔命名"
@@ -53,26 +122,14 @@
   "instanceNamePlaceholder": {
     "message": "例如「工作」或「個人」"
   },
-  "welcomeInstanceNameHint": {
-    "message": "代理程式會用這個名稱區分你的各個瀏覽器和設定檔，因此你可以說「用工作瀏覽器」。$1"
-  },
   "optionsInstanceNameHint": {
     "message": "代理程式會用這個名稱區分你的各個瀏覽器和設定檔。$1"
   },
   "instanceId": {
     "message": "執行個體 ID：$1"
   },
-  "welcomeStepAdd": {
-    "message": "1. 新增至代理程式"
-  },
-  "welcomeStepAddHint": {
-    "message": "你的代理程式會啟動一個小型本機伺服器（$1），這個擴充功能會連線至該伺服器。請選擇你的代理程式："
-  },
   "welcomeAgentSetupTitle": {
     "message": "讓代理程式自行設定"
-  },
-  "welcomeAgentSetupBody": {
-    "message": "將這段提示貼到任何能執行指令並編輯自身設定的代理程式中，例如 Claude Code、Cursor 或 Codex。它會先檢查 Node.js，然後新增伺服器。"
   },
   "copyPrompt": {
     "message": "複製提示"
@@ -83,29 +140,11 @@
   "copied": {
     "message": "已複製"
   },
-  "welcomeClaudeCodeBody": {
-    "message": "在終端機中執行一次："
-  },
-  "welcomeOpensAndConfirms": {
-    "message": "系統會開啟應用程式並要求你確認。"
-  },
   "welcomeAddTo": {
     "message": "新增至 $1"
   },
-  "welcomeClaudeDesktopBody": {
-    "message": "下載擴充功能，然後開啟檔案進行安裝。不需要 Node.js。"
-  },
   "welcomeDownloadFor": {
     "message": "下載 $1 版"
-  },
-  "welcomeOtherAgentsTitle": {
-    "message": "其他代理程式"
-  },
-  "welcomeOtherAgentsBody": {
-    "message": "將這段內容加入代理程式的 MCP 設定，然後重新啟動代理程式。"
-  },
-  "welcomeStepTry": {
-    "message": "2. 試試看"
   },
   "welcomeTryIntro": {
     "message": "開啟 Chrome 後，對你的代理程式說："
@@ -116,9 +155,6 @@
   "welcomeTryPage": {
     "message": "打開 Chrome 版本資訊，摘要說明最新版本有哪些變更。"
   },
-  "welcomeTryHint": {
-    "message": "代理程式的伺服器開始執行後，上方的狀態就會變成綠色。透過 $1 所做的變更，只要請代理程式復原即可還原。"
-  },
   "welcomeTryIntroSafari": {
     "message": "開啟 Safari 後，對你的代理程式說："
   },
@@ -128,9 +164,6 @@
   "welcomeTrySortSafari": {
     "message": "把我的 Safari 分頁依網站排好。"
   },
-  "welcomeTryHintSafari": {
-    "message": "代理程式的伺服器開始執行後，上方的狀態就會變成綠色。在 Safari 中，代理程式可以開啟、排列和關閉視窗，也可以開啟、瀏覽、切換、固定、靜音、複製、移動和關閉分頁。如果看不到分頁標題和網址，請在 Safari 的「設定」>「延伸功能」中允許這個延伸功能存取網站。分頁群組、歷史記錄、書籤和網頁控制功能僅適用於 Chrome。"
-  },
   "welcomePrivacyHeading": {
     "message": "隱私權"
   },
@@ -139,9 +172,6 @@
   },
   "welcomePrivacySafari": {
     "message": "你的瀏覽資料只會留在你的電腦上：這個擴充功能只會與 $1 通訊。在你提出要求時，代理程式可以讀取分頁標題和網址，以及開啟、排列或關閉視窗和分頁。在 Safari 中，代理程式無法讀取網頁內容或在網頁中操作。這個擴充功能絕不會將分頁標題和網址傳送到其他地方。"
-  },
-  "welcomeAnalytics": {
-    "message": "分享匿名使用統計資料（使用了哪些功能、擴充功能版本），協助改善這個擴充功能。"
   },
   "analyticsTitle": {
     "message": "分享匿名使用統計資料"

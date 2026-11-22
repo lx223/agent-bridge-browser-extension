@@ -35,20 +35,89 @@
   "welcomeLedeSafari": {
     "message": "Deja que tu agente de IA busque, abra, mueva y cierre tus pestañas de Safari."
   },
-  "welcomeConnected": {
-    "message": "Conectado: tu agente puede usar el navegador."
+  "profileLabel": {
+    "message": "Este perfil"
   },
-  "welcomeConnectedMany_one": {
-    "message": "Conectado: $1 sesión de agente puede usar el navegador."
+  "profilePlaceholder": {
+    "message": "Asígnale un nombre"
   },
-  "welcomeConnectedMany_other": {
-    "message": "Conectado: $1 sesiones de agente pueden usar el navegador."
+  "profileHint": {
+    "message": "Los agentes usan este nombre para distinguir tus navegadores y perfiles, así puedes pedir tu navegador \"Trabajo\"."
   },
-  "welcomeConnectedMany_many": {
-    "message": "Conectado: $1 sesiones de agente pueden usar el navegador."
+  "profileSaved": {
+    "message": "Guardado"
   },
-  "welcomeDisconnected": {
-    "message": "Esperando a tu agente. Configúralo abajo y luego inicia una sesión."
+  "profileNameRemoved": {
+    "message": "Nombre eliminado"
+  },
+  "statusNotConnected": {
+    "message": "Todavía no está conectado"
+  },
+  "statusSetUpHint": {
+    "message": "Conecta tu agente abajo y luego inicia una nueva sesión en él."
+  },
+  "statusConnected": {
+    "message": "Conectado"
+  },
+  "statusConnectedMany_one": {
+    "message": "Conectado a $1 sesión de agente"
+  },
+  "statusConnectedMany_many": {
+    "message": "Conectado a $1 sesiones de agente"
+  },
+  "statusConnectedMany_other": {
+    "message": "Conectado a $1 sesiones de agente"
+  },
+  "statusConnectedHint": {
+    "message": "Tu agente puede usar este navegador. Prueba uno de los prompts de abajo."
+  },
+  "welcomeStepConnect": {
+    "message": "Conecta tu agente"
+  },
+  "stepDone": {
+    "message": "Listo"
+  },
+  "welcomePickAgent": {
+    "message": "Elige el agente que usas."
+  },
+  "welcomeAgentTabs": {
+    "message": "Tu agente"
+  },
+  "welcomeTabOther": {
+    "message": "Otro"
+  },
+  "welcomeClaudeCodeSteps": {
+    "message": "Ejecuta esto una vez en una terminal y luego inicia una nueva sesión de Claude Code."
+  },
+  "welcomeClaudeDesktopSteps": {
+    "message": "Descarga la extensión y abre el archivo. Claude Desktop la instala por ti, sin necesidad de Node.js."
+  },
+  "welcomeOpensToConfirm": {
+    "message": "Se abre $1 y te pide que confirmes."
+  },
+  "welcomeOtherAgentsSteps": {
+    "message": "Agrega esto a la configuración MCP del agente y reinícialo."
+  },
+  "welcomeAgentSetupHint": {
+    "message": "Pega este prompt en un agente que pueda ejecutar comandos, como Claude Code, Cursor o Codex. Verifica si está Node.js y agrega el servidor."
+  },
+  "showPrompt": {
+    "message": "Mostrar prompt"
+  },
+  "welcomeServerFootnote": {
+    "message": "Tu agente inicia un pequeño servidor local, $1, al que se conecta esta extensión."
+  },
+  "welcomeStepAsk": {
+    "message": "Pídele algo"
+  },
+  "welcomeUndoFootnote": {
+    "message": "¿Cambiaste de opinión? Los cambios hechos con $1 se pueden revertir pidiéndole al agente que los deshaga."
+  },
+  "welcomeSafariFootnote": {
+    "message": "En Safari, tu agente puede abrir, organizar y cerrar ventanas, y abrir pestañas, navegar en ellas, cambiar entre ellas, fijarlas, silenciarlas, duplicarlas, moverlas y cerrarlas. Los grupos de pestañas, el historial, los favoritos y el control de páginas están disponibles en Chrome. Si faltan los títulos y las direcciones de las pestañas, dale a la extensión acceso a sitios web en Safari, en Configuración > Extensiones."
+  },
+  "welcomeAnalyticsHint": {
+    "message": "Qué funciones se usan y la versión de la extensión, para ayudar a mejorar la extensión."
   },
   "instanceNameLabel": {
     "message": "Asígnale un nombre a este perfil del navegador"
@@ -56,26 +125,14 @@
   "instanceNamePlaceholder": {
     "message": "Por ejemplo, Trabajo o Personal"
   },
-  "welcomeInstanceNameHint": {
-    "message": "Los agentes usan este nombre para distinguir tus navegadores y perfiles, así puedes pedir tu navegador \"Trabajo\". $1"
-  },
   "optionsInstanceNameHint": {
     "message": "Los agentes usan este nombre para distinguir tus navegadores y perfiles. $1"
   },
   "instanceId": {
     "message": "ID de instancia: $1"
   },
-  "welcomeStepAdd": {
-    "message": "1. Agrégalo a tu agente"
-  },
-  "welcomeStepAddHint": {
-    "message": "Tu agente inicia un pequeño servidor local ($1) al que se conecta esta extensión. Elige tu agente:"
-  },
   "welcomeAgentSetupTitle": {
     "message": "Deja que tu agente lo configure"
-  },
-  "welcomeAgentSetupBody": {
-    "message": "Pega este prompt en cualquier agente que pueda ejecutar comandos y editar su propia configuración, como Claude Code, Cursor o Codex. Verifica si está Node.js y luego agrega el servidor."
   },
   "copyPrompt": {
     "message": "Copiar prompt"
@@ -86,29 +143,11 @@
   "copied": {
     "message": "Copiado"
   },
-  "welcomeClaudeCodeBody": {
-    "message": "Ejecuta una vez en una terminal:"
-  },
-  "welcomeOpensAndConfirms": {
-    "message": "Abre la app y te pide que confirmes."
-  },
   "welcomeAddTo": {
     "message": "Agregar a $1"
   },
-  "welcomeClaudeDesktopBody": {
-    "message": "Descarga la extensión y abre el archivo para instalarla. No necesitas Node.js."
-  },
   "welcomeDownloadFor": {
     "message": "Descargar para $1"
-  },
-  "welcomeOtherAgentsTitle": {
-    "message": "Otros agentes"
-  },
-  "welcomeOtherAgentsBody": {
-    "message": "Agrega esto a la configuración MCP del agente y reinícialo."
-  },
-  "welcomeStepTry": {
-    "message": "2. Pruébalo"
   },
   "welcomeTryIntro": {
     "message": "Con Chrome abierto, pídele a tu agente:"
@@ -119,9 +158,6 @@
   "welcomeTryPage": {
     "message": "Abre las notas de la versión de Chrome y resume qué cambió en la última versión."
   },
-  "welcomeTryHint": {
-    "message": "El estado de arriba se pone verde cuando el servidor de tu agente está en ejecución. Los cambios hechos con $1 se pueden revertir pidiéndole al agente que los deshaga."
-  },
   "welcomeTryIntroSafari": {
     "message": "Con Safari abierto, pídele a tu agente:"
   },
@@ -131,9 +167,6 @@
   "welcomeTrySortSafari": {
     "message": "Ordena mis pestañas de Safari por sitio web."
   },
-  "welcomeTryHintSafari": {
-    "message": "El estado de arriba se pone verde cuando el servidor de tu agente está en ejecución. En Safari, tu agente puede abrir, organizar y cerrar ventanas, y abrir pestañas, navegar en ellas, cambiar entre ellas, fijarlas, silenciarlas, duplicarlas, moverlas y cerrarlas. Si faltan los títulos y las direcciones de las pestañas, dale a la extensión acceso a sitios web en Safari, en Configuración > Extensiones. Los grupos de pestañas, el historial, los favoritos y el control de páginas están disponibles en Chrome."
-  },
   "welcomePrivacyHeading": {
     "message": "Privacidad"
   },
@@ -142,9 +175,6 @@
   },
   "welcomePrivacySafari": {
     "message": "Tus datos de navegación se quedan en tu computadora: la extensión solo se comunica con $1. Tu agente puede leer los títulos y las URL de las pestañas, y abrir, organizar o cerrar ventanas y pestañas cuando se lo pidas. En Safari no puede leer páginas web ni actuar en ellas. Esta extensión nunca envía a ningún otro lugar los títulos ni las URL de las pestañas."
-  },
-  "welcomeAnalytics": {
-    "message": "Compartir estadísticas de uso anónimas (qué funciones se usan y la versión de la extensión) para ayudar a mejorar la extensión."
   },
   "analyticsTitle": {
     "message": "Compartir estadísticas de uso anónimas"
@@ -167,10 +197,10 @@
   "optionsConnectedMany_one": {
     "message": "$1 sesión de agente conectada"
   },
-  "optionsConnectedMany_other": {
+  "optionsConnectedMany_many": {
     "message": "$1 sesiones de agente conectadas"
   },
-  "optionsConnectedMany_many": {
+  "optionsConnectedMany_other": {
     "message": "$1 sesiones de agente conectadas"
   },
   "optionsDisconnected": {
@@ -188,10 +218,10 @@
   "sessionLastUsed_one": {
     "message": "Último uso: $2 $3, $1 llamada"
   },
-  "sessionLastUsed_other": {
+  "sessionLastUsed_many": {
     "message": "Último uso: $2 $3, $1 llamadas"
   },
-  "sessionLastUsed_many": {
+  "sessionLastUsed_other": {
     "message": "Último uso: $2 $3, $1 llamadas"
   },
   "sessionUnused": {
@@ -245,10 +275,10 @@
   "chatUnseen_one": {
     "message": "$2 ($1 nuevo)"
   },
-  "chatUnseen_other": {
+  "chatUnseen_many": {
     "message": "$2 ($1 nuevos)"
   },
-  "chatUnseen_many": {
+  "chatUnseen_other": {
     "message": "$2 ($1 nuevos)"
   },
   "chatStatusWaiting": {
@@ -296,10 +326,10 @@
   "chatTooLong_one": {
     "message": "Los mensajes pueden tener $1 carácter como máximo."
   },
-  "chatTooLong_other": {
+  "chatTooLong_many": {
     "message": "Los mensajes pueden tener $1 caracteres como máximo."
   },
-  "chatTooLong_many": {
+  "chatTooLong_other": {
     "message": "Los mensajes pueden tener $1 caracteres como máximo."
   }
 }

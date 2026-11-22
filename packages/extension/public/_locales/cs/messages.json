@@ -35,23 +35,92 @@
   "welcomeLedeSafari": {
     "message": "Nechte AI agenta vyhledávat, otevírat, přesouvat a zavírat vaše karty v Safari."
   },
-  "welcomeConnected": {
-    "message": "Připojeno: agent může používat prohlížeč."
+  "profileLabel": {
+    "message": "Tento profil"
   },
-  "welcomeConnectedMany_one": {
-    "message": "Připojeno: $1 relace agenta může používat prohlížeč."
+  "profilePlaceholder": {
+    "message": "Pojmenujte ho"
   },
-  "welcomeConnectedMany_other": {
-    "message": "Připojeno: $1 relací agenta může používat prohlížeč."
+  "profileHint": {
+    "message": "Podle tohoto názvu agenti rozlišují vaše prohlížeče a profily, takže můžete požádat o prohlížeč „Práce“."
   },
-  "welcomeConnectedMany_few": {
-    "message": "Připojeno: $1 relace agenta mohou používat prohlížeč."
+  "profileSaved": {
+    "message": "Uloženo"
   },
-  "welcomeConnectedMany_many": {
-    "message": "Připojeno: $1 relace agenta může používat prohlížeč."
+  "profileNameRemoved": {
+    "message": "Název odstraněn"
   },
-  "welcomeDisconnected": {
-    "message": "Čeká se na agenta. Nastavte ho níže a pak spusťte relaci."
+  "statusNotConnected": {
+    "message": "Zatím nepřipojeno"
+  },
+  "statusSetUpHint": {
+    "message": "Níže připojte svého agenta a pak v něm spusťte novou relaci."
+  },
+  "statusConnected": {
+    "message": "Připojeno"
+  },
+  "statusConnectedMany_one": {
+    "message": "Připojeno k $1 relaci agenta"
+  },
+  "statusConnectedMany_few": {
+    "message": "Připojeno k $1 relacím agenta"
+  },
+  "statusConnectedMany_many": {
+    "message": "Připojeno k $1 relace agenta"
+  },
+  "statusConnectedMany_other": {
+    "message": "Připojeno k $1 relacím agenta"
+  },
+  "statusConnectedHint": {
+    "message": "Agent může používat tento prohlížeč. Vyzkoušejte některý z promptů níže."
+  },
+  "welcomeStepConnect": {
+    "message": "Připojte svého agenta"
+  },
+  "stepDone": {
+    "message": "Hotovo"
+  },
+  "welcomePickAgent": {
+    "message": "Vyberte agenta, kterého používáte."
+  },
+  "welcomeAgentTabs": {
+    "message": "Váš agent"
+  },
+  "welcomeTabOther": {
+    "message": "Ostatní"
+  },
+  "welcomeClaudeCodeSteps": {
+    "message": "Jednou to spusťte v terminálu a pak zahajte novou relaci Claude Code."
+  },
+  "welcomeClaudeDesktopSteps": {
+    "message": "Stáhněte rozšíření a otevřete soubor. Claude Desktop ho nainstaluje za vás, Node.js není potřeba."
+  },
+  "welcomeOpensToConfirm": {
+    "message": "Otevře se $1 a požádá vás o potvrzení."
+  },
+  "welcomeOtherAgentsSteps": {
+    "message": "Přidejte toto do konfigurace MCP agenta a pak ho restartujte."
+  },
+  "welcomeAgentSetupHint": {
+    "message": "Vložte tento prompt do agenta, který umí spouštět příkazy, například Claude Code, Cursor nebo Codex. Zkontroluje Node.js a přidá server."
+  },
+  "showPrompt": {
+    "message": "Zobrazit prompt"
+  },
+  "welcomeServerFootnote": {
+    "message": "Agent spouští malý místní server, $1, ke kterému se toto rozšíření připojuje."
+  },
+  "welcomeStepAsk": {
+    "message": "Na něco se ho zeptejte"
+  },
+  "welcomeUndoFootnote": {
+    "message": "Rozmysleli jste si to? Změny provedené pomocí $1 můžete vrátit – stačí o to agenta požádat."
+  },
+  "welcomeSafariFootnote": {
+    "message": "V Safari může agent otevírat, uspořádávat a zavírat okna a také otevírat, přepínat, připínat, ztlumovat, duplikovat, přesouvat a zavírat karty a otevírat v nich adresy. Skupiny karet, historie, záložky a ovládání stránek jsou k dispozici v Chromu. Pokud chybí názvy a adresy karet, udělte rozšíření přístup k webům v Safari v části Nastavení > Rozšíření."
+  },
+  "welcomeAnalyticsHint": {
+    "message": "Které funkce se používají a verze rozšíření, aby bylo možné rozšíření zlepšovat."
   },
   "instanceNameLabel": {
     "message": "Pojmenujte tento profil prohlížeče"
@@ -59,26 +128,14 @@
   "instanceNamePlaceholder": {
     "message": "Například Práce nebo Osobní"
   },
-  "welcomeInstanceNameHint": {
-    "message": "Podle tohoto názvu agenti rozlišují vaše prohlížeče a profily, takže můžete požádat o prohlížeč „Práce“. $1"
-  },
   "optionsInstanceNameHint": {
     "message": "Podle tohoto názvu agenti rozlišují vaše prohlížeče a profily. $1"
   },
   "instanceId": {
     "message": "ID instance: $1"
   },
-  "welcomeStepAdd": {
-    "message": "1. Přidejte ho do svého agenta"
-  },
-  "welcomeStepAddHint": {
-    "message": "Agent spustí malý místní server ($1), ke kterému se toto rozšíření připojí. Vyberte svého agenta:"
-  },
   "welcomeAgentSetupTitle": {
     "message": "Nechte nastavení na agentovi"
-  },
-  "welcomeAgentSetupBody": {
-    "message": "Vložte tento prompt do libovolného agenta, který umí spouštět příkazy a upravovat vlastní nastavení, například Claude Code, Cursor nebo Codex. Zkontroluje Node.js a pak přidá server."
   },
   "copyPrompt": {
     "message": "Kopírovat prompt"
@@ -89,29 +146,11 @@
   "copied": {
     "message": "Zkopírováno"
   },
-  "welcomeClaudeCodeBody": {
-    "message": "Jednou spusťte v terminálu:"
-  },
-  "welcomeOpensAndConfirms": {
-    "message": "Otevře aplikaci a požádá vás o potvrzení."
-  },
   "welcomeAddTo": {
     "message": "Přidat do $1"
   },
-  "welcomeClaudeDesktopBody": {
-    "message": "Stáhněte rozšíření a pak ho nainstalujte otevřením souboru. Node.js není potřeba."
-  },
   "welcomeDownloadFor": {
     "message": "Stáhnout pro $1"
-  },
-  "welcomeOtherAgentsTitle": {
-    "message": "Další agenti"
-  },
-  "welcomeOtherAgentsBody": {
-    "message": "Přidejte toto do konfigurace MCP agenta a pak ho restartujte."
-  },
-  "welcomeStepTry": {
-    "message": "2. Vyzkoušejte to"
   },
   "welcomeTryIntro": {
     "message": "Mějte otevřený Chrome a požádejte agenta:"
@@ -122,9 +161,6 @@
   "welcomeTryPage": {
     "message": "Otevři poznámky k verzi Chromu a shrň, co se změnilo v nejnovější verzi."
   },
-  "welcomeTryHint": {
-    "message": "Jakmile server agenta poběží, stav nahoře zezelená. Změny provedené pomocí $1 můžete vrátit – stačí o to agenta požádat."
-  },
   "welcomeTryIntroSafari": {
     "message": "Mějte otevřené Safari a požádejte agenta:"
   },
@@ -134,9 +170,6 @@
   "welcomeTrySortSafari": {
     "message": "Seřaď moje karty v Safari podle webů."
   },
-  "welcomeTryHintSafari": {
-    "message": "Jakmile server agenta poběží, stav nahoře zezelená. V Safari může agent otevírat, uspořádávat a zavírat okna a také otevírat, přepínat, připínat, ztlumovat, duplikovat, přesouvat a zavírat karty a otevírat v nich adresy. Pokud chybí názvy a adresy karet, udělte rozšíření přístup k webům v Safari v části Nastavení > Rozšíření. Skupiny karet, historie, záložky a ovládání stránek jsou k dispozici v Chromu."
-  },
   "welcomePrivacyHeading": {
     "message": "Ochrana soukromí"
   },
@@ -145,9 +178,6 @@
   },
   "welcomePrivacySafari": {
     "message": "Údaje o prohlížení zůstávají ve vašem počítači: rozšíření komunikuje pouze s $1. Agent může číst názvy a adresy URL karet a také otevírat, uspořádávat nebo zavírat okna a karty, když ho o to požádáte. V Safari nemůže číst webové stránky ani v nich provádět akce. Toto rozšíření nikdy nikam jinam neodesílá názvy karet ani adresy URL."
-  },
-  "welcomeAnalytics": {
-    "message": "Sdílet anonymní statistiky využití (které funkce se používají, verze rozšíření) a pomoci tak rozšíření zlepšovat."
   },
   "analyticsTitle": {
     "message": "Sdílet anonymní statistiky využití"
@@ -170,14 +200,14 @@
   "optionsConnectedMany_one": {
     "message": "Připojena $1 relace agenta"
   },
-  "optionsConnectedMany_other": {
-    "message": "Připojeno $1 relací agenta"
-  },
   "optionsConnectedMany_few": {
     "message": "Připojeny $1 relace agenta"
   },
   "optionsConnectedMany_many": {
     "message": "Připojeno $1 relace agenta"
+  },
+  "optionsConnectedMany_other": {
+    "message": "Připojeno $1 relací agenta"
   },
   "optionsDisconnected": {
     "message": "Není připojen žádný agent"
@@ -194,13 +224,13 @@
   "sessionLastUsed_one": {
     "message": "Naposledy použito $2 $3, $1 volání"
   },
-  "sessionLastUsed_other": {
-    "message": "Naposledy použito $2 $3, $1 volání"
-  },
   "sessionLastUsed_few": {
     "message": "Naposledy použito $2 $3, $1 volání"
   },
   "sessionLastUsed_many": {
+    "message": "Naposledy použito $2 $3, $1 volání"
+  },
+  "sessionLastUsed_other": {
     "message": "Naposledy použito $2 $3, $1 volání"
   },
   "sessionUnused": {
@@ -254,13 +284,13 @@
   "chatUnseen_one": {
     "message": "$2 (nové: $1)"
   },
-  "chatUnseen_other": {
-    "message": "$2 (nové: $1)"
-  },
   "chatUnseen_few": {
     "message": "$2 (nové: $1)"
   },
   "chatUnseen_many": {
+    "message": "$2 (nové: $1)"
+  },
+  "chatUnseen_other": {
     "message": "$2 (nové: $1)"
   },
   "chatStatusWaiting": {
@@ -308,13 +338,13 @@
   "chatTooLong_one": {
     "message": "Zpráva může mít nejvýše $1 znak."
   },
-  "chatTooLong_other": {
-    "message": "Zpráva může mít nejvýše $1 znaků."
-  },
   "chatTooLong_few": {
     "message": "Zpráva může mít nejvýše $1 znaky."
   },
   "chatTooLong_many": {
     "message": "Zpráva může mít nejvýše $1 znaku."
+  },
+  "chatTooLong_other": {
+    "message": "Zpráva může mít nejvýše $1 znaků."
   }
 }

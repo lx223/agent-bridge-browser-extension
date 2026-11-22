@@ -35,20 +35,89 @@
   "welcomeLedeSafari": {
     "message": "Ļaujiet savam MI aģentam atrast, atvērt, pārvietot un aizvērt jūsu Safari cilnes."
   },
-  "welcomeConnected": {
-    "message": "Savienots: jūsu aģents var izmantot pārlūkprogrammu."
+  "profileLabel": {
+    "message": "Šis profils"
   },
-  "welcomeConnectedMany_one": {
-    "message": "Savienots: pārlūkprogrammu var izmantot $1 aģenta sesija."
+  "profilePlaceholder": {
+    "message": "Piešķiriet nosaukumu"
   },
-  "welcomeConnectedMany_other": {
-    "message": "Savienots: pārlūkprogrammu var izmantot $1 aģenta sesijas."
+  "profileHint": {
+    "message": "Aģenti pēc šī nosaukuma atšķir jūsu pārlūkprogrammas un profilus, tāpēc varat lūgt, piemēram, pārlūkprogrammu Darbs."
   },
-  "welcomeConnectedMany_zero": {
-    "message": "Savienots: pārlūkprogrammu var izmantot $1 aģenta sesijas."
+  "profileSaved": {
+    "message": "Saglabāts"
   },
-  "welcomeDisconnected": {
-    "message": "Gaida jūsu aģentu. Iestatiet to tālāk un pēc tam sāciet sesiju."
+  "profileNameRemoved": {
+    "message": "Nosaukums noņemts"
+  },
+  "statusNotConnected": {
+    "message": "Vēl nav savienots"
+  },
+  "statusSetUpHint": {
+    "message": "Tālāk pievienojiet savu aģentu un pēc tam sāciet tajā jaunu sesiju."
+  },
+  "statusConnected": {
+    "message": "Savienots"
+  },
+  "statusConnectedMany_one": {
+    "message": "Savienots ar $1 aģenta sesiju"
+  },
+  "statusConnectedMany_zero": {
+    "message": "Savienots ar $1 aģenta sesijām"
+  },
+  "statusConnectedMany_other": {
+    "message": "Savienots ar $1 aģenta sesijām"
+  },
+  "statusConnectedHint": {
+    "message": "Jūsu aģents var izmantot šo pārlūkprogrammu. Izmēģiniet kādu no tālāk norādītajām uzvednēm."
+  },
+  "welcomeStepConnect": {
+    "message": "Pievienojiet savu aģentu"
+  },
+  "stepDone": {
+    "message": "Gatavs"
+  },
+  "welcomePickAgent": {
+    "message": "Izvēlieties aģentu, ko izmantojat."
+  },
+  "welcomeAgentTabs": {
+    "message": "Jūsu aģents"
+  },
+  "welcomeTabOther": {
+    "message": "Cits"
+  },
+  "welcomeClaudeCodeSteps": {
+    "message": "Vienreiz izpildiet šo terminālī un pēc tam sāciet jaunu Claude Code sesiju."
+  },
+  "welcomeClaudeDesktopSteps": {
+    "message": "Lejupielādējiet paplašinājumu un atveriet failu. Claude Desktop to instalēs jūsu vietā, Node.js nav nepieciešams."
+  },
+  "welcomeOpensToConfirm": {
+    "message": "$1 atveras un lūdz jums apstiprināt."
+  },
+  "welcomeOtherAgentsSteps": {
+    "message": "Pievienojiet šo aģenta MCP konfigurācijai un pēc tam restartējiet aģentu."
+  },
+  "welcomeAgentSetupHint": {
+    "message": "Ielīmējiet šo uzvedni aģentā, kas var izpildīt komandas, piemēram, Claude Code, Cursor vai Codex. Tas pārbauda, vai ir instalēts Node.js, un pievieno serveri."
+  },
+  "showPrompt": {
+    "message": "Rādīt uzvedni"
+  },
+  "welcomeServerFootnote": {
+    "message": "Jūsu aģents palaiž nelielu lokālo serveri ($1), ar kuru savienojas šis paplašinājums."
+  },
+  "welcomeStepAsk": {
+    "message": "Pajautājiet tam kaut ko"
+  },
+  "welcomeUndoFootnote": {
+    "message": "Pārdomājāt? Izmaiņas, kas veiktas ar $1, var atcelt, palūdzot aģentam tās atsaukt."
+  },
+  "welcomeSafariFootnote": {
+    "message": "Safari jūsu aģents var atvērt, izkārtot un aizvērt logus, kā arī atvērt cilnes, pāriet tajās uz citām lapām, pārslēgties starp tām, piespraust, izslēgt skaņu, dublēt, pārvietot un aizvērt tās. Ciļņu grupas, vēsture, grāmatzīmes un lapu vadība ir pieejama pārlūkprogrammā Chrome. Ja trūkst ciļņu nosaukumu un adrešu, piešķiriet paplašinājumam piekļuvi vietnēm Safari sadaļā Settings > Extensions."
+  },
+  "welcomeAnalyticsHint": {
+    "message": "Kuras funkcijas tiek izmantotas un paplašinājuma versija, lai palīdzētu uzlabot paplašinājumu."
   },
   "instanceNameLabel": {
     "message": "Piešķiriet nosaukumu šim pārlūkprogrammas profilam"
@@ -56,26 +125,14 @@
   "instanceNamePlaceholder": {
     "message": "Piemēram, Darbs vai Personīgais"
   },
-  "welcomeInstanceNameHint": {
-    "message": "Aģenti pēc šī nosaukuma atšķir jūsu pārlūkprogrammas un profilus, tāpēc varat lūgt, piemēram, pārlūkprogrammu Darbs. $1"
-  },
   "optionsInstanceNameHint": {
     "message": "Aģenti pēc šī nosaukuma atšķir jūsu pārlūkprogrammas un profilus. $1"
   },
   "instanceId": {
     "message": "Instances ID: $1"
   },
-  "welcomeStepAdd": {
-    "message": "1. Pievienojiet to savam aģentam"
-  },
-  "welcomeStepAddHint": {
-    "message": "Jūsu aģents palaiž nelielu lokālo serveri ($1), ar kuru savienojas šis paplašinājums. Izvēlieties savu aģentu:"
-  },
   "welcomeAgentSetupTitle": {
     "message": "Ļaujiet aģentam to iestatīt"
-  },
-  "welcomeAgentSetupBody": {
-    "message": "Ielīmējiet šo uzvedni jebkurā aģentā, kas var izpildīt komandas un mainīt savus iestatījumus, piemēram, Claude Code, Cursor vai Codex. Tas pārbauda, vai ir instalēts Node.js, un pēc tam pievieno serveri."
   },
   "copyPrompt": {
     "message": "Kopēt uzvedni"
@@ -86,29 +143,11 @@
   "copied": {
     "message": "Nokopēts"
   },
-  "welcomeClaudeCodeBody": {
-    "message": "Vienreiz izpildiet terminālī:"
-  },
-  "welcomeOpensAndConfirms": {
-    "message": "Atver lietotni un lūdz jums apstiprināt."
-  },
   "welcomeAddTo": {
     "message": "Pievienot: $1"
   },
-  "welcomeClaudeDesktopBody": {
-    "message": "Lejupielādējiet paplašinājumu un pēc tam atveriet failu, lai to instalētu. Node.js nav nepieciešams."
-  },
   "welcomeDownloadFor": {
     "message": "Lejupielādēt: $1"
-  },
-  "welcomeOtherAgentsTitle": {
-    "message": "Citi aģenti"
-  },
-  "welcomeOtherAgentsBody": {
-    "message": "Pievienojiet šo aģenta MCP konfigurācijai un pēc tam restartējiet aģentu."
-  },
-  "welcomeStepTry": {
-    "message": "2. Izmēģiniet"
   },
   "welcomeTryIntro": {
     "message": "Kad Chrome ir atvērts, uzrakstiet savam aģentam:"
@@ -119,9 +158,6 @@
   "welcomeTryPage": {
     "message": "Atver Chrome laidiena piezīmes un apkopo, kas mainījies jaunākajā versijā."
   },
-  "welcomeTryHint": {
-    "message": "Statuss augšā kļūst zaļš, tiklīdz darbojas jūsu aģenta serveris. Izmaiņas, kas veiktas ar $1, var atcelt, palūdzot aģentam tās atsaukt."
-  },
   "welcomeTryIntroSafari": {
     "message": "Kad Safari ir atvērts, uzrakstiet savam aģentam:"
   },
@@ -131,9 +167,6 @@
   "welcomeTrySortSafari": {
     "message": "Sakārto manas Safari cilnes pēc vietnes."
   },
-  "welcomeTryHintSafari": {
-    "message": "Statuss augšā kļūst zaļš, tiklīdz darbojas jūsu aģenta serveris. Safari jūsu aģents var atvērt, izkārtot un aizvērt logus, kā arī atvērt cilnes, pāriet tajās uz citām lapām, pārslēgties starp tām, piespraust, izslēgt skaņu, dublēt, pārvietot un aizvērt tās. Ja trūkst ciļņu nosaukumu un adrešu, piešķiriet paplašinājumam piekļuvi vietnēm Safari sadaļā Settings > Extensions. Ciļņu grupas, vēsture, grāmatzīmes un lapu vadība ir pieejama pārlūkprogrammā Chrome."
-  },
   "welcomePrivacyHeading": {
     "message": "Konfidencialitāte"
   },
@@ -142,9 +175,6 @@
   },
   "welcomePrivacySafari": {
     "message": "Jūsu pārlūkošanas dati paliek jūsu datorā: paplašinājums sazinās tikai ar $1. Jūsu aģents var lasīt ciļņu nosaukumus un URL, kā arī atvērt, izkārtot vai aizvērt logus un cilnes, kad jūs to lūdzat. Safari tas nevar lasīt tīmekļa lapas vai darboties tajās. Šis paplašinājums nekad nekur citur nesūta ciļņu nosaukumus vai URL."
-  },
-  "welcomeAnalytics": {
-    "message": "Kopīgot anonīmu lietojuma statistiku (kuras funkcijas tiek izmantotas, paplašinājuma versija), lai palīdzētu uzlabot paplašinājumu."
   },
   "analyticsTitle": {
     "message": "Kopīgot anonīmu lietojuma statistiku"
@@ -167,10 +197,10 @@
   "optionsConnectedMany_one": {
     "message": "Pievienota $1 aģenta sesija"
   },
-  "optionsConnectedMany_other": {
+  "optionsConnectedMany_zero": {
     "message": "Pievienotas $1 aģenta sesijas"
   },
-  "optionsConnectedMany_zero": {
+  "optionsConnectedMany_other": {
     "message": "Pievienotas $1 aģenta sesijas"
   },
   "optionsDisconnected": {
@@ -188,10 +218,10 @@
   "sessionLastUsed_one": {
     "message": "Pēdējoreiz izmantots $2 $3, $1 izsaukums"
   },
-  "sessionLastUsed_other": {
+  "sessionLastUsed_zero": {
     "message": "Pēdējoreiz izmantots $2 $3, $1 izsaukumi"
   },
-  "sessionLastUsed_zero": {
+  "sessionLastUsed_other": {
     "message": "Pēdējoreiz izmantots $2 $3, $1 izsaukumi"
   },
   "sessionUnused": {
@@ -245,10 +275,10 @@
   "chatUnseen_one": {
     "message": "$2 ($1 jauns)"
   },
-  "chatUnseen_other": {
+  "chatUnseen_zero": {
     "message": "$2 ($1 jauni)"
   },
-  "chatUnseen_zero": {
+  "chatUnseen_other": {
     "message": "$2 ($1 jauni)"
   },
   "chatStatusWaiting": {
@@ -296,10 +326,10 @@
   "chatTooLong_one": {
     "message": "Ziņojumā var būt ne vairāk kā $1 rakstzīme."
   },
-  "chatTooLong_other": {
+  "chatTooLong_zero": {
     "message": "Ziņojumā var būt ne vairāk kā $1 rakstzīmes."
   },
-  "chatTooLong_zero": {
+  "chatTooLong_other": {
     "message": "Ziņojumā var būt ne vairāk kā $1 rakstzīmes."
   }
 }

@@ -35,17 +35,86 @@
   "welcomeLedeSafari": {
     "message": "Bízza MI-ügynökére Safari-lapjai megkeresését, megnyitását, áthelyezését és bezárását."
   },
-  "welcomeConnected": {
-    "message": "Csatlakoztatva: az ügynök használhatja a böngészőt."
+  "profileLabel": {
+    "message": "Ez a profil"
   },
-  "welcomeConnectedMany_one": {
-    "message": "Csatlakoztatva: $1 ügynök-munkamenet használhatja a böngészőt."
+  "profilePlaceholder": {
+    "message": "Adjon neki nevet"
   },
-  "welcomeConnectedMany_other": {
-    "message": "Csatlakoztatva: $1 ügynök-munkamenet használhatja a böngészőt."
+  "profileHint": {
+    "message": "Az ügynökök ezzel a névvel különböztetik meg a böngészőit és profiljait, így kérheti például a Munka böngészőt."
   },
-  "welcomeDisconnected": {
-    "message": "Várakozás az ügynökre. Állítsa be alább, majd indítson munkamenetet."
+  "profileSaved": {
+    "message": "Mentve"
+  },
+  "profileNameRemoved": {
+    "message": "Név eltávolítva"
+  },
+  "statusNotConnected": {
+    "message": "Még nincs csatlakoztatva"
+  },
+  "statusSetUpHint": {
+    "message": "Csatlakoztassa alább az ügynökét, majd indítson benne új munkamenetet."
+  },
+  "statusConnected": {
+    "message": "Csatlakoztatva"
+  },
+  "statusConnectedMany_one": {
+    "message": "$1 ügynök-munkamenet csatlakoztatva"
+  },
+  "statusConnectedMany_other": {
+    "message": "$1 ügynök-munkamenet csatlakoztatva"
+  },
+  "statusConnectedHint": {
+    "message": "Az ügynöke használhatja ezt a böngészőt. Próbálja ki az alábbi promptok egyikét."
+  },
+  "welcomeStepConnect": {
+    "message": "Csatlakoztassa az ügynökét"
+  },
+  "stepDone": {
+    "message": "Kész"
+  },
+  "welcomePickAgent": {
+    "message": "Válassza ki, melyik ügynököt használja."
+  },
+  "welcomeAgentTabs": {
+    "message": "Az Ön ügynöke"
+  },
+  "welcomeTabOther": {
+    "message": "Egyéb"
+  },
+  "welcomeClaudeCodeSteps": {
+    "message": "Futtassa ezt egyszer egy terminálban, majd indítson új Claude Code-munkamenetet."
+  },
+  "welcomeClaudeDesktopSteps": {
+    "message": "Töltse le a bővítményt, és nyissa meg a fájlt. A Claude Desktop telepíti Ön helyett, Node.js nem szükséges."
+  },
+  "welcomeOpensToConfirm": {
+    "message": "Megnyílik a $1, és megerősítést kér."
+  },
+  "welcomeOtherAgentsSteps": {
+    "message": "Adja hozzá ezt az ügynök MCP-konfigurációjához, majd indítsa újra az ügynököt."
+  },
+  "welcomeAgentSetupHint": {
+    "message": "Illessze be ezt a promptot egy olyan ügynökbe, amely parancsokat tud futtatni, például a Claude Code, a Cursor vagy a Codex. Ellenőrzi, hogy telepítve van-e a Node.js, és hozzáadja a szervert."
+  },
+  "showPrompt": {
+    "message": "Prompt megjelenítése"
+  },
+  "welcomeServerFootnote": {
+    "message": "Az ügynöke egy kis helyi szervert futtat ($1), amelyhez ez a bővítmény csatlakozik."
+  },
+  "welcomeStepAsk": {
+    "message": "Kérdezzen tőle valamit"
+  },
+  "welcomeUndoFootnote": {
+    "message": "Meggondolta magát? A $1 eszközzel végzett módosítások visszavonhatók, ha megkéri rá az ügynököt."
+  },
+  "welcomeSafariFootnote": {
+    "message": "A Safariban az ügynök ablakokat nyithat meg, rendezhet el és zárhat be, valamint lapokat nyithat meg, navigálhat bennük, válthat közöttük, rögzítheti, némíthatja, duplikálhatja, áthelyezheti és bezárhatja őket. A lapcsoportok, az előzmények, a könyvjelzők és az oldalvezérlés a Chrome-ban érhetők el. Ha hiányoznak a lapok címei és webcímei, adjon webhely-hozzáférést a bővítménynek a Safari Beállítások > Bővítmények részében."
+  },
+  "welcomeAnalyticsHint": {
+    "message": "Mely funkciókat használják, és a bővítmény verziója, a bővítmény fejlesztéséhez."
   },
   "instanceNameLabel": {
     "message": "Adjon nevet ennek a böngészőprofilnak"
@@ -53,26 +122,14 @@
   "instanceNamePlaceholder": {
     "message": "Például Munka vagy Személyes"
   },
-  "welcomeInstanceNameHint": {
-    "message": "Az ügynökök ezzel a névvel különböztetik meg a böngészőit és profiljait, így kérheti például a Munka böngészőt. $1"
-  },
   "optionsInstanceNameHint": {
     "message": "Az ügynökök ezzel a névvel különböztetik meg a böngészőit és profiljait. $1"
   },
   "instanceId": {
     "message": "Példányazonosító: $1"
   },
-  "welcomeStepAdd": {
-    "message": "1. Adja hozzá az ügynökéhez"
-  },
-  "welcomeStepAddHint": {
-    "message": "Az ügynök elindít egy kis helyi szervert ($1), amelyhez ez a bővítmény csatlakozik. Válassza ki az ügynökét:"
-  },
   "welcomeAgentSetupTitle": {
     "message": "Bízza a beállítást az ügynökre"
-  },
-  "welcomeAgentSetupBody": {
-    "message": "Illessze be ezt a promptot bármely olyan ügynökbe, amely parancsokat tud futtatni és a saját beállításait módosítani, például a Claude Code, a Cursor vagy a Codex. Ellenőrzi, hogy telepítve van-e a Node.js, majd hozzáadja a szervert."
   },
   "copyPrompt": {
     "message": "Prompt másolása"
@@ -83,29 +140,11 @@
   "copied": {
     "message": "Másolva"
   },
-  "welcomeClaudeCodeBody": {
-    "message": "Futtassa egyszer egy terminálban:"
-  },
-  "welcomeOpensAndConfirms": {
-    "message": "Megnyitja az alkalmazást, és megerősítést kér."
-  },
   "welcomeAddTo": {
     "message": "Hozzáadás: $1"
   },
-  "welcomeClaudeDesktopBody": {
-    "message": "Töltse le a bővítményt, majd a telepítéshez nyissa meg a fájlt. Node.js nem szükséges."
-  },
   "welcomeDownloadFor": {
     "message": "Letöltés: $1"
-  },
-  "welcomeOtherAgentsTitle": {
-    "message": "Egyéb ügynökök"
-  },
-  "welcomeOtherAgentsBody": {
-    "message": "Adja hozzá ezt az ügynök MCP-konfigurációjához, majd indítsa újra az ügynököt."
-  },
-  "welcomeStepTry": {
-    "message": "2. Próbálja ki"
   },
   "welcomeTryIntro": {
     "message": "Amikor a Chrome meg van nyitva, írja ezt az ügynökének:"
@@ -116,9 +155,6 @@
   "welcomeTryPage": {
     "message": "Nyisd meg a Chrome kiadási megjegyzéseit, és foglald össze, mi változott a legújabb verzióban."
   },
-  "welcomeTryHint": {
-    "message": "A fenti állapot zöldre vált, amint fut az ügynök szervere. A $1 eszközzel végzett módosítások visszavonhatók, ha megkéri rá az ügynököt."
-  },
   "welcomeTryIntroSafari": {
     "message": "Amikor a Safari meg van nyitva, írja ezt az ügynökének:"
   },
@@ -128,9 +164,6 @@
   "welcomeTrySortSafari": {
     "message": "Rendezd webhely szerint a Safari-lapjaimat."
   },
-  "welcomeTryHintSafari": {
-    "message": "A fenti állapot zöldre vált, amint fut az ügynök szervere. A Safariban az ügynök ablakokat nyithat meg, rendezhet el és zárhat be, valamint lapokat nyithat meg, navigálhat bennük, válthat közöttük, rögzítheti, némíthatja, duplikálhatja, áthelyezheti és bezárhatja őket. Ha hiányoznak a lapok címei és webcímei, adjon webhely-hozzáférést a bővítménynek a Safari Beállítások > Bővítmények részében. A lapcsoportok, az előzmények, a könyvjelzők és az oldalvezérlés a Chrome-ban érhetők el."
-  },
   "welcomePrivacyHeading": {
     "message": "Adatvédelem"
   },
@@ -139,9 +172,6 @@
   },
   "welcomePrivacySafari": {
     "message": "Böngészési adatai a számítógépén maradnak: a bővítmény csak a következő címmel kommunikál: $1. Az ügynök olvashatja a lapok címét és URL-jét, valamint kérésére ablakokat és lapokat nyithat meg, rendezhet el vagy zárhat be. A Safariban nem tudja olvasni a weboldalakat, és nem végezhet rajtuk műveleteket. Ez a bővítmény soha nem küldi el máshová a lapcímeket vagy URL-eket."
-  },
-  "welcomeAnalytics": {
-    "message": "Névtelen használati statisztikák megosztása (mely funkciókat használják, a bővítmény verziója) a bővítmény fejlesztéséhez."
   },
   "analyticsTitle": {
     "message": "Névtelen használati statisztikák megosztása"

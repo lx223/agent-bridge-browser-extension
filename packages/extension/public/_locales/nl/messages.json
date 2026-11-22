@@ -35,17 +35,86 @@
   "welcomeLedeSafari": {
     "message": "Laat je AI-agent je Safari-tabbladen vinden, openen, verplaatsen en sluiten."
   },
-  "welcomeConnected": {
-    "message": "Verbonden: je agent kan de browser gebruiken."
+  "profileLabel": {
+    "message": "Dit profiel"
   },
-  "welcomeConnectedMany_one": {
-    "message": "Verbonden: $1 agentsessie kan de browser gebruiken."
+  "profilePlaceholder": {
+    "message": "Geef het een naam"
   },
-  "welcomeConnectedMany_other": {
-    "message": "Verbonden: $1 agentsessies kunnen de browser gebruiken."
+  "profileHint": {
+    "message": "Agents gebruiken deze naam om je browsers en profielen uit elkaar te houden, zodat je naar je browser Werk kunt vragen."
   },
-  "welcomeDisconnected": {
-    "message": "Wachten op je agent. Stel hem hieronder in en start dan een sessie."
+  "profileSaved": {
+    "message": "Opgeslagen"
+  },
+  "profileNameRemoved": {
+    "message": "Naam verwijderd"
+  },
+  "statusNotConnected": {
+    "message": "Nog niet verbonden"
+  },
+  "statusSetUpHint": {
+    "message": "Verbind hieronder je agent en start daarin een nieuwe sessie."
+  },
+  "statusConnected": {
+    "message": "Verbonden"
+  },
+  "statusConnectedMany_one": {
+    "message": "Verbonden met $1 agentsessie"
+  },
+  "statusConnectedMany_other": {
+    "message": "Verbonden met $1 agentsessies"
+  },
+  "statusConnectedHint": {
+    "message": "Je agent kan deze browser gebruiken. Probeer een van de prompts hieronder."
+  },
+  "welcomeStepConnect": {
+    "message": "Verbind je agent"
+  },
+  "stepDone": {
+    "message": "Klaar"
+  },
+  "welcomePickAgent": {
+    "message": "Kies de agent die je gebruikt."
+  },
+  "welcomeAgentTabs": {
+    "message": "Je agent"
+  },
+  "welcomeTabOther": {
+    "message": "Overig"
+  },
+  "welcomeClaudeCodeSteps": {
+    "message": "Voer dit één keer uit in een terminal en start daarna een nieuwe Claude Code-sessie."
+  },
+  "welcomeClaudeDesktopSteps": {
+    "message": "Download de extensie en open het bestand. Claude Desktop installeert hem voor je, Node.js is niet nodig."
+  },
+  "welcomeOpensToConfirm": {
+    "message": "$1 wordt geopend en vraagt je om te bevestigen."
+  },
+  "welcomeOtherAgentsSteps": {
+    "message": "Voeg dit toe aan de MCP-configuratie van de agent en start de agent daarna opnieuw."
+  },
+  "welcomeAgentSetupHint": {
+    "message": "Plak deze prompt in een agent die opdrachten kan uitvoeren, zoals Claude Code, Cursor of Codex. Hij controleert of Node.js aanwezig is en voegt de server toe."
+  },
+  "showPrompt": {
+    "message": "Prompt tonen"
+  },
+  "welcomeServerFootnote": {
+    "message": "Je agent draait een kleine lokale server, $1, waarmee deze extensie verbinding maakt."
+  },
+  "welcomeStepAsk": {
+    "message": "Vraag je agent iets"
+  },
+  "welcomeUndoFootnote": {
+    "message": "Van gedachten veranderd? Wijzigingen die met $1 zijn gemaakt, kun je terugdraaien door de agent te vragen ze ongedaan te maken."
+  },
+  "welcomeSafariFootnote": {
+    "message": "In Safari kan je agent vensters openen, ordenen en sluiten, en tabbladen openen, er pagina's in laden, ertussen wisselen en ze vastzetten, dempen, dupliceren, verplaatsen en sluiten. Tabbladgroepen, geschiedenis, bookmarks en paginabediening zijn beschikbaar in Chrome. Ontbreken de titels en adressen van tabbladen? Geef de extensie dan in Safari toegang tot websites via Instellingen > Extensies."
+  },
+  "welcomeAnalyticsHint": {
+    "message": "Welke functies worden gebruikt en de versie van de extensie, om de extensie te helpen verbeteren."
   },
   "instanceNameLabel": {
     "message": "Geef dit browserprofiel een naam"
@@ -53,26 +122,14 @@
   "instanceNamePlaceholder": {
     "message": "Bijvoorbeeld Werk of Privé"
   },
-  "welcomeInstanceNameHint": {
-    "message": "Agents gebruiken deze naam om je browsers en profielen uit elkaar te houden, zodat je naar je browser Werk kunt vragen. $1"
-  },
   "optionsInstanceNameHint": {
     "message": "Agents gebruiken deze naam om je browsers en profielen uit elkaar te houden. $1"
   },
   "instanceId": {
     "message": "Instantie-ID: $1"
   },
-  "welcomeStepAdd": {
-    "message": "1. Voeg het toe aan je agent"
-  },
-  "welcomeStepAddHint": {
-    "message": "Je agent start een kleine lokale server ($1) waarmee deze extensie verbinding maakt. Kies je agent:"
-  },
   "welcomeAgentSetupTitle": {
     "message": "Laat je agent het instellen"
-  },
-  "welcomeAgentSetupBody": {
-    "message": "Plak deze prompt in een agent die opdrachten kan uitvoeren en zijn eigen instellingen kan bewerken, zoals Claude Code, Cursor of Codex. Hij controleert of Node.js aanwezig is en voegt dan de server toe."
   },
   "copyPrompt": {
     "message": "Prompt kopiëren"
@@ -83,29 +140,11 @@
   "copied": {
     "message": "Gekopieerd"
   },
-  "welcomeClaudeCodeBody": {
-    "message": "Voer dit één keer uit in een terminal:"
-  },
-  "welcomeOpensAndConfirms": {
-    "message": "Opent de app en vraagt je om te bevestigen."
-  },
   "welcomeAddTo": {
     "message": "Toevoegen aan $1"
   },
-  "welcomeClaudeDesktopBody": {
-    "message": "Download de extensie en open daarna het bestand om hem te installeren. Node.js is niet nodig."
-  },
   "welcomeDownloadFor": {
     "message": "Downloaden voor $1"
-  },
-  "welcomeOtherAgentsTitle": {
-    "message": "Andere agents"
-  },
-  "welcomeOtherAgentsBody": {
-    "message": "Voeg dit toe aan de MCP-configuratie van de agent en start de agent daarna opnieuw."
-  },
-  "welcomeStepTry": {
-    "message": "2. Probeer het uit"
   },
   "welcomeTryIntro": {
     "message": "Open Chrome en vraag je agent:"
@@ -116,9 +155,6 @@
   "welcomeTryPage": {
     "message": "Open de releaseopmerkingen van Chrome en vat samen wat er in de nieuwste versie is veranderd."
   },
-  "welcomeTryHint": {
-    "message": "De status hierboven wordt groen zodra de server van je agent draait. Wijzigingen die met $1 zijn gemaakt, kun je terugdraaien door de agent te vragen ze ongedaan te maken."
-  },
   "welcomeTryIntroSafari": {
     "message": "Open Safari en vraag je agent:"
   },
@@ -128,9 +164,6 @@
   "welcomeTrySortSafari": {
     "message": "Sorteer mijn Safari-tabbladen op website."
   },
-  "welcomeTryHintSafari": {
-    "message": "De status hierboven wordt groen zodra de server van je agent draait. In Safari kan je agent vensters openen, ordenen en sluiten, en tabbladen openen, er pagina's in laden, ertussen wisselen en ze vastzetten, dempen, dupliceren, verplaatsen en sluiten. Ontbreken de titels en adressen van tabbladen? Geef de extensie dan in Safari toegang tot websites via Instellingen > Extensies. Tabbladgroepen, geschiedenis, bookmarks en paginabediening zijn beschikbaar in Chrome."
-  },
   "welcomePrivacyHeading": {
     "message": "Privacy"
   },
@@ -139,9 +172,6 @@
   },
   "welcomePrivacySafari": {
     "message": "Je browsegegevens blijven op je computer: de extensie communiceert alleen met $1. Je agent kan titels en URL's van tabbladen lezen, en vensters en tabbladen openen, ordenen of sluiten als je daarom vraagt. In Safari kan hij webpagina's niet lezen en er niet mee werken. Deze extensie stuurt titels van tabbladen en URL's nooit ergens anders naartoe."
-  },
-  "welcomeAnalytics": {
-    "message": "Anonieme gebruiksstatistieken delen (welke functies worden gebruikt, versie van de extensie) om de extensie te helpen verbeteren."
   },
   "analyticsTitle": {
     "message": "Anonieme gebruiksstatistieken delen"

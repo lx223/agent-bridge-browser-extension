@@ -35,17 +35,86 @@
   "welcomeLedeSafari": {
     "message": "AI エージェントが Safari のタブを探したり、開いたり、移動したり、閉じたりできます。"
   },
-  "welcomeConnected": {
-    "message": "接続済み: エージェントがブラウザを使用できます。"
+  "profileLabel": {
+    "message": "このプロファイル"
   },
-  "welcomeConnectedMany_one": {
-    "message": "接続済み: $1 件のエージェントセッションがブラウザを使用できます。"
+  "profilePlaceholder": {
+    "message": "名前を付ける"
   },
-  "welcomeConnectedMany_other": {
-    "message": "接続済み: $1 件のエージェントセッションがブラウザを使用できます。"
+  "profileHint": {
+    "message": "エージェントはこの名前でブラウザやプロファイルを区別するので、「仕事用のブラウザで」のように頼めます。"
   },
-  "welcomeDisconnected": {
-    "message": "エージェントを待っています。下の手順で設定してから、セッションを開始してください。"
+  "profileSaved": {
+    "message": "保存しました"
+  },
+  "profileNameRemoved": {
+    "message": "名前を削除しました"
+  },
+  "statusNotConnected": {
+    "message": "まだ接続されていません"
+  },
+  "statusSetUpHint": {
+    "message": "下の手順でエージェントを接続してから、エージェントで新しいセッションを開始してください。"
+  },
+  "statusConnected": {
+    "message": "接続済み"
+  },
+  "statusConnectedMany_one": {
+    "message": "$1 件のエージェントセッションに接続済み"
+  },
+  "statusConnectedMany_other": {
+    "message": "$1 件のエージェントセッションに接続済み"
+  },
+  "statusConnectedHint": {
+    "message": "エージェントがこのブラウザを使用できます。下のいずれかのプロンプトを試してみてください。"
+  },
+  "welcomeStepConnect": {
+    "message": "エージェントを接続する"
+  },
+  "stepDone": {
+    "message": "完了"
+  },
+  "welcomePickAgent": {
+    "message": "お使いのエージェントを選んでください。"
+  },
+  "welcomeAgentTabs": {
+    "message": "お使いのエージェント"
+  },
+  "welcomeTabOther": {
+    "message": "その他"
+  },
+  "welcomeClaudeCodeSteps": {
+    "message": "ターミナルでこれを一度だけ実行してから、新しい Claude Code セッションを開始してください。"
+  },
+  "welcomeClaudeDesktopSteps": {
+    "message": "拡張機能をダウンロードして、ファイルを開いてください。Claude Desktop がインストールを行うので、Node.js は不要です。"
+  },
+  "welcomeOpensToConfirm": {
+    "message": "$1 が開き、確認を求められます。"
+  },
+  "welcomeOtherAgentsSteps": {
+    "message": "これをエージェントの MCP 設定に追加して、エージェントを再起動してください。"
+  },
+  "welcomeAgentSetupHint": {
+    "message": "コマンドを実行できるエージェント（Claude Code、Cursor、Codex など）に、このプロンプトを貼り付けてください。Node.js があるか確認して、サーバーを追加します。"
+  },
+  "showPrompt": {
+    "message": "プロンプトを表示"
+  },
+  "welcomeServerFootnote": {
+    "message": "エージェントは小さなローカルサーバー（$1）を実行し、この拡張機能がそこに接続します。"
+  },
+  "welcomeStepAsk": {
+    "message": "エージェントに頼んでみる"
+  },
+  "welcomeUndoFootnote": {
+    "message": "気が変わりましたか？$1 で行った変更は、エージェントに頼めば元に戻せます。"
+  },
+  "welcomeSafariFootnote": {
+    "message": "Safari では、エージェントはウィンドウを開く・並べる・閉じる操作と、タブを開く・ページを移動する・切り替える・ピン固定する・消音する・複製する・移動する・閉じる操作ができます。タブグループ、履歴、ブックマーク、ページの操作は Chrome で利用できます。タブのタイトルやアドレスが表示されない場合は、Safari の「設定」>「機能拡張」で、この拡張機能にウェブサイトへのアクセスを許可してください。"
+  },
+  "welcomeAnalyticsHint": {
+    "message": "拡張機能の改善のため、使用された機能と拡張機能のバージョンを送信します。"
   },
   "instanceNameLabel": {
     "message": "このブラウザのプロファイルに名前を付ける"
@@ -53,26 +122,14 @@
   "instanceNamePlaceholder": {
     "message": "例: 仕事、個人"
   },
-  "welcomeInstanceNameHint": {
-    "message": "エージェントはこの名前でブラウザやプロファイルを区別するので、「仕事用のブラウザで」のように頼めます。$1"
-  },
   "optionsInstanceNameHint": {
     "message": "エージェントはこの名前でブラウザやプロファイルを区別します。$1"
   },
   "instanceId": {
     "message": "インスタンス ID: $1"
   },
-  "welcomeStepAdd": {
-    "message": "1. エージェントに追加する"
-  },
-  "welcomeStepAddHint": {
-    "message": "エージェントが小さなローカルサーバー（$1）を起動し、この拡張機能がそこに接続します。お使いのエージェントを選んでください:"
-  },
   "welcomeAgentSetupTitle": {
     "message": "エージェントに設定を任せる"
-  },
-  "welcomeAgentSetupBody": {
-    "message": "コマンドを実行して自身の設定を編集できるエージェント（Claude Code、Cursor、Codex など）に、このプロンプトを貼り付けてください。Node.js があるか確認してから、サーバーを追加します。"
   },
   "copyPrompt": {
     "message": "プロンプトをコピー"
@@ -83,29 +140,11 @@
   "copied": {
     "message": "コピーしました"
   },
-  "welcomeClaudeCodeBody": {
-    "message": "ターミナルで一度だけ実行します:"
-  },
-  "welcomeOpensAndConfirms": {
-    "message": "アプリが開き、確認を求められます。"
-  },
   "welcomeAddTo": {
     "message": "$1 に追加"
   },
-  "welcomeClaudeDesktopBody": {
-    "message": "拡張機能をダウンロードし、ファイルを開いてインストールします。Node.js は不要です。"
-  },
   "welcomeDownloadFor": {
     "message": "$1 版をダウンロード"
-  },
-  "welcomeOtherAgentsTitle": {
-    "message": "その他のエージェント"
-  },
-  "welcomeOtherAgentsBody": {
-    "message": "これをエージェントの MCP 設定に追加して、エージェントを再起動してください。"
-  },
-  "welcomeStepTry": {
-    "message": "2. 試してみる"
   },
   "welcomeTryIntro": {
     "message": "Chrome を開いた状態で、エージェントにこう頼んでみてください:"
@@ -116,9 +155,6 @@
   "welcomeTryPage": {
     "message": "Chrome のリリースノートを開いて、最新バージョンの変更点をまとめて。"
   },
-  "welcomeTryHint": {
-    "message": "エージェントのサーバーが起動すると、上のステータスが緑色になります。$1 で行った変更は、エージェントに頼めば元に戻せます。"
-  },
   "welcomeTryIntroSafari": {
     "message": "Safari を開いた状態で、エージェントにこう頼んでみてください:"
   },
@@ -128,9 +164,6 @@
   "welcomeTrySortSafari": {
     "message": "Safari のタブをサイトごとに並べ替えて。"
   },
-  "welcomeTryHintSafari": {
-    "message": "エージェントのサーバーが起動すると、上のステータスが緑色になります。Safari では、エージェントはウィンドウを開く・並べる・閉じる操作と、タブを開く・ページを移動する・切り替える・ピン固定する・消音する・複製する・移動する・閉じる操作ができます。タブのタイトルやアドレスが表示されない場合は、Safari の「設定」>「機能拡張」で、この拡張機能にウェブサイトへのアクセスを許可してください。タブグループ、履歴、ブックマーク、ページの操作は Chrome で利用できます。"
-  },
   "welcomePrivacyHeading": {
     "message": "プライバシー"
   },
@@ -139,9 +172,6 @@
   },
   "welcomePrivacySafari": {
     "message": "閲覧データはお使いのコンピュータ内にとどまります。この拡張機能が通信する相手は $1 だけです。エージェントは、あなたが頼んだときに、タブのタイトルと URL の読み取り、ウィンドウとタブを開く・並べる・閉じる操作を行えます。Safari ではウェブページの読み取りや操作はできません。この拡張機能がタブのタイトルや URL を他の場所に送信することはありません。"
-  },
-  "welcomeAnalytics": {
-    "message": "匿名の使用統計情報（使用された機能、拡張機能のバージョン）を送信して、拡張機能の改善に協力する。"
   },
   "analyticsTitle": {
     "message": "匿名の使用統計情報を送信する"

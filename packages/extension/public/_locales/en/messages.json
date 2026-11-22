@@ -47,21 +47,113 @@
     "message": "Let your AI agent find, open, move and close your Safari tabs.",
     "description": "Subtitle of the setup page in Safari."
   },
-  "welcomeConnected": {
-    "message": "Connected: your agent can use the browser.",
-    "description": "Connection status on the setup page when one agent session is connected."
+  "profileLabel": {
+    "message": "This profile",
+    "description": "Setup page: label above the name of this browser profile."
   },
-  "welcomeConnectedMany_one": {
-    "message": "Connected: $1 agent session can use the browser.",
-    "description": "Connection status on the setup page. $1 is the number of connected agent sessions."
+  "profilePlaceholder": {
+    "message": "Give it a name",
+    "description": "Setup page: placeholder in the empty profile name field."
   },
-  "welcomeConnectedMany_other": {
-    "message": "Connected: $1 agent sessions can use the browser.",
-    "description": "Connection status on the setup page. $1 is the number of connected agent sessions."
+  "profileHint": {
+    "message": "Agents use this name to tell your browsers and profiles apart, so you can ask for your Work browser.",
+    "description": "Setup page: explains the profile name. \"Work\" is an example profile name."
   },
-  "welcomeDisconnected": {
-    "message": "Waiting for your agent. Set it up below, then start a session.",
-    "description": "Connection status on the setup page when no agent is connected."
+  "profileSaved": {
+    "message": "Saved",
+    "description": "Setup page: shown after a check mark once the profile name is saved."
+  },
+  "profileNameRemoved": {
+    "message": "Name removed",
+    "description": "Setup page: shown after a check mark once the profile name is cleared."
+  },
+  "statusNotConnected": {
+    "message": "Not connected yet",
+    "description": "Setup page: connection headline while no agent is connected."
+  },
+  "statusSetUpHint": {
+    "message": "Connect your agent below, then start a new session in it.",
+    "description": "Setup page: next step under the headline while no agent is connected."
+  },
+  "statusConnected": {
+    "message": "Connected",
+    "description": "Setup page: connection headline when one agent session is connected."
+  },
+  "statusConnectedMany_one": {
+    "message": "Connected to $1 agent session",
+    "description": "Setup page: connection headline. $1 is the number of connected agent sessions."
+  },
+  "statusConnectedMany_other": {
+    "message": "Connected to $1 agent sessions",
+    "description": "Setup page: connection headline. $1 is the number of connected agent sessions."
+  },
+  "statusConnectedHint": {
+    "message": "Your agent can use this browser. Try one of the prompts below.",
+    "description": "Setup page: next step under the headline once an agent is connected."
+  },
+  "welcomeStepConnect": {
+    "message": "Connect your agent",
+    "description": "Setup page: heading of step 1."
+  },
+  "stepDone": {
+    "message": "Done",
+    "description": "Setup page: badge on step 1 once an agent is connected."
+  },
+  "welcomePickAgent": {
+    "message": "Pick the agent you use.",
+    "description": "Setup page: above the tabs with one tab per agent app."
+  },
+  "welcomeAgentTabs": {
+    "message": "Your agent",
+    "description": "Setup page: accessible label of the row of agent tabs."
+  },
+  "welcomeTabOther": {
+    "message": "Other",
+    "description": "Setup page: tab for any other MCP client, next to tabs named after agent apps."
+  },
+  "welcomeClaudeCodeSteps": {
+    "message": "Run this once in a terminal, then start a new Claude Code session.",
+    "description": "Setup page: Claude Code tab, above a command to copy."
+  },
+  "welcomeClaudeDesktopSteps": {
+    "message": "Download the extension and open the file. Claude Desktop installs it for you, no Node.js needed.",
+    "description": "Setup page: Claude Desktop tab. \"Extension\" here is a Claude Desktop extension file."
+  },
+  "welcomeOpensToConfirm": {
+    "message": "$1 opens and asks you to confirm.",
+    "description": "Setup page: Cursor and VS Code tabs. $1 is the app name."
+  },
+  "welcomeOtherAgentsSteps": {
+    "message": "Add this to your agent's MCP config, then restart it.",
+    "description": "Setup page: Other tab, above a JSON configuration to copy."
+  },
+  "welcomeAgentSetupHint": {
+    "message": "Paste this prompt into an agent that can run commands, such as Claude Code, Cursor or Codex. It checks for Node.js and adds the server.",
+    "description": "Setup page: explains the self-setup prompt."
+  },
+  "showPrompt": {
+    "message": "Show prompt",
+    "description": "Setup page: expands the full text of the self-setup prompt."
+  },
+  "welcomeServerFootnote": {
+    "message": "Your agent runs a small local server, $1, that this extension connects to.",
+    "description": "Setup page: $1 is the command that starts the server."
+  },
+  "welcomeStepAsk": {
+    "message": "Ask it something",
+    "description": "Setup page: heading of step 2, followed by example prompts."
+  },
+  "welcomeUndoFootnote": {
+    "message": "Changed your mind? Changes made with $1 can be reverted by asking the agent to undo.",
+    "description": "Setup page: $1 is the tool name chrome_plan_apply."
+  },
+  "welcomeSafariFootnote": {
+    "message": "In Safari your agent can open, arrange and close windows, and open, navigate, switch, pin, mute, duplicate, move and close tabs. Tab groups, history, bookmarks and page control are available in Chrome. If tab titles and addresses are missing, give the extension website access in Safari under Settings > Extensions.",
+    "description": "Setup page in Safari: what the agent can do there. \"Settings > Extensions\" is the path in Safari's settings."
+  },
+  "welcomeAnalyticsHint": {
+    "message": "Which features are used and the extension version, to help improve the extension.",
+    "description": "Setup page: under \"Share anonymous usage statistics\"."
   },
   "instanceNameLabel": {
     "message": "Name this browser profile",
@@ -71,10 +163,6 @@
     "message": "For example Work or Personal",
     "description": "Placeholder of the browser profile name field."
   },
-  "welcomeInstanceNameHint": {
-    "message": "Agents use this name to tell your browsers and profiles apart, so you can ask for your Work browser. $1",
-    "description": "Help text under the browser profile name field on the setup page. $1 is replaced by the instance id, which may be empty. Translate Work the same way as in the placeholder."
-  },
   "optionsInstanceNameHint": {
     "message": "Agents use this name to tell your browsers and profiles apart. $1",
     "description": "Help text under the browser profile name field in the options. $1 is replaced by the instance id, which may be empty."
@@ -83,21 +171,9 @@
     "message": "Instance id: $1",
     "description": "$1 is a short random identifier of this browser profile."
   },
-  "welcomeStepAdd": {
-    "message": "1. Add it to your agent",
-    "description": "Heading of the first setup step."
-  },
-  "welcomeStepAddHint": {
-    "message": "Your agent starts a small local server ($1) that this extension connects to. Pick your agent:",
-    "description": "$1 is a terminal command and is kept as is."
-  },
   "welcomeAgentSetupTitle": {
-    "message": "Let your agent set it up",
+    "message": "Let your agent set itself up",
     "description": "Card heading."
-  },
-  "welcomeAgentSetupBody": {
-    "message": "Paste this prompt into any agent that can run commands and edit its own settings, such as Claude Code, Cursor or Codex. It checks for Node.js, then adds the server.",
-    "description": "Card text. Claude Code, Cursor, Codex and Node.js are product names."
   },
   "copyPrompt": {
     "message": "Copy prompt",
@@ -111,37 +187,13 @@
     "message": "Copied",
     "description": "Briefly shown on a copy button after copying."
   },
-  "welcomeClaudeCodeBody": {
-    "message": "Run once in a terminal:",
-    "description": "Card text above a terminal command."
-  },
-  "welcomeOpensAndConfirms": {
-    "message": "Opens the app and asks you to confirm.",
-    "description": "Card text for the Cursor and VS Code install buttons."
-  },
   "welcomeAddTo": {
     "message": "Add to $1",
     "description": "Button. $1 is an app name such as Cursor or VS Code."
   },
-  "welcomeClaudeDesktopBody": {
-    "message": "Download the extension, then open the file to install it. No Node.js needed.",
-    "description": "Card text for Claude Desktop."
-  },
   "welcomeDownloadFor": {
     "message": "Download for $1",
     "description": "Button. $1 is an app name such as Claude Desktop."
-  },
-  "welcomeOtherAgentsTitle": {
-    "message": "Other agents",
-    "description": "Card heading."
-  },
-  "welcomeOtherAgentsBody": {
-    "message": "Add this to the agent's MCP config, then restart it.",
-    "description": "Card text above a JSON configuration snippet. MCP stays in English."
-  },
-  "welcomeStepTry": {
-    "message": "2. Try it",
-    "description": "Heading of the second setup step."
   },
   "welcomeTryIntro": {
     "message": "With Chrome open, ask your agent:",
@@ -155,10 +207,6 @@
     "message": "Open the Chrome release notes and summarise what changed in the latest version.",
     "description": "Example prompt the user can send to the agent."
   },
-  "welcomeTryHint": {
-    "message": "The status above turns green once your agent's server is running. Changes made with $1 can be reverted by asking the agent to undo.",
-    "description": "$1 is a tool name and is kept as is."
-  },
   "welcomeTryIntroSafari": {
     "message": "With Safari open, ask your agent:",
     "description": "Introduces example prompts in Safari."
@@ -171,10 +219,6 @@
     "message": "Put my Safari tabs in order by site.",
     "description": "Example prompt the user can send to the agent."
   },
-  "welcomeTryHintSafari": {
-    "message": "The status above turns green once your agent's server is running. In Safari your agent can open, arrange and close windows, and open, navigate, switch, pin, mute, duplicate, move and close tabs. If tab titles and addresses are missing, give the extension website access in Safari under Settings > Extensions. Tab groups, history, bookmarks and page control are available in Chrome.",
-    "description": "Use the names Safari shows for Settings and Extensions in this language."
-  },
   "welcomePrivacyHeading": {
     "message": "Privacy",
     "description": "Section heading."
@@ -186,10 +230,6 @@
   "welcomePrivacySafari": {
     "message": "Your browsing data stays on your computer: the extension only talks to $1. Your agent can read tab titles and URLs, and open, arrange or close windows and tabs when you ask it to. It cannot read or act in web pages in Safari. Tab titles and URLs are never sent anywhere else by this extension.",
     "description": "$1 is the local address 127.0.0.1."
-  },
-  "welcomeAnalytics": {
-    "message": "Share anonymous usage statistics (which features are used, extension version) to help improve the extension.",
-    "description": "Checkbox label."
   },
   "analyticsTitle": {
     "message": "Share anonymous usage statistics",

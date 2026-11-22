@@ -1,11 +1,13 @@
 import { t } from '../i18n/messages.ts';
 import { INSTANCE_KEY, INSTANCE_NAME_KEY, MAX_INSTANCE_NAME_LENGTH, normalizeInstanceName, saveInstanceName } from '../background/browser.ts';
 
-export function bindInstanceName(input: HTMLInputElement, idLabel: HTMLElement) {
+export function bindInstanceName(input: HTMLInputElement, idLabel: HTMLElement, onName: (name: string) => void = () => undefined) {
   input.maxLength = MAX_INSTANCE_NAME_LENGTH;
 
   const renderName = (value: unknown) => {
-    if (document.activeElement !== input) input.value = normalizeInstanceName(value) ?? '';
+    if (document.activeElement === input) return;
+    input.value = normalizeInstanceName(value) ?? '';
+    onName(input.value);
   };
   const renderId = (value: unknown) => {
     idLabel.textContent = typeof value === 'string' && value ? t('instanceId', value) : '';
@@ -23,6 +25,7 @@ export function bindInstanceName(input: HTMLInputElement, idLabel: HTMLElement) 
 
   input.addEventListener('change', () => {
     input.value = normalizeInstanceName(input.value) ?? '';
+    onName(input.value);
     void saveInstanceName(chrome.storage.local, input.value);
   });
 }

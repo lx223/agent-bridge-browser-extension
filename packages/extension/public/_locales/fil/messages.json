@@ -35,17 +35,86 @@
   "welcomeLedeSafari": {
     "message": "Hayaang hanapin, buksan, ilipat at isara ng iyong AI agent ang mga tab mo sa Safari."
   },
-  "welcomeConnected": {
-    "message": "Nakakonekta: magagamit ng iyong agent ang browser."
+  "profileLabel": {
+    "message": "Ang profile na ito"
   },
-  "welcomeConnectedMany_one": {
-    "message": "Nakakonekta: magagamit ng $1 session ng agent ang browser."
+  "profilePlaceholder": {
+    "message": "Bigyan ito ng pangalan"
   },
-  "welcomeConnectedMany_other": {
-    "message": "Nakakonekta: magagamit ng $1 session ng agent ang browser."
+  "profileHint": {
+    "message": "Ginagamit ng mga agent ang pangalang ito para matukoy ang pagkakaiba ng iyong mga browser at profile, kaya puwede mong hilingin ang browser mo sa Trabaho."
   },
-  "welcomeDisconnected": {
-    "message": "Hinihintay ang iyong agent. I-set up ito sa ibaba, pagkatapos ay magsimula ng session."
+  "profileSaved": {
+    "message": "Na-save"
+  },
+  "profileNameRemoved": {
+    "message": "Inalis ang pangalan"
+  },
+  "statusNotConnected": {
+    "message": "Hindi pa nakakonekta"
+  },
+  "statusSetUpHint": {
+    "message": "Ikonekta ang iyong agent sa ibaba, pagkatapos ay magsimula ng bagong session dito."
+  },
+  "statusConnected": {
+    "message": "Nakakonekta"
+  },
+  "statusConnectedMany_one": {
+    "message": "Nakakonekta sa $1 session ng agent"
+  },
+  "statusConnectedMany_other": {
+    "message": "Nakakonekta sa $1 session ng agent"
+  },
+  "statusConnectedHint": {
+    "message": "Magagamit ng iyong agent ang browser na ito. Subukan ang isa sa mga prompt sa ibaba."
+  },
+  "welcomeStepConnect": {
+    "message": "Ikonekta ang iyong agent"
+  },
+  "stepDone": {
+    "message": "Tapos na"
+  },
+  "welcomePickAgent": {
+    "message": "Piliin ang agent na ginagamit mo."
+  },
+  "welcomeAgentTabs": {
+    "message": "Ang iyong agent"
+  },
+  "welcomeTabOther": {
+    "message": "Iba pa"
+  },
+  "welcomeClaudeCodeSteps": {
+    "message": "Patakbuhin ito nang isang beses sa terminal, pagkatapos ay magsimula ng bagong session ng Claude Code."
+  },
+  "welcomeClaudeDesktopSteps": {
+    "message": "I-download ang extension at buksan ang file. Ii-install ito ng Claude Desktop para sa iyo, hindi kailangan ng Node.js."
+  },
+  "welcomeOpensToConfirm": {
+    "message": "Magbubukas ang $1 at hihilingin sa iyong kumpirmahin."
+  },
+  "welcomeOtherAgentsSteps": {
+    "message": "Idagdag ito sa MCP config ng agent, pagkatapos ay i-restart ito."
+  },
+  "welcomeAgentSetupHint": {
+    "message": "I-paste ang prompt na ito sa isang agent na nakakapagpatakbo ng mga command, gaya ng Claude Code, Cursor o Codex. Tinitingnan nito kung may Node.js, pagkatapos ay idinadagdag ang server."
+  },
+  "showPrompt": {
+    "message": "Ipakita ang prompt"
+  },
+  "welcomeServerFootnote": {
+    "message": "Nagpapatakbo ang iyong agent ng maliit na lokal na server, $1, na kinokonektahan ng extension na ito."
+  },
+  "welcomeStepAsk": {
+    "message": "Magtanong ng kahit ano"
+  },
+  "welcomeUndoFootnote": {
+    "message": "Nagbago ang isip mo? Maibabalik ang mga pagbabagong ginawa gamit ang $1 sa pamamagitan ng paghiling sa agent na i-undo ang mga ito."
+  },
+  "welcomeSafariFootnote": {
+    "message": "Sa Safari, kayang buksan, ayusin at isara ng iyong agent ang mga window, at kayang magbukas, mag-navigate, lumipat, mag-pin, mag-mute, mag-duplicate, maglipat at magsara ng mga tab. Available sa Chrome ang mga grupo ng tab, history, bookmark at kontrol sa page. Kung walang lumalabas na pamagat at address ng tab, bigyan ang extension ng access sa website sa Safari sa ilalim ng Settings > Extensions."
+  },
+  "welcomeAnalyticsHint": {
+    "message": "Kung aling mga feature ang ginagamit at ang bersyon ng extension, para makatulong na mapahusay ang extension."
   },
   "instanceNameLabel": {
     "message": "Pangalanan ang profile ng browser na ito"
@@ -53,26 +122,14 @@
   "instanceNamePlaceholder": {
     "message": "Halimbawa, Trabaho o Personal"
   },
-  "welcomeInstanceNameHint": {
-    "message": "Ginagamit ng mga agent ang pangalang ito para matukoy ang pagkakaiba ng iyong mga browser at profile, kaya puwede mong hilingin ang browser mo sa Trabaho. $1"
-  },
   "optionsInstanceNameHint": {
     "message": "Ginagamit ng mga agent ang pangalang ito para matukoy ang pagkakaiba ng iyong mga browser at profile. $1"
   },
   "instanceId": {
     "message": "ID ng instance: $1"
   },
-  "welcomeStepAdd": {
-    "message": "1. Idagdag ito sa iyong agent"
-  },
-  "welcomeStepAddHint": {
-    "message": "Nagsisimula ang iyong agent ng maliit na lokal na server ($1) na kinokonektahan ng extension na ito. Piliin ang iyong agent:"
-  },
   "welcomeAgentSetupTitle": {
     "message": "Hayaang ang agent mo ang mag-set up nito"
-  },
-  "welcomeAgentSetupBody": {
-    "message": "I-paste ang prompt na ito sa anumang agent na nakakapagpatakbo ng mga command at nakakapag-edit ng sarili nitong mga setting, gaya ng Claude Code, Cursor o Codex. Tinitingnan nito kung may Node.js, pagkatapos ay idinadagdag ang server."
   },
   "copyPrompt": {
     "message": "Kopyahin ang prompt"
@@ -83,29 +140,11 @@
   "copied": {
     "message": "Nakopya"
   },
-  "welcomeClaudeCodeBody": {
-    "message": "Patakbuhin nang isang beses sa terminal:"
-  },
-  "welcomeOpensAndConfirms": {
-    "message": "Binubuksan ang app at hinihiling sa iyong kumpirmahin."
-  },
   "welcomeAddTo": {
     "message": "Idagdag sa $1"
   },
-  "welcomeClaudeDesktopBody": {
-    "message": "I-download ang extension, pagkatapos ay buksan ang file para i-install ito. Hindi kailangan ng Node.js."
-  },
   "welcomeDownloadFor": {
     "message": "I-download para sa $1"
-  },
-  "welcomeOtherAgentsTitle": {
-    "message": "Iba pang agent"
-  },
-  "welcomeOtherAgentsBody": {
-    "message": "Idagdag ito sa MCP config ng agent, pagkatapos ay i-restart ito."
-  },
-  "welcomeStepTry": {
-    "message": "2. Subukan ito"
   },
   "welcomeTryIntro": {
     "message": "Habang nakabukas ang Chrome, sabihin sa iyong agent:"
@@ -116,9 +155,6 @@
   "welcomeTryPage": {
     "message": "Buksan ang release notes ng Chrome at ibuod kung ano ang nagbago sa pinakabagong bersyon."
   },
-  "welcomeTryHint": {
-    "message": "Magiging berde ang status sa itaas kapag tumatakbo na ang server ng iyong agent. Maibabalik ang mga pagbabagong ginawa gamit ang $1 sa pamamagitan ng paghiling sa agent na i-undo ang mga ito."
-  },
   "welcomeTryIntroSafari": {
     "message": "Habang nakabukas ang Safari, sabihin sa iyong agent:"
   },
@@ -128,9 +164,6 @@
   "welcomeTrySortSafari": {
     "message": "Ayusin ang mga tab ko sa Safari ayon sa site."
   },
-  "welcomeTryHintSafari": {
-    "message": "Magiging berde ang status sa itaas kapag tumatakbo na ang server ng iyong agent. Sa Safari, kayang buksan, ayusin at isara ng iyong agent ang mga window, at kayang magbukas, mag-navigate, lumipat, mag-pin, mag-mute, mag-duplicate, maglipat at magsara ng mga tab. Kung walang lumalabas na pamagat at address ng tab, bigyan ang extension ng access sa website sa Safari sa ilalim ng Settings > Extensions. Available sa Chrome ang mga grupo ng tab, history, bookmark at kontrol sa page."
-  },
   "welcomePrivacyHeading": {
     "message": "Privacy"
   },
@@ -139,9 +172,6 @@
   },
   "welcomePrivacySafari": {
     "message": "Nananatili sa iyong computer ang data ng pag-browse mo: sa $1 lang nakikipag-ugnayan ang extension. Kayang basahin ng iyong agent ang mga pamagat at URL ng tab, at magbukas, mag-ayos o magsara ng mga window at tab kapag hiniling mo. Hindi ito makakapagbasa o makakakilos sa mga web page sa Safari. Hindi kailanman ipinapadala ng extension na ito saanman ang mga pamagat ng tab at URL."
-  },
-  "welcomeAnalytics": {
-    "message": "Ibahagi ang anonymous na istatistika ng paggamit (kung aling mga feature ang ginagamit, bersyon ng extension) para makatulong na mapahusay ang extension."
   },
   "analyticsTitle": {
     "message": "Ibahagi ang anonymous na istatistika ng paggamit"

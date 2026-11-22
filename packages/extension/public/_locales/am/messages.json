@@ -35,17 +35,86 @@
   "welcomeLedeSafari": {
     "message": "የAI ወኪልዎ የSafari ትሮችዎን እንዲያገኝ፣ እንዲከፍት፣ እንዲያንቀሳቅስ እና እንዲዘጋ ይፍቀዱ።"
   },
-  "welcomeConnected": {
-    "message": "ተገናኝቷል፦ ወኪልዎ አሳሹን መጠቀም ይችላል።"
+  "profileLabel": {
+    "message": "ይህ መገለጫ"
   },
-  "welcomeConnectedMany_one": {
-    "message": "ተገናኝቷል፦ $1 የወኪል ክፍለ-ጊዜ አሳሹን መጠቀም ይችላል።"
+  "profilePlaceholder": {
+    "message": "ስም ይስጡት"
   },
-  "welcomeConnectedMany_other": {
-    "message": "ተገናኝቷል፦ $1 የወኪል ክፍለ-ጊዜዎች አሳሹን መጠቀም ይችላሉ።"
+  "profileHint": {
+    "message": "ወኪሎች አሳሾችዎን እና መገለጫዎችዎን ለመለየት ይህን ስም ይጠቀማሉ፣ ስለዚህ የሥራ አሳሽዎን መጠየቅ ይችላሉ።"
   },
-  "welcomeDisconnected": {
-    "message": "ወኪልዎን በመጠበቅ ላይ። ከታች ያዋቅሩት፣ ከዚያ ክፍለ-ጊዜ ይጀምሩ።"
+  "profileSaved": {
+    "message": "ተቀምጧል"
+  },
+  "profileNameRemoved": {
+    "message": "ስሙ ተወግዷል"
+  },
+  "statusNotConnected": {
+    "message": "ገና አልተገናኘም"
+  },
+  "statusSetUpHint": {
+    "message": "ወኪልዎን ከታች ያገናኙ፣ ከዚያ በውስጡ አዲስ ክፍለ-ጊዜ ይጀምሩ።"
+  },
+  "statusConnected": {
+    "message": "ተገናኝቷል"
+  },
+  "statusConnectedMany_one": {
+    "message": "ከ$1 የወኪል ክፍለ-ጊዜ ጋር ተገናኝቷል"
+  },
+  "statusConnectedMany_other": {
+    "message": "ከ$1 የወኪል ክፍለ-ጊዜዎች ጋር ተገናኝቷል"
+  },
+  "statusConnectedHint": {
+    "message": "ወኪልዎ ይህን አሳሽ መጠቀም ይችላል። ከታች ካሉት ጥያቄዎች አንዱን ይሞክሩ።"
+  },
+  "welcomeStepConnect": {
+    "message": "ወኪልዎን ያገናኙ"
+  },
+  "stepDone": {
+    "message": "ተጠናቋል"
+  },
+  "welcomePickAgent": {
+    "message": "የሚጠቀሙበትን ወኪል ይምረጡ።"
+  },
+  "welcomeAgentTabs": {
+    "message": "ወኪልዎ"
+  },
+  "welcomeTabOther": {
+    "message": "ሌላ"
+  },
+  "welcomeClaudeCodeSteps": {
+    "message": "ይህን በተርሚናል ውስጥ አንድ ጊዜ ያሂዱ፣ ከዚያ አዲስ የClaude Code ክፍለ-ጊዜ ይጀምሩ።"
+  },
+  "welcomeClaudeDesktopSteps": {
+    "message": "ቅጥያውን ያውርዱ እና ፋይሉን ይክፈቱ። Claude Desktop ይጭንልዎታል፣ Node.js አያስፈልግም።"
+  },
+  "welcomeOpensToConfirm": {
+    "message": "$1 ይከፈታል እና እንዲያረጋግጡ ይጠይቅዎታል።"
+  },
+  "welcomeOtherAgentsSteps": {
+    "message": "ይህን ወደ ወኪሉ የMCP ውቅር ያክሉ፣ ከዚያ ወኪሉን ዳግም ያስጀምሩ።"
+  },
+  "welcomeAgentSetupHint": {
+    "message": "ይህን ጥያቄ ትዕዛዞችን ማሄድ በሚችል ወኪል ውስጥ ይለጥፉ፣ ለምሳሌ Claude Code፣ Cursor ወይም Codex። Node.js መኖሩን ያረጋግጣል እና አገልጋዩን ያክላል።"
+  },
+  "showPrompt": {
+    "message": "ጥያቄውን አሳይ"
+  },
+  "welcomeServerFootnote": {
+    "message": "ወኪልዎ ይህ ቅጥያ የሚገናኝበትን ትንሽ አካባቢያዊ አገልጋይ፣ $1፣ ያስኬዳል።"
+  },
+  "welcomeStepAsk": {
+    "message": "አንድ ነገር ይጠይቁት"
+  },
+  "welcomeUndoFootnote": {
+    "message": "ሐሳብዎን ቀይረዋል? በ$1 የተደረጉ ለውጦችን ወኪሉ እንዲቀለብሳቸው በመጠየቅ መመለስ ይቻላል።"
+  },
+  "welcomeSafariFootnote": {
+    "message": "በSafari ውስጥ ወኪልዎ መስኮቶችን መክፈት፣ ማደራጀት እና መዝጋት፣ እንዲሁም ትሮችን መክፈት፣ ማሰስ፣ መቀየር፣ መሰካት፣ ድምፅ ማጥፋት፣ ማባዛት፣ ማንቀሳቀስ እና መዝጋት ይችላል። የትር ቡድኖች፣ ታሪክ፣ ዕልባቶች እና የገጽ ቁጥጥር በChrome ውስጥ ይገኛሉ። የትር ርዕሶች እና አድራሻዎች የማይታዩ ከሆነ፣ በSafari ውስጥ በSettings > Extensions ስር ለቅጥያው የድር ጣቢያ መዳረሻ ይስጡ።"
+  },
+  "welcomeAnalyticsHint": {
+    "message": "ቅጥያውን ለማሻሻል እንዲረዳ፣ የትኞቹ ባህሪያት ጥቅም ላይ እንደሚውሉ እና የቅጥያው ስሪት።"
   },
   "instanceNameLabel": {
     "message": "ይህን የአሳሽ መገለጫ ይሰይሙ"
@@ -53,26 +122,14 @@
   "instanceNamePlaceholder": {
     "message": "ለምሳሌ ሥራ ወይም የግል"
   },
-  "welcomeInstanceNameHint": {
-    "message": "ወኪሎች አሳሾችዎን እና መገለጫዎችዎን ለመለየት ይህን ስም ይጠቀማሉ፣ ስለዚህ የሥራ አሳሽዎን መጠየቅ ይችላሉ። $1"
-  },
   "optionsInstanceNameHint": {
     "message": "ወኪሎች አሳሾችዎን እና መገለጫዎችዎን ለመለየት ይህን ስም ይጠቀማሉ። $1"
   },
   "instanceId": {
     "message": "የአሳሽ መታወቂያ: $1"
   },
-  "welcomeStepAdd": {
-    "message": "1. ወደ ወኪልዎ ያክሉት"
-  },
-  "welcomeStepAddHint": {
-    "message": "ወኪልዎ ይህ ቅጥያ የሚገናኝበትን ትንሽ አካባቢያዊ አገልጋይ ($1) ያስጀምራል። ወኪልዎን ይምረጡ፦"
-  },
   "welcomeAgentSetupTitle": {
     "message": "ወኪልዎ እንዲያዋቅረው ይፍቀዱ"
-  },
-  "welcomeAgentSetupBody": {
-    "message": "ይህን ጥያቄ ትዕዛዞችን ማሄድ እና የራሱን ቅንብሮች ማርትዕ በሚችል ማንኛውም ወኪል ውስጥ ይለጥፉ፣ ለምሳሌ Claude Code፣ Cursor ወይም Codex። Node.js መኖሩን ያረጋግጣል፣ ከዚያ አገልጋዩን ያክላል።"
   },
   "copyPrompt": {
     "message": "ጥያቄውን ቅዳ"
@@ -83,29 +140,11 @@
   "copied": {
     "message": "ተቀድቷል"
   },
-  "welcomeClaudeCodeBody": {
-    "message": "በተርሚናል ውስጥ አንድ ጊዜ ያሂዱ፦"
-  },
-  "welcomeOpensAndConfirms": {
-    "message": "መተግበሪያውን ይከፍታል እና እንዲያረጋግጡ ይጠይቅዎታል።"
-  },
   "welcomeAddTo": {
     "message": "ወደ $1 አክል"
   },
-  "welcomeClaudeDesktopBody": {
-    "message": "ቅጥያውን ያውርዱ፣ ከዚያ ለመጫን ፋይሉን ይክፈቱ። Node.js አያስፈልግም።"
-  },
   "welcomeDownloadFor": {
     "message": "ለ$1 አውርድ"
-  },
-  "welcomeOtherAgentsTitle": {
-    "message": "ሌሎች ወኪሎች"
-  },
-  "welcomeOtherAgentsBody": {
-    "message": "ይህን ወደ ወኪሉ የMCP ውቅር ያክሉ፣ ከዚያ ወኪሉን ዳግም ያስጀምሩ።"
-  },
-  "welcomeStepTry": {
-    "message": "2. ይሞክሩት"
   },
   "welcomeTryIntro": {
     "message": "Chrome ተከፍቶ ሳለ፣ ወኪልዎን ይጠይቁ፦"
@@ -116,9 +155,6 @@
   "welcomeTryPage": {
     "message": "የChrome የልቀት ማስታወሻዎችን ክፈት እና በአዲሱ ስሪት ምን እንደተቀየረ አጠቃልልኝ።"
   },
-  "welcomeTryHint": {
-    "message": "የወኪልዎ አገልጋይ መሥራት ሲጀምር ከላይ ያለው ሁኔታ ወደ አረንጓዴ ይቀየራል። በ$1 የተደረጉ ለውጦችን ወኪሉ እንዲቀለብሳቸው በመጠየቅ መመለስ ይቻላል።"
-  },
   "welcomeTryIntroSafari": {
     "message": "Safari ተከፍቶ ሳለ፣ ወኪልዎን ይጠይቁ፦"
   },
@@ -128,9 +164,6 @@
   "welcomeTrySortSafari": {
     "message": "የSafari ትሮቼን በጣቢያ ደርድር።"
   },
-  "welcomeTryHintSafari": {
-    "message": "የወኪልዎ አገልጋይ መሥራት ሲጀምር ከላይ ያለው ሁኔታ ወደ አረንጓዴ ይቀየራል። በSafari ውስጥ ወኪልዎ መስኮቶችን መክፈት፣ ማደራጀት እና መዝጋት፣ እንዲሁም ትሮችን መክፈት፣ ማሰስ፣ መቀየር፣ መሰካት፣ ድምፅ ማጥፋት፣ ማባዛት፣ ማንቀሳቀስ እና መዝጋት ይችላል። የትር ርዕሶች እና አድራሻዎች የማይታዩ ከሆነ፣ በSafari ውስጥ በSettings > Extensions ስር ለቅጥያው የድር ጣቢያ መዳረሻ ይስጡ። የትር ቡድኖች፣ ታሪክ፣ ዕልባቶች እና የገጽ ቁጥጥር በChrome ውስጥ ይገኛሉ።"
-  },
   "welcomePrivacyHeading": {
     "message": "ግላዊነት"
   },
@@ -139,9 +172,6 @@
   },
   "welcomePrivacySafari": {
     "message": "የአሰሳ ውሂብዎ በኮምፒውተርዎ ላይ ይቆያል፦ ቅጥያው የሚገናኘው ከ$1 ጋር ብቻ ነው። ሲጠይቁት ወኪልዎ የትር ርዕሶችን እና ዩአርኤሎችን ማንበብ፣ እንዲሁም መስኮቶችን እና ትሮችን መክፈት፣ ማደራጀት ወይም መዝጋት ይችላል። በSafari ውስጥ ድረ-ገጾችን ማንበብ ወይም በእነሱ ላይ እርምጃ መውሰድ አይችልም። የትር ርዕሶች እና ዩአርኤሎች በዚህ ቅጥያ በጭራሽ ወደ ሌላ ቦታ አይላኩም።"
-  },
-  "welcomeAnalytics": {
-    "message": "ቅጥያውን ለማሻሻል እንዲረዳ ስም-አልባ የአጠቃቀም ስታቲስቲክስ (የትኞቹ ባህሪያት ጥቅም ላይ እንደሚውሉ፣ የቅጥያ ስሪት) ያጋሩ።"
   },
   "analyticsTitle": {
     "message": "ስም-አልባ የአጠቃቀም ስታቲስቲክስ ያጋሩ"

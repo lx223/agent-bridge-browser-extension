@@ -35,23 +35,92 @@
   "welcomeLedeSafari": {
     "message": "Дозвольте ШІ-агенту знаходити, відкривати, переміщувати й закривати ваші вкладки Safari."
   },
-  "welcomeConnected": {
-    "message": "Підключено: агент може користуватися браузером."
+  "profileLabel": {
+    "message": "Цей профіль"
   },
-  "welcomeConnectedMany_one": {
-    "message": "Підключено: $1 сеанс агента може користуватися браузером."
+  "profilePlaceholder": {
+    "message": "Дайте йому назву"
   },
-  "welcomeConnectedMany_other": {
-    "message": "Підключено: $1 сеансу агента можуть користуватися браузером."
+  "profileHint": {
+    "message": "За цією назвою агенти розрізняють ваші браузери та профілі, тож можна попросити, наприклад, браузер «Робота»."
   },
-  "welcomeConnectedMany_few": {
-    "message": "Підключено: $1 сеанси агента можуть користуватися браузером."
+  "profileSaved": {
+    "message": "Збережено"
   },
-  "welcomeConnectedMany_many": {
-    "message": "Підключено: $1 сеансів агента можуть користуватися браузером."
+  "profileNameRemoved": {
+    "message": "Назву видалено"
   },
-  "welcomeDisconnected": {
-    "message": "Очікування агента. Налаштуйте його нижче, а потім почніть сеанс."
+  "statusNotConnected": {
+    "message": "Ще не підключено"
+  },
+  "statusSetUpHint": {
+    "message": "Підключіть агента нижче, а потім почніть у ньому новий сеанс."
+  },
+  "statusConnected": {
+    "message": "Підключено"
+  },
+  "statusConnectedMany_one": {
+    "message": "Підключено $1 сеанс агента"
+  },
+  "statusConnectedMany_few": {
+    "message": "Підключено $1 сеанси агента"
+  },
+  "statusConnectedMany_many": {
+    "message": "Підключено $1 сеансів агента"
+  },
+  "statusConnectedMany_other": {
+    "message": "Підключено $1 сеансу агента"
+  },
+  "statusConnectedHint": {
+    "message": "Агент може користуватися цим браузером. Спробуйте один із промптів нижче."
+  },
+  "welcomeStepConnect": {
+    "message": "Підключіть агента"
+  },
+  "stepDone": {
+    "message": "Готово"
+  },
+  "welcomePickAgent": {
+    "message": "Виберіть агента, яким користуєтеся."
+  },
+  "welcomeAgentTabs": {
+    "message": "Ваш агент"
+  },
+  "welcomeTabOther": {
+    "message": "Інший"
+  },
+  "welcomeClaudeCodeSteps": {
+    "message": "Виконайте це один раз у терміналі, а потім почніть новий сеанс Claude Code."
+  },
+  "welcomeClaudeDesktopSteps": {
+    "message": "Завантажте розширення й відкрийте файл. Claude Desktop установить його сам, Node.js не потрібен."
+  },
+  "welcomeOpensToConfirm": {
+    "message": "Відкриється $1 і попросить підтвердження."
+  },
+  "welcomeOtherAgentsSteps": {
+    "message": "Додайте це до конфігурації MCP агента, а потім перезапустіть його."
+  },
+  "welcomeAgentSetupHint": {
+    "message": "Вставте цей промпт в агента, який уміє виконувати команди, наприклад Claude Code, Cursor чи Codex. Він перевірить наявність Node.js, а потім додасть сервер."
+  },
+  "showPrompt": {
+    "message": "Показати промпт"
+  },
+  "welcomeServerFootnote": {
+    "message": "Агент запускає невеликий локальний сервер, $1, до якого підключається це розширення."
+  },
+  "welcomeStepAsk": {
+    "message": "Попросіть агента про щось"
+  },
+  "welcomeUndoFootnote": {
+    "message": "Передумали? Зміни, внесені за допомогою $1, можна скасувати — просто попросіть агента."
+  },
+  "welcomeSafariFootnote": {
+    "message": "У Safari агент може відкривати, упорядковувати й закривати вікна, а також відкривати, перемикати, закріплювати, дублювати, переміщувати й закривати вкладки, відкривати в них адреси та вимикати в них звук. Групи вкладок, історія, закладки й керування сторінками доступні в Chrome. Якщо назви й адреси вкладок не відображаються, надайте розширенню доступ до вебсайтів у Safari: «Параметри» > «Розширення»."
+  },
+  "welcomeAnalyticsHint": {
+    "message": "Які функції використовуються та версія розширення — щоб допомогти покращити розширення."
   },
   "instanceNameLabel": {
     "message": "Назвіть цей профіль браузера"
@@ -59,26 +128,14 @@
   "instanceNamePlaceholder": {
     "message": "Наприклад, Робота або Особисте"
   },
-  "welcomeInstanceNameHint": {
-    "message": "За цією назвою агенти розрізняють ваші браузери та профілі, тож можна попросити, наприклад, браузер «Робота». $1"
-  },
   "optionsInstanceNameHint": {
     "message": "За цією назвою агенти розрізняють ваші браузери та профілі. $1"
   },
   "instanceId": {
     "message": "ID екземпляра: $1"
   },
-  "welcomeStepAdd": {
-    "message": "1. Додайте його до свого агента"
-  },
-  "welcomeStepAddHint": {
-    "message": "Агент запускає невеликий локальний сервер ($1), до якого підключається це розширення. Виберіть свого агента:"
-  },
   "welcomeAgentSetupTitle": {
     "message": "Доручіть налаштування агенту"
-  },
-  "welcomeAgentSetupBody": {
-    "message": "Вставте цей промпт у будь-якого агента, який уміє виконувати команди й змінювати власні налаштування, наприклад Claude Code, Cursor чи Codex. Він перевірить наявність Node.js, а потім додасть сервер."
   },
   "copyPrompt": {
     "message": "Копіювати промпт"
@@ -89,29 +146,11 @@
   "copied": {
     "message": "Скопійовано"
   },
-  "welcomeClaudeCodeBody": {
-    "message": "Виконайте один раз у терміналі:"
-  },
-  "welcomeOpensAndConfirms": {
-    "message": "Відкриє застосунок і попросить підтвердження."
-  },
   "welcomeAddTo": {
     "message": "Додати в $1"
   },
-  "welcomeClaudeDesktopBody": {
-    "message": "Завантажте розширення, а потім відкрийте файл, щоб установити його. Node.js не потрібен."
-  },
   "welcomeDownloadFor": {
     "message": "Завантажити для $1"
-  },
-  "welcomeOtherAgentsTitle": {
-    "message": "Інші агенти"
-  },
-  "welcomeOtherAgentsBody": {
-    "message": "Додайте це до конфігурації MCP агента, а потім перезапустіть його."
-  },
-  "welcomeStepTry": {
-    "message": "2. Спробуйте"
   },
   "welcomeTryIntro": {
     "message": "Відкрийте Chrome і попросіть агента:"
@@ -122,9 +161,6 @@
   "welcomeTryPage": {
     "message": "Відкрий нотатки до випуску Chrome і коротко підсумуй, що змінилося в останній версії."
   },
-  "welcomeTryHint": {
-    "message": "Стан угорі стане зеленим, щойно сервер агента запуститься. Зміни, внесені за допомогою $1, можна скасувати — просто попросіть агента."
-  },
   "welcomeTryIntroSafari": {
     "message": "Відкрийте Safari і попросіть агента:"
   },
@@ -134,9 +170,6 @@
   "welcomeTrySortSafari": {
     "message": "Впорядкуй мої вкладки Safari за сайтами."
   },
-  "welcomeTryHintSafari": {
-    "message": "Стан угорі стане зеленим, щойно сервер агента запуститься. У Safari агент може відкривати, упорядковувати й закривати вікна, а також відкривати, перемикати, закріплювати, дублювати, переміщувати й закривати вкладки, відкривати в них адреси та вимикати в них звук. Якщо назви й адреси вкладок не відображаються, надайте розширенню доступ до вебсайтів у Safari: «Параметри» > «Розширення». Групи вкладок, історія, закладки й керування сторінками доступні в Chrome."
-  },
   "welcomePrivacyHeading": {
     "message": "Конфіденційність"
   },
@@ -145,9 +178,6 @@
   },
   "welcomePrivacySafari": {
     "message": "Дані веб-перегляду залишаються на вашому комп’ютері: розширення обмінюється даними лише з $1. Агент може читати назви й URL-адреси вкладок, а також відкривати, упорядковувати чи закривати вікна й вкладки, коли ви його про це попросите. У Safari він не може читати вебсторінки чи виконувати на них дії. Це розширення ніколи нікуди більше не надсилає назви та URL-адреси вкладок."
-  },
-  "welcomeAnalytics": {
-    "message": "Надсилати анонімну статистику використання (які функції використовуються, версія розширення), щоб допомогти покращити розширення."
   },
   "analyticsTitle": {
     "message": "Надсилати анонімну статистику використання"
@@ -170,14 +200,14 @@
   "optionsConnectedMany_one": {
     "message": "Підключено $1 сеанс агента"
   },
-  "optionsConnectedMany_other": {
-    "message": "Підключено $1 сеансу агента"
-  },
   "optionsConnectedMany_few": {
     "message": "Підключено $1 сеанси агента"
   },
   "optionsConnectedMany_many": {
     "message": "Підключено $1 сеансів агента"
+  },
+  "optionsConnectedMany_other": {
+    "message": "Підключено $1 сеансу агента"
   },
   "optionsDisconnected": {
     "message": "Агента не підключено"
@@ -194,14 +224,14 @@
   "sessionLastUsed_one": {
     "message": "Останній виклик: $2 $3, усього $1 виклик"
   },
-  "sessionLastUsed_other": {
-    "message": "Останній виклик: $2 $3, усього $1 виклику"
-  },
   "sessionLastUsed_few": {
     "message": "Останній виклик: $2 $3, усього $1 виклики"
   },
   "sessionLastUsed_many": {
     "message": "Останній виклик: $2 $3, усього $1 викликів"
+  },
+  "sessionLastUsed_other": {
+    "message": "Останній виклик: $2 $3, усього $1 виклику"
   },
   "sessionUnused": {
     "message": "Браузер ще не використовувався"
@@ -254,13 +284,13 @@
   "chatUnseen_one": {
     "message": "$2 (нових: $1)"
   },
-  "chatUnseen_other": {
-    "message": "$2 (нових: $1)"
-  },
   "chatUnseen_few": {
     "message": "$2 (нових: $1)"
   },
   "chatUnseen_many": {
+    "message": "$2 (нових: $1)"
+  },
+  "chatUnseen_other": {
     "message": "$2 (нових: $1)"
   },
   "chatStatusWaiting": {
@@ -308,13 +338,13 @@
   "chatTooLong_one": {
     "message": "Повідомлення може містити не більше $1 символу."
   },
-  "chatTooLong_other": {
-    "message": "Повідомлення може містити не більше $1 символу."
-  },
   "chatTooLong_few": {
     "message": "Повідомлення може містити не більше $1 символів."
   },
   "chatTooLong_many": {
     "message": "Повідомлення може містити не більше $1 символів."
+  },
+  "chatTooLong_other": {
+    "message": "Повідомлення може містити не більше $1 символу."
   }
 }

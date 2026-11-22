@@ -35,20 +35,89 @@
   "welcomeLedeSafari": {
     "message": "Laissez votre agent IA trouver, ouvrir, déplacer et fermer vos onglets Safari."
   },
-  "welcomeConnected": {
-    "message": "Connecté : votre agent peut utiliser le navigateur."
+  "profileLabel": {
+    "message": "Ce profil"
   },
-  "welcomeConnectedMany_one": {
-    "message": "Connecté : $1 session d'agent peut utiliser le navigateur."
+  "profilePlaceholder": {
+    "message": "Donnez-lui un nom"
   },
-  "welcomeConnectedMany_other": {
-    "message": "Connecté : $1 sessions d'agent peuvent utiliser le navigateur."
+  "profileHint": {
+    "message": "Les agents utilisent ce nom pour distinguer vos navigateurs et profils. Vous pouvez ainsi demander votre navigateur Travail."
   },
-  "welcomeConnectedMany_many": {
-    "message": "Connecté : $1 de sessions d'agent peuvent utiliser le navigateur."
+  "profileSaved": {
+    "message": "Enregistré"
   },
-  "welcomeDisconnected": {
-    "message": "En attente de votre agent. Configurez-le ci-dessous, puis démarrez une session."
+  "profileNameRemoved": {
+    "message": "Nom supprimé"
+  },
+  "statusNotConnected": {
+    "message": "Pas encore connecté"
+  },
+  "statusSetUpHint": {
+    "message": "Connectez votre agent ci-dessous, puis démarrez une nouvelle session dans celui-ci."
+  },
+  "statusConnected": {
+    "message": "Connecté"
+  },
+  "statusConnectedMany_one": {
+    "message": "Connecté à $1 session d'agent"
+  },
+  "statusConnectedMany_many": {
+    "message": "Connecté à $1 de sessions d'agent"
+  },
+  "statusConnectedMany_other": {
+    "message": "Connecté à $1 sessions d'agent"
+  },
+  "statusConnectedHint": {
+    "message": "Votre agent peut utiliser ce navigateur. Essayez l'un des prompts ci-dessous."
+  },
+  "welcomeStepConnect": {
+    "message": "Connectez votre agent"
+  },
+  "stepDone": {
+    "message": "Terminé"
+  },
+  "welcomePickAgent": {
+    "message": "Choisissez l'agent que vous utilisez."
+  },
+  "welcomeAgentTabs": {
+    "message": "Votre agent"
+  },
+  "welcomeTabOther": {
+    "message": "Autre"
+  },
+  "welcomeClaudeCodeSteps": {
+    "message": "Exécutez ceci une seule fois dans un terminal, puis démarrez une nouvelle session Claude Code."
+  },
+  "welcomeClaudeDesktopSteps": {
+    "message": "Téléchargez l'extension, puis ouvrez le fichier. Claude Desktop l'installe pour vous, sans besoin de Node.js."
+  },
+  "welcomeOpensToConfirm": {
+    "message": "$1 s'ouvre et vous demande de confirmer."
+  },
+  "welcomeOtherAgentsSteps": {
+    "message": "Ajoutez ceci à la configuration MCP de l'agent, puis redémarrez-le."
+  },
+  "welcomeAgentSetupHint": {
+    "message": "Collez ce prompt dans un agent capable d'exécuter des commandes, comme Claude Code, Cursor ou Codex. Il vérifie la présence de Node.js, puis ajoute le serveur."
+  },
+  "showPrompt": {
+    "message": "Afficher le prompt"
+  },
+  "welcomeServerFootnote": {
+    "message": "Votre agent lance un petit serveur local, $1, auquel cette extension se connecte."
+  },
+  "welcomeStepAsk": {
+    "message": "Demandez-lui quelque chose"
+  },
+  "welcomeUndoFootnote": {
+    "message": "Vous avez changé d'avis ? Pour annuler les modifications effectuées avec $1, il suffit de le demander à l'agent."
+  },
+  "welcomeSafariFootnote": {
+    "message": "Dans Safari, votre agent peut ouvrir, organiser et fermer des fenêtres. Il peut aussi ouvrir des onglets, y charger des pages, passer de l'un à l'autre, les épingler, couper leur son, les dupliquer, les déplacer et les fermer. Les groupes d'onglets, l'historique, les favoris et le contrôle des pages sont disponibles dans Chrome. Si les titres et adresses des onglets n'apparaissent pas, autorisez l'extension à accéder aux sites web dans Safari, sous Réglages > Extensions."
+  },
+  "welcomeAnalyticsHint": {
+    "message": "Fonctionnalités utilisées et version de l'extension, pour aider à améliorer l'extension."
   },
   "instanceNameLabel": {
     "message": "Nommer ce profil de navigateur"
@@ -56,26 +125,14 @@
   "instanceNamePlaceholder": {
     "message": "Par exemple Travail ou Personnel"
   },
-  "welcomeInstanceNameHint": {
-    "message": "Les agents utilisent ce nom pour distinguer vos navigateurs et profils. Vous pouvez ainsi demander votre navigateur Travail. $1"
-  },
   "optionsInstanceNameHint": {
     "message": "Les agents utilisent ce nom pour distinguer vos navigateurs et profils. $1"
   },
   "instanceId": {
     "message": "ID d'instance : $1"
   },
-  "welcomeStepAdd": {
-    "message": "1. Ajouter à votre agent"
-  },
-  "welcomeStepAddHint": {
-    "message": "Votre agent lance un petit serveur local ($1) auquel cette extension se connecte. Choisissez votre agent :"
-  },
   "welcomeAgentSetupTitle": {
     "message": "Laissez votre agent s'en charger"
-  },
-  "welcomeAgentSetupBody": {
-    "message": "Collez ce prompt dans un agent capable d'exécuter des commandes et de modifier ses propres paramètres, comme Claude Code, Cursor ou Codex. Il vérifie la présence de Node.js, puis ajoute le serveur."
   },
   "copyPrompt": {
     "message": "Copier le prompt"
@@ -86,29 +143,11 @@
   "copied": {
     "message": "Copié"
   },
-  "welcomeClaudeCodeBody": {
-    "message": "Exécutez une seule fois dans un terminal :"
-  },
-  "welcomeOpensAndConfirms": {
-    "message": "Ouvre l'application et vous demande de confirmer."
-  },
   "welcomeAddTo": {
     "message": "Ajouter à $1"
   },
-  "welcomeClaudeDesktopBody": {
-    "message": "Téléchargez l'extension, puis ouvrez le fichier pour l'installer. Node.js n'est pas nécessaire."
-  },
   "welcomeDownloadFor": {
     "message": "Télécharger pour $1"
-  },
-  "welcomeOtherAgentsTitle": {
-    "message": "Autres agents"
-  },
-  "welcomeOtherAgentsBody": {
-    "message": "Ajoutez ceci à la configuration MCP de l'agent, puis redémarrez-le."
-  },
-  "welcomeStepTry": {
-    "message": "2. Essayez"
   },
   "welcomeTryIntro": {
     "message": "Avec Chrome ouvert, demandez à votre agent :"
@@ -119,9 +158,6 @@
   "welcomeTryPage": {
     "message": "Ouvre les notes de version de Chrome et résume ce qui a changé dans la dernière version."
   },
-  "welcomeTryHint": {
-    "message": "L'état ci-dessus passe au vert dès que le serveur de votre agent est lancé. Pour annuler les modifications effectuées avec $1, il suffit de le demander à l'agent."
-  },
   "welcomeTryIntroSafari": {
     "message": "Avec Safari ouvert, demandez à votre agent :"
   },
@@ -131,9 +167,6 @@
   "welcomeTrySortSafari": {
     "message": "Trie mes onglets Safari par site."
   },
-  "welcomeTryHintSafari": {
-    "message": "L'état ci-dessus passe au vert dès que le serveur de votre agent est lancé. Dans Safari, votre agent peut ouvrir, organiser et fermer des fenêtres. Il peut aussi ouvrir des onglets, y charger des pages, passer de l'un à l'autre, les épingler, couper leur son, les dupliquer, les déplacer et les fermer. Si les titres et adresses des onglets n'apparaissent pas, autorisez l'extension à accéder aux sites web dans Safari, sous Réglages > Extensions. Les groupes d'onglets, l'historique, les favoris et le contrôle des pages sont disponibles dans Chrome."
-  },
   "welcomePrivacyHeading": {
     "message": "Confidentialité"
   },
@@ -142,9 +175,6 @@
   },
   "welcomePrivacySafari": {
     "message": "Vos données de navigation restent sur votre ordinateur : l'extension communique uniquement avec $1. Votre agent peut lire les titres et URL des onglets, et ouvrir, organiser ou fermer des fenêtres et des onglets lorsque vous le lui demandez. Dans Safari, il ne peut ni lire les pages web ni agir dessus. Cette extension n'envoie jamais ailleurs les titres des onglets ni les URL."
-  },
-  "welcomeAnalytics": {
-    "message": "Partager des statistiques d'utilisation anonymes (fonctionnalités utilisées, version de l'extension) pour aider à améliorer l'extension."
   },
   "analyticsTitle": {
     "message": "Partager des statistiques d'utilisation anonymes"
@@ -167,11 +197,11 @@
   "optionsConnectedMany_one": {
     "message": "$1 session d'agent connectée"
   },
-  "optionsConnectedMany_other": {
-    "message": "$1 sessions d'agent connectées"
-  },
   "optionsConnectedMany_many": {
     "message": "$1 de sessions d'agent connectées"
+  },
+  "optionsConnectedMany_other": {
+    "message": "$1 sessions d'agent connectées"
   },
   "optionsDisconnected": {
     "message": "Aucun agent connecté"
@@ -188,11 +218,11 @@
   "sessionLastUsed_one": {
     "message": "Dernière utilisation : $2 $3, $1 appel"
   },
-  "sessionLastUsed_other": {
-    "message": "Dernière utilisation : $2 $3, $1 appels"
-  },
   "sessionLastUsed_many": {
     "message": "Dernière utilisation : $2 $3, $1 d'appels"
+  },
+  "sessionLastUsed_other": {
+    "message": "Dernière utilisation : $2 $3, $1 appels"
   },
   "sessionUnused": {
     "message": "N'a encore utilisé aucun navigateur"
@@ -245,10 +275,10 @@
   "chatUnseen_one": {
     "message": "$2 ($1 nouveau)"
   },
-  "chatUnseen_other": {
+  "chatUnseen_many": {
     "message": "$2 ($1 nouveaux)"
   },
-  "chatUnseen_many": {
+  "chatUnseen_other": {
     "message": "$2 ($1 nouveaux)"
   },
   "chatStatusWaiting": {
@@ -296,10 +326,10 @@
   "chatTooLong_one": {
     "message": "Les messages ne peuvent pas dépasser $1 caractère."
   },
-  "chatTooLong_other": {
-    "message": "Les messages ne peuvent pas dépasser $1 caractères."
-  },
   "chatTooLong_many": {
     "message": "Les messages ne peuvent pas dépasser $1 de caractères."
+  },
+  "chatTooLong_other": {
+    "message": "Les messages ne peuvent pas dépasser $1 caractères."
   }
 }

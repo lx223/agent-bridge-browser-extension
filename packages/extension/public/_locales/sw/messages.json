@@ -35,17 +35,86 @@
   "welcomeLedeSafari": {
     "message": "Ruhusu wakala wako wa AI atafute, afungue, ahamishe na afunge vichupo vyako vya Safari."
   },
-  "welcomeConnected": {
-    "message": "Imeunganishwa: wakala wako anaweza kutumia kivinjari."
+  "profileLabel": {
+    "message": "Wasifu huu"
   },
-  "welcomeConnectedMany_one": {
-    "message": "Imeunganishwa: kipindi $1 cha wakala kinaweza kutumia kivinjari."
+  "profilePlaceholder": {
+    "message": "Ipe jina"
   },
-  "welcomeConnectedMany_other": {
-    "message": "Imeunganishwa: vipindi $1 vya wakala vinaweza kutumia kivinjari."
+  "profileHint": {
+    "message": "Mawakala hutumia jina hili kutofautisha vivinjari na wasifu wako, kwa hivyo unaweza kuomba kivinjari chako cha Kazini."
   },
-  "welcomeDisconnected": {
-    "message": "Inamsubiri wakala wako. Mweke hapa chini, kisha uanzishe kipindi."
+  "profileSaved": {
+    "message": "Imehifadhiwa"
+  },
+  "profileNameRemoved": {
+    "message": "Jina limeondolewa"
+  },
+  "statusNotConnected": {
+    "message": "Bado haijaunganishwa"
+  },
+  "statusSetUpHint": {
+    "message": "Unganisha wakala wako hapa chini, kisha uanzishe kipindi kipya ndani yake."
+  },
+  "statusConnected": {
+    "message": "Imeunganishwa"
+  },
+  "statusConnectedMany_one": {
+    "message": "Imeunganishwa kwenye kipindi $1 cha wakala"
+  },
+  "statusConnectedMany_other": {
+    "message": "Imeunganishwa kwenye vipindi $1 vya wakala"
+  },
+  "statusConnectedHint": {
+    "message": "Wakala wako anaweza kutumia kivinjari hiki. Jaribu mojawapo ya maagizo yaliyo hapa chini."
+  },
+  "welcomeStepConnect": {
+    "message": "Unganisha wakala wako"
+  },
+  "stepDone": {
+    "message": "Imekamilika"
+  },
+  "welcomePickAgent": {
+    "message": "Chagua wakala unayemtumia."
+  },
+  "welcomeAgentTabs": {
+    "message": "Wakala wako"
+  },
+  "welcomeTabOther": {
+    "message": "Nyingine"
+  },
+  "welcomeClaudeCodeSteps": {
+    "message": "Tekeleza hii mara moja kwenye terminal, kisha uanzishe kipindi kipya cha Claude Code."
+  },
+  "welcomeClaudeDesktopSteps": {
+    "message": "Pakua kiendelezi na ufungue faili. Claude Desktop itakusakinishia, huhitaji Node.js."
+  },
+  "welcomeOpensToConfirm": {
+    "message": "$1 hufunguka na kukuomba uthibitishe."
+  },
+  "welcomeOtherAgentsSteps": {
+    "message": "Ongeza hii kwenye mipangilio ya MCP ya wakala, kisha umzime na umwashe tena."
+  },
+  "welcomeAgentSetupHint": {
+    "message": "Bandika maagizo haya kwenye wakala anayeweza kutekeleza amri, kama vile Claude Code, Cursor au Codex. Yanakagua kama kuna Node.js, kisha yanaongeza seva."
+  },
+  "showPrompt": {
+    "message": "Onyesha maagizo"
+  },
+  "welcomeServerFootnote": {
+    "message": "Wakala wako huendesha seva ndogo ya karibu, $1, ambayo kiendelezi hiki huunganisha nayo."
+  },
+  "welcomeStepAsk": {
+    "message": "Muulize jambo"
+  },
+  "welcomeUndoFootnote": {
+    "message": "Umebadilisha nia? Mabadiliko yaliyofanywa kwa $1 yanaweza kutenduliwa kwa kumwomba wakala ayatendue."
+  },
+  "welcomeSafariFootnote": {
+    "message": "Kwenye Safari, wakala wako anaweza kufungua, kupanga na kufunga madirisha, na pia kufungua, kuelekeza, kubadilisha, kubandika, kuzima sauti, kunakili, kuhamisha na kufunga vichupo. Vikundi vya vichupo, historia, alamisho na udhibiti wa kurasa vinapatikana kwenye Chrome. Ikiwa majina na anwani za vichupo hazionekani, kipe kiendelezi ruhusa ya kufikia tovuti kwenye Safari katika Settings > Extensions."
+  },
+  "welcomeAnalyticsHint": {
+    "message": "Vipengele vinavyotumiwa na toleo la kiendelezi, ili kusaidia kuboresha kiendelezi."
   },
   "instanceNameLabel": {
     "message": "Ipe jina wasifu huu wa kivinjari"
@@ -53,26 +122,14 @@
   "instanceNamePlaceholder": {
     "message": "Kwa mfano Kazini au Binafsi"
   },
-  "welcomeInstanceNameHint": {
-    "message": "Mawakala hutumia jina hili kutofautisha vivinjari na wasifu wako, kwa hivyo unaweza kuomba kivinjari chako cha Kazini. $1"
-  },
   "optionsInstanceNameHint": {
     "message": "Mawakala hutumia jina hili kutofautisha vivinjari na wasifu wako. $1"
   },
   "instanceId": {
     "message": "Kitambulisho cha tukio: $1"
   },
-  "welcomeStepAdd": {
-    "message": "1. Iongeze kwa wakala wako"
-  },
-  "welcomeStepAddHint": {
-    "message": "Wakala wako huanzisha seva ndogo ya karibu ($1) ambayo kiendelezi hiki huunganisha nayo. Chagua wakala wako:"
-  },
   "welcomeAgentSetupTitle": {
     "message": "Ruhusu wakala wako aiweke"
-  },
-  "welcomeAgentSetupBody": {
-    "message": "Bandika maagizo haya kwenye wakala yeyote anayeweza kutekeleza amri na kubadilisha mipangilio yake mwenyewe, kama vile Claude Code, Cursor au Codex. Yanakagua kama kuna Node.js, kisha yanaongeza seva."
   },
   "copyPrompt": {
     "message": "Nakili maagizo"
@@ -83,29 +140,11 @@
   "copied": {
     "message": "Imenakiliwa"
   },
-  "welcomeClaudeCodeBody": {
-    "message": "Tekeleza mara moja kwenye terminal:"
-  },
-  "welcomeOpensAndConfirms": {
-    "message": "Hufungua programu na kukuomba uthibitishe."
-  },
   "welcomeAddTo": {
     "message": "Ongeza kwenye $1"
   },
-  "welcomeClaudeDesktopBody": {
-    "message": "Pakua kiendelezi, kisha ufungue faili ili ukisakinishe. Huhitaji Node.js."
-  },
   "welcomeDownloadFor": {
     "message": "Pakua kwa ajili ya $1"
-  },
-  "welcomeOtherAgentsTitle": {
-    "message": "Mawakala wengine"
-  },
-  "welcomeOtherAgentsBody": {
-    "message": "Ongeza hii kwenye mipangilio ya MCP ya wakala, kisha umzime na umwashe tena."
-  },
-  "welcomeStepTry": {
-    "message": "2. Ijaribu"
   },
   "welcomeTryIntro": {
     "message": "Chrome ikiwa imefunguliwa, muulize wakala wako:"
@@ -116,9 +155,6 @@
   "welcomeTryPage": {
     "message": "Fungua maelezo ya toleo la Chrome na unifupishie kilichobadilika katika toleo jipya zaidi."
   },
-  "welcomeTryHint": {
-    "message": "Hali iliyo hapo juu itabadilika kuwa kijani seva ya wakala wako ikishaanza kufanya kazi. Mabadiliko yaliyofanywa kwa $1 yanaweza kutenduliwa kwa kumwomba wakala ayatendue."
-  },
   "welcomeTryIntroSafari": {
     "message": "Safari ikiwa imefunguliwa, muulize wakala wako:"
   },
@@ -128,9 +164,6 @@
   "welcomeTrySortSafari": {
     "message": "Panga vichupo vyangu vya Safari kulingana na tovuti."
   },
-  "welcomeTryHintSafari": {
-    "message": "Hali iliyo hapo juu itabadilika kuwa kijani seva ya wakala wako ikishaanza kufanya kazi. Kwenye Safari, wakala wako anaweza kufungua, kupanga na kufunga madirisha, na pia kufungua, kuelekeza, kubadilisha, kubandika, kuzima sauti, kunakili, kuhamisha na kufunga vichupo. Ikiwa majina na anwani za vichupo hazionekani, kipe kiendelezi ruhusa ya kufikia tovuti kwenye Safari katika Settings > Extensions. Vikundi vya vichupo, historia, alamisho na udhibiti wa kurasa vinapatikana kwenye Chrome."
-  },
   "welcomePrivacyHeading": {
     "message": "Faragha"
   },
@@ -139,9 +172,6 @@
   },
   "welcomePrivacySafari": {
     "message": "Data yako ya kuvinjari hubaki kwenye kompyuta yako: kiendelezi huwasiliana na $1 pekee. Wakala wako anaweza kusoma majina na URL za vichupo, na kufungua, kupanga au kufunga madirisha na vichupo unapomwomba. Hawezi kusoma wala kuchukua hatua kwenye kurasa za wavuti katika Safari. Kiendelezi hiki hakitumi kamwe majina ya vichupo wala URL popote pengine."
-  },
-  "welcomeAnalytics": {
-    "message": "Shiriki takwimu za matumizi bila kutambulisha (vipengele vinavyotumiwa, toleo la kiendelezi) ili kusaidia kuboresha kiendelezi."
   },
   "analyticsTitle": {
     "message": "Shiriki takwimu za matumizi bila kutambulisha"

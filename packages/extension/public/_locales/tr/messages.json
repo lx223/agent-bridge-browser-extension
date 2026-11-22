@@ -35,17 +35,86 @@
   "welcomeLedeSafari": {
     "message": "Yapay zeka ajanınız Safari sekmelerinizi bulsun, açsın, taşısın ve kapatsın."
   },
-  "welcomeConnected": {
-    "message": "Bağlı: Ajanınız tarayıcıyı kullanabilir."
+  "profileLabel": {
+    "message": "Bu profil"
   },
-  "welcomeConnectedMany_one": {
-    "message": "Bağlı: $1 ajan oturumu tarayıcıyı kullanabilir."
+  "profilePlaceholder": {
+    "message": "Bir ad verin"
   },
-  "welcomeConnectedMany_other": {
-    "message": "Bağlı: $1 ajan oturumu tarayıcıyı kullanabilir."
+  "profileHint": {
+    "message": "Ajanlar, tarayıcılarınızı ve profillerinizi birbirinden ayırt etmek için bu adı kullanır. Böylece İş tarayıcınızı isteyebilirsiniz."
   },
-  "welcomeDisconnected": {
-    "message": "Ajanınız bekleniyor. Aşağıdan kurun, ardından bir oturum başlatın."
+  "profileSaved": {
+    "message": "Kaydedildi"
+  },
+  "profileNameRemoved": {
+    "message": "Ad kaldırıldı"
+  },
+  "statusNotConnected": {
+    "message": "Henüz bağlı değil"
+  },
+  "statusSetUpHint": {
+    "message": "Ajanınızı aşağıdan bağlayın, ardından ajanınızda yeni bir oturum başlatın."
+  },
+  "statusConnected": {
+    "message": "Bağlı"
+  },
+  "statusConnectedMany_one": {
+    "message": "$1 ajan oturumuna bağlı"
+  },
+  "statusConnectedMany_other": {
+    "message": "$1 ajan oturumuna bağlı"
+  },
+  "statusConnectedHint": {
+    "message": "Ajanınız bu tarayıcıyı kullanabilir. Aşağıdaki istemlerden birini deneyin."
+  },
+  "welcomeStepConnect": {
+    "message": "Ajanınızı bağlayın"
+  },
+  "stepDone": {
+    "message": "Tamamlandı"
+  },
+  "welcomePickAgent": {
+    "message": "Kullandığınız ajanı seçin."
+  },
+  "welcomeAgentTabs": {
+    "message": "Ajanınız"
+  },
+  "welcomeTabOther": {
+    "message": "Diğer"
+  },
+  "welcomeClaudeCodeSteps": {
+    "message": "Bunu terminalde bir kez çalıştırın, ardından yeni bir Claude Code oturumu başlatın."
+  },
+  "welcomeClaudeDesktopSteps": {
+    "message": "Uzantıyı indirin ve dosyayı açın. Claude Desktop uzantıyı sizin için yükler; Node.js gerekmez."
+  },
+  "welcomeOpensToConfirm": {
+    "message": "$1 açılır ve onaylamanızı ister."
+  },
+  "welcomeOtherAgentsSteps": {
+    "message": "Bunu ajanın MCP yapılandırmasına ekleyin, ardından ajanı yeniden başlatın."
+  },
+  "welcomeAgentSetupHint": {
+    "message": "Bu istemi, komut çalıştırabilen bir ajana yapıştırın (örneğin Claude Code, Cursor veya Codex). İstem önce Node.js kontrolü yapar, ardından sunucuyu ekler."
+  },
+  "showPrompt": {
+    "message": "İstemi göster"
+  },
+  "welcomeServerFootnote": {
+    "message": "Ajanınız, bu uzantının bağlandığı küçük bir yerel sunucu ($1) çalıştırır."
+  },
+  "welcomeStepAsk": {
+    "message": "Ajanınızdan bir şey isteyin"
+  },
+  "welcomeUndoFootnote": {
+    "message": "Fikrinizi mi değiştirdiniz? $1 ile yapılan değişiklikleri, ajandan geri almasını isteyerek geri alabilirsiniz."
+  },
+  "welcomeSafariFootnote": {
+    "message": "Safari'de ajanınız pencereleri açabilir, düzenleyebilir ve kapatabilir; sekmeleri açabilir, başka adreslere yönlendirebilir, sekmeler arasında geçiş yapabilir, sabitleyebilir, sesini kapatabilir, çoğaltabilir, taşıyabilir ve kapatabilir. Sekme grupları, geçmiş, yer işaretleri ve sayfa kontrolü Chrome'da kullanılabilir. Sekme başlıkları ve adresleri görünmüyorsa Safari'de Ayarlar > Uzantılar bölümünden uzantıya web sitesi erişimi verin."
+  },
+  "welcomeAnalyticsHint": {
+    "message": "Uzantının geliştirilmesine yardımcı olmak için hangi özelliklerin kullanıldığı ve uzantı sürümü."
   },
   "instanceNameLabel": {
     "message": "Bu tarayıcı profiline ad verin"
@@ -53,26 +122,14 @@
   "instanceNamePlaceholder": {
     "message": "Örneğin İş veya Kişisel"
   },
-  "welcomeInstanceNameHint": {
-    "message": "Ajanlar, tarayıcılarınızı ve profillerinizi birbirinden ayırt etmek için bu adı kullanır. Böylece İş tarayıcınızı isteyebilirsiniz. $1"
-  },
   "optionsInstanceNameHint": {
     "message": "Ajanlar, tarayıcılarınızı ve profillerinizi birbirinden ayırt etmek için bu adı kullanır. $1"
   },
   "instanceId": {
     "message": "Örnek kimliği: $1"
   },
-  "welcomeStepAdd": {
-    "message": "1. Ajanınıza ekleyin"
-  },
-  "welcomeStepAddHint": {
-    "message": "Ajanınız, bu uzantının bağlandığı küçük bir yerel sunucu ($1) başlatır. Ajanınızı seçin:"
-  },
   "welcomeAgentSetupTitle": {
     "message": "Kurulumu ajanınıza bırakın"
-  },
-  "welcomeAgentSetupBody": {
-    "message": "Bu istemi, komut çalıştırabilen ve kendi ayarlarını düzenleyebilen herhangi bir ajana yapıştırın (örneğin Claude Code, Cursor veya Codex). İstem önce Node.js kontrolü yapar, ardından sunucuyu ekler."
   },
   "copyPrompt": {
     "message": "İstemi kopyala"
@@ -83,29 +140,11 @@
   "copied": {
     "message": "Kopyalandı"
   },
-  "welcomeClaudeCodeBody": {
-    "message": "Terminalde bir kez çalıştırın:"
-  },
-  "welcomeOpensAndConfirms": {
-    "message": "Uygulamayı açar ve onaylamanızı ister."
-  },
   "welcomeAddTo": {
     "message": "$1 uygulamasına ekle"
   },
-  "welcomeClaudeDesktopBody": {
-    "message": "Uzantıyı indirin, ardından yüklemek için dosyayı açın. Node.js gerekmez."
-  },
   "welcomeDownloadFor": {
     "message": "$1 için indir"
-  },
-  "welcomeOtherAgentsTitle": {
-    "message": "Diğer ajanlar"
-  },
-  "welcomeOtherAgentsBody": {
-    "message": "Bunu ajanın MCP yapılandırmasına ekleyin, ardından ajanı yeniden başlatın."
-  },
-  "welcomeStepTry": {
-    "message": "2. Deneyin"
   },
   "welcomeTryIntro": {
     "message": "Chrome açıkken ajanınızdan şunu isteyin:"
@@ -116,9 +155,6 @@
   "welcomeTryPage": {
     "message": "Chrome sürüm notlarını aç ve son sürümde nelerin değiştiğini özetle."
   },
-  "welcomeTryHint": {
-    "message": "Ajanınızın sunucusu çalışmaya başladığında yukarıdaki durum yeşile döner. $1 ile yapılan değişiklikleri, ajandan geri almasını isteyerek geri alabilirsiniz."
-  },
   "welcomeTryIntroSafari": {
     "message": "Safari açıkken ajanınızdan şunu isteyin:"
   },
@@ -128,9 +164,6 @@
   "welcomeTrySortSafari": {
     "message": "Safari sekmelerimi siteye göre sırala."
   },
-  "welcomeTryHintSafari": {
-    "message": "Ajanınızın sunucusu çalışmaya başladığında yukarıdaki durum yeşile döner. Safari'de ajanınız pencereleri açabilir, düzenleyebilir ve kapatabilir; sekmeleri açabilir, başka adreslere yönlendirebilir, sekmeler arasında geçiş yapabilir, sabitleyebilir, sesini kapatabilir, çoğaltabilir, taşıyabilir ve kapatabilir. Sekme başlıkları ve adresleri görünmüyorsa Safari'de Ayarlar > Uzantılar bölümünden uzantıya web sitesi erişimi verin. Sekme grupları, geçmiş, yer işaretleri ve sayfa kontrolü Chrome'da kullanılabilir."
-  },
   "welcomePrivacyHeading": {
     "message": "Gizlilik"
   },
@@ -139,9 +172,6 @@
   },
   "welcomePrivacySafari": {
     "message": "Tarama verileriniz bilgisayarınızda kalır: Uzantı yalnızca $1 ile iletişim kurar. Ajanınız, siz istediğinizde sekme başlıklarını ve URL'leri okuyabilir; pencereleri ve sekmeleri açabilir, düzenleyebilir veya kapatabilir. Safari'de web sayfalarını okuyamaz ve bu sayfalarda işlem yapamaz. Sekme başlıkları ve URL'ler bu uzantı tarafından hiçbir zaman başka bir yere gönderilmez."
-  },
-  "welcomeAnalytics": {
-    "message": "Uzantının geliştirilmesine yardımcı olmak için anonim kullanım istatistiklerini (hangi özelliklerin kullanıldığı, uzantı sürümü) paylaşın."
   },
   "analyticsTitle": {
     "message": "Anonim kullanım istatistiklerini paylaşın"

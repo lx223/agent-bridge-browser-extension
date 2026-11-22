@@ -35,17 +35,86 @@
   "welcomeLedeSafari": {
     "message": "Lassen Sie Ihren KI-Agenten Ihre Safari-Tabs finden, öffnen, verschieben und schließen."
   },
-  "welcomeConnected": {
-    "message": "Verbunden: Ihr Agent kann den Browser verwenden."
+  "profileLabel": {
+    "message": "Dieses Profil"
   },
-  "welcomeConnectedMany_one": {
-    "message": "Verbunden: $1 Agent-Sitzung kann den Browser verwenden."
+  "profilePlaceholder": {
+    "message": "Namen vergeben"
   },
-  "welcomeConnectedMany_other": {
-    "message": "Verbunden: $1 Agent-Sitzungen können den Browser verwenden."
+  "profileHint": {
+    "message": "Anhand dieses Namens unterscheiden Agenten Ihre Browser und Profile. So können Sie nach Ihrem Browser „Arbeit“ fragen."
   },
-  "welcomeDisconnected": {
-    "message": "Warten auf Ihren Agenten. Richten Sie ihn unten ein und starten Sie dann eine Sitzung."
+  "profileSaved": {
+    "message": "Gespeichert"
+  },
+  "profileNameRemoved": {
+    "message": "Name entfernt"
+  },
+  "statusNotConnected": {
+    "message": "Noch nicht verbunden"
+  },
+  "statusSetUpHint": {
+    "message": "Verbinden Sie unten Ihren Agenten und starten Sie dann darin eine neue Sitzung."
+  },
+  "statusConnected": {
+    "message": "Verbunden"
+  },
+  "statusConnectedMany_one": {
+    "message": "Mit $1 Agent-Sitzung verbunden"
+  },
+  "statusConnectedMany_other": {
+    "message": "Mit $1 Agent-Sitzungen verbunden"
+  },
+  "statusConnectedHint": {
+    "message": "Ihr Agent kann diesen Browser verwenden. Probieren Sie einen der Prompts unten aus."
+  },
+  "welcomeStepConnect": {
+    "message": "Agenten verbinden"
+  },
+  "stepDone": {
+    "message": "Erledigt"
+  },
+  "welcomePickAgent": {
+    "message": "Wählen Sie den Agenten aus, den Sie verwenden."
+  },
+  "welcomeAgentTabs": {
+    "message": "Ihr Agent"
+  },
+  "welcomeTabOther": {
+    "message": "Andere"
+  },
+  "welcomeClaudeCodeSteps": {
+    "message": "Führen Sie dies einmal in einem Terminal aus und starten Sie dann eine neue Claude Code-Sitzung."
+  },
+  "welcomeClaudeDesktopSteps": {
+    "message": "Laden Sie die Erweiterung herunter und öffnen Sie die Datei. Claude Desktop installiert sie für Sie, Node.js ist nicht erforderlich."
+  },
+  "welcomeOpensToConfirm": {
+    "message": "$1 wird geöffnet und bittet Sie um Bestätigung."
+  },
+  "welcomeOtherAgentsSteps": {
+    "message": "Fügen Sie dies der MCP-Konfiguration des Agenten hinzu und starten Sie ihn dann neu."
+  },
+  "welcomeAgentSetupHint": {
+    "message": "Fügen Sie diesen Prompt in einen Agenten ein, der Befehle ausführen kann, etwa Claude Code, Cursor oder Codex. Er prüft, ob Node.js vorhanden ist, und fügt den Server hinzu."
+  },
+  "showPrompt": {
+    "message": "Prompt anzeigen"
+  },
+  "welcomeServerFootnote": {
+    "message": "Ihr Agent führt einen kleinen lokalen Server aus, $1, mit dem sich diese Erweiterung verbindet."
+  },
+  "welcomeStepAsk": {
+    "message": "Agenten etwas fragen"
+  },
+  "welcomeUndoFootnote": {
+    "message": "Doch anders entschieden? Mit $1 vorgenommene Änderungen lassen sich rückgängig machen, wenn Sie den Agenten darum bitten."
+  },
+  "welcomeSafariFootnote": {
+    "message": "In Safari kann Ihr Agent Fenster öffnen, anordnen und schließen sowie Tabs öffnen, darin Seiten aufrufen, zwischen ihnen wechseln, sie anpinnen, stummschalten, duplizieren, verschieben und schließen. Tabgruppen, Verlauf, Lesezeichen und die Steuerung von Webseiten sind in Chrome verfügbar. Wenn Tab-Titel und Adressen fehlen, erlauben Sie der Erweiterung in Safari unter „Einstellungen > Erweiterungen“ den Zugriff auf Websites."
+  },
+  "welcomeAnalyticsHint": {
+    "message": "Welche Funktionen genutzt werden und die Version der Erweiterung, um die Erweiterung zu verbessern."
   },
   "instanceNameLabel": {
     "message": "Name für dieses Browserprofil"
@@ -53,26 +122,14 @@
   "instanceNamePlaceholder": {
     "message": "Zum Beispiel Arbeit oder Privat"
   },
-  "welcomeInstanceNameHint": {
-    "message": "Anhand dieses Namens unterscheiden Agenten Ihre Browser und Profile. So können Sie nach Ihrem Browser „Arbeit“ fragen. $1"
-  },
   "optionsInstanceNameHint": {
     "message": "Anhand dieses Namens unterscheiden Agenten Ihre Browser und Profile. $1"
   },
   "instanceId": {
     "message": "Instanz-ID: $1"
   },
-  "welcomeStepAdd": {
-    "message": "1. Zum Agenten hinzufügen"
-  },
-  "welcomeStepAddHint": {
-    "message": "Ihr Agent startet einen kleinen lokalen Server ($1), mit dem sich diese Erweiterung verbindet. Wählen Sie Ihren Agenten aus:"
-  },
   "welcomeAgentSetupTitle": {
     "message": "Vom Agenten einrichten lassen"
-  },
-  "welcomeAgentSetupBody": {
-    "message": "Fügen Sie diesen Prompt in einen Agenten ein, der Befehle ausführen und seine eigenen Einstellungen bearbeiten kann, etwa Claude Code, Cursor oder Codex. Er prüft, ob Node.js vorhanden ist, und fügt dann den Server hinzu."
   },
   "copyPrompt": {
     "message": "Prompt kopieren"
@@ -83,29 +140,11 @@
   "copied": {
     "message": "Kopiert"
   },
-  "welcomeClaudeCodeBody": {
-    "message": "Einmal in einem Terminal ausführen:"
-  },
-  "welcomeOpensAndConfirms": {
-    "message": "Öffnet die App und bittet Sie um Bestätigung."
-  },
   "welcomeAddTo": {
     "message": "Zu $1 hinzufügen"
   },
-  "welcomeClaudeDesktopBody": {
-    "message": "Laden Sie die Erweiterung herunter und öffnen Sie die Datei, um sie zu installieren. Node.js ist nicht erforderlich."
-  },
   "welcomeDownloadFor": {
     "message": "Für $1 herunterladen"
-  },
-  "welcomeOtherAgentsTitle": {
-    "message": "Andere Agenten"
-  },
-  "welcomeOtherAgentsBody": {
-    "message": "Fügen Sie dies der MCP-Konfiguration des Agenten hinzu und starten Sie ihn dann neu."
-  },
-  "welcomeStepTry": {
-    "message": "2. Ausprobieren"
   },
   "welcomeTryIntro": {
     "message": "Öffnen Sie Chrome und fragen Sie Ihren Agenten:"
@@ -116,9 +155,6 @@
   "welcomeTryPage": {
     "message": "Öffne die Versionshinweise von Chrome und fasse zusammen, was sich in der neuesten Version geändert hat."
   },
-  "welcomeTryHint": {
-    "message": "Der Status oben wird grün, sobald der Server Ihres Agenten läuft. Mit $1 vorgenommene Änderungen lassen sich rückgängig machen, wenn Sie den Agenten darum bitten."
-  },
   "welcomeTryIntroSafari": {
     "message": "Öffnen Sie Safari und fragen Sie Ihren Agenten:"
   },
@@ -128,9 +164,6 @@
   "welcomeTrySortSafari": {
     "message": "Sortiere meine Safari-Tabs nach Website."
   },
-  "welcomeTryHintSafari": {
-    "message": "Der Status oben wird grün, sobald der Server Ihres Agenten läuft. In Safari kann Ihr Agent Fenster öffnen, anordnen und schließen sowie Tabs öffnen, darin Seiten aufrufen, zwischen ihnen wechseln, sie anpinnen, stummschalten, duplizieren, verschieben und schließen. Wenn Tab-Titel und Adressen fehlen, erlauben Sie der Erweiterung in Safari unter „Einstellungen > Erweiterungen“ den Zugriff auf Websites. Tabgruppen, Verlauf, Lesezeichen und die Steuerung von Webseiten sind in Chrome verfügbar."
-  },
   "welcomePrivacyHeading": {
     "message": "Datenschutz"
   },
@@ -139,9 +172,6 @@
   },
   "welcomePrivacySafari": {
     "message": "Ihre Browserdaten bleiben auf Ihrem Computer: Die Erweiterung kommuniziert nur mit $1. Ihr Agent kann Tab-Titel und URLs lesen sowie Fenster und Tabs öffnen, anordnen oder schließen, wenn Sie ihn darum bitten. In Safari kann er keine Webseiten lesen oder darin handeln. Tab-Titel und URLs werden von dieser Erweiterung nie an andere Stellen gesendet."
-  },
-  "welcomeAnalytics": {
-    "message": "Anonyme Nutzungsstatistiken senden (welche Funktionen genutzt werden, Version der Erweiterung), um die Erweiterung zu verbessern."
   },
   "analyticsTitle": {
     "message": "Anonyme Nutzungsstatistiken senden"

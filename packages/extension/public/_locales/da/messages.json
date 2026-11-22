@@ -35,17 +35,86 @@
   "welcomeLedeSafari": {
     "message": "Lad din AI-agent finde, åbne, flytte og lukke dine Safari-faner."
   },
-  "welcomeConnected": {
-    "message": "Forbundet: Din agent kan bruge browseren."
+  "profileLabel": {
+    "message": "Denne profil"
   },
-  "welcomeConnectedMany_one": {
-    "message": "Forbundet: $1 agentsession kan bruge browseren."
+  "profilePlaceholder": {
+    "message": "Giv den et navn"
   },
-  "welcomeConnectedMany_other": {
-    "message": "Forbundet: $1 agentsessioner kan bruge browseren."
+  "profileHint": {
+    "message": "Agenter bruger navnet til at skelne mellem dine browsere og profiler, så du kan bede om browseren Arbejde."
   },
-  "welcomeDisconnected": {
-    "message": "Venter på din agent. Konfigurer den nedenfor, og start derefter en session."
+  "profileSaved": {
+    "message": "Gemt"
+  },
+  "profileNameRemoved": {
+    "message": "Navnet er fjernet"
+  },
+  "statusNotConnected": {
+    "message": "Ikke forbundet endnu"
+  },
+  "statusSetUpHint": {
+    "message": "Forbind din agent nedenfor, og start derefter en ny session i den."
+  },
+  "statusConnected": {
+    "message": "Forbundet"
+  },
+  "statusConnectedMany_one": {
+    "message": "Forbundet til $1 agentsession"
+  },
+  "statusConnectedMany_other": {
+    "message": "Forbundet til $1 agentsessioner"
+  },
+  "statusConnectedHint": {
+    "message": "Din agent kan bruge denne browser. Prøv en af prompterne nedenfor."
+  },
+  "welcomeStepConnect": {
+    "message": "Forbind din agent"
+  },
+  "stepDone": {
+    "message": "Færdig"
+  },
+  "welcomePickAgent": {
+    "message": "Vælg den agent, du bruger."
+  },
+  "welcomeAgentTabs": {
+    "message": "Din agent"
+  },
+  "welcomeTabOther": {
+    "message": "Andre"
+  },
+  "welcomeClaudeCodeSteps": {
+    "message": "Kør dette én gang i en terminal, og start derefter en ny Claude Code-session."
+  },
+  "welcomeClaudeDesktopSteps": {
+    "message": "Download udvidelsen, og åbn filen. Claude Desktop installerer den for dig, og Node.js er ikke nødvendigt."
+  },
+  "welcomeOpensToConfirm": {
+    "message": "$1 åbner og beder dig bekræfte."
+  },
+  "welcomeOtherAgentsSteps": {
+    "message": "Føj dette til agentens MCP-konfiguration, og genstart den derefter."
+  },
+  "welcomeAgentSetupHint": {
+    "message": "Indsæt denne prompt i en agent, der kan køre kommandoer, f.eks. Claude Code, Cursor eller Codex. Den tjekker, om Node.js er installeret, og tilføjer serveren."
+  },
+  "showPrompt": {
+    "message": "Vis prompt"
+  },
+  "welcomeServerFootnote": {
+    "message": "Din agent kører en lille lokal server, $1, som denne udvidelse forbinder til."
+  },
+  "welcomeStepAsk": {
+    "message": "Spørg den om noget"
+  },
+  "welcomeUndoFootnote": {
+    "message": "Fortryder du? Ændringer foretaget med $1 kan fortrydes ved at bede agenten om at fortryde dem."
+  },
+  "welcomeSafariFootnote": {
+    "message": "I Safari kan din agent åbne, arrangere og lukke vinduer samt åbne faner, indlæse sider i dem, skifte mellem dem og fastgøre, slå lyden fra, duplikere, flytte og lukke dem. Fanegrupper, historik, bogmærker og sidestyring er tilgængelige i Chrome. Hvis fanernes titler og adresser mangler, skal du give udvidelsen adgang til websteder i Safari under Indstillinger > Udvidelser."
+  },
+  "welcomeAnalyticsHint": {
+    "message": "Hvilke funktioner der bruges, og udvidelsens version, for at hjælpe med at forbedre udvidelsen."
   },
   "instanceNameLabel": {
     "message": "Giv denne browserprofil et navn"
@@ -53,26 +122,14 @@
   "instanceNamePlaceholder": {
     "message": "F.eks. Arbejde eller Privat"
   },
-  "welcomeInstanceNameHint": {
-    "message": "Agenter bruger navnet til at skelne mellem dine browsere og profiler, så du kan bede om browseren Arbejde. $1"
-  },
   "optionsInstanceNameHint": {
     "message": "Agenter bruger navnet til at skelne mellem dine browsere og profiler. $1"
   },
   "instanceId": {
     "message": "Instans-id: $1"
   },
-  "welcomeStepAdd": {
-    "message": "1. Føj den til din agent"
-  },
-  "welcomeStepAddHint": {
-    "message": "Din agent starter en lille lokal server ($1), som denne udvidelse forbinder til. Vælg din agent:"
-  },
   "welcomeAgentSetupTitle": {
     "message": "Lad din agent sætte det op"
-  },
-  "welcomeAgentSetupBody": {
-    "message": "Indsæt denne prompt i en agent, der kan køre kommandoer og redigere sine egne indstillinger, f.eks. Claude Code, Cursor eller Codex. Den tjekker, om Node.js er installeret, og tilføjer derefter serveren."
   },
   "copyPrompt": {
     "message": "Kopiér prompt"
@@ -83,29 +140,11 @@
   "copied": {
     "message": "Kopieret"
   },
-  "welcomeClaudeCodeBody": {
-    "message": "Kør én gang i en terminal:"
-  },
-  "welcomeOpensAndConfirms": {
-    "message": "Åbner appen og beder dig bekræfte."
-  },
   "welcomeAddTo": {
     "message": "Føj til $1"
   },
-  "welcomeClaudeDesktopBody": {
-    "message": "Download udvidelsen, og åbn derefter filen for at installere den. Node.js er ikke nødvendigt."
-  },
   "welcomeDownloadFor": {
     "message": "Download til $1"
-  },
-  "welcomeOtherAgentsTitle": {
-    "message": "Andre agenter"
-  },
-  "welcomeOtherAgentsBody": {
-    "message": "Føj dette til agentens MCP-konfiguration, og genstart den derefter."
-  },
-  "welcomeStepTry": {
-    "message": "2. Prøv det"
   },
   "welcomeTryIntro": {
     "message": "Åbn Chrome, og spørg din agent:"
@@ -116,9 +155,6 @@
   "welcomeTryPage": {
     "message": "Åbn Chromes versionsnoter, og opsummer, hvad der er ændret i den nyeste version."
   },
-  "welcomeTryHint": {
-    "message": "Statussen ovenfor bliver grøn, når din agents server kører. Ændringer foretaget med $1 kan fortrydes ved at bede agenten om at fortryde dem."
-  },
   "welcomeTryIntroSafari": {
     "message": "Åbn Safari, og spørg din agent:"
   },
@@ -128,9 +164,6 @@
   "welcomeTrySortSafari": {
     "message": "Sortér mine Safari-faner efter websted."
   },
-  "welcomeTryHintSafari": {
-    "message": "Statussen ovenfor bliver grøn, når din agents server kører. I Safari kan din agent åbne, arrangere og lukke vinduer samt åbne faner, indlæse sider i dem, skifte mellem dem og fastgøre, slå lyden fra, duplikere, flytte og lukke dem. Hvis fanernes titler og adresser mangler, skal du give udvidelsen adgang til websteder i Safari under Indstillinger > Udvidelser. Fanegrupper, historik, bogmærker og sidestyring er tilgængelige i Chrome."
-  },
   "welcomePrivacyHeading": {
     "message": "Privatliv"
   },
@@ -139,9 +172,6 @@
   },
   "welcomePrivacySafari": {
     "message": "Dine browserdata forbliver på din computer: Udvidelsen kommunikerer kun med $1. Din agent kan læse fanetitler og webadresser samt åbne, arrangere eller lukke vinduer og faner, når du beder den om det. I Safari kan den ikke læse eller handle på websider. Denne udvidelse sender aldrig fanetitler eller webadresser andre steder hen."
-  },
-  "welcomeAnalytics": {
-    "message": "Del anonyme brugsstatistikker (hvilke funktioner der bruges, udvidelsens version) for at hjælpe med at forbedre udvidelsen."
   },
   "analyticsTitle": {
     "message": "Del anonyme brugsstatistikker"

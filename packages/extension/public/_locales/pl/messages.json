@@ -35,23 +35,92 @@
   "welcomeLedeSafari": {
     "message": "Pozwól agentowi AI znajdować, otwierać, przenosić i zamykać Twoje karty w Safari."
   },
-  "welcomeConnected": {
-    "message": "Połączono: agent może korzystać z przeglądarki."
+  "profileLabel": {
+    "message": "Ten profil"
   },
-  "welcomeConnectedMany_one": {
-    "message": "Połączono: $1 sesja agenta może korzystać z przeglądarki."
+  "profilePlaceholder": {
+    "message": "Nadaj mu nazwę"
   },
-  "welcomeConnectedMany_other": {
-    "message": "Połączono: $1 sesji agenta może korzystać z przeglądarki."
+  "profileHint": {
+    "message": "Dzięki tej nazwie agenci odróżniają Twoje przeglądarki i profile, więc możesz poprosić o przeglądarkę „Praca”."
   },
-  "welcomeConnectedMany_few": {
-    "message": "Połączono: $1 sesje agenta mogą korzystać z przeglądarki."
+  "profileSaved": {
+    "message": "Zapisano"
   },
-  "welcomeConnectedMany_many": {
-    "message": "Połączono: $1 sesji agenta może korzystać z przeglądarki."
+  "profileNameRemoved": {
+    "message": "Usunięto nazwę"
   },
-  "welcomeDisconnected": {
-    "message": "Oczekiwanie na agenta. Skonfiguruj go poniżej, a potem rozpocznij sesję."
+  "statusNotConnected": {
+    "message": "Jeszcze nie połączono"
+  },
+  "statusSetUpHint": {
+    "message": "Połącz agenta poniżej, a potem rozpocznij w nim nową sesję."
+  },
+  "statusConnected": {
+    "message": "Połączono"
+  },
+  "statusConnectedMany_one": {
+    "message": "Połączono z $1 sesją agenta"
+  },
+  "statusConnectedMany_few": {
+    "message": "Połączono z $1 sesjami agenta"
+  },
+  "statusConnectedMany_many": {
+    "message": "Połączono z $1 sesjami agenta"
+  },
+  "statusConnectedMany_other": {
+    "message": "Połączono z $1 sesji agenta"
+  },
+  "statusConnectedHint": {
+    "message": "Agent może korzystać z tej przeglądarki. Wypróbuj jeden z promptów poniżej."
+  },
+  "welcomeStepConnect": {
+    "message": "Połącz agenta"
+  },
+  "stepDone": {
+    "message": "Gotowe"
+  },
+  "welcomePickAgent": {
+    "message": "Wybierz agenta, z którego korzystasz."
+  },
+  "welcomeAgentTabs": {
+    "message": "Twój agent"
+  },
+  "welcomeTabOther": {
+    "message": "Inny"
+  },
+  "welcomeClaudeCodeSteps": {
+    "message": "Uruchom to raz w terminalu, a potem rozpocznij nową sesję Claude Code."
+  },
+  "welcomeClaudeDesktopSteps": {
+    "message": "Pobierz rozszerzenie i otwórz plik. Claude Desktop zainstaluje je za Ciebie, Node.js nie jest potrzebny."
+  },
+  "welcomeOpensToConfirm": {
+    "message": "Otworzy się $1 z prośbą o potwierdzenie."
+  },
+  "welcomeOtherAgentsSteps": {
+    "message": "Dodaj to do konfiguracji MCP agenta, a potem uruchom go ponownie."
+  },
+  "welcomeAgentSetupHint": {
+    "message": "Wklej ten prompt do agenta, który potrafi uruchamiać polecenia, np. Claude Code, Cursor lub Codex. Sprawdzi, czy masz Node.js, i doda serwer."
+  },
+  "showPrompt": {
+    "message": "Pokaż prompt"
+  },
+  "welcomeServerFootnote": {
+    "message": "Agent uruchamia mały lokalny serwer ($1), z którym łączy się to rozszerzenie."
+  },
+  "welcomeStepAsk": {
+    "message": "Poproś agenta o coś"
+  },
+  "welcomeUndoFootnote": {
+    "message": "Zmiana zdania? Zmiany wprowadzone za pomocą $1 możesz cofnąć – wystarczy poprosić o to agenta."
+  },
+  "welcomeSafariFootnote": {
+    "message": "W Safari agent może otwierać, rozmieszczać i zamykać okna, a także otwierać, przełączać, przypinać, wyciszać, duplikować, przenosić i zamykać karty oraz otwierać w nich adresy. Grupy kart, historia, zakładki i sterowanie stronami są dostępne w Chrome. Jeśli nie widać tytułów i adresów kart, przyznaj rozszerzeniu dostęp do witryn w Safari w sekcji Ustawienia > Rozszerzenia."
+  },
+  "welcomeAnalyticsHint": {
+    "message": "Które funkcje są używane i wersja rozszerzenia – aby pomóc ulepszać rozszerzenie."
   },
   "instanceNameLabel": {
     "message": "Nazwij ten profil przeglądarki"
@@ -59,26 +128,14 @@
   "instanceNamePlaceholder": {
     "message": "Na przykład Praca lub Prywatny"
   },
-  "welcomeInstanceNameHint": {
-    "message": "Dzięki tej nazwie agenci odróżniają Twoje przeglądarki i profile, więc możesz poprosić o przeglądarkę „Praca”. $1"
-  },
   "optionsInstanceNameHint": {
     "message": "Dzięki tej nazwie agenci odróżniają Twoje przeglądarki i profile. $1"
   },
   "instanceId": {
     "message": "Identyfikator instancji: $1"
   },
-  "welcomeStepAdd": {
-    "message": "1. Dodaj go do swojego agenta"
-  },
-  "welcomeStepAddHint": {
-    "message": "Agent uruchamia mały lokalny serwer ($1), z którym łączy się to rozszerzenie. Wybierz swojego agenta:"
-  },
   "welcomeAgentSetupTitle": {
     "message": "Zleć konfigurację agentowi"
-  },
-  "welcomeAgentSetupBody": {
-    "message": "Wklej ten prompt do dowolnego agenta, który potrafi uruchamiać polecenia i edytować własne ustawienia, np. Claude Code, Cursor lub Codex. Sprawdzi, czy masz Node.js, a potem doda serwer."
   },
   "copyPrompt": {
     "message": "Kopiuj prompt"
@@ -89,29 +146,11 @@
   "copied": {
     "message": "Skopiowano"
   },
-  "welcomeClaudeCodeBody": {
-    "message": "Uruchom raz w terminalu:"
-  },
-  "welcomeOpensAndConfirms": {
-    "message": "Otwiera aplikację i prosi o potwierdzenie."
-  },
   "welcomeAddTo": {
     "message": "Dodaj do $1"
   },
-  "welcomeClaudeDesktopBody": {
-    "message": "Pobierz rozszerzenie, a potem otwórz plik, aby je zainstalować. Node.js nie jest potrzebny."
-  },
   "welcomeDownloadFor": {
     "message": "Pobierz dla $1"
-  },
-  "welcomeOtherAgentsTitle": {
-    "message": "Inni agenci"
-  },
-  "welcomeOtherAgentsBody": {
-    "message": "Dodaj to do konfiguracji MCP agenta, a potem uruchom go ponownie."
-  },
-  "welcomeStepTry": {
-    "message": "2. Wypróbuj"
   },
   "welcomeTryIntro": {
     "message": "Przy otwartym Chrome poproś agenta:"
@@ -122,9 +161,6 @@
   "welcomeTryPage": {
     "message": "Otwórz informacje o wersji Chrome i podsumuj, co się zmieniło w najnowszej wersji."
   },
-  "welcomeTryHint": {
-    "message": "Stan powyżej zmieni kolor na zielony, gdy serwer agenta zacznie działać. Zmiany wprowadzone za pomocą $1 możesz cofnąć – wystarczy poprosić o to agenta."
-  },
   "welcomeTryIntroSafari": {
     "message": "Przy otwartym Safari poproś agenta:"
   },
@@ -134,9 +170,6 @@
   "welcomeTrySortSafari": {
     "message": "Uporządkuj moje karty w Safari według witryn."
   },
-  "welcomeTryHintSafari": {
-    "message": "Stan powyżej zmieni kolor na zielony, gdy serwer agenta zacznie działać. W Safari agent może otwierać, rozmieszczać i zamykać okna, a także otwierać, przełączać, przypinać, wyciszać, duplikować, przenosić i zamykać karty oraz otwierać w nich adresy. Jeśli nie widać tytułów i adresów kart, przyznaj rozszerzeniu dostęp do witryn w Safari w sekcji Ustawienia > Rozszerzenia. Grupy kart, historia, zakładki i sterowanie stronami są dostępne w Chrome."
-  },
   "welcomePrivacyHeading": {
     "message": "Prywatność"
   },
@@ -145,9 +178,6 @@
   },
   "welcomePrivacySafari": {
     "message": "Twoje dane przeglądania pozostają na Twoim komputerze: rozszerzenie komunikuje się tylko z $1. Agent może odczytywać tytuły i adresy URL kart oraz otwierać, rozmieszczać lub zamykać okna i karty, gdy go o to poprosisz. W Safari nie może odczytywać stron internetowych ani wykonywać na nich działań. To rozszerzenie nigdy nie wysyła nigdzie indziej tytułów kart ani adresów URL."
-  },
-  "welcomeAnalytics": {
-    "message": "Wysyłaj anonimowe statystyki użytkowania (które funkcje są używane, wersja rozszerzenia), aby pomóc ulepszać rozszerzenie."
   },
   "analyticsTitle": {
     "message": "Wysyłaj anonimowe statystyki użytkowania"
@@ -170,13 +200,13 @@
   "optionsConnectedMany_one": {
     "message": "Połączono $1 sesję agenta"
   },
-  "optionsConnectedMany_other": {
-    "message": "Połączono $1 sesji agenta"
-  },
   "optionsConnectedMany_few": {
     "message": "Połączono $1 sesje agenta"
   },
   "optionsConnectedMany_many": {
+    "message": "Połączono $1 sesji agenta"
+  },
+  "optionsConnectedMany_other": {
     "message": "Połączono $1 sesji agenta"
   },
   "optionsDisconnected": {
@@ -194,14 +224,14 @@
   "sessionLastUsed_one": {
     "message": "Ostatnio użyto $2 $3, $1 wywołanie"
   },
-  "sessionLastUsed_other": {
-    "message": "Ostatnio użyto $2 $3, $1 wywołania"
-  },
   "sessionLastUsed_few": {
     "message": "Ostatnio użyto $2 $3, $1 wywołania"
   },
   "sessionLastUsed_many": {
     "message": "Ostatnio użyto $2 $3, $1 wywołań"
+  },
+  "sessionLastUsed_other": {
+    "message": "Ostatnio użyto $2 $3, $1 wywołania"
   },
   "sessionUnused": {
     "message": "Nie korzystano jeszcze z przeglądarki"
@@ -254,13 +284,13 @@
   "chatUnseen_one": {
     "message": "$2 (nowe: $1)"
   },
-  "chatUnseen_other": {
-    "message": "$2 (nowe: $1)"
-  },
   "chatUnseen_few": {
     "message": "$2 (nowe: $1)"
   },
   "chatUnseen_many": {
+    "message": "$2 (nowe: $1)"
+  },
+  "chatUnseen_other": {
     "message": "$2 (nowe: $1)"
   },
   "chatStatusWaiting": {
@@ -308,13 +338,13 @@
   "chatTooLong_one": {
     "message": "Wiadomość może mieć maksymalnie $1 znak."
   },
-  "chatTooLong_other": {
-    "message": "Wiadomość może mieć maksymalnie $1 znaku."
-  },
   "chatTooLong_few": {
     "message": "Wiadomość może mieć maksymalnie $1 znaki."
   },
   "chatTooLong_many": {
     "message": "Wiadomość może mieć maksymalnie $1 znaków."
+  },
+  "chatTooLong_other": {
+    "message": "Wiadomość może mieć maksymalnie $1 znaku."
   }
 }

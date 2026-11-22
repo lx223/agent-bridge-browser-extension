@@ -35,20 +35,89 @@
   "welcomeLedeSafari": {
     "message": "סוכן ה-AI שלך יכול למצוא, לפתוח, להעביר ולסגור כרטיסיות ב-Safari."
   },
-  "welcomeConnected": {
-    "message": "מחובר: הסוכן שלך יכול להשתמש בדפדפן."
+  "profileLabel": {
+    "message": "הפרופיל הזה"
   },
-  "welcomeConnectedMany_one": {
-    "message": "מחובר: $1 סשן של סוכן יכול להשתמש בדפדפן."
+  "profilePlaceholder": {
+    "message": "אפשר לתת לו שם"
   },
-  "welcomeConnectedMany_other": {
-    "message": "מחובר: $1 סשנים של סוכנים יכולים להשתמש בדפדפן."
+  "profileHint": {
+    "message": "סוכנים משתמשים בשם הזה כדי להבחין בין הדפדפנים והפרופילים שלך, כך שאפשר לבקש מהם את דפדפן העבודה."
   },
-  "welcomeConnectedMany_two": {
-    "message": "מחובר: $1 סשנים של סוכנים יכולים להשתמש בדפדפן."
+  "profileSaved": {
+    "message": "נשמר"
   },
-  "welcomeDisconnected": {
-    "message": "ממתין לסוכן. יש להגדיר אותו למטה ואז להתחיל סשן."
+  "profileNameRemoved": {
+    "message": "השם הוסר"
+  },
+  "statusNotConnected": {
+    "message": "עדיין לא מחובר"
+  },
+  "statusSetUpHint": {
+    "message": "יש לחבר את הסוכן למטה ואז להתחיל בו סשן חדש."
+  },
+  "statusConnected": {
+    "message": "מחובר"
+  },
+  "statusConnectedMany_one": {
+    "message": "מחובר ל-$1 סשן של סוכן"
+  },
+  "statusConnectedMany_two": {
+    "message": "מחובר ל-$1 סשנים של סוכנים"
+  },
+  "statusConnectedMany_other": {
+    "message": "מחובר ל-$1 סשנים של סוכנים"
+  },
+  "statusConnectedHint": {
+    "message": "הסוכן שלך יכול להשתמש בדפדפן הזה. אפשר לנסות את אחת ההנחיות שלמטה."
+  },
+  "welcomeStepConnect": {
+    "message": "חיבור הסוכן"
+  },
+  "stepDone": {
+    "message": "בוצע"
+  },
+  "welcomePickAgent": {
+    "message": "יש לבחור את הסוכן שבו משתמשים."
+  },
+  "welcomeAgentTabs": {
+    "message": "הסוכן שלך"
+  },
+  "welcomeTabOther": {
+    "message": "אחר"
+  },
+  "welcomeClaudeCodeSteps": {
+    "message": "יש להריץ את זה פעם אחת בטרמינל ואז להתחיל סשן חדש של Claude Code."
+  },
+  "welcomeClaudeDesktopSteps": {
+    "message": "יש להוריד את התוסף ולפתוח את הקובץ. Claude Desktop יתקין אותו בשבילך, בלי צורך ב-Node.js."
+  },
+  "welcomeOpensToConfirm": {
+    "message": "ייפתח $1 ותופיע בקשה לאישור."
+  },
+  "welcomeOtherAgentsSteps": {
+    "message": "יש להוסיף את זה להגדרות ה-MCP של הסוכן ואז להפעיל אותו מחדש."
+  },
+  "welcomeAgentSetupHint": {
+    "message": "יש להדביק את ההנחיה הזו בסוכן שיכול להריץ פקודות, כמו Claude Code, Cursor או Codex. היא בודקת ש-Node.js מותקן ואז מוסיפה את השרת."
+  },
+  "showPrompt": {
+    "message": "הצגת ההנחיה"
+  },
+  "welcomeServerFootnote": {
+    "message": "הסוכן מפעיל שרת מקומי קטן, $1, שהתוסף הזה מתחבר אליו."
+  },
+  "welcomeStepAsk": {
+    "message": "בקשה מהסוכן"
+  },
+  "welcomeUndoFootnote": {
+    "message": "רוצה לחזור בך? אפשר לבטל שינויים שבוצעו באמצעות $1 על ידי בקשה מהסוכן לבטל אותם."
+  },
+  "welcomeSafariFootnote": {
+    "message": "ב-Safari הסוכן יכול לפתוח, לסדר ולסגור חלונות, וגם לפתוח כרטיסיות, לנווט בהן, לעבור ביניהן, להצמיד, להשתיק, לשכפל, להעביר ולסגור אותן. קבוצות כרטיסיות, היסטוריה, סימניות ושליטה בדפים זמינות ב-Chrome. אם הכותרות והכתובות של הכרטיסיות חסרות, יש לתת לתוסף גישה לאתרים ב-Safari בהגדרות > הרחבות."
+  },
+  "welcomeAnalyticsHint": {
+    "message": "באילו תכונות משתמשים וגרסת התוסף, כדי לעזור לשפר את התוסף."
   },
   "instanceNameLabel": {
     "message": "מתן שם לפרופיל הדפדפן הזה"
@@ -56,26 +125,14 @@
   "instanceNamePlaceholder": {
     "message": "לדוגמה: עבודה או אישי"
   },
-  "welcomeInstanceNameHint": {
-    "message": "סוכנים משתמשים בשם הזה כדי להבחין בין הדפדפנים והפרופילים שלך, כך שאפשר לבקש מהם את דפדפן העבודה. $1"
-  },
   "optionsInstanceNameHint": {
     "message": "סוכנים משתמשים בשם הזה כדי להבחין בין הדפדפנים והפרופילים שלך. $1"
   },
   "instanceId": {
     "message": "מזהה מופע: $1"
   },
-  "welcomeStepAdd": {
-    "message": "1. הוספה לסוכן"
-  },
-  "welcomeStepAddHint": {
-    "message": "הסוכן מפעיל שרת מקומי קטן ($1) שהתוסף הזה מתחבר אליו. יש לבחור את הסוכן:"
-  },
   "welcomeAgentSetupTitle": {
     "message": "הגדרה על ידי הסוכן"
-  },
-  "welcomeAgentSetupBody": {
-    "message": "יש להדביק את ההנחיה הזו בכל סוכן שיכול להריץ פקודות ולערוך את ההגדרות של עצמו, כמו Claude Code, Cursor או Codex. היא בודקת ש-Node.js מותקן ואז מוסיפה את השרת."
   },
   "copyPrompt": {
     "message": "העתקת ההנחיה"
@@ -86,29 +143,11 @@
   "copied": {
     "message": "הועתק"
   },
-  "welcomeClaudeCodeBody": {
-    "message": "יש להריץ פעם אחת בטרמינל:"
-  },
-  "welcomeOpensAndConfirms": {
-    "message": "האפליקציה תיפתח ותבקש אישור."
-  },
   "welcomeAddTo": {
     "message": "הוספה ל-$1"
   },
-  "welcomeClaudeDesktopBody": {
-    "message": "יש להוריד את התוסף ואז לפתוח את הקובץ כדי להתקין אותו. אין צורך ב-Node.js."
-  },
   "welcomeDownloadFor": {
     "message": "הורדה עבור $1"
-  },
-  "welcomeOtherAgentsTitle": {
-    "message": "סוכנים אחרים"
-  },
-  "welcomeOtherAgentsBody": {
-    "message": "יש להוסיף את זה להגדרות ה-MCP של הסוכן ואז להפעיל אותו מחדש."
-  },
-  "welcomeStepTry": {
-    "message": "2. התנסות"
   },
   "welcomeTryIntro": {
     "message": "כש-Chrome פתוח, אפשר לבקש מהסוכן:"
@@ -119,9 +158,6 @@
   "welcomeTryPage": {
     "message": "תפתח את הערות הגרסה של Chrome ותסכם מה השתנה בגרסה האחרונה."
   },
-  "welcomeTryHint": {
-    "message": "הסטטוס שלמעלה יהפוך לירוק כשהשרת של הסוכן יפעל. אפשר לבטל שינויים שבוצעו באמצעות $1 על ידי בקשה מהסוכן לבטל אותם."
-  },
   "welcomeTryIntroSafari": {
     "message": "כש-Safari פתוח, אפשר לבקש מהסוכן:"
   },
@@ -131,9 +167,6 @@
   "welcomeTrySortSafari": {
     "message": "תסדר את הכרטיסיות שלי ב-Safari לפי אתר."
   },
-  "welcomeTryHintSafari": {
-    "message": "הסטטוס שלמעלה יהפוך לירוק כשהשרת של הסוכן יפעל. ב-Safari הסוכן יכול לפתוח, לסדר ולסגור חלונות, וגם לפתוח כרטיסיות, לנווט בהן, לעבור ביניהן, להצמיד, להשתיק, לשכפל, להעביר ולסגור אותן. אם הכותרות והכתובות של הכרטיסיות חסרות, יש לתת לתוסף גישה לאתרים ב-Safari בהגדרות > הרחבות. קבוצות כרטיסיות, היסטוריה, סימניות ושליטה בדפים זמינות ב-Chrome."
-  },
   "welcomePrivacyHeading": {
     "message": "פרטיות"
   },
@@ -142,9 +175,6 @@
   },
   "welcomePrivacySafari": {
     "message": "נתוני הגלישה שלך נשארים במחשב שלך: התוסף מתקשר רק עם $1. הסוכן יכול לקרוא כותרות של כרטיסיות וכתובות URL, ולפתוח, לסדר או לסגור חלונות וכרטיסיות כשמבקשים ממנו. ב-Safari הוא לא יכול לקרוא דפי אינטרנט או לפעול בהם. התוסף הזה אף פעם לא שולח לשום מקום אחר כותרות של כרטיסיות או כתובות URL."
-  },
-  "welcomeAnalytics": {
-    "message": "שיתוף נתונים סטטיסטיים אנונימיים על השימוש (באילו תכונות משתמשים, גרסת התוסף) כדי לעזור לשפר את התוסף."
   },
   "analyticsTitle": {
     "message": "שיתוף נתונים סטטיסטיים אנונימיים על השימוש"
@@ -167,10 +197,10 @@
   "optionsConnectedMany_one": {
     "message": "$1 סשן של סוכן מחובר"
   },
-  "optionsConnectedMany_other": {
+  "optionsConnectedMany_two": {
     "message": "$1 סשנים של סוכנים מחוברים"
   },
-  "optionsConnectedMany_two": {
+  "optionsConnectedMany_other": {
     "message": "$1 סשנים של סוכנים מחוברים"
   },
   "optionsDisconnected": {
@@ -188,10 +218,10 @@
   "sessionLastUsed_one": {
     "message": "שימוש אחרון: $2 $3, $1 קריאה"
   },
-  "sessionLastUsed_other": {
+  "sessionLastUsed_two": {
     "message": "שימוש אחרון: $2 $3, $1 קריאות"
   },
-  "sessionLastUsed_two": {
+  "sessionLastUsed_other": {
     "message": "שימוש אחרון: $2 $3, $1 קריאות"
   },
   "sessionUnused": {
@@ -245,10 +275,10 @@
   "chatUnseen_one": {
     "message": "$2 ($1 חדשה)"
   },
-  "chatUnseen_other": {
+  "chatUnseen_two": {
     "message": "$2 ($1 חדשות)"
   },
-  "chatUnseen_two": {
+  "chatUnseen_other": {
     "message": "$2 ($1 חדשות)"
   },
   "chatStatusWaiting": {
@@ -296,10 +326,10 @@
   "chatTooLong_one": {
     "message": "הודעה יכולה להכיל עד $1 תו."
   },
-  "chatTooLong_other": {
+  "chatTooLong_two": {
     "message": "הודעה יכולה להכיל עד $1 תווים."
   },
-  "chatTooLong_two": {
+  "chatTooLong_other": {
     "message": "הודעה יכולה להכיל עד $1 תווים."
   }
 }

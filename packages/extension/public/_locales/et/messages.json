@@ -35,17 +35,86 @@
   "welcomeLedeSafari": {
     "message": "Laske oma AI-agendil Safari vahelehti leida, avada, teisaldada ja sulgeda."
   },
-  "welcomeConnected": {
-    "message": "Ühendatud: teie agent saab brauserit kasutada."
+  "profileLabel": {
+    "message": "See profiil"
   },
-  "welcomeConnectedMany_one": {
-    "message": "Ühendatud: brauserit saab kasutada $1 agendiseanss."
+  "profilePlaceholder": {
+    "message": "Andke sellele nimi"
   },
-  "welcomeConnectedMany_other": {
-    "message": "Ühendatud: brauserit saab kasutada $1 agendiseanssi."
+  "profileHint": {
+    "message": "Agendid eristavad selle nime järgi teie brausereid ja profiile, nii et saate küsida näiteks brauserit Töö."
   },
-  "welcomeDisconnected": {
-    "message": "Teie agendi ootamine. Seadistage see allpool ja seejärel alustage seanssi."
+  "profileSaved": {
+    "message": "Salvestatud"
+  },
+  "profileNameRemoved": {
+    "message": "Nimi eemaldatud"
+  },
+  "statusNotConnected": {
+    "message": "Pole veel ühendatud"
+  },
+  "statusSetUpHint": {
+    "message": "Ühendage allpool oma agent ja seejärel alustage selles uut seanssi."
+  },
+  "statusConnected": {
+    "message": "Ühendatud"
+  },
+  "statusConnectedMany_one": {
+    "message": "Ühendatud: $1 agendiseanss"
+  },
+  "statusConnectedMany_other": {
+    "message": "Ühendatud: $1 agendiseanssi"
+  },
+  "statusConnectedHint": {
+    "message": "Teie agent saab seda brauserit kasutada. Proovige mõnda allolevat viipa."
+  },
+  "welcomeStepConnect": {
+    "message": "Ühendage oma agent"
+  },
+  "stepDone": {
+    "message": "Valmis"
+  },
+  "welcomePickAgent": {
+    "message": "Valige agent, mida kasutate."
+  },
+  "welcomeAgentTabs": {
+    "message": "Teie agent"
+  },
+  "welcomeTabOther": {
+    "message": "Muu"
+  },
+  "welcomeClaudeCodeSteps": {
+    "message": "Käivitage see üks kord terminalis ja seejärel alustage uut Claude Code'i seanssi."
+  },
+  "welcomeClaudeDesktopSteps": {
+    "message": "Laadige laiendus alla ja avage fail. Claude Desktop installib selle teie eest, Node.js-i pole vaja."
+  },
+  "welcomeOpensToConfirm": {
+    "message": "$1 avaneb ja palub teil kinnitada."
+  },
+  "welcomeOtherAgentsSteps": {
+    "message": "Lisage see agendi MCP konfiguratsiooni ja taaskäivitage agent."
+  },
+  "welcomeAgentSetupHint": {
+    "message": "Kleepige see viip agenti, mis saab käske käivitada, näiteks Claude Code, Cursor või Codex. See kontrollib, kas Node.js on olemas, ja lisab serveri."
+  },
+  "showPrompt": {
+    "message": "Näita viipa"
+  },
+  "welcomeServerFootnote": {
+    "message": "Teie agent käivitab väikese kohaliku serveri $1, millega see laiendus ühendub."
+  },
+  "welcomeStepAsk": {
+    "message": "Küsige midagi"
+  },
+  "welcomeUndoFootnote": {
+    "message": "Mõtlesite ümber? Tööriistaga $1 tehtud muudatused saab tagasi võtta, kui palute agendil need tühistada."
+  },
+  "welcomeSafariFootnote": {
+    "message": "Safaris saab agent aknaid avada, paigutada ja sulgeda ning vahelehti avada, neis liikuda, nende vahel vahetada, kinnitada, vaigistada, duplikeerida, teisaldada ja sulgeda. Vahelehtede rühmad, ajalugu, järjehoidjad ja lehtede juhtimine on saadaval Chrome'is. Kui vahelehtede pealkirjad ja aadressid puuduvad, andke laiendusele Safaris veebisaitidele juurdepääs jaotises Settings > Extensions."
+  },
+  "welcomeAnalyticsHint": {
+    "message": "Milliseid funktsioone kasutatakse ja laienduse versioon, et aidata laiendust täiustada."
   },
   "instanceNameLabel": {
     "message": "Pange sellele brauseriprofiilile nimi"
@@ -53,26 +122,14 @@
   "instanceNamePlaceholder": {
     "message": "Näiteks Töö või Isiklik"
   },
-  "welcomeInstanceNameHint": {
-    "message": "Agendid eristavad selle nime järgi teie brausereid ja profiile, nii et saate küsida näiteks brauserit Töö. $1"
-  },
   "optionsInstanceNameHint": {
     "message": "Agendid eristavad selle nime järgi teie brausereid ja profiile. $1"
   },
   "instanceId": {
     "message": "Eksemplari ID: $1"
   },
-  "welcomeStepAdd": {
-    "message": "1. Lisage see oma agendile"
-  },
-  "welcomeStepAddHint": {
-    "message": "Teie agent käivitab väikese kohaliku serveri ($1), millega see laiendus ühendub. Valige oma agent:"
-  },
   "welcomeAgentSetupTitle": {
     "message": "Laske agendil see seadistada"
-  },
-  "welcomeAgentSetupBody": {
-    "message": "Kleepige see viip mis tahes agenti, mis saab käske käivitada ja oma seadeid muuta, näiteks Claude Code, Cursor või Codex. See kontrollib, kas Node.js on olemas, ja lisab seejärel serveri."
   },
   "copyPrompt": {
     "message": "Kopeeri viip"
@@ -83,29 +140,11 @@
   "copied": {
     "message": "Kopeeritud"
   },
-  "welcomeClaudeCodeBody": {
-    "message": "Käivitage üks kord terminalis:"
-  },
-  "welcomeOpensAndConfirms": {
-    "message": "Avab rakenduse ja palub teil kinnitada."
-  },
   "welcomeAddTo": {
     "message": "Lisa: $1"
   },
-  "welcomeClaudeDesktopBody": {
-    "message": "Laadige laiendus alla ja avage installimiseks fail. Node.js-i pole vaja."
-  },
   "welcomeDownloadFor": {
     "message": "Laadi alla: $1"
-  },
-  "welcomeOtherAgentsTitle": {
-    "message": "Muud agendid"
-  },
-  "welcomeOtherAgentsBody": {
-    "message": "Lisage see agendi MCP konfiguratsiooni ja taaskäivitage agent."
-  },
-  "welcomeStepTry": {
-    "message": "2. Proovige"
   },
   "welcomeTryIntro": {
     "message": "Kui Chrome on avatud, kirjutage oma agendile:"
@@ -116,9 +155,6 @@
   "welcomeTryPage": {
     "message": "Ava Chrome'i väljalaskemärkmed ja tee kokkuvõte, mis uusimas versioonis muutus."
   },
-  "welcomeTryHint": {
-    "message": "Ülal olev olek muutub roheliseks, kui teie agendi server töötab. Tööriistaga $1 tehtud muudatused saab tagasi võtta, kui palute agendil need tühistada."
-  },
   "welcomeTryIntroSafari": {
     "message": "Kui Safari on avatud, kirjutage oma agendile:"
   },
@@ -128,9 +164,6 @@
   "welcomeTrySortSafari": {
     "message": "Järjesta mu Safari vahelehed saitide kaupa."
   },
-  "welcomeTryHintSafari": {
-    "message": "Ülal olev olek muutub roheliseks, kui teie agendi server töötab. Safaris saab agent aknaid avada, paigutada ja sulgeda ning vahelehti avada, neis liikuda, nende vahel vahetada, kinnitada, vaigistada, duplikeerida, teisaldada ja sulgeda. Kui vahelehtede pealkirjad ja aadressid puuduvad, andke laiendusele Safaris veebisaitidele juurdepääs jaotises Settings > Extensions. Vahelehtede rühmad, ajalugu, järjehoidjad ja lehtede juhtimine on saadaval Chrome'is."
-  },
   "welcomePrivacyHeading": {
     "message": "Privaatsus"
   },
@@ -139,9 +172,6 @@
   },
   "welcomePrivacySafari": {
     "message": "Teie sirvimisandmed jäävad teie arvutisse: laiendus suhtleb ainult aadressiga $1. Teie agent saab lugeda vahelehtede pealkirju ja URL-e ning teie palvel aknaid ja vahelehti avada, paigutada või sulgeda. Safaris ei saa see veebilehti lugeda ega neil toiminguid teha. See laiendus ei saada vahelehtede pealkirju ega URL-e kunagi kuhugi mujale."
-  },
-  "welcomeAnalytics": {
-    "message": "Jaga anonüümset kasutusstatistikat (milliseid funktsioone kasutatakse, laienduse versioon), et aidata laiendust täiustada."
   },
   "analyticsTitle": {
     "message": "Jaga anonüümset kasutusstatistikat"

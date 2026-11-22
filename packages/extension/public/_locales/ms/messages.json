@@ -35,17 +35,86 @@
   "welcomeLedeSafari": {
     "message": "Biarkan ejen AI anda mencari, membuka, mengalihkan dan menutup tab Safari anda."
   },
-  "welcomeConnected": {
-    "message": "Disambungkan: ejen anda boleh menggunakan penyemak imbas."
+  "profileLabel": {
+    "message": "Profil ini"
   },
-  "welcomeConnectedMany_one": {
-    "message": "Disambungkan: $1 sesi ejen boleh menggunakan penyemak imbas."
+  "profilePlaceholder": {
+    "message": "Berikan nama"
   },
-  "welcomeConnectedMany_other": {
-    "message": "Disambungkan: $1 sesi ejen boleh menggunakan penyemak imbas."
+  "profileHint": {
+    "message": "Ejen menggunakan nama ini untuk membezakan penyemak imbas dan profil anda, jadi anda boleh meminta penyemak imbas Kerja anda."
   },
-  "welcomeDisconnected": {
-    "message": "Menunggu ejen anda. Sediakannya di bawah, kemudian mulakan sesi."
+  "profileSaved": {
+    "message": "Disimpan"
+  },
+  "profileNameRemoved": {
+    "message": "Nama dialih keluar"
+  },
+  "statusNotConnected": {
+    "message": "Belum disambungkan"
+  },
+  "statusSetUpHint": {
+    "message": "Sambungkan ejen anda di bawah, kemudian mulakan sesi baharu dalamnya."
+  },
+  "statusConnected": {
+    "message": "Disambungkan"
+  },
+  "statusConnectedMany_one": {
+    "message": "Disambungkan kepada $1 sesi ejen"
+  },
+  "statusConnectedMany_other": {
+    "message": "Disambungkan kepada $1 sesi ejen"
+  },
+  "statusConnectedHint": {
+    "message": "Ejen anda boleh menggunakan penyemak imbas ini. Cuba salah satu gesaan di bawah."
+  },
+  "welcomeStepConnect": {
+    "message": "Sambungkan ejen anda"
+  },
+  "stepDone": {
+    "message": "Selesai"
+  },
+  "welcomePickAgent": {
+    "message": "Pilih ejen yang anda gunakan."
+  },
+  "welcomeAgentTabs": {
+    "message": "Ejen anda"
+  },
+  "welcomeTabOther": {
+    "message": "Lain-lain"
+  },
+  "welcomeClaudeCodeSteps": {
+    "message": "Jalankan ini sekali dalam terminal, kemudian mulakan sesi Claude Code baharu."
+  },
+  "welcomeClaudeDesktopSteps": {
+    "message": "Muat turun sambungan dan buka fail tersebut. Claude Desktop memasangnya untuk anda, Node.js tidak diperlukan."
+  },
+  "welcomeOpensToConfirm": {
+    "message": "$1 dibuka dan meminta anda mengesahkan."
+  },
+  "welcomeOtherAgentsSteps": {
+    "message": "Tambahkan ini pada konfigurasi MCP ejen, kemudian mulakan semula ejen."
+  },
+  "welcomeAgentSetupHint": {
+    "message": "Tampalkan gesaan ini ke dalam ejen yang boleh menjalankan arahan, seperti Claude Code, Cursor atau Codex. Gesaan ini menyemak Node.js dan menambahkan pelayan."
+  },
+  "showPrompt": {
+    "message": "Tunjukkan gesaan"
+  },
+  "welcomeServerFootnote": {
+    "message": "Ejen anda menjalankan pelayan setempat yang kecil, $1, yang disambungkan oleh sambungan ini."
+  },
+  "welcomeStepAsk": {
+    "message": "Tanya ejen sesuatu"
+  },
+  "welcomeUndoFootnote": {
+    "message": "Berubah fikiran? Perubahan yang dibuat dengan $1 boleh dibatalkan dengan meminta ejen membuat asal."
+  },
+  "welcomeSafariFootnote": {
+    "message": "Dalam Safari, ejen anda boleh membuka, mengatur dan menutup tetingkap, serta membuka, menavigasi, menukar, menyemat, meredam, menduakan, mengalihkan dan menutup tab. Kumpulan tab, sejarah, penanda halaman dan kawalan halaman tersedia dalam Chrome. Jika tajuk dan alamat tab tiada, berikan sambungan akses tapak web dalam Safari di bawah Seting > Sambungan."
+  },
+  "welcomeAnalyticsHint": {
+    "message": "Ciri yang digunakan dan versi sambungan, untuk membantu menambah baik sambungan ini."
   },
   "instanceNameLabel": {
     "message": "Namakan profil penyemak imbas ini"
@@ -53,26 +122,14 @@
   "instanceNamePlaceholder": {
     "message": "Contohnya Kerja atau Peribadi"
   },
-  "welcomeInstanceNameHint": {
-    "message": "Ejen menggunakan nama ini untuk membezakan penyemak imbas dan profil anda, jadi anda boleh meminta penyemak imbas Kerja anda. $1"
-  },
   "optionsInstanceNameHint": {
     "message": "Ejen menggunakan nama ini untuk membezakan penyemak imbas dan profil anda. $1"
   },
   "instanceId": {
     "message": "ID tika: $1"
   },
-  "welcomeStepAdd": {
-    "message": "1. Tambahkan pada ejen anda"
-  },
-  "welcomeStepAddHint": {
-    "message": "Ejen anda memulakan pelayan setempat yang kecil ($1) yang disambungkan oleh sambungan ini. Pilih ejen anda:"
-  },
   "welcomeAgentSetupTitle": {
     "message": "Biarkan ejen anda menyediakannya"
-  },
-  "welcomeAgentSetupBody": {
-    "message": "Tampalkan gesaan ini ke dalam mana-mana ejen yang boleh menjalankan arahan dan mengedit tetapannya sendiri, seperti Claude Code, Cursor atau Codex. Gesaan ini menyemak Node.js, kemudian menambahkan pelayan."
   },
   "copyPrompt": {
     "message": "Salin gesaan"
@@ -83,29 +140,11 @@
   "copied": {
     "message": "Disalin"
   },
-  "welcomeClaudeCodeBody": {
-    "message": "Jalankan sekali dalam terminal:"
-  },
-  "welcomeOpensAndConfirms": {
-    "message": "Membuka apl dan meminta anda mengesahkan."
-  },
   "welcomeAddTo": {
     "message": "Tambahkan pada $1"
   },
-  "welcomeClaudeDesktopBody": {
-    "message": "Muat turun sambungan, kemudian buka fail tersebut untuk memasangnya. Node.js tidak diperlukan."
-  },
   "welcomeDownloadFor": {
     "message": "Muat turun untuk $1"
-  },
-  "welcomeOtherAgentsTitle": {
-    "message": "Ejen lain"
-  },
-  "welcomeOtherAgentsBody": {
-    "message": "Tambahkan ini pada konfigurasi MCP ejen, kemudian mulakan semula ejen."
-  },
-  "welcomeStepTry": {
-    "message": "2. Cuba"
   },
   "welcomeTryIntro": {
     "message": "Semasa Chrome dibuka, minta ejen anda:"
@@ -116,9 +155,6 @@
   "welcomeTryPage": {
     "message": "Buka nota keluaran Chrome dan ringkaskan perubahan dalam versi terkini."
   },
-  "welcomeTryHint": {
-    "message": "Status di atas bertukar hijau sebaik sahaja pelayan ejen anda berjalan. Perubahan yang dibuat dengan $1 boleh dibatalkan dengan meminta ejen membuat asal."
-  },
   "welcomeTryIntroSafari": {
     "message": "Semasa Safari dibuka, minta ejen anda:"
   },
@@ -128,9 +164,6 @@
   "welcomeTrySortSafari": {
     "message": "Susun tab Safari saya mengikut tapak."
   },
-  "welcomeTryHintSafari": {
-    "message": "Status di atas bertukar hijau sebaik sahaja pelayan ejen anda berjalan. Dalam Safari, ejen anda boleh membuka, mengatur dan menutup tetingkap, serta membuka, menavigasi, menukar, menyemat, meredam, menduakan, mengalihkan dan menutup tab. Jika tajuk dan alamat tab tiada, berikan sambungan akses tapak web dalam Safari di bawah Seting > Sambungan. Kumpulan tab, sejarah, penanda halaman dan kawalan halaman tersedia dalam Chrome."
-  },
   "welcomePrivacyHeading": {
     "message": "Privasi"
   },
@@ -139,9 +172,6 @@
   },
   "welcomePrivacySafari": {
     "message": "Data penyemakan imbas anda kekal pada komputer anda: sambungan ini hanya berhubung dengan $1. Ejen anda boleh membaca tajuk dan URL tab, serta membuka, mengatur atau menutup tetingkap dan tab apabila anda memintanya. Ejen tidak boleh membaca atau bertindak dalam halaman web dalam Safari. Tajuk tab dan URL tidak sekali-kali dihantar ke tempat lain oleh sambungan ini."
-  },
-  "welcomeAnalytics": {
-    "message": "Kongsi statistik penggunaan tanpa nama (ciri yang digunakan, versi sambungan) untuk membantu menambah baik sambungan ini."
   },
   "analyticsTitle": {
     "message": "Kongsi statistik penggunaan tanpa nama"

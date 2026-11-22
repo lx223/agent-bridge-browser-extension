@@ -35,17 +35,86 @@
   "welcomeLedeSafari": {
     "message": "让 AI 智能体帮您查找、打开、移动和关闭 Safari 标签页。"
   },
-  "welcomeConnected": {
-    "message": "已连接：您的智能体可以使用浏览器了。"
+  "profileLabel": {
+    "message": "此配置文件"
   },
-  "welcomeConnectedMany_one": {
-    "message": "已连接：$1 个智能体会话可以使用浏览器。"
+  "profilePlaceholder": {
+    "message": "为它命名"
   },
-  "welcomeConnectedMany_other": {
-    "message": "已连接：$1 个智能体会话可以使用浏览器。"
+  "profileHint": {
+    "message": "智能体通过此名称区分您的各个浏览器和配置文件，这样您就可以说“用工作浏览器”。"
   },
-  "welcomeDisconnected": {
-    "message": "正在等待您的智能体。请先按下方说明完成设置，然后开始一个会话。"
+  "profileSaved": {
+    "message": "已保存"
+  },
+  "profileNameRemoved": {
+    "message": "已移除名称"
+  },
+  "statusNotConnected": {
+    "message": "尚未连接"
+  },
+  "statusSetUpHint": {
+    "message": "请在下方连接您的智能体，然后在其中开始一个新会话。"
+  },
+  "statusConnected": {
+    "message": "已连接"
+  },
+  "statusConnectedMany_one": {
+    "message": "已连接 $1 个智能体会话"
+  },
+  "statusConnectedMany_other": {
+    "message": "已连接 $1 个智能体会话"
+  },
+  "statusConnectedHint": {
+    "message": "您的智能体可以使用此浏览器了。试试下方的某个提示吧。"
+  },
+  "welcomeStepConnect": {
+    "message": "连接您的智能体"
+  },
+  "stepDone": {
+    "message": "已完成"
+  },
+  "welcomePickAgent": {
+    "message": "选择您使用的智能体。"
+  },
+  "welcomeAgentTabs": {
+    "message": "您的智能体"
+  },
+  "welcomeTabOther": {
+    "message": "其他"
+  },
+  "welcomeClaudeCodeSteps": {
+    "message": "在终端中运行一次，然后开始一个新的 Claude Code 会话。"
+  },
+  "welcomeClaudeDesktopSteps": {
+    "message": "下载扩展并打开文件，Claude Desktop 会为您完成安装，无需 Node.js。"
+  },
+  "welcomeOpensToConfirm": {
+    "message": "$1 将打开并请您确认。"
+  },
+  "welcomeOtherAgentsSteps": {
+    "message": "将此内容添加到智能体的 MCP 配置中，然后重启智能体。"
+  },
+  "welcomeAgentSetupHint": {
+    "message": "将此提示粘贴到能运行命令的智能体中，例如 Claude Code、Cursor 或 Codex。它会先检查 Node.js，然后添加服务器。"
+  },
+  "showPrompt": {
+    "message": "显示提示"
+  },
+  "welcomeServerFootnote": {
+    "message": "您的智能体会运行一个小型本地服务器（$1），此扩展程序会连接到该服务器。"
+  },
+  "welcomeStepAsk": {
+    "message": "向智能体提问"
+  },
+  "welcomeUndoFootnote": {
+    "message": "改主意了？通过 $1 所做的更改，可以让智能体撤消。"
+  },
+  "welcomeSafariFootnote": {
+    "message": "在 Safari 中，您的智能体可以打开、排列和关闭窗口，还可以打开、跳转、切换、固定、静音、复制、移动和关闭标签页。标签页分组、历史记录、书签和网页操作仅在 Chrome 中可用。如果看不到标签页标题和地址，请在 Safari 的“设置”>“扩展”中允许此扩展访问网站。"
+  },
+  "welcomeAnalyticsHint": {
+    "message": "使用了哪些功能以及扩展程序版本，用于帮助改进此扩展程序。"
   },
   "instanceNameLabel": {
     "message": "为此浏览器配置文件命名"
@@ -53,26 +122,14 @@
   "instanceNamePlaceholder": {
     "message": "例如“工作”或“个人”"
   },
-  "welcomeInstanceNameHint": {
-    "message": "智能体通过此名称区分您的各个浏览器和配置文件，这样您就可以说“用工作浏览器”。$1"
-  },
   "optionsInstanceNameHint": {
     "message": "智能体通过此名称区分您的各个浏览器和配置文件。$1"
   },
   "instanceId": {
     "message": "实例 ID：$1"
   },
-  "welcomeStepAdd": {
-    "message": "1. 添加到您的智能体"
-  },
-  "welcomeStepAddHint": {
-    "message": "您的智能体会启动一个小型本地服务器（$1），此扩展程序会连接到该服务器。请选择您的智能体："
-  },
   "welcomeAgentSetupTitle": {
     "message": "让智能体自行设置"
-  },
-  "welcomeAgentSetupBody": {
-    "message": "将此提示粘贴到任何能运行命令并修改自身设置的智能体中，例如 Claude Code、Cursor 或 Codex。它会先检查 Node.js，然后添加服务器。"
   },
   "copyPrompt": {
     "message": "复制提示"
@@ -83,29 +140,11 @@
   "copied": {
     "message": "已复制"
   },
-  "welcomeClaudeCodeBody": {
-    "message": "在终端中运行一次："
-  },
-  "welcomeOpensAndConfirms": {
-    "message": "将打开应用并请您确认。"
-  },
   "welcomeAddTo": {
     "message": "添加到 $1"
   },
-  "welcomeClaudeDesktopBody": {
-    "message": "下载扩展，然后打开文件进行安装。无需 Node.js。"
-  },
   "welcomeDownloadFor": {
     "message": "下载 $1 版"
-  },
-  "welcomeOtherAgentsTitle": {
-    "message": "其他智能体"
-  },
-  "welcomeOtherAgentsBody": {
-    "message": "将此内容添加到智能体的 MCP 配置中，然后重启智能体。"
-  },
-  "welcomeStepTry": {
-    "message": "2. 试一试"
   },
   "welcomeTryIntro": {
     "message": "打开 Chrome，然后对您的智能体说："
@@ -116,9 +155,6 @@
   "welcomeTryPage": {
     "message": "打开 Chrome 版本说明，总结一下最新版本有哪些变化。"
   },
-  "welcomeTryHint": {
-    "message": "智能体的服务器运行后，上方的状态会变为绿色。通过 $1 所做的更改，可以让智能体撤消。"
-  },
   "welcomeTryIntroSafari": {
     "message": "打开 Safari，然后对您的智能体说："
   },
@@ -128,9 +164,6 @@
   "welcomeTrySortSafari": {
     "message": "把我的 Safari 标签页按网站排好序。"
   },
-  "welcomeTryHintSafari": {
-    "message": "智能体的服务器运行后，上方的状态会变为绿色。在 Safari 中，智能体可以打开、排列和关闭窗口，还可以打开、跳转、切换、固定、静音、复制、移动和关闭标签页。如果看不到标签页标题和地址，请在 Safari 的“设置”>“扩展”中允许此扩展访问网站。标签页分组、历史记录、书签和网页操作仅在 Chrome 中可用。"
-  },
   "welcomePrivacyHeading": {
     "message": "隐私"
   },
@@ -139,9 +172,6 @@
   },
   "welcomePrivacySafari": {
     "message": "您的浏览数据会保留在您的电脑上：此扩展程序只与 $1 通信。在您提出要求时，智能体可以读取标签页标题和网址，以及打开、排列或关闭窗口和标签页。在 Safari 中，它无法读取网页内容或在网页中执行操作。此扩展程序绝不会将标签页标题和网址发送到其他任何地方。"
-  },
-  "welcomeAnalytics": {
-    "message": "分享匿名使用统计信息（使用了哪些功能、扩展程序版本），帮助改进此扩展程序。"
   },
   "analyticsTitle": {
     "message": "分享匿名使用统计信息"
