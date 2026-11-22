@@ -9,11 +9,12 @@ import { chromium, type BrowserContext } from 'playwright';
 import { build } from 'vite';
 import { DEFAULT_PORT, STATUS_TOOL } from '@agent-browser-bridge/protocol';
 
-const ROOT = resolve(import.meta.dirname, '..');
+const ROOT = resolve(import.meta.dirname, '../..');
 const EXTENSION_ROOT = join(ROOT, 'packages/extension');
 export const EXTENSION_DIST = join(EXTENSION_ROOT, 'dist');
 const SERVER_ENTRY = resolve(ROOT, process.env.E2E_SERVER_ENTRY ?? 'packages/server/dist/index.js');
-const FIXTURES = join(ROOT, 'e2e/fixtures');
+export const SERVER_RUNS_LAUNCHER = process.env.E2E_SERVER_ENTRY === undefined;
+const FIXTURES = join(import.meta.dirname, 'fixtures');
 const CONNECT_TIMEOUT_MS = 30_000;
 export const LOCAL_ONLY = '--host-resolver-rules=MAP * ~NOTFOUND, EXCLUDE 127.0.0.1';
 
@@ -66,6 +67,7 @@ export interface Agent {
   call<T = unknown>(name: string, args?: Record<string, unknown>): Promise<T>;
   text(name: string, args?: Record<string, unknown>): Promise<string>;
   waitUntilConnected(): Promise<BridgeStatus>;
+  serverPid(): number | null;
   close(): Promise<void>;
 }
 
@@ -164,14 +166,13 @@ export function testBridge(): Promise<TestBridge> {
 export async function startAgent(name = 'e2e', version = '0.0.0'): Promise<Agent> {
   const { port } = await testBridge();
   const client = new Client({ name, version });
-  await client.connect(
-    new StdioClientTransport({
-      command: process.execPath,
-      args: [SERVER_ENTRY],
-      env: { ...getDefaultEnvironment(), AGENT_BROWSER_BRIDGE_PORT: String(port) },
-      stderr: 'ignore',
-    }),
-  );
+  const transport = new StdioClientTransport({
+    command: process.execPath,
+    args: [SERVER_ENTRY],
+    env: { ...getDefaultEnvironment(), AGENT_BROWSER_BRIDGE_PORT: String(port) },
+    stderr: 'ignore',
+  });
+  await client.connect(transport);
 
   const raw = async (tool: string, args: Record<string, unknown> = {}): Promise<ToolResult> => {
     const result = await client.callTool({ name: tool, arguments: args });
@@ -194,7 +195,7 @@ export async function startAgent(name = 'e2e', version = '0.0.0'): Promise<Agent
     }
   };
 
-  return { client, raw, call, text, waitUntilConnected, close: () => client.close() };
+  return { client, raw, call, text, waitUntilConnected, serverPid: () => transport.pid, close: () => client.close() };
 }
 
 function serveFixtures(): Promise<Server> {
@@ -210,6 +211,11 @@ function serveFixtures(): Promise<Server> {
   return new Promise((done) => server.listen(0, '127.0.0.1', () => done(server)));
 }
 
+export interface BrowserProfile {
+  context: BrowserContext;
+  close(): Promise<void>;
+}
+
 export interface Harness {
   agent: Agent;
   context: BrowserContext;
@@ -217,6 +223,7 @@ export interface Harness {
   fixture(name: string): string;
   openFixture(name: string): Promise<Tab>;
   restartAgent(): Promise<Agent>;
+  openAnotherProfile(): Promise<BrowserProfile>;
   close(): Promise<void>;
 }
 
@@ -228,25 +235,12 @@ export interface HarnessOptions {
   agentVersion?: string;
 }
 
-export async function startHarness(options: HarnessOptions = {}): Promise<Harness> {
-  const { extensionDir } = await testBridge();
+const removeProfile = (profile: string) => rmSync(profile, { recursive: true, force: true, maxRetries: 10, retryDelay: 200 });
 
-  const fixtures = await serveFixtures();
-  const fixturePort = (fixtures.address() as { port: number }).port;
+async function launchProfile(extensionDir: string, options: HarnessOptions): Promise<BrowserProfile> {
   const profile = mkdtempSync(join(tmpdir(), 'agent-browser-bridge-e2e-'));
-  let agent: Agent | undefined;
-  let context: BrowserContext | undefined;
-  const close = async () => {
-    await agent?.close().catch(() => {});
-    await context?.close().catch(() => {});
-    await new Promise((done) => fixtures.close(done));
-    rmSync(profile, { recursive: true, force: true });
-  };
-
   try {
-    const launchAgent = () => startAgent(options.agentName, options.agentVersion);
-    agent = await launchAgent();
-    context = await chromium.launchPersistentContext(profile, {
+    const context = await chromium.launchPersistentContext(profile, {
       channel: 'chromium',
       headless: true,
       locale: options.locale,
@@ -260,6 +254,38 @@ export async function startHarness(options: HarnessOptions = {}): Promise<Harnes
         ...(options.locale ? [`--lang=${options.locale}`] : []),
       ],
     });
+    return {
+      context,
+      async close() {
+        await context.close().catch(() => {});
+        removeProfile(profile);
+      },
+    };
+  } catch (error) {
+    removeProfile(profile);
+    throw error;
+  }
+}
+
+export async function startHarness(options: HarnessOptions = {}): Promise<Harness> {
+  const { extensionDir } = await testBridge();
+
+  const fixtures = await serveFixtures();
+  const fixturePort = (fixtures.address() as { port: number }).port;
+  let agent: Agent | undefined;
+  let main: BrowserProfile | undefined;
+  const extra: BrowserProfile[] = [];
+  const close = async () => {
+    await agent?.close().catch(() => {});
+    for (const profile of [...extra, ...(main ? [main] : [])]) await profile.close();
+    await new Promise((done) => fixtures.close(done));
+  };
+
+  try {
+    const launchAgent = () => startAgent(options.agentName, options.agentVersion);
+    agent = await launchAgent();
+    main = await launchProfile(extensionDir, options);
+    const { context } = main;
     const worker = context.serviceWorkers()[0] ?? (await context.waitForEvent('serviceworker'));
     const extensionId = new URL(worker.url()).host;
     await agent.waitUntilConnected();
@@ -281,6 +307,11 @@ export async function startHarness(options: HarnessOptions = {}): Promise<Harnes
         await current.close();
         current = await launchAgent();
         return current;
+      },
+      async openAnotherProfile() {
+        const profile = await launchProfile(extensionDir, options);
+        extra.push(profile);
+        return profile;
       },
       async close() {
         await current.close().catch(() => {});

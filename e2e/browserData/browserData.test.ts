@@ -1,5 +1,5 @@
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
-import { startHarness, type Harness, type Tab } from './harness.ts';
+import { startHarness, type Harness, type Tab } from '../support/harness.ts';
 
 interface ReadingListEntry {
   url: string;

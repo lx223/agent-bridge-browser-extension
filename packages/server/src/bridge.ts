@@ -43,6 +43,7 @@ export interface BridgeOptions {
   reconnectGraceMs?: number;
   reloadGraceMs?: number;
   hostChangeGraceMs?: number;
+  startupGraceMs?: number;
   log?: (msg: string) => void;
   agentInfo?: () => AgentInfo;
 }
@@ -126,10 +127,12 @@ export class ExtensionBridge {
   private expected = new Map<string, ExpectedInstance>();
   private reloading = new WeakSet<WebSocket>();
   private changeListeners = new Set<() => void>();
+  private startupUntil: number;
   private readonly log: (msg: string) => void;
 
   constructor(private readonly opts: BridgeOptions) {
     this.log = opts.log ?? (() => {});
+    this.startupUntil = opts.startupGraceMs ? Date.now() + opts.startupGraceMs : 0;
   }
 
   async start(): Promise<number> {
@@ -147,6 +150,7 @@ export class ExtensionBridge {
     clearTimeout(this.retryTimer);
     clearTimeout(this.broadcastTimer);
     this.expected.clear();
+    this.startupUntil = 0;
     this.notifyChange();
     this.failPending(new NotConnectedError('Bridge stopped'));
     this.upstream?.terminate();
@@ -221,6 +225,7 @@ export class ExtensionBridge {
       }
       if (entry.browser === browser) deadline = Math.max(deadline ?? 0, entry.until);
     }
+    if (this.startupUntil > now && !current.some((hello) => hello.browser === browser)) deadline = Math.max(deadline ?? 0, this.startupUntil);
     return deadline;
   }
 

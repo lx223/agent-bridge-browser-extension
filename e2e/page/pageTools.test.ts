@@ -1,5 +1,5 @@
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
-import { startHarness, type Harness } from './harness.ts';
+import { startHarness, type Harness } from '../support/harness.ts';
 
 interface ListedTools {
   tools: { name: string; description: string; inputSchema?: { required?: string[] }; frameId: string }[];

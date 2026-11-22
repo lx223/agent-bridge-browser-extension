@@ -1,7 +1,7 @@
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import type { Page } from 'playwright';
 import { CHAT_RECEIVE_TOOL, CHAT_SEND_TOOL } from '@agent-browser-bridge/protocol';
-import { startHarness, type Harness } from './harness.ts';
+import { startHarness, type Harness } from '../support/harness.ts';
 
 let harness: Harness;
 let panel: Page;

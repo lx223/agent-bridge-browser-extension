@@ -1,9 +1,9 @@
 import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
 import { IDENTIFY_INSTANCES_TOOL, NAME_INSTANCE_TOOL, PROTOCOL_VERSION } from '@agent-browser-bridge/protocol';
-import { EXTENSION_VERSION, startAgent, testBridge, type Agent, type Tab } from './harness.ts';
-import { COMPAT_DATA_VERSION, compareVersions, safariSupport } from './safari/apiSupport.ts';
-import { openSetupPageAsSafari } from './safari/setupPage.ts';
-import { SAFARI_VERSION, startSimulatedSafari, type SimulatedSafari } from './safari/simulatedSafari.ts';
+import { EXTENSION_VERSION, startAgent, testBridge, type Agent, type Tab } from '../support/harness.ts';
+import { COMPAT_DATA_VERSION, compareVersions, safariSupport } from '../support/safari/apiSupport.ts';
+import { openSetupPageAsSafari } from '../support/safari/setupPage.ts';
+import { SAFARI_VERSION, startSimulatedSafari, type SimulatedSafari } from '../support/safari/simulatedSafari.ts';
 
 const NEWS = 'https://news.example.com/today';
 const DOCS = 'https://docs.example.com/guide';
