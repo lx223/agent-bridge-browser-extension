@@ -10,6 +10,21 @@ The service worker listens for `chrome.runtime.onUpdateAvailable` and calls `chr
 
 The code is in `packages/extension/src/background/update.ts`, and `BridgeClient.whenIdle()` reports when requests have finished.
 
+### What survives an update
+
+The extension keeps per-browser-session state in `chrome.storage.session`, which Chrome clears whenever the extension reloads, as well as when the browser quits. Two parts of it are carried over an update, so an agent can carry on where it was:
+
+- the browser chat conversations (`chat.conversations`), so the side panel still shows them and the chat cursor the MCP server holds still points at the right messages;
+- the undo snapshot of the last `plan.apply` (`lastPlanSnapshot`), so `chrome_plan_undo` still works.
+
+Just before `chrome.runtime.reload()`, after bridge requests have finished, the service worker copies both keys into `chrome.storage.local` under `reloadCarryOver`, with the time it was saved. When the service worker starts again it reads that copy, deletes it, and writes the keys back into `chrome.storage.session` unless they are already there. Bridge requests and the chat store wait for this to finish before they touch the state. The code is in `packages/extension/src/background/carryOver.ts`.
+
+A browser restart still clears this state. Normally there is no copy at start-up, because the one written before a reload is used and deleted straight away. A copy more than two minutes old, left behind if the browser quit between saving it and reloading, is deleted without being restored.
+
+Everything else in `chrome.storage.session` is cleared by an update, as before, and so is in-memory state, such as a `chat.receive` call still waiting for the user. An update from a version before this change starts with an empty chat, because the older version saves nothing before reloading.
+
+Both storage areas allow 10 MB, so whatever fits in `storage.session` fits in the copy, apart from the few other small settings `storage.local` already holds. The chat store caps itself at 20 conversations of 500 messages each, but messages can be up to 20,000 characters, so a very full chat could still come close to that limit. If the copy cannot be written, the extension reloads anyway and the state is lost, as it was before.
+
 ### Extensions that cannot update themselves
 
 Versions before 0.4.0 have no `onUpdateAvailable` listener. While an agent is connected their service worker never stops, so Chrome keeps the downloaded update waiting until the browser restarts. The server cannot reload them, so it tells the agent to ask the user instead (`packages/server/src/outdated.ts`):

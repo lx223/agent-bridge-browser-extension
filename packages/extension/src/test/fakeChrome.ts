@@ -5,11 +5,22 @@
 interface FakeTab { id: number; windowId: number; groupId: number; pinned: boolean; title: string; url: string }
 interface FakeGroup { id: number; windowId: number; title: string; color: string; collapsed: boolean }
 
+function storageArea(items: () => Record<string, unknown>) {
+  const keyList = (keys: string | string[]) => (Array.isArray(keys) ? keys : [keys]);
+  return {
+    set: async (next: Record<string, unknown>) => void Object.assign(items(), structuredClone(next)),
+    get: async (keys: string | string[]) =>
+      Object.fromEntries(keyList(keys).flatMap((key) => (key in items() ? [[key, structuredClone(items()[key])]] : []))),
+    remove: async (keys: string | string[]) => keyList(keys).forEach((key) => delete items()[key]),
+  };
+}
+
 export function installFakeChrome(tabs: Partial<FakeTab>[], groups: Partial<FakeGroup>[] = []) {
   const state = {
     tabs: tabs.map((t, i) => ({ id: i + 1, windowId: 1, groupId: -1, pinned: false, title: `Tab ${i + 1}`, url: `https://example.com/${i + 1}`, ...t })),
     groups: groups.map((g, i) => ({ id: 100 + i, windowId: 1, title: '', color: 'grey', collapsed: false, ...g })),
     session: {} as Record<string, unknown>,
+    local: {} as Record<string, unknown>,
     nextGroupId: 200,
   };
 
@@ -82,11 +93,8 @@ export function installFakeChrome(tabs: Partial<FakeTab>[], groups: Partial<Fake
       },
     },
     storage: {
-      session: {
-        set: async (items: Record<string, unknown>) => void Object.assign(state.session, structuredClone(items)),
-        get: async (key: string) => (key in state.session ? { [key]: structuredClone(state.session[key]) } : {}),
-        remove: async (key: string) => void delete state.session[key],
-      },
+      session: storageArea(() => state.session),
+      local: storageArea(() => state.local),
     },
   };
   (globalThis as unknown as { chrome: unknown }).chrome = fake;

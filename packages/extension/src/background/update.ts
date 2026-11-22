@@ -5,12 +5,20 @@ export interface UpdatableRuntime {
   reload(): void;
 }
 
-export function applyUpdatesWhenIdle(runtime: UpdatableRuntime, whenIdle: () => Promise<void>, maxWaitMs = MAX_UPDATE_WAIT_MS) {
+export interface UpdateOptions {
+  beforeReload?: () => Promise<void>;
+  maxWaitMs?: number;
+}
+
+export function applyUpdatesWhenIdle(runtime: UpdatableRuntime, whenIdle: () => Promise<void>, { beforeReload, maxWaitMs = MAX_UPDATE_WAIT_MS }: UpdateOptions = {}) {
   let waiting = false;
   runtime.onUpdateAvailable?.addListener(() => {
     if (waiting) return;
     waiting = true;
     const timeout = new Promise<void>((resolve) => setTimeout(resolve, maxWaitMs));
-    void Promise.race([whenIdle(), timeout]).then(() => runtime.reload());
+    void Promise.race([whenIdle(), timeout])
+      .then(() => beforeReload?.())
+      .catch(() => undefined)
+      .then(() => runtime.reload());
   });
 }

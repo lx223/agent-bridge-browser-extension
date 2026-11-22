@@ -52,6 +52,7 @@ export interface ChatStorage {
 
 export interface ChatStoreOptions {
   now?: () => number;
+  ready?: Promise<void>;
   onChange?: (conversations: Conversations) => void;
   onAgentMessage?: (conversation: Conversation, message: ChatMessage) => void;
 }
@@ -192,8 +193,9 @@ export class ChatStore {
   }
 
   private load(): Promise<Conversations> {
-    this.cache ??= this.storage
-      .get(CHAT_STORAGE_KEY)
+    this.cache ??= Promise.resolve(this.options.ready)
+      .catch(() => undefined)
+      .then(() => this.storage.get(CHAT_STORAGE_KEY))
       .then((items) => (items[CHAT_STORAGE_KEY] ?? {}) as Conversations)
       .catch(() => ({}));
     return this.cache;
