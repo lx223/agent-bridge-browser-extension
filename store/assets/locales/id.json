@@ -10,7 +10,7 @@
     },
     "profiles": {
       "headline": "Beri nama profil browser Anda",
-      "subline": "Minta browser Kerja dan agen Anda memilih profil Chrome yang tepat."
+      "subline": "Minta browser Kantor dan agen Anda memilih profil Chrome yang tepat."
     },
     "setup": {
       "headline": "Hubungkan agen yang sudah Anda gunakan",
@@ -49,9 +49,9 @@
     "guestName": "Ada Lovelace"
   },
   "profiles": {
-    "prompt": "Profil Chrome ini untuk kerja. Beri nama Kerja.",
-    "reply": "Selesai. Saat Anda meminta browser Kerja, saya akan memakai profil ini.",
-    "name": "Kerja"
+    "prompt": "Profil Chrome ini untuk urusan kantor. Beri nama Kantor.",
+    "reply": "Selesai. Saat Anda meminta browser Kantor, saya akan memakai profil ini.",
+    "name": "Kantor"
   },
   "video": {
     "tagline": "Biarkan agen AI Anda memakai browser yang sudah Anda gunakan.",

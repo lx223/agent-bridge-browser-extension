@@ -41,15 +41,15 @@
     "restaurant": "Casa Azul",
     "heading": "Magpareserba ng table",
     "name": "Pangalan",
-    "guests": "Bilang ng bisita",
+    "guests": "Bisita",
     "when": "Kailan",
     "tonight": "Ngayong gabi, 7:30 PM",
     "submit": "I-book ang table",
-    "confirmation": "Naka-book ang table para sa {guests} sa pangalang {name}. Kita tayo mamayang gabi!",
+    "confirmation": "Naka-book ang table para sa {guests} sa pangalang {name}. Kita tayo mamaya!",
     "guestName": "Ada Lovelace"
   },
   "profiles": {
-    "prompt": "Pang-trabaho ang Chrome profile na ito. Pangalanan mo itong Trabaho.",
+    "prompt": "Pang-trabaho ang Chrome profile na ito. Tawagin itong Trabaho.",
     "reply": "Tapos na. Kapag hiniling mo ang browser mo sa Trabaho, gagamitin ko ang profile na ito.",
     "name": "Trabaho"
   },

@@ -10,10 +10,10 @@
     },
     "profiles": {
       "headline": "Dai un nome ai profili del browser",
-      "subline": "Chiedi il browser di Lavoro e il tuo agente sceglie il profilo Chrome giusto."
+      "subline": "Chiedi il browser Lavoro e il tuo agente sceglie il profilo Chrome giusto."
     },
     "setup": {
-      "headline": "Collega l'agente che usi già",
+      "headline": "Connetti l'agente che usi già",
       "subline": "Claude Code, Cursor, VS Code, Claude Desktop o qualsiasi client MCP. Tutto viene eseguito sul tuo computer."
     }
   },
@@ -50,7 +50,7 @@
   },
   "profiles": {
     "prompt": "Questo profilo Chrome è per il lavoro. Chiamalo Lavoro.",
-    "reply": "Fatto. Quando chiederai il browser di Lavoro, userò questo profilo.",
+    "reply": "Fatto. Quando chiederai il browser Lavoro, userò questo profilo.",
     "name": "Lavoro"
   },
   "video": {
