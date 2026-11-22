@@ -23,13 +23,15 @@ export const MAX_CHAT_MESSAGE_LENGTH = 20_000;
 export const MAX_CHAT_RECEIVE_WAIT_MS = 20_000;
 
 const cursor = z.number().int().nonnegative().optional();
+const conversationId = z.string().optional();
 
 export const chatSendParams = z.object({ text: z.string().min(1).max(MAX_CHAT_MESSAGE_LENGTH) });
 export const chatReceiveParams = z.object({
   waitMs: z.number().int().min(0).max(MAX_CHAT_RECEIVE_WAIT_MS).default(0),
   after: cursor,
+  conversation: conversationId,
 });
-export const chatPeekParams = z.object({ after: cursor });
+export const chatPeekParams = z.object({ after: cursor, conversation: conversationId });
 
 export const chatTab = z.object({ title: z.string(), url: z.string() });
 
@@ -43,11 +45,13 @@ export const chatUserMessage = z.object({
 export const chatInbox = z.object({
   messages: z.array(chatUserMessage),
   ended: z.boolean(),
+  conversation: conversationId,
 });
 
 export const chatPeek = z.object({
   unread: z.number().int(),
   ended: z.boolean(),
+  conversation: conversationId,
 });
 
 export type ChatTab = z.infer<typeof chatTab>;

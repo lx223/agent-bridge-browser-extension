@@ -6,6 +6,7 @@ import { chooseConversation, panelView } from './view.ts';
 const NOW = 1_700_000_000_000;
 
 const conversation = (sessionId: string, extra: Partial<Conversation> = {}): Conversation => ({
+  id: `conversation-${sessionId}`,
   sessionId,
   title: `claude-code in ${sessionId}`,
   messages: [],

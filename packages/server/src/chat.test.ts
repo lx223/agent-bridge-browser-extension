@@ -93,6 +93,40 @@ describe('browser chat tools', () => {
     expect(extension.receives).toEqual([{ waitMs: 20_000 }, { waitMs: 20_000, after: 4 }, { waitMs: 20_000, after: 4 }]);
   });
 
+  it('starts reading a new conversation from the start when the browser replaced the old one', async () => {
+    const extension = fakeExtension([
+      { messages: [{ seq: 12, text: 'before the restart', sentAt: 0 }], ended: false, conversation: 'first' },
+      { messages: [{ seq: 2, text: 'after the restart', sentAt: 0 }], ended: false, conversation: 'second' },
+      { messages: [{ seq: 4, text: 'later', sentAt: 0 }], ended: false, conversation: 'second' },
+    ]);
+    const { client } = await connect(extension.request);
+    await client.callTool({ name: CHAT_RECEIVE_TOOL, arguments: {} });
+    const replaced = await client.callTool({ name: CHAT_RECEIVE_TOOL, arguments: {} });
+    expect(jsonOf(replaced).messages).toEqual([{ text: 'after the restart', sentAt: '1970-01-01T00:00:00.000Z' }]);
+    await client.callTool({ name: CHAT_RECEIVE_TOOL, arguments: {} });
+    expect(extension.receives).toEqual([
+      { waitMs: 20_000 },
+      { waitMs: 20_000, after: 12, conversation: 'first' },
+      { waitMs: 20_000, after: 2, conversation: 'second' },
+    ]);
+  });
+
+  it('forgets the cursor when a peek shows the conversation was replaced', async () => {
+    const extension = fakeExtension([{ messages: [{ seq: 12, text: 'before the restart', sentAt: 0 }], ended: false, conversation: 'first' }]);
+    const peeks: Array<Record<string, unknown>> = [];
+    const request: Request = async (browser, method, params, agent, instance) => {
+      if (method !== CHAT_PEEK_METHOD) return extension.request(browser, method, params, agent, instance);
+      peeks.push(params);
+      return { unread: 1, ended: false, conversation: 'second' };
+    };
+    const { client } = await connect(request);
+    await client.callTool({ name: CHAT_RECEIVE_TOOL, arguments: {} });
+    await client.callTool({ name: 'chrome_tabs_list', arguments: {} });
+    await client.callTool({ name: CHAT_RECEIVE_TOOL, arguments: { timeoutSeconds: 0 } });
+    expect(peeks).toEqual([{ after: 12, conversation: 'first' }]);
+    expect(extension.receives.at(-1)).toEqual({ waitMs: 0, conversation: 'second' });
+  });
+
   it('says so when no reply arrived in time', async () => {
     const extension = fakeExtension([]);
     const { client } = await connect(extension.request);
