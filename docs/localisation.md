@@ -59,3 +59,10 @@ On Linux and Windows, start Chrome with `--lang=de`. On macOS, Chrome follows th
 ## Review
 
 The translations other than English were written without a native speaker review. Have the most important languages checked before relying on them, and fix any message in its `messages.json`.
+
+Open questions from the translation:
+
+- Safari's names for Settings > Extensions come from memory and are least certain in `ms`, `uk` and `ar`. Where macOS has no interface in the language (`fa`, `fil`, `sw`, `am`, `et`, `lv`, `lt`, `sr`, `sl`), the path stays in English. The Indian languages other than `hi` translate it, which may not match what Safari shows.
+- Register: `de` uses Sie and `zh_CN` uses 您, while the store screenshot captions in `store/screenshots/locales/` use du and 你. The example prompts on the setup page use the informal form people type to an agent.
+- `bn` and `mr` number the setup steps with their own digits, while the other Indian languages use 1 and 2.
+- Words with no settled Chrome term, chosen from memory: "agent" (`zh_CN` 智能体, `tr` ajan) and "extension" or "tab" in `kn`, `ml` and `ta`. In the Indian languages the example profile name "Work" is rendered as "Office".
