@@ -20,9 +20,6 @@
   "notificationReply": {
     "message": "Klicka på knappen Agent Browser Bridge i verktygsfältet för att svara"
   },
-  "optionsTitle": {
-    "message": "Alternativ för Agent Browser Bridge"
-  },
   "statusChecking": {
     "message": "Kontrollerar anslutningen…"
   },
@@ -116,15 +113,6 @@
   "welcomeAnalyticsHint": {
     "message": "Vilka funktioner som används och tilläggets version, för att hjälpa till att förbättra tillägget."
   },
-  "instanceNameLabel": {
-    "message": "Namnge den här webbläsarprofilen"
-  },
-  "instanceNamePlaceholder": {
-    "message": "Till exempel Jobb eller Privat"
-  },
-  "optionsInstanceNameHint": {
-    "message": "Agenter använder namnet för att skilja dina webbläsare och profiler åt. $1"
-  },
   "instanceId": {
     "message": "Instans-id: $1"
   },
@@ -176,29 +164,8 @@
   "analyticsTitle": {
     "message": "Dela anonym användningsstatistik"
   },
-  "analyticsHint": {
-    "message": "Vilka funktioner som används, om de lyckas samt versionerna av tillägget och agenten. Aldrig fliktitlar, webbadresser eller sidinnehåll. $1"
-  },
   "privacyPolicy": {
     "message": "Integritetspolicy"
-  },
-  "analyticsUnavailable": {
-    "message": "Den här versionen samlar inte in användningsstatistik."
-  },
-  "openSetup": {
-    "message": "Öppna konfiguration och anslutningsstatus"
-  },
-  "optionsConnected": {
-    "message": "Agent ansluten"
-  },
-  "optionsConnectedMany_one": {
-    "message": "$1 agentsession ansluten"
-  },
-  "optionsConnectedMany_other": {
-    "message": "$1 agentsessioner anslutna"
-  },
-  "optionsDisconnected": {
-    "message": "Ingen agent ansluten"
   },
   "agentStartingUp": {
     "message": "Agenten startar"
@@ -281,6 +248,9 @@
   "chatStatusDisconnected": {
     "message": "Agenten är frånkopplad"
   },
+  "chatStatusReconnecting": {
+    "message": "Agenten ansluter igen"
+  },
   "chatStatusEnded": {
     "message": "Chatten är avslutad"
   },
@@ -292,6 +262,9 @@
   },
   "chatHintDisconnected": {
     "message": "Den här agentsessionen har stängts."
+  },
+  "chatHintReconnecting": {
+    "message": "Anslutningen till agenten bröts. Dina meddelanden väntar här tills den är ansluten igen."
   },
   "chatHintEnded": {
     "message": "Be agenten att fortsätta i webbläsaren för att chatta igen."

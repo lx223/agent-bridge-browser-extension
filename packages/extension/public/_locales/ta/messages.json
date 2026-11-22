@@ -20,9 +20,6 @@
   "notificationReply": {
     "message": "பதிலளிக்க, கருவிப்பட்டியில் உள்ள Agent Browser Bridge பட்டனைக் கிளிக் செய்யவும்"
   },
-  "optionsTitle": {
-    "message": "Agent Browser Bridge விருப்பங்கள்"
-  },
   "statusChecking": {
     "message": "இணைப்பைச் சரிபார்க்கிறது…"
   },
@@ -116,15 +113,6 @@
   "welcomeAnalyticsHint": {
     "message": "எந்த அம்சங்கள் பயன்படுத்தப்படுகின்றன, நீட்டிப்பின் பதிப்பு ஆகியவை. நீட்டிப்பை மேம்படுத்த இவை உதவும்."
   },
-  "instanceNameLabel": {
-    "message": "இந்த உலாவிச் சுயவிவரத்திற்குப் பெயரிடுங்கள்"
-  },
-  "instanceNamePlaceholder": {
-    "message": "எடுத்துக்காட்டாக, அலுவலகம் அல்லது தனிப்பட்டது"
-  },
-  "optionsInstanceNameHint": {
-    "message": "உங்கள் உலாவிகளையும் சுயவிவரங்களையும் வேறுபடுத்தி அறிய ஏஜென்ட்டுகள் இந்தப் பெயரைப் பயன்படுத்துகின்றன. $1"
-  },
   "instanceId": {
     "message": "இன்ஸ்டன்ஸ் ஐடி: $1"
   },
@@ -176,29 +164,8 @@
   "analyticsTitle": {
     "message": "அநாமதேயப் பயன்பாட்டுப் புள்ளிவிவரங்களைப் பகிர்"
   },
-  "analyticsHint": {
-    "message": "எந்த அம்சங்கள் பயன்படுத்தப்படுகின்றன, அவை வெற்றிபெறுகின்றனவா, நீட்டிப்பு மற்றும் ஏஜென்ட்டின் பதிப்புகள். தாவல் தலைப்புகள், URLகள், பக்க உள்ளடக்கம் ஆகியவை ஒருபோதும் சேகரிக்கப்படாது. $1"
-  },
   "privacyPolicy": {
     "message": "தனியுரிமைக் கொள்கை"
-  },
-  "analyticsUnavailable": {
-    "message": "இந்த பில்டு பயன்பாட்டுப் புள்ளிவிவரங்களைச் சேகரிக்காது."
-  },
-  "openSetup": {
-    "message": "அமைவையும் இணைப்பு நிலையையும் திற"
-  },
-  "optionsConnected": {
-    "message": "ஏஜென்ட் இணைக்கப்பட்டுள்ளது"
-  },
-  "optionsConnectedMany_one": {
-    "message": "$1 ஏஜென்ட் அமர்வு இணைக்கப்பட்டுள்ளது"
-  },
-  "optionsConnectedMany_other": {
-    "message": "$1 ஏஜென்ட் அமர்வுகள் இணைக்கப்பட்டுள்ளன"
-  },
-  "optionsDisconnected": {
-    "message": "ஏஜென்ட் எதுவும் இணைக்கப்படவில்லை"
   },
   "agentStartingUp": {
     "message": "ஏஜென்ட் தொடங்குகிறது"
@@ -281,6 +248,9 @@
   "chatStatusDisconnected": {
     "message": "ஏஜென்ட் துண்டிக்கப்பட்டது"
   },
+  "chatStatusReconnecting": {
+    "message": "முகவர் மீண்டும் இணைகிறது"
+  },
   "chatStatusEnded": {
     "message": "அரட்டை முடிந்தது"
   },
@@ -292,6 +262,9 @@
   },
   "chatHintDisconnected": {
     "message": "இந்த ஏஜென்ட் அமர்வு மூடப்பட்டது."
+  },
+  "chatHintReconnecting": {
+    "message": "முகவருடனான இணைப்பு துண்டிக்கப்பட்டது. மீண்டும் இணையும் வரை உங்கள் செய்திகள் இங்கே காத்திருக்கும்."
   },
   "chatHintEnded": {
     "message": "மீண்டும் அரட்டையடிக்க, உலாவியில் தொடருமாறு ஏஜென்ட்டிடம் கேளுங்கள்."

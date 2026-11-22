@@ -20,9 +20,6 @@
   "notificationReply": {
     "message": "Klik på knappen Agent Browser Bridge på værktøjslinjen for at svare"
   },
-  "optionsTitle": {
-    "message": "Indstillinger for Agent Browser Bridge"
-  },
   "statusChecking": {
     "message": "Tjekker forbindelsen…"
   },
@@ -116,15 +113,6 @@
   "welcomeAnalyticsHint": {
     "message": "Hvilke funktioner der bruges, og udvidelsens version, for at hjælpe med at forbedre udvidelsen."
   },
-  "instanceNameLabel": {
-    "message": "Giv denne browserprofil et navn"
-  },
-  "instanceNamePlaceholder": {
-    "message": "F.eks. Arbejde eller Privat"
-  },
-  "optionsInstanceNameHint": {
-    "message": "Agenter bruger navnet til at skelne mellem dine browsere og profiler. $1"
-  },
   "instanceId": {
     "message": "Instans-id: $1"
   },
@@ -176,29 +164,8 @@
   "analyticsTitle": {
     "message": "Del anonyme brugsstatistikker"
   },
-  "analyticsHint": {
-    "message": "Hvilke funktioner der bruges, om de lykkes, og udvidelsens og agentens versioner. Aldrig fanetitler, webadresser eller sideindhold. $1"
-  },
   "privacyPolicy": {
     "message": "Privatlivspolitik"
-  },
-  "analyticsUnavailable": {
-    "message": "Denne version indsamler ikke brugsstatistikker."
-  },
-  "openSetup": {
-    "message": "Åbn opsætning og forbindelsesstatus"
-  },
-  "optionsConnected": {
-    "message": "Agent forbundet"
-  },
-  "optionsConnectedMany_one": {
-    "message": "$1 agentsession forbundet"
-  },
-  "optionsConnectedMany_other": {
-    "message": "$1 agentsessioner forbundet"
-  },
-  "optionsDisconnected": {
-    "message": "Ingen agent forbundet"
   },
   "agentStartingUp": {
     "message": "Agenten starter"
@@ -281,6 +248,9 @@
   "chatStatusDisconnected": {
     "message": "Agenten er afbrudt"
   },
+  "chatStatusReconnecting": {
+    "message": "Agenten genopretter forbindelsen"
+  },
   "chatStatusEnded": {
     "message": "Chatten er afsluttet"
   },
@@ -292,6 +262,9 @@
   },
   "chatHintDisconnected": {
     "message": "Denne agentsession er lukket."
+  },
+  "chatHintReconnecting": {
+    "message": "Forbindelsen til agenten blev afbrudt. Dine beskeder venter her, indtil den er tilbage."
   },
   "chatHintEnded": {
     "message": "Bed agenten om at fortsætte i browseren for at chatte igen."

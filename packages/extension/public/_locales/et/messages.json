@@ -20,9 +20,6 @@
   "notificationReply": {
     "message": "Vastamiseks klõpsake tööriistaribal nuppu Agent Browser Bridge"
   },
-  "optionsTitle": {
-    "message": "Agent Browser Bridge – valikud"
-  },
   "statusChecking": {
     "message": "Ühenduse kontrollimine …"
   },
@@ -116,15 +113,6 @@
   "welcomeAnalyticsHint": {
     "message": "Milliseid funktsioone kasutatakse ja laienduse versioon, et aidata laiendust täiustada."
   },
-  "instanceNameLabel": {
-    "message": "Pange sellele brauseriprofiilile nimi"
-  },
-  "instanceNamePlaceholder": {
-    "message": "Näiteks Töö või Isiklik"
-  },
-  "optionsInstanceNameHint": {
-    "message": "Agendid eristavad selle nime järgi teie brausereid ja profiile. $1"
-  },
   "instanceId": {
     "message": "Eksemplari ID: $1"
   },
@@ -176,29 +164,8 @@
   "analyticsTitle": {
     "message": "Jaga anonüümset kasutusstatistikat"
   },
-  "analyticsHint": {
-    "message": "Milliseid funktsioone kasutatakse, kas need õnnestuvad, ning laienduse ja agendi versioonid. Mitte kunagi vahelehtede pealkirju, URL-e ega lehtede sisu. $1"
-  },
   "privacyPolicy": {
     "message": "Privaatsuseeskirjad"
-  },
-  "analyticsUnavailable": {
-    "message": "See järk ei kogu kasutusstatistikat."
-  },
-  "openSetup": {
-    "message": "Ava seadistus ja ühenduse olek"
-  },
-  "optionsConnected": {
-    "message": "Agent on ühendatud"
-  },
-  "optionsConnectedMany_one": {
-    "message": "$1 agendiseanss on ühendatud"
-  },
-  "optionsConnectedMany_other": {
-    "message": "$1 agendiseanssi on ühendatud"
-  },
-  "optionsDisconnected": {
-    "message": "Ühtegi agenti pole ühendatud"
   },
   "agentStartingUp": {
     "message": "Agent käivitub"
@@ -281,6 +248,9 @@
   "chatStatusDisconnected": {
     "message": "Agendi ühendus katkes"
   },
+  "chatStatusReconnecting": {
+    "message": "Agent loob uuesti ühendust"
+  },
   "chatStatusEnded": {
     "message": "Vestlus on lõppenud"
   },
@@ -292,6 +262,9 @@
   },
   "chatHintDisconnected": {
     "message": "See agendiseanss on suletud."
+  },
+  "chatHintReconnecting": {
+    "message": "Ühendus agendiga katkes. Sinu sõnumid ootavad siin, kuni ühendus taastub."
   },
   "chatHintEnded": {
     "message": "Uuesti vestlemiseks paluge agendil brauseris jätkata."

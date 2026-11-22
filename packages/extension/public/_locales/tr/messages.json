@@ -20,9 +20,6 @@
   "notificationReply": {
     "message": "Yanıtlamak için araç çubuğundaki Agent Browser Bridge düğmesini tıklayın"
   },
-  "optionsTitle": {
-    "message": "Agent Browser Bridge seçenekleri"
-  },
   "statusChecking": {
     "message": "Bağlantı kontrol ediliyor…"
   },
@@ -116,15 +113,6 @@
   "welcomeAnalyticsHint": {
     "message": "Uzantının geliştirilmesine yardımcı olmak için hangi özelliklerin kullanıldığı ve uzantı sürümü."
   },
-  "instanceNameLabel": {
-    "message": "Bu tarayıcı profiline ad verin"
-  },
-  "instanceNamePlaceholder": {
-    "message": "Örneğin İş veya Kişisel"
-  },
-  "optionsInstanceNameHint": {
-    "message": "Ajanlar, tarayıcılarınızı ve profillerinizi birbirinden ayırt etmek için bu adı kullanır. $1"
-  },
   "instanceId": {
     "message": "Örnek kimliği: $1"
   },
@@ -176,29 +164,8 @@
   "analyticsTitle": {
     "message": "Anonim kullanım istatistiklerini paylaşın"
   },
-  "analyticsHint": {
-    "message": "Hangi özelliklerin kullanıldığı, başarılı olup olmadıkları ve uzantı ile ajan sürümleri. Sekme başlıkları, URL'ler veya sayfa içerikleri asla paylaşılmaz. $1"
-  },
   "privacyPolicy": {
     "message": "Gizlilik politikası"
-  },
-  "analyticsUnavailable": {
-    "message": "Bu derleme kullanım istatistiği toplamaz."
-  },
-  "openSetup": {
-    "message": "Kurulumu ve bağlantı durumunu aç"
-  },
-  "optionsConnected": {
-    "message": "Ajan bağlı"
-  },
-  "optionsConnectedMany_one": {
-    "message": "$1 ajan oturumu bağlı"
-  },
-  "optionsConnectedMany_other": {
-    "message": "$1 ajan oturumu bağlı"
-  },
-  "optionsDisconnected": {
-    "message": "Bağlı ajan yok"
   },
   "agentStartingUp": {
     "message": "Ajan başlatılıyor"
@@ -281,6 +248,9 @@
   "chatStatusDisconnected": {
     "message": "Ajanın bağlantısı kesildi"
   },
+  "chatStatusReconnecting": {
+    "message": "Ajan yeniden bağlanıyor"
+  },
   "chatStatusEnded": {
     "message": "Sohbet sona erdi"
   },
@@ -292,6 +262,9 @@
   },
   "chatHintDisconnected": {
     "message": "Bu ajan oturumu kapandı."
+  },
+  "chatHintReconnecting": {
+    "message": "Ajanla bağlantı koptu. Mesajlarınız yeniden bağlanana kadar burada bekler."
   },
   "chatHintEnded": {
     "message": "Yeniden sohbet etmek için ajandan tarayıcıda devam etmesini isteyin."

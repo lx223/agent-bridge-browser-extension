@@ -20,9 +20,6 @@
   "notificationReply": {
     "message": "Klikk på Agent Browser Bridge-knappen i verktøyraden for å svare"
   },
-  "optionsTitle": {
-    "message": "Alternativer for Agent Browser Bridge"
-  },
   "statusChecking": {
     "message": "Sjekker tilkoblingen…"
   },
@@ -116,15 +113,6 @@
   "welcomeAnalyticsHint": {
     "message": "Hvilke funksjoner som brukes, og utvidelsesversjon, for å bidra til å forbedre utvidelsen."
   },
-  "instanceNameLabel": {
-    "message": "Gi denne nettleserprofilen et navn"
-  },
-  "instanceNamePlaceholder": {
-    "message": "For eksempel Jobb eller Privat"
-  },
-  "optionsInstanceNameHint": {
-    "message": "Agenter bruker navnet til å skille mellom nettleserne og profilene dine. $1"
-  },
   "instanceId": {
     "message": "Instans-ID: $1"
   },
@@ -176,29 +164,8 @@
   "analyticsTitle": {
     "message": "Del anonym bruksstatistikk"
   },
-  "analyticsHint": {
-    "message": "Hvilke funksjoner som brukes, om de lykkes, og versjonene av utvidelsen og agenten. Aldri fanetitler, nettadresser eller sideinnhold. $1"
-  },
   "privacyPolicy": {
     "message": "Personvernerklæring"
-  },
-  "analyticsUnavailable": {
-    "message": "Denne versjonen samler ikke inn bruksstatistikk."
-  },
-  "openSetup": {
-    "message": "Åpne oppsett og tilkoblingsstatus"
-  },
-  "optionsConnected": {
-    "message": "Agent tilkoblet"
-  },
-  "optionsConnectedMany_one": {
-    "message": "$1 agentøkt tilkoblet"
-  },
-  "optionsConnectedMany_other": {
-    "message": "$1 agentøkter tilkoblet"
-  },
-  "optionsDisconnected": {
-    "message": "Ingen agent tilkoblet"
   },
   "agentStartingUp": {
     "message": "Agenten starter"
@@ -281,6 +248,9 @@
   "chatStatusDisconnected": {
     "message": "Agenten er frakoblet"
   },
+  "chatStatusReconnecting": {
+    "message": "Agenten kobler til på nytt"
+  },
   "chatStatusEnded": {
     "message": "Chatten er avsluttet"
   },
@@ -292,6 +262,9 @@
   },
   "chatHintDisconnected": {
     "message": "Denne agentøkten er lukket."
+  },
+  "chatHintReconnecting": {
+    "message": "Forbindelsen til agenten ble brutt. Meldingene dine venter her til den kobler til igjen."
   },
   "chatHintEnded": {
     "message": "Be agenten fortsette i nettleseren for å chatte igjen."

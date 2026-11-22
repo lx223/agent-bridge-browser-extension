@@ -7,6 +7,7 @@ const NOW = 1_700_000_000_000;
 
 const conversation = (sessionId: string, extra: Partial<Conversation> = {}): Conversation => ({
   id: `conversation-${sessionId}`,
+  key: sessionId,
   sessionId,
   title: `claude-code in ${sessionId}`,
   messages: [],
@@ -48,6 +49,13 @@ describe('panelView', () => {
     expect(panelView({ a: conversation('a') }, chatting, NOW).status).toBe('Working');
   });
 
+  it('keeps the chat open while a dropped agent reconnects', () => {
+    const view = panelView({ a: conversation('a', { goneAt: NOW - 1_000 }) }, [], NOW);
+    expect(view).toMatchObject({ state: 'reconnecting', status: 'Agent reconnecting', canSend: true, canEnd: true, canRemove: false });
+    expect(view.composerHint).toMatch(/wait here until it reconnects/);
+    expect(panelView({ a: conversation('a', { goneAt: NOW - 11 * 60_000 }) }, [], NOW).state).toBe('disconnected');
+  });
+
   it('stops replies once the agent session closes or the chat ends', () => {
     expect(panelView({ a: conversation('a') }, [], NOW)).toMatchObject({ state: 'disconnected', canSend: false, canEnd: false, canRemove: true });
     expect(panelView({ a: conversation('a', { ended: true }) }, [session('a')], NOW)).toMatchObject({ state: 'ended', canSend: false, canRemove: true });
@@ -70,8 +78,8 @@ describe('panelView', () => {
     };
     const view = panelView(conversations, [session('a'), session('b')], NOW);
     expect(view.options).toEqual([
-      { sessionId: 'a', label: 'claude-code in a' },
-      { sessionId: 'b', label: 'claude-code in b (1 new)' },
+      { key: 'a', label: 'claude-code in a' },
+      { key: 'b', label: 'claude-code in b (1 new)' },
     ]);
   });
 });

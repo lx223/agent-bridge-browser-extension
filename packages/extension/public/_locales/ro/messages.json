@@ -20,9 +20,6 @@
   "notificationReply": {
     "message": "Dați clic pe butonul Agent Browser Bridge din bara de instrumente pentru a răspunde"
   },
-  "optionsTitle": {
-    "message": "Opțiuni Agent Browser Bridge"
-  },
   "statusChecking": {
     "message": "Se verifică conexiunea…"
   },
@@ -119,15 +116,6 @@
   "welcomeAnalyticsHint": {
     "message": "Ce funcții se folosesc și versiunea extensiei, pentru a ajuta la îmbunătățirea extensiei."
   },
-  "instanceNameLabel": {
-    "message": "Denumiți acest profil de browser"
-  },
-  "instanceNamePlaceholder": {
-    "message": "De exemplu, Serviciu sau Personal"
-  },
-  "optionsInstanceNameHint": {
-    "message": "Agenții folosesc acest nume pentru a deosebi browserele și profilurile dvs. $1"
-  },
   "instanceId": {
     "message": "ID instanță: $1"
   },
@@ -179,32 +167,8 @@
   "analyticsTitle": {
     "message": "Trimiteți statistici de utilizare anonime"
   },
-  "analyticsHint": {
-    "message": "Ce funcții se folosesc, dacă reușesc și versiunile extensiei și agentului. Niciodată titlurile filelor, adresele URL sau conținutul paginilor. $1"
-  },
   "privacyPolicy": {
     "message": "Politica de confidențialitate"
-  },
-  "analyticsUnavailable": {
-    "message": "Această versiune nu colectează statistici de utilizare."
-  },
-  "openSetup": {
-    "message": "Deschideți configurarea și starea conexiunii"
-  },
-  "optionsConnected": {
-    "message": "Agent conectat"
-  },
-  "optionsConnectedMany_one": {
-    "message": "$1 sesiune de agent conectată"
-  },
-  "optionsConnectedMany_few": {
-    "message": "$1 sesiuni de agent conectate"
-  },
-  "optionsConnectedMany_other": {
-    "message": "$1 de sesiuni de agent conectate"
-  },
-  "optionsDisconnected": {
-    "message": "Niciun agent conectat"
   },
   "agentStartingUp": {
     "message": "Agentul pornește"
@@ -293,6 +257,9 @@
   "chatStatusDisconnected": {
     "message": "Agent deconectat"
   },
+  "chatStatusReconnecting": {
+    "message": "Agentul se reconectează"
+  },
   "chatStatusEnded": {
     "message": "Chat încheiat"
   },
@@ -304,6 +271,9 @@
   },
   "chatHintDisconnected": {
     "message": "Această sesiune de agent s-a închis."
+  },
+  "chatHintReconnecting": {
+    "message": "Conexiunea cu agentul s-a întrerupt. Mesajele tale așteaptă aici până se reconectează."
   },
   "chatHintEnded": {
     "message": "Cereți-i agentului să continue în browser pentru a discuta din nou."

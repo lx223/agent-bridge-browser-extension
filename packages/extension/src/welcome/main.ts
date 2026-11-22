@@ -25,6 +25,7 @@ $<HTMLAnchorElement>('cursor-link').href = cursorInstallUrl();
 $<HTMLAnchorElement>('vscode-link').href = vscodeInstallUrl();
 $<HTMLAnchorElement>('claude-desktop-link').href = claudeDesktopExtensionUrl;
 $<HTMLAnchorElement>('privacy-link').href = PRIVACY_URL;
+$('extension-version').textContent = `v${chrome.runtime.getManifest().version}`;
 
 const profileName = $<HTMLInputElement>('instance-name');
 const showInitial = (name: string) => ($('profile-avatar').textContent = profileInitial(name));

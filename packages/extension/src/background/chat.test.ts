@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
 import { CHAT_PEEK_METHOD, CHAT_RECEIVE_METHOD, CHAT_SEND_METHOD, type AgentInfo } from '@agent-browser-bridge/protocol';
-import { CHAT_STORAGE_KEY, ChatStore, hasOpenConversation, MAX_CONVERSATIONS, totalUnseen, type Conversations } from './chat.ts';
+import { CHAT_STORAGE_KEY, ChatStore, hasOpenConversation, MAX_CONVERSATIONS, RECONNECT_GRACE_MS, totalUnseen, type Conversations } from './chat.ts';
 
 const agent = (sessionId = 'session-1', project = 'shop'): AgentInfo => ({
   serverVersion: '1.0.0',
@@ -189,6 +189,112 @@ describe('ChatStore', () => {
     expect(hasOpenConversation(stored(storage), new Set(['session-3']))).toBe(false);
     await store.end('session-2');
     expect(hasOpenConversation(stored(storage), new Set(['session-2']))).toBe(false);
+  });
+
+  describe('when the agent gives its own id', () => {
+    const me = { id: 'agent-1', name: 'Tidy tabs' };
+
+    it('keys the conversation by that id and titles it with the agent name', async () => {
+      const { store, storage } = setup();
+      await store.dispatch(CHAT_SEND_METHOD, { text: 'What next?', agentSession: me }, agent());
+      expect(stored(storage)['agent-session:agent-1']).toMatchObject({ key: 'agent-session:agent-1', sessionId: 'session-1', agentSessionId: 'agent-1', title: 'Tidy tabs' });
+    });
+
+    it('keeps the conversation when the agent comes back through a new server session', async () => {
+      const { store, storage } = setup();
+      await store.sessionsChanged(new Set(['session-1']));
+      await store.dispatch(CHAT_SEND_METHOD, { text: 'What next?', agentSession: me }, agent());
+      await store.userSays('agent-session:agent-1', 'Group my tabs');
+      await store.sessionsChanged(new Set(['session-2']));
+      const inbox = (await store.dispatch(CHAT_RECEIVE_METHOD, { waitMs: 0, agentSession: me }, agent('session-2'))) as { messages: Array<{ text: string }> };
+      expect(inbox.messages.map((message) => message.text)).toEqual(['Group my tabs']);
+      expect(Object.keys(stored(storage))).toEqual(['agent-session:agent-1']);
+      expect(stored(storage)['agent-session:agent-1']).toMatchObject({ sessionId: 'session-2' });
+      expect(stored(storage)['agent-session:agent-1']!.goneAt).toBeUndefined();
+    });
+
+    it('gives agents sharing one server session their own conversations', async () => {
+      const { store, storage } = setup();
+      await store.dispatch(CHAT_SEND_METHOD, { text: 'Tabs?', agentSession: me }, agent());
+      await store.dispatch(CHAT_SEND_METHOD, { text: 'PRs?', agentSession: { id: 'agent-2', name: 'Review PRs' } }, agent());
+      await store.userSays('agent-session:agent-2', 'Look at the open ones');
+      expect(Object.keys(stored(storage)).sort()).toEqual(['agent-session:agent-1', 'agent-session:agent-2']);
+      expect(await store.dispatch(CHAT_PEEK_METHOD, { agentSession: me }, agent())).toMatchObject({ unread: 0 });
+      expect(await store.dispatch(CHAT_PEEK_METHOD, { agentSession: { id: 'agent-2' } }, agent())).toMatchObject({ unread: 1 });
+    });
+
+    it('is never taken over by a session that gives no id', async () => {
+      const { store, storage } = setup();
+      await store.sessionsChanged(new Set(['session-1']));
+      await store.dispatch(CHAT_SEND_METHOD, { text: 'What next?', agentSession: me }, agent());
+      await store.sessionsChanged(new Set(['session-2']));
+      await store.agentSays(agent('session-2'), 'Hello');
+      expect(Object.keys(stored(storage)).sort()).toEqual(['agent-session:agent-1', 'session-2']);
+    });
+  });
+
+  it('gives conversations saved before keys existed their storage key', async () => {
+    const storage = memoryStorage();
+    storage.items[CHAT_STORAGE_KEY] = { 'session-1': { sessionId: 'session-1', id: 'c1', title: 't', messages: [], nextSeq: 1, acknowledged: 0, delivered: 0, seenByUser: 0, listeningUntil: 0, ended: false, updatedAt: 0 } };
+    const store = new ChatStore(storage);
+    expect((await store.conversations())['session-1']!.key).toBe('session-1');
+  });
+
+  describe('when the agent session reconnects with a new id', () => {
+    async function dropped() {
+      const context = setup();
+      await context.store.sessionsChanged(new Set(['session-1']));
+      await context.store.agentSays(agent(), 'What next?');
+      await context.store.userSays('session-1', 'Group my tabs');
+      await context.store.sessionsChanged(new Set(['session-2']));
+      return context;
+    }
+
+    it('marks the conversation as reconnecting instead of closing it', async () => {
+      const { store, storage } = await dropped();
+      expect(stored(storage)['session-1']).toMatchObject({ goneAt: 1_000, ended: false });
+      expect(hasOpenConversation(stored(storage), new Set(['session-2']), 1_000)).toBe(true);
+      await store.userSays('session-1', 'and pin the inbox');
+      expect(stored(storage)['session-1']!.messages).toHaveLength(3);
+    });
+
+    it('moves the conversation to the new session of the same agent and hands over the unread replies', async () => {
+      const { store, storage } = await dropped();
+      const inbox = await store.receive(agent('session-2'), { waitMs: 0 });
+      expect(inbox.messages.map((message) => message.text)).toEqual(['Group my tabs']);
+      expect(Object.keys(stored(storage))).toEqual(['session-2']);
+      expect(stored(storage)['session-2']).toMatchObject({ sessionId: 'session-2', messages: [{ text: 'What next?' }, { text: 'Group my tabs' }] });
+      expect(stored(storage)['session-2']!.goneAt).toBeUndefined();
+    });
+
+    it('leaves it alone for a different agent or project', async () => {
+      const { store, storage } = await dropped();
+      await store.agentSays(agent('session-2', 'docs'), 'Hello');
+      expect(Object.keys(stored(storage)).sort()).toEqual(['session-1', 'session-2']);
+    });
+
+    it('leaves it alone once the grace period is over', async () => {
+      const { store, storage, advance } = await dropped();
+      advance(RECONNECT_GRACE_MS);
+      expect(hasOpenConversation(stored(storage), new Set(['session-2']), 1_000 + RECONNECT_GRACE_MS)).toBe(false);
+      await store.agentSays(agent('session-2'), 'Hello');
+      expect(Object.keys(stored(storage)).sort()).toEqual(['session-1', 'session-2']);
+    });
+
+    it('leaves a live session alone', async () => {
+      const { store, storage } = setup();
+      await store.sessionsChanged(new Set(['session-1', 'session-2']));
+      await store.agentSays(agent(), 'What next?');
+      await store.agentSays(agent('session-2'), 'Hello');
+      expect(Object.keys(stored(storage)).sort()).toEqual(['session-1', 'session-2']);
+    });
+
+    it('does not bring back a conversation for the session that left', async () => {
+      const { store, storage } = await dropped();
+      await store.receive(agent('session-2'), { waitMs: 0 });
+      await expect(store.receive(agent(), { waitMs: 0 })).resolves.toEqual({ messages: [], ended: false });
+      expect(Object.keys(stored(storage))).toEqual(['session-2']);
+    });
   });
 
   it('removes conversations and keeps only the most recent ones', async () => {

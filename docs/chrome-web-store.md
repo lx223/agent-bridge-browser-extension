@@ -30,7 +30,7 @@ The Chrome files go to `store/assets/out/chrome/`:
 | --- | --- | --- |
 | `<locale>/1-tabs.png` | Screenshots, 1280x800 | An agent grouping open tabs by topic with `chrome_plan_apply` |
 | `<locale>/2-pages.png` | Screenshots | An agent filling in and submitting a booking form |
-| `<locale>/3-profiles.png` | Screenshots | An agent naming the browser profile, and the options popup showing the name |
+| `<locale>/3-profiles.png` | Screenshots | An agent naming the browser profile, and the setup page showing the name |
 | `<locale>/4-setup.png` | Screenshots | The setup page with an agent connected |
 | `<locale>/promo-video.mp4` | Promo video, as a YouTube link | The four scenes played in order, between an opening and a closing title card |
 | `promo/small-promo-tile-440x280.png` | Small promo tile | The icon, name and tagline |

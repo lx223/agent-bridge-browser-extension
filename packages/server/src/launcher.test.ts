@@ -153,6 +153,13 @@ async function initializedHarness(...args: Parameters<typeof harness>) {
   return h;
 }
 
+const listChanged = [
+  { jsonrpc: '2.0', method: 'notifications/tools/list_changed' },
+  { jsonrpc: '2.0', method: 'notifications/prompts/list_changed' },
+];
+
+const isListChanged = (msg: Message) => msg.method?.endsWith('/list_changed') ?? false;
+
 describe('Launcher', () => {
   it('runs the bundled server and passes messages through both ways', async () => {
     const h = await initializedHarness();
@@ -199,7 +206,7 @@ describe('Launcher', () => {
     expect(next!.received.map((msg) => msg.method)).toEqual(['initialize', 'notifications/initialized']);
     expect(next!.received[0]).toMatchObject({ id: LAUNCHER_INIT_ID, params: initialize.params });
     expect(h.output.filter((msg) => msg.id === LAUNCHER_INIT_ID)).toEqual([]);
-    expect(h.output.at(-1)).toEqual({ jsonrpc: '2.0', method: 'notifications/tools/list_changed' });
+    expect(h.output.slice(-2)).toEqual(listChanged);
 
     await expect.poll(() => h.workers[0]!.stdinEnded).toBe(true);
     h.send(call(7));
@@ -265,7 +272,7 @@ describe('Launcher', () => {
     expect(h.workers[1]!.killed).toBe(true);
     h.send(call(3));
     await expect.poll(() => h.output.find((msg) => msg.id === 3)).toMatchObject({ result: { from: '1.0.0' } });
-    expect(h.output.some((msg) => msg.method === 'notifications/tools/list_changed')).toBe(false);
+    expect(h.output.filter(isListChanged)).toEqual([]);
   });
 
   it('stays on the current version when the new one exits during start-up', async () => {
@@ -290,6 +297,7 @@ describe('Launcher', () => {
       await expect.poll(() => h.output.find((msg) => msg.id === 5)).toMatchObject({ result: { from: '1.0.0' } });
       expect(h.exits).toEqual([]);
       expect(h.output.filter((msg) => msg.id === LAUNCHER_INIT_ID)).toEqual([]);
+      expect(h.output.filter(isListChanged)).toEqual([]);
     });
 
     it('answers a tool call it cut off with an error and repeats other requests', async () => {
@@ -337,7 +345,8 @@ describe('Launcher', () => {
       h.workers[2]!.exit(1);
       await expect.poll(() => h.spawned).toEqual([null, '1.1.0', '1.1.0', null]);
       await expect.poll(() => h.launcher.version).toBe('1.0.0');
-      await expect.poll(() => h.output.at(-1)).toEqual({ jsonrpc: '2.0', method: 'notifications/tools/list_changed' });
+      await expect.poll(() => h.output.slice(-2)).toEqual(listChanged);
+      expect(h.output.filter(isListChanged)).toEqual([...listChanged, ...listChanged]);
       h.send(call(9));
       await expect.poll(() => h.output.find((msg) => msg.id === 9)).toMatchObject({ result: { from: '1.0.0' } });
     });

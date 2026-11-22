@@ -20,9 +20,6 @@
   "notificationReply": {
     "message": "Да бисте одговорили, кликните на дугме Agent Browser Bridge на траци с алаткама"
   },
-  "optionsTitle": {
-    "message": "Agent Browser Bridge – опције"
-  },
   "statusChecking": {
     "message": "Проверава се веза…"
   },
@@ -119,15 +116,6 @@
   "welcomeAnalyticsHint": {
     "message": "Које функције се користе и верзија додатка, да бисте помогли у побољшању додатка."
   },
-  "instanceNameLabel": {
-    "message": "Дајте назив овом профилу прегледача"
-  },
-  "instanceNamePlaceholder": {
-    "message": "На пример Посао или Лично"
-  },
-  "optionsInstanceNameHint": {
-    "message": "Агенти помоћу овог назива разликују ваше прегледаче и профиле. $1"
-  },
   "instanceId": {
     "message": "ID инстанце: $1"
   },
@@ -179,32 +167,8 @@
   "analyticsTitle": {
     "message": "Делите анонимну статистику коришћења"
   },
-  "analyticsHint": {
-    "message": "Које функције се користе, да ли успевају, као и верзије додатка и агента. Никада наслови картица, URL-ови нити садржај страница. $1"
-  },
   "privacyPolicy": {
     "message": "Политика приватности"
-  },
-  "analyticsUnavailable": {
-    "message": "Ова верзија не прикупља статистику коришћења."
-  },
-  "openSetup": {
-    "message": "Отвори подешавање и статус везе"
-  },
-  "optionsConnected": {
-    "message": "Агент је повезан"
-  },
-  "optionsConnectedMany_one": {
-    "message": "Повезана је $1 сесија агента"
-  },
-  "optionsConnectedMany_few": {
-    "message": "Повезане су $1 сесије агента"
-  },
-  "optionsConnectedMany_other": {
-    "message": "Повезано је $1 сесија агента"
-  },
-  "optionsDisconnected": {
-    "message": "Ниједан агент није повезан"
   },
   "agentStartingUp": {
     "message": "Агент се покреће"
@@ -293,6 +257,9 @@
   "chatStatusDisconnected": {
     "message": "Веза са агентом је прекинута"
   },
+  "chatStatusReconnecting": {
+    "message": "Агент се поново повезује"
+  },
   "chatStatusEnded": {
     "message": "Ћаскање је завршено"
   },
@@ -304,6 +271,9 @@
   },
   "chatHintDisconnected": {
     "message": "Ова сесија агента је затворена."
+  },
+  "chatHintReconnecting": {
+    "message": "Веза са агентом је прекинута. Ваше поруке чекају овде док се поново не повеже."
   },
   "chatHintEnded": {
     "message": "Да бисте поново ћаскали, замолите агента да настави у прегледачу."

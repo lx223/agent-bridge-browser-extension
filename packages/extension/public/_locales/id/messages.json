@@ -20,9 +20,6 @@
   "notificationReply": {
     "message": "Klik tombol Agent Browser Bridge di toolbar untuk membalas"
   },
-  "optionsTitle": {
-    "message": "Opsi Agent Browser Bridge"
-  },
   "statusChecking": {
     "message": "Memeriksa koneksi…"
   },
@@ -116,15 +113,6 @@
   "welcomeAnalyticsHint": {
     "message": "Fitur yang digunakan dan versi ekstensi, untuk membantu meningkatkan ekstensi."
   },
-  "instanceNameLabel": {
-    "message": "Beri nama profil browser ini"
-  },
-  "instanceNamePlaceholder": {
-    "message": "Misalnya Kantor atau Pribadi"
-  },
-  "optionsInstanceNameHint": {
-    "message": "Agen menggunakan nama ini untuk membedakan browser dan profil Anda. $1"
-  },
   "instanceId": {
     "message": "ID instance: $1"
   },
@@ -176,29 +164,8 @@
   "analyticsTitle": {
     "message": "Bagikan statistik penggunaan anonim"
   },
-  "analyticsHint": {
-    "message": "Fitur yang digunakan, apakah berhasil, serta versi ekstensi dan agen. Tidak pernah judul tab, URL, atau konten halaman. $1"
-  },
   "privacyPolicy": {
     "message": "Kebijakan privasi"
-  },
-  "analyticsUnavailable": {
-    "message": "Build ini tidak mengumpulkan statistik penggunaan."
-  },
-  "openSetup": {
-    "message": "Buka penyiapan dan status koneksi"
-  },
-  "optionsConnected": {
-    "message": "Agen terhubung"
-  },
-  "optionsConnectedMany_one": {
-    "message": "$1 sesi agen terhubung"
-  },
-  "optionsConnectedMany_other": {
-    "message": "$1 sesi agen terhubung"
-  },
-  "optionsDisconnected": {
-    "message": "Tidak ada agen yang terhubung"
   },
   "agentStartingUp": {
     "message": "Agen sedang dimulai"
@@ -281,6 +248,9 @@
   "chatStatusDisconnected": {
     "message": "Agen terputus"
   },
+  "chatStatusReconnecting": {
+    "message": "Agen sedang menyambung ulang"
+  },
   "chatStatusEnded": {
     "message": "Chat berakhir"
   },
@@ -292,6 +262,9 @@
   },
   "chatHintDisconnected": {
     "message": "Sesi agen ini telah ditutup."
+  },
+  "chatHintReconnecting": {
+    "message": "Koneksi agen terputus. Pesan Anda menunggu di sini sampai agen tersambung kembali."
   },
   "chatHintEnded": {
     "message": "Minta agen untuk melanjutkan di browser agar dapat chat lagi."

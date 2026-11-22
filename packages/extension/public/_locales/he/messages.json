@@ -20,9 +20,6 @@
   "notificationReply": {
     "message": "כדי להשיב, יש ללחוץ על הלחצן של Agent Browser Bridge בסרגל הכלים"
   },
-  "optionsTitle": {
-    "message": "אפשרויות של Agent Browser Bridge"
-  },
   "statusChecking": {
     "message": "בודק את החיבור…"
   },
@@ -119,15 +116,6 @@
   "welcomeAnalyticsHint": {
     "message": "באילו תכונות משתמשים וגרסת התוסף, כדי לעזור לשפר את התוסף."
   },
-  "instanceNameLabel": {
-    "message": "מתן שם לפרופיל הדפדפן הזה"
-  },
-  "instanceNamePlaceholder": {
-    "message": "לדוגמה: עבודה או אישי"
-  },
-  "optionsInstanceNameHint": {
-    "message": "סוכנים משתמשים בשם הזה כדי להבחין בין הדפדפנים והפרופילים שלך. $1"
-  },
   "instanceId": {
     "message": "מזהה מופע: $1"
   },
@@ -179,32 +167,8 @@
   "analyticsTitle": {
     "message": "שיתוף נתונים סטטיסטיים אנונימיים על השימוש"
   },
-  "analyticsHint": {
-    "message": "באילו תכונות משתמשים, אם הן מצליחות, והגרסאות של התוסף והסוכן. אף פעם לא כותרות של כרטיסיות, כתובות URL או תוכן של דפים. $1"
-  },
   "privacyPolicy": {
     "message": "מדיניות הפרטיות"
-  },
-  "analyticsUnavailable": {
-    "message": "הגרסה הזו לא אוספת נתונים סטטיסטיים על השימוש."
-  },
-  "openSetup": {
-    "message": "פתיחת ההגדרה ומצב החיבור"
-  },
-  "optionsConnected": {
-    "message": "סוכן מחובר"
-  },
-  "optionsConnectedMany_one": {
-    "message": "$1 סשן של סוכן מחובר"
-  },
-  "optionsConnectedMany_two": {
-    "message": "$1 סשנים של סוכנים מחוברים"
-  },
-  "optionsConnectedMany_other": {
-    "message": "$1 סשנים של סוכנים מחוברים"
-  },
-  "optionsDisconnected": {
-    "message": "אין סוכן מחובר"
   },
   "agentStartingUp": {
     "message": "הסוכן מופעל"
@@ -293,6 +257,9 @@
   "chatStatusDisconnected": {
     "message": "הסוכן התנתק"
   },
+  "chatStatusReconnecting": {
+    "message": "הסוכן מתחבר מחדש"
+  },
   "chatStatusEnded": {
     "message": "הצ'אט הסתיים"
   },
@@ -304,6 +271,9 @@
   },
   "chatHintDisconnected": {
     "message": "הסשן של הסוכן הזה נסגר."
+  },
+  "chatHintReconnecting": {
+    "message": "החיבור לסוכן נותק. ההודעות שלך ימתינו כאן עד שיתחבר מחדש."
   },
   "chatHintEnded": {
     "message": "כדי לשוחח שוב, אפשר לבקש מהסוכן להמשיך בדפדפן."

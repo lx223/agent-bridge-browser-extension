@@ -48,8 +48,8 @@ describe('textDirection', () => {
 
 describe('plural', () => {
   it('picks the English singular and plural', () => {
-    expect(plural('optionsConnectedMany', 1)).toBe('1 agent session connected');
-    expect(plural('optionsConnectedMany', 3)).toBe('3 agent sessions connected');
+    expect(plural('statusConnectedMany', 1)).toBe('Connected to 1 agent session');
+    expect(plural('statusConnectedMany', 3)).toBe('Connected to 3 agent sessions');
     expect(plural('sessionLastUsed', 1, 'chrome_tabs_list', 'just now')).toBe('Last used chrome_tabs_list just now, 1 call');
   });
 

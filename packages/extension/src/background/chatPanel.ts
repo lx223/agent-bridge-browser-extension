@@ -9,13 +9,13 @@ const NOTIFICATION_ICON = 'icons/icon-128.png';
 const NOTIFICATION_PREVIEW_LENGTH = 200;
 const BADGE_COLOR = '#2563eb';
 
-const sessionId = z.string().min(1);
+const key = z.string().min(1);
 
 export const chatPanelMessage = z.discriminatedUnion('type', [
-  z.object({ type: z.literal('CHAT_POST'), sessionId, text: z.string(), tab: chatTab.optional() }),
-  z.object({ type: z.literal('CHAT_END'), sessionId }),
-  z.object({ type: z.literal('CHAT_REMOVE'), sessionId }),
-  z.object({ type: z.literal('CHAT_SEEN'), sessionId }),
+  z.object({ type: z.literal('CHAT_POST'), key, text: z.string(), tab: chatTab.optional() }),
+  z.object({ type: z.literal('CHAT_END'), key }),
+  z.object({ type: z.literal('CHAT_REMOVE'), key }),
+  z.object({ type: z.literal('CHAT_SEEN'), key }),
 ]);
 
 export type ChatPanelMessage = z.infer<typeof chatPanelMessage>;
@@ -52,6 +52,7 @@ export class ChatPanel {
   agentsChanged(agents: AgentSession[]) {
     this.liveSessions = new Set(agents.flatMap((agent) => (agent.sessionId === undefined ? [] : [agent.sessionId])));
     this.reflect(this.latest);
+    void this.store.sessionsChanged(this.liveSessions).catch(() => undefined);
   }
 
   handles(message: unknown): message is ChatPanelMessage {
@@ -61,13 +62,13 @@ export class ChatPanel {
   async handle(message: ChatPanelMessage): Promise<void> {
     switch (message.type) {
       case 'CHAT_POST':
-        return this.store.userSays(message.sessionId, message.text, message.tab);
+        return this.store.userSays(message.key, message.text, message.tab);
       case 'CHAT_END':
-        return this.store.end(message.sessionId);
+        return this.store.end(message.key);
       case 'CHAT_REMOVE':
-        return this.store.remove(message.sessionId);
+        return this.store.remove(message.key);
       case 'CHAT_SEEN':
-        return this.store.markSeen(message.sessionId);
+        return this.store.markSeen(message.key);
     }
   }
 

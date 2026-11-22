@@ -20,9 +20,6 @@
   "notificationReply": {
     "message": "उत्तर देण्यासाठी टूलबारमधील Agent Browser Bridge बटणावर क्लिक करा"
   },
-  "optionsTitle": {
-    "message": "Agent Browser Bridge पर्याय"
-  },
   "statusChecking": {
     "message": "कनेक्शन तपासत आहे…"
   },
@@ -116,15 +113,6 @@
   "welcomeAnalyticsHint": {
     "message": "एक्स्टेंशनमध्ये सुधारणा करण्यात मदत करण्यासाठी, कोणती वैशिष्ट्ये वापरली जातात आणि एक्स्टेंशनची आवृत्ती."
   },
-  "instanceNameLabel": {
-    "message": "या ब्राउझर प्रोफाइलला नाव द्या"
-  },
-  "instanceNamePlaceholder": {
-    "message": "उदाहरणार्थ ऑफिस किंवा वैयक्तिक"
-  },
-  "optionsInstanceNameHint": {
-    "message": "एजंट हे नाव वापरून तुमचे ब्राउझर आणि प्रोफाइल वेगवेगळे ओळखतात. $1"
-  },
   "instanceId": {
     "message": "इंस्टन्स आयडी: $1"
   },
@@ -176,29 +164,8 @@
   "analyticsTitle": {
     "message": "वापराची निनावी आकडेवारी शेअर करा"
   },
-  "analyticsHint": {
-    "message": "कोणती वैशिष्ट्ये वापरली जातात, ती यशस्वी होतात का, आणि एक्स्टेंशन व एजंटच्या आवृत्त्या. टॅबची शीर्षके, URL किंवा पेजचा आशय कधीही नाही. $1"
-  },
   "privacyPolicy": {
     "message": "गोपनीयता धोरण"
-  },
-  "analyticsUnavailable": {
-    "message": "हा बिल्ड वापराची आकडेवारी गोळा करत नाही."
-  },
-  "openSetup": {
-    "message": "सेटअप आणि कनेक्शनची स्थिती उघडा"
-  },
-  "optionsConnected": {
-    "message": "एजंट कनेक्ट केला आहे"
-  },
-  "optionsConnectedMany_one": {
-    "message": "$1 एजंट सेशन कनेक्ट केले आहे"
-  },
-  "optionsConnectedMany_other": {
-    "message": "$1 एजंट सेशन कनेक्ट केली आहेत"
-  },
-  "optionsDisconnected": {
-    "message": "कोणताही एजंट कनेक्ट केलेला नाही"
   },
   "agentStartingUp": {
     "message": "एजंट सुरू होत आहे"
@@ -281,6 +248,9 @@
   "chatStatusDisconnected": {
     "message": "एजंट डिस्कनेक्ट झाला"
   },
+  "chatStatusReconnecting": {
+    "message": "एजंट पुन्हा कनेक्ट होत आहे"
+  },
   "chatStatusEnded": {
     "message": "चॅट संपले"
   },
@@ -292,6 +262,9 @@
   },
   "chatHintDisconnected": {
     "message": "हे एजंट सेशन बंद झाले आहे."
+  },
+  "chatHintReconnecting": {
+    "message": "एजंटचे कनेक्शन तुटले. तो पुन्हा कनेक्ट होईपर्यंत तुमचे संदेश येथे थांबतील."
   },
   "chatHintEnded": {
     "message": "पुन्हा चॅट करण्यासाठी एजंटला ब्राउझरमध्ये पुढे सुरू ठेवायला सांगा."

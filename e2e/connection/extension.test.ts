@@ -27,9 +27,9 @@ describe('the packaged extension', () => {
   it('ships a manifest whose version and files match the build', () => {
     const manifest = JSON.parse(readFileSync(join(DIST, 'manifest.json'), 'utf-8'));
     expect(manifest.version).toBe(EXTENSION_VERSION);
+    expect(manifest.options_ui).toEqual({ page: 'src/welcome/index.html', open_in_tab: true });
     const referenced = [
       manifest.background.service_worker,
-      manifest.options_ui.page,
       manifest.side_panel.default_path,
       ...Object.values<string>(manifest.icons),
       ...Object.values<string>(manifest.action.default_icon),
@@ -44,6 +44,7 @@ describe('the packaged extension', () => {
     const { page, errors } = await openExtensionPage('src/welcome/index.html');
     await page.waitForSelector('#status[data-state="connected"]');
     expect(await page.textContent('#status-text')).toMatch(/^Connected/);
+    expect(await page.textContent('#extension-version')).toBe(`v${EXTENSION_VERSION}`);
     await harness.agent.call('chrome_windows_list');
     const session = page.locator('#agents li.session');
     await expect.poll(() => session.locator('.chip').allTextContents()).toEqual(['Chrome, this browser']);
@@ -60,6 +61,7 @@ describe('the packaged extension', () => {
     expect(JSON.parse((await page.textContent('#json-config'))!)).toBeTypeOf('object');
     expect(await page.getAttribute('#cursor-link', 'href')).toMatch(/^cursor:/);
     expect(await page.getAttribute('#vscode-link', 'href')).toMatch(/^vscode:/);
+    expect(await page.getAttribute('#privacy-link', 'href')).toMatch(/PRIVACY\.md$/);
     expect(errors).toEqual([]);
     await page.close();
   });
@@ -77,18 +79,6 @@ describe('the packaged extension', () => {
     await name.press('Enter');
     expect(await page.textContent('#profile-saved')).toBe('Name removed');
     expect(await page.textContent('#profile-avatar')).toBe('');
-    expect(errors).toEqual([]);
-    await page.close();
-  });
-
-  it('renders the options page', async () => {
-    const { page, errors } = await openExtensionPage('src/options/index.html');
-    await page.waitForSelector('#connection[data-state="connected"] #agents li.session');
-    expect(await page.textContent('#agents li .session-head strong')).toBe('e2e 0.0.0');
-    expect(await page.getAttribute('#privacy-link', 'href')).toMatch(/PRIVACY\.md$/);
-    const settingHidden = await page.locator('#analytics-setting').isHidden();
-    const noticeHidden = await page.locator('#analytics-unavailable').isHidden();
-    expect(settingHidden).not.toBe(noticeHidden);
     expect(errors).toEqual([]);
     await page.close();
   });

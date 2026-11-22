@@ -20,9 +20,6 @@
   "notificationReply": {
     "message": "I-click ang button ng Agent Browser Bridge sa toolbar para sumagot"
   },
-  "optionsTitle": {
-    "message": "Mga opsyon ng Agent Browser Bridge"
-  },
   "statusChecking": {
     "message": "Sinusuri ang koneksyon…"
   },
@@ -116,15 +113,6 @@
   "welcomeAnalyticsHint": {
     "message": "Kung aling mga feature ang ginagamit at ang bersyon ng extension, para makatulong na mapahusay ang extension."
   },
-  "instanceNameLabel": {
-    "message": "Pangalanan ang profile ng browser na ito"
-  },
-  "instanceNamePlaceholder": {
-    "message": "Halimbawa, Trabaho o Personal"
-  },
-  "optionsInstanceNameHint": {
-    "message": "Ginagamit ng mga agent ang pangalang ito para matukoy ang pagkakaiba ng iyong mga browser at profile. $1"
-  },
   "instanceId": {
     "message": "ID ng instance: $1"
   },
@@ -176,29 +164,8 @@
   "analyticsTitle": {
     "message": "Ibahagi ang anonymous na istatistika ng paggamit"
   },
-  "analyticsHint": {
-    "message": "Kung aling mga feature ang ginagamit, kung nagtatagumpay ang mga ito, at ang mga bersyon ng extension at agent. Hindi kailanman ang mga pamagat ng tab, URL o nilalaman ng page. $1"
-  },
   "privacyPolicy": {
     "message": "Patakaran sa privacy"
-  },
-  "analyticsUnavailable": {
-    "message": "Hindi nangongolekta ng istatistika ng paggamit ang build na ito."
-  },
-  "openSetup": {
-    "message": "Buksan ang setup at status ng koneksyon"
-  },
-  "optionsConnected": {
-    "message": "Nakakonekta ang agent"
-  },
-  "optionsConnectedMany_one": {
-    "message": "$1 session ng agent ang nakakonekta"
-  },
-  "optionsConnectedMany_other": {
-    "message": "$1 session ng agent ang nakakonekta"
-  },
-  "optionsDisconnected": {
-    "message": "Walang nakakonektang agent"
   },
   "agentStartingUp": {
     "message": "Nagsisimula ang agent"
@@ -281,6 +248,9 @@
   "chatStatusDisconnected": {
     "message": "Nadiskonekta ang agent"
   },
+  "chatStatusReconnecting": {
+    "message": "Muling kumokonekta ang agent"
+  },
   "chatStatusEnded": {
     "message": "Tapos na ang chat"
   },
@@ -292,6 +262,9 @@
   },
   "chatHintDisconnected": {
     "message": "Nagsara na ang session ng agent na ito."
+  },
+  "chatHintReconnecting": {
+    "message": "Naputol ang koneksyon ng agent. Maghihintay rito ang mga mensahe mo hanggang muling kumonekta ito."
   },
   "chatHintEnded": {
     "message": "Hilingin sa agent na magpatuloy sa browser para makapag-chat ulit."

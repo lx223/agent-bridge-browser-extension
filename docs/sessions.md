@@ -1,6 +1,6 @@
 # Agent sessions
 
-Several agent sessions can share the bridge at once, for example Claude Code in one project and Codex in another. The extension's setup page (click the toolbar icon) and its options page show one card for each session.
+Several agent sessions can share the bridge at once, for example Claude Code in one project and Codex in another. The extension's setup page (click the toolbar icon or open the extension's options) shows one card for each session.
 
 ## What a card shows
 
@@ -22,6 +22,12 @@ Hovering over a card shows the session id and the bridge server version.
 **Activity.** The bridge server that hosts the connection for all sessions sees every browser request, along with the session that sent it. For each session it records the time, the tool, a call count and the browser profiles used (up to eight). It sends the session list to every connected browser when a session joins or leaves and, at most four times a second, after browser activity. Activity is kept in memory only:
 - It starts again when another server takes over hosting.
 - It is forgotten when the session disconnects.
+
+## Claude Desktop
+
+Claude Desktop starts one bridge server for its chat and one for all of its Code sessions, rather than one for each session. Every Code session in the app therefore appears as the same agent session, with the same card. Desktop also restarts that server after a tool call fails or times out, which gives it a new session id. The browser chat copes with both because each agent passes its own `agentSessionId` on chat calls, as [chat.md](chat.md#which-agent-a-conversation-belongs-to) explains.
+
+Desktop's Code sessions also keep the tool list they got when Desktop started the server. They ignore the `notifications/tools/list_changed` that the server sends after updating itself, so new tools appear only after the server restarts, for example after turning the extension off and on under **Settings → Extensions**.
 
 ## Privacy
 

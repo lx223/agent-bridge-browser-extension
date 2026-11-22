@@ -16,6 +16,8 @@ import type { BridgeStatus, ExtensionBridge } from './bridge.ts';
 import { createMcpServer } from './mcp.ts';
 
 const closers: Array<() => Promise<void>> = [];
+const ME = { agentSessionId: 'agent-1', agentSessionName: 'Tidy tabs' };
+const ME_PARAM = { id: 'agent-1', name: 'Tidy tabs' };
 
 afterEach(async () => {
   await Promise.all(closers.splice(0).map((close) => close()));
@@ -50,7 +52,9 @@ const jsonOf = (result: unknown) => JSON.parse(textOf(result)[0]!) as Record<str
 function fakeExtension(replies: ChatInbox[]) {
   const sent: string[] = [];
   const receives: Array<Record<string, unknown>> = [];
-  const request: Request = async (_browser, method, params) => {
+  const agentSessions: unknown[] = [];
+  const request: Request = async (_browser, method, { agentSession, ...params }) => {
+    agentSessions.push(agentSession);
     if (method === CHAT_SEND_METHOD) {
       sent.push(params.text as string);
       return { seq: sent.length };
@@ -62,7 +66,7 @@ function fakeExtension(replies: ChatInbox[]) {
     if (method === CHAT_PEEK_METHOD) return { unread: 0, ended: false };
     return [];
   };
-  return { sent, receives, request };
+  return { sent, receives, agentSessions, request };
 }
 
 describe('browser chat tools', () => {
@@ -71,13 +75,14 @@ describe('browser chat tools', () => {
       { messages: [{ seq: 2, text: 'Group my tabs', sentAt: 0, tab: { title: 'Inbox', url: 'https://mail.example/' } }], ended: false },
     ]);
     const { client, bridge } = await connect(extension.request);
-    const result = await client.callTool({ name: CHAT_SEND_TOOL, arguments: { text: 'What next?' } });
+    const result = await client.callTool({ name: CHAT_SEND_TOOL, arguments: { ...ME, text: 'What next?' } });
     expect(extension.sent).toEqual(['What next?']);
     expect(jsonOf(result)).toMatchObject({
       sent: true,
       messages: [{ text: 'Group my tabs', sentAt: '1970-01-01T00:00:00.000Z', viewingTab: { title: 'Inbox', url: 'https://mail.example/' } }],
     });
-    expect(bridge.request).toHaveBeenCalledWith('chrome', CHAT_RECEIVE_METHOD, { waitMs: 20_000 }, undefined, 'aaaa1111');
+    expect(bridge.request).toHaveBeenCalledWith('chrome', CHAT_RECEIVE_METHOD, { waitMs: 20_000, agentSession: ME_PARAM }, undefined, 'aaaa1111');
+    expect(extension.agentSessions).toEqual([ME_PARAM, ME_PARAM]);
   });
 
   it('keeps waiting in short rounds and passes back the last message it read', async () => {
@@ -87,8 +92,8 @@ describe('browser chat tools', () => {
       { messages: [{ seq: 6, text: 'second', sentAt: 0 }], ended: false },
     ]);
     const { client } = await connect(extension.request);
-    await client.callTool({ name: CHAT_RECEIVE_TOOL, arguments: {} });
-    const result = await client.callTool({ name: CHAT_RECEIVE_TOOL, arguments: {} });
+    await client.callTool({ name: CHAT_RECEIVE_TOOL, arguments: { ...ME } });
+    const result = await client.callTool({ name: CHAT_RECEIVE_TOOL, arguments: { ...ME } });
     expect(jsonOf(result).messages).toEqual([{ text: 'second', sentAt: '1970-01-01T00:00:00.000Z' }]);
     expect(extension.receives).toEqual([{ waitMs: 20_000 }, { waitMs: 20_000, after: 4 }, { waitMs: 20_000, after: 4 }]);
   });
@@ -100,10 +105,10 @@ describe('browser chat tools', () => {
       { messages: [{ seq: 4, text: 'later', sentAt: 0 }], ended: false, conversation: 'second' },
     ]);
     const { client } = await connect(extension.request);
-    await client.callTool({ name: CHAT_RECEIVE_TOOL, arguments: {} });
-    const replaced = await client.callTool({ name: CHAT_RECEIVE_TOOL, arguments: {} });
+    await client.callTool({ name: CHAT_RECEIVE_TOOL, arguments: { ...ME } });
+    const replaced = await client.callTool({ name: CHAT_RECEIVE_TOOL, arguments: { ...ME } });
     expect(jsonOf(replaced).messages).toEqual([{ text: 'after the restart', sentAt: '1970-01-01T00:00:00.000Z' }]);
-    await client.callTool({ name: CHAT_RECEIVE_TOOL, arguments: {} });
+    await client.callTool({ name: CHAT_RECEIVE_TOOL, arguments: { ...ME } });
     expect(extension.receives).toEqual([
       { waitMs: 20_000 },
       { waitMs: 20_000, after: 12, conversation: 'first' },
@@ -114,23 +119,49 @@ describe('browser chat tools', () => {
   it('forgets the cursor when a peek shows the conversation was replaced', async () => {
     const extension = fakeExtension([{ messages: [{ seq: 12, text: 'before the restart', sentAt: 0 }], ended: false, conversation: 'first' }]);
     const peeks: Array<Record<string, unknown>> = [];
-    const request: Request = async (browser, method, params, agent, instance) => {
-      if (method !== CHAT_PEEK_METHOD) return extension.request(browser, method, params, agent, instance);
+    const request: Request = async (browser, method, { agentSession, ...params }, agent, instance) => {
+      if (method !== CHAT_PEEK_METHOD) return extension.request(browser, method, { agentSession, ...params }, agent, instance);
+      expect(agentSession).toEqual(ME_PARAM);
       peeks.push(params);
       return { unread: 1, ended: false, conversation: 'second' };
     };
     const { client } = await connect(request);
-    await client.callTool({ name: CHAT_RECEIVE_TOOL, arguments: {} });
+    await client.callTool({ name: CHAT_RECEIVE_TOOL, arguments: { ...ME } });
     await client.callTool({ name: 'chrome_tabs_list', arguments: {} });
-    await client.callTool({ name: CHAT_RECEIVE_TOOL, arguments: { timeoutSeconds: 0 } });
+    await client.callTool({ name: CHAT_RECEIVE_TOOL, arguments: { ...ME, timeoutSeconds: 0 } });
     expect(peeks).toEqual([{ after: 12, conversation: 'first' }]);
     expect(extension.receives.at(-1)).toEqual({ waitMs: 0, conversation: 'second' });
+  });
+
+  it('keeps a separate conversation and cursor for each agent sharing the server', async () => {
+    const extension = fakeExtension([
+      { messages: [{ seq: 4, text: 'for the first agent', sentAt: 0 }], ended: false },
+      { messages: [{ seq: 9, text: 'for the second agent', sentAt: 0 }], ended: false },
+      { messages: [], ended: false },
+    ]);
+    const { client } = await connect(extension.request);
+    const other = { agentSessionId: 'agent-2', agentSessionName: 'Review PRs' };
+    await client.callTool({ name: CHAT_RECEIVE_TOOL, arguments: { ...ME } });
+    await client.callTool({ name: CHAT_RECEIVE_TOOL, arguments: { ...other } });
+    await client.callTool({ name: CHAT_RECEIVE_TOOL, arguments: { ...ME, timeoutSeconds: 0 } });
+    expect(extension.agentSessions).toEqual([ME_PARAM, { id: 'agent-2', name: 'Review PRs' }, ME_PARAM]);
+    expect(extension.receives).toEqual([{ waitMs: 20_000 }, { waitMs: 20_000 }, { waitMs: 0, after: 4 }]);
+  });
+
+  it('asks every agent for a stable id and a name', async () => {
+    const { client } = await connect(async () => null);
+    const { tools } = await client.listTools();
+    for (const name of [CHAT_SEND_TOOL, CHAT_RECEIVE_TOOL]) {
+      expect(tools.find((tool) => tool.name === name)!.inputSchema.required).toEqual(expect.arrayContaining(['agentSessionId', 'agentSessionName']));
+    }
+    const result = await client.callTool({ name: CHAT_RECEIVE_TOOL, arguments: {} });
+    expect(result.isError).toBe(true);
   });
 
   it('says so when no reply arrived in time', async () => {
     const extension = fakeExtension([]);
     const { client } = await connect(extension.request);
-    const result = await client.callTool({ name: CHAT_RECEIVE_TOOL, arguments: { timeoutSeconds: 0 } });
+    const result = await client.callTool({ name: CHAT_RECEIVE_TOOL, arguments: { ...ME, timeoutSeconds: 0 } });
     expect(jsonOf(result)).toEqual({ messages: [], next: expect.stringContaining(`Call ${CHAT_RECEIVE_TOOL} to keep waiting`) });
     expect(extension.receives).toEqual([{ waitMs: 0 }]);
   });
@@ -138,7 +169,7 @@ describe('browser chat tools', () => {
   it('can post without waiting', async () => {
     const extension = fakeExtension([]);
     const { client } = await connect(extension.request);
-    const result = await client.callTool({ name: CHAT_SEND_TOOL, arguments: { text: 'Starting now', waitForReply: false } });
+    const result = await client.callTool({ name: CHAT_SEND_TOOL, arguments: { ...ME, text: 'Starting now', waitForReply: false } });
     expect(jsonOf(result)).toEqual({ sent: true, next: expect.stringContaining(CHAT_RECEIVE_TOOL) });
     expect(extension.receives).toEqual([]);
   });
@@ -146,7 +177,7 @@ describe('browser chat tools', () => {
   it('tells the agent to stop once the user ends the chat', async () => {
     const extension = fakeExtension([{ messages: [], ended: true }]);
     const { client } = await connect(extension.request);
-    const result = await client.callTool({ name: CHAT_SEND_TOOL, arguments: { text: 'Done' } });
+    const result = await client.callTool({ name: CHAT_SEND_TOOL, arguments: { ...ME, text: 'Done' } });
     expect(jsonOf(result)).toMatchObject({ ended: true, next: expect.stringContaining('The user ended the browser chat') });
   });
 
@@ -160,7 +191,7 @@ describe('browser chat tools', () => {
     await client.callTool({ name: 'chrome_tabs_list', arguments: {} });
     expect(bridge.request).not.toHaveBeenCalledWith('chrome', CHAT_PEEK_METHOD, expect.anything(), undefined, expect.anything());
 
-    await client.callTool({ name: CHAT_SEND_TOOL, arguments: { text: 'Working on it', waitForReply: false } });
+    await client.callTool({ name: CHAT_SEND_TOOL, arguments: { ...ME, text: 'Working on it', waitForReply: false } });
     expect(textOf(await client.callTool({ name: 'chrome_tabs_list', arguments: {} }))).toHaveLength(2);
 
     unread = 2;
@@ -175,7 +206,7 @@ describe('browser chat tools', () => {
       if (method === CHAT_PEEK_METHOD) return { unread: 0, ended };
       return extension.request(browser, method, params, agent, instance);
     });
-    await client.callTool({ name: CHAT_SEND_TOOL, arguments: { text: 'Working on it', waitForReply: false } });
+    await client.callTool({ name: CHAT_SEND_TOOL, arguments: { ...ME, text: 'Working on it', waitForReply: false } });
     ended = true;
     expect(textOf(await client.callTool({ name: 'chrome_tabs_list', arguments: {} })).at(-1)).toMatch(/^The user ended the browser chat/);
     expect(textOf(await client.callTool({ name: 'chrome_tabs_list', arguments: {} }))).toHaveLength(2);
@@ -183,7 +214,7 @@ describe('browser chat tools', () => {
 
   it('explains that the chat panel needs Chrome when only Safari is connected', async () => {
     const { client } = await connect(async () => null, [hello('safari', 'bbbb2222')]);
-    const result = await client.callTool({ name: CHAT_SEND_TOOL, arguments: { text: 'Hello' } });
+    const result = await client.callTool({ name: CHAT_SEND_TOOL, arguments: { ...ME, text: 'Hello' } });
     expect(result.isError).toBe(true);
     expect(textOf(result)[0]).toMatch(/only available in Chrome for now, and only Safari is connected/);
   });
@@ -192,9 +223,19 @@ describe('browser chat tools', () => {
     const { client } = await connect(async (_browser, method) => {
       throw new Error(`Unknown method: ${method}`);
     });
-    const result = await client.callTool({ name: CHAT_SEND_TOOL, arguments: { text: 'Hello' } });
+    const result = await client.callTool({ name: CHAT_SEND_TOOL, arguments: { ...ME, text: 'Hello' } });
     expect(result.isError).toBe(true);
     expect(textOf(result)[0]).toMatch(/older Agent Browser Bridge extension without the chat panel/);
+  });
+
+  it('waits under a minute by default, so clients that stop calls after 60 seconds do not time out', async () => {
+    const { client } = await connect(async () => null);
+    const { tools } = await client.listTools();
+    for (const name of [CHAT_SEND_TOOL, CHAT_RECEIVE_TOOL]) {
+      const timeout = tools.find((tool) => tool.name === name)!.inputSchema.properties!.timeoutSeconds as { default: number; maximum: number };
+      expect(timeout.default).toBe(50);
+      expect(timeout.maximum).toBe(600);
+    }
   });
 
   it('offers a prompt that moves the conversation to the browser', async () => {

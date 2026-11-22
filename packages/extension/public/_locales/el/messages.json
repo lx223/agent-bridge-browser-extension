@@ -20,9 +20,6 @@
   "notificationReply": {
     "message": "Για να απαντήσετε, κάντε κλικ στο κουμπί του Agent Browser Bridge στη γραμμή εργαλείων"
   },
-  "optionsTitle": {
-    "message": "Επιλογές Agent Browser Bridge"
-  },
   "statusChecking": {
     "message": "Έλεγχος σύνδεσης…"
   },
@@ -116,15 +113,6 @@
   "welcomeAnalyticsHint": {
     "message": "Ποιες λειτουργίες χρησιμοποιούνται και η έκδοση της επέκτασης, για να βοηθήσετε στη βελτίωση της επέκτασης."
   },
-  "instanceNameLabel": {
-    "message": "Δώστε όνομα σε αυτό το προφίλ του προγράμματος περιήγησης"
-  },
-  "instanceNamePlaceholder": {
-    "message": "Για παράδειγμα Εργασία ή Προσωπικό"
-  },
-  "optionsInstanceNameHint": {
-    "message": "Οι πράκτορες χρησιμοποιούν αυτό το όνομα για να ξεχωρίζουν τα προγράμματα περιήγησης και τα προφίλ σας. $1"
-  },
   "instanceId": {
     "message": "Αναγνωριστικό παρουσίας: $1"
   },
@@ -176,29 +164,8 @@
   "analyticsTitle": {
     "message": "Κοινοποίηση ανώνυμων στατιστικών χρήσης"
   },
-  "analyticsHint": {
-    "message": "Ποιες λειτουργίες χρησιμοποιούνται, αν ολοκληρώνονται με επιτυχία και οι εκδόσεις της επέκτασης και του πράκτορα. Ποτέ τίτλοι καρτελών, διευθύνσεις URL ή περιεχόμενο σελίδων. $1"
-  },
   "privacyPolicy": {
     "message": "Πολιτική απορρήτου"
-  },
-  "analyticsUnavailable": {
-    "message": "Αυτή η έκδοση δεν συλλέγει στατιστικά χρήσης."
-  },
-  "openSetup": {
-    "message": "Άνοιγμα ρύθμισης και κατάστασης σύνδεσης"
-  },
-  "optionsConnected": {
-    "message": "Ο πράκτορας συνδέθηκε"
-  },
-  "optionsConnectedMany_one": {
-    "message": "$1 συνεδρία πράκτορα συνδεδεμένη"
-  },
-  "optionsConnectedMany_other": {
-    "message": "$1 συνεδρίες πράκτορα συνδεδεμένες"
-  },
-  "optionsDisconnected": {
-    "message": "Δεν έχει συνδεθεί πράκτορας"
   },
   "agentStartingUp": {
     "message": "Ο πράκτορας ξεκινά"
@@ -281,6 +248,9 @@
   "chatStatusDisconnected": {
     "message": "Ο πράκτορας αποσυνδέθηκε"
   },
+  "chatStatusReconnecting": {
+    "message": "Ο πράκτορας επανασυνδέεται"
+  },
   "chatStatusEnded": {
     "message": "Η συνομιλία τερματίστηκε"
   },
@@ -292,6 +262,9 @@
   },
   "chatHintDisconnected": {
     "message": "Αυτή η συνεδρία πράκτορα έκλεισε."
+  },
+  "chatHintReconnecting": {
+    "message": "Η σύνδεση του πράκτορα διακόπηκε. Τα μηνύματά σας περιμένουν εδώ μέχρι να επανασυνδεθεί."
   },
   "chatHintEnded": {
     "message": "Για να συνομιλήσετε ξανά, ζητήστε από τον πράκτορα να συνεχίσει στο πρόγραμμα περιήγησης."

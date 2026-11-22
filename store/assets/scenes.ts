@@ -13,8 +13,8 @@ export interface SceneContext {
 
 export type SceneCapture = (context: SceneContext) => Promise<Stage>;
 
-const OPTIONS_POPUP_WIDTH = 420;
-const OPTIONS_POPUP_SCALE = 1.45;
+const PROFILE_CARD_VIEWPORT = 560;
+const PROFILE_CARD_SCALE = 1.2;
 const WELCOME_PAGE_SCALE = 0.8;
 export const TOPIC_COLORS: Record<Topic, string> = { travel: 'blue', work: 'purple', recipes: 'orange' };
 
@@ -133,17 +133,16 @@ async function pages(context: SceneContext) {
   return { messages, window: { title: text.restaurant, size: SIDE_WINDOW, states } };
 }
 
-async function optionsPopup(context: SceneContext, name: string) {
+async function profileCard(context: SceneContext, name: string) {
   const page = await context.harness.context.newPage();
   try {
-    await page.setViewportSize({ width: OPTIONS_POPUP_WIDTH, height: 600 });
-    await page.goto(extensionUrl(context, 'src/options/index.html'));
-    await page.waitForSelector('#connection[data-state="connected"] #agents li');
+    await page.setViewportSize({ width: PROFILE_CARD_VIEWPORT, height: 800 });
+    await page.goto(extensionUrl(context, 'src/welcome/index.html'));
+    await page.waitForSelector('#status[data-state="connected"] ~ #agents li');
     await page.waitForFunction((expected) => (document.getElementById('instance-name') as HTMLInputElement | null)?.value === expected, name);
-    const box = (await page.locator('#instance-setting').boundingBox())!;
-    const height = Math.ceil(box.y + box.height + 16);
-    const png = await page.screenshot({ clip: { x: 0, y: 0, width: OPTIONS_POPUP_WIDTH, height } });
-    return { png, height };
+    const connection = page.locator('section.connection');
+    const box = (await connection.boundingBox())!;
+    return { png: await connection.screenshot(), size: { width: Math.ceil(box.width), height: Math.ceil(box.height) } };
   } finally {
     await page.close();
   }
@@ -152,11 +151,11 @@ async function optionsPopup(context: SceneContext, name: string) {
 async function profiles(context: SceneContext) {
   const { harness, locale } = context;
   const text = locale.strings.profiles;
-  const unnamed = await optionsPopup(context, '');
+  const unnamed = await profileCard(context, '');
   const { instances } = await harness.agent.call<{ instances: Array<{ instanceId: string }> }>(IDENTIFY_INSTANCES_TOOL, { sampleSize: 5 });
   const instance = instances[0]!.instanceId;
   await harness.agent.call(NAME_INSTANCE_TOOL, { browser: 'chrome', instance, name: text.name });
-  const named = await optionsPopup(context, text.name);
+  const named = await profileCard(context, text.name);
 
   const messages: ChatMessage[] = [
     { kind: 'user', text: text.prompt },
@@ -164,15 +163,15 @@ async function profiles(context: SceneContext) {
     { kind: 'tool', name: NAME_INSTANCE_TOOL, detail: `"${text.name}"` },
     { kind: 'agent', text: text.reply },
   ];
-  const body = (png: Buffer, height: number) => popupBody(png, scaled({ width: OPTIONS_POPUP_WIDTH, height }, OPTIONS_POPUP_SCALE));
+  const body = (card: { png: Buffer; size: Size }) => popupBody(card.png, scaled(card.size, PROFILE_CARD_SCALE));
   return {
     messages,
     window: {
       title: PRODUCT_NAME,
       size: SIDE_WINDOW,
       states: [
-        { step: 0, body: body(unnamed.png, unnamed.height) },
-        { step: 2, body: body(named.png, named.height) },
+        { step: 0, body: body(unnamed) },
+        { step: 2, body: body(named) },
       ],
     },
   };

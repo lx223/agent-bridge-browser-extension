@@ -20,9 +20,6 @@
   "notificationReply": {
     "message": "Lai atbildētu, rīkjoslā noklikšķiniet uz pogas Agent Browser Bridge"
   },
-  "optionsTitle": {
-    "message": "Agent Browser Bridge — opcijas"
-  },
   "statusChecking": {
     "message": "Notiek savienojuma pārbaude…"
   },
@@ -119,15 +116,6 @@
   "welcomeAnalyticsHint": {
     "message": "Kuras funkcijas tiek izmantotas un paplašinājuma versija, lai palīdzētu uzlabot paplašinājumu."
   },
-  "instanceNameLabel": {
-    "message": "Piešķiriet nosaukumu šim pārlūkprogrammas profilam"
-  },
-  "instanceNamePlaceholder": {
-    "message": "Piemēram, Darbs vai Personīgais"
-  },
-  "optionsInstanceNameHint": {
-    "message": "Aģenti pēc šī nosaukuma atšķir jūsu pārlūkprogrammas un profilus. $1"
-  },
   "instanceId": {
     "message": "Instances ID: $1"
   },
@@ -179,32 +167,8 @@
   "analyticsTitle": {
     "message": "Kopīgot anonīmu lietojuma statistiku"
   },
-  "analyticsHint": {
-    "message": "Kuras funkcijas tiek izmantotas, vai tās izdodas, kā arī paplašinājuma un aģenta versijas. Nekad ciļņu nosaukumi, URL vai lapu saturs. $1"
-  },
   "privacyPolicy": {
     "message": "Konfidencialitātes politika"
-  },
-  "analyticsUnavailable": {
-    "message": "Šī versija nevāc lietojuma statistiku."
-  },
-  "openSetup": {
-    "message": "Atvērt iestatīšanu un savienojuma statusu"
-  },
-  "optionsConnected": {
-    "message": "Aģents pievienots"
-  },
-  "optionsConnectedMany_one": {
-    "message": "Pievienota $1 aģenta sesija"
-  },
-  "optionsConnectedMany_zero": {
-    "message": "Pievienotas $1 aģenta sesijas"
-  },
-  "optionsConnectedMany_other": {
-    "message": "Pievienotas $1 aģenta sesijas"
-  },
-  "optionsDisconnected": {
-    "message": "Nav pievienots neviens aģents"
   },
   "agentStartingUp": {
     "message": "Aģents tiek palaists"
@@ -293,6 +257,9 @@
   "chatStatusDisconnected": {
     "message": "Aģents atvienots"
   },
+  "chatStatusReconnecting": {
+    "message": "Aģents atjauno savienojumu"
+  },
   "chatStatusEnded": {
     "message": "Tērzēšana beigta"
   },
@@ -304,6 +271,9 @@
   },
   "chatHintDisconnected": {
     "message": "Šī aģenta sesija ir slēgta."
+  },
+  "chatHintReconnecting": {
+    "message": "Savienojums ar aģentu pārtrūka. Jūsu ziņas gaidīs šeit, līdz tas atkal pievienosies."
   },
   "chatHintEnded": {
     "message": "Lai tērzētu atkal, palūdziet aģentam turpināt pārlūkprogrammā."

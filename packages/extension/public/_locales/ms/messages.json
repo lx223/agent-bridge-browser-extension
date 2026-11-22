@@ -20,9 +20,6 @@
   "notificationReply": {
     "message": "Klik butang Agent Browser Bridge pada bar alat untuk membalas"
   },
-  "optionsTitle": {
-    "message": "Pilihan Agent Browser Bridge"
-  },
   "statusChecking": {
     "message": "Menyemak sambungan…"
   },
@@ -116,15 +113,6 @@
   "welcomeAnalyticsHint": {
     "message": "Ciri yang digunakan dan versi sambungan, untuk membantu menambah baik sambungan ini."
   },
-  "instanceNameLabel": {
-    "message": "Namakan profil penyemak imbas ini"
-  },
-  "instanceNamePlaceholder": {
-    "message": "Contohnya Kerja atau Peribadi"
-  },
-  "optionsInstanceNameHint": {
-    "message": "Ejen menggunakan nama ini untuk membezakan penyemak imbas dan profil anda. $1"
-  },
   "instanceId": {
     "message": "ID tika: $1"
   },
@@ -176,29 +164,8 @@
   "analyticsTitle": {
     "message": "Kongsi statistik penggunaan tanpa nama"
   },
-  "analyticsHint": {
-    "message": "Ciri yang digunakan, sama ada ciri itu berjaya, serta versi sambungan dan ejen. Tidak sekali-kali tajuk tab, URL atau kandungan halaman. $1"
-  },
   "privacyPolicy": {
     "message": "Dasar privasi"
-  },
-  "analyticsUnavailable": {
-    "message": "Binaan ini tidak mengumpulkan statistik penggunaan."
-  },
-  "openSetup": {
-    "message": "Buka persediaan dan status sambungan"
-  },
-  "optionsConnected": {
-    "message": "Ejen disambungkan"
-  },
-  "optionsConnectedMany_one": {
-    "message": "$1 sesi ejen disambungkan"
-  },
-  "optionsConnectedMany_other": {
-    "message": "$1 sesi ejen disambungkan"
-  },
-  "optionsDisconnected": {
-    "message": "Tiada ejen disambungkan"
   },
   "agentStartingUp": {
     "message": "Ejen sedang dimulakan"
@@ -281,6 +248,9 @@
   "chatStatusDisconnected": {
     "message": "Ejen diputuskan sambungan"
   },
+  "chatStatusReconnecting": {
+    "message": "Ejen sedang menyambung semula"
+  },
   "chatStatusEnded": {
     "message": "Sembang ditamatkan"
   },
@@ -292,6 +262,9 @@
   },
   "chatHintDisconnected": {
     "message": "Sesi ejen ini telah ditutup."
+  },
+  "chatHintReconnecting": {
+    "message": "Sambungan ejen terputus. Mesej anda menunggu di sini sehingga ejen bersambung semula."
   },
   "chatHintEnded": {
     "message": "Minta ejen meneruskan dalam penyemak imbas untuk bersembang semula."

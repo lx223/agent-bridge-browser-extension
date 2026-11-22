@@ -9,7 +9,7 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const dist = join(root, 'dist');
 const projectLocation = join(root, 'safari');
 const appIconSet = join(root, 'safari-app', 'AppIcon.appiconset');
-const packagedFiles = ['manifest.json', 'background.js', 'icons/icon-128.png', 'src/welcome/index.html', 'src/options/index.html'];
+const packagedFiles = ['manifest.json', 'background.js', 'icons/icon-128.png', 'src/welcome/index.html'];
 
 const findBySuffix = (directory, suffix) =>
   readdirSync(directory, { recursive: true })

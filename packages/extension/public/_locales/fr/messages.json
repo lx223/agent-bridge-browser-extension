@@ -20,9 +20,6 @@
   "notificationReply": {
     "message": "Cliquez sur le bouton Agent Browser Bridge dans la barre d'outils pour répondre"
   },
-  "optionsTitle": {
-    "message": "Options d'Agent Browser Bridge"
-  },
   "statusChecking": {
     "message": "Vérification de la connexion…"
   },
@@ -119,15 +116,6 @@
   "welcomeAnalyticsHint": {
     "message": "Fonctionnalités utilisées et version de l'extension, pour aider à améliorer l'extension."
   },
-  "instanceNameLabel": {
-    "message": "Nommer ce profil de navigateur"
-  },
-  "instanceNamePlaceholder": {
-    "message": "Par exemple Travail ou Personnel"
-  },
-  "optionsInstanceNameHint": {
-    "message": "Les agents utilisent ce nom pour distinguer vos navigateurs et profils. $1"
-  },
   "instanceId": {
     "message": "ID d'instance : $1"
   },
@@ -179,32 +167,8 @@
   "analyticsTitle": {
     "message": "Partager des statistiques d'utilisation anonymes"
   },
-  "analyticsHint": {
-    "message": "Les fonctionnalités utilisées, leur réussite, ainsi que les versions de l'extension et de l'agent. Jamais les titres des onglets, les URL ni le contenu des pages. $1"
-  },
   "privacyPolicy": {
     "message": "Politique de confidentialité"
-  },
-  "analyticsUnavailable": {
-    "message": "Cette version ne collecte pas de statistiques d'utilisation."
-  },
-  "openSetup": {
-    "message": "Ouvrir la configuration et l'état de la connexion"
-  },
-  "optionsConnected": {
-    "message": "Agent connecté"
-  },
-  "optionsConnectedMany_one": {
-    "message": "$1 session d'agent connectée"
-  },
-  "optionsConnectedMany_many": {
-    "message": "$1 de sessions d'agent connectées"
-  },
-  "optionsConnectedMany_other": {
-    "message": "$1 sessions d'agent connectées"
-  },
-  "optionsDisconnected": {
-    "message": "Aucun agent connecté"
   },
   "agentStartingUp": {
     "message": "Démarrage de l'agent"
@@ -293,6 +257,9 @@
   "chatStatusDisconnected": {
     "message": "Agent déconnecté"
   },
+  "chatStatusReconnecting": {
+    "message": "Reconnexion de l'agent"
+  },
   "chatStatusEnded": {
     "message": "Chat terminé"
   },
@@ -304,6 +271,9 @@
   },
   "chatHintDisconnected": {
     "message": "Cette session d'agent est fermée."
+  },
+  "chatHintReconnecting": {
+    "message": "La connexion à l'agent a été interrompue. Vos messages attendent ici jusqu'à sa reconnexion."
   },
   "chatHintEnded": {
     "message": "Demandez à l'agent de continuer dans le navigateur pour discuter à nouveau."

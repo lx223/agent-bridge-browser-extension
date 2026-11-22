@@ -46,6 +46,7 @@ header { padding: 10px 14px; border-bottom: 1px solid var(--border); display: fl
 .status::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--muted); }
 body[data-state='waiting'] .status::before { background: var(--wait); }
 body[data-state='working'] .status::before { background: var(--ok); }
+body[data-state='reconnecting'] .status::before { background: var(--wait); }
 #empty { padding: 16px 14px; }
 #empty p { margin: 0 0 10px; }
 #messages { flex: 1; overflow-y: auto; margin: 0; padding: 12px 14px; list-style: none; display: flex; flex-direction: column; gap: 10px; }

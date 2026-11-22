@@ -49,7 +49,7 @@ A minute after start and then every hour, the launcher asks the npm registry (th
 1. starts `npx -y agent-browser-bridge-mcp@<version>` as a second worker, alongside the first;
 2. replays the agent's `initialize` request to it and waits for a successful answer, then sends `notifications/initialized`;
 3. sends new agent requests to the new worker, while the old worker finishes requests already in flight (for up to a minute) and then exits;
-4. tells the agent `notifications/tools/list_changed`, so clients that support it refresh the tool list.
+4. tells the agent `notifications/tools/list_changed` and `notifications/prompts/list_changed`, so clients that support them refresh the tool and prompt lists.
 
 If the new version fails to start or initialize, the launcher keeps the current worker and tries again at the next check. A request the old worker never answers gets an error response asking the agent to retry. The launcher itself does not change until the agent session restarts, so it is kept small and generic.
 
@@ -96,6 +96,7 @@ If the active worker exits while the agent session is still open, the launcher s
 1. Requests the worker had not answered are sent to the new worker, except `tools/call`, which gets an error saying the tool may or may not have taken effect.
 2. Requests that arrive while the new worker starts wait for it.
 3. The new worker gets the agent's `initialize` request and `notifications/initialized` replayed, as in an update.
+4. If the new worker runs a different version from the one that stopped, for example because the launcher fell back to the bundled version after an updated worker kept stopping, the agent gets `notifications/tools/list_changed` and `notifications/prompts/list_changed`, as in an update.
 
 A new worker started by a restart or an update does not yet know which browsers were connected, and the extension takes a few seconds to reconnect to it. For its first 10 seconds, a call for a browser that has no connected instance waits for one instead of failing with "not connected". The launcher tells the worker why it started in `AGENT_BROWSER_BRIDGE_WORKER_REASON` (`start`, `update` or `restart`), and only `update` and `restart` get this wait, so a fresh session still reports a missing extension straight away.
 

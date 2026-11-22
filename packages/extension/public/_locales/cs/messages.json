@@ -20,9 +20,6 @@
   "notificationReply": {
     "message": "Chcete-li odpovědět, klikněte na tlačítko Agent Browser Bridge na panelu nástrojů"
   },
-  "optionsTitle": {
-    "message": "Možnosti Agent Browser Bridge"
-  },
   "statusChecking": {
     "message": "Kontrola připojení…"
   },
@@ -122,15 +119,6 @@
   "welcomeAnalyticsHint": {
     "message": "Které funkce se používají a verze rozšíření, aby bylo možné rozšíření zlepšovat."
   },
-  "instanceNameLabel": {
-    "message": "Pojmenujte tento profil prohlížeče"
-  },
-  "instanceNamePlaceholder": {
-    "message": "Například Práce nebo Osobní"
-  },
-  "optionsInstanceNameHint": {
-    "message": "Podle tohoto názvu agenti rozlišují vaše prohlížeče a profily. $1"
-  },
   "instanceId": {
     "message": "ID instance: $1"
   },
@@ -182,35 +170,8 @@
   "analyticsTitle": {
     "message": "Sdílet anonymní statistiky využití"
   },
-  "analyticsHint": {
-    "message": "Které funkce se používají, zda fungují, a verze rozšíření a agenta. Nikdy názvy karet, adresy URL ani obsah stránek. $1"
-  },
   "privacyPolicy": {
     "message": "Zásady ochrany soukromí"
-  },
-  "analyticsUnavailable": {
-    "message": "Tato verze statistiky využití neshromažďuje."
-  },
-  "openSetup": {
-    "message": "Otevřít nastavení a stav připojení"
-  },
-  "optionsConnected": {
-    "message": "Agent připojen"
-  },
-  "optionsConnectedMany_one": {
-    "message": "Připojena $1 relace agenta"
-  },
-  "optionsConnectedMany_few": {
-    "message": "Připojeny $1 relace agenta"
-  },
-  "optionsConnectedMany_many": {
-    "message": "Připojeno $1 relace agenta"
-  },
-  "optionsConnectedMany_other": {
-    "message": "Připojeno $1 relací agenta"
-  },
-  "optionsDisconnected": {
-    "message": "Není připojen žádný agent"
   },
   "agentStartingUp": {
     "message": "Agent se spouští"
@@ -305,6 +266,9 @@
   "chatStatusDisconnected": {
     "message": "Agent odpojen"
   },
+  "chatStatusReconnecting": {
+    "message": "Agent se znovu připojuje"
+  },
   "chatStatusEnded": {
     "message": "Chat ukončen"
   },
@@ -316,6 +280,9 @@
   },
   "chatHintDisconnected": {
     "message": "Tato relace agenta byla ukončena."
+  },
+  "chatHintReconnecting": {
+    "message": "Spojení s agentem se přerušilo. Vaše zprávy tu počkají, dokud se znovu nepřipojí."
   },
   "chatHintEnded": {
     "message": "Chcete-li znovu chatovat, požádejte agenta, aby pokračoval v prohlížeči."

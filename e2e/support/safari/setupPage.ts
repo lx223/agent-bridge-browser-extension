@@ -37,7 +37,7 @@ function serveExtension(extensionDir: string): Promise<Server> {
   return new Promise((done) => server.listen(0, '127.0.0.1', () => done(server)));
 }
 
-function installSafariExtensionApi({ origin, messages }: { origin: string; messages: Messages }) {
+function installSafariExtensionApi({ origin, messages, version }: { origin: string; messages: Messages; version: string }) {
   const getMessage = (key: string, substitutions: string | string[] = []) => {
     const values = [substitutions].flat();
     return (messages[key]?.message ?? '').replace(/\$([1-9])/g, (_, slot: string) => values[Number(slot) - 1] ?? '');
@@ -52,6 +52,7 @@ function installSafariExtensionApi({ origin, messages }: { origin: string; messa
         getUILanguage: () => 'en',
       },
       runtime: {
+        getManifest: () => ({ version }),
         getURL: (path = '') => `${origin}/${path.replace(/^\//, '')}`,
         sendMessage: (message: unknown) => page.sendToBackground(message),
         onMessage: event,
@@ -81,6 +82,7 @@ export async function openSetupPageAsSafari(options: SafariSetupPageOptions): Pr
     await page.addInitScript(installSafariExtensionApi, {
       origin: options.extensionOrigin,
       messages: defaultLocaleMessages(options.extensionDir),
+      version: JSON.parse(readFileSync(resolve(options.extensionDir, 'manifest.json'), 'utf-8')).version,
     });
     const { port } = server.address() as { port: number };
     await page.goto(`http://127.0.0.1:${port}/src/welcome/index.html`);

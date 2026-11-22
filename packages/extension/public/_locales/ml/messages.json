@@ -20,9 +20,6 @@
   "notificationReply": {
     "message": "മറുപടി നൽകാൻ ടൂൾബാറിലെ Agent Browser Bridge ബട്ടൺ ക്ലിക്ക് ചെയ്യുക"
   },
-  "optionsTitle": {
-    "message": "Agent Browser Bridge ഓപ്ഷനുകൾ"
-  },
   "statusChecking": {
     "message": "കണക്ഷൻ പരിശോധിക്കുന്നു…"
   },
@@ -116,15 +113,6 @@
   "welcomeAnalyticsHint": {
     "message": "വിപുലീകരണം മെച്ചപ്പെടുത്താൻ സഹായിക്കുന്നതിന്, ഏതൊക്കെ ഫീച്ചറുകൾ ഉപയോഗിക്കുന്നു എന്നതും വിപുലീകരണത്തിന്റെ പതിപ്പും."
   },
-  "instanceNameLabel": {
-    "message": "ഈ ബ്രൗസർ പ്രൊഫൈലിന് പേര് നൽകുക"
-  },
-  "instanceNamePlaceholder": {
-    "message": "ഉദാഹരണത്തിന്, ഓഫീസ് അല്ലെങ്കിൽ വ്യക്തിപരം"
-  },
-  "optionsInstanceNameHint": {
-    "message": "നിങ്ങളുടെ ബ്രൗസറുകളും പ്രൊഫൈലുകളും വേർതിരിച്ചറിയാൻ ഏജന്റുകൾ ഈ പേര് ഉപയോഗിക്കുന്നു. $1"
-  },
   "instanceId": {
     "message": "ഇൻസ്റ്റൻസ് ഐഡി: $1"
   },
@@ -176,29 +164,8 @@
   "analyticsTitle": {
     "message": "അജ്ഞാത ഉപയോഗ സ്ഥിതിവിവരക്കണക്കുകൾ പങ്കിടുക"
   },
-  "analyticsHint": {
-    "message": "ഏതൊക്കെ ഫീച്ചറുകൾ ഉപയോഗിക്കുന്നു, അവ വിജയിക്കുന്നുണ്ടോ, വിപുലീകരണത്തിന്റെയും ഏജന്റിന്റെയും പതിപ്പുകൾ. ടാബ് ശീർഷകങ്ങളോ URL-കളോ പേജ് ഉള്ളടക്കമോ ഒരിക്കലും ഉൾപ്പെടില്ല. $1"
-  },
   "privacyPolicy": {
     "message": "സ്വകാര്യതാ നയം"
-  },
-  "analyticsUnavailable": {
-    "message": "ഈ ബിൽഡ് ഉപയോഗ സ്ഥിതിവിവരക്കണക്കുകൾ ശേഖരിക്കുന്നില്ല."
-  },
-  "openSetup": {
-    "message": "സജ്ജീകരണവും കണക്ഷൻ നിലയും തുറക്കുക"
-  },
-  "optionsConnected": {
-    "message": "ഏജന്റ് കണക്റ്റ് ചെയ്തു"
-  },
-  "optionsConnectedMany_one": {
-    "message": "$1 ഏജന്റ് സെഷൻ കണക്റ്റ് ചെയ്തു"
-  },
-  "optionsConnectedMany_other": {
-    "message": "$1 ഏജന്റ് സെഷനുകൾ കണക്റ്റ് ചെയ്തു"
-  },
-  "optionsDisconnected": {
-    "message": "ഏജന്റൊന്നും കണക്റ്റ് ചെയ്തിട്ടില്ല"
   },
   "agentStartingUp": {
     "message": "ഏജന്റ് ആരംഭിക്കുന്നു"
@@ -281,6 +248,9 @@
   "chatStatusDisconnected": {
     "message": "ഏജന്റ് വിച്ഛേദിക്കപ്പെട്ടു"
   },
+  "chatStatusReconnecting": {
+    "message": "ഏജന്റ് വീണ്ടും കണക്റ്റ് ചെയ്യുന്നു"
+  },
   "chatStatusEnded": {
     "message": "ചാറ്റ് അവസാനിച്ചു"
   },
@@ -292,6 +262,9 @@
   },
   "chatHintDisconnected": {
     "message": "ഈ ഏജന്റ് സെഷൻ അവസാനിച്ചു."
+  },
+  "chatHintReconnecting": {
+    "message": "ഏജന്റിന്റെ കണക്ഷൻ നഷ്ടപ്പെട്ടു. വീണ്ടും കണക്റ്റ് ചെയ്യുന്നതുവരെ നിങ്ങളുടെ സന്ദേശങ്ങൾ ഇവിടെ കാത്തിരിക്കും."
   },
   "chatHintEnded": {
     "message": "വീണ്ടും ചാറ്റ് ചെയ്യാൻ, ബ്രൗസറിൽ തുടരാൻ ഏജന്റിനോട് ആവശ്യപ്പെടുക."

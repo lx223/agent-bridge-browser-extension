@@ -20,9 +20,6 @@
   "notificationReply": {
     "message": "উত্তর দিতে টুলবারে Agent Browser Bridge বোতামে ক্লিক করুন"
   },
-  "optionsTitle": {
-    "message": "Agent Browser Bridge বিকল্প"
-  },
   "statusChecking": {
     "message": "কানেকশন চেক করা হচ্ছে…"
   },
@@ -116,15 +113,6 @@
   "welcomeAnalyticsHint": {
     "message": "কোন ফিচার ব্যবহার করা হয় এবং এক্সটেনশনের ভার্সন, যাতে এক্সটেনশনটি উন্নত করা যায়।"
   },
-  "instanceNameLabel": {
-    "message": "এই ব্রাউজার প্রোফাইলের নাম দিন"
-  },
-  "instanceNamePlaceholder": {
-    "message": "যেমন অফিস বা ব্যক্তিগত"
-  },
-  "optionsInstanceNameHint": {
-    "message": "এই নাম দিয়ে এজেন্ট আপনার ব্রাউজার ও প্রোফাইলগুলো আলাদা করে চেনে। $1"
-  },
   "instanceId": {
     "message": "ইনস্ট্যান্স আইডি: $1"
   },
@@ -176,29 +164,8 @@
   "analyticsTitle": {
     "message": "বেনামী ব্যবহারের পরিসংখ্যান শেয়ার করুন"
   },
-  "analyticsHint": {
-    "message": "কোন ফিচার ব্যবহার করা হয়, সেগুলো সফল হয় কিনা, এবং এক্সটেনশন ও এজেন্টের ভার্সন। ট্যাবের টাইটেল, URL বা পেজের কন্টেন্ট কখনই নয়। $1"
-  },
   "privacyPolicy": {
     "message": "গোপনীয়তা নীতি"
-  },
-  "analyticsUnavailable": {
-    "message": "এই বিল্ড ব্যবহারের পরিসংখ্যান সংগ্রহ করে না।"
-  },
-  "openSetup": {
-    "message": "সেটআপ ও কানেকশনের স্ট্যাটাস খুলুন"
-  },
-  "optionsConnected": {
-    "message": "এজেন্ট কানেক্ট করা আছে"
-  },
-  "optionsConnectedMany_one": {
-    "message": "$1টি এজেন্ট সেশন কানেক্ট করা আছে"
-  },
-  "optionsConnectedMany_other": {
-    "message": "$1টি এজেন্ট সেশন কানেক্ট করা আছে"
-  },
-  "optionsDisconnected": {
-    "message": "কোনো এজেন্ট কানেক্ট করা নেই"
   },
   "agentStartingUp": {
     "message": "এজেন্ট চালু হচ্ছে"
@@ -281,6 +248,9 @@
   "chatStatusDisconnected": {
     "message": "এজেন্টের কানেকশন বিচ্ছিন্ন হয়েছে"
   },
+  "chatStatusReconnecting": {
+    "message": "এজেন্ট আবার সংযুক্ত হচ্ছে"
+  },
   "chatStatusEnded": {
     "message": "চ্যাট শেষ হয়েছে"
   },
@@ -292,6 +262,9 @@
   },
   "chatHintDisconnected": {
     "message": "এই এজেন্ট সেশন বন্ধ হয়ে গেছে।"
+  },
+  "chatHintReconnecting": {
+    "message": "এজেন্টের সংযোগ বিচ্ছিন্ন হয়েছে। আবার সংযুক্ত না হওয়া পর্যন্ত আপনার বার্তাগুলি এখানে অপেক্ষা করবে।"
   },
   "chatHintEnded": {
     "message": "আবার চ্যাট করতে এজেন্টকে ব্রাউজারে চালিয়ে যেতে বলুন।"
