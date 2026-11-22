@@ -1,0 +1,60 @@
+{
+  "captions": {
+    "tabs": {
+      "headline": "Nechte AI agenta uspořádat vaše karty",
+      "subline": "Prohlédněte si plán seskupení, použijte ho jedním krokem, a když si to rozmyslíte, vraťte ho."
+    },
+    "pages": {
+      "headline": "Agent pracuje na skutečných webových stránkách",
+      "subline": "Čte stránku, vyplňuje formuláře a kliká na tlačítka v prohlížeči, který už používáte."
+    },
+    "profiles": {
+      "headline": "Pojmenujte své profily prohlížeče",
+      "subline": "Požádejte o prohlížeč „Práce“ a agent vybere správný profil Chromu."
+    },
+    "setup": {
+      "headline": "Připojte agenta, kterého už používáte",
+      "subline": "Claude Code, Cursor, VS Code, Claude Desktop nebo jakýkoli MCP klient. Vše běží ve vašem počítači."
+    }
+  },
+  "chat": {
+    "you": "Vy",
+    "agent": "Agent"
+  },
+  "tabs": {
+    "prompt": "Rozděl moje otevřené karty do skupin podle témat.",
+    "reply": "Hotovo. {tabs} karet je teď ve {groups} skupinách. Pokud chcete původní rozložení, požádejte mě o vrácení.",
+    "groups": {
+      "travel": "Výlet do Lisabonu",
+      "work": "Zpráva za Q3",
+      "recipes": "Nápady na večeři"
+    },
+    "pages": {
+      "travel": ["Lety do Lisabonu – porovnání cen", "Hotely v Alfamě", "Lisabon: 10 nejlepších zážitků"],
+      "work": ["Přehled tržeb za Q3", "Koncept zprávy za Q3", "Poznámky z porady týmu"],
+      "recipes": ["Rychlé těstoviny na všední den", "Pečená zelenina z plechu"]
+    }
+  },
+  "booking": {
+    "prompt": "Zarezervuj na dnešní večer stůl pro 4 v Casa Azul na jméno Ada Lovelace.",
+    "reply": "Hotovo. Casa Azul potvrdila stůl pro 4 na jméno Ada Lovelace.",
+    "restaurant": "Casa Azul",
+    "heading": "Rezervace stolu",
+    "name": "Jméno",
+    "guests": "Počet osob",
+    "when": "Kdy",
+    "tonight": "Dnes, 19:30",
+    "submit": "Rezervovat stůl",
+    "confirmation": "Stůl pro {guests} je rezervován na jméno {name}. Těšíme se na vás večer!",
+    "guestName": "Ada Lovelace"
+  },
+  "profiles": {
+    "prompt": "Tento profil Chromu je na práci. Pojmenuj ho Práce.",
+    "reply": "Hotovo. Když požádáte o prohlížeč „Práce“, použiji tento profil.",
+    "name": "Práce"
+  },
+  "video": {
+    "tagline": "Nechte AI agenta pracovat v prohlížeči, který už používáte.",
+    "closing": "Funguje s Claude Code, Cursor, VS Code a jakýmkoli MCP klientem. Zdarma a open source."
+  }
+}

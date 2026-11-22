@@ -1,0 +1,60 @@
+{
+  "captions": {
+    "tabs": {
+      "headline": "Deixa que l'agent d'IA organitzi les pestanyes",
+      "subline": "Previsualitza un pla d'agrupació, aplica'l en un pas i desfés-lo si canvies d'opinió."
+    },
+    "pages": {
+      "headline": "El teu agent treballa en pàgines web reals",
+      "subline": "Llegeix la pàgina, omple formularis i fa clic a botons al navegador que ja fas servir."
+    },
+    "profiles": {
+      "headline": "Posa nom als perfils del navegador",
+      "subline": "Demana el navegador «Feina» i el teu agent triarà el perfil de Chrome correcte."
+    },
+    "setup": {
+      "headline": "Connecta l'agent que ja fas servir",
+      "subline": "Claude Code, Cursor, VS Code, Claude Desktop o qualsevol client MCP. Tot s'executa al teu ordinador."
+    }
+  },
+  "chat": {
+    "you": "Tu",
+    "agent": "Agent"
+  },
+  "tabs": {
+    "prompt": "Organitza les meves pestanyes obertes en grups per tema.",
+    "reply": "Fet. He agrupat {tabs} pestanyes en {groups} grups. Demana'm que ho desfaci si vols recuperar la disposició anterior.",
+    "groups": {
+      "travel": "Viatge a Lisboa",
+      "work": "Informe T3",
+      "recipes": "Idees per sopar"
+    },
+    "pages": {
+      "travel": ["Vols a Lisboa: compara preus", "Hotels a l'Alfama", "Lisboa: les 10 coses imprescindibles"],
+      "work": ["Tauler d'ingressos del T3", "Esborrany de l'informe T3", "Notes de la reunió d'equip"],
+      "recipes": ["Pasta fàcil per a cada dia", "Verdures rostides al forn"]
+    }
+  },
+  "booking": {
+    "prompt": "Reserva una taula per a 4 a Casa Azul aquesta nit a nom d'Ada Lovelace.",
+    "reply": "Fet. Casa Azul ha confirmat una taula per a 4 a nom d'Ada Lovelace.",
+    "restaurant": "Casa Azul",
+    "heading": "Reserva una taula",
+    "name": "Nom",
+    "guests": "Persones",
+    "when": "Quan",
+    "tonight": "Aquesta nit, 19:30",
+    "submit": "Reserva taula",
+    "confirmation": "{name}, la teva taula per a {guests} està reservada. Fins aquesta nit!",
+    "guestName": "Ada Lovelace"
+  },
+  "profiles": {
+    "prompt": "Aquest perfil de Chrome és per a la feina. Anomena'l Feina.",
+    "reply": "Fet. Quan demanis el navegador «Feina», faré servir aquest perfil.",
+    "name": "Feina"
+  },
+  "video": {
+    "tagline": "Deixa que el teu agent d'IA utilitzi el navegador que ja fas servir.",
+    "closing": "Funciona amb Claude Code, Cursor, VS Code i qualsevol client MCP. Gratuït i de codi obert."
+  }
+}

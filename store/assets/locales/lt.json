@@ -1,0 +1,60 @@
+{
+  "captions": {
+    "tabs": {
+      "headline": "Leiskite DI agentui sutvarkyti skirtukus",
+      "subline": "Peržiūrėkite grupavimo planą, pritaikykite jį vienu žingsniu ir atšaukite, jei persigalvosite."
+    },
+    "pages": {
+      "headline": "Jūsų agentas dirba tikruose tinklalapiuose",
+      "subline": "Jis skaito puslapį, pildo formas ir spustelėja mygtukus naršyklėje, kurią jau naudojate."
+    },
+    "profiles": {
+      "headline": "Pavadinkite savo naršyklės profilius",
+      "subline": "Paprašykite naršyklės Darbas, ir agentas pasirinks tinkamą Chrome profilį."
+    },
+    "setup": {
+      "headline": "Prijunkite agentą, kurį jau naudojate",
+      "subline": "Claude Code, Cursor, VS Code, Claude Desktop ar bet kuris MCP klientas. Viskas veikia jūsų kompiuteryje."
+    }
+  },
+  "chat": {
+    "you": "Jūs",
+    "agent": "Agentas"
+  },
+  "tabs": {
+    "prompt": "Sugrupuok mano atidarytus skirtukus pagal temas.",
+    "reply": "Atlikta. Sugrupavau {tabs} skirtukus į {groups} grupes. Jei norite grąžinti ankstesnį išdėstymą, paprašykite atšaukti.",
+    "groups": {
+      "travel": "Kelionė į Lisaboną",
+      "work": "Q3 ataskaita",
+      "recipes": "Vakarienės idėjos"
+    },
+    "pages": {
+      "travel": ["Skrydžiai į Lisaboną – palyginkite kainas", "Viešbučiai Alfamoje", "Lisabona: 10 lankytinų vietų"],
+      "work": ["Q3 pajamų suvestinė", "Q3 ataskaitos juodraštis", "Komandos susitikimo užrašai"],
+      "recipes": ["Greiti makaronai darbo dienos vakarui", "Orkaitėje keptos daržovės"]
+    }
+  },
+  "booking": {
+    "prompt": "Rezervuok šįvakar staliuką 4 asmenims restorane Casa Azul Ada Lovelace vardu.",
+    "reply": "Atlikta. Casa Azul patvirtino staliuką 4 asmenims Ada Lovelace vardu.",
+    "restaurant": "Casa Azul",
+    "heading": "Rezervuoti staliuką",
+    "name": "Vardas",
+    "guests": "Svečiai",
+    "when": "Kada",
+    "tonight": "Šįvakar, 19:30",
+    "submit": "Rezervuoti",
+    "confirmation": "Staliukas {guests} asmenims rezervuotas {name} vardu. Iki pasimatymo šįvakar!",
+    "guestName": "Ada Lovelace"
+  },
+  "profiles": {
+    "prompt": "Šis Chrome profilis skirtas darbui. Pavadink jį Darbas.",
+    "reply": "Atlikta. Kai paprašysite naršyklės Darbas, naudosiu šį profilį.",
+    "name": "Darbas"
+  },
+  "video": {
+    "tagline": "Leiskite DI agentui dirbti jūsų įprastoje naršyklėje.",
+    "closing": "Veikia su Claude Code, Cursor, VS Code ir bet kuriuo MCP klientu. Nemokama ir atvirojo kodo."
+  }
+}

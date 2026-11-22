@@ -1,0 +1,60 @@
+{
+  "captions": {
+    "tabs": {
+      "headline": "Bízza MI-ügynökére a lapok rendezését",
+      "subline": "Nézze meg a csoportosítási tervet, alkalmazza egy lépésben, és vonja vissza, ha meggondolja magát."
+    },
+    "pages": {
+      "headline": "Ügynöke valódi weboldalakon dolgozik",
+      "subline": "Elolvassa az oldalt, kitölti az űrlapokat és gombokra kattint a már megszokott böngészőjében."
+    },
+    "profiles": {
+      "headline": "Nevezze el böngészőprofiljait",
+      "subline": "Kérje a Munka böngészőt, és ügynöke a megfelelő Chrome-profilt választja."
+    },
+    "setup": {
+      "headline": "Csatlakoztassa a már használt ügynökét",
+      "subline": "Claude Code, Cursor, VS Code, Claude Desktop vagy bármely MCP-kompatibilis ügynök. Minden a saját gépén fut."
+    }
+  },
+  "chat": {
+    "you": "Ön",
+    "agent": "Ügynök"
+  },
+  "tabs": {
+    "prompt": "Rendezd téma szerint csoportokba a megnyitott lapjaimat.",
+    "reply": "Kész. {tabs} lapot {groups} csoportba rendeztem. Ha vissza szeretné kapni a régi elrendezést, kérje, hogy vonjam vissza.",
+    "groups": {
+      "travel": "Lisszaboni út",
+      "work": "Q3-jelentés",
+      "recipes": "Vacsoraötletek"
+    },
+    "pages": {
+      "travel": ["Repülőjegyek Lisszabonba – árösszehasonlítás", "Szállodák az Alfamában", "Lisszabon: 10 kihagyhatatlan program"],
+      "work": ["Q3 bevételi irányítópult", "Q3-jelentés vázlata", "Csapatmegbeszélés jegyzetei"],
+      "recipes": ["Egyszerű hétköznapi tészta", "Tepsiben sült zöldségek"]
+    }
+  },
+  "booking": {
+    "prompt": "Foglalj ma estére asztalt 4 főre a Casa Azulban Ada Lovelace nevére.",
+    "reply": "Kész. A Casa Azul visszaigazolta a 4 fős asztalt Ada Lovelace nevére.",
+    "restaurant": "Casa Azul",
+    "heading": "Asztalfoglalás",
+    "name": "Név",
+    "guests": "Létszám",
+    "when": "Időpont",
+    "tonight": "Ma, 19:30",
+    "submit": "Asztal foglalása",
+    "confirmation": "Asztal lefoglalva {guests} főre, {name} nevére. Várjuk ma este!",
+    "guestName": "Ada Lovelace"
+  },
+  "profiles": {
+    "prompt": "Ez a Chrome-profil a munkához kell. Legyen a neve Munka.",
+    "reply": "Kész. Ha a Munka böngészőt kéri, ezt a profilt fogom használni.",
+    "name": "Munka"
+  },
+  "video": {
+    "tagline": "Engedje, hogy MI-ügynöke a már megszokott böngészőjét használja.",
+    "closing": "Kompatibilis: Claude Code, Cursor, VS Code és bármely MCP-kliens. Ingyenes és nyílt forráskódú."
+  }
+}

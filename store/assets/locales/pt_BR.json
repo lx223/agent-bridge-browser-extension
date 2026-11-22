@@ -1,7 +1,7 @@
 {
   "captions": {
     "tabs": {
-      "headline": "Deixe seu agente de IA organizar suas abas",
+      "headline": "Deixe seu agente de IA organizar suas guias",
       "subline": "Veja um plano de agrupamento, aplique em uma etapa e desfaça se mudar de ideia."
     },
     "pages": {
@@ -22,8 +22,8 @@
     "agent": "Agente"
   },
   "tabs": {
-    "prompt": "Organize minhas abas abertas em grupos por assunto.",
-    "reply": "Pronto. Agrupei {tabs} abas em {groups} grupos. Peça para desfazer se quiser o layout anterior de volta.",
+    "prompt": "Organize minhas guias abertas em grupos por assunto.",
+    "reply": "Pronto. Agrupei {tabs} guias em {groups} grupos. Peça para desfazer se quiser o layout anterior de volta.",
     "groups": {
       "travel": "Viagem a Lisboa",
       "work": "Relatório do T3",
