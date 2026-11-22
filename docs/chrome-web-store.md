@@ -42,6 +42,8 @@ The translations other than English were written without a native speaker review
 
 The package ships translations for every language the store supports (see [Localisation](localisation.md)). The store reads the extension's name and summary from the package for each language. The detailed description and screenshots are per language in the dashboard under Store listing; a language without its own description shows the English one.
 
+The detailed description for each language other than English is in [`store/chrome/descriptions/`](../store/chrome/descriptions), one file per locale code, such as `de.md` or `pt_BR.md`. Paste each file into that language's Store listing. The English text is in the [submission copy](../store/chrome/submission.md). The translations had no native speaker review; they use the same terms as the extension's `messages.json` for each language, so the open questions in [Localisation](localisation.md#review) apply to them too. When the English description changes, update every file.
+
 Which countries can install the extension is a separate setting under Distribution > Regions, and does not depend on the languages. Keep it on all regions.
 
 ## Release steps
