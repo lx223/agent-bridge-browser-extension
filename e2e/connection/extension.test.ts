@@ -44,6 +44,7 @@ describe('the packaged extension', () => {
     const { page, errors } = await openExtensionPage('src/welcome/index.html');
     await page.waitForSelector('#status[data-state="connected"]');
     expect(await page.textContent('#status-text')).toMatch(/^Connected/);
+    expect(await page.textContent('#extension-version')).toBe(`v${EXTENSION_VERSION}`);
     await harness.agent.call('chrome_windows_list');
     const session = page.locator('#agents li.session');
     await expect.poll(() => session.locator('.chip').allTextContents()).toEqual(['Chrome, this browser']);
