@@ -16,7 +16,7 @@ import type { BridgeStatus, ExtensionBridge } from './bridge.ts';
 import { createMcpServer } from './mcp.ts';
 
 const closers: Array<() => Promise<void>> = [];
-const ME = { agentId: 'agent-1', agentName: 'Tidy tabs' };
+const ME = { agentSessionId: 'agent-1', agentSessionName: 'Tidy tabs' };
 const ME_PARAM = { id: 'agent-1', name: 'Tidy tabs' };
 
 afterEach(async () => {
@@ -52,9 +52,9 @@ const jsonOf = (result: unknown) => JSON.parse(textOf(result)[0]!) as Record<str
 function fakeExtension(replies: ChatInbox[]) {
   const sent: string[] = [];
   const receives: Array<Record<string, unknown>> = [];
-  const agents: unknown[] = [];
-  const request: Request = async (_browser, method, { agent, ...params }) => {
-    agents.push(agent);
+  const agentSessions: unknown[] = [];
+  const request: Request = async (_browser, method, { agentSession, ...params }) => {
+    agentSessions.push(agentSession);
     if (method === CHAT_SEND_METHOD) {
       sent.push(params.text as string);
       return { seq: sent.length };
@@ -66,7 +66,7 @@ function fakeExtension(replies: ChatInbox[]) {
     if (method === CHAT_PEEK_METHOD) return { unread: 0, ended: false };
     return [];
   };
-  return { sent, receives, agents, request };
+  return { sent, receives, agentSessions, request };
 }
 
 describe('browser chat tools', () => {
@@ -81,8 +81,8 @@ describe('browser chat tools', () => {
       sent: true,
       messages: [{ text: 'Group my tabs', sentAt: '1970-01-01T00:00:00.000Z', viewingTab: { title: 'Inbox', url: 'https://mail.example/' } }],
     });
-    expect(bridge.request).toHaveBeenCalledWith('chrome', CHAT_RECEIVE_METHOD, { waitMs: 20_000, agent: ME_PARAM }, undefined, 'aaaa1111');
-    expect(extension.agents).toEqual([ME_PARAM, ME_PARAM]);
+    expect(bridge.request).toHaveBeenCalledWith('chrome', CHAT_RECEIVE_METHOD, { waitMs: 20_000, agentSession: ME_PARAM }, undefined, 'aaaa1111');
+    expect(extension.agentSessions).toEqual([ME_PARAM, ME_PARAM]);
   });
 
   it('keeps waiting in short rounds and passes back the last message it read', async () => {
@@ -119,9 +119,9 @@ describe('browser chat tools', () => {
   it('forgets the cursor when a peek shows the conversation was replaced', async () => {
     const extension = fakeExtension([{ messages: [{ seq: 12, text: 'before the restart', sentAt: 0 }], ended: false, conversation: 'first' }]);
     const peeks: Array<Record<string, unknown>> = [];
-    const request: Request = async (browser, method, { agent: chatAgent, ...params }, agent, instance) => {
-      if (method !== CHAT_PEEK_METHOD) return extension.request(browser, method, { agent: chatAgent, ...params }, agent, instance);
-      expect(chatAgent).toEqual(ME_PARAM);
+    const request: Request = async (browser, method, { agentSession, ...params }, agent, instance) => {
+      if (method !== CHAT_PEEK_METHOD) return extension.request(browser, method, { agentSession, ...params }, agent, instance);
+      expect(agentSession).toEqual(ME_PARAM);
       peeks.push(params);
       return { unread: 1, ended: false, conversation: 'second' };
     };
@@ -140,11 +140,11 @@ describe('browser chat tools', () => {
       { messages: [], ended: false },
     ]);
     const { client } = await connect(extension.request);
-    const other = { agentId: 'agent-2', agentName: 'Review PRs' };
+    const other = { agentSessionId: 'agent-2', agentSessionName: 'Review PRs' };
     await client.callTool({ name: CHAT_RECEIVE_TOOL, arguments: { ...ME } });
     await client.callTool({ name: CHAT_RECEIVE_TOOL, arguments: { ...other } });
     await client.callTool({ name: CHAT_RECEIVE_TOOL, arguments: { ...ME, timeoutSeconds: 0 } });
-    expect(extension.agents).toEqual([ME_PARAM, { id: 'agent-2', name: 'Review PRs' }, ME_PARAM]);
+    expect(extension.agentSessions).toEqual([ME_PARAM, { id: 'agent-2', name: 'Review PRs' }, ME_PARAM]);
     expect(extension.receives).toEqual([{ waitMs: 20_000 }, { waitMs: 20_000 }, { waitMs: 0, after: 4 }]);
   });
 
@@ -152,7 +152,7 @@ describe('browser chat tools', () => {
     const { client } = await connect(async () => null);
     const { tools } = await client.listTools();
     for (const name of [CHAT_SEND_TOOL, CHAT_RECEIVE_TOOL]) {
-      expect(tools.find((tool) => tool.name === name)!.inputSchema.required).toEqual(expect.arrayContaining(['agentId', 'agentName']));
+      expect(tools.find((tool) => tool.name === name)!.inputSchema.required).toEqual(expect.arrayContaining(['agentSessionId', 'agentSessionName']));
     }
     const result = await client.callTool({ name: CHAT_RECEIVE_TOOL, arguments: {} });
     expect(result.isError).toBe(true);

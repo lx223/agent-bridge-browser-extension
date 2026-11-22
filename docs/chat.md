@@ -15,19 +15,19 @@ Chrome only lets an extension open its side panel after you click something, so 
 
 ## Which agent a conversation belongs to
 
-Each chat call carries an `agentId` and an `agentName` that the agent chooses itself:
+Each chat call carries an `agentSessionId` and an `agentSessionName` that the agent chooses itself:
 
-- **agentId** is any stable string: the agent's own session id if it knows one, or a random UUID it makes up on its first chat call. It passes the same value on every later call.
-- **agentName** is a short name the user will recognise, such as the task the agent is working on. It titles the conversation in the panel.
+- **agentSessionId** is any stable string: the agent's own session id if it knows one, or a random UUID it makes up on its first chat call. It passes the same value on every later call.
+- **agentSessionName** is a short name the user will recognise, such as the task the agent is working on. It titles the conversation in the panel.
 
-The extension keeps one conversation per `agentId`. The MCP connection can't identify the agent session on its own:
+The extension keeps one conversation per `agentSessionId`. The MCP connection can't identify the agent session on its own:
 
 - **Shared servers:** Claude Desktop starts one bridge server for all of its Code sessions. Every Code session reports the same client name and the folders of all sessions together, and its tool calls carry nothing that tells sessions apart.
 - **Restarts:** the server gets a new session id whenever the client restarts it.
 
 An id the agent chooses and repeats covers both cases.
 
-Older servers send no `agentId`. Their conversations are keyed by the bridge's session id instead, as before.
+Older servers send no `agentSessionId`. Their conversations are keyed by the bridge's session id instead, as before.
 
 ## Talking in the panel
 
@@ -54,13 +54,13 @@ The server confirms what the agent read by sending a cursor: the number of the l
 
 An agent's MCP client can restart the bridge server in the middle of a chat. Claude Desktop does this after any tool call that fails, including one that it stopped after 60 seconds. The new server is a new agent session with a new id.
 
-When the agent passes its `agentId`, its next chat call finds the same conversation, whichever server session it comes through. Until then, and for conversations without an `agentId`, the extension does not close the conversation straight away when its session leaves:
+When the agent passes its `agentSessionId`, its next chat call finds the same conversation, whichever server session it comes through. Until then, and for conversations without an `agentSessionId`, the extension does not close the conversation straight away when its session leaves:
 
 1. For 10 minutes the panel shows the agent as **reconnecting**. You can keep writing, and your messages wait for the agent.
-2. A conversation without an `agentId` moves to a new session from the same agent if one joins in that time. The same agent means the same client name, such as `claude-code`, and the same project folder. The new session's first chat call then gets the messages the old one had not read.
+2. A conversation without an `agentSessionId` moves to a new session from the same agent if one joins in that time. The same agent means the same client name, such as `claude-code`, and the same project folder. The new session's first chat call then gets the messages the old one had not read.
 3. After 10 minutes without such a session, the panel shows the agent as **disconnected**.
 
-For conversations without an `agentId`, that match is a best guess: two sessions of the same agent in the same folder look alike, so the conversation goes to whichever one uses the chat first.
+For conversations without an `agentSessionId`, that match is a best guess: two sessions of the same agent in the same folder look alike, so the conversation goes to whichever one uses the chat first.
 
 ## Limits
 

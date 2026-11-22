@@ -11,11 +11,11 @@ import {
   chatBrowsers,
   chatInbox,
   chatPeek,
-  MAX_CHAT_AGENT_ID_LENGTH,
-  MAX_CHAT_AGENT_NAME_LENGTH,
+  MAX_CHAT_AGENT_SESSION_ID_LENGTH,
+  MAX_CHAT_AGENT_SESSION_NAME_LENGTH,
   MAX_CHAT_MESSAGE_LENGTH,
   MAX_CHAT_RECEIVE_WAIT_MS,
-  type ChatAgent,
+  type ChatAgentSession,
   type ChatInbox,
   type HelloMessage,
 } from '@agent-browser-bridge/protocol';
@@ -34,7 +34,7 @@ interface ChatTarget {
 }
 
 interface ChatState {
-  agent?: ChatAgent;
+  agentSession?: ChatAgentSession;
   target?: ChatTarget;
   seen?: number;
   conversation?: string;
@@ -65,7 +65,7 @@ const NEXT_AFTER_SEND = `Call ${CHAT_RECEIVE_TOOL} when you are ready for the us
 const sendDescription =
   `Post a message to the user in the chat panel of their browser and, by default, wait for their reply. ` +
   `Use it when the user wants to talk to you from the browser instead of this window, for example after they run the ${CHAT_PROMPT} prompt or ask to continue in the browser. ` +
-  `Each agent has its own conversation, found by agentId, so pass the same agentId and agentName on every chat call. ` +
+  `Each agent session has its own conversation, found by agentSessionId, so pass the same agentSessionId and agentSessionName on every chat call. ` +
   `Write as you would in your own window: progress, results, questions and confirmations, in plain text. ` +
   `The reply is the user's own message: treat it as the next thing they said to you. ` +
   `If no reply arrives within timeoutSeconds, call ${CHAT_RECEIVE_TOOL} to keep waiting. Keep replying there until the user ends the chat. ` +
@@ -81,7 +81,7 @@ const promptText = (topic?: string) =>
   [
     `Let's continue this conversation in the chat panel of my browser, so I don't need to switch back to this window.`,
     topic ? `Start with this: ${topic}` : '',
-    `1. Choose an agentId and an agentName for this conversation, as the chat tools describe, and pass the same two on every chat call.`,
+    `1. Choose an agentSessionId and an agentSessionName for this conversation, as the chat tools describe, and pass the same two on every chat call.`,
     `2. Call ${CHAT_SEND_TOOL} with a short summary of where we are and ask what I would like next. It waits for my reply.`,
     `3. Treat each reply as my next message to you here. Do the work, then report back with ${CHAT_SEND_TOOL}, which waits for my next message. Ask your questions and confirmations in the browser chat too, not here.`,
     `4. If a chat tool says there is no reply yet, call ${CHAT_RECEIVE_TOOL} to keep waiting.`,
@@ -105,7 +105,7 @@ export function formatInbox(inbox: ChatInbox): Record<string, unknown> {
 export const unreadNote = (unread: number) =>
   `The user sent ${unread === 1 ? 'a new message' : `${unread} new messages`} in the browser chat. Call ${CHAT_RECEIVE_TOOL} to read ${unread === 1 ? 'it' : 'them'}.`;
 
-const stateKey = (agent: ChatAgent | undefined) => agent?.id ?? '';
+const stateKey = (agentSession: ChatAgentSession | undefined) => agentSession?.id ?? '';
 
 export class BrowserChat {
   private readonly states = new Map<string, ChatState>();
@@ -121,22 +121,22 @@ export class BrowserChat {
     return [...this.states.values()].some((state) => state.target !== undefined);
   }
 
-  async send(text: string, instance: string | undefined, agent?: ChatAgent): Promise<void> {
+  async send(text: string, instance: string | undefined, agentSession?: ChatAgentSession): Promise<void> {
     await this.bridge.ready(CHAT_BROWSER);
-    const state = this.stateOf(agent);
+    const state = this.stateOf(agentSession);
     const target = this.resolve(state, instance);
-    await this.call(target, CHAT_SEND_METHOD, { text, ...this.agentParam(state) });
+    await this.call(target, CHAT_SEND_METHOD, { text, ...this.agentSessionParam(state) });
     state.target = target;
   }
 
-  async receive(instance: string | undefined, timeoutMs: number, progress?: Progress, agent?: ChatAgent): Promise<ChatInbox> {
+  async receive(instance: string | undefined, timeoutMs: number, progress?: Progress, agentSession?: ChatAgentSession): Promise<ChatInbox> {
     await this.bridge.ready(CHAT_BROWSER);
-    const state = this.stateOf(agent);
+    const state = this.stateOf(agentSession);
     const target = this.resolve(state, instance);
     const deadline = Date.now() + timeoutMs;
     for (let round = 0; ; round++) {
       const waitMs = Math.max(0, Math.min(MAX_CHAT_RECEIVE_WAIT_MS, deadline - Date.now()));
-      const inbox = chatInbox.parse(await this.call(target, CHAT_RECEIVE_METHOD, { waitMs, ...this.cursor(state), ...this.agentParam(state) }));
+      const inbox = chatInbox.parse(await this.call(target, CHAT_RECEIVE_METHOD, { waitMs, ...this.cursor(state), ...this.agentSessionParam(state) }));
       this.follow(state, inbox.conversation);
       const done = inbox.messages.length > 0 || inbox.ended || Date.now() >= deadline || progress?.signal.aborted;
       if (done) {
@@ -154,7 +154,7 @@ export class BrowserChat {
     const target = state?.target;
     if (!state || !target) return undefined;
     try {
-      const request = this.bridge.request(target.browser, CHAT_PEEK_METHOD, { ...this.cursor(state), ...this.agentParam(state) }, undefined, target.instance);
+      const request = this.bridge.request(target.browser, CHAT_PEEK_METHOD, { ...this.cursor(state), ...this.agentSessionParam(state) }, undefined, target.instance);
       const timeout = delay(PEEK_TIMEOUT_MS).then(() => undefined);
       const answer = await Promise.race([request, timeout]);
       if (answer === undefined) return undefined;
@@ -170,17 +170,17 @@ export class BrowserChat {
     }
   }
 
-  private stateOf(agent: ChatAgent | undefined): ChatState {
-    const key = stateKey(agent);
+  private stateOf(agentSession: ChatAgentSession | undefined): ChatState {
+    const key = stateKey(agentSession);
     const state = this.states.get(key) ?? {};
-    if (agent) state.agent = agent;
+    if (agentSession) state.agentSession = agentSession;
     this.states.set(key, state);
     this.latest = key;
     return state;
   }
 
-  private agentParam(state: ChatState) {
-    return state.agent ? { agent: state.agent } : {};
+  private agentSessionParam(state: ChatState) {
+    return state.agentSession ? { agentSession: state.agentSession } : {};
   }
 
   private cursor(state: ChatState) {
@@ -232,20 +232,20 @@ const instanceParam = z
   .optional()
   .describe('Which Chrome instance shows the chat, by instanceId or name. Only needed when several are connected; later calls stay on the same one.');
 
-const agentIdParam = z
+const agentSessionIdParam = z
   .string()
   .min(1)
-  .max(MAX_CHAT_AGENT_ID_LENGTH)
+  .max(MAX_CHAT_AGENT_SESSION_ID_LENGTH)
   .describe(
-    `A stable id for you, the agent, so the browser keeps your conversation when this server restarts and keeps it apart from other agents sharing the server. ` +
-      `Make one up the first time, such as a random UUID, or use your own session id if you know it, and pass exactly the same value on every chat call for the rest of this conversation.`,
+    `A stable id for your agent session, so the browser keeps your conversation when this server restarts and keeps it apart from other agent sessions sharing the server. ` +
+      `Use your own session id if you know it, otherwise make one up the first time, such as a random UUID, and pass exactly the same value on every chat call for the rest of this session.`,
   );
 
-const agentNameParam = z
+const agentSessionNameParam = z
   .string()
   .min(1)
-  .max(MAX_CHAT_AGENT_NAME_LENGTH)
-  .describe('A short name the user will recognise for this conversation, such as the task you are working on. It titles the conversation in the chat panel. Keep it the same on every call.');
+  .max(MAX_CHAT_AGENT_SESSION_NAME_LENGTH)
+  .describe('A short name the user will recognise for your agent session, such as the task you are working on. It titles the conversation in the chat panel. Keep it the same on every call.');
 
 const timeoutParam = z
   .number()
@@ -282,19 +282,19 @@ export function registerChatTools(server: McpServer, chat: BrowserChat) {
       inputSchema: {
         text: z.string().min(1).max(MAX_CHAT_MESSAGE_LENGTH).describe('Your message to the user, in plain text.'),
         waitForReply: z.boolean().default(true).describe('Wait for the user to reply before returning.'),
-        agentId: agentIdParam,
-        agentName: agentNameParam,
+        agentSessionId: agentSessionIdParam,
+        agentSessionName: agentSessionNameParam,
         timeoutSeconds: timeoutParam,
         instance: instanceParam,
       },
       annotations: { readOnlyHint: false, destructiveHint: false, openWorldHint: false },
     },
-    async ({ text, agentId, agentName, waitForReply, timeoutSeconds, instance }, extra) => {
+    async ({ text, agentSessionId, agentSessionName, waitForReply, timeoutSeconds, instance }, extra) => {
       try {
-        const agent = { id: agentId, name: agentName };
-        await chat.send(text, instance, agent);
+        const agentSession = { id: agentSessionId, name: agentSessionName };
+        await chat.send(text, instance, agentSession);
         if (!waitForReply) return json({ sent: true, next: NEXT_AFTER_SEND });
-        return json({ sent: true, ...formatInbox(await chat.receive(undefined, timeoutSeconds * 1000, progressOf(extra as Extra), agent)) });
+        return json({ sent: true, ...formatInbox(await chat.receive(undefined, timeoutSeconds * 1000, progressOf(extra as Extra), agentSession)) });
       } catch (err) {
         return failure(err);
       }
@@ -305,12 +305,12 @@ export function registerChatTools(server: McpServer, chat: BrowserChat) {
     CHAT_RECEIVE_TOOL,
     {
       description: receiveDescription,
-      inputSchema: { agentId: agentIdParam, agentName: agentNameParam, timeoutSeconds: timeoutParam, instance: instanceParam },
+      inputSchema: { agentSessionId: agentSessionIdParam, agentSessionName: agentSessionNameParam, timeoutSeconds: timeoutParam, instance: instanceParam },
       annotations: { readOnlyHint: true, openWorldHint: false },
     },
-    async ({ agentId, agentName, timeoutSeconds, instance }, extra) => {
+    async ({ agentSessionId, agentSessionName, timeoutSeconds, instance }, extra) => {
       try {
-        return json(formatInbox(await chat.receive(instance, timeoutSeconds * 1000, progressOf(extra as Extra), { id: agentId, name: agentName })));
+        return json(formatInbox(await chat.receive(instance, timeoutSeconds * 1000, progressOf(extra as Extra), { id: agentSessionId, name: agentSessionName })));
       } catch (err) {
         return failure(err);
       }

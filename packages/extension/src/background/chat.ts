@@ -7,7 +7,7 @@ import {
   chatSendParams,
   MAX_CHAT_MESSAGE_LENGTH,
   type AgentInfo,
-  type ChatAgent,
+  type ChatAgentSession,
   type ChatInbox,
   type ChatPeek,
   type ChatPeekParams,
@@ -42,7 +42,7 @@ export interface Conversation {
   id: string;
   key: string;
   sessionId: string;
-  agentId?: string;
+  agentSessionId?: string;
   title: string;
   agent?: ConversationAgent;
   goneAt?: number;
@@ -75,11 +75,11 @@ const sessionKey = (agent: AgentInfo | null) => {
   return agent.sessionId;
 };
 
-export const agentConversationKey = (agentId: string) => `agent:${agentId}`;
+export const agentSessionKey = (agentSessionId: string) => `agent-session:${agentSessionId}`;
 
-const conversationKey = (agent: AgentInfo | null, chatAgent: ChatAgent | undefined) => {
+const conversationKey = (agent: AgentInfo | null, agentSession: ChatAgentSession | undefined) => {
   const session = sessionKey(agent);
-  return chatAgent ? agentConversationKey(chatAgent.id) : session;
+  return agentSession ? agentSessionKey(agentSession.id) : session;
 };
 
 export const isListening = (conversation: Conversation, now: number) => !conversation.ended && conversation.listeningUntil > now;
@@ -156,8 +156,8 @@ export class ChatStore {
   async dispatch(method: string, params: unknown, agent: AgentInfo | null): Promise<unknown> {
     switch (method) {
       case CHAT_SEND_METHOD: {
-        const { text, agent: chatAgent } = parse(chatSendParams, method, params);
-        return this.agentSays(agent, text, chatAgent);
+        const { text, agentSession } = parse(chatSendParams, method, params);
+        return this.agentSays(agent, text, agentSession);
       }
       case CHAT_RECEIVE_METHOD:
         return this.receive(agent, parse(chatReceiveParams, method, params));
@@ -168,10 +168,10 @@ export class ChatStore {
     }
   }
 
-  async agentSays(agent: AgentInfo | null, text: string, chatAgent?: ChatAgent): Promise<{ seq: number }> {
-    const key = conversationKey(agent, chatAgent);
+  async agentSays(agent: AgentInfo | null, text: string, agentSession?: ChatAgentSession): Promise<{ seq: number }> {
+    const key = conversationKey(agent, agentSession);
     const { conversation, message } = await this.update((all) => {
-      const conversation = this.ensure(all, key, agent, chatAgent);
+      const conversation = this.ensure(all, key, agent, agentSession);
       conversation.ended = false;
       const message = this.append(conversation, 'agent', text);
       return { conversation: structuredClone(conversation), message };
@@ -180,13 +180,13 @@ export class ChatStore {
     return { seq: message.seq };
   }
 
-  async receive(agent: AgentInfo | null, { waitMs, after, conversation: cursorConversation, agent: chatAgent }: ChatReceiveParams): Promise<ChatInbox> {
-    const key = conversationKey(agent, chatAgent);
+  async receive(agent: AgentInfo | null, { waitMs, after, conversation: cursorConversation, agentSession }: ChatReceiveParams): Promise<ChatInbox> {
+    const key = conversationKey(agent, agentSession);
     const deadline = this.now() + waitMs;
     for (;;) {
       const inbox = await this.update((all) => {
-        if (!chatAgent && !all[key] && this.isGone(key)) return this.now() >= deadline ? { messages: [], ended: false } : undefined;
-        const conversation = this.ensure(all, key, agent, chatAgent);
+        if (!agentSession && !all[key] && this.isGone(key)) return this.now() >= deadline ? { messages: [], ended: false } : undefined;
+        const conversation = this.ensure(all, key, agent, agentSession);
         const from = this.acknowledge(conversation, after, cursorConversation);
         const messages = userMessagesAfter(conversation, from);
         const answered = messages.length > 0 || conversation.ended;
@@ -205,8 +205,8 @@ export class ChatStore {
     }
   }
 
-  async peek(agent: AgentInfo | null, { after, conversation: cursorConversation, agent: chatAgent }: ChatPeekParams): Promise<ChatPeek> {
-    const key = conversationKey(agent, chatAgent);
+  async peek(agent: AgentInfo | null, { after, conversation: cursorConversation, agentSession }: ChatPeekParams): Promise<ChatPeek> {
+    const key = conversationKey(agent, agentSession);
     return this.update((all) => {
       const conversation = all[key];
       if (!conversation) return { unread: 0, ended: false };
@@ -281,12 +281,12 @@ export class ChatStore {
     return run;
   }
 
-  private ensure(all: Conversations, key: string, agent: AgentInfo | null, chatAgent: ChatAgent | undefined): Conversation {
-    const title = chatAgent?.name ?? (agent ? sessionTitle(agent) : 'Agent');
+  private ensure(all: Conversations, key: string, agent: AgentInfo | null, agentSession: ChatAgentSession | undefined): Conversation {
+    const title = agentSession?.name ?? (agent ? sessionTitle(agent) : 'Agent');
     const sessionId = sessionKey(agent);
-    const existing = all[key] ?? (chatAgent ? undefined : this.adopt(all, key, agentOf(agent)));
+    const existing = all[key] ?? (agentSession ? undefined : this.adopt(all, key, agentOf(agent)));
     if (existing) {
-      existing.title = chatAgent?.name ?? (existing.agentId === undefined ? title : existing.title);
+      existing.title = agentSession?.name ?? (existing.agentSessionId === undefined ? title : existing.title);
       existing.sessionId = sessionId;
       existing.agent = agentOf(agent);
       delete existing.goneAt;
@@ -296,7 +296,7 @@ export class ChatStore {
       id: newConversationId(),
       key,
       sessionId,
-      ...(chatAgent && { agentId: chatAgent.id }),
+      ...(agentSession && { agentSessionId: agentSession.id }),
       title,
       agent: agentOf(agent),
       messages: [],
@@ -323,7 +323,7 @@ export class ChatStore {
     const previous = Object.values(all)
       .filter(
         (conversation) =>
-          conversation.agentId === undefined && !live.has(conversation.sessionId) && isReconnecting(conversation, now) && sameAgent(conversation.agent, agent),
+          conversation.agentSessionId === undefined && !live.has(conversation.sessionId) && isReconnecting(conversation, now) && sameAgent(conversation.agent, agent),
       )
       .sort((a, b) => b.updatedAt - a.updatedAt)[0];
     if (!previous) return undefined;

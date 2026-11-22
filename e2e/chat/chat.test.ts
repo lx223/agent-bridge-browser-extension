@@ -6,7 +6,7 @@ import { startHarness, type Harness } from '../support/harness.ts';
 let harness: Harness;
 let panel: Page;
 const errors: string[] = [];
-const ME = { agentId: 'e2e-agent', agentName: 'Tidy my tabs' };
+const ME = { agentSessionId: 'e2e-agent', agentSessionName: 'Tidy my tabs' };
 
 beforeAll(async () => {
   harness = await startHarness();

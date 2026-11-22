@@ -196,40 +196,40 @@ describe('ChatStore', () => {
 
     it('keys the conversation by that id and titles it with the agent name', async () => {
       const { store, storage } = setup();
-      await store.dispatch(CHAT_SEND_METHOD, { text: 'What next?', agent: me }, agent());
-      expect(stored(storage)['agent:agent-1']).toMatchObject({ key: 'agent:agent-1', sessionId: 'session-1', agentId: 'agent-1', title: 'Tidy tabs' });
+      await store.dispatch(CHAT_SEND_METHOD, { text: 'What next?', agentSession: me }, agent());
+      expect(stored(storage)['agent-session:agent-1']).toMatchObject({ key: 'agent-session:agent-1', sessionId: 'session-1', agentSessionId: 'agent-1', title: 'Tidy tabs' });
     });
 
     it('keeps the conversation when the agent comes back through a new server session', async () => {
       const { store, storage } = setup();
       await store.sessionsChanged(new Set(['session-1']));
-      await store.dispatch(CHAT_SEND_METHOD, { text: 'What next?', agent: me }, agent());
-      await store.userSays('agent:agent-1', 'Group my tabs');
+      await store.dispatch(CHAT_SEND_METHOD, { text: 'What next?', agentSession: me }, agent());
+      await store.userSays('agent-session:agent-1', 'Group my tabs');
       await store.sessionsChanged(new Set(['session-2']));
-      const inbox = (await store.dispatch(CHAT_RECEIVE_METHOD, { waitMs: 0, agent: me }, agent('session-2'))) as { messages: Array<{ text: string }> };
+      const inbox = (await store.dispatch(CHAT_RECEIVE_METHOD, { waitMs: 0, agentSession: me }, agent('session-2'))) as { messages: Array<{ text: string }> };
       expect(inbox.messages.map((message) => message.text)).toEqual(['Group my tabs']);
-      expect(Object.keys(stored(storage))).toEqual(['agent:agent-1']);
-      expect(stored(storage)['agent:agent-1']).toMatchObject({ sessionId: 'session-2' });
-      expect(stored(storage)['agent:agent-1']!.goneAt).toBeUndefined();
+      expect(Object.keys(stored(storage))).toEqual(['agent-session:agent-1']);
+      expect(stored(storage)['agent-session:agent-1']).toMatchObject({ sessionId: 'session-2' });
+      expect(stored(storage)['agent-session:agent-1']!.goneAt).toBeUndefined();
     });
 
     it('gives agents sharing one server session their own conversations', async () => {
       const { store, storage } = setup();
-      await store.dispatch(CHAT_SEND_METHOD, { text: 'Tabs?', agent: me }, agent());
-      await store.dispatch(CHAT_SEND_METHOD, { text: 'PRs?', agent: { id: 'agent-2', name: 'Review PRs' } }, agent());
-      await store.userSays('agent:agent-2', 'Look at the open ones');
-      expect(Object.keys(stored(storage)).sort()).toEqual(['agent:agent-1', 'agent:agent-2']);
-      expect(await store.dispatch(CHAT_PEEK_METHOD, { agent: me }, agent())).toMatchObject({ unread: 0 });
-      expect(await store.dispatch(CHAT_PEEK_METHOD, { agent: { id: 'agent-2' } }, agent())).toMatchObject({ unread: 1 });
+      await store.dispatch(CHAT_SEND_METHOD, { text: 'Tabs?', agentSession: me }, agent());
+      await store.dispatch(CHAT_SEND_METHOD, { text: 'PRs?', agentSession: { id: 'agent-2', name: 'Review PRs' } }, agent());
+      await store.userSays('agent-session:agent-2', 'Look at the open ones');
+      expect(Object.keys(stored(storage)).sort()).toEqual(['agent-session:agent-1', 'agent-session:agent-2']);
+      expect(await store.dispatch(CHAT_PEEK_METHOD, { agentSession: me }, agent())).toMatchObject({ unread: 0 });
+      expect(await store.dispatch(CHAT_PEEK_METHOD, { agentSession: { id: 'agent-2' } }, agent())).toMatchObject({ unread: 1 });
     });
 
     it('is never taken over by a session that gives no id', async () => {
       const { store, storage } = setup();
       await store.sessionsChanged(new Set(['session-1']));
-      await store.dispatch(CHAT_SEND_METHOD, { text: 'What next?', agent: me }, agent());
+      await store.dispatch(CHAT_SEND_METHOD, { text: 'What next?', agentSession: me }, agent());
       await store.sessionsChanged(new Set(['session-2']));
       await store.agentSays(agent('session-2'), 'Hello');
-      expect(Object.keys(stored(storage)).sort()).toEqual(['agent:agent-1', 'session-2']);
+      expect(Object.keys(stored(storage)).sort()).toEqual(['agent-session:agent-1', 'session-2']);
     });
   });
 

@@ -25,7 +25,7 @@ Hovering over a card shows the session id and the bridge server version.
 
 ## Claude Desktop
 
-Claude Desktop starts one bridge server for its chat and one for all of its Code sessions, rather than one for each session. Every Code session in the app therefore appears as the same agent session, with the same card. Desktop also restarts that server after a tool call fails or times out, which gives it a new session id. The browser chat copes with both because each agent passes its own `agentId` on chat calls, as [chat.md](chat.md#which-agent-a-conversation-belongs-to) explains.
+Claude Desktop starts one bridge server for its chat and one for all of its Code sessions, rather than one for each session. Every Code session in the app therefore appears as the same agent session, with the same card. Desktop also restarts that server after a tool call fails or times out, which gives it a new session id. The browser chat copes with both because each agent passes its own `agentSessionId` on chat calls, as [chat.md](chat.md#which-agent-a-conversation-belongs-to) explains.
 
 Desktop's Code sessions also keep the tool list they got when Desktop started the server. They ignore the `notifications/tools/list_changed` that the server sends after updating itself, so new tools appear only after the server restarts, for example after turning the extension off and on under **Settings → Extensions**.
 
