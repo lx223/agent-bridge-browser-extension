@@ -20,9 +20,6 @@
   "notificationReply": {
     "message": "คลิกปุ่ม Agent Browser Bridge ในแถบเครื่องมือเพื่อตอบกลับ"
   },
-  "optionsTitle": {
-    "message": "ตัวเลือกของ Agent Browser Bridge"
-  },
   "statusChecking": {
     "message": "กำลังตรวจสอบการเชื่อมต่อ…"
   },
@@ -116,15 +113,6 @@
   "welcomeAnalyticsHint": {
     "message": "ฟีเจอร์ที่ใช้และเวอร์ชันของส่วนขยาย เพื่อช่วยปรับปรุงส่วนขยาย"
   },
-  "instanceNameLabel": {
-    "message": "ตั้งชื่อโปรไฟล์เบราว์เซอร์นี้"
-  },
-  "instanceNamePlaceholder": {
-    "message": "เช่น งาน หรือ ส่วนตัว"
-  },
-  "optionsInstanceNameHint": {
-    "message": "เอเจนต์ใช้ชื่อนี้เพื่อแยกเบราว์เซอร์และโปรไฟล์ของคุณ $1"
-  },
   "instanceId": {
     "message": "รหัสอินสแตนซ์: $1"
   },
@@ -176,29 +164,8 @@
   "analyticsTitle": {
     "message": "แชร์สถิติการใช้งานแบบไม่ระบุตัวตน"
   },
-  "analyticsHint": {
-    "message": "ฟีเจอร์ที่ใช้ ใช้สำเร็จหรือไม่ และเวอร์ชันของส่วนขยายและเอเจนต์ ไม่รวมชื่อแท็บ URL หรือเนื้อหาของหน้าเว็บ $1"
-  },
   "privacyPolicy": {
     "message": "นโยบายความเป็นส่วนตัว"
-  },
-  "analyticsUnavailable": {
-    "message": "บิลด์นี้ไม่เก็บสถิติการใช้งาน"
-  },
-  "openSetup": {
-    "message": "เปิดการตั้งค่าและสถานะการเชื่อมต่อ"
-  },
-  "optionsConnected": {
-    "message": "เชื่อมต่อเอเจนต์แล้ว"
-  },
-  "optionsConnectedMany_one": {
-    "message": "เชื่อมต่อเซสชันเอเจนต์แล้ว $1 รายการ"
-  },
-  "optionsConnectedMany_other": {
-    "message": "เชื่อมต่อเซสชันเอเจนต์แล้ว $1 รายการ"
-  },
-  "optionsDisconnected": {
-    "message": "ไม่มีเอเจนต์ที่เชื่อมต่อ"
   },
   "agentStartingUp": {
     "message": "เอเจนต์กำลังเริ่มทำงาน"

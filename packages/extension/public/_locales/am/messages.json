@@ -20,9 +20,6 @@
   "notificationReply": {
     "message": "ምላሽ ለመስጠት በመሣሪያ አሞሌው ላይ ያለውን የAgent Browser Bridge አዝራር ጠቅ ያድርጉ"
   },
-  "optionsTitle": {
-    "message": "የAgent Browser Bridge አማራጮች"
-  },
   "statusChecking": {
     "message": "ግንኙነትን በመፈተሽ ላይ…"
   },
@@ -116,15 +113,6 @@
   "welcomeAnalyticsHint": {
     "message": "ቅጥያውን ለማሻሻል እንዲረዳ፣ የትኞቹ ባህሪያት ጥቅም ላይ እንደሚውሉ እና የቅጥያው ስሪት።"
   },
-  "instanceNameLabel": {
-    "message": "ይህን የአሳሽ መገለጫ ይሰይሙ"
-  },
-  "instanceNamePlaceholder": {
-    "message": "ለምሳሌ ሥራ ወይም የግል"
-  },
-  "optionsInstanceNameHint": {
-    "message": "ወኪሎች አሳሾችዎን እና መገለጫዎችዎን ለመለየት ይህን ስም ይጠቀማሉ። $1"
-  },
   "instanceId": {
     "message": "የአሳሽ መታወቂያ: $1"
   },
@@ -176,29 +164,8 @@
   "analyticsTitle": {
     "message": "ስም-አልባ የአጠቃቀም ስታቲስቲክስ ያጋሩ"
   },
-  "analyticsHint": {
-    "message": "የትኞቹ ባህሪያት ጥቅም ላይ እንደሚውሉ፣ ይሳኩ እንደሆነ፣ እና የቅጥያ እና የወኪል ስሪቶች። የትር ርዕሶች፣ ዩአርኤሎች ወይም የገጽ ይዘቶች በጭራሽ አይካተቱም። $1"
-  },
   "privacyPolicy": {
     "message": "የግላዊነት መመሪያ"
-  },
-  "analyticsUnavailable": {
-    "message": "ይህ ግንብ የአጠቃቀም ስታቲስቲክስ አይሰበስብም።"
-  },
-  "openSetup": {
-    "message": "ማዋቀርን እና የግንኙነት ሁኔታን ክፈት"
-  },
-  "optionsConnected": {
-    "message": "ወኪል ተገናኝቷል"
-  },
-  "optionsConnectedMany_one": {
-    "message": "$1 የወኪል ክፍለ-ጊዜ ተገናኝቷል"
-  },
-  "optionsConnectedMany_other": {
-    "message": "$1 የወኪል ክፍለ-ጊዜዎች ተገናኝተዋል"
-  },
-  "optionsDisconnected": {
-    "message": "ምንም ወኪል አልተገናኘም"
   },
   "agentStartingUp": {
     "message": "ወኪል በመጀመር ላይ"

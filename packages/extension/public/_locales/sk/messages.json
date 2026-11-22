@@ -20,9 +20,6 @@
   "notificationReply": {
     "message": "Ak chcete odpovedať, kliknite na tlačidlo Agent Browser Bridge na paneli s nástrojmi"
   },
-  "optionsTitle": {
-    "message": "Možnosti Agent Browser Bridge"
-  },
   "statusChecking": {
     "message": "Kontroluje sa pripojenie…"
   },
@@ -122,15 +119,6 @@
   "welcomeAnalyticsHint": {
     "message": "Ktoré funkcie sa používajú a verzia rozšírenia – pomáha to zlepšovať rozšírenie."
   },
-  "instanceNameLabel": {
-    "message": "Pomenujte tento profil prehliadača"
-  },
-  "instanceNamePlaceholder": {
-    "message": "Napríklad Práca alebo Osobné"
-  },
-  "optionsInstanceNameHint": {
-    "message": "Podľa tohto názvu agenti rozlišujú vaše prehliadače a profily. $1"
-  },
   "instanceId": {
     "message": "ID inštancie: $1"
   },
@@ -182,35 +170,8 @@
   "analyticsTitle": {
     "message": "Zdieľať anonymné štatistiky používania"
   },
-  "analyticsHint": {
-    "message": "Ktoré funkcie sa používajú, či fungujú, a verzie rozšírenia a agenta. Nikdy názvy kariet, webové adresy ani obsah stránok. $1"
-  },
   "privacyPolicy": {
     "message": "Pravidlá ochrany súkromia"
-  },
-  "analyticsUnavailable": {
-    "message": "Táto verzia nezhromažďuje štatistiky používania."
-  },
-  "openSetup": {
-    "message": "Otvoriť nastavenie a stav pripojenia"
-  },
-  "optionsConnected": {
-    "message": "Agent je pripojený"
-  },
-  "optionsConnectedMany_one": {
-    "message": "Pripojená $1 relácia agenta"
-  },
-  "optionsConnectedMany_few": {
-    "message": "Pripojené $1 relácie agenta"
-  },
-  "optionsConnectedMany_many": {
-    "message": "Pripojené $1 relácie agenta"
-  },
-  "optionsConnectedMany_other": {
-    "message": "Pripojených $1 relácií agenta"
-  },
-  "optionsDisconnected": {
-    "message": "Nie je pripojený žiadny agent"
   },
   "agentStartingUp": {
     "message": "Agent sa spúšťa"

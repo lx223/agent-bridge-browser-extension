@@ -20,9 +20,6 @@
   "notificationReply": {
     "message": "A válaszadáshoz kattintson az eszköztár Agent Browser Bridge gombjára"
   },
-  "optionsTitle": {
-    "message": "Agent Browser Bridge – beállítások"
-  },
   "statusChecking": {
     "message": "Kapcsolat ellenőrzése…"
   },
@@ -116,15 +113,6 @@
   "welcomeAnalyticsHint": {
     "message": "Mely funkciókat használják, és a bővítmény verziója, a bővítmény fejlesztéséhez."
   },
-  "instanceNameLabel": {
-    "message": "Adjon nevet ennek a böngészőprofilnak"
-  },
-  "instanceNamePlaceholder": {
-    "message": "Például Munka vagy Személyes"
-  },
-  "optionsInstanceNameHint": {
-    "message": "Az ügynökök ezzel a névvel különböztetik meg a böngészőit és profiljait. $1"
-  },
   "instanceId": {
     "message": "Példányazonosító: $1"
   },
@@ -176,29 +164,8 @@
   "analyticsTitle": {
     "message": "Névtelen használati statisztikák megosztása"
   },
-  "analyticsHint": {
-    "message": "Mely funkciókat használják, sikeresek-e, valamint a bővítmény és az ügynök verziója. Lapcímeket, URL-eket és oldaltartalmakat soha. $1"
-  },
   "privacyPolicy": {
     "message": "Adatvédelmi irányelvek"
-  },
-  "analyticsUnavailable": {
-    "message": "Ez a verzió nem gyűjt használati statisztikákat."
-  },
-  "openSetup": {
-    "message": "Beállítás és kapcsolat állapotának megnyitása"
-  },
-  "optionsConnected": {
-    "message": "Ügynök csatlakoztatva"
-  },
-  "optionsConnectedMany_one": {
-    "message": "$1 ügynök-munkamenet csatlakoztatva"
-  },
-  "optionsConnectedMany_other": {
-    "message": "$1 ügynök-munkamenet csatlakoztatva"
-  },
-  "optionsDisconnected": {
-    "message": "Nincs csatlakoztatott ügynök"
   },
   "agentStartingUp": {
     "message": "Az ügynök indul"

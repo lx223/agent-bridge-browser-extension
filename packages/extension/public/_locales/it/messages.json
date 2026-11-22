@@ -20,9 +20,6 @@
   "notificationReply": {
     "message": "Fai clic sul pulsante Agent Browser Bridge nella barra degli strumenti per rispondere"
   },
-  "optionsTitle": {
-    "message": "Opzioni di Agent Browser Bridge"
-  },
   "statusChecking": {
     "message": "Verifica della connessione…"
   },
@@ -119,15 +116,6 @@
   "welcomeAnalyticsHint": {
     "message": "Quali funzionalità vengono usate e la versione dell'estensione, per contribuire a migliorare l'estensione."
   },
-  "instanceNameLabel": {
-    "message": "Assegna un nome a questo profilo del browser"
-  },
-  "instanceNamePlaceholder": {
-    "message": "Ad esempio Lavoro o Personale"
-  },
-  "optionsInstanceNameHint": {
-    "message": "Gli agenti usano questo nome per distinguere i tuoi browser e profili. $1"
-  },
   "instanceId": {
     "message": "ID istanza: $1"
   },
@@ -179,32 +167,8 @@
   "analyticsTitle": {
     "message": "Condividi statistiche di utilizzo anonime"
   },
-  "analyticsHint": {
-    "message": "Quali funzionalità vengono usate, se vanno a buon fine e le versioni dell'estensione e dell'agente. Mai titoli delle schede, URL o contenuti delle pagine. $1"
-  },
   "privacyPolicy": {
     "message": "Informativa sulla privacy"
-  },
-  "analyticsUnavailable": {
-    "message": "Questa versione non raccoglie statistiche di utilizzo."
-  },
-  "openSetup": {
-    "message": "Apri configurazione e stato della connessione"
-  },
-  "optionsConnected": {
-    "message": "Agente connesso"
-  },
-  "optionsConnectedMany_one": {
-    "message": "$1 sessione dell'agente connessa"
-  },
-  "optionsConnectedMany_many": {
-    "message": "$1 di sessioni dell'agente connesse"
-  },
-  "optionsConnectedMany_other": {
-    "message": "$1 sessioni dell'agente connesse"
-  },
-  "optionsDisconnected": {
-    "message": "Nessun agente connesso"
   },
   "agentStartingUp": {
     "message": "Avvio dell'agente in corso"

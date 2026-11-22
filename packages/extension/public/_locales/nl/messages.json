@@ -20,9 +20,6 @@
   "notificationReply": {
     "message": "Klik op de knop Agent Browser Bridge in de werkbalk om te antwoorden"
   },
-  "optionsTitle": {
-    "message": "Opties voor Agent Browser Bridge"
-  },
   "statusChecking": {
     "message": "Verbinding controleren…"
   },
@@ -116,15 +113,6 @@
   "welcomeAnalyticsHint": {
     "message": "Welke functies worden gebruikt en de versie van de extensie, om de extensie te helpen verbeteren."
   },
-  "instanceNameLabel": {
-    "message": "Geef dit browserprofiel een naam"
-  },
-  "instanceNamePlaceholder": {
-    "message": "Bijvoorbeeld Werk of Privé"
-  },
-  "optionsInstanceNameHint": {
-    "message": "Agents gebruiken deze naam om je browsers en profielen uit elkaar te houden. $1"
-  },
   "instanceId": {
     "message": "Instantie-ID: $1"
   },
@@ -176,29 +164,8 @@
   "analyticsTitle": {
     "message": "Anonieme gebruiksstatistieken delen"
   },
-  "analyticsHint": {
-    "message": "Welke functies worden gebruikt, of ze slagen, en de versies van de extensie en de agent. Nooit titels van tabbladen, URL's of pagina-inhoud. $1"
-  },
   "privacyPolicy": {
     "message": "Privacybeleid"
-  },
-  "analyticsUnavailable": {
-    "message": "Deze versie verzamelt geen gebruiksstatistieken."
-  },
-  "openSetup": {
-    "message": "Instellen en verbindingsstatus openen"
-  },
-  "optionsConnected": {
-    "message": "Agent verbonden"
-  },
-  "optionsConnectedMany_one": {
-    "message": "$1 agentsessie verbonden"
-  },
-  "optionsConnectedMany_other": {
-    "message": "$1 agentsessies verbonden"
-  },
-  "optionsDisconnected": {
-    "message": "Geen agent verbonden"
   },
   "agentStartingUp": {
     "message": "Agent wordt gestart"

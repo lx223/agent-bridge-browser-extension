@@ -13,8 +13,8 @@ export interface SceneContext {
 export type SceneCapture = (context: SceneContext) => Promise<string>;
 
 const PRODUCT_NAME = 'Agent Browser Bridge';
-const OPTIONS_POPUP_WIDTH = 420;
-const OPTIONS_POPUP_SCALE = 1.45;
+const PROFILE_CARD_VIEWPORT = 560;
+const PROFILE_CARD_SCALE = 1.2;
 const WELCOME_PAGE_SCALE = 0.8;
 const TOPIC_COLORS: Record<Topic, string> = { travel: 'blue', work: 'purple', recipes: 'orange' };
 
@@ -126,16 +126,17 @@ async function profiles(context: SceneContext) {
   await harness.agent.call(NAME_INSTANCE_TOOL, { browser: 'chrome', instance, name: text.name });
 
   const page = await harness.context.newPage();
-  let popup: Buffer;
-  let height: number;
+  let card: Buffer;
+  let cardSize: Size;
   try {
-    await page.setViewportSize({ width: OPTIONS_POPUP_WIDTH, height: 600 });
-    await page.goto(extensionUrl(context, 'src/options/index.html'));
-    await page.waitForSelector('#connection[data-state="connected"] #agents li');
+    await page.setViewportSize({ width: PROFILE_CARD_VIEWPORT, height: 800 });
+    await page.goto(extensionUrl(context, 'src/welcome/index.html'));
+    await page.waitForSelector('#status[data-state="connected"] ~ #agents li');
     await page.waitForFunction((name) => (document.getElementById('instance-name') as HTMLInputElement | null)?.value === name, text.name);
-    const box = (await page.locator('#instance-setting').boundingBox())!;
-    height = Math.ceil(box.y + box.height + 16);
-    popup = await page.screenshot({ clip: { x: 0, y: 0, width: OPTIONS_POPUP_WIDTH, height } });
+    const connection = page.locator('section.connection');
+    const box = (await connection.boundingBox())!;
+    cardSize = { width: Math.ceil(box.width), height: Math.ceil(box.height) };
+    card = await connection.screenshot();
   } finally {
     await page.close();
   }
@@ -146,8 +147,8 @@ async function profiles(context: SceneContext) {
     { kind: 'tool', name: NAME_INSTANCE_TOOL, detail: `"${text.name}"` },
     { kind: 'agent', text: text.reply },
   ];
-  const size = scaled({ width: OPTIONS_POPUP_WIDTH, height }, OPTIONS_POPUP_SCALE);
-  return chatCard(locale.strings.chat, messages) + windowCard({ title: PRODUCT_NAME, size: SIDE_WINDOW, body: popupBody(popup, size) });
+  const size = scaled(cardSize, PROFILE_CARD_SCALE);
+  return chatCard(locale.strings.chat, messages) + windowCard({ title: PRODUCT_NAME, size: SIDE_WINDOW, body: popupBody(card, size) });
 }
 
 async function setup(context: SceneContext) {

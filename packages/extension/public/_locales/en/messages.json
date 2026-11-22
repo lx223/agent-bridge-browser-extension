@@ -27,10 +27,6 @@
     "message": "Click the Agent Browser Bridge toolbar button to reply",
     "description": "Small text under a desktop notification that shows a chat message from the agent."
   },
-  "optionsTitle": {
-    "message": "Agent Browser Bridge options",
-    "description": "Browser tab title of the options page."
-  },
   "statusChecking": {
     "message": "Checking connection…",
     "description": "Shown while the extension checks whether an agent is connected."
@@ -155,18 +151,6 @@
     "message": "Which features are used and the extension version, to help improve the extension.",
     "description": "Setup page: under \"Share anonymous usage statistics\"."
   },
-  "instanceNameLabel": {
-    "message": "Name this browser profile",
-    "description": "Label of a text field where the user names this browser profile."
-  },
-  "instanceNamePlaceholder": {
-    "message": "For example Work or Personal",
-    "description": "Placeholder of the browser profile name field."
-  },
-  "optionsInstanceNameHint": {
-    "message": "Agents use this name to tell your browsers and profiles apart. $1",
-    "description": "Help text under the browser profile name field in the options. $1 is replaced by the instance id, which may be empty."
-  },
   "instanceId": {
     "message": "Instance id: $1",
     "description": "$1 is a short random identifier of this browser profile."
@@ -235,37 +219,9 @@
     "message": "Share anonymous usage statistics",
     "description": "Checkbox label in the options."
   },
-  "analyticsHint": {
-    "message": "Which features are used, whether they succeed, and the extension and agent versions. Never tab titles, URLs or page contents. $1",
-    "description": "Help text under the statistics checkbox. $1 is a link that reads Privacy policy."
-  },
   "privacyPolicy": {
     "message": "Privacy policy",
     "description": "Link to the privacy policy."
-  },
-  "analyticsUnavailable": {
-    "message": "This build does not collect usage statistics.",
-    "description": "Shown in the options when the extension was built without analytics."
-  },
-  "openSetup": {
-    "message": "Open setup and connection status",
-    "description": "Link from the options to the setup page."
-  },
-  "optionsConnected": {
-    "message": "Agent connected",
-    "description": "Connection status in the options."
-  },
-  "optionsConnectedMany_one": {
-    "message": "$1 agent session connected",
-    "description": "Connection status in the options. $1 is the number of connected agent sessions."
-  },
-  "optionsConnectedMany_other": {
-    "message": "$1 agent sessions connected",
-    "description": "Connection status in the options. $1 is the number of connected agent sessions."
-  },
-  "optionsDisconnected": {
-    "message": "No agent connected",
-    "description": "Connection status in the options."
   },
   "agentStartingUp": {
     "message": "Agent starting up",

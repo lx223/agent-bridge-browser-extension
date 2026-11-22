@@ -20,9 +20,6 @@
   "notificationReply": {
     "message": "返信するには、ツールバーの Agent Browser Bridge ボタンをクリックしてください"
   },
-  "optionsTitle": {
-    "message": "Agent Browser Bridge のオプション"
-  },
   "statusChecking": {
     "message": "接続を確認しています…"
   },
@@ -116,15 +113,6 @@
   "welcomeAnalyticsHint": {
     "message": "拡張機能の改善のため、使用された機能と拡張機能のバージョンを送信します。"
   },
-  "instanceNameLabel": {
-    "message": "このブラウザのプロファイルに名前を付ける"
-  },
-  "instanceNamePlaceholder": {
-    "message": "例: 仕事、個人"
-  },
-  "optionsInstanceNameHint": {
-    "message": "エージェントはこの名前でブラウザやプロファイルを区別します。$1"
-  },
   "instanceId": {
     "message": "インスタンス ID: $1"
   },
@@ -176,29 +164,8 @@
   "analyticsTitle": {
     "message": "匿名の使用統計情報を送信する"
   },
-  "analyticsHint": {
-    "message": "使用された機能、その成否、拡張機能とエージェントのバージョンを送信します。タブのタイトル、URL、ページの内容は送信しません。$1"
-  },
   "privacyPolicy": {
     "message": "プライバシーポリシー"
-  },
-  "analyticsUnavailable": {
-    "message": "このビルドでは使用統計情報を収集しません。"
-  },
-  "openSetup": {
-    "message": "セットアップと接続状況を開く"
-  },
-  "optionsConnected": {
-    "message": "エージェント接続済み"
-  },
-  "optionsConnectedMany_one": {
-    "message": "$1 件のエージェントセッションが接続中"
-  },
-  "optionsConnectedMany_other": {
-    "message": "$1 件のエージェントセッションが接続中"
-  },
-  "optionsDisconnected": {
-    "message": "エージェント未接続"
   },
   "agentStartingUp": {
     "message": "エージェントを起動中"

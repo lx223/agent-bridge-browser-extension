@@ -20,9 +20,6 @@
   "notificationReply": {
     "message": "ಪ್ರತ್ಯುತ್ತರಿಸಲು ಟೂಲ್‌ಬಾರ್‌ನಲ್ಲಿರುವ Agent Browser Bridge ಬಟನ್ ಕ್ಲಿಕ್ ಮಾಡಿ"
   },
-  "optionsTitle": {
-    "message": "Agent Browser Bridge ಆಯ್ಕೆಗಳು"
-  },
   "statusChecking": {
     "message": "ಕನೆಕ್ಷನ್ ಪರಿಶೀಲಿಸಲಾಗುತ್ತಿದೆ…"
   },
@@ -116,15 +113,6 @@
   "welcomeAnalyticsHint": {
     "message": "ವಿಸ್ತರಣೆಯನ್ನು ಸುಧಾರಿಸಲು ಸಹಾಯ ಮಾಡುವುದಕ್ಕಾಗಿ, ಯಾವ ಫೀಚರ್‌ಗಳನ್ನು ಬಳಸಲಾಗುತ್ತದೆ ಮತ್ತು ವಿಸ್ತರಣೆಯ ಆವೃತ್ತಿ."
   },
-  "instanceNameLabel": {
-    "message": "ಈ ಬ್ರೌಸರ್ ಪ್ರೊಫೈಲ್‌ಗೆ ಹೆಸರಿಡಿ"
-  },
-  "instanceNamePlaceholder": {
-    "message": "ಉದಾಹರಣೆಗೆ, ಆಫೀಸ್ ಅಥವಾ ವೈಯಕ್ತಿಕ"
-  },
-  "optionsInstanceNameHint": {
-    "message": "ನಿಮ್ಮ ಬ್ರೌಸರ್‌ಗಳು ಮತ್ತು ಪ್ರೊಫೈಲ್‌ಗಳನ್ನು ಪ್ರತ್ಯೇಕವಾಗಿ ಗುರುತಿಸಲು ಏಜೆಂಟ್‌ಗಳು ಈ ಹೆಸರನ್ನು ಬಳಸುತ್ತವೆ. $1"
-  },
   "instanceId": {
     "message": "ಇನ್‌ಸ್ಟೆನ್ಸ್ ID: $1"
   },
@@ -176,29 +164,8 @@
   "analyticsTitle": {
     "message": "ಅನಾಮಧೇಯ ಬಳಕೆಯ ಅಂಕಿಅಂಶಗಳನ್ನು ಹಂಚಿಕೊಳ್ಳಿ"
   },
-  "analyticsHint": {
-    "message": "ಯಾವ ಫೀಚರ್‌ಗಳನ್ನು ಬಳಸಲಾಗುತ್ತದೆ, ಅವು ಯಶಸ್ವಿಯಾಗುತ್ತವೆಯೇ, ಮತ್ತು ವಿಸ್ತರಣೆ ಹಾಗೂ ಏಜೆಂಟ್ ಆವೃತ್ತಿಗಳು. ಟ್ಯಾಬ್ ಶೀರ್ಷಿಕೆಗಳು, URL ಗಳು ಅಥವಾ ಪುಟದ ವಿಷಯವನ್ನು ಎಂದಿಗೂ ಸಂಗ್ರಹಿಸುವುದಿಲ್ಲ. $1"
-  },
   "privacyPolicy": {
     "message": "ಗೌಪ್ಯತಾ ನೀತಿ"
-  },
-  "analyticsUnavailable": {
-    "message": "ಈ ಬಿಲ್ಡ್ ಬಳಕೆಯ ಅಂಕಿಅಂಶಗಳನ್ನು ಸಂಗ್ರಹಿಸುವುದಿಲ್ಲ."
-  },
-  "openSetup": {
-    "message": "ಸೆಟಪ್ ಮತ್ತು ಕನೆಕ್ಷನ್ ಸ್ಥಿತಿಯನ್ನು ತೆರೆಯಿರಿ"
-  },
-  "optionsConnected": {
-    "message": "ಏಜೆಂಟ್ ಕನೆಕ್ಟ್ ಆಗಿದೆ"
-  },
-  "optionsConnectedMany_one": {
-    "message": "$1 ಏಜೆಂಟ್ ಸೆಷನ್ ಕನೆಕ್ಟ್ ಆಗಿದೆ"
-  },
-  "optionsConnectedMany_other": {
-    "message": "$1 ಏಜೆಂಟ್ ಸೆಷನ್‌ಗಳು ಕನೆಕ್ಟ್ ಆಗಿವೆ"
-  },
-  "optionsDisconnected": {
-    "message": "ಯಾವುದೇ ಏಜೆಂಟ್ ಕನೆಕ್ಟ್ ಆಗಿಲ್ಲ"
   },
   "agentStartingUp": {
     "message": "ಏಜೆಂಟ್ ಪ್ರಾರಂಭವಾಗುತ್ತಿದೆ"

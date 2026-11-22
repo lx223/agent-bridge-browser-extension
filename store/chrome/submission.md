@@ -102,7 +102,7 @@ The submitted 0.3.0 dashboard selected Web history, User activity and Website co
 
 Review additional categories before the next submission: analytics uses a persistent random installation identifier and the service receives an IP address. Page tools can also return personal communications, account details, financial or health information, authentication information and other sensitive data present in the requested page. The three selections above record what was submitted, not a claim that other categories can never be processed.
 
-Analytics is on by default in configured release builds and can be disabled on the setup or options page. Browser information goes to the local bridge and the user's chosen agent; that agent or its model provider may transmit or retain it under its own policies.
+Analytics is on by default in configured release builds and can be disabled on the setup page. Browser information goes to the local bridge and the user's chosen agent; that agent or its model provider may transmit or retain it under its own policies.
 
 Privacy policy URL: https://github.com/lx223/agent-bridge-browser-extension/blob/main/PRIVACY.md
 
@@ -131,7 +131,7 @@ No extension account is required. Use Chrome 116 or later and Node.js 20 or late
 5. Ask the agent to preview a tab grouping plan, apply it, then undo it. Confirm groups and tab positions change and restore.
 6. Ask the agent to inspect the example.com tab with `chrome_snapshot_page`, then click its More information link using the returned reference. Chrome displays a debugging banner while attached.
 7. Call `chrome_detach_debugger` for that tab and confirm the banner disappears.
-8. Open the extension options and turn off Share anonymous usage statistics to test the analytics control.
+8. Open the extension options (the setup page) and turn off Share anonymous usage statistics to test the analytics control.
 
 Page control cannot operate on chrome:// pages, extension pages, DevTools or the Chrome Web Store. WebMCP tools require a page that registers them and a Chrome build with WebMCP enabled; they are not required for ordinary page inspection or clicks.
 

@@ -20,9 +20,6 @@
   "notificationReply": {
     "message": "Nhấp vào nút Agent Browser Bridge trên thanh công cụ để trả lời"
   },
-  "optionsTitle": {
-    "message": "Tùy chọn Agent Browser Bridge"
-  },
   "statusChecking": {
     "message": "Đang kiểm tra kết nối…"
   },
@@ -116,15 +113,6 @@
   "welcomeAnalyticsHint": {
     "message": "Tính năng nào được dùng và phiên bản tiện ích, để giúp cải thiện tiện ích."
   },
-  "instanceNameLabel": {
-    "message": "Đặt tên cho hồ sơ trình duyệt này"
-  },
-  "instanceNamePlaceholder": {
-    "message": "Ví dụ: Công việc hoặc Cá nhân"
-  },
-  "optionsInstanceNameHint": {
-    "message": "Tác nhân dùng tên này để phân biệt các trình duyệt và hồ sơ của bạn. $1"
-  },
   "instanceId": {
     "message": "Mã phiên bản: $1"
   },
@@ -176,29 +164,8 @@
   "analyticsTitle": {
     "message": "Chia sẻ số liệu thống kê sử dụng ẩn danh"
   },
-  "analyticsHint": {
-    "message": "Tính năng nào được dùng, có thành công hay không, cùng phiên bản của tiện ích và tác nhân. Không bao giờ gồm tiêu đề thẻ, URL hay nội dung trang. $1"
-  },
   "privacyPolicy": {
     "message": "Chính sách quyền riêng tư"
-  },
-  "analyticsUnavailable": {
-    "message": "Bản dựng này không thu thập số liệu thống kê sử dụng."
-  },
-  "openSetup": {
-    "message": "Mở trang thiết lập và trạng thái kết nối"
-  },
-  "optionsConnected": {
-    "message": "Tác nhân đã kết nối"
-  },
-  "optionsConnectedMany_one": {
-    "message": "$1 phiên tác nhân đã kết nối"
-  },
-  "optionsConnectedMany_other": {
-    "message": "$1 phiên tác nhân đã kết nối"
-  },
-  "optionsDisconnected": {
-    "message": "Chưa có tác nhân nào kết nối"
   },
   "agentStartingUp": {
     "message": "Tác nhân đang khởi động"

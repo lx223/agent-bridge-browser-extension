@@ -20,9 +20,6 @@
   "notificationReply": {
     "message": "Vastaa klikkaamalla työkalupalkin Agent Browser Bridge ‑painiketta"
   },
-  "optionsTitle": {
-    "message": "Agent Browser Bridge – asetukset"
-  },
   "statusChecking": {
     "message": "Tarkistetaan yhteyttä…"
   },
@@ -116,15 +113,6 @@
   "welcomeAnalyticsHint": {
     "message": "Käytetyt ominaisuudet ja laajennuksen versio laajennuksen kehittämiseksi."
   },
-  "instanceNameLabel": {
-    "message": "Nimeä tämä selainprofiili"
-  },
-  "instanceNamePlaceholder": {
-    "message": "Esimerkiksi Työ tai Oma"
-  },
-  "optionsInstanceNameHint": {
-    "message": "Agentit erottavat selaimesi ja profiilisi toisistaan tämän nimen avulla. $1"
-  },
   "instanceId": {
     "message": "Instanssin tunnus: $1"
   },
@@ -176,29 +164,8 @@
   "analyticsTitle": {
     "message": "Jaa nimettömiä käyttötilastoja"
   },
-  "analyticsHint": {
-    "message": "Mitä ominaisuuksia käytetään, onnistuvatko ne sekä laajennuksen ja agentin versiot. Ei koskaan välilehtien otsikoita, URL-osoitteita tai sivujen sisältöä. $1"
-  },
   "privacyPolicy": {
     "message": "Tietosuojakäytäntö"
-  },
-  "analyticsUnavailable": {
-    "message": "Tämä versio ei kerää käyttötilastoja."
-  },
-  "openSetup": {
-    "message": "Avaa käyttöönotto ja yhteyden tila"
-  },
-  "optionsConnected": {
-    "message": "Agentti yhdistetty"
-  },
-  "optionsConnectedMany_one": {
-    "message": "$1 agentti-istunto yhdistetty"
-  },
-  "optionsConnectedMany_other": {
-    "message": "$1 agentti-istuntoa yhdistetty"
-  },
-  "optionsDisconnected": {
-    "message": "Ei yhdistettyä agenttia"
   },
   "agentStartingUp": {
     "message": "Agentti käynnistyy"

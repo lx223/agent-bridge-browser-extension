@@ -20,9 +20,6 @@
   "notificationReply": {
     "message": "답장하려면 툴바의 Agent Browser Bridge 버튼을 클릭하세요"
   },
-  "optionsTitle": {
-    "message": "Agent Browser Bridge 옵션"
-  },
   "statusChecking": {
     "message": "연결 확인 중…"
   },
@@ -116,15 +113,6 @@
   "welcomeAnalyticsHint": {
     "message": "확장 프로그램 개선을 위해 사용된 기능과 확장 프로그램 버전을 공유합니다."
   },
-  "instanceNameLabel": {
-    "message": "이 브라우저 프로필의 이름 지정"
-  },
-  "instanceNamePlaceholder": {
-    "message": "예: 업무 또는 개인"
-  },
-  "optionsInstanceNameHint": {
-    "message": "에이전트가 이 이름으로 브라우저와 프로필을 구분합니다. $1"
-  },
   "instanceId": {
     "message": "인스턴스 ID: $1"
   },
@@ -176,29 +164,8 @@
   "analyticsTitle": {
     "message": "익명 사용 통계 공유"
   },
-  "analyticsHint": {
-    "message": "사용된 기능, 성공 여부, 확장 프로그램 및 에이전트 버전이 포함됩니다. 탭 제목, URL, 페이지 콘텐츠는 절대 포함되지 않습니다. $1"
-  },
   "privacyPolicy": {
     "message": "개인정보처리방침"
-  },
-  "analyticsUnavailable": {
-    "message": "이 빌드는 사용 통계를 수집하지 않습니다."
-  },
-  "openSetup": {
-    "message": "설정 및 연결 상태 열기"
-  },
-  "optionsConnected": {
-    "message": "에이전트 연결됨"
-  },
-  "optionsConnectedMany_one": {
-    "message": "에이전트 세션 $1개 연결됨"
-  },
-  "optionsConnectedMany_other": {
-    "message": "에이전트 세션 $1개 연결됨"
-  },
-  "optionsDisconnected": {
-    "message": "연결된 에이전트 없음"
   },
   "agentStartingUp": {
     "message": "에이전트 시작 중"
