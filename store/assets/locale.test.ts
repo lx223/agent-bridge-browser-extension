@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { availableLocales, CHROME_WEB_STORE_LOCALES, compareToReference, fill, loadLocale, REFERENCE_LOCALE, RIGHT_TO_LEFT_LOCALES } from './locale.ts';
+import { availableLocales, CHROME_WEB_STORE_LOCALES, compareToReference, fill, listingLanguages, loadLocale, REFERENCE_LOCALE, textDirection } from './locale.ts';
 
 describe('store screenshot locales', () => {
   it.each(availableLocales())('%s has every string the reference locale has', (code) => {
@@ -10,8 +10,12 @@ describe('store screenshot locales', () => {
     expect(availableLocales().filter((code) => !CHROME_WEB_STORE_LOCALES.includes(code))).toEqual([]);
   });
 
-  it('has no right-to-left locales, which the layouts cannot render', () => {
-    expect(availableLocales().filter((code) => RIGHT_TO_LEFT_LOCALES.includes(code))).toEqual([]);
+  it('covers every language the store listing has a description for', () => {
+    expect(listingLanguages().filter((code) => !availableLocales().includes(code))).toEqual([]);
+  });
+
+  it('lays out Arabic, Persian and Hebrew from right to left', () => {
+    expect(['ar', 'fa', 'he', 'en', 'zh-TW', 'pt_BR'].map(textDirection)).toEqual(['rtl', 'rtl', 'rtl', 'ltr', 'ltr', 'ltr']);
   });
 
   it('includes the reference locale', () => {

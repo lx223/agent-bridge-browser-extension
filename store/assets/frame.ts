@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { escapeHtml, pngDataUri } from './html.ts';
-import type { Caption } from './locale.ts';
+import { textDirection, type Caption } from './locale.ts';
 
 export interface Layout {
   width: number;
@@ -31,7 +31,7 @@ export const PRODUCT_NAME = 'Agent Browser Bridge';
 const ICON = readFileSync(join(import.meta.dirname, '../../packages/extension/icons/icon.svg'));
 export const ICON_URI = `data:image/svg+xml;base64,${ICON.toString('base64')}`;
 
-const groupColors: Record<string, string> = {
+export const GROUP_COLORS: Record<string, string> = {
   grey: '#5f6368',
   blue: '#1a73e8',
   red: '#d93025',
@@ -103,7 +103,7 @@ const styles = (layout: Layout, languageTag: string) => `
   .stage { position: absolute; left: 80px; top: ${layout.stageTop}px; width: ${STAGE.width}px; height: ${STAGE.height}px; display: flex; gap: ${GAP}px; }
 
   .window { flex: none; height: 100%; background: #fff; border-radius: 14px; overflow: hidden; box-shadow: 0 24px 60px rgba(15, 23, 42, 0.45); display: flex; flex-direction: column; }
-  .bar { height: ${TITLE_BAR}px; flex: none; display: flex; align-items: center; gap: 8px; padding: 0 14px; background: #eef0f4; border-bottom: 1px solid #dfe3ea; }
+  .bar { direction: ltr; height: ${TITLE_BAR}px; flex: none; display: flex; align-items: center; gap: 8px; padding: 0 14px; background: #eef0f4; border-bottom: 1px solid #dfe3ea; }
   .bar i { width: 11px; height: 11px; border-radius: 50%; background: #d1d5db; }
   .bar i:nth-child(1) { background: #f87171; }
   .bar i:nth-child(2) { background: #fbbf24; }
@@ -116,17 +116,17 @@ const styles = (layout: Layout, languageTag: string) => `
   .chat { width: ${CHAT_WIDTH}px; flex: none; height: 100%; background: #0f172a; color: #e2e8f0; border-radius: 14px; box-shadow: 0 24px 60px rgba(15, 23, 42, 0.45); padding: 22px 22px; display: flex; flex-direction: column; gap: 14px; overflow: hidden; }
   .who { font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #94a3b8; margin-bottom: 4px; }
   .user { align-self: flex-end; max-width: 92%; }
-  .user .who { text-align: right; }
-  .user p { margin: 0; background: #4f46e5; color: #fff; padding: 11px 14px; border-radius: 14px 14px 4px 14px; font-size: 16px; line-height: 1.45; }
-  .agent p { margin: 0; background: #1e293b; padding: 11px 14px; border-radius: 14px 14px 14px 4px; font-size: 16px; line-height: 1.45; }
-  .tool { font: 13px/1.4 ui-monospace, 'SF Mono', Menlo, Consolas, monospace; color: #a5b4fc; background: rgba(99, 102, 241, 0.12); border: 1px solid rgba(129, 140, 248, 0.3); border-radius: 8px; padding: 7px 10px; }
+  .user .who { text-align: end; }
+  .user p { margin: 0; background: #4f46e5; color: #fff; padding: 11px 14px; border-radius: 14px; border-end-end-radius: 4px; font-size: 16px; line-height: 1.45; }
+  .agent p { margin: 0; background: #1e293b; padding: 11px 14px; border-radius: 14px; border-end-start-radius: 4px; font-size: 16px; line-height: 1.45; }
+  .tool { direction: ltr; text-align: left; font: 13px/1.4 ui-monospace, 'SF Mono', Menlo, Consolas, monospace; color: #a5b4fc; background: rgba(99, 102, 241, 0.12); border: 1px solid rgba(129, 140, 248, 0.3); border-radius: 8px; padding: 7px 10px; }
   .tool b { color: #c7d2fe; font-weight: 600; }
   .tool small { display: block; color: #94a3b8; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
   .groups { padding: 18px 22px; display: flex; flex-direction: column; gap: 14px; background: #f8fafc; height: 100%; }
   .strip { display: flex; gap: 8px; padding-bottom: 14px; border-bottom: 1px solid #e2e8f0; }
   .chip { color: #fff; font-size: 13px; font-weight: 600; padding: 4px 10px; border-radius: 8px; white-space: nowrap; }
-  .group { border-left: 4px solid; padding-left: 14px; }
+  .group { border-inline-start: 4px solid; padding-inline-start: 14px; }
   .group h3 { margin: 0 0 6px; font-size: 15px; }
   .group ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 5px; }
   .group li { display: flex; align-items: center; gap: 10px; font-size: 14px; color: #334155; background: #fff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 6px 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -160,7 +160,7 @@ export function chatCard(labels: ChatLabels, messages: ChatMessage[]) {
   return `<section class="chat" data-fit>${items.join('')}</section>`;
 }
 
-const colorOf = (color: string) => groupColors[color] ?? groupColors.grey;
+const colorOf = (color: string) => GROUP_COLORS[color] ?? GROUP_COLORS.grey!;
 
 const tabItem = (title: string, color: string) => `<li><i style="background: ${colorOf(color)}">${escapeHtml([...title][0] ?? '')}</i>${escapeHtml(title)}</li>`;
 
@@ -203,7 +203,7 @@ export function slideHtml(labels: ChatLabels, slide: Slide, animated = false) {
 
 export function documentHtml(options: { languageTag: string; layout: Layout; content: string; extraStyles?: string }) {
   return `<!doctype html>
-<html lang="${options.languageTag}">
+<html lang="${options.languageTag}" dir="${textDirection(options.languageTag)}">
   <head><meta charset="utf-8" /><style>${styles(options.layout, options.languageTag)}${options.extraStyles ?? ''}</style></head>
   <body>${options.content}</body>
 </html>`;

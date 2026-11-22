@@ -115,7 +115,7 @@ async function chrome(browser: Browser, options: Options, report: Report) {
     console.log('chrome/promo:');
     const directory = join(root, 'promo');
     mkdirSync(directory, { recursive: true });
-    for (const image of await renderPromoImages(browser, loadLocale(REFERENCE_LOCALE), directory)) {
+    for (const image of await renderPromoImages(browser, directory)) {
       report.overflow(relative(options.out, image.file), image.overflowing);
       show(image.file);
     }
