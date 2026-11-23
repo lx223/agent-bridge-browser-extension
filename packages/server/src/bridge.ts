@@ -47,7 +47,12 @@ export interface BridgeOptions {
   startupGraceMs?: number;
   log?: (msg: string) => void;
   agentInfo?: () => AgentInfo;
+  attached?: boolean;
+  agents?: () => AgentInfo[];
+  notConnectedMessage?: (browser: string) => string;
 }
+
+export type BrowserBridge = Pick<ExtensionBridge, 'status' | 'request' | 'ready'>;
 
 export type BridgeRole = 'host' | 'relay';
 
@@ -139,6 +144,11 @@ export class ExtensionBridge {
   }
 
   async start(): Promise<number> {
+    if (this.opts.attached) {
+      this.role = 'host';
+      this.notifyChange();
+      return this.port;
+    }
     try {
       return await this.establish();
     } catch (err) {
@@ -200,7 +210,7 @@ export class ExtensionBridge {
 
   private async attempt(browser: string, method: string, params: unknown, agent: AgentInfo | null, instance: string | undefined, record: boolean) {
     if (this.role === 'relay' && this.upstream) return this.send(this.upstream, method, params, agent, { browser, instance });
-    if (this.role !== 'host') throw new NotConnectedError(this.error ?? notConnected(browser));
+    if (this.role !== 'host') throw new NotConnectedError(this.error ?? this.notConnected(browser));
     const socket = this.pick(browser, instance);
     const hello = this.extensions.get(socket);
     if (record) this.recordActivity(agent, browser, method, hello);
@@ -270,7 +280,7 @@ export class ExtensionBridge {
 
   private pick(browser: string, instance?: string): WebSocket {
     const candidates = this.connectedBrowsers().filter(([, hello]) => hello.browser === browser);
-    if (!candidates.length) throw new NotConnectedError(this.error ?? notConnected(browser));
+    if (!candidates.length) throw new NotConnectedError(this.error ?? this.notConnected(browser));
     const listed = candidates.map(([, hello]) => describeInstance(hello)).join(', ');
     if (instance !== undefined) {
       const target = candidates.find(([, hello]) => hello.instanceId === instance);
@@ -283,15 +293,28 @@ export class ExtensionBridge {
     return candidates[0][0];
   }
 
+  private notConnected(browser: string) {
+    return this.opts.notConnectedMessage?.(browser) ?? notConnected(browser);
+  }
+
   agentChanged() {
     if (this.role === 'host') this.broadcastAgents();
     else if (this.role === 'relay' && this.upstream) this.announceAgent(this.upstream);
   }
 
+  forgetAgent(sessionId: string) {
+    this.activity.delete(sessionId);
+    this.agentChanged();
+  }
+
+  connectedInstances(): HelloMessage[] {
+    return this.connectedBrowsers().map(([, hello]) => hello);
+  }
+
   agents(): AgentSession[] {
     const own = this.opts.agentInfo?.();
     const relayed = [...this.relays.values()].filter((agent): agent is AgentInfo => agent !== undefined);
-    const all = own ? [own, ...relayed] : relayed;
+    const all = this.opts.agents?.() ?? (own ? [own, ...relayed] : relayed);
     const latest = all.filter((agent, index) => agent.sessionId === undefined || !all.slice(index + 1).some((later) => later.sessionId === agent.sessionId));
     return latest.map((agent) => {
       const activity = agent.sessionId === undefined ? undefined : this.activity.get(agent.sessionId);
@@ -634,11 +657,11 @@ export class ExtensionBridge {
     for (const relay of this.relays.keys()) this.sendStatus(relay);
   }
 
-  private attachExtension(socket: WebSocket) {
+  attachExtension(socket: WebSocket, earlier: WebSocket.RawData[] = []) {
     this.extensions.set(socket, undefined);
     socket.on('error', (err) => this.log(`Extension connection error: ${errorMessage(err)}`));
 
-    socket.on('message', (raw) => {
+    const receive = (raw: WebSocket.RawData) => {
       const msg = this.parse(raw, extensionToServer);
       if (!msg) return;
       switch (msg.type) {
@@ -666,7 +689,9 @@ export class ExtensionBridge {
         case 'response':
           this.settle(msg);
       }
-    });
+    };
+    socket.on('message', receive);
+    for (const raw of earlier) receive(raw);
 
     socket.on('close', () => {
       const hello = this.extensions.get(socket);

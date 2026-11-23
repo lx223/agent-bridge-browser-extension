@@ -23,7 +23,7 @@ import {
   type Method,
 } from '@agent-browser-bridge/protocol';
 import { BrowserAsk, registerAskTool } from './ask.ts';
-import type { BridgeStatus, ExtensionBridge } from './bridge.ts';
+import type { BridgeStatus, BrowserBridge } from './bridge.ts';
 import { BrowserChat, registerChatTools } from './chat.ts';
 import { describeInstance, InstanceSelector } from './instances.ts';
 import { registerNamingTools } from './naming.ts';
@@ -83,7 +83,7 @@ const failure = (err: unknown) => ({
   isError: true,
 });
 
-export function createMcpServer(bridge: ExtensionBridge, version: string, { progressIntervalMs = PROGRESS_INTERVAL_MS } = {}): McpServer {
+export function createMcpServer(bridge: BrowserBridge, version: string, { progressIntervalMs = PROGRESS_INTERVAL_MS } = {}): McpServer {
   const connected = () => {
     const status = bridge.status();
     return status.state === 'error' ? [] : status.browsers;

@@ -18,7 +18,7 @@ import {
   type AskAnswer,
   type AskTab,
 } from '@agent-browser-bridge/protocol';
-import type { ExtensionBridge } from './bridge.ts';
+import type { BrowserBridge } from './bridge.ts';
 import type { InstanceSelector } from './instances.ts';
 
 export const DEFAULT_ASK_WAIT_SECONDS = 120;
@@ -52,7 +52,7 @@ const description =
 
 export class BrowserAsk {
   constructor(
-    private readonly bridge: ExtensionBridge,
+    private readonly bridge: BrowserBridge,
     private readonly selector: InstanceSelector,
   ) {}
 
