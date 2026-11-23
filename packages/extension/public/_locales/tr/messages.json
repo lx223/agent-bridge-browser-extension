@@ -206,6 +206,12 @@
   "chatConversation": {
     "message": "Konuşma"
   },
+  "chatOpenChats": {
+    "message": "Açık sohbetler"
+  },
+  "chatPastChats": {
+    "message": "Geçmiş sohbetler"
+  },
   "chatEmptyHeading": {
     "message": "Ajanınızla buradan konuşun"
   },

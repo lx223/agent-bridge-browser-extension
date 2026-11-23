@@ -212,6 +212,12 @@
   "chatConversation": {
     "message": "שיחה"
   },
+  "chatOpenChats": {
+    "message": "צ'אטים פתוחים"
+  },
+  "chatPastChats": {
+    "message": "צ'אטים קודמים"
+  },
   "chatEmptyHeading": {
     "message": "אפשר לדבר עם הסוכן מכאן"
   },

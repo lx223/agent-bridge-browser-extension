@@ -206,6 +206,12 @@
   "chatConversation": {
     "message": "സംഭാഷണം"
   },
+  "chatOpenChats": {
+    "message": "തുറന്ന ചാറ്റുകൾ"
+  },
+  "chatPastChats": {
+    "message": "മുൻ ചാറ്റുകൾ"
+  },
   "chatEmptyHeading": {
     "message": "ഇവിടെ നിന്ന് നിങ്ങളുടെ ഏജന്റുമായി സംസാരിക്കുക"
   },

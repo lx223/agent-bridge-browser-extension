@@ -206,6 +206,12 @@
   "chatConversation": {
     "message": "Vestlus"
   },
+  "chatOpenChats": {
+    "message": "Avatud vestlused"
+  },
+  "chatPastChats": {
+    "message": "Varasemad vestlused"
+  },
   "chatEmptyHeading": {
     "message": "Suhelge oma agendiga siin"
   },

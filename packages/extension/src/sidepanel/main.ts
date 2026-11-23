@@ -2,7 +2,7 @@ import type { AgentSession, ChatTab } from '@agent-browser-bridge/protocol';
 import type { ConnectionStatus } from '../background/bridgeClient.ts';
 import { CHAT_STORAGE_KEY, type Conversations } from '../background/chat.ts';
 import { CHAT_PANEL_PORT, type ChatPanelMessage } from '../background/chatPanel.ts';
-import { canSubmit, panelView, type MessageView, type PanelView } from './view.ts';
+import { canSubmit, panelView, type ConversationOption, type MessageView, type PanelView } from './view.ts';
 import { t } from '../i18n/messages.ts';
 import { localizePage } from '../i18n/page.ts';
 
@@ -77,6 +77,25 @@ function updateSendButton() {
   sendButton.disabled = !view || !canSubmit(view, input.value, sending);
 }
 
+function optionElement(option: ConversationOption): HTMLOptionElement {
+  const element = document.createElement('option');
+  element.value = option.key;
+  element.textContent = option.label;
+  element.selected = option.key === selected;
+  return element;
+}
+
+function pickerItems(options: ConversationOption[]): HTMLElement[] {
+  const groups = (['open', 'past'] as const).map((group) => ({ group, options: options.filter((option) => option.group === group) })).filter((entry) => entry.options.length);
+  if (groups.length < 2) return options.map(optionElement);
+  return groups.map(({ group, options: members }) => {
+    const element = document.createElement('optgroup');
+    element.label = t(group === 'open' ? 'chatOpenChats' : 'chatPastChats');
+    element.append(...members.map(optionElement));
+    return element;
+  });
+}
+
 function render() {
   view = panelView(conversations, agents, Date.now(), chosen);
   selected = view.selected;
@@ -85,15 +104,7 @@ function render() {
   title.title = view.title;
   title.hidden = view.pickConversation;
   pickerBox.hidden = !view.pickConversation;
-  picker.replaceChildren(
-    ...view.options.map((option) => {
-      const element = document.createElement('option');
-      element.value = option.key;
-      element.textContent = option.label;
-      element.selected = option.key === selected;
-      return element;
-    }),
-  );
+  picker.replaceChildren(...pickerItems(view.options));
   status.textContent = view.status;
   empty.hidden = view.selected !== undefined;
   list.hidden = view.selected === undefined;

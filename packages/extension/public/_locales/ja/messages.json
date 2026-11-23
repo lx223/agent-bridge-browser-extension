@@ -206,6 +206,12 @@
   "chatConversation": {
     "message": "会話"
   },
+  "chatOpenChats": {
+    "message": "進行中のチャット"
+  },
+  "chatPastChats": {
+    "message": "過去のチャット"
+  },
   "chatEmptyHeading": {
     "message": "ここからエージェントと話せます"
   },

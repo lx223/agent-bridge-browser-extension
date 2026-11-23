@@ -212,6 +212,12 @@
   "chatConversation": {
     "message": "Conversație"
   },
+  "chatOpenChats": {
+    "message": "Chaturi deschise"
+  },
+  "chatPastChats": {
+    "message": "Chaturi anterioare"
+  },
   "chatEmptyHeading": {
     "message": "Vorbiți cu agentul de aici"
   },

@@ -206,6 +206,12 @@
   "chatConversation": {
     "message": "Unterhaltung"
   },
+  "chatOpenChats": {
+    "message": "Offene Chats"
+  },
+  "chatPastChats": {
+    "message": "Frühere Chats"
+  },
   "chatEmptyHeading": {
     "message": "Chatten Sie hier mit Ihrem Agenten"
   },

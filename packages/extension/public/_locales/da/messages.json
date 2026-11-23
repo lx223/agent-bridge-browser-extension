@@ -206,6 +206,12 @@
   "chatConversation": {
     "message": "Samtale"
   },
+  "chatOpenChats": {
+    "message": "Åbne chats"
+  },
+  "chatPastChats": {
+    "message": "Tidligere chats"
+  },
   "chatEmptyHeading": {
     "message": "Tal med din agent herfra"
   },

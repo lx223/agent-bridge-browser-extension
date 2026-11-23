@@ -78,10 +78,27 @@ describe('panelView', () => {
     };
     const view = panelView(conversations, [session('a'), session('b')], NOW);
     expect(view.options).toEqual([
-      { key: 'a', label: 'claude-code in a' },
-      { key: 'b', label: 'claude-code in b (1 new)' },
+      { key: 'a', label: 'claude-code in a', group: 'open' },
+      { key: 'b', label: 'claude-code in b (1 new)', group: 'open' },
     ]);
     expect(view.pickConversation).toBe(true);
+  });
+
+  it('lists open conversations before the ones that ended or lost their agent', () => {
+    const conversations = {
+      ended: conversation('ended', { updatedAt: NOW, ended: true }),
+      gone: conversation('gone', { updatedAt: NOW - 1 }),
+      reconnecting: conversation('reconnecting', { updatedAt: NOW - 3, goneAt: NOW - 1_000 }),
+      live: conversation('live', { updatedAt: NOW - 2 }),
+    };
+    const view = panelView(conversations, [session('live')], NOW);
+    expect(view.options.map(({ key, group }) => [key, group])).toEqual([
+      ['live', 'open'],
+      ['reconnecting', 'open'],
+      ['ended', 'past'],
+      ['gone', 'past'],
+    ]);
+    expect(view.selected).toBe('live');
   });
 
   it('shows a single conversation by its title instead of a picker', () => {
@@ -104,10 +121,12 @@ describe('chooseConversation', () => {
     const conversations = {
       old: conversation('old', { updatedAt: NOW - 100 }),
       ended: conversation('ended', { updatedAt: NOW, ended: true }),
+      gone: conversation('gone', { updatedAt: NOW }),
     };
-    expect(chooseConversation(conversations)).toBe('old');
-    expect(chooseConversation(conversations, 'ended')).toBe('ended');
-    expect(chooseConversation(conversations, 'gone')).toBe('old');
+    const agents = [session('old')];
+    expect(chooseConversation(conversations, agents, NOW)).toBe('old');
+    expect(chooseConversation(conversations, agents, NOW, 'ended')).toBe('ended');
+    expect(chooseConversation(conversations, agents, NOW, 'missing')).toBe('old');
   });
 });
 

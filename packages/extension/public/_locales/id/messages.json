@@ -206,6 +206,12 @@
   "chatConversation": {
     "message": "Percakapan"
   },
+  "chatOpenChats": {
+    "message": "Obrolan terbuka"
+  },
+  "chatPastChats": {
+    "message": "Obrolan sebelumnya"
+  },
   "chatEmptyHeading": {
     "message": "Bicara dengan agen Anda dari sini"
   },

@@ -34,7 +34,7 @@ Older servers send no `agentSessionId`. Their conversations are keyed by the bri
 - **Enter** or the send button sends your message and **Shift+Enter** starts a new line. The message box grows as you write.
 - The status line under the title shows whether the agent is **waiting for your reply**, **working**, **reconnecting** (its connection dropped a moment ago), **disconnected** (its session has closed) or the chat has **ended**. While it works, it also shows the last browser tool it used.
 - You can write while the agent is working. Messages wait until it next checks the chat. Each one shows **not read yet** until the agent reads it, then **read by the agent**.
-- Each agent session has its own conversation. With several, the title becomes a list: pick a conversation from it. The list shows how many new messages each has.
+- Each agent session has its own conversation. With several, the title becomes a list: pick a conversation from it. The list shows how many new messages each has, with open chats first and chats that ended or whose agent disconnected under **Past chats**.
 - The button next to the title is **End chat** while the chat runs and **Remove** once it is over. Once a chat is over, the message box is replaced by a note on how to chat again.
 - **End chat** tells the agent the chat is over. It stops using the chat tools and finishes its turn in its own window. Asking the agent to continue in the browser starts the conversation again.
 - **Remove** deletes a conversation that has ended or whose agent has disconnected.
@@ -77,7 +77,7 @@ For conversations without an `agentSessionId`, that match is a best guess: two s
 
 ## Where messages are kept
 
-Conversations are kept in the extension's session storage. They stay in memory, and Chrome clears them when it quits. They are carried over when the extension updates itself, as [updates](updates.md#what-survives-an-update) describes. Each conversation keeps its last 500 messages, and the extension keeps the 20 most recently used conversations.
+Conversations are kept in the extension's session storage. They stay in memory, and Chrome clears them when it quits. They are carried over when the extension updates itself, as [updates](updates.md#what-survives-an-update) describes. Each conversation keeps its last 500 messages. The extension keeps the 20 most recently used conversations, and drops a conversation a day after it ended or its agent disconnected.
 
 Your messages go only to the agent session the conversation belongs to, through the local bridge. Each message includes the title and URL of the tab you were looking at when you sent it, so the agent knows what "this page" means. Chat text is never included in usage analytics. See the [privacy policy](../PRIVACY.md).
 

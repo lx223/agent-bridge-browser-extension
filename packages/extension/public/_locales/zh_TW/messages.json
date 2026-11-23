@@ -206,6 +206,12 @@
   "chatConversation": {
     "message": "對話"
   },
+  "chatOpenChats": {
+    "message": "進行中的聊天"
+  },
+  "chatPastChats": {
+    "message": "過去的聊天"
+  },
   "chatEmptyHeading": {
     "message": "在這裡與你的代理程式對話"
   },

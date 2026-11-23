@@ -206,6 +206,12 @@
   "chatConversation": {
     "message": "گفتگو"
   },
+  "chatOpenChats": {
+    "message": "گفتگوهای باز"
+  },
+  "chatPastChats": {
+    "message": "گفتگوهای قبلی"
+  },
   "chatEmptyHeading": {
     "message": "از همین‌جا با عامل خود گفتگو کنید"
   },

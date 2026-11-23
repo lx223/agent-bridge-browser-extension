@@ -206,6 +206,12 @@
   "chatConversation": {
     "message": "Cuộc trò chuyện"
   },
+  "chatOpenChats": {
+    "message": "Cuộc trò chuyện đang mở"
+  },
+  "chatPastChats": {
+    "message": "Cuộc trò chuyện trước đây"
+  },
   "chatEmptyHeading": {
     "message": "Trò chuyện với tác nhân của bạn tại đây"
   },

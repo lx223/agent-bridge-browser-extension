@@ -206,6 +206,12 @@
   "chatConversation": {
     "message": "Mazungumzo"
   },
+  "chatOpenChats": {
+    "message": "Gumzo zilizo wazi"
+  },
+  "chatPastChats": {
+    "message": "Gumzo za awali"
+  },
   "chatEmptyHeading": {
     "message": "Zungumza na wakala wako ukiwa hapa"
   },

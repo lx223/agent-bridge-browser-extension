@@ -212,6 +212,12 @@
   "chatConversation": {
     "message": "Saruna"
   },
+  "chatOpenChats": {
+    "message": "Atvērtās tērzēšanas"
+  },
+  "chatPastChats": {
+    "message": "Iepriekšējās tērzēšanas"
+  },
   "chatEmptyHeading": {
     "message": "Sazinieties ar savu aģentu šeit"
   },

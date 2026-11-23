@@ -206,6 +206,12 @@
   "chatConversation": {
     "message": "Συνομιλία"
   },
+  "chatOpenChats": {
+    "message": "Ανοιχτές συνομιλίες"
+  },
+  "chatPastChats": {
+    "message": "Προηγούμενες συνομιλίες"
+  },
   "chatEmptyHeading": {
     "message": "Μιλήστε με τον πράκτορά σας από εδώ"
   },

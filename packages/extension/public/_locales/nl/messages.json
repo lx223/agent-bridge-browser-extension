@@ -206,6 +206,12 @@
   "chatConversation": {
     "message": "Gesprek"
   },
+  "chatOpenChats": {
+    "message": "Open chats"
+  },
+  "chatPastChats": {
+    "message": "Eerdere chats"
+  },
   "chatEmptyHeading": {
     "message": "Praat hier met je agent"
   },

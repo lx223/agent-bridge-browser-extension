@@ -206,6 +206,12 @@
   "chatConversation": {
     "message": "Keskustelu"
   },
+  "chatOpenChats": {
+    "message": "Avoimet keskustelut"
+  },
+  "chatPastChats": {
+    "message": "Aiemmat keskustelut"
+  },
   "chatEmptyHeading": {
     "message": "Keskustele agenttisi kanssa täällä"
   },

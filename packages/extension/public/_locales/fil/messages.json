@@ -206,6 +206,12 @@
   "chatConversation": {
     "message": "Pag-uusap"
   },
+  "chatOpenChats": {
+    "message": "Mga bukas na chat"
+  },
+  "chatPastChats": {
+    "message": "Mga nakaraang chat"
+  },
   "chatEmptyHeading": {
     "message": "Kausapin ang iyong agent mula rito"
   },

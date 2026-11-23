@@ -230,6 +230,12 @@
   "chatConversation": {
     "message": "المحادثة"
   },
+  "chatOpenChats": {
+    "message": "المحادثات المفتوحة"
+  },
+  "chatPastChats": {
+    "message": "المحادثات السابقة"
+  },
   "chatEmptyHeading": {
     "message": "تحدّث مع الوكيل من هنا"
   },

@@ -206,6 +206,12 @@
   "chatConversation": {
     "message": "การสนทนา"
   },
+  "chatOpenChats": {
+    "message": "แชทที่เปิดอยู่"
+  },
+  "chatPastChats": {
+    "message": "แชทที่ผ่านมา"
+  },
   "chatEmptyHeading": {
     "message": "คุยกับเอเจนต์ของคุณได้จากที่นี่"
   },
