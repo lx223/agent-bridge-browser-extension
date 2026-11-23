@@ -17,6 +17,7 @@ function setup() {
     analytics,
     storage,
     countBrowser: async () => ({ tabs: 42, windows: 2 }),
+    installType: async () => 'normal',
     now: () => now,
   });
   const events = () =>
@@ -89,7 +90,13 @@ describe('UsageTracker', () => {
     await usage.dailyActive();
     const active = events().filter((e) => e.event === 'extension_active');
     expect(active).toHaveLength(2);
-    expect(active[0].properties).toMatchObject({ agent_connected: true, tab_count_bucket: '26-50', window_count: 2 });
+    expect(active[0].properties).toMatchObject({ agent_connected: true, tab_count_bucket: '26-50', window_count: 2, install_type: 'normal' });
+  });
+
+  it('says whether the extension came from a store or was loaded unpacked', async () => {
+    const { usage, events } = setup();
+    await usage.installed();
+    expect(events().find((e) => e.event === 'extension_installed')?.properties.install_type).toBe('normal');
   });
 
   it('reports the last agent seen while connected and forgets it on disconnect', async () => {

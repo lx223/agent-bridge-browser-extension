@@ -1,5 +1,6 @@
-import { NPM_URL, PAGES, PRODUCT_NAME, RELEASES_URL, REPO_URL, type PageConfig } from './config.ts';
+import { NPM_URL, PAGES, PRODUCT_NAME, RELEASES_URL, REPO_URL, SITE_APP_TAG, type AnalyticsConfig, type PageConfig } from './config.ts';
 import { relativeHref } from './links.ts';
+import { linkTarget, storeUrl } from './tracking.ts';
 
 export interface PageView {
   page: PageConfig;
@@ -9,6 +10,7 @@ export interface PageView {
   canonical: string;
   bodyHtml: string;
   structuredData: object;
+  analytics?: AnalyticsConfig;
 }
 
 export function escapeHtml(value: string): string {
@@ -29,11 +31,28 @@ function navLink(view: PageView, target: PageConfig, label: string): string {
   return `<a href="${relativeHref(view.page.slug, target.slug)}"${current}>${escapeHtml(label)}</a>`;
 }
 
+export function trackAttribute(href: string): string {
+  const target = linkTarget(href);
+  return target ? ` data-track="${target}"` : '';
+}
+
+function externalLink(href: string, label: string, className?: string): string {
+  const classAttribute = className ? ` class="${className}"` : '';
+  return `<a${classAttribute} href="${escapeHtml(href)}"${trackAttribute(href)}>${escapeHtml(label)}</a>`;
+}
+
 function callToAction(): string {
-  return `<p class="actions">
-        <a class="button primary" href="${RELEASES_URL}">Download the extension</a>
-        <a class="button" href="${REPO_URL}">View on GitHub</a>
+  return `<p class="actions" data-area="hero">
+        ${externalLink(storeUrl('html'), 'Add to Chrome', 'button primary')}
+        ${externalLink(REPO_URL, 'View on GitHub', 'button')}
       </p>`;
+}
+
+function siteScript(root: string, analytics: AnalyticsConfig | undefined): string {
+  const config = analytics
+    ? ` data-posthog-key="${escapeHtml(analytics.key)}" data-posthog-host="${escapeHtml(analytics.host)}" data-app="${SITE_APP_TAG}"`
+    : '';
+  return `<script src="${root}site.js" defer${config}></script>`;
 }
 
 export function renderPage(view: PageView): string {
@@ -61,30 +80,31 @@ export function renderPage(view: PageView): string {
   <meta property="og:description" content="${escapeHtml(view.description)}">
   <meta property="og:url" content="${view.canonical}">
   <meta name="twitter:card" content="summary">
+  ${siteScript(root, view.analytics)}
   <script type="application/ld+json">
 ${jsonForScript(view.structuredData)}
   </script>
 </head>
 <body>
-  <header class="site-header">
+  <header class="site-header" data-area="header">
     <div class="wrap">
       <a class="brand" href="${root}"><img src="${root}icon.svg" alt="" width="28" height="28">${PRODUCT_NAME}</a>
       <nav aria-label="Site">
         ${navLink(view, home, 'Overview')}
         ${navLink(view, guides[0] ?? home, 'Guides')}
         ${navLink(view, privacy, 'Privacy')}
-        <a href="${REPO_URL}">GitHub</a>
+        ${externalLink(REPO_URL, 'GitHub')}
       </nav>
     </div>
   </header>
   <main class="wrap">
-    <article>
+    <article data-area="content">
       <h1>${escapeHtml(view.title)}</h1>
       ${isHome ? callToAction() : ''}
 ${view.bodyHtml}
     </article>
   </main>
-  <footer class="site-footer">
+  <footer class="site-footer" data-area="footer">
     <div class="wrap">
       <section>
         <h2>Guides</h2>
@@ -95,9 +115,10 @@ ${view.bodyHtml}
       <section>
         <h2>Project</h2>
         <ul>
-          <li><a href="${REPO_URL}">Source code</a></li>
-          <li><a href="${RELEASES_URL}">Releases</a></li>
-          <li><a href="${NPM_URL}">MCP server on npm</a></li>
+          <li>${externalLink(storeUrl('html'), 'Chrome Web Store')}</li>
+          <li>${externalLink(REPO_URL, 'Source code')}</li>
+          <li>${externalLink(RELEASES_URL, 'Releases')}</li>
+          <li>${externalLink(NPM_URL, 'MCP server on npm')}</li>
           <li>${navLink(view, privacy, 'Privacy policy')}</li>
           <li><a href="${root}llms.txt">llms.txt</a></li>
         </ul>

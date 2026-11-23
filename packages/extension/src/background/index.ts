@@ -44,6 +44,7 @@ const usage = new UsageTracker({
     const windows = await chrome.windows.getAll({ populate: true });
     return { windows: windows.length, tabs: windows.reduce((sum, w) => sum + (w.tabs?.length ?? 0), 0) };
   },
+  installType: async () => (await chrome.management.getSelf()).installType,
 });
 
 const carriedOver = restoreAfterReload(chrome.storage.session, chrome.storage.local).catch(() => undefined);

@@ -29,6 +29,9 @@ jobs:
 
       - run: npm ci
       - run: npm run build:site
+        env:
+          SITE_POSTHOG_KEY: phc_FtV2hwQzJhR4Ul4ts9ViUxKZIP9MlDPMjMyvvPfZFjg
+          SITE_POSTHOG_HOST: https://eu.i.posthog.com
 
       - uses: actions/upload-pages-artifact@v3
         with:

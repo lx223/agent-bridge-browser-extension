@@ -10,7 +10,7 @@ In Claude, open **Customize > Plugins > Discover**, select Agent Browser Bridge 
 
 ## Requirements
 
-- The Agent Browser Bridge extension in Chrome or Safari. The plugin cannot install it for you. Follow the [install steps](https://github.com/lx223/agent-bridge-browser-extension#install), or run `/agent-browser-bridge:setup` and Claude walks you through it.
+- The Agent Browser Bridge extension in Chrome or Safari. The plugin cannot install it for you. Add it to Chrome from the [Chrome Web Store](https://chromewebstore.google.com/detail/agent-browser-bridge/kmhcfgambmbglmgdjmdlkhcfkfpkddgb), follow the [install steps](https://github.com/lx223/agent-bridge-browser-extension#install) for Safari, or run `/agent-browser-bridge:setup` and Claude walks you through it.
 - Node.js 20 or later.
 
 ## What the plugin contains

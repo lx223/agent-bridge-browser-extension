@@ -4,6 +4,8 @@ export const SERVER_PACKAGE = 'agent-browser-bridge-mcp';
 /** Name agents register the MCP server under. */
 export const SERVER_NAME = 'agent-browser-bridge';
 
+export const CHROME_WEB_STORE_URL = 'https://chromewebstore.google.com/detail/agent-browser-bridge/kmhcfgambmbglmgdjmdlkhcfkfpkddgb';
+
 /** Localhost port the MCP server listens on for the extension. */
 export const DEFAULT_PORT = 17373;
 

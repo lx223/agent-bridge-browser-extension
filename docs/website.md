@@ -22,6 +22,27 @@ For agents and AI search, every page also has a Markdown copy at `index.md` next
 
 `robots.txt` is only read from the root of a domain, so it belongs to the `lanxiao.dev` user site rather than this one. No `robots.txt` there means crawlers may index everything.
 
+## Analytics
+
+The site counts visits and install intent with PostHog in cookieless mode, in the same PostHog project as the extension. The [privacy policy](../PRIVACY.md#website) describes it for visitors.
+
+`site/site.js` is the only script on the site. It adds a **Copy** button to each code block and, when the build was given a PostHog key, loads the PostHog web SDK from `eu-assets.i.posthog.com` with cookies, storage, autocapture, session recording, heatmaps, surveys and feature flags all off. Every event carries `app: agent-browser-bridge-site`, which keeps the site apart from the extension's `agent-browser-bridge` events.
+
+| Event | When | Properties |
+| --- | --- | --- |
+| `$pageview`, `$pageleave` | A page opens or closes | PostHog's standard page, referrer and UTM properties |
+| `site_install_viewed` | The home page's Install heading scrolls into view, once per page view | |
+| `site_link_clicked` | A tracked link is followed | `target`: `chrome_web_store`, `github_releases`, `claude_desktop_extension`, `github_file`, `github` or `npm`; `placement`: `header`, `hero`, `content` or `footer` |
+| `site_snippet_copied` | A code block is copied | `snippet`: `claude-code-cmd`, `json-config`, `safari-build` or `other`, named like the setup page's snippets; `method`: `button` or `selection` |
+
+The build decides which links and snippets are tracked: `site/tracking.ts` names them, and the build adds them to the HTML as `data-track` and `data-snippet` attributes. Links between the site's own pages are not tracked; page views cover them.
+
+Links to the Chrome Web Store get `utm_source=website`, with `utm_medium=html` on the HTML pages and `utm_medium=markdown` in the Markdown copies and `llms.txt`. The store's statistics then show installs that started on the site, including ones where an agent read the Markdown and passed the link on, which the site script cannot see. The extension's `extension_installed` and `extension_active` events carry `install_type` (`normal` for a store install, `development` for an unpacked ZIP), so PostHog shows how many people install from the store.
+
+The build turns analytics on only when `SITE_POSTHOG_KEY` is set; `SITE_POSTHOG_HOST` defaults to `https://eu.i.posthog.com`. The Publish website workflow sets both. Local builds without the key ship the same pages with the copy buttons and no analytics.
+
+Cookieless events are dropped unless the PostHog project has cookieless tracking turned on, under **Settings > Project > Web analytics**. The **Agent Browser Bridge** dashboard in PostHog has a Website section built from these events.
+
 ## Building and deploying
 
 ```bash

@@ -23,11 +23,11 @@ Node.js 20 or later is required for the MCP server.
 
 ### 1. Install the Chrome extension
 
-1. Download the latest extension ZIP from [GitHub Releases](https://github.com/lx223/agent-bridge-browser-extension/releases) and unzip it.
-2. Open `chrome://extensions` and turn on **Developer mode**.
-3. Click **Load unpacked** and select the unzipped folder.
+Add [Agent Browser Bridge from the Chrome Web Store](https://chromewebstore.google.com/detail/agent-browser-bridge/kmhcfgambmbglmgdjmdlkhcfkfpkddgb). Edge, Brave and other Chromium browsers install it from the same listing; Edge first asks you to allow extensions from other stores.
 
 The setup page opens automatically. Click the toolbar icon to reopen it.
+
+To try a release before it reaches the store, download the extension ZIP from [GitHub Releases](https://github.com/lx223/agent-bridge-browser-extension/releases) and unzip it, open `chrome://extensions`, turn on **Developer mode**, click **Load unpacked** and select the unzipped folder. An unpacked copy does not update itself, so remove it when you switch to the store version.
 
 ### 2. Connect your agent
 

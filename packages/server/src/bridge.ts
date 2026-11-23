@@ -7,6 +7,7 @@ import {
   CHAT_PEEK_METHOD,
   CHAT_RECEIVE_METHOD,
   chatToolNames,
+  CHROME_WEB_STORE_URL,
   extensionToServer,
   isChatMethod,
   hostToRelay,
@@ -85,8 +86,10 @@ const RELOAD_GRACE_MS = 20_000;
 const HOST_CHANGE_GRACE_MS = 10_000;
 const MAX_ATTEMPTS = 3;
 const PROTOCOL_MISMATCH_CLOSE_CODE = 4001;
+const installHint = (browser: string) =>
+  browser === 'chrome' ? ` If the user has not installed it, they can add it from the Chrome Web Store: ${CHROME_WEB_STORE_URL}` : '';
 const notConnected = (browser: string) =>
-  `The Agent Browser Bridge extension is not connected in ${browser}. Make sure ${browser} is open with the extension installed and enabled; it reconnects automatically within ~30 seconds.`;
+  `The Agent Browser Bridge extension is not connected in ${browser}. Make sure ${browser} is open with the extension installed and enabled; it reconnects automatically within ~30 seconds.${installHint(browser)}`;
 const EXTENSION_SCHEMES = ['chrome-extension://', 'safari-web-extension://'];
 
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
