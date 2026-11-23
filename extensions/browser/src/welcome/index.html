@@ -132,6 +132,43 @@
         </div>
       </section>
 
+      <section id="remote" class="settings">
+        <h2 data-i18n="remoteHeading">Remote access</h2>
+        <label class="setting toggle">
+          <input type="checkbox" id="remote-enabled" />
+          <span>
+            <strong data-i18n="remoteToggle">Let agents reach this browser through a relay</strong>
+            <span class="hint" data-i18n="remoteToggleHint">For agents on another computer or in the cloud. The relay passes their requests to this browser and the answers back, including tab titles, URLs and page contents, so only use a relay you trust.</span>
+          </span>
+        </label>
+        <div id="remote-body" class="remote" hidden>
+          <label class="field">
+            <span data-i18n="remoteAddressLabel">Relay address</span>
+            <input id="remote-address" type="url" placeholder="https://relay.example.com" autocomplete="off" spellcheck="false" aria-describedby="remote-address-error" />
+          </label>
+          <p id="remote-address-error" class="error" role="alert" data-i18n="remoteAddressInvalid" hidden>Enter an address that starts with https://</p>
+          <div id="remote-status" class="status compact" data-state="disconnected" aria-live="polite">
+            <span class="dot" aria-hidden="true"></span>
+            <strong id="remote-status-text"></strong>
+          </div>
+          <ul id="remote-agents" class="agents" hidden></ul>
+
+          <h3 data-i18n="remoteTokensHeading">Agent access tokens</h3>
+          <p class="hint" data-i18n="remoteTokensHint">Each agent needs its own token. Anyone with a token can control this browser, so give tokens only to agents you trust and revoke them when you stop using them.</p>
+          <ul id="remote-tokens" class="tokens"></ul>
+          <p id="remote-no-tokens" class="hint" data-i18n="remoteNoTokens">No tokens yet.</p>
+          <form id="remote-new-token" class="new-token">
+            <input id="remote-token-name" type="text" required maxlength="40" autocomplete="off" placeholder="Who it's for, such as Cloud agent" data-i18n-placeholder="remoteTokenNamePlaceholder" />
+            <button type="submit" data-i18n="remoteCreateToken">Create token</button>
+          </form>
+          <div id="remote-created" class="created" hidden>
+            <p class="hint" data-i18n="remoteTokenCreatedHint">Copy it now; it isn't shown again. Run this to add it to Claude Code, or add the JSON to another agent's MCP configuration.</p>
+            <div class="snippet"><code id="remote-claude-code"></code><button class="secondary" data-copy="remote-claude-code" data-i18n="copy">Copy</button></div>
+            <div class="snippet block"><pre id="remote-json"></pre><button class="secondary" data-copy="remote-json" data-i18n="copy">Copy</button></div>
+          </div>
+        </div>
+      </section>
+
       <section class="settings">
         <h2 data-i18n="welcomePrivacyHeading">Privacy</h2>
         <label id="analytics-setting" class="setting toggle">
@@ -141,7 +178,7 @@
             <span class="hint" data-i18n="welcomeAnalyticsHint">Which features are used and the extension version, to help improve the extension.</span>
           </span>
         </label>
-        <div class="setting privacy">
+        <div id="privacy" class="setting privacy">
           <p class="hint" data-browser="chrome" data-i18n="welcomePrivacy">
             Your browsing data stays on your computer: the extension only talks to <code>127.0.0.1</code>. Your agent can read tab titles and URLs,
             rearrange, group or close tabs, and read and act in web pages when you ask it to. Chrome shows a debugging banner while it works in a page.
@@ -152,6 +189,7 @@
             and open, arrange or close windows and tabs when you ask it to. It cannot read or act in web pages in Safari. Tab titles and URLs are never
             sent anywhere else by this extension.
           </p>
+          <p id="remote-privacy" class="hint" hidden></p>
           <p class="hint"><a id="privacy-link" target="_blank" rel="noopener" data-i18n="privacyPolicy">Privacy policy</a></p>
         </div>
       </section>

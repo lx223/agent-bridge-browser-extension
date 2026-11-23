@@ -4,6 +4,7 @@ import {
   serverToExtension,
   type AgentInfo,
   type AgentSession,
+  type ExtensionToRemote,
   type ExtensionToServer,
 } from '@agent-browser-bridge/protocol';
 import { browserLabel, detectBrowser, instanceId, instanceName, newInstanceId, storeInstanceId } from './browser.ts';
@@ -22,6 +23,10 @@ const KEEPALIVE_MS = 20_000; // < 30s idle limit for MV3 service workers
 const MAX_BACKOFF_MS = 10_000;
 const RELOAD_ANNOUNCE_WAIT_MS = 500;
 
+export interface BridgeClientOptions {
+  authenticate?: () => Promise<ExtensionToRemote>;
+}
+
 /**
  * Keeps a WebSocket open to the local MCP server. The server only exists while
  * an agent session is running, so failures are normal and retried quietly.
@@ -34,12 +39,14 @@ export class BridgeClient {
   private inFlight = 0;
   private idleWaiters: (() => void)[] = [];
   private instance?: string;
+  private closed = false;
   private _status: ConnectionStatus;
 
   constructor(
     private readonly url: string,
     private readonly dispatch: (method: string, params: unknown, agent: AgentInfo | null) => Promise<unknown>,
     private readonly onStatus: (status: ConnectionStatus) => void = () => {},
+    private readonly options: BridgeClientOptions = {},
   ) {
     this._status = { state: 'disconnected', url, since: Date.now(), agents: [] };
   }
@@ -64,6 +71,7 @@ export class BridgeClient {
   }
 
   connect() {
+    if (this.closed) return;
     if (this.ws && this.ws.readyState <= WebSocket.OPEN) return;
     clearTimeout(this.retry);
     this.setState('connecting');
@@ -72,7 +80,7 @@ export class BridgeClient {
 
     ws.onopen = () => {
       this.backoff = 1000;
-      void this.sendHello();
+      void this.introduce();
       this.keepalive = setInterval(() => this.send({ type: 'ping' }), KEEPALIVE_MS);
       this.setState('connected');
     };
@@ -85,6 +93,7 @@ export class BridgeClient {
       if (event.code === REPLACED_CLOSE_CODE) this.takeNewInstanceId();
       this.ws = undefined;
       this.setState('disconnected');
+      if (this.closed) return;
       this.retry = setTimeout(() => this.connect(), this.backoff);
       this.backoff = Math.min(this.backoff * 2, MAX_BACKOFF_MS);
     };
@@ -92,6 +101,32 @@ export class BridgeClient {
 
   reintroduce() {
     if (this.ws?.readyState === WebSocket.OPEN) void this.sendHello();
+  }
+
+  sendTokens(tokens: string[]) {
+    this.send({ type: 'remoteTokens', tokens });
+  }
+
+  close() {
+    this.closed = true;
+    clearTimeout(this.retry);
+    clearInterval(this.keepalive);
+    const ws = this.ws;
+    this.ws = undefined;
+    ws?.close();
+    this.setState('disconnected');
+  }
+
+  private async introduce() {
+    if (this.options.authenticate) {
+      try {
+        this.send(await this.options.authenticate());
+      } catch {
+        this.ws?.close();
+        return;
+      }
+    }
+    await this.sendHello();
   }
 
   private async sendHello() {
@@ -139,7 +174,7 @@ export class BridgeClient {
     }
   }
 
-  private send(msg: ExtensionToServer) {
+  private send(msg: ExtensionToServer | ExtensionToRemote) {
     if (this.ws?.readyState === WebSocket.OPEN) this.ws.send(JSON.stringify(msg));
   }
 

@@ -12,10 +12,12 @@ import { listenForPageToolEvents } from './pageTools.ts';
 import { applyUpdatesWhenIdle } from './update.ts';
 import { dispatch } from './handlers.ts';
 import { UsageTracker } from './usage.ts';
+import { loadRemoteSettings, readRemoteSettings, RemoteConnection, REMOTE_SETTINGS_KEY } from './remote.ts';
 
 const WELCOME_PAGE = 'src/welcome/index.html';
 const RECONNECT_ALARM = 'agent-browser-bridge-reconnect';
 const BRIDGE_PORT = Number(import.meta.env.VITE_BRIDGE_PORT || DEFAULT_PORT);
+const DEFAULT_RELAY = import.meta.env.VITE_RELAY_URL ?? '';
 
 const statusTitle = ({ state, agents }: ConnectionStatus) => {
   if (state !== 'connected') return t('actionTitleDisconnected');
@@ -85,19 +87,33 @@ const trackedDispatch = async (method: string, params: unknown, agent: AgentInfo
   }
 };
 
-const client = new BridgeClient(
-  `ws://127.0.0.1:${BRIDGE_PORT}`,
-  trackedDispatch,
-  (status) => {
-    usage.setConnected(status.state === 'connected');
-    chatPanel?.agentsChanged(status.agents);
-    if (status.state === 'connected') void usage.milestone('first_connected');
-    showStatus(status);
-    chrome.runtime.sendMessage({ type: 'STATUS_CHANGED', status }).catch(() => {
-      /* no welcome page open */
-    });
-  },
-);
+const combinedStatus = (): ConnectionStatus => {
+  const local = client.status;
+  const remoteStatus = remote.status;
+  if (!remoteStatus) return local;
+  const connected = local.state === 'connected' || remoteStatus.state === 'connected';
+  return { ...local, state: connected ? 'connected' : local.state, agents: [...local.agents, ...remoteStatus.agents] };
+};
+
+const statusChanged = () => {
+  const status = combinedStatus();
+  usage.setConnected(status.state === 'connected');
+  chatPanel?.agentsChanged(status.agents);
+  if (status.state === 'connected') void usage.milestone('first_connected');
+  showStatus(status);
+};
+
+const client: BridgeClient = new BridgeClient(`ws://127.0.0.1:${BRIDGE_PORT}`, trackedDispatch, (status) => {
+  statusChanged();
+  chrome.runtime.sendMessage({ type: 'STATUS_CHANGED', status }).catch(() => undefined);
+});
+
+const remote: RemoteConnection = new RemoteConnection(trackedDispatch, (status) => {
+  statusChanged();
+  chrome.runtime.sendMessage({ type: 'REMOTE_STATUS_CHANGED', status: status ?? null }).catch(() => undefined);
+});
+
+void loadRemoteSettings(chrome.storage.local, DEFAULT_RELAY).then((settings) => remote.apply(settings));
 
 const syncUninstallSurvey = async () => {
   const survey = import.meta.env.VITE_UNINSTALL_SURVEY_URL;
@@ -111,7 +127,11 @@ void syncUninstallSurvey();
 chrome.storage.onChanged.addListener((changes, area) => {
   if (area !== 'local') return;
   if (ANALYTICS_ENABLED_KEY in changes) void syncUninstallSurvey();
-  if (INSTANCE_NAME_KEY in changes) client.reintroduce();
+  if (INSTANCE_NAME_KEY in changes) {
+    client.reintroduce();
+    remote.reintroduce();
+  }
+  if (REMOTE_SETTINGS_KEY in changes) remote.apply(readRemoteSettings(changes[REMOTE_SETTINGS_KEY].newValue, DEFAULT_RELAY));
 });
 
 listenForDetach();
@@ -119,7 +139,12 @@ listenForPageToolEvents();
 
 const openWelcome = () => chrome.tabs.create({ url: chrome.runtime.getURL(WELCOME_PAGE) });
 
-applyUpdatesWhenIdle(chrome.runtime, client, {
+const clients = {
+  whenIdle: async () => void (await Promise.all([client.whenIdle(), remote.whenIdle()])),
+  announceReload: async () => void (await Promise.all([client.announceReload(), remote.announceReload()])),
+};
+
+applyUpdatesWhenIdle(chrome.runtime, clients, {
   beforeReload: () => saveForReload(chrome.storage.session, chrome.storage.local),
 });
 
@@ -143,6 +168,7 @@ chrome.alarms.create(RECONNECT_ALARM, { periodInMinutes: 0.5 });
 chrome.alarms.onAlarm.addListener((alarm) => {
   if (alarm.name !== RECONNECT_ALARM) return;
   client.connect();
+  remote.connect();
   void usage.dailyActive();
 });
 
@@ -159,7 +185,10 @@ chrome.runtime.onMessage.addListener((message, sender, respond) => {
     respond(client.status);
   } else if (message?.type === 'RECONNECT') {
     client.connect();
+    remote.connect();
     respond(client.status);
+  } else if (message?.type === 'GET_REMOTE_STATUS') {
+    respond(remote.status ?? null);
   } else if (message?.type === 'TRACK' && isPageEvent(message.event)) {
     void analytics.capture(message.event, (message.properties ?? {}) as Properties);
   }

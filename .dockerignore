@@ -1,0 +1,6 @@
+**/node_modules
+**/dist
+**/mcpb-dist
+.git
+extensions/browser/safari
+extensions/browser/safari-release

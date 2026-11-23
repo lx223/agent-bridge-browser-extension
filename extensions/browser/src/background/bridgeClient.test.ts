@@ -353,4 +353,44 @@ describe('BridgeClient', () => {
     expect(peer.received[0]!.instanceId).toMatch(/^[0-9a-f]{8}$/);
     expect(peer.received[0]).not.toHaveProperty('name');
   });
+
+  it('authenticates before introducing itself when asked to', async () => {
+    const port = await listen();
+    const auth = { type: 'remoteAuth' as const, key: 'k'.repeat(43), tokens: [] };
+    const client = new BridgeClient(`ws://127.0.0.1:${port}`, async () => null, () => {}, { authenticate: async () => auth });
+    clients.push(client);
+    client.connect();
+    await until(() => peers.length === 1 && peers[0]!.received.length === 2);
+    expect(peers[0]!.received[0]).toEqual(auth);
+    expect(peers[0]!.received[1]).toMatchObject({ type: 'hello' });
+  });
+
+  it('drops the connection when it cannot authenticate', async () => {
+    const port = await listen();
+    const states: ConnectionState[] = [];
+    const client = new BridgeClient(`ws://127.0.0.1:${port}`, async () => null, (status) => states.push(status.state), {
+      authenticate: async () => Promise.reject(new Error('no key')),
+    });
+    clients.push(client);
+    client.connect();
+    await until(() => states.at(-1) === 'disconnected' && states.includes('connected'));
+    expect(peers[0]?.received ?? []).toEqual([]);
+  });
+
+  it('sends token updates', async () => {
+    const { client, peer } = await connected();
+    client.sendTokens(['b'.repeat(64)]);
+    await until(() => peer.received.length === 2);
+    expect(peer.received[1]).toEqual({ type: 'remoteTokens', tokens: ['b'.repeat(64)] });
+  });
+
+  it('stays closed once closed', async () => {
+    const { client, states } = await connected();
+    client.close();
+    await until(() => states.at(-1) === 'disconnected');
+    client.connect();
+    await vi.advanceTimersByTimeAsync(20_000);
+    expect(peers).toHaveLength(1);
+    expect(client.status.state).toBe('disconnected');
+  });
 });

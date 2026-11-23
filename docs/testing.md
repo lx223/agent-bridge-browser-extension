@@ -52,6 +52,7 @@ The tests are grouped by what a user does with the bridge, one folder each. `e2e
 | `ask/` | `ask.test.ts` | Asking the user in a page: the popover's text, confirming and cancelling with real clicks inside its closed shadow root, asking in the active tab, bringing the tab to the front, `navigated` after a navigation, a page script that can neither see the answer nor click for the user, the timeout removing the popover, and one question per tab. |
 | `theme/` | `theme.test.ts` | The chat panel and the setup page switching between light and dark with the system colour scheme, and both using the same colours. |
 | `localisation/` | `localisation.test.ts` | The setup page in German and in Arabic: translated text, code and links kept inside translated sentences, and the right-to-left layout. |
+| `remote/` | `relay.test.ts` | Remote access end to end: starting the server in `http` mode, switching remote access on and entering the relay address on the setup page, creating a token there, an agent using it over Streamable HTTP to list this browser's tabs, revoking it, and switching remote access off. |
 | `resilience/` | `serverRestart.test.ts` | Killing the MCP server process mid-session: the launcher starts a new one, the agent's next call still reaches the browser, and a tool call the crash cut off is reported as possibly not finished. It needs the launcher, so it does not run against the Claude Desktop bundle. |
 | `safari/` | `safari.test.ts` | The built extension in a simulated Safari instead of Chromium. See [Safari](#safari). |
 

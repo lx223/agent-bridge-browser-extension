@@ -12,6 +12,7 @@ import { AGENT_TAB_KEY, initialAgentTab, isAgentTab, tabAfterKey } from './agent
 import { agentSetupPrompt, claudeCodeCommand, claudeDesktopExtensionUrl, cursorInstallUrl, LAUNCH_SPEC, mcpJsonConfig, vscodeInstallUrl } from './install.ts';
 import { profileInitial } from './profile.ts';
 import { describeStatus } from './status.ts';
+import { bindRemoteAccess } from './remote.ts';
 
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 
@@ -118,6 +119,8 @@ chrome.runtime.onMessage.addListener((message) => {
 const poll = () => chrome.runtime.sendMessage({ type: 'RECONNECT' }).then(render, () => render(undefined));
 void poll();
 setInterval(poll, 3000);
+
+bindRemoteAccess(import.meta.env.VITE_RELAY_URL ?? '');
 
 if (analyticsAvailable) {
   bindAnalyticsToggle($<HTMLInputElement>('analytics-enabled'));

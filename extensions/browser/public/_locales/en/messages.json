@@ -426,5 +426,77 @@
   "askNotificationTitle": {
     "message": "$1 needs your answer",
     "description": "Title of the desktop notification shown while an agent waits for an answer in a page. $1 is the agent name, such as claude-code, or \"Your agent\"."
+  },
+  "remoteHeading": {
+    "message": "Remote access",
+    "description": "Setup page: heading of the section that lets agents on other computers reach this browser through a relay server."
+  },
+  "remoteToggle": {
+    "message": "Let agents reach this browser through a relay",
+    "description": "Setup page: label of the switch that turns remote access on."
+  },
+  "remoteToggleHint": {
+    "message": "For agents on another computer or in the cloud. The relay passes their requests to this browser and the answers back, including tab titles, URLs and page contents, so only use a relay you trust.",
+    "description": "Setup page: explanation under the remote access switch. A relay is a server on the internet that forwards messages between the agent and this browser."
+  },
+  "remoteAddressLabel": {
+    "message": "Relay address",
+    "description": "Setup page: label of the field for the relay server's web address."
+  },
+  "remoteAddressInvalid": {
+    "message": "Enter an address that starts with https://",
+    "description": "Setup page: error shown when the relay address is not a valid web address. https:// stays as is."
+  },
+  "remoteStatusConnected": {
+    "message": "Connected to the relay",
+    "description": "Setup page: remote access status when this browser is connected to the relay server."
+  },
+  "remoteStatusConnecting": {
+    "message": "Connecting to the relay…",
+    "description": "Setup page: remote access status while this browser tries to reach the relay server."
+  },
+  "remoteStatusOffline": {
+    "message": "Can't reach the relay. Retrying…",
+    "description": "Setup page: remote access status when the relay server cannot be reached; the extension keeps trying on its own."
+  },
+  "remoteStatusNoAddress": {
+    "message": "Enter the relay address to connect.",
+    "description": "Setup page: remote access status when remote access is on but no relay address is set."
+  },
+  "remoteTokensHeading": {
+    "message": "Agent access tokens",
+    "description": "Setup page: heading of the list of tokens that let agents use this browser through the relay."
+  },
+  "remoteTokensHint": {
+    "message": "Each agent needs its own token. Anyone with a token can control this browser, so give tokens only to agents you trust and revoke them when you stop using them.",
+    "description": "Setup page: explanation above the list of access tokens."
+  },
+  "remoteNoTokens": {
+    "message": "No tokens yet.",
+    "description": "Setup page: shown in place of the token list when no access token exists."
+  },
+  "remoteTokenNamePlaceholder": {
+    "message": "Who it's for, such as Cloud agent",
+    "description": "Setup page: placeholder in the field for the name of a new access token. Cloud agent is an example name."
+  },
+  "remoteCreateToken": {
+    "message": "Create token",
+    "description": "Setup page: button that creates a new access token."
+  },
+  "remoteTokenCreatedHint": {
+    "message": "Copy it now; it isn't shown again. Run this to add it to Claude Code, or add the JSON to another agent's MCP configuration.",
+    "description": "Setup page: shown with a newly created access token. Claude Code, JSON and MCP stay in English."
+  },
+  "remoteTokenCreatedAt": {
+    "message": "Created $1",
+    "description": "Setup page: when an access token was created. $1 is a relative time, such as 5 minutes ago."
+  },
+  "remoteRevoke": {
+    "message": "Revoke",
+    "description": "Setup page: button that deletes an access token so agents using it lose access."
+  },
+  "remotePrivacy": {
+    "message": "Remote access is on: this extension also connects to $1, which passes your agents' requests and this browser's answers, including tab titles, URLs and page contents.",
+    "description": "Setup page, privacy section, while remote access is on. $1 is the relay server's address, such as relay.example.com."
   }
 }
