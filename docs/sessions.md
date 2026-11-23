@@ -1,6 +1,6 @@
 # Agent sessions
 
-Several agent sessions can share the bridge at once, for example Claude Code in one project and Codex in another. The extension's setup page (click the toolbar icon or open the extension's options) shows one card for each session.
+Several agent sessions can share the bridge at once, for example Claude Code in one project and Codex in another. The extension's setup page (click the gear button in the side panel or open the extension's options) shows one card for each session.
 
 ## What a card shows
 

@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
 import { CHAT_PEEK_METHOD, CHAT_RECEIVE_METHOD, CHAT_SEND_METHOD, type AgentInfo } from '@agent-browser-bridge/protocol';
-import { CHAT_STORAGE_KEY, ChatStore, hasOpenConversation, MAX_CONVERSATIONS, PAST_CONVERSATION_KEEP_MS, RECONNECT_GRACE_MS, totalUnseen, type Conversations } from './chat.ts';
+import { CHAT_STORAGE_KEY, ChatStore, MAX_CONVERSATIONS, PAST_CONVERSATION_KEEP_MS, RECONNECT_GRACE_MS, totalUnseen, type Conversations } from './chat.ts';
 
 const agent = (sessionId = 'session-1', project = 'shop'): AgentInfo => ({
   serverVersion: '1.0.0',
@@ -196,10 +196,6 @@ describe('ChatStore', () => {
     expect(totalUnseen(stored(storage))).toBe(3);
     await store.markSeen('session-1');
     expect(totalUnseen(stored(storage))).toBe(1);
-    expect(hasOpenConversation(stored(storage), new Set(['session-2']))).toBe(true);
-    expect(hasOpenConversation(stored(storage), new Set(['session-3']))).toBe(false);
-    await store.end('session-2');
-    expect(hasOpenConversation(stored(storage), new Set(['session-2']))).toBe(false);
   });
 
   describe('when the agent gives its own id', () => {
@@ -264,7 +260,6 @@ describe('ChatStore', () => {
     it('marks the conversation as reconnecting instead of closing it', async () => {
       const { store, storage } = await dropped();
       expect(stored(storage)['session-1']).toMatchObject({ goneAt: 1_000, ended: false });
-      expect(hasOpenConversation(stored(storage), new Set(['session-2']), 1_000)).toBe(true);
       await store.userSays('session-1', 'and pin the inbox');
       expect(stored(storage)['session-1']!.messages).toHaveLength(3);
     });
@@ -287,7 +282,6 @@ describe('ChatStore', () => {
     it('leaves it alone once the grace period is over', async () => {
       const { store, storage, advance } = await dropped();
       advance(RECONNECT_GRACE_MS);
-      expect(hasOpenConversation(stored(storage), new Set(['session-2']), 1_000 + RECONNECT_GRACE_MS)).toBe(false);
       await store.agentSays(agent('session-2'), 'Hello');
       expect(Object.keys(stored(storage)).sort()).toEqual(['session-1', 'session-2']);
     });

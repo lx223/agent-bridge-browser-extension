@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { chatTab, type AgentSession } from '@agent-browser-bridge/protocol';
 import { t } from '../i18n/messages.ts';
-import { ChatStore, hasOpenConversation, totalUnseen, type ChatMessage, type Conversation, type Conversations } from './chat.ts';
+import { ChatStore, totalUnseen, type ChatMessage, type Conversation, type Conversations } from './chat.ts';
 
 export const CHAT_PANEL_PORT = 'chat-panel';
 const NOTIFICATION_ID = 'agent-browser-bridge-chat';
@@ -26,8 +26,6 @@ const notifications = () => (chrome as Partial<typeof chrome>).notifications;
 export class ChatPanel {
   readonly store: ChatStore;
   private openPanels = 0;
-  private liveSessions = new Set<string>();
-  private latest: Conversations = {};
 
   constructor(ready?: Promise<void>) {
     this.store = new ChatStore(chrome.storage.session, {
@@ -46,13 +44,13 @@ export class ChatPanel {
       void this.reveal();
       notifications()?.clear(id).catch(() => undefined);
     });
+    void sidePanel()?.setPanelBehavior({ openPanelOnActionClick: true }).catch(() => undefined);
     void this.store.conversations().then((all) => this.reflect(all));
   }
 
   agentsChanged(agents: AgentSession[]) {
-    this.liveSessions = new Set(agents.flatMap((agent) => (agent.sessionId === undefined ? [] : [agent.sessionId])));
-    this.reflect(this.latest);
-    void this.store.sessionsChanged(this.liveSessions).catch(() => undefined);
+    const liveSessions = new Set(agents.flatMap((agent) => (agent.sessionId === undefined ? [] : [agent.sessionId])));
+    void this.store.sessionsChanged(liveSessions).catch(() => undefined);
   }
 
   handles(message: unknown): message is ChatPanelMessage {
@@ -73,13 +71,9 @@ export class ChatPanel {
   }
 
   private reflect(all: Conversations) {
-    this.latest = all;
     const unseen = totalUnseen(all);
     void chrome.action.setBadgeText({ text: unseen ? String(Math.min(unseen, 99)) : '' }).catch(() => undefined);
     if (unseen) void chrome.action.setBadgeBackgroundColor({ color: BADGE_COLOR }).catch(() => undefined);
-    void sidePanel()
-      ?.setPanelBehavior({ openPanelOnActionClick: hasOpenConversation(all, this.liveSessions) })
-      .catch(() => undefined);
   }
 
   private announce(conversation: Conversation, message: ChatMessage) {
