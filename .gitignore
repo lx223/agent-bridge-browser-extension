@@ -41,3 +41,6 @@ store/assets/out/
 # Claude Desktop extension bundle
 packages/server/mcpb-dist/
 *.mcpb
+
+# Rendered raea promo video
+promo/out/
