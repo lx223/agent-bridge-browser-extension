@@ -218,6 +218,12 @@
   "chatConversation": {
     "message": "Konverzace"
   },
+  "chatOpenChats": {
+    "message": "Otevřené chaty"
+  },
+  "chatPastChats": {
+    "message": "Předchozí chaty"
+  },
   "chatEmptyHeading": {
     "message": "Mluvte s agentem přímo tady"
   },

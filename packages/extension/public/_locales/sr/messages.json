@@ -212,6 +212,12 @@
   "chatConversation": {
     "message": "Конверзација"
   },
+  "chatOpenChats": {
+    "message": "Отворена ћаскања"
+  },
+  "chatPastChats": {
+    "message": "Претходна ћаскања"
+  },
   "chatEmptyHeading": {
     "message": "Разговарајте са агентом овде"
   },

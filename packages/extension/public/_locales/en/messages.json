@@ -275,6 +275,14 @@
     "message": "Conversation",
     "description": "Accessible name of the list that picks a conversation."
   },
+  "chatOpenChats": {
+    "message": "Open chats",
+    "description": "Heading in the conversation list for chats whose agent is still connected."
+  },
+  "chatPastChats": {
+    "message": "Past chats",
+    "description": "Heading in the conversation list for chats that ended or whose agent disconnected."
+  },
   "chatEmptyHeading": {
     "message": "Talk to your agent from here",
     "description": "Heading shown in the chat panel when there is no conversation."

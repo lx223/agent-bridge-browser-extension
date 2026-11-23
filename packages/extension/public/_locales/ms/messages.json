@@ -206,6 +206,12 @@
   "chatConversation": {
     "message": "Perbualan"
   },
+  "chatOpenChats": {
+    "message": "Sembang terbuka"
+  },
+  "chatPastChats": {
+    "message": "Sembang lepas"
+  },
   "chatEmptyHeading": {
     "message": "Bercakap dengan ejen anda dari sini"
   },

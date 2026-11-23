@@ -206,6 +206,12 @@
   "chatConversation": {
     "message": "సంభాషణ"
   },
+  "chatOpenChats": {
+    "message": "తెరిచి ఉన్న చాట్‌లు"
+  },
+  "chatPastChats": {
+    "message": "గత చాట్‌లు"
+  },
   "chatEmptyHeading": {
     "message": "ఇక్కడి నుండే మీ ఏజెంట్‌తో మాట్లాడండి"
   },

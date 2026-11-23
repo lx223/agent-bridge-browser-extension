@@ -206,6 +206,12 @@
   "chatConversation": {
     "message": "কথোপকথন"
   },
+  "chatOpenChats": {
+    "message": "খোলা চ্যাট"
+  },
+  "chatPastChats": {
+    "message": "আগের চ্যাট"
+  },
   "chatEmptyHeading": {
     "message": "এখান থেকে আপনার এজেন্টের সাথে কথা বলুন"
   },

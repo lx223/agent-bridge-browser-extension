@@ -206,6 +206,12 @@
   "chatConversation": {
     "message": "对话"
   },
+  "chatOpenChats": {
+    "message": "进行中的聊天"
+  },
+  "chatPastChats": {
+    "message": "过去的聊天"
+  },
   "chatEmptyHeading": {
     "message": "在这里与您的智能体对话"
   },

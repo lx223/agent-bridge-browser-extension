@@ -206,6 +206,12 @@
   "chatConversation": {
     "message": "Konversation"
   },
+  "chatOpenChats": {
+    "message": "Öppna chattar"
+  },
+  "chatPastChats": {
+    "message": "Tidigare chattar"
+  },
   "chatEmptyHeading": {
     "message": "Prata med din agent här"
   },

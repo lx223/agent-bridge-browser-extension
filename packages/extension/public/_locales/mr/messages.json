@@ -206,6 +206,12 @@
   "chatConversation": {
     "message": "संभाषण"
   },
+  "chatOpenChats": {
+    "message": "उघड्या चॅट"
+  },
+  "chatPastChats": {
+    "message": "मागील चॅट"
+  },
   "chatEmptyHeading": {
     "message": "येथून तुमच्या एजंटशी बोला"
   },

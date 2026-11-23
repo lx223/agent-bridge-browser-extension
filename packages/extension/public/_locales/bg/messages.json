@@ -206,6 +206,12 @@
   "chatConversation": {
     "message": "Разговор"
   },
+  "chatOpenChats": {
+    "message": "Отворени чатове"
+  },
+  "chatPastChats": {
+    "message": "Минали чатове"
+  },
   "chatEmptyHeading": {
     "message": "Говорете с агента си оттук"
   },

@@ -206,6 +206,12 @@
   "chatConversation": {
     "message": "ውይይት"
   },
+  "chatOpenChats": {
+    "message": "ክፍት ውይይቶች"
+  },
+  "chatPastChats": {
+    "message": "ያለፉ ውይይቶች"
+  },
   "chatEmptyHeading": {
     "message": "ከዚህ ሆነው ከወኪልዎ ጋር ይነጋገሩ"
   },

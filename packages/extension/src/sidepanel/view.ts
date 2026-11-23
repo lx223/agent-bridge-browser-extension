@@ -4,9 +4,12 @@ import { clockTime, plural, relativeTime, t, type MessageKey } from '../i18n/mes
 
 export type ConversationState = 'waiting' | 'working' | 'reconnecting' | 'disconnected' | 'ended';
 
+export type ConversationGroup = 'open' | 'past';
+
 export interface ConversationOption {
   key: string;
   label: string;
+  group: ConversationGroup;
 }
 
 export interface MessageView {
@@ -48,17 +51,23 @@ const HINT = {
   ended: 'chatHintEnded',
 } as const satisfies Record<ConversationState, MessageKey>;
 
-const byRecency = (a: Conversation, b: Conversation) => Number(a.ended) - Number(b.ended) || b.updatedAt - a.updatedAt;
-
-export function chooseConversation(conversations: Conversations, preferred?: string): string | undefined {
-  if (preferred !== undefined && conversations[preferred]) return preferred;
-  return Object.values(conversations).sort(byRecency)[0]?.key;
-}
-
 export function conversationState(conversation: Conversation, agents: AgentSession[], now: number): ConversationState {
   if (conversation.ended) return 'ended';
   if (!agents.some((agent) => agent.sessionId === conversation.sessionId)) return isReconnecting(conversation, now) ? 'reconnecting' : 'disconnected';
   return isListening(conversation, now) ? 'waiting' : 'working';
+}
+
+const groupOf = (state: ConversationState): ConversationGroup => (state === 'ended' || state === 'disconnected' ? 'past' : 'open');
+
+function sortedByGroup(conversations: Conversations, agents: AgentSession[], now: number) {
+  return Object.values(conversations)
+    .map((conversation) => ({ conversation, group: groupOf(conversationState(conversation, agents, now)) }))
+    .sort((a, b) => Number(a.group === 'past') - Number(b.group === 'past') || b.conversation.updatedAt - a.conversation.updatedAt);
+}
+
+export function chooseConversation(conversations: Conversations, agents: AgentSession[], now: number, preferred?: string): string | undefined {
+  if (preferred !== undefined && conversations[preferred]) return preferred;
+  return sortedByGroup(conversations, agents, now)[0]?.conversation.key;
 }
 
 function statusText(state: ConversationState, agent: AgentSession | undefined, now: number): string {
@@ -73,13 +82,11 @@ function messageMeta(message: ChatMessage, conversation: Conversation): string {
 }
 
 export function panelView(conversations: Conversations, agents: AgentSession[], now: number, preferred?: string): PanelView {
-  const selected = chooseConversation(conversations, preferred);
-  const options = Object.values(conversations)
-    .sort(byRecency)
-    .map((conversation) => {
-      const unseen = conversation.key === selected ? 0 : unseenCount(conversation);
-      return { key: conversation.key, label: unseen ? plural('chatUnseen', unseen, conversation.title) : conversation.title };
-    });
+  const selected = chooseConversation(conversations, agents, now, preferred);
+  const options = sortedByGroup(conversations, agents, now).map(({ conversation, group }) => {
+    const unseen = conversation.key === selected ? 0 : unseenCount(conversation);
+    return { key: conversation.key, label: unseen ? plural('chatUnseen', unseen, conversation.title) : conversation.title, group };
+  });
   const conversation = selected === undefined ? undefined : conversations[selected];
   if (!conversation) {
     return { options, pickConversation: false, title: t('chatTitle'), status: '', messages: [], canSend: false, composerHint: '', canEnd: false, canRemove: false };

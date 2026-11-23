@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
 import { CHAT_PEEK_METHOD, CHAT_RECEIVE_METHOD, CHAT_SEND_METHOD, type AgentInfo } from '@agent-browser-bridge/protocol';
-import { CHAT_STORAGE_KEY, ChatStore, hasOpenConversation, MAX_CONVERSATIONS, RECONNECT_GRACE_MS, totalUnseen, type Conversations } from './chat.ts';
+import { CHAT_STORAGE_KEY, ChatStore, hasOpenConversation, MAX_CONVERSATIONS, PAST_CONVERSATION_KEEP_MS, RECONNECT_GRACE_MS, totalUnseen, type Conversations } from './chat.ts';
 
 const agent = (sessionId = 'session-1', project = 'shop'): AgentInfo => ({
   serverVersion: '1.0.0',
@@ -306,6 +306,22 @@ describe('ChatStore', () => {
       await expect(store.receive(agent(), { waitMs: 0 })).resolves.toEqual({ messages: [], ended: false });
       expect(Object.keys(stored(storage))).toEqual(['session-2']);
     });
+  });
+
+  it('forgets conversations a day after they ended or lost their agent', async () => {
+    const { store, storage, advance } = setup();
+    await store.sessionsChanged(new Set(['session-1', 'session-2', 'session-3']));
+    await store.agentSays(agent('session-1'), 'ending');
+    await store.agentSays(agent('session-2'), 'leaving');
+    await store.agentSays(agent('session-3'), 'staying');
+    await store.end('session-1');
+    await store.sessionsChanged(new Set(['session-3']));
+    advance(PAST_CONVERSATION_KEEP_MS - 1);
+    await store.agentSays(agent('session-3'), 'still here');
+    expect(Object.keys(stored(storage)).sort()).toEqual(['session-1', 'session-2', 'session-3']);
+    advance(1);
+    await store.agentSays(agent('session-3'), 'a day later');
+    expect(Object.keys(stored(storage))).toEqual(['session-3']);
   });
 
   it('removes conversations and keeps only the most recent ones', async () => {

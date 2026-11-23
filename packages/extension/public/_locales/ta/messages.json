@@ -206,6 +206,12 @@
   "chatConversation": {
     "message": "உரையாடல்"
   },
+  "chatOpenChats": {
+    "message": "திறந்த அரட்டைகள்"
+  },
+  "chatPastChats": {
+    "message": "முந்தைய அரட்டைகள்"
+  },
   "chatEmptyHeading": {
     "message": "இங்கிருந்தே உங்கள் ஏஜென்ட்டுடன் பேசுங்கள்"
   },

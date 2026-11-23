@@ -21,6 +21,7 @@ import { sessionTitle } from '../settings/sessionList.ts';
 export const CHAT_STORAGE_KEY = 'chat.conversations';
 export const MAX_MESSAGES_PER_CONVERSATION = 500;
 export const MAX_CONVERSATIONS = 20;
+export const PAST_CONVERSATION_KEEP_MS = 24 * 60 * 60_000;
 const LISTEN_GRACE_MS = 5_000;
 export const RECONNECT_GRACE_MS = 10 * 60_000;
 
@@ -121,7 +122,13 @@ const withKeys = (all: Conversations) => {
 const cursorMatches = (conversation: Conversation, after: number, cursorConversation: string | undefined) =>
   cursorConversation === undefined ? after < conversation.nextSeq : cursorConversation === conversation.id;
 
-const pruneConversations = (all: Conversations) => {
+const overSince = (conversation: Conversation) => (conversation.ended ? conversation.updatedAt : conversation.goneAt);
+
+const pruneConversations = (all: Conversations, now: number) => {
+  for (const conversation of Object.values(all)) {
+    const over = overSince(conversation);
+    if (over !== undefined && now - over >= PAST_CONVERSATION_KEEP_MS) delete all[conversation.key];
+  }
   const sessions = Object.values(all).sort((a, b) => b.updatedAt - a.updatedAt);
   for (const stale of sessions.slice(MAX_CONVERSATIONS)) delete all[stale.key];
 };
@@ -273,7 +280,7 @@ export class ChatStore {
       const before = JSON.stringify(all);
       const result = change(all);
       if (JSON.stringify(all) !== before) {
-        pruneConversations(all);
+        pruneConversations(all, this.now());
         await this.storage.set({ [CHAT_STORAGE_KEY]: all });
         this.options.onChange?.(structuredClone(all));
       }

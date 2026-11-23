@@ -218,6 +218,12 @@
   "chatConversation": {
     "message": "Pogovor"
   },
+  "chatOpenChats": {
+    "message": "Odprti klepeti"
+  },
+  "chatPastChats": {
+    "message": "Pretekli klepeti"
+  },
   "chatEmptyHeading": {
     "message": "Pogovarjajte se z agentom tukaj"
   },

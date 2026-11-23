@@ -212,6 +212,12 @@
   "chatConversation": {
     "message": "Conversación"
   },
+  "chatOpenChats": {
+    "message": "Chats abiertos"
+  },
+  "chatPastChats": {
+    "message": "Chats anteriores"
+  },
   "chatEmptyHeading": {
     "message": "Habla con tu agente desde aquí"
   },

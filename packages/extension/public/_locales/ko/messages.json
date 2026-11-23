@@ -206,6 +206,12 @@
   "chatConversation": {
     "message": "대화"
   },
+  "chatOpenChats": {
+    "message": "진행 중인 채팅"
+  },
+  "chatPastChats": {
+    "message": "지난 채팅"
+  },
   "chatEmptyHeading": {
     "message": "여기에서 에이전트와 대화하세요"
   },

@@ -218,6 +218,12 @@
   "chatConversation": {
     "message": "Разговор"
   },
+  "chatOpenChats": {
+    "message": "Открытые чаты"
+  },
+  "chatPastChats": {
+    "message": "Прошлые чаты"
+  },
   "chatEmptyHeading": {
     "message": "Общайтесь с агентом прямо здесь"
   },

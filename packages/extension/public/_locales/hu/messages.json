@@ -206,6 +206,12 @@
   "chatConversation": {
     "message": "Beszélgetés"
   },
+  "chatOpenChats": {
+    "message": "Nyitott csevegések"
+  },
+  "chatPastChats": {
+    "message": "Korábbi csevegések"
+  },
   "chatEmptyHeading": {
     "message": "Beszélgessen itt az ügynökével"
   },

@@ -218,6 +218,12 @@
   "chatConversation": {
     "message": "Pokalbis"
   },
+  "chatOpenChats": {
+    "message": "Atviri pokalbiai"
+  },
+  "chatPastChats": {
+    "message": "Ankstesni pokalbiai"
+  },
   "chatEmptyHeading": {
     "message": "Bendraukite su agentu čia"
   },

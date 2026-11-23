@@ -206,6 +206,12 @@
   "chatConversation": {
     "message": "વાતચીત"
   },
+  "chatOpenChats": {
+    "message": "ખુલ્લી ચેટ"
+  },
+  "chatPastChats": {
+    "message": "અગાઉની ચેટ"
+  },
   "chatEmptyHeading": {
     "message": "અહીંથી તમારા એજન્ટ સાથે વાત કરો"
   },
