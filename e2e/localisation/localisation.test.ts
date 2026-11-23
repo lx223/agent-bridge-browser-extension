@@ -3,7 +3,7 @@ import { resolve } from 'node:path';
 import { afterEach, describe, expect, it } from 'vitest';
 import { startHarness, type Harness } from '../support/harness.ts';
 
-const LOCALES = resolve(import.meta.dirname, '../../packages/extension/dist/_locales');
+const LOCALES = resolve(import.meta.dirname, '../../extensions/browser/dist/_locales');
 const messages = (locale: string): Record<string, { message: string }> => JSON.parse(readFileSync(resolve(LOCALES, locale, 'messages.json'), 'utf-8'));
 
 let harness: Harness | undefined;

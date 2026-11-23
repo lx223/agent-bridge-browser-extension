@@ -8,7 +8,7 @@ Chrome downloads an extension update in the background but only installs it once
 
 The service worker listens for `chrome.runtime.onUpdateAvailable` and calls `chrome.runtime.reload()`, which installs the update. It first waits until no bridge request is in flight, for at most a minute, so an agent's tool call is not cut off. Just before reloading it sends the server a `reloading` message. After the reload the extension reconnects to the MCP server within a second or two, and the server holds calls for it during that gap instead of failing them; see [Riding out reconnects](#riding-out-reconnects).
 
-The code is in `packages/extension/src/background/update.ts`. `BridgeClient.whenIdle()` reports when requests have finished, and `BridgeClient.announceReload()` sends the `reloading` message.
+The code is in `extensions/browser/src/background/update.ts`. `BridgeClient.whenIdle()` reports when requests have finished, and `BridgeClient.announceReload()` sends the `reloading` message.
 
 ### What survives an update
 
@@ -17,7 +17,7 @@ The extension keeps per-browser-session state in `chrome.storage.session`, which
 - the browser chat conversations (`chat.conversations`), so the side panel still shows them and the chat cursor the MCP server holds still points at the right messages;
 - the undo snapshot of the last `plan.apply` (`lastPlanSnapshot`), so `chrome_plan_undo` still works.
 
-Once bridge requests have finished, and before it sends `reloading`, the service worker copies both keys into `chrome.storage.local` under `reloadCarryOver`, with the time it was saved. When the service worker starts again it reads that copy, deletes it, and writes the keys back into `chrome.storage.session` unless they are already there. Bridge requests and the chat store wait for this to finish before they touch the state. The code is in `packages/extension/src/background/carryOver.ts`.
+Once bridge requests have finished, and before it sends `reloading`, the service worker copies both keys into `chrome.storage.local` under `reloadCarryOver`, with the time it was saved. When the service worker starts again it reads that copy, deletes it, and writes the keys back into `chrome.storage.session` unless they are already there. Bridge requests and the chat store wait for this to finish before they touch the state. The code is in `extensions/browser/src/background/carryOver.ts`.
 
 A browser restart still clears this state. Normally there is no copy at start-up, because the one written before a reload is used and deleted straight away. A copy more than two minutes old, left behind if the browser quit between saving it and reloading, is deleted without being restored.
 

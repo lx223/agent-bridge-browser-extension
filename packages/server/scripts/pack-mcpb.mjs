@@ -16,7 +16,7 @@ const { version } = JSON.parse(readFileSync(join(serverDir, 'package.json'), 'ut
 const manifest = JSON.parse(readFileSync(join(serverDir, 'mcpb/manifest.json'), 'utf8'));
 mkdirSync(stageDir, { recursive: true });
 writeFileSync(join(stageDir, 'manifest.json'), `${JSON.stringify({ ...manifest, version }, null, 2)}\n`);
-copyFileSync(join(repoDir, 'packages/extension/public/icons/icon-128.png'), join(stageDir, 'icon.png'));
+copyFileSync(join(repoDir, 'extensions/browser/public/icons/icon-128.png'), join(stageDir, 'icon.png'));
 copyFileSync(join(repoDir, 'LICENSE'), join(stageDir, 'LICENSE'));
 
 run('npx', ['mcpb', 'validate', join(stageDir, 'manifest.json')]);

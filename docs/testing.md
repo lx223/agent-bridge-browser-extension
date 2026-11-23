@@ -16,9 +16,9 @@ Tests live next to the code as `*.test.ts` and run with Vitest in a Node environ
 - `packages/server/src/mcp.test.ts` connects a real MCP client to `createMcpServer` over an in-memory transport with a fake bridge. It checks the tool list against the protocol, the published schemas and annotations, the text, JSON and image result formats, and error results.
 - `packages/server/src/bridge.test.ts` runs hosts and relays on real local WebSockets. Besides routing, it covers handing the bridge over to a newer server version, including requests in flight and other relays.
 - `packages/server/src/launcher.test.ts` drives the self-updating launcher with in-memory fake workers. It covers passing messages through, replaying the handshake to a new version, draining the old worker, routing cancellations, failed upgrades and update check timing. `docs/updates.md` describes the design.
-- `packages/extension/src/background/bridgeClient.test.ts` runs `BridgeClient` against a real local WebSocket server with fake timers. It covers the hello handshake, the list of connected agent sessions, request dispatch, error responses, malformed messages, keepalive pings, reconnecting, backoff and waiting for requests in flight. The test uses the `ws` client as the `WebSocket` global because it reports refused connections the way Chrome does on every supported Node version.
-- `packages/extension/src/background/update.test.ts` checks that a pending extension update reloads the service worker once requests have finished, or after a minute at most, and that nothing happens in a browser without update events, such as Safari.
-- `packages/extension/src/test/` holds in-memory fakes of `chrome.tabs`, `chrome.tabGroups`, `chrome.storage.session` and `chrome.debugger` for the plan and page logic.
+- `extensions/browser/src/background/bridgeClient.test.ts` runs `BridgeClient` against a real local WebSocket server with fake timers. It covers the hello handshake, the list of connected agent sessions, request dispatch, error responses, malformed messages, keepalive pings, reconnecting, backoff and waiting for requests in flight. The test uses the `ws` client as the `WebSocket` global because it reports refused connections the way Chrome does on every supported Node version.
+- `extensions/browser/src/background/update.test.ts` checks that a pending extension update reloads the service worker once requests have finished, or after a minute at most, and that nothing happens in a browser without update events, such as Safari.
+- `extensions/browser/src/test/` holds in-memory fakes of `chrome.tabs`, `chrome.tabGroups`, `chrome.storage.session` and `chrome.debugger` for the plan and page logic.
 
 ## Coverage
 
@@ -28,7 +28,7 @@ Files that only wire things to the browser are excluded from the unit coverage n
 
 ## End-to-end tests
 
-`npm run test:e2e` builds both packages, picks a free port and makes a test copy of `packages/extension/dist` that connects to it (see [Bridge port](#bridge-port)), then for each test file under `e2e/`:
+`npm run test:e2e` builds both packages, picks a free port and makes a test copy of `extensions/browser/dist` that connects to it (see [Bridge port](#bridge-port)), then for each test file under `e2e/`:
 
 1. starts the built MCP server (`packages/server/dist/index.js`) over stdio with a real MCP client and `AGENT_BROWSER_BRIDGE_PORT` set to that port,
 2. launches headless Chromium with the test copy loaded as an unpacked extension,
@@ -57,7 +57,7 @@ The tests are grouped by what a user does with the bridge, one folder each. `e2e
 
 Some behaviour is covered only by unit tests, because the end-to-end harness cannot produce it:
 
-- **An extension reloading to install an update.** Chromium does not reload an extension loaded with `--disable-extensions-except`, which the harness needs: after `chrome.runtime.reload()` the extension stays unloaded. `packages/server/src/bridge.test.ts` covers the server holding and repeating calls across a reload over real WebSockets, and `packages/extension/src/background/update.test.ts` and `carryOver.test.ts` cover the extension's side.
+- **An extension reloading to install an update.** Chromium does not reload an extension loaded with `--disable-extensions-except`, which the harness needs: after `chrome.runtime.reload()` the extension stays unloaded. `packages/server/src/bridge.test.ts` covers the server holding and repeating calls across a reload over real WebSockets, and `extensions/browser/src/background/update.test.ts` and `carryOver.test.ts` cover the extension's side.
 - **Handing the bridge over to a newer server version.** Every server in a run is the same build. `bridge.test.ts` covers it.
 - **An extension older than the server.** `bridge.test.ts` and `outdated.test.ts` cover the messages.
 
@@ -67,7 +67,7 @@ Some behaviour is covered only by unit tests, because the end-to-end harness can
 
 Release builds connect to port 17373, the server's default. The extension reads the port from `VITE_BRIDGE_PORT` at build time and falls back to 17373 when it is not set, so a release build only changes if that variable is set while building.
 
-`createTestBridge()` in `e2e/support/harness.ts` picks a free port other than 17373. It copies `packages/extension/dist` to a temporary folder and rebuilds only `background.js` into it with `VITE_BRIDGE_PORT` set to that port, using `packages/extension/vite.background.config.ts`, then checks that the rebuilt script contains the new port and not 17373.
+`createTestBridge()` in `e2e/support/harness.ts` picks a free port other than 17373. It copies `extensions/browser/dist` to a temporary folder and rebuilds only `background.js` into it with `VITE_BRIDGE_PORT` set to that port, using `extensions/browser/vite.background.config.ts`, then checks that the rebuilt script contains the new port and not 17373.
 
 `e2e/support/globalSetup.ts` does this once per Vitest run, passes the port and folder to the test files in `E2E_BRIDGE_PORT` and `E2E_EXTENSION_DIR`, and deletes the folder when the run ends. Outside Vitest, as in `npm run store:assets`, `testBridge()` makes its own copy and deletes it when the process exits. `startAgent` starts every server with `AGENT_BROWSER_BRIDGE_PORT` set to that port, and Chromium, the simulated Safari and the Safari setup page all load the test copy.
 
@@ -87,7 +87,7 @@ AGENT_BROWSER_BRIDGE_PORT=17374 node packages/server/dist/index.js
 
 ### Stale element refs
 
-A ref from `chrome_page_snapshot` stops working once its element leaves the page. `chrome.debugger.sendCommand` rejects with an `Error` whose message is the CDP error as a JSON string, and `withStaleRefHint` in `packages/extension/src/background/page.ts` matches on that text to replace it with `Element eN no longer exists; take a new chrome_page_snapshot.` These are the messages Chromium returns:
+A ref from `chrome_page_snapshot` stops working once its element leaves the page. `chrome.debugger.sendCommand` rejects with an `Error` whose message is the CDP error as a JSON string, and `withStaleRefHint` in `extensions/browser/src/background/page.ts` matches on that text to replace it with `Element eN no longer exists; take a new chrome_page_snapshot.` These are the messages Chromium returns:
 
 | Situation | Message |
 | --- | --- |
@@ -116,14 +116,14 @@ Safari only loads an extension from a signed app, or from an unsigned one after 
 
 `e2e/safari/safari.test.ts` runs as part of `npm run test:e2e`, on Linux as well as macOS. It starts the built MCP server like the Chromium tests do, but instead of a browser it uses `e2e/support/safari/simulatedSafari.ts`:
 
-1. It reads `manifest.json` from the test copy of `packages/extension/dist`, turns it into the Safari manifest with `safariManifest` (`packages/extension/src/safariManifest.ts`), and runs the background script as a classic script. It refuses a manifest whose background is a service worker: Safari 27 lists such a worker under **Develop > Web Extension Background Content** but never runs it, so the extension never connects. The Safari build runs the same `background.js` as a non-persistent background page instead.
+1. It reads `manifest.json` from the test copy of `extensions/browser/dist`, turns it into the Safari manifest with `safariManifest` (`extensions/browser/src/safariManifest.ts`), and runs the background script as a classic script. It refuses a manifest whose background is a service worker: Safari 27 lists such a worker under **Develop > Web Extension Background Content** but never runs it, so the extension never connects. The Safari build runs the same `background.js` as a non-persistent background page instead.
 2. The script gets a `chrome` object that has only what Safari offers: no `chrome.debugger`, `chrome.tabGroups` or `runtime.onUpdateAvailable`, and tabs without `groupId`, `discarded` or `lastAccessed`.
 3. Its WebSocket sends a `safari-web-extension://` origin, so the server treats it as Safari.
 4. Windows, tabs, page loads, back and forward history, extension storage, alarms and the toolbar button are kept in memory. `fetch` always fails, so nothing leaves the machine.
 
 The tests then call the `safari_*` tools through MCP and compare the results with the simulated browser's own state. They cover connecting as Safari, the setup page opening on install and from the toolbar button, the toolbar icon and title, every Safari tool, naming the Safari instance, and reconnecting to a new agent session.
 
-One test opens the built setup page the way Safari would (`e2e/support/safari/setupPage.ts`). Chromium renders it, but the page gets a `safari-web-extension://` extension URL and its messages go to the simulated Safari's background script. The test checks that the page shows the Safari wording and the connection, and none of the Chrome wording. The setup page marks wording for one browser with `data-browser="chrome"` or `data-browser="safari"`, and `packages/extension/src/settings/browserContent.ts` hides the other.
+One test opens the built setup page the way Safari would (`e2e/support/safari/setupPage.ts`). Chromium renders it, but the page gets a `safari-web-extension://` extension URL and its messages go to the simulated Safari's background script. The test checks that the page shows the Safari wording and the connection, and none of the Chrome wording. The setup page marks wording for one browser with `data-browser="chrome"` or `data-browser="safari"`, and `extensions/browser/src/settings/browserContent.ts` hides the other.
 
 This catches code that Safari cannot run. If the background script reaches for an API the simulation does not have, the test fails and says which one and what MDN knows about it:
 
@@ -141,19 +141,19 @@ What the simulation does not prove: that real Safari behaves the way MDN and the
 
 ### Safari app build
 
-`npm run test:safari-app -w agent-browser-bridge-extension` needs macOS with Xcode. Presubmit runs it on a macOS runner. `packages/extension/scripts/check-safari-app.mjs`:
+`npm run test:safari-app -w agent-browser-bridge-extension` needs macOS with Xcode. Presubmit runs it on a macOS runner. `extensions/browser/scripts/check-safari-app.mjs`:
 
 1. builds the extension and generates the Xcode project through `npm run build:safari`, without opening Xcode,
 2. builds the generated Xcode project with `xcodebuild`, without code signing,
-3. checks that the extension bundle inside the app contains the same `background.js` as `packages/extension/dist`, the manifest from `safariManifest`, and the icons and pages,
+3. checks that the extension bundle inside the app contains the same `background.js` as `extensions/browser/dist`, the manifest from `safariManifest`, and the icons and pages,
 4. checks that the Xcode project uses the committed app icon, and that the built app's icon includes the 1024 pixel image the App Store asks for,
 5. checks that the built app's Info.plist has the bundle identifier, version, App Store category, minimum macOS version and export compliance key the App Store needs.
 
 On GitHub the job summary shows the converter's output, including any manifest keys the installed Safari does not support.
 
-`npm run build:safari` runs `packages/extension/scripts/build-safari.mjs`. Apple's `safari-web-extension-converter` gives the app a bundle identifier made from its name, which does not match the extension's `dev.agentbrowserbridge.app.Extension`, and Xcode refuses to build an extension whose identifier does not start with its app's. The script sets the app's identifier to `dev.agentbrowserbridge.app` after converting, and fails if the project holds any other identifier. It also sets the version, build number, minimum macOS version and App Store keys the release needs; see [Mac App Store releases](safari-app-store.md#how-the-app-is-built).
+`npm run build:safari` runs `extensions/browser/scripts/build-safari.mjs`. Apple's `safari-web-extension-converter` gives the app a bundle identifier made from its name, which does not match the extension's `dev.agentbrowserbridge.app.Extension`, and Xcode refuses to build an extension whose identifier does not start with its app's. The script sets the app's identifier to `dev.agentbrowserbridge.app` after converting, and fails if the project holds any other identifier. It also sets the version, build number, minimum macOS version and App Store keys the release needs; see [Mac App Store releases](safari-app-store.md#how-the-app-is-built).
 
-The converter also builds the app icon by enlarging the extension's 128 pixel icon. The script replaces it with the icon set in `packages/extension/safari-app/AppIcon.appiconset`, which follows the macOS icon shape and has every size up to 1024 pixels, and uses the same artwork for the icon shown in the app's window. `npm run icons -w agent-browser-bridge-extension` draws that set, along with the extension's own icons, from `packages/extension/scripts/render-icons.mjs`. It needs Chrome; set `CHROME_PATH` if it is not in the default macOS location.
+The converter also builds the app icon by enlarging the extension's 128 pixel icon. The script replaces it with the icon set in `extensions/browser/safari-app/AppIcon.appiconset`, which follows the macOS icon shape and has every size up to 1024 pixels, and uses the same artwork for the icon shown in the app's window. `npm run icons -w agent-browser-bridge-extension` draws that set, along with the extension's own icons, from `extensions/browser/scripts/render-icons.mjs`. It needs Chrome; set `CHROME_PATH` if it is not in the default macOS location.
 
 This proves the app can be built from a clean checkout. It does not sign, notarise or install the app.
 
@@ -168,6 +168,6 @@ Do this before a Safari release and after changing anything the Safari tools use
 5. Leave Safari idle for a few minutes, then call a tool again to check that the extension is still connected or reconnects.
 6. End the agent session and start a new one, and check that Safari reconnects within about 30 seconds.
 
-Build the app inside the repository, for example with Xcode's default derived data or under `packages/extension/safari-release/`. In testing, Safari did not load the background script of the same app built under `/private/tmp`.
+Build the app inside the repository, for example with Xcode's default derived data or under `extensions/browser/safari-release/`. In testing, Safari did not load the background script of the same app built under `/private/tmp`.
 
 If real Safari behaves differently from the simulation, change the simulation to match and add a test for it.

@@ -4,7 +4,7 @@ Some tasks need the user to do something in the browser first, such as signing i
 
 The tool takes a `tabId` and a `url`, a `title` or both. Each matches the whole value, ignores case and accepts `*` wildcards. It returns the tab as soon as it matches, at once if it already does, and fails when the tab closes or `timeoutMs` passes. `timeoutMs` defaults to 2 minutes and is capped at 10.
 
-The extension watches `tabs.onUpdated` and `tabs.onRemoved` (`packages/extension/src/background/tabWait.ts`), so it needs no debugger and works in Safari too. Safari reports a tab's url and title only for websites the extension has access to, so a tab on another website never matches there.
+The extension watches `tabs.onUpdated` and `tabs.onRemoved` (`extensions/browser/src/background/tabWait.ts`), so it needs no debugger and works in Safari too. Safari reports a tab's url and title only for websites the extension has access to, so a tab on another website never matches there.
 
 ## Timeouts along the way
 

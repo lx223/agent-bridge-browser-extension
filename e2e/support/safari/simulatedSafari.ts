@@ -2,7 +2,7 @@ import { randomUUID } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import WebSocketClient from 'ws';
-import { safariManifest } from '../../../packages/extension/src/safariManifest.ts';
+import { safariManifest } from '../../../extensions/browser/src/safariManifest.ts';
 import { describeSafariSupport } from './apiSupport.ts';
 import { defaultLocaleMessages, getMessage } from './i18n.ts';
 

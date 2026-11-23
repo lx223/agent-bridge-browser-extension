@@ -4,7 +4,7 @@ import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { SERVER_PACKAGE } from '@agent-browser-bridge/protocol';
 import { EXTENSION_VERSION, startHarness, type Harness } from '../support/harness.ts';
 
-const DIST = resolve(import.meta.dirname, '../../packages/extension/dist');
+const DIST = resolve(import.meta.dirname, '../../extensions/browser/dist');
 let harness: Harness;
 
 beforeAll(async () => {

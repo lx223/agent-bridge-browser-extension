@@ -2,7 +2,7 @@ import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { SERVER_NAME, SERVER_PACKAGE, STATUS_TOOL } from '@agent-browser-bridge/protocol';
-import { MIN_NODE_VERSION, launch } from '../packages/extension/src/welcome/install.ts';
+import { MIN_NODE_VERSION, launch } from '../extensions/browser/src/welcome/install.ts';
 
 const repoDir = join(import.meta.dirname, '..');
 const pluginDir = join(repoDir, 'plugins/claude');
