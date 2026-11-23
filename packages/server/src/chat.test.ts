@@ -98,6 +98,25 @@ describe('browser chat tools', () => {
     expect(extension.receives).toEqual([{ waitMs: 20_000 }, { waitMs: 20_000, after: 4 }, { waitMs: 20_000, after: 4 }]);
   });
 
+  it('tells the browser which replies it read when it posts a message', async () => {
+    const extension = fakeExtension([{ messages: [{ seq: 4, text: 'first', sentAt: 0 }], ended: false, conversation: 'first' }]);
+    const sends: Array<Record<string, unknown>> = [];
+    const request: Request = async (browser, method, params, agent, instance) => {
+      if (method === CHAT_SEND_METHOD) {
+        const { agentSession: _agentSession, ...rest } = params;
+        sends.push(rest);
+        return { seq: 5, conversation: 'second' };
+      }
+      return extension.request(browser, method, params, agent, instance);
+    };
+    const { client } = await connect(request);
+    await client.callTool({ name: CHAT_RECEIVE_TOOL, arguments: { ...ME } });
+    await client.callTool({ name: CHAT_SEND_TOOL, arguments: { ...ME, text: 'On it', waitForReply: false } });
+    await client.callTool({ name: CHAT_RECEIVE_TOOL, arguments: { ...ME, timeoutSeconds: 0 } });
+    expect(sends).toEqual([{ text: 'On it', after: 4, conversation: 'first' }]);
+    expect(extension.receives.at(-1)).toEqual({ waitMs: 0, conversation: 'second' });
+  });
+
   it('starts reading a new conversation from the start when the browser replaced the old one', async () => {
     const extension = fakeExtension([
       { messages: [{ seq: 12, text: 'before the restart', sentAt: 0 }], ended: false, conversation: 'first' },

@@ -12,6 +12,7 @@ import {
   type ChatPeek,
   type ChatPeekParams,
   type ChatReceiveParams,
+  type ChatSent,
   type ChatTab,
 } from '@agent-browser-bridge/protocol';
 import { plural, t } from '../i18n/messages.ts';
@@ -156,8 +157,8 @@ export class ChatStore {
   async dispatch(method: string, params: unknown, agent: AgentInfo | null): Promise<unknown> {
     switch (method) {
       case CHAT_SEND_METHOD: {
-        const { text, agentSession } = parse(chatSendParams, method, params);
-        return this.agentSays(agent, text, agentSession);
+        const { text, after, conversation, agentSession } = parse(chatSendParams, method, params);
+        return this.agentSays(agent, text, agentSession, after, conversation);
       }
       case CHAT_RECEIVE_METHOD:
         return this.receive(agent, parse(chatReceiveParams, method, params));
@@ -168,16 +169,17 @@ export class ChatStore {
     }
   }
 
-  async agentSays(agent: AgentInfo | null, text: string, agentSession?: ChatAgentSession): Promise<{ seq: number }> {
+  async agentSays(agent: AgentInfo | null, text: string, agentSession?: ChatAgentSession, after?: number, cursorConversation?: string): Promise<ChatSent> {
     const key = conversationKey(agent, agentSession);
     const { conversation, message } = await this.update((all) => {
       const conversation = this.ensure(all, key, agent, agentSession);
+      this.acknowledge(conversation, after, cursorConversation);
       conversation.ended = false;
       const message = this.append(conversation, 'agent', text);
       return { conversation: structuredClone(conversation), message };
     });
     this.options.onAgentMessage?.(conversation, message);
-    return { seq: message.seq };
+    return { seq: message.seq, conversation: conversation.id };
   }
 
   async receive(agent: AgentInfo | null, { waitMs, after, conversation: cursorConversation, agentSession }: ChatReceiveParams): Promise<ChatInbox> {
@@ -210,7 +212,7 @@ export class ChatStore {
     return this.update((all) => {
       const conversation = all[key];
       if (!conversation) return { unread: 0, ended: false };
-      const from = this.acknowledge(withId(conversation), after, cursorConversation);
+      const from = this.acknowledge(conversation, after, cursorConversation);
       return { unread: userMessagesAfter(conversation, from).length, ended: conversation.ended, conversation: conversation.id };
     });
   }
