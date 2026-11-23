@@ -62,7 +62,7 @@ Some behaviour is covered only by unit tests, because the end-to-end harness can
 - **Handing the bridge over to a newer server version.** Every server in a run is the same build. `bridge.test.ts` covers it.
 - **An extension older than the server.** `bridge.test.ts` and `outdated.test.ts` cover the messages.
 
-`npm run test:e2e:mcpb` runs the same suite against the Claude Desktop extension bundle (`packages/server/mcpb-dist/server/index.js`) instead of the npm build. The bundle inlines every dependency, so this catches bundling problems that only show up once the extension connects. Set `E2E_SERVER_ENTRY` to point the suite at any other server entry.
+`npm run test:e2e:mcpb` runs the same suite against the Claude Desktop extension bundle (`packages/server/mcpb-dist/server/index.js`) instead of the npm build. The bundle inlines every dependency, so this catches bundling problems that only show up once the extension connects. Set `E2E_SERVER_ENTRY` to point the suite at any other server entry. The Claude Desktop bundle only runs in stdio mode, so `e2e/remote/relay.test.ts` always starts the relay from the npm build.
 
 ### Bridge port
 

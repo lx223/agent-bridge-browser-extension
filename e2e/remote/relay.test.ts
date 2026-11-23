@@ -7,7 +7,7 @@ import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { STATUS_TOOL } from '@agent-browser-bridge/protocol';
 import { startHarness, type BridgeStatus, type Harness, type Tab } from '../support/harness.ts';
 
-const SERVER_ENTRY = resolve(import.meta.dirname, '../..', process.env.E2E_SERVER_ENTRY ?? 'packages/server/dist/index.js');
+const RELAY_ENTRY = resolve(import.meta.dirname, '../../packages/server/dist/index.js');
 
 let harness: Harness;
 let relay: ChildProcess;
@@ -17,7 +17,7 @@ let firstToken: string;
 const agents: Client[] = [];
 
 function startRelay(): Promise<{ process: ChildProcess; url: string }> {
-  const child = spawn(process.execPath, [SERVER_ENTRY, 'http', '--port', '0'], { stdio: ['ignore', 'ignore', 'pipe'] });
+  const child = spawn(process.execPath, [RELAY_ENTRY, 'http', '--port', '0'], { stdio: ['ignore', 'ignore', 'pipe'] });
   return new Promise((done, fail) => {
     let output = '';
     child.stderr!.on('data', (chunk: Buffer) => {
