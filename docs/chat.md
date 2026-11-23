@@ -9,7 +9,7 @@ Start it from the agent, once:
 - run the server's `continue_in_browser` prompt (in Claude Code, type `/continue_in_browser` and pick it from the list), or
 - tell the agent "let's continue in the browser chat".
 
-The agent posts a message with `browser_chat_send`. The toolbar button shows a badge with the number of messages you haven't read. If no chat panel is open, Chrome also shows a desktop notification. Click the toolbar button to open the panel: while a chat is open, the button opens the chat panel instead of the setup page. The gear button at the top of the panel still opens the setup page.
+The agent posts a message with `browser_chat_send`. The toolbar button shows a badge with the number of messages you haven't read. If no chat panel is open, Chrome also shows a desktop notification. In Chrome, clicking the toolbar button always opens the chat panel. The gear button at the top of the panel opens the setup page.
 
 Chrome only lets an extension open its side panel after you click something, so the agent can't open the panel for you.
 

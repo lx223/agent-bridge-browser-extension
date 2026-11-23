@@ -53,7 +53,7 @@ Events also include the extension version, the MCP server version, and the name 
 
 When analytics is on, uninstalling the extension may open a short optional PostHog survey asking why you left, linked to the same random identifier.
 
-Usage analytics are on by default. You can turn them off at any time with the "Share anonymous usage statistics" checkbox on the setup page (click the toolbar icon, or in Chrome right-click it and choose Options). Builds made from source without a PostHog key send no analytics.
+Usage analytics are on by default. You can turn them off at any time with the "Share anonymous usage statistics" checkbox on the setup page (right-click the toolbar icon and choose Options, or click the gear button in the side panel). Builds made from source without a PostHog key send no analytics.
 
 ## Website
 
