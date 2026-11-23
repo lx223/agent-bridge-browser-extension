@@ -1,4 +1,4 @@
-import { Marked, type Token, type Tokens } from 'marked';
+import { Marked, Renderer, type Token, type Tokens } from 'marked';
 
 const ENTITIES: Record<string, string> = {
   '&amp;': '&',
@@ -37,11 +37,37 @@ export interface LinkParts {
   text: string;
 }
 
-export function renderMarkdown(markdown: string, rewriteLink: (link: LinkParts) => LinkParts): RenderedMarkdown {
+export interface Decorations {
+  link?: (href: string) => Record<string, string> | undefined;
+  code?: (text: string) => Record<string, string> | undefined;
+}
+
+function attributes(values: Record<string, string> | undefined): string {
+  if (!values) return '';
+  return Object.entries(values)
+    .map(([name, value]) => ` ${name}="${value.replace(/&/g, '&amp;').replace(/"/g, '&quot;')}"`)
+    .join('');
+}
+
+export function renderMarkdown(
+  markdown: string,
+  rewriteLink: (link: LinkParts) => LinkParts,
+  decorations: Decorations = {},
+): RenderedMarkdown {
   const usedIds = new Map<string, number>();
   const marked = new Marked({
     gfm: true,
     renderer: {
+      link(token) {
+        const extra = attributes(decorations.link?.(token.href));
+        if (!extra) return false;
+        return Renderer.prototype.link.call(this, token).replace(/^<a /, `<a${extra} `);
+      },
+      code(token) {
+        const extra = attributes(decorations.code?.(token.text));
+        if (!extra) return false;
+        return Renderer.prototype.code.call(this, token).replace(/^<pre>/, `<pre${extra}>`);
+      },
       heading({ tokens, depth }) {
         const inner = this.parser.parseInline(tokens);
         const base = githubSlug(htmlToText(inner));

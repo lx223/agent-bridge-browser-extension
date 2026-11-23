@@ -1,9 +1,23 @@
+export { CHROME_WEB_STORE_URL } from '../packages/protocol/src/constants.ts';
+
 export const PRODUCT_NAME = 'Agent Browser Bridge';
 export const SITE_URL = 'https://lanxiao.dev/agent-bridge-browser-extension/';
 export const REPO_URL = 'https://github.com/lx223/agent-bridge-browser-extension';
 export const RELEASES_URL = `${REPO_URL}/releases/latest`;
 export const NPM_URL = 'https://www.npmjs.com/package/agent-browser-bridge-mcp';
+export const SITE_APP_TAG = 'agent-browser-bridge-site';
 export const HOME_TITLE = 'Agent Browser Bridge: control your own browser with any AI agent';
+
+export interface AnalyticsConfig {
+  key: string;
+  host: string;
+}
+
+export function analyticsFromEnv(env: Record<string, string | undefined>): AnalyticsConfig | undefined {
+  const key = env.SITE_POSTHOG_KEY?.trim();
+  if (!key) return undefined;
+  return { key, host: (env.SITE_POSTHOG_HOST?.trim() || 'https://eu.i.posthog.com').replace(/\/$/, '') };
+}
 
 export interface PageConfig {
   source: string;

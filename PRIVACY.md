@@ -1,6 +1,6 @@
 # Agent Browser Bridge privacy policy
 
-Last updated: 21 November 2026
+Last updated: 23 November 2026
 
 Agent Browser Bridge connects your browser's tabs, tab groups and web pages to an MCP-compatible agent through a bridge server running on your computer. It runs in Chrome, in other Chromium browsers such as Edge and Brave, and in Safari. Safari offers fewer tools, so less information is used there; see [Safari](#safari).
 
@@ -38,9 +38,9 @@ The local MCP server passes tool results to the agent you connect. Your chosen a
 
 Release builds send anonymous usage events to PostHog (EU region, eu.i.posthog.com) so the developer can see whether setup works, which features are used and whether people keep using the extension. Events are:
 
-- extension installed or updated, setup page opened, setup link clicked or snippet copied;
+- extension installed or updated, with whether it was installed from a store or loaded unpacked, setup page opened, setup link clicked or snippet copied;
 - the first time an agent connects and the first time a tab plan is applied, with minutes since install;
-- once a day while the browser is open: whether an agent is connected, the number of open windows, and the number of open tabs as a range (such as 11–25);
+- once a day while the browser is open: whether an agent is connected, the number of open windows, the number of open tabs as a range (such as 11–25), and whether the extension was installed from a store or loaded unpacked;
 - each tool call: the tool name, whether it succeeded, how long it took, a fixed error category on failure (such as "tab not found"), and counts such as how many tabs or groups it affected, how many results a history or recently closed search returned, whether it was a preview, and minutes between applying a plan and undoing it.
 
 Events also include the extension version, the MCP server version, and the name and version the connected agent reports for itself (such as "claude-code"). Each event includes a random identifier generated on install and kept in extension local storage. Events never include tab titles, URLs, domains, tab or window contents, tab-group names, error messages, or tool parameters or results. PostHog receives your IP address as part of the network request; the PostHog project is configured to discard it.
@@ -48,6 +48,19 @@ Events also include the extension version, the MCP server version, and the name 
 When analytics is on, uninstalling the extension may open a short optional PostHog survey asking why you left, linked to the same random identifier.
 
 Usage analytics are on by default. You can turn them off at any time with the "Share anonymous usage statistics" checkbox on the setup page (click the toolbar icon, or in Chrome right-click it and choose Options). Builds made from source without a PostHog key send no analytics.
+
+## Website
+
+The project website at lanxiao.dev/agent-bridge-browser-extension counts visits with PostHog (EU region) in cookieless mode. It sets no cookies and stores nothing in your browser, so it cannot recognise you on a later visit or on another site. It records:
+
+- each page view and when you leave the page: the page address, the referring website, campaign tags in the link you followed (such as `utm_source`), and your browser, operating system and screen size;
+- when you reach the install steps on the home page;
+- when you follow a link to the Chrome Web Store, GitHub releases, the Claude Desktop extension download, GitHub or npm, and which part of the page the link was in;
+- when you copy one of the install snippets, and which one.
+
+PostHog groups a day's page views into visits with a hash of your IP address, user agent and a random value it changes every day. It removes the IP address before storing the event and does not look up your location from it. The website records no clicks or text beyond the list above, no session recordings and no form input. If your browser or an ad blocker stops the PostHog script from loading, the website works the same and sends nothing.
+
+Links from the website to the Chrome Web Store carry `utm_source=website`, so the store's own statistics can count installs that started on the website. The Chrome Web Store handles that visit under Google's privacy policy.
 
 ## Use and sharing
 

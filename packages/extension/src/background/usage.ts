@@ -17,6 +17,7 @@ export interface UsageDeps {
   analytics: Analytics;
   storage: LocalStorage;
   countBrowser: () => Promise<{ tabs: number; windows: number }>;
+  installType?: () => Promise<string>;
   now?: () => number;
 }
 
@@ -110,9 +111,13 @@ export class UsageTracker {
     return (await this.deps.storage.get(key))[key] as T | undefined;
   }
 
+  private async installType() {
+    return (await this.deps.installType?.().catch(() => undefined)) ?? null;
+  }
+
   async installed() {
     await this.deps.storage.set({ [INSTALLED_AT_KEY]: this.now() });
-    await this.deps.analytics.capture('extension_installed');
+    await this.deps.analytics.capture('extension_installed', { install_type: await this.installType() });
   }
 
   setConnected(connected: boolean) {
@@ -172,6 +177,7 @@ export class UsageTracker {
       tab_count_bucket: counts ? tabCountBucket(counts.tabs) : null,
       window_count: counts?.windows ?? null,
       client_name: this.lastClient,
+      install_type: await this.installType(),
     });
   }
 }

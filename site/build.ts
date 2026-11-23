@@ -1,9 +1,33 @@
 import { copyFile, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import path from 'node:path';
-import { HOME_TITLE, NPM_URL, PAGES, PRODUCT_NAME, RELEASES_URL, REPO_URL, SITE_URL, type PageConfig } from './config.ts';
+import {
+  CHROME_WEB_STORE_URL,
+  HOME_TITLE,
+  NPM_URL,
+  PAGES,
+  PRODUCT_NAME,
+  RELEASES_URL,
+  REPO_URL,
+  SITE_URL,
+  type AnalyticsConfig,
+  type PageConfig,
+} from './config.ts';
 import { htmlLink, markdownHref } from './links.ts';
-import { renderMarkdown, rewriteMarkdownLinks, type RenderedMarkdown } from './markdown.ts';
+import { renderMarkdown, rewriteMarkdownLinks, type Decorations, type RenderedMarkdown } from './markdown.ts';
 import { renderPage } from './template.ts';
+import { linkTarget, snippetName, storeUrl } from './tracking.ts';
+
+export interface BuildOptions {
+  analytics?: AnalyticsConfig;
+}
+
+const decorations: Decorations = {
+  link: (href) => {
+    const target = linkTarget(href);
+    return target ? { 'data-track': target } : undefined;
+  },
+  code: (text) => ({ 'data-snippet': snippetName(text) }),
+};
 
 interface BuiltPage {
   page: PageConfig;
@@ -23,10 +47,11 @@ function structuredData(built: BuiltPage, version: string): object {
       operatingSystem: 'Windows, macOS, Linux',
       softwareVersion: version,
       license: 'https://www.apache.org/licenses/LICENSE-2.0',
+      installUrl: CHROME_WEB_STORE_URL,
       downloadUrl: RELEASES_URL,
       isAccessibleForFree: true,
       offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
-      sameAs: [REPO_URL, NPM_URL],
+      sameAs: [CHROME_WEB_STORE_URL, REPO_URL, NPM_URL],
     };
   }
   return {
@@ -54,6 +79,7 @@ function llmsTxt(pages: BuiltPage[]): string {
     '',
     '## Optional',
     '',
+    `- [Chrome Web Store listing](${storeUrl('markdown')}): install the extension in Chrome, Edge, Brave and other Chromium browsers`,
     `- [Source code](${REPO_URL})`,
     `- [Latest release](${RELEASES_URL})`,
     `- [MCP server on npm](${NPM_URL})`,
@@ -67,7 +93,7 @@ function sitemap(pages: BuiltPage[]): string {
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`;
 }
 
-export async function buildSite(repoRoot: string, outDir: string): Promise<string[]> {
+export async function buildSite(repoRoot: string, outDir: string, options: BuildOptions = {}): Promise<string[]> {
   await rm(outDir, { recursive: true, force: true });
   const written: string[] = [];
   const write = async (relativePath: string, content: string) => {
@@ -83,7 +109,7 @@ export async function buildSite(repoRoot: string, outDir: string): Promise<strin
   const pages: BuiltPage[] = [];
   for (const page of PAGES) {
     const markdown = await readFile(path.join(repoRoot, page.source), 'utf8');
-    const parsed = renderMarkdown(markdown, (link) => htmlLink(link, page));
+    const parsed = renderMarkdown(markdown, (link) => htmlLink(link, page), decorations);
     const rendered = { ...parsed, description: page.description ?? parsed.description };
     const built = { page, rendered };
     pages.push(built);
@@ -97,6 +123,7 @@ export async function buildSite(repoRoot: string, outDir: string): Promise<strin
         canonical: SITE_URL + page.slug,
         bodyHtml: rendered.html,
         structuredData: structuredData(built, version),
+        analytics: options.analytics,
       }),
     );
     await write(`${page.slug}index.md`, rewriteMarkdownLinks(markdown, (href) => markdownHref(href, page)));
@@ -108,6 +135,8 @@ export async function buildSite(repoRoot: string, outDir: string): Promise<strin
 
   await copyFile(path.join(repoRoot, 'site/style.css'), path.join(outDir, 'style.css'));
   written.push('style.css');
+  await copyFile(path.join(repoRoot, 'site/site.js'), path.join(outDir, 'site.js'));
+  written.push('site.js');
   await copyFile(path.join(repoRoot, 'packages/extension/icons/icon.svg'), path.join(outDir, 'icon.svg'));
   written.push('icon.svg');
 

@@ -21,9 +21,7 @@ Ask the user which browser they want to connect.
 
 ### Chrome and other Chromium browsers
 
-1. Download the latest extension ZIP from https://github.com/lx223/agent-bridge-browser-extension/releases/latest and unzip it.
-2. Open `chrome://extensions` and turn on **Developer mode**.
-3. Click **Load unpacked** and select the unzipped folder.
+Send the user to the Chrome Web Store listing, https://chromewebstore.google.com/detail/agent-browser-bridge/kmhcfgambmbglmgdjmdlkhcfkfpkddgb, and ask them to click **Add to Chrome**. The same listing works in Edge, Brave and other Chromium browsers; Edge first asks the user to allow extensions from other stores.
 
 The extension's setup page opens and turns green once it reaches the server. This takes up to 30 seconds. Call `browser_status` again to confirm.
 

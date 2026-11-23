@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it } from 'vitest';
 import WebSocket from 'ws';
-import { PROTOCOL_VERSION } from '@agent-browser-bridge/protocol';
+import { CHROME_WEB_STORE_URL, PROTOCOL_VERSION } from '@agent-browser-bridge/protocol';
 import { ExtensionBridge } from './bridge.ts';
 
 const EXT_ORIGIN = 'chrome-extension://abcdefghijklmnopabcdefghijklmnop';
@@ -81,6 +81,12 @@ describe('ExtensionBridge', () => {
   it('fails fast when the extension is not connected', async () => {
     await startBridge();
     await expect(bridge!.request('chrome', 'tabs.list', {})).rejects.toThrow(/not connected/);
+  });
+
+  it('tells the agent where to install the Chrome extension, but not the Safari one', async () => {
+    await startBridge();
+    await expect(bridge!.request('chrome', 'tabs.list', {})).rejects.toThrow(CHROME_WEB_STORE_URL);
+    await expect(bridge!.request('safari', 'tabs.list', {})).rejects.toThrow(/within ~30 seconds\.$/);
   });
 
   it('round-trips requests and errors', async () => {
