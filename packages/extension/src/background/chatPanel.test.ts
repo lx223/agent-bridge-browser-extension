@@ -83,14 +83,13 @@ describe('ChatPanel', () => {
     expect(chrome.fake.action.setBadgeText).toHaveBeenLastCalledWith({ text: '' });
   });
 
-  it('opens the panel from the toolbar only while a connected agent has an open chat', async () => {
+  it('always opens the panel from the toolbar', async () => {
     const panel = new ChatPanel();
+    expect(chrome.fake.sidePanel.setPanelBehavior).toHaveBeenCalledWith({ openPanelOnActionClick: true });
     await panel.store.agentSays(agent('a'), 'What next?');
-    expect(chrome.fake.sidePanel.setPanelBehavior).toHaveBeenLastCalledWith({ openPanelOnActionClick: false });
     panel.agentsChanged([session('a')]);
-    expect(chrome.fake.sidePanel.setPanelBehavior).toHaveBeenLastCalledWith({ openPanelOnActionClick: true });
     await panel.handle({ type: 'CHAT_END', key: 'a' });
-    expect(chrome.fake.sidePanel.setPanelBehavior).toHaveBeenLastCalledWith({ openPanelOnActionClick: false });
+    expect(chrome.fake.sidePanel.setPanelBehavior).toHaveBeenCalledTimes(1);
   });
 
   it('notifies about agent messages only while no chat panel is open', async () => {

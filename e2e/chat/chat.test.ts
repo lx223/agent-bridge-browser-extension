@@ -36,20 +36,19 @@ async function reply(text: string) {
 }
 
 describe('the browser chat panel', () => {
-  it('explains how to start a chat before there is one', async () => {
+  it('opens from the toolbar and explains how to start a chat before there is one', async () => {
     expect(await panel.isVisible('#empty')).toBe(true);
     expect(await panel.textContent('#empty')).toContain('continue_in_browser');
     expect(await panel.isVisible('#composer')).toBe(false);
     expect(await panel.isVisible('#end')).toBe(false);
     expect(await panel.isVisible('#setup-link')).toBe(true);
-    expect(await opensPanelFromToolbar()).toBe(false);
+    expect(await opensPanelFromToolbar()).toBe(true);
   });
 
-  it('badges the toolbar button and opens the panel from it while a chat is open', async () => {
+  it('badges the toolbar button while a chat is open', async () => {
     await panel.close();
     await harness.agent.call(CHAT_SEND_TOOL, { ...ME, text: 'Are you there?', waitForReply: false });
     await expect.poll(badge).toBe('1');
-    expect(await opensPanelFromToolbar()).toBe(true);
     panel = await harness.context.newPage();
     panel.on('pageerror', (error) => errors.push(error.message));
     await panel.goto(`chrome-extension://${harness.extensionId}/src/sidepanel/index.html`);
@@ -101,7 +100,7 @@ describe('the browser chat panel', () => {
     await panel.waitForSelector('#remove:visible');
     expect(await panel.isVisible('#end')).toBe(false);
     expect(await panel.textContent('.message.from-notice .text')).toBe('You ended the chat.');
-    await expect.poll(opensPanelFromToolbar).toBe(false);
+    expect(await opensPanelFromToolbar()).toBe(true);
   });
 
   it('grows the message box with the draft', async () => {

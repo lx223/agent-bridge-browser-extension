@@ -22,7 +22,7 @@ The agent can do this for the user, so nobody needs to open the extension page.
 
 The `name_browser_profiles` MCP prompt runs the same flow on request. In Claude Code it shows up as `/mcp__agent-browser-bridge__name_browser_profiles`.
 
-Users can also type a name on the setup page, opened from the toolbar icon or the extension's options.
+Users can also type a name on the setup page, opened from the gear button in the side panel or the extension's options.
 
 ## Staying on the same instance
 

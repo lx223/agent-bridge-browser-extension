@@ -101,9 +101,6 @@ export const unseenCount = (conversation: Conversation) =>
 
 export const totalUnseen = (conversations: Conversations) => Object.values(conversations).reduce((sum, conversation) => sum + unseenCount(conversation), 0);
 
-export const hasOpenConversation = (conversations: Conversations, liveSessions: ReadonlySet<string>, now = Date.now()) =>
-  Object.values(conversations).some((conversation) => !conversation.ended && (liveSessions.has(conversation.sessionId) || isReconnecting(conversation, now)));
-
 const userMessagesAfter = (conversation: Conversation, after: number) =>
   conversation.messages.filter((message) => message.from === 'user' && message.seq > after);
 
