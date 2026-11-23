@@ -99,6 +99,17 @@ describe('ChatStore', () => {
     expect((await store.receive(agent(), { waitMs: 0 })).messages.map((m) => m.text)).toEqual(['second']);
   });
 
+  it('takes a message from the agent as confirmation that it read the replies before it', async () => {
+    const { store, storage } = setup();
+    await store.agentSays(agent(), 'What next?');
+    await store.userSays('session-1', 'first');
+    const inbox = await store.receive(agent(), { waitMs: 0 });
+    const sent = (await store.dispatch(CHAT_SEND_METHOD, { text: 'On it', after: 2, conversation: inbox.conversation }, agent())) as { conversation: string };
+    expect(sent.conversation).toBe(inbox.conversation);
+    expect(stored(storage)['session-1']).toMatchObject({ acknowledged: 2 });
+    expect((await store.receive(agent('session-1'), { waitMs: 0 })).messages).toEqual([]);
+  });
+
   describe('when the agent read an earlier conversation for the same session', () => {
     async function restarted() {
       const { store, storage } = setup();

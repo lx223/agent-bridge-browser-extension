@@ -11,6 +11,7 @@ import {
   chatBrowsers,
   chatInbox,
   chatPeek,
+  chatSent,
   MAX_CHAT_AGENT_SESSION_ID_LENGTH,
   MAX_CHAT_AGENT_SESSION_NAME_LENGTH,
   MAX_CHAT_MESSAGE_LENGTH,
@@ -125,7 +126,8 @@ export class BrowserChat {
     await this.bridge.ready(CHAT_BROWSER);
     const state = this.stateOf(agentSession);
     const target = this.resolve(state, instance);
-    await this.call(target, CHAT_SEND_METHOD, { text, ...this.agentSessionParam(state) });
+    const sent = chatSent.parse(await this.call(target, CHAT_SEND_METHOD, { text, ...this.cursor(state), ...this.agentSessionParam(state) }));
+    this.follow(state, sent.conversation);
     state.target = target;
   }
 

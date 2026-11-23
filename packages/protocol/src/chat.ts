@@ -32,7 +32,12 @@ export const chatAgentSession = z.object({
   name: z.string().min(1).max(MAX_CHAT_AGENT_SESSION_NAME_LENGTH).optional(),
 });
 
-export const chatSendParams = z.object({ text: z.string().min(1).max(MAX_CHAT_MESSAGE_LENGTH), agentSession: chatAgentSession.optional() });
+export const chatSendParams = z.object({
+  text: z.string().min(1).max(MAX_CHAT_MESSAGE_LENGTH),
+  after: cursor,
+  conversation: conversationId,
+  agentSession: chatAgentSession.optional(),
+});
 export const chatReceiveParams = z.object({
   waitMs: z.number().int().min(0).max(MAX_CHAT_RECEIVE_WAIT_MS).default(0),
   after: cursor,
@@ -56,6 +61,11 @@ export const chatInbox = z.object({
   conversation: conversationId,
 });
 
+export const chatSent = z.object({
+  seq: z.number().int().nonnegative(),
+  conversation: conversationId,
+});
+
 export const chatPeek = z.object({
   unread: z.number().int(),
   ended: z.boolean(),
@@ -67,6 +77,7 @@ export type ChatTab = z.infer<typeof chatTab>;
 export type ChatUserMessage = z.infer<typeof chatUserMessage>;
 export type ChatInbox = z.infer<typeof chatInbox>;
 export type ChatPeek = z.infer<typeof chatPeek>;
+export type ChatSent = z.infer<typeof chatSent>;
 export type ChatSendParams = z.infer<typeof chatSendParams>;
 export type ChatReceiveParams = z.output<typeof chatReceiveParams>;
 export type ChatPeekParams = z.infer<typeof chatPeekParams>;
