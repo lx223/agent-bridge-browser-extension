@@ -319,5 +319,59 @@
   },
   "askNotificationTitle": {
     "message": "$1 があなたの回答を待っています"
+  },
+  "remoteHeading": {
+    "message": "リモートアクセス"
+  },
+  "remoteToggle": {
+    "message": "リレー経由でエージェントがこのブラウザにアクセスできるようにする"
+  },
+  "remoteToggleHint": {
+    "message": "別のコンピュータやクラウド上のエージェント向けです。リレーはエージェントからのリクエストをこのブラウザに、応答をエージェントに中継します。これにはタブのタイトル、URL、ページの内容も含まれるため、信頼できるリレーのみを使用してください。"
+  },
+  "remoteAddressLabel": {
+    "message": "リレーのアドレス"
+  },
+  "remoteAddressInvalid": {
+    "message": "https:// で始まるアドレスを入力してください"
+  },
+  "remoteStatusConnected": {
+    "message": "リレーに接続済み"
+  },
+  "remoteStatusConnecting": {
+    "message": "リレーに接続しています…"
+  },
+  "remoteStatusOffline": {
+    "message": "リレーに接続できません。再試行しています…"
+  },
+  "remoteStatusNoAddress": {
+    "message": "接続するにはリレーのアドレスを入力してください。"
+  },
+  "remoteTokensHeading": {
+    "message": "エージェントのアクセストークン"
+  },
+  "remoteTokensHint": {
+    "message": "エージェントごとに専用のトークンが必要です。トークンを持っていれば誰でもこのブラウザを操作できるため、トークンは信頼できるエージェントにのみ渡し、使わなくなったら取り消してください。"
+  },
+  "remoteNoTokens": {
+    "message": "トークンはまだありません。"
+  },
+  "remoteTokenNamePlaceholder": {
+    "message": "用途（例: クラウドエージェント）"
+  },
+  "remoteCreateToken": {
+    "message": "トークンを作成"
+  },
+  "remoteTokenCreatedHint": {
+    "message": "今すぐコピーしてください。再表示はされません。Claude Code に追加するにはこれを実行します。他のエージェントの場合は、JSON を MCP 設定に追加してください。"
+  },
+  "remoteTokenCreatedAt": {
+    "message": "$1に作成"
+  },
+  "remoteRevoke": {
+    "message": "取り消す"
+  },
+  "remotePrivacy": {
+    "message": "リモートアクセスがオンです。この拡張機能は $1 にも接続し、そこを経由してエージェントからのリクエストとこのブラウザの応答（タブのタイトル、URL、ページの内容を含む）がやり取りされます。"
   }
 }

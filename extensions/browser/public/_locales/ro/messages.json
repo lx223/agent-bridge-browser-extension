@@ -331,5 +331,59 @@
   },
   "askNotificationTitle": {
     "message": "$1 așteaptă răspunsul dvs."
+  },
+  "remoteHeading": {
+    "message": "Acces la distanță"
+  },
+  "remoteToggle": {
+    "message": "Permiteți agenților să acceseze acest browser printr-un server releu"
+  },
+  "remoteToggleHint": {
+    "message": "Pentru agenți de pe alt computer sau din cloud. Serverul releu transmite solicitările lor către acest browser și răspunsurile înapoi, inclusiv titlurile și adresele URL ale filelor și conținutul paginilor, așa că folosiți doar un server releu în care aveți încredere."
+  },
+  "remoteAddressLabel": {
+    "message": "Adresa serverului releu"
+  },
+  "remoteAddressInvalid": {
+    "message": "Introduceți o adresă care începe cu https://"
+  },
+  "remoteStatusConnected": {
+    "message": "Conectat la serverul releu"
+  },
+  "remoteStatusConnecting": {
+    "message": "Se conectează la serverul releu…"
+  },
+  "remoteStatusOffline": {
+    "message": "Serverul releu nu poate fi accesat. Se reîncearcă…"
+  },
+  "remoteStatusNoAddress": {
+    "message": "Introduceți adresa serverului releu pentru a vă conecta."
+  },
+  "remoteTokensHeading": {
+    "message": "Tokenuri de acces pentru agenți"
+  },
+  "remoteTokensHint": {
+    "message": "Fiecare agent are nevoie de propriul token. Oricine are un token poate controla acest browser, așa că dați tokenuri doar agenților în care aveți încredere și revocați-le când nu le mai folosiți."
+  },
+  "remoteNoTokens": {
+    "message": "Încă nu există tokenuri."
+  },
+  "remoteTokenNamePlaceholder": {
+    "message": "Pentru cine este, de exemplu Agent cloud"
+  },
+  "remoteCreateToken": {
+    "message": "Creați un token"
+  },
+  "remoteTokenCreatedHint": {
+    "message": "Copiați-l acum; nu va mai fi afișat. Rulați această comandă pentru a-l adăuga în Claude Code sau adăugați JSON-ul în configurația MCP a altui agent."
+  },
+  "remoteTokenCreatedAt": {
+    "message": "Creat $1"
+  },
+  "remoteRevoke": {
+    "message": "Revocați"
+  },
+  "remotePrivacy": {
+    "message": "Accesul la distanță este activat: această extensie se conectează și la $1, care transmite solicitările agenților dvs. și răspunsurile acestui browser, inclusiv titlurile și adresele URL ale filelor și conținutul paginilor."
   }
 }

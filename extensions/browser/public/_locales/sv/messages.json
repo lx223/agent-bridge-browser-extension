@@ -319,5 +319,59 @@
   },
   "askNotificationTitle": {
     "message": "$1 behöver ditt svar"
+  },
+  "remoteHeading": {
+    "message": "Fjärråtkomst"
+  },
+  "remoteToggle": {
+    "message": "Låt agenter nå den här webbläsaren via ett relä"
+  },
+  "remoteToggleHint": {
+    "message": "För agenter på en annan dator eller i molnet. Reläet skickar deras förfrågningar till den här webbläsaren och svaren tillbaka, inklusive fliktitlar, webbadresser och sidinnehåll, så använd bara ett relä du litar på."
+  },
+  "remoteAddressLabel": {
+    "message": "Reläadress"
+  },
+  "remoteAddressInvalid": {
+    "message": "Ange en adress som börjar med https://"
+  },
+  "remoteStatusConnected": {
+    "message": "Ansluten till reläet"
+  },
+  "remoteStatusConnecting": {
+    "message": "Ansluter till reläet…"
+  },
+  "remoteStatusOffline": {
+    "message": "Det går inte att nå reläet. Försöker igen…"
+  },
+  "remoteStatusNoAddress": {
+    "message": "Ange reläadressen för att ansluta."
+  },
+  "remoteTokensHeading": {
+    "message": "Åtkomsttoken för agenter"
+  },
+  "remoteTokensHint": {
+    "message": "Varje agent behöver en egen token. Alla som har en token kan styra den här webbläsaren, så ge bara token till agenter du litar på och återkalla dem när du slutar använda dem."
+  },
+  "remoteNoTokens": {
+    "message": "Inga token än."
+  },
+  "remoteTokenNamePlaceholder": {
+    "message": "Vem den är till, till exempel Molnagent"
+  },
+  "remoteCreateToken": {
+    "message": "Skapa token"
+  },
+  "remoteTokenCreatedHint": {
+    "message": "Kopiera den nu, den visas inte igen. Kör det här för att lägga till den i Claude Code, eller lägg till JSON-koden i en annan agents MCP-konfiguration."
+  },
+  "remoteTokenCreatedAt": {
+    "message": "Skapad $1"
+  },
+  "remoteRevoke": {
+    "message": "Återkalla"
+  },
+  "remotePrivacy": {
+    "message": "Fjärråtkomst är på: tillägget ansluter också till $1, som förmedlar dina agenters förfrågningar och den här webbläsarens svar, inklusive fliktitlar, webbadresser och sidinnehåll."
   }
 }

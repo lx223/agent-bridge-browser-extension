@@ -331,5 +331,59 @@
   },
   "askNotificationTitle": {
     "message": "$1 attende la tua risposta"
+  },
+  "remoteHeading": {
+    "message": "Accesso remoto"
+  },
+  "remoteToggle": {
+    "message": "Consenti agli agenti di raggiungere questo browser tramite un relay"
+  },
+  "remoteToggleHint": {
+    "message": "Per agenti su un altro computer o nel cloud. Il relay inoltra le loro richieste a questo browser e restituisce le risposte, inclusi titoli e URL delle schede e contenuti delle pagine, quindi usa solo un relay di cui ti fidi."
+  },
+  "remoteAddressLabel": {
+    "message": "Indirizzo del relay"
+  },
+  "remoteAddressInvalid": {
+    "message": "Inserisci un indirizzo che inizi con https://"
+  },
+  "remoteStatusConnected": {
+    "message": "Connesso al relay"
+  },
+  "remoteStatusConnecting": {
+    "message": "Connessione al relay…"
+  },
+  "remoteStatusOffline": {
+    "message": "Impossibile raggiungere il relay. Nuovo tentativo…"
+  },
+  "remoteStatusNoAddress": {
+    "message": "Inserisci l'indirizzo del relay per connetterti."
+  },
+  "remoteTokensHeading": {
+    "message": "Token di accesso degli agenti"
+  },
+  "remoteTokensHint": {
+    "message": "Ogni agente ha bisogno del proprio token. Chiunque abbia un token può controllare questo browser, quindi dai i token solo ad agenti di cui ti fidi e revocali quando smetti di usarli."
+  },
+  "remoteNoTokens": {
+    "message": "Ancora nessun token."
+  },
+  "remoteTokenNamePlaceholder": {
+    "message": "Per chi è, ad esempio Agente cloud"
+  },
+  "remoteCreateToken": {
+    "message": "Crea token"
+  },
+  "remoteTokenCreatedHint": {
+    "message": "Copialo ora: non verrà mostrato di nuovo. Esegui questo comando per aggiungerlo a Claude Code, oppure aggiungi il JSON alla configurazione MCP di un altro agente."
+  },
+  "remoteTokenCreatedAt": {
+    "message": "Creato $1"
+  },
+  "remoteRevoke": {
+    "message": "Revoca"
+  },
+  "remotePrivacy": {
+    "message": "L'accesso remoto è attivo: questa estensione si connette anche a $1, che inoltra le richieste dei tuoi agenti e le risposte di questo browser, inclusi titoli e URL delle schede e contenuti delle pagine."
   }
 }

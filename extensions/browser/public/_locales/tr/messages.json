@@ -319,5 +319,59 @@
   },
   "askNotificationTitle": {
     "message": "$1 yanıtınızı bekliyor"
+  },
+  "remoteHeading": {
+    "message": "Uzaktan erişim"
+  },
+  "remoteToggle": {
+    "message": "Ajanların bu tarayıcıya bir aktarma sunucusu üzerinden erişmesine izin ver"
+  },
+  "remoteToggleHint": {
+    "message": "Başka bir bilgisayardaki veya buluttaki ajanlar için. Aktarma sunucusu, ajanların isteklerini bu tarayıcıya, yanıtları da geri iletir; buna sekme başlıkları, URL'ler ve sayfa içerikleri dahildir. Bu nedenle yalnızca güvendiğiniz bir aktarma sunucusu kullanın."
+  },
+  "remoteAddressLabel": {
+    "message": "Aktarma sunucusu adresi"
+  },
+  "remoteAddressInvalid": {
+    "message": "https:// ile başlayan bir adres girin"
+  },
+  "remoteStatusConnected": {
+    "message": "Aktarma sunucusuna bağlı"
+  },
+  "remoteStatusConnecting": {
+    "message": "Aktarma sunucusuna bağlanılıyor…"
+  },
+  "remoteStatusOffline": {
+    "message": "Aktarma sunucusuna ulaşılamıyor. Yeniden deneniyor…"
+  },
+  "remoteStatusNoAddress": {
+    "message": "Bağlanmak için aktarma sunucusu adresini girin."
+  },
+  "remoteTokensHeading": {
+    "message": "Ajan erişim belirteçleri"
+  },
+  "remoteTokensHint": {
+    "message": "Her ajanın kendi belirteci olmalıdır. Belirteci olan herkes bu tarayıcıyı kontrol edebilir. Bu nedenle belirteçleri yalnızca güvendiğiniz ajanlara verin ve kullanmayı bıraktığınızda iptal edin."
+  },
+  "remoteNoTokens": {
+    "message": "Henüz belirteç yok."
+  },
+  "remoteTokenNamePlaceholder": {
+    "message": "Kimin için, örneğin Bulut ajanı"
+  },
+  "remoteCreateToken": {
+    "message": "Belirteç oluştur"
+  },
+  "remoteTokenCreatedHint": {
+    "message": "Şimdi kopyalayın; bir daha gösterilmeyecek. Claude Code'a eklemek için bunu çalıştırın veya JSON'u başka bir ajanın MCP yapılandırmasına ekleyin."
+  },
+  "remoteTokenCreatedAt": {
+    "message": "$1 oluşturuldu"
+  },
+  "remoteRevoke": {
+    "message": "İptal et"
+  },
+  "remotePrivacy": {
+    "message": "Uzaktan erişim açık: Bu uzantı ayrıca $1 adresine bağlanır. Bu sunucu, ajanlarınızın isteklerini ve bu tarayıcının yanıtlarını iletir; buna sekme başlıkları, URL'ler ve sayfa içerikleri dahildir."
   }
 }

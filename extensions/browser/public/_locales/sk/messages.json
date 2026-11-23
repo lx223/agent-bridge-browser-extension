@@ -343,5 +343,59 @@
   },
   "askNotificationTitle": {
     "message": "$1 čaká na vašu odpoveď"
+  },
+  "remoteHeading": {
+    "message": "Vzdialený prístup"
+  },
+  "remoteToggle": {
+    "message": "Povoliť agentom prístup k tomuto prehliadaču cez prenosový server"
+  },
+  "remoteToggleHint": {
+    "message": "Pre agentov na inom počítači alebo v cloude. Prenosový server odovzdáva ich požiadavky tomuto prehliadaču a odpovede späť vrátane názvov a webových adries kariet a obsahu stránok, preto používajte iba server, ktorému dôverujete."
+  },
+  "remoteAddressLabel": {
+    "message": "Adresa prenosového servera"
+  },
+  "remoteAddressInvalid": {
+    "message": "Zadajte adresu, ktorá začína na https://"
+  },
+  "remoteStatusConnected": {
+    "message": "Pripojené k prenosovému serveru"
+  },
+  "remoteStatusConnecting": {
+    "message": "Pripája sa k prenosovému serveru…"
+  },
+  "remoteStatusOffline": {
+    "message": "Prenosový server je nedostupný. Skúša sa znova…"
+  },
+  "remoteStatusNoAddress": {
+    "message": "Na pripojenie zadajte adresu prenosového servera."
+  },
+  "remoteTokensHeading": {
+    "message": "Prístupové tokeny agentov"
+  },
+  "remoteTokensHint": {
+    "message": "Každý agent potrebuje vlastný token. Ktokoľvek s tokenom môže ovládať tento prehliadač, preto dávajte tokeny iba agentom, ktorým dôverujete, a odvolajte ich, keď ich prestanete používať."
+  },
+  "remoteNoTokens": {
+    "message": "Zatiaľ žiadne tokeny."
+  },
+  "remoteTokenNamePlaceholder": {
+    "message": "Pre koho je, napr. Cloudový agent"
+  },
+  "remoteCreateToken": {
+    "message": "Vytvoriť token"
+  },
+  "remoteTokenCreatedHint": {
+    "message": "Skopírujte ho teraz, znova sa nezobrazí. Spustite toto, aby ste ho pridali do Claude Code, alebo pridajte JSON do konfigurácie MCP iného agenta."
+  },
+  "remoteTokenCreatedAt": {
+    "message": "Vytvorené $1"
+  },
+  "remoteRevoke": {
+    "message": "Odvolať"
+  },
+  "remotePrivacy": {
+    "message": "Vzdialený prístup je zapnutý: toto rozšírenie sa pripája aj k $1, ktorý odovzdáva požiadavky vašich agentov a odpovede tohto prehliadača vrátane názvov a webových adries kariet a obsahu stránok."
   }
 }

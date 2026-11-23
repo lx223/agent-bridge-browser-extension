@@ -319,5 +319,59 @@
   },
   "askNotificationTitle": {
     "message": "$1 需要你的回覆"
+  },
+  "remoteHeading": {
+    "message": "遠端存取"
+  },
+  "remoteToggle": {
+    "message": "允許代理程式透過中繼伺服器存取這個瀏覽器"
+  },
+  "remoteToggleHint": {
+    "message": "適用於其他電腦或雲端上的代理程式。中繼伺服器會將它們的要求轉送到這個瀏覽器，並將回應傳回，其中包括分頁標題、網址和網頁內容，因此請只使用你信任的中繼伺服器。"
+  },
+  "remoteAddressLabel": {
+    "message": "中繼伺服器位址"
+  },
+  "remoteAddressInvalid": {
+    "message": "請輸入以 https:// 開頭的位址"
+  },
+  "remoteStatusConnected": {
+    "message": "已連線至中繼伺服器"
+  },
+  "remoteStatusConnecting": {
+    "message": "正在連線至中繼伺服器…"
+  },
+  "remoteStatusOffline": {
+    "message": "無法連線至中繼伺服器，正在重試…"
+  },
+  "remoteStatusNoAddress": {
+    "message": "請輸入中繼伺服器位址以連線。"
+  },
+  "remoteTokensHeading": {
+    "message": "代理程式存取權杖"
+  },
+  "remoteTokensHint": {
+    "message": "每個代理程式都需要自己的權杖。任何人只要持有權杖就能控制這個瀏覽器，因此請只將權杖提供給你信任的代理程式，並在不再使用時撤銷。"
+  },
+  "remoteNoTokens": {
+    "message": "尚無權杖。"
+  },
+  "remoteTokenNamePlaceholder": {
+    "message": "用途，例如「雲端代理程式」"
+  },
+  "remoteCreateToken": {
+    "message": "建立權杖"
+  },
+  "remoteTokenCreatedHint": {
+    "message": "請立即複製，之後不會再顯示。執行這段指令即可將其加入 Claude Code，或將 JSON 加入其他代理程式的 MCP 設定。"
+  },
+  "remoteTokenCreatedAt": {
+    "message": "$1建立"
+  },
+  "remoteRevoke": {
+    "message": "撤銷"
+  },
+  "remotePrivacy": {
+    "message": "遠端存取已開啟：這個擴充功能也會連線至 $1，由它轉送你的代理程式發出的要求和這個瀏覽器的回應，其中包括分頁標題、網址和網頁內容。"
   }
 }

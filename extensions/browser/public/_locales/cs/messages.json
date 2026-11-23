@@ -343,5 +343,59 @@
   },
   "askNotificationTitle": {
     "message": "$1 potřebuje vaši odpověď"
+  },
+  "remoteHeading": {
+    "message": "Vzdálený přístup"
+  },
+  "remoteToggle": {
+    "message": "Povolit agentům přístup k tomuto prohlížeči přes přenosový server"
+  },
+  "remoteToggleHint": {
+    "message": "Pro agenty na jiném počítači nebo v cloudu. Přenosový server předává jejich požadavky tomuto prohlížeči a odpovědi zpět, včetně názvů a adres URL karet a obsahu stránek, proto používejte jen server, kterému důvěřujete."
+  },
+  "remoteAddressLabel": {
+    "message": "Adresa přenosového serveru"
+  },
+  "remoteAddressInvalid": {
+    "message": "Zadejte adresu začínající https://"
+  },
+  "remoteStatusConnected": {
+    "message": "Připojeno k přenosovému serveru"
+  },
+  "remoteStatusConnecting": {
+    "message": "Připojování k přenosovému serveru…"
+  },
+  "remoteStatusOffline": {
+    "message": "Přenosový server je nedostupný. Opakování pokusu…"
+  },
+  "remoteStatusNoAddress": {
+    "message": "Pro připojení zadejte adresu přenosového serveru."
+  },
+  "remoteTokensHeading": {
+    "message": "Přístupové tokeny agentů"
+  },
+  "remoteTokensHint": {
+    "message": "Každý agent potřebuje vlastní token. Kdokoli s tokenem může ovládat tento prohlížeč, proto tokeny dávejte jen agentům, kterým důvěřujete, a odvolejte je, až je přestanete používat."
+  },
+  "remoteNoTokens": {
+    "message": "Zatím žádné tokeny."
+  },
+  "remoteTokenNamePlaceholder": {
+    "message": "Pro koho je, např. Cloudový agent"
+  },
+  "remoteCreateToken": {
+    "message": "Vytvořit token"
+  },
+  "remoteTokenCreatedHint": {
+    "message": "Zkopírujte ho hned, znovu se nezobrazí. Spusťte toto, abyste ho přidali do Claude Code, nebo přidejte JSON do konfigurace MCP jiného agenta."
+  },
+  "remoteTokenCreatedAt": {
+    "message": "Vytvořeno $1"
+  },
+  "remoteRevoke": {
+    "message": "Odvolat"
+  },
+  "remotePrivacy": {
+    "message": "Vzdálený přístup je zapnutý: toto rozšíření se také připojuje k $1, který předává požadavky vašich agentů a odpovědi tohoto prohlížeče, včetně názvů a adres URL karet a obsahu stránek."
   }
 }

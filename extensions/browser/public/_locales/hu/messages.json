@@ -319,5 +319,59 @@
   },
   "askNotificationTitle": {
     "message": "$1 az Ön válaszára vár"
+  },
+  "remoteHeading": {
+    "message": "Távoli hozzáférés"
+  },
+  "remoteToggle": {
+    "message": "Ügynökök hozzáférésének engedélyezése ehhez a böngészőhöz továbbítószerveren keresztül"
+  },
+  "remoteToggleHint": {
+    "message": "Másik számítógépen vagy a felhőben futó ügynökökhöz. A továbbítószerver eljuttatja a kéréseiket ehhez a böngészőhöz, a válaszokat pedig vissza, beleértve a lapok címét és URL-jét, valamint az oldalak tartalmát, ezért csak megbízható továbbítószervert használjon."
+  },
+  "remoteAddressLabel": {
+    "message": "Továbbítószerver címe"
+  },
+  "remoteAddressInvalid": {
+    "message": "Adjon meg egy https:// kezdetű címet"
+  },
+  "remoteStatusConnected": {
+    "message": "Csatlakozva a továbbítószerverhez"
+  },
+  "remoteStatusConnecting": {
+    "message": "Csatlakozás a továbbítószerverhez…"
+  },
+  "remoteStatusOffline": {
+    "message": "A továbbítószerver nem érhető el. Újrapróbálkozás…"
+  },
+  "remoteStatusNoAddress": {
+    "message": "A csatlakozáshoz adja meg a továbbítószerver címét."
+  },
+  "remoteTokensHeading": {
+    "message": "Ügynökök hozzáférési tokenjei"
+  },
+  "remoteTokensHint": {
+    "message": "Minden ügynöknek saját token kell. Bárki, akinek tokenje van, irányíthatja ezt a böngészőt, ezért csak megbízható ügynököknek adjon tokent, és vonja vissza, ha már nem használja."
+  },
+  "remoteNoTokens": {
+    "message": "Még nincsenek tokenek."
+  },
+  "remoteTokenNamePlaceholder": {
+    "message": "Kinek szól, pl. Felhőalapú ügynök"
+  },
+  "remoteCreateToken": {
+    "message": "Token létrehozása"
+  },
+  "remoteTokenCreatedHint": {
+    "message": "Másolja ki most, mert többé nem jelenik meg. Futtassa ezt a Claude Code-hoz való hozzáadáshoz, vagy adja hozzá a JSON-t egy másik ügynök MCP-konfigurációjához."
+  },
+  "remoteTokenCreatedAt": {
+    "message": "Létrehozva: $1"
+  },
+  "remoteRevoke": {
+    "message": "Visszavonás"
+  },
+  "remotePrivacy": {
+    "message": "A távoli hozzáférés be van kapcsolva: ez a bővítmény a következőhöz is csatlakozik: $1. Ez továbbítja az ügynökei kéréseit és a böngésző válaszait, beleértve a lapok címét és URL-jét, valamint az oldalak tartalmát."
   }
 }

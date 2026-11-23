@@ -319,5 +319,59 @@
   },
   "askNotificationTitle": {
     "message": "$1 anasubiri jibu lako"
+  },
+  "remoteHeading": {
+    "message": "Ufikiaji wa mbali"
+  },
+  "remoteToggle": {
+    "message": "Ruhusu mawakala wafikie kivinjari hiki kupitia seva ya upeanaji"
+  },
+  "remoteToggleHint": {
+    "message": "Kwa mawakala walio kwenye kompyuta nyingine au kwenye wingu. Seva ya upeanaji hupeleka maombi yao kwenye kivinjari hiki na kurudisha majibu, ikiwa ni pamoja na majina na URL za vichupo na maudhui ya kurasa, kwa hivyo tumia tu seva ya upeanaji unayoiamini."
+  },
+  "remoteAddressLabel": {
+    "message": "Anwani ya seva ya upeanaji"
+  },
+  "remoteAddressInvalid": {
+    "message": "Weka anwani inayoanza na https://"
+  },
+  "remoteStatusConnected": {
+    "message": "Imeunganishwa kwenye seva ya upeanaji"
+  },
+  "remoteStatusConnecting": {
+    "message": "Inaunganisha kwenye seva ya upeanaji…"
+  },
+  "remoteStatusOffline": {
+    "message": "Haiwezi kufikia seva ya upeanaji. Inajaribu tena…"
+  },
+  "remoteStatusNoAddress": {
+    "message": "Weka anwani ya seva ya upeanaji ili uunganishe."
+  },
+  "remoteTokensHeading": {
+    "message": "Tokeni za ufikiaji za mawakala"
+  },
+  "remoteTokensHint": {
+    "message": "Kila wakala anahitaji tokeni yake. Mtu yeyote aliye na tokeni anaweza kudhibiti kivinjari hiki, kwa hivyo wape tokeni mawakala unaowaamini pekee na uzibatilishe unapoacha kuzitumia."
+  },
+  "remoteNoTokens": {
+    "message": "Bado hakuna tokeni."
+  },
+  "remoteTokenNamePlaceholder": {
+    "message": "Ni ya nani, kwa mfano Wakala wa wingu"
+  },
+  "remoteCreateToken": {
+    "message": "Unda tokeni"
+  },
+  "remoteTokenCreatedHint": {
+    "message": "Inakili sasa; haitaonyeshwa tena. Tekeleza hii ili uiongeze kwenye Claude Code, au ongeza JSON kwenye mipangilio ya MCP ya wakala mwingine."
+  },
+  "remoteTokenCreatedAt": {
+    "message": "Iliundwa $1"
+  },
+  "remoteRevoke": {
+    "message": "Batilisha"
+  },
+  "remotePrivacy": {
+    "message": "Ufikiaji wa mbali umewashwa: kiendelezi hiki pia huunganisha na $1, ambayo hupitisha maombi ya mawakala wako na majibu ya kivinjari hiki, ikiwa ni pamoja na majina na URL za vichupo na maudhui ya kurasa."
   }
 }

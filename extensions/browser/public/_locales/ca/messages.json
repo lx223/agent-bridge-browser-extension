@@ -331,5 +331,59 @@
   },
   "askNotificationTitle": {
     "message": "$1 necessita la teva resposta"
+  },
+  "remoteHeading": {
+    "message": "Accés remot"
+  },
+  "remoteToggle": {
+    "message": "Permet als agents accedir a aquest navegador mitjançant un servidor de retransmissió"
+  },
+  "remoteToggleHint": {
+    "message": "Per a agents en un altre ordinador o al núvol. El servidor de retransmissió envia les seves sol·licituds a aquest navegador i en retorna les respostes, inclosos els títols i els URL de les pestanyes i el contingut de les pàgines, així que utilitza només un servidor de confiança."
+  },
+  "remoteAddressLabel": {
+    "message": "Adreça del servidor de retransmissió"
+  },
+  "remoteAddressInvalid": {
+    "message": "Introdueix una adreça que comenci per https://"
+  },
+  "remoteStatusConnected": {
+    "message": "Connectat al servidor de retransmissió"
+  },
+  "remoteStatusConnecting": {
+    "message": "S'està connectant al servidor de retransmissió…"
+  },
+  "remoteStatusOffline": {
+    "message": "No es pot accedir al servidor de retransmissió. S'està tornant a provar…"
+  },
+  "remoteStatusNoAddress": {
+    "message": "Introdueix l'adreça del servidor de retransmissió per connectar-te."
+  },
+  "remoteTokensHeading": {
+    "message": "Testimonis d'accés dels agents"
+  },
+  "remoteTokensHint": {
+    "message": "Cada agent necessita el seu propi testimoni. Qualsevol persona amb un testimoni pot controlar aquest navegador, així que dona testimonis només a agents de confiança i revoca'ls quan deixis d'utilitzar-los."
+  },
+  "remoteNoTokens": {
+    "message": "Encara no hi ha cap testimoni."
+  },
+  "remoteTokenNamePlaceholder": {
+    "message": "Per a qui és, per exemple, Agent al núvol"
+  },
+  "remoteCreateToken": {
+    "message": "Crea un testimoni"
+  },
+  "remoteTokenCreatedHint": {
+    "message": "Copia'l ara; no es tornarà a mostrar. Executa això per afegir-lo a Claude Code o afegeix el JSON a la configuració MCP d'un altre agent."
+  },
+  "remoteTokenCreatedAt": {
+    "message": "Creat $1"
+  },
+  "remoteRevoke": {
+    "message": "Revoca"
+  },
+  "remotePrivacy": {
+    "message": "L'accés remot està activat: aquesta extensió també es connecta a $1, que transmet les sol·licituds dels teus agents i les respostes d'aquest navegador, inclosos els títols i els URL de les pestanyes i el contingut de les pàgines."
   }
 }

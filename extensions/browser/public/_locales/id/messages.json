@@ -319,5 +319,59 @@
   },
   "askNotificationTitle": {
     "message": "$1 menunggu jawaban Anda"
+  },
+  "remoteHeading": {
+    "message": "Akses jarak jauh"
+  },
+  "remoteToggle": {
+    "message": "Izinkan agen menjangkau browser ini melalui server relay"
+  },
+  "remoteToggleHint": {
+    "message": "Untuk agen di komputer lain atau di cloud. Server relay meneruskan permintaan mereka ke browser ini dan mengembalikan jawabannya, termasuk judul dan URL tab serta konten halaman, jadi gunakan hanya server relay yang Anda percayai."
+  },
+  "remoteAddressLabel": {
+    "message": "Alamat server relay"
+  },
+  "remoteAddressInvalid": {
+    "message": "Masukkan alamat yang diawali dengan https://"
+  },
+  "remoteStatusConnected": {
+    "message": "Terhubung ke server relay"
+  },
+  "remoteStatusConnecting": {
+    "message": "Menghubungkan ke server relay…"
+  },
+  "remoteStatusOffline": {
+    "message": "Server relay tidak dapat dijangkau. Mencoba lagi…"
+  },
+  "remoteStatusNoAddress": {
+    "message": "Masukkan alamat server relay untuk terhubung."
+  },
+  "remoteTokensHeading": {
+    "message": "Token akses agen"
+  },
+  "remoteTokensHint": {
+    "message": "Setiap agen memerlukan tokennya sendiri. Siapa pun yang memiliki token dapat mengontrol browser ini, jadi berikan token hanya kepada agen yang Anda percayai dan cabut token saat tidak digunakan lagi."
+  },
+  "remoteNoTokens": {
+    "message": "Belum ada token."
+  },
+  "remoteTokenNamePlaceholder": {
+    "message": "Untuk siapa, misalnya Agen cloud"
+  },
+  "remoteCreateToken": {
+    "message": "Buat token"
+  },
+  "remoteTokenCreatedHint": {
+    "message": "Salin sekarang; token tidak akan ditampilkan lagi. Jalankan ini untuk menambahkannya ke Claude Code, atau tambahkan JSON ke konfigurasi MCP agen lain."
+  },
+  "remoteTokenCreatedAt": {
+    "message": "Dibuat $1"
+  },
+  "remoteRevoke": {
+    "message": "Cabut"
+  },
+  "remotePrivacy": {
+    "message": "Akses jarak jauh aktif: ekstensi ini juga terhubung ke $1, yang meneruskan permintaan agen Anda dan jawaban browser ini, termasuk judul dan URL tab serta konten halaman."
   }
 }

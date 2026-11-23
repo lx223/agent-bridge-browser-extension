@@ -319,5 +319,59 @@
   },
   "askNotificationTitle": {
     "message": "$1 har brug for dit svar"
+  },
+  "remoteHeading": {
+    "message": "Fjernadgang"
+  },
+  "remoteToggle": {
+    "message": "Lad agenter nå denne browser via et relæ"
+  },
+  "remoteToggleHint": {
+    "message": "Til agenter på en anden computer eller i skyen. Relæet sender deres anmodninger videre til denne browser og svarene tilbage, herunder fanetitler, webadresser og sideindhold, så brug kun et relæ, du har tillid til."
+  },
+  "remoteAddressLabel": {
+    "message": "Relæadresse"
+  },
+  "remoteAddressInvalid": {
+    "message": "Angiv en adresse, der starter med https://"
+  },
+  "remoteStatusConnected": {
+    "message": "Forbundet til relæet"
+  },
+  "remoteStatusConnecting": {
+    "message": "Opretter forbindelse til relæet…"
+  },
+  "remoteStatusOffline": {
+    "message": "Relæet kan ikke nås. Prøver igen…"
+  },
+  "remoteStatusNoAddress": {
+    "message": "Angiv relæadressen for at oprette forbindelse."
+  },
+  "remoteTokensHeading": {
+    "message": "Adgangstokens til agenter"
+  },
+  "remoteTokensHint": {
+    "message": "Hver agent skal have sit eget token. Alle med et token kan styre denne browser, så giv kun tokens til agenter, du har tillid til, og tilbagekald dem, når du holder op med at bruge dem."
+  },
+  "remoteNoTokens": {
+    "message": "Ingen tokens endnu."
+  },
+  "remoteTokenNamePlaceholder": {
+    "message": "Hvem det er til, f.eks. Cloudagent"
+  },
+  "remoteCreateToken": {
+    "message": "Opret token"
+  },
+  "remoteTokenCreatedHint": {
+    "message": "Kopiér det nu; det vises ikke igen. Kør dette for at føje det til Claude Code, eller føj JSON-koden til en anden agents MCP-konfiguration."
+  },
+  "remoteTokenCreatedAt": {
+    "message": "Oprettet $1"
+  },
+  "remoteRevoke": {
+    "message": "Tilbagekald"
+  },
+  "remotePrivacy": {
+    "message": "Fjernadgang er slået til: Udvidelsen forbinder også til $1, som videresender dine agenters anmodninger og denne browsers svar, herunder fanetitler, webadresser og sideindhold."
   }
 }

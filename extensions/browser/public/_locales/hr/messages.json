@@ -331,5 +331,59 @@
   },
   "askNotificationTitle": {
     "message": "$1 treba vaš odgovor"
+  },
+  "remoteHeading": {
+    "message": "Udaljeni pristup"
+  },
+  "remoteToggle": {
+    "message": "Dopusti agentima pristup ovom pregledniku putem relejnog poslužitelja"
+  },
+  "remoteToggleHint": {
+    "message": "Za agente na drugom računalu ili u oblaku. Relejni poslužitelj prosljeđuje njihove zahtjeve ovom pregledniku i odgovore natrag, uključujući naslove i URL-ove kartica te sadržaj stranica, pa koristite samo relejni poslužitelj kojem vjerujete."
+  },
+  "remoteAddressLabel": {
+    "message": "Adresa relejnog poslužitelja"
+  },
+  "remoteAddressInvalid": {
+    "message": "Unesite adresu koja počinje s https://"
+  },
+  "remoteStatusConnected": {
+    "message": "Povezano s relejnim poslužiteljem"
+  },
+  "remoteStatusConnecting": {
+    "message": "Povezivanje s relejnim poslužiteljem…"
+  },
+  "remoteStatusOffline": {
+    "message": "Relejni poslužitelj nije dostupan. Ponovni pokušaj…"
+  },
+  "remoteStatusNoAddress": {
+    "message": "Unesite adresu relejnog poslužitelja za povezivanje."
+  },
+  "remoteTokensHeading": {
+    "message": "Pristupni tokeni agenata"
+  },
+  "remoteTokensHint": {
+    "message": "Svakom agentu treba vlastiti token. Svatko s tokenom može upravljati ovim preglednikom, stoga tokene dajte samo agentima kojima vjerujete i opozovite ih kada ih prestanete koristiti."
+  },
+  "remoteNoTokens": {
+    "message": "Još nema tokena."
+  },
+  "remoteTokenNamePlaceholder": {
+    "message": "Za koga je, npr. Agent u oblaku"
+  },
+  "remoteCreateToken": {
+    "message": "Izradi token"
+  },
+  "remoteTokenCreatedHint": {
+    "message": "Kopirajte ga sada jer se više neće prikazati. Pokrenite ovo da biste ga dodali u Claude Code ili dodajte JSON u MCP konfiguraciju drugog agenta."
+  },
+  "remoteTokenCreatedAt": {
+    "message": "Izrađen $1"
+  },
+  "remoteRevoke": {
+    "message": "Opozovi"
+  },
+  "remotePrivacy": {
+    "message": "Udaljeni pristup je uključen: ovo proširenje povezuje se i s $1, koji prosljeđuje zahtjeve vaših agenata i odgovore ovog preglednika, uključujući naslove i URL-ove kartica te sadržaj stranica."
   }
 }

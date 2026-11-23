@@ -319,5 +319,59 @@
   },
   "askNotificationTitle": {
     "message": "$1 braucht Ihre Antwort"
+  },
+  "remoteHeading": {
+    "message": "Fernzugriff"
+  },
+  "remoteToggle": {
+    "message": "Agenten über ein Relay auf diesen Browser zugreifen lassen"
+  },
+  "remoteToggleHint": {
+    "message": "Für Agenten auf einem anderen Computer oder in der Cloud. Das Relay leitet ihre Anfragen an diesen Browser weiter und die Antworten zurück, einschließlich Tab-Titeln, URLs und Seiteninhalten. Verwenden Sie daher nur ein Relay, dem Sie vertrauen."
+  },
+  "remoteAddressLabel": {
+    "message": "Relay-Adresse"
+  },
+  "remoteAddressInvalid": {
+    "message": "Geben Sie eine Adresse ein, die mit https:// beginnt"
+  },
+  "remoteStatusConnected": {
+    "message": "Mit dem Relay verbunden"
+  },
+  "remoteStatusConnecting": {
+    "message": "Verbindung zum Relay wird hergestellt…"
+  },
+  "remoteStatusOffline": {
+    "message": "Relay nicht erreichbar. Neuer Versuch…"
+  },
+  "remoteStatusNoAddress": {
+    "message": "Geben Sie die Relay-Adresse ein, um eine Verbindung herzustellen."
+  },
+  "remoteTokensHeading": {
+    "message": "Zugriffstokens für Agenten"
+  },
+  "remoteTokensHint": {
+    "message": "Jeder Agent braucht ein eigenes Token. Wer ein Token hat, kann diesen Browser steuern. Geben Sie Tokens daher nur Agenten, denen Sie vertrauen, und widerrufen Sie sie, wenn Sie sie nicht mehr verwenden."
+  },
+  "remoteNoTokens": {
+    "message": "Noch keine Tokens."
+  },
+  "remoteTokenNamePlaceholder": {
+    "message": "Für wen, z. B. Cloud-Agent"
+  },
+  "remoteCreateToken": {
+    "message": "Token erstellen"
+  },
+  "remoteTokenCreatedHint": {
+    "message": "Kopieren Sie es jetzt, es wird nicht noch einmal angezeigt. Führen Sie dies aus, um es Claude Code hinzuzufügen, oder fügen Sie das JSON der MCP-Konfiguration eines anderen Agenten hinzu."
+  },
+  "remoteTokenCreatedAt": {
+    "message": "Erstellt $1"
+  },
+  "remoteRevoke": {
+    "message": "Widerrufen"
+  },
+  "remotePrivacy": {
+    "message": "Fernzugriff ist aktiv: Diese Erweiterung verbindet sich außerdem mit $1. Darüber laufen die Anfragen Ihrer Agenten und die Antworten dieses Browsers, einschließlich Tab-Titeln, URLs und Seiteninhalten."
   }
 }

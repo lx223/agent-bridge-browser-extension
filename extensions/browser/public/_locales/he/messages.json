@@ -331,5 +331,59 @@
   },
   "askNotificationTitle": {
     "message": "$1 מחכה לתשובה שלך"
+  },
+  "remoteHeading": {
+    "message": "גישה מרחוק"
+  },
+  "remoteToggle": {
+    "message": "לאפשר לסוכנים לגשת לדפדפן הזה דרך שרת ממסר"
+  },
+  "remoteToggleHint": {
+    "message": "לסוכנים במחשב אחר או בענן. שרת הממסר מעביר את הבקשות שלהם לדפדפן הזה ואת התשובות בחזרה, כולל כותרות של כרטיסיות, כתובות URL ותוכן של דפים, לכן כדאי להשתמש רק בשרת ממסר מהימן."
+  },
+  "remoteAddressLabel": {
+    "message": "כתובת שרת הממסר"
+  },
+  "remoteAddressInvalid": {
+    "message": "יש להזין כתובת שמתחילה ב-https://"
+  },
+  "remoteStatusConnected": {
+    "message": "מחובר לשרת הממסר"
+  },
+  "remoteStatusConnecting": {
+    "message": "מתחבר לשרת הממסר…"
+  },
+  "remoteStatusOffline": {
+    "message": "אין גישה לשרת הממסר. מנסה שוב…"
+  },
+  "remoteStatusNoAddress": {
+    "message": "יש להזין את כתובת שרת הממסר כדי להתחבר."
+  },
+  "remoteTokensHeading": {
+    "message": "אסימוני גישה לסוכנים"
+  },
+  "remoteTokensHint": {
+    "message": "כל סוכן צריך אסימון משלו. כל מי שיש לו אסימון יכול לשלוט בדפדפן הזה, לכן כדאי לתת אסימונים רק לסוכנים מהימנים ולבטל אותם כשמפסיקים להשתמש בהם."
+  },
+  "remoteNoTokens": {
+    "message": "אין עדיין אסימונים."
+  },
+  "remoteTokenNamePlaceholder": {
+    "message": "למי הוא מיועד, למשל סוכן בענן"
+  },
+  "remoteCreateToken": {
+    "message": "יצירת אסימון"
+  },
+  "remoteTokenCreatedHint": {
+    "message": "יש להעתיק אותו עכשיו, כי הוא לא יוצג שוב. אפשר להריץ את זה כדי להוסיף אותו ל-Claude Code, או להוסיף את ה-JSON להגדרות ה-MCP של סוכן אחר."
+  },
+  "remoteTokenCreatedAt": {
+    "message": "נוצר $1"
+  },
+  "remoteRevoke": {
+    "message": "ביטול"
+  },
+  "remotePrivacy": {
+    "message": "הגישה מרחוק פעילה: התוסף הזה מתחבר גם אל $1, שמעביר את הבקשות של הסוכנים שלך ואת התשובות של הדפדפן הזה, כולל כותרות של כרטיסיות, כתובות URL ותוכן של דפים."
   }
 }

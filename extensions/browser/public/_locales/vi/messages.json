@@ -319,5 +319,59 @@
   },
   "askNotificationTitle": {
     "message": "$1 cần câu trả lời của bạn"
+  },
+  "remoteHeading": {
+    "message": "Truy cập từ xa"
+  },
+  "remoteToggle": {
+    "message": "Cho phép tác nhân truy cập trình duyệt này qua máy chủ chuyển tiếp"
+  },
+  "remoteToggleHint": {
+    "message": "Dành cho tác nhân trên máy tính khác hoặc trên đám mây. Máy chủ chuyển tiếp chuyển yêu cầu của chúng đến trình duyệt này và gửi phản hồi trở lại, bao gồm tiêu đề và URL của thẻ cũng như nội dung trang, vì vậy chỉ dùng máy chủ chuyển tiếp mà bạn tin tưởng."
+  },
+  "remoteAddressLabel": {
+    "message": "Địa chỉ máy chủ chuyển tiếp"
+  },
+  "remoteAddressInvalid": {
+    "message": "Nhập địa chỉ bắt đầu bằng https://"
+  },
+  "remoteStatusConnected": {
+    "message": "Đã kết nối với máy chủ chuyển tiếp"
+  },
+  "remoteStatusConnecting": {
+    "message": "Đang kết nối với máy chủ chuyển tiếp…"
+  },
+  "remoteStatusOffline": {
+    "message": "Không thể kết nối với máy chủ chuyển tiếp. Đang thử lại…"
+  },
+  "remoteStatusNoAddress": {
+    "message": "Nhập địa chỉ máy chủ chuyển tiếp để kết nối."
+  },
+  "remoteTokensHeading": {
+    "message": "Mã truy cập của tác nhân"
+  },
+  "remoteTokensHint": {
+    "message": "Mỗi tác nhân cần một mã riêng. Bất kỳ ai có mã đều có thể điều khiển trình duyệt này, vì vậy chỉ cấp mã cho tác nhân bạn tin tưởng và thu hồi khi không dùng nữa."
+  },
+  "remoteNoTokens": {
+    "message": "Chưa có mã nào."
+  },
+  "remoteTokenNamePlaceholder": {
+    "message": "Dành cho ai, ví dụ: Tác nhân đám mây"
+  },
+  "remoteCreateToken": {
+    "message": "Tạo mã"
+  },
+  "remoteTokenCreatedHint": {
+    "message": "Hãy sao chép ngay; mã sẽ không hiển thị lại. Chạy lệnh này để thêm vào Claude Code, hoặc thêm JSON vào cấu hình MCP của tác nhân khác."
+  },
+  "remoteTokenCreatedAt": {
+    "message": "Đã tạo $1"
+  },
+  "remoteRevoke": {
+    "message": "Thu hồi"
+  },
+  "remotePrivacy": {
+    "message": "Truy cập từ xa đang bật: tiện ích này cũng kết nối với $1, nơi chuyển tiếp yêu cầu của tác nhân và phản hồi của trình duyệt này, bao gồm tiêu đề và URL của thẻ cũng như nội dung trang."
   }
 }

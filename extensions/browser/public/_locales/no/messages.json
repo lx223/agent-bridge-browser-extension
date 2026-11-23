@@ -319,5 +319,59 @@
   },
   "askNotificationTitle": {
     "message": "$1 trenger svaret ditt"
+  },
+  "remoteHeading": {
+    "message": "Ekstern tilgang"
+  },
+  "remoteToggle": {
+    "message": "La agenter nå denne nettleseren via et relé"
+  },
+  "remoteToggleHint": {
+    "message": "For agenter på en annen datamaskin eller i skyen. Reléet sender forespørslene deres til denne nettleseren og svarene tilbake, inkludert fanetitler, nettadresser og sideinnhold, så bruk bare et relé du stoler på."
+  },
+  "remoteAddressLabel": {
+    "message": "Reléadresse"
+  },
+  "remoteAddressInvalid": {
+    "message": "Skriv inn en adresse som begynner med https://"
+  },
+  "remoteStatusConnected": {
+    "message": "Koblet til reléet"
+  },
+  "remoteStatusConnecting": {
+    "message": "Kobler til reléet…"
+  },
+  "remoteStatusOffline": {
+    "message": "Får ikke kontakt med reléet. Prøver på nytt…"
+  },
+  "remoteStatusNoAddress": {
+    "message": "Skriv inn reléadressen for å koble til."
+  },
+  "remoteTokensHeading": {
+    "message": "Tilgangstokener for agenter"
+  },
+  "remoteTokensHint": {
+    "message": "Hver agent trenger sitt eget token. Alle som har et token, kan styre denne nettleseren, så gi bare tokener til agenter du stoler på, og tilbakekall dem når du slutter å bruke dem."
+  },
+  "remoteNoTokens": {
+    "message": "Ingen tokener ennå."
+  },
+  "remoteTokenNamePlaceholder": {
+    "message": "Hvem det er til, for eksempel Skyagent"
+  },
+  "remoteCreateToken": {
+    "message": "Opprett token"
+  },
+  "remoteTokenCreatedHint": {
+    "message": "Kopier det nå; det vises ikke igjen. Kjør dette for å legge det til i Claude Code, eller legg til JSON-koden i en annen agents MCP-konfigurasjon."
+  },
+  "remoteTokenCreatedAt": {
+    "message": "Opprettet $1"
+  },
+  "remoteRevoke": {
+    "message": "Tilbakekall"
+  },
+  "remotePrivacy": {
+    "message": "Ekstern tilgang er på: Denne utvidelsen kobler seg også til $1, som videresender agentenes forespørsler og denne nettleserens svar, inkludert fanetitler, nettadresser og sideinnhold."
   }
 }

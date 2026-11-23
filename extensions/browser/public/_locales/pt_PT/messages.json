@@ -331,5 +331,59 @@
   },
   "askNotificationTitle": {
     "message": "$1 precisa da sua resposta"
+  },
+  "remoteHeading": {
+    "message": "Acesso remoto"
+  },
+  "remoteToggle": {
+    "message": "Permitir que os agentes acedam a este navegador através de um servidor de retransmissão"
+  },
+  "remoteToggleHint": {
+    "message": "Para agentes noutro computador ou na nuvem. O servidor de retransmissão envia os pedidos deles para este navegador e devolve as respostas, incluindo os títulos e os URLs dos separadores e o conteúdo das páginas, por isso utilize apenas um em que confie."
+  },
+  "remoteAddressLabel": {
+    "message": "Endereço do servidor de retransmissão"
+  },
+  "remoteAddressInvalid": {
+    "message": "Introduza um endereço que comece por https://"
+  },
+  "remoteStatusConnected": {
+    "message": "Ligado ao servidor de retransmissão"
+  },
+  "remoteStatusConnecting": {
+    "message": "A ligar ao servidor de retransmissão…"
+  },
+  "remoteStatusOffline": {
+    "message": "Não é possível aceder ao servidor de retransmissão. A tentar novamente…"
+  },
+  "remoteStatusNoAddress": {
+    "message": "Introduza o endereço do servidor de retransmissão para ligar."
+  },
+  "remoteTokensHeading": {
+    "message": "Tokens de acesso dos agentes"
+  },
+  "remoteTokensHint": {
+    "message": "Cada agente precisa do seu próprio token. Qualquer pessoa com um token pode controlar este navegador, por isso dê tokens apenas a agentes em que confie e revogue-os quando deixar de os utilizar."
+  },
+  "remoteNoTokens": {
+    "message": "Ainda não há tokens."
+  },
+  "remoteTokenNamePlaceholder": {
+    "message": "Para quem é, por exemplo, Agente na nuvem"
+  },
+  "remoteCreateToken": {
+    "message": "Criar token"
+  },
+  "remoteTokenCreatedHint": {
+    "message": "Copie-o agora; não voltará a ser mostrado. Execute isto para o adicionar ao Claude Code ou adicione o JSON à configuração MCP de outro agente."
+  },
+  "remoteTokenCreatedAt": {
+    "message": "Criado $1"
+  },
+  "remoteRevoke": {
+    "message": "Revogar"
+  },
+  "remotePrivacy": {
+    "message": "O acesso remoto está ativado: esta extensão também se liga a $1, que transmite os pedidos dos seus agentes e as respostas deste navegador, incluindo os títulos e os URLs dos separadores e o conteúdo das páginas."
   }
 }

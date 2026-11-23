@@ -319,5 +319,59 @@
   },
   "askNotificationTitle": {
     "message": "$1 menunggu jawapan anda"
+  },
+  "remoteHeading": {
+    "message": "Akses jauh"
+  },
+  "remoteToggle": {
+    "message": "Benarkan ejen mencapai penyemak imbas ini melalui pelayan geganti"
+  },
+  "remoteToggleHint": {
+    "message": "Untuk ejen pada komputer lain atau dalam awan. Pelayan geganti menghantar permintaan mereka kepada penyemak imbas ini dan memulangkan jawapannya, termasuk tajuk dan URL tab serta kandungan halaman, jadi gunakan hanya pelayan geganti yang anda percayai."
+  },
+  "remoteAddressLabel": {
+    "message": "Alamat pelayan geganti"
+  },
+  "remoteAddressInvalid": {
+    "message": "Masukkan alamat yang bermula dengan https://"
+  },
+  "remoteStatusConnected": {
+    "message": "Disambungkan ke pelayan geganti"
+  },
+  "remoteStatusConnecting": {
+    "message": "Menyambung ke pelayan geganti…"
+  },
+  "remoteStatusOffline": {
+    "message": "Tidak dapat mencapai pelayan geganti. Mencuba semula…"
+  },
+  "remoteStatusNoAddress": {
+    "message": "Masukkan alamat pelayan geganti untuk menyambung."
+  },
+  "remoteTokensHeading": {
+    "message": "Token akses ejen"
+  },
+  "remoteTokensHint": {
+    "message": "Setiap ejen memerlukan token sendiri. Sesiapa yang mempunyai token boleh mengawal penyemak imbas ini, jadi berikan token kepada ejen yang anda percayai sahaja dan batalkannya apabila anda berhenti menggunakannya."
+  },
+  "remoteNoTokens": {
+    "message": "Belum ada token."
+  },
+  "remoteTokenNamePlaceholder": {
+    "message": "Untuk siapa, contohnya Ejen awan"
+  },
+  "remoteCreateToken": {
+    "message": "Cipta token"
+  },
+  "remoteTokenCreatedHint": {
+    "message": "Salin sekarang; token ini tidak akan dipaparkan lagi. Jalankan ini untuk menambahkannya pada Claude Code, atau tambahkan JSON pada konfigurasi MCP ejen lain."
+  },
+  "remoteTokenCreatedAt": {
+    "message": "Dicipta $1"
+  },
+  "remoteRevoke": {
+    "message": "Batalkan"
+  },
+  "remotePrivacy": {
+    "message": "Akses jauh dihidupkan: sambungan ini juga berhubung dengan $1, yang menghantar permintaan ejen anda dan jawapan penyemak imbas ini, termasuk tajuk dan URL tab serta kandungan halaman."
   }
 }

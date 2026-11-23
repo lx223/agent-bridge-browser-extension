@@ -367,5 +367,59 @@
   },
   "askNotificationTitle": {
     "message": "$1 بحاجة إلى إجابتك"
+  },
+  "remoteHeading": {
+    "message": "الوصول عن بُعد"
+  },
+  "remoteToggle": {
+    "message": "السماح للوكلاء بالوصول إلى هذا المتصفح عبر خادم ترحيل"
+  },
+  "remoteToggleHint": {
+    "message": "للوكلاء على جهاز كمبيوتر آخر أو في السحابة. ينقل خادم الترحيل طلباتهم إلى هذا المتصفح ويعيد الردود إليهم، بما في ذلك عناوين علامات التبويب وعناوين URL ومحتوى الصفحات، لذا لا تستخدم إلا خادم ترحيل تثق به."
+  },
+  "remoteAddressLabel": {
+    "message": "عنوان خادم الترحيل"
+  },
+  "remoteAddressInvalid": {
+    "message": "أدخِل عنوانًا يبدأ بـ https://"
+  },
+  "remoteStatusConnected": {
+    "message": "متصل بخادم الترحيل"
+  },
+  "remoteStatusConnecting": {
+    "message": "جارٍ الاتصال بخادم الترحيل…"
+  },
+  "remoteStatusOffline": {
+    "message": "تعذّر الوصول إلى خادم الترحيل. جارٍ إعادة المحاولة…"
+  },
+  "remoteStatusNoAddress": {
+    "message": "أدخِل عنوان خادم الترحيل للاتصال."
+  },
+  "remoteTokensHeading": {
+    "message": "رموز وصول الوكلاء"
+  },
+  "remoteTokensHint": {
+    "message": "يحتاج كل وكيل إلى رمز خاص به. يمكن لأي شخص لديه رمز التحكم في هذا المتصفح، لذا لا تمنح الرموز إلا لوكلاء تثق بهم، وأبطِلها عندما تتوقف عن استخدامها."
+  },
+  "remoteNoTokens": {
+    "message": "لا توجد رموز بعد."
+  },
+  "remoteTokenNamePlaceholder": {
+    "message": "لمن هو، مثل وكيل السحابة"
+  },
+  "remoteCreateToken": {
+    "message": "إنشاء رمز"
+  },
+  "remoteTokenCreatedHint": {
+    "message": "انسخه الآن، فلن يظهر مرة أخرى. شغّل هذا الأمر لإضافته إلى Claude Code، أو أضِف JSON إلى إعدادات MCP لوكيل آخر."
+  },
+  "remoteTokenCreatedAt": {
+    "message": "أُنشئ $1"
+  },
+  "remoteRevoke": {
+    "message": "إبطال"
+  },
+  "remotePrivacy": {
+    "message": "الوصول عن بُعد مفعَّل: تتصل هذه الإضافة أيضًا بـ $1، الذي ينقل طلبات الوكلاء وردود هذا المتصفح، بما في ذلك عناوين علامات التبويب وعناوين URL ومحتوى الصفحات."
   }
 }

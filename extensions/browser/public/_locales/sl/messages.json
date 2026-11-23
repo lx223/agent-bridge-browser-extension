@@ -343,5 +343,59 @@
   },
   "askNotificationTitle": {
     "message": "$1 čaka na vaš odgovor"
+  },
+  "remoteHeading": {
+    "message": "Oddaljeni dostop"
+  },
+  "remoteToggle": {
+    "message": "Agentom dovoli dostop do tega brskalnika prek posredniškega strežnika"
+  },
+  "remoteToggleHint": {
+    "message": "Za agente v drugem računalniku ali v oblaku. Posredniški strežnik posreduje njihove zahteve temu brskalniku in odgovore nazaj, vključno z naslovi in URL-ji zavihkov ter vsebino strani, zato uporabljajte samo strežnik, ki mu zaupate."
+  },
+  "remoteAddressLabel": {
+    "message": "Naslov posredniškega strežnika"
+  },
+  "remoteAddressInvalid": {
+    "message": "Vnesite naslov, ki se začne s https://"
+  },
+  "remoteStatusConnected": {
+    "message": "Povezano s posredniškim strežnikom"
+  },
+  "remoteStatusConnecting": {
+    "message": "Povezovanje s posredniškim strežnikom …"
+  },
+  "remoteStatusOffline": {
+    "message": "Posredniški strežnik ni dosegljiv. Ponovni poskus …"
+  },
+  "remoteStatusNoAddress": {
+    "message": "Za povezavo vnesite naslov posredniškega strežnika."
+  },
+  "remoteTokensHeading": {
+    "message": "Žetoni za dostop agentov"
+  },
+  "remoteTokensHint": {
+    "message": "Vsak agent potrebuje svoj žeton. Kdor ima žeton, lahko upravlja ta brskalnik, zato žetone dajte samo agentom, ki jim zaupate, in jih prekličite, ko jih ne uporabljate več."
+  },
+  "remoteNoTokens": {
+    "message": "Še ni žetonov."
+  },
+  "remoteTokenNamePlaceholder": {
+    "message": "Za koga je, npr. Agent v oblaku"
+  },
+  "remoteCreateToken": {
+    "message": "Ustvari žeton"
+  },
+  "remoteTokenCreatedHint": {
+    "message": "Kopirajte ga zdaj, ker ne bo več prikazan. Zaženite to, da ga dodate v Claude Code, ali dodajte JSON v konfiguracijo MCP drugega agenta."
+  },
+  "remoteTokenCreatedAt": {
+    "message": "Ustvarjen $1"
+  },
+  "remoteRevoke": {
+    "message": "Prekliči"
+  },
+  "remotePrivacy": {
+    "message": "Oddaljeni dostop je vklopljen: ta razširitev se poveže tudi z naslovom $1, ki posreduje zahteve vaših agentov in odgovore tega brskalnika, vključno z naslovi in URL-ji zavihkov ter vsebino strani."
   }
 }
