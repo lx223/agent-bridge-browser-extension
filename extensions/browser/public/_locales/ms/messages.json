@@ -347,30 +347,6 @@
   "remoteStatusNoAddress": {
     "message": "Masukkan alamat pelayan geganti untuk menyambung."
   },
-  "remoteTokensHeading": {
-    "message": "Token akses ejen"
-  },
-  "remoteTokensHint": {
-    "message": "Setiap ejen memerlukan token sendiri. Sesiapa yang mempunyai token boleh mengawal penyemak imbas ini, jadi berikan token kepada ejen yang anda percayai sahaja dan batalkannya apabila anda berhenti menggunakannya."
-  },
-  "remoteNoTokens": {
-    "message": "Belum ada token."
-  },
-  "remoteTokenNamePlaceholder": {
-    "message": "Untuk siapa, contohnya Ejen awan"
-  },
-  "remoteCreateToken": {
-    "message": "Cipta token"
-  },
-  "remoteTokenCreatedHint": {
-    "message": "Salin sekarang; token ini tidak akan dipaparkan lagi. Jalankan ini untuk menambahkannya pada Claude Code, atau tambahkan JSON pada konfigurasi MCP ejen lain."
-  },
-  "remoteTokenCreatedAt": {
-    "message": "Dicipta $1"
-  },
-  "remoteRevoke": {
-    "message": "Batalkan"
-  },
   "remotePrivacy": {
     "message": "Akses jauh dihidupkan: sambungan ini juga berhubung dengan $1, yang menghantar permintaan ejen anda dan jawapan penyemak imbas ini, termasuk tajuk dan URL tab serta kandungan halaman."
   }

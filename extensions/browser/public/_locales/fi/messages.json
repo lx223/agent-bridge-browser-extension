@@ -347,30 +347,6 @@
   "remoteStatusNoAddress": {
     "message": "Yhdistä antamalla välityspalvelimen osoite."
   },
-  "remoteTokensHeading": {
-    "message": "Agenttien käyttöoikeustunnukset"
-  },
-  "remoteTokensHint": {
-    "message": "Jokainen agentti tarvitsee oman tunnuksen. Kuka tahansa, jolla on tunnus, voi ohjata tätä selainta, joten anna tunnuksia vain agenteille, joihin luotat, ja peruuta ne, kun lopetat niiden käytön."
-  },
-  "remoteNoTokens": {
-    "message": "Ei vielä tunnuksia."
-  },
-  "remoteTokenNamePlaceholder": {
-    "message": "Kenelle, esim. Pilviagentti"
-  },
-  "remoteCreateToken": {
-    "message": "Luo tunnus"
-  },
-  "remoteTokenCreatedHint": {
-    "message": "Kopioi se nyt, sillä sitä ei näytetä uudelleen. Lisää se Claude Codeen suorittamalla tämä tai lisää JSON toisen agentin MCP-määrityksiin."
-  },
-  "remoteTokenCreatedAt": {
-    "message": "Luotu $1"
-  },
-  "remoteRevoke": {
-    "message": "Peruuta"
-  },
   "remotePrivacy": {
     "message": "Etäkäyttö on päällä: tämä laajennus muodostaa yhteyden myös osoitteeseen $1, joka välittää agenttiesi pyynnöt ja tämän selaimen vastaukset, mukaan lukien välilehtien otsikot ja URL-osoitteet sekä sivujen sisällön."
   }

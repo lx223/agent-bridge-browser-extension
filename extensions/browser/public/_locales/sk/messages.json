@@ -371,30 +371,6 @@
   "remoteStatusNoAddress": {
     "message": "Na pripojenie zadajte adresu prenosového servera."
   },
-  "remoteTokensHeading": {
-    "message": "Prístupové tokeny agentov"
-  },
-  "remoteTokensHint": {
-    "message": "Každý agent potrebuje vlastný token. Ktokoľvek s tokenom môže ovládať tento prehliadač, preto dávajte tokeny iba agentom, ktorým dôverujete, a odvolajte ich, keď ich prestanete používať."
-  },
-  "remoteNoTokens": {
-    "message": "Zatiaľ žiadne tokeny."
-  },
-  "remoteTokenNamePlaceholder": {
-    "message": "Pre koho je, napr. Cloudový agent"
-  },
-  "remoteCreateToken": {
-    "message": "Vytvoriť token"
-  },
-  "remoteTokenCreatedHint": {
-    "message": "Skopírujte ho teraz, znova sa nezobrazí. Spustite toto, aby ste ho pridali do Claude Code, alebo pridajte JSON do konfigurácie MCP iného agenta."
-  },
-  "remoteTokenCreatedAt": {
-    "message": "Vytvorené $1"
-  },
-  "remoteRevoke": {
-    "message": "Odvolať"
-  },
   "remotePrivacy": {
     "message": "Vzdialený prístup je zapnutý: toto rozšírenie sa pripája aj k $1, ktorý odovzdáva požiadavky vašich agentov a odpovede tohto prehliadača vrátane názvov a webových adries kariet a obsahu stránok."
   }

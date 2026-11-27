@@ -347,30 +347,6 @@
   "remoteStatusNoAddress": {
     "message": "ለመገናኘት የአስተላላፊ አገልጋዩን አድራሻ ያስገቡ።"
   },
-  "remoteTokensHeading": {
-    "message": "የወኪል መዳረሻ ቶከኖች"
-  },
-  "remoteTokensHint": {
-    "message": "እያንዳንዱ ወኪል የራሱ ቶከን ያስፈልገዋል። ቶከን ያለው ማንኛውም ሰው ይህን አሳሽ መቆጣጠር ይችላል፤ ስለዚህ ቶከኖችን ለሚያምኗቸው ወኪሎች ብቻ ይስጡ፣ መጠቀም ሲያቆሙም ይሻሯቸው።"
-  },
-  "remoteNoTokens": {
-    "message": "እስካሁን ምንም ቶከኖች የሉም።"
-  },
-  "remoteTokenNamePlaceholder": {
-    "message": "ለማን እንደሆነ፣ ለምሳሌ የደመና ወኪል"
-  },
-  "remoteCreateToken": {
-    "message": "ቶከን ፍጠር"
-  },
-  "remoteTokenCreatedHint": {
-    "message": "አሁኑኑ ይቅዱት፤ ዳግም አይታይም። ወደ Claude Code ለማከል ይህን ያሂዱ፣ ወይም JSONን ወደ ሌላ ወኪል የMCP ውቅር ያክሉ።"
-  },
-  "remoteTokenCreatedAt": {
-    "message": "$1 ተፈጥሯል"
-  },
-  "remoteRevoke": {
-    "message": "ሻር"
-  },
   "remotePrivacy": {
     "message": "የርቀት መዳረሻ በርቷል፦ ይህ ቅጥያ ከ$1 ጋርም ይገናኛል፤ እሱም የወኪሎችዎን ጥያቄዎች እና የዚህን አሳሽ ምላሾች ያስተላልፋል፣ የትር ርዕሶችን፣ ዩአርኤሎችን እና የገጽ ይዘቶችን ጨምሮ።"
   }

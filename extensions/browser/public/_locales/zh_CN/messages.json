@@ -347,30 +347,6 @@
   "remoteStatusNoAddress": {
     "message": "请输入中继服务器地址以连接。"
   },
-  "remoteTokensHeading": {
-    "message": "智能体访问令牌"
-  },
-  "remoteTokensHint": {
-    "message": "每个智能体都需要单独的令牌。任何持有令牌的人都能控制此浏览器，因此请只把令牌交给您信任的智能体，并在不再使用时将其撤销。"
-  },
-  "remoteNoTokens": {
-    "message": "还没有令牌。"
-  },
-  "remoteTokenNamePlaceholder": {
-    "message": "用途，例如“云端智能体”"
-  },
-  "remoteCreateToken": {
-    "message": "创建令牌"
-  },
-  "remoteTokenCreatedHint": {
-    "message": "请立即复制，它不会再次显示。运行此命令可将其添加到 Claude Code，或将 JSON 添加到其他智能体的 MCP 配置中。"
-  },
-  "remoteTokenCreatedAt": {
-    "message": "$1创建"
-  },
-  "remoteRevoke": {
-    "message": "撤销"
-  },
   "remotePrivacy": {
     "message": "远程访问已开启：此扩展程序还会连接到 $1，由它转发您的智能体发出的请求和此浏览器的响应，其中包括标签页标题、网址和网页内容。"
   }

@@ -359,30 +359,6 @@
   "remoteStatusNoAddress": {
     "message": "יש להזין את כתובת שרת הממסר כדי להתחבר."
   },
-  "remoteTokensHeading": {
-    "message": "אסימוני גישה לסוכנים"
-  },
-  "remoteTokensHint": {
-    "message": "כל סוכן צריך אסימון משלו. כל מי שיש לו אסימון יכול לשלוט בדפדפן הזה, לכן כדאי לתת אסימונים רק לסוכנים מהימנים ולבטל אותם כשמפסיקים להשתמש בהם."
-  },
-  "remoteNoTokens": {
-    "message": "אין עדיין אסימונים."
-  },
-  "remoteTokenNamePlaceholder": {
-    "message": "למי הוא מיועד, למשל סוכן בענן"
-  },
-  "remoteCreateToken": {
-    "message": "יצירת אסימון"
-  },
-  "remoteTokenCreatedHint": {
-    "message": "יש להעתיק אותו עכשיו, כי הוא לא יוצג שוב. אפשר להריץ את זה כדי להוסיף אותו ל-Claude Code, או להוסיף את ה-JSON להגדרות ה-MCP של סוכן אחר."
-  },
-  "remoteTokenCreatedAt": {
-    "message": "נוצר $1"
-  },
-  "remoteRevoke": {
-    "message": "ביטול"
-  },
   "remotePrivacy": {
     "message": "הגישה מרחוק פעילה: התוסף הזה מתחבר גם אל $1, שמעביר את הבקשות של הסוכנים שלך ואת התשובות של הדפדפן הזה, כולל כותרות של כרטיסיות, כתובות URL ותוכן של דפים."
   }

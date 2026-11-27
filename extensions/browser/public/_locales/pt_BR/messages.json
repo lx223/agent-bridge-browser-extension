@@ -359,30 +359,6 @@
   "remoteStatusNoAddress": {
     "message": "Insira o endereço do servidor de retransmissão para conectar."
   },
-  "remoteTokensHeading": {
-    "message": "Tokens de acesso de agentes"
-  },
-  "remoteTokensHint": {
-    "message": "Cada agente precisa do próprio token. Qualquer pessoa com um token pode controlar este navegador, então só dê tokens a agentes em que você confia e revogue-os quando parar de usá-los."
-  },
-  "remoteNoTokens": {
-    "message": "Nenhum token ainda."
-  },
-  "remoteTokenNamePlaceholder": {
-    "message": "Para quem é, como Agente na nuvem"
-  },
-  "remoteCreateToken": {
-    "message": "Criar token"
-  },
-  "remoteTokenCreatedHint": {
-    "message": "Copie agora; ele não será mostrado de novo. Execute isto para adicioná-lo ao Claude Code ou adicione o JSON à configuração MCP de outro agente."
-  },
-  "remoteTokenCreatedAt": {
-    "message": "Criado $1"
-  },
-  "remoteRevoke": {
-    "message": "Revogar"
-  },
   "remotePrivacy": {
     "message": "O acesso remoto está ativado: esta extensão também se conecta a $1, que transmite as solicitações dos seus agentes e as respostas deste navegador, incluindo títulos e URLs das guias e conteúdo das páginas."
   }

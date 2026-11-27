@@ -347,30 +347,6 @@
   "remoteStatusNoAddress": {
     "message": "Ilagay ang address ng relay para kumonekta."
   },
-  "remoteTokensHeading": {
-    "message": "Mga access token ng agent"
-  },
-  "remoteTokensHint": {
-    "message": "Kailangan ng bawat agent ang sarili nitong token. Makokontrol ng sinumang may token ang browser na ito, kaya magbigay lang ng token sa mga agent na pinagkakatiwalaan mo at bawiin ang mga ito kapag hindi mo na ginagamit."
-  },
-  "remoteNoTokens": {
-    "message": "Wala pang token."
-  },
-  "remoteTokenNamePlaceholder": {
-    "message": "Para kanino, gaya ng Cloud agent"
-  },
-  "remoteCreateToken": {
-    "message": "Gumawa ng token"
-  },
-  "remoteTokenCreatedHint": {
-    "message": "Kopyahin ito ngayon; hindi na ito ipapakita ulit. Patakbuhin ito para idagdag sa Claude Code, o idagdag ang JSON sa MCP config ng ibang agent."
-  },
-  "remoteTokenCreatedAt": {
-    "message": "Ginawa $1"
-  },
-  "remoteRevoke": {
-    "message": "Bawiin"
-  },
   "remotePrivacy": {
     "message": "Naka-on ang remote na access: kumokonekta rin ang extension na ito sa $1, na nagpapasa ng mga request ng iyong mga agent at ng mga sagot ng browser na ito, kasama ang mga pamagat at URL ng tab at nilalaman ng page."
   }

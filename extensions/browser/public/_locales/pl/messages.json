@@ -371,30 +371,6 @@
   "remoteStatusNoAddress": {
     "message": "Wpisz adres serwera przekaźnikowego, aby się połączyć."
   },
-  "remoteTokensHeading": {
-    "message": "Tokeny dostępu agentów"
-  },
-  "remoteTokensHint": {
-    "message": "Każdy agent potrzebuje własnego tokena. Każdy, kto ma token, może sterować tą przeglądarką, więc dawaj tokeny tylko agentom, którym ufasz, i unieważniaj je, gdy przestaniesz ich używać."
-  },
-  "remoteNoTokens": {
-    "message": "Nie ma jeszcze tokenów."
-  },
-  "remoteTokenNamePlaceholder": {
-    "message": "Dla kogo, np. Agent w chmurze"
-  },
-  "remoteCreateToken": {
-    "message": "Utwórz token"
-  },
-  "remoteTokenCreatedHint": {
-    "message": "Skopiuj go teraz – nie zostanie wyświetlony ponownie. Uruchom to, aby dodać go do Claude Code, lub dodaj JSON do konfiguracji MCP innego agenta."
-  },
-  "remoteTokenCreatedAt": {
-    "message": "Utworzono $1"
-  },
-  "remoteRevoke": {
-    "message": "Unieważnij"
-  },
   "remotePrivacy": {
     "message": "Dostęp zdalny jest włączony: to rozszerzenie łączy się też z $1, który przekazuje żądania Twoich agentów i odpowiedzi tej przeglądarki, w tym tytuły i adresy URL kart oraz zawartość stron."
   }

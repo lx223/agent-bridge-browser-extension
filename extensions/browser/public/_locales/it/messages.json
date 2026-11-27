@@ -359,30 +359,6 @@
   "remoteStatusNoAddress": {
     "message": "Inserisci l'indirizzo del relay per connetterti."
   },
-  "remoteTokensHeading": {
-    "message": "Token di accesso degli agenti"
-  },
-  "remoteTokensHint": {
-    "message": "Ogni agente ha bisogno del proprio token. Chiunque abbia un token può controllare questo browser, quindi dai i token solo ad agenti di cui ti fidi e revocali quando smetti di usarli."
-  },
-  "remoteNoTokens": {
-    "message": "Ancora nessun token."
-  },
-  "remoteTokenNamePlaceholder": {
-    "message": "Per chi è, ad esempio Agente cloud"
-  },
-  "remoteCreateToken": {
-    "message": "Crea token"
-  },
-  "remoteTokenCreatedHint": {
-    "message": "Copialo ora: non verrà mostrato di nuovo. Esegui questo comando per aggiungerlo a Claude Code, oppure aggiungi il JSON alla configurazione MCP di un altro agente."
-  },
-  "remoteTokenCreatedAt": {
-    "message": "Creato $1"
-  },
-  "remoteRevoke": {
-    "message": "Revoca"
-  },
   "remotePrivacy": {
     "message": "L'accesso remoto è attivo: questa estensione si connette anche a $1, che inoltra le richieste dei tuoi agenti e le risposte di questo browser, inclusi titoli e URL delle schede e contenuti delle pagine."
   }

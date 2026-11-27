@@ -347,30 +347,6 @@
   "remoteStatusNoAddress": {
     "message": "Nhập địa chỉ máy chủ chuyển tiếp để kết nối."
   },
-  "remoteTokensHeading": {
-    "message": "Mã truy cập của tác nhân"
-  },
-  "remoteTokensHint": {
-    "message": "Mỗi tác nhân cần một mã riêng. Bất kỳ ai có mã đều có thể điều khiển trình duyệt này, vì vậy chỉ cấp mã cho tác nhân bạn tin tưởng và thu hồi khi không dùng nữa."
-  },
-  "remoteNoTokens": {
-    "message": "Chưa có mã nào."
-  },
-  "remoteTokenNamePlaceholder": {
-    "message": "Dành cho ai, ví dụ: Tác nhân đám mây"
-  },
-  "remoteCreateToken": {
-    "message": "Tạo mã"
-  },
-  "remoteTokenCreatedHint": {
-    "message": "Hãy sao chép ngay; mã sẽ không hiển thị lại. Chạy lệnh này để thêm vào Claude Code, hoặc thêm JSON vào cấu hình MCP của tác nhân khác."
-  },
-  "remoteTokenCreatedAt": {
-    "message": "Đã tạo $1"
-  },
-  "remoteRevoke": {
-    "message": "Thu hồi"
-  },
   "remotePrivacy": {
     "message": "Truy cập từ xa đang bật: tiện ích này cũng kết nối với $1, nơi chuyển tiếp yêu cầu của tác nhân và phản hồi của trình duyệt này, bao gồm tiêu đề và URL của thẻ cũng như nội dung trang."
   }

@@ -359,30 +359,6 @@
   "remoteStatusNoAddress": {
     "message": "Lai izveidotu savienojumu, ievadiet retranslācijas servera adresi."
   },
-  "remoteTokensHeading": {
-    "message": "Aģentu piekļuves marķieri"
-  },
-  "remoteTokensHint": {
-    "message": "Katram aģentam nepieciešams savs marķieris. Ikviens, kam ir marķieris, var vadīt šo pārlūkprogrammu, tāpēc dodiet marķierus tikai aģentiem, kuriem uzticaties, un atsauciet tos, kad vairs tos neizmantojat."
-  },
-  "remoteNoTokens": {
-    "message": "Vēl nav marķieru."
-  },
-  "remoteTokenNamePlaceholder": {
-    "message": "Kam tas paredzēts, piem., Mākoņa aģents"
-  },
-  "remoteCreateToken": {
-    "message": "Izveidot marķieri"
-  },
-  "remoteTokenCreatedHint": {
-    "message": "Nokopējiet to tagad — tas vairs netiks rādīts. Palaidiet šo, lai to pievienotu Claude Code, vai pievienojiet JSON cita aģenta MCP konfigurācijai."
-  },
-  "remoteTokenCreatedAt": {
-    "message": "Izveidots $1"
-  },
-  "remoteRevoke": {
-    "message": "Atsaukt"
-  },
   "remotePrivacy": {
     "message": "Attālā piekļuve ir ieslēgta: šis paplašinājums savienojas arī ar $1, kas nodod jūsu aģentu pieprasījumus un šīs pārlūkprogrammas atbildes, tostarp ciļņu nosaukumus, URL un lapu saturu."
   }

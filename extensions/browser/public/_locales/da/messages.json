@@ -347,30 +347,6 @@
   "remoteStatusNoAddress": {
     "message": "Angiv relæadressen for at oprette forbindelse."
   },
-  "remoteTokensHeading": {
-    "message": "Adgangstokens til agenter"
-  },
-  "remoteTokensHint": {
-    "message": "Hver agent skal have sit eget token. Alle med et token kan styre denne browser, så giv kun tokens til agenter, du har tillid til, og tilbagekald dem, når du holder op med at bruge dem."
-  },
-  "remoteNoTokens": {
-    "message": "Ingen tokens endnu."
-  },
-  "remoteTokenNamePlaceholder": {
-    "message": "Hvem det er til, f.eks. Cloudagent"
-  },
-  "remoteCreateToken": {
-    "message": "Opret token"
-  },
-  "remoteTokenCreatedHint": {
-    "message": "Kopiér det nu; det vises ikke igen. Kør dette for at føje det til Claude Code, eller føj JSON-koden til en anden agents MCP-konfiguration."
-  },
-  "remoteTokenCreatedAt": {
-    "message": "Oprettet $1"
-  },
-  "remoteRevoke": {
-    "message": "Tilbagekald"
-  },
   "remotePrivacy": {
     "message": "Fjernadgang er slået til: Udvidelsen forbinder også til $1, som videresender dine agenters anmodninger og denne browsers svar, herunder fanetitler, webadresser og sideindhold."
   }

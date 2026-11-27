@@ -395,30 +395,6 @@
   "remoteStatusNoAddress": {
     "message": "أدخِل عنوان خادم الترحيل للاتصال."
   },
-  "remoteTokensHeading": {
-    "message": "رموز وصول الوكلاء"
-  },
-  "remoteTokensHint": {
-    "message": "يحتاج كل وكيل إلى رمز خاص به. يمكن لأي شخص لديه رمز التحكم في هذا المتصفح، لذا لا تمنح الرموز إلا لوكلاء تثق بهم، وأبطِلها عندما تتوقف عن استخدامها."
-  },
-  "remoteNoTokens": {
-    "message": "لا توجد رموز بعد."
-  },
-  "remoteTokenNamePlaceholder": {
-    "message": "لمن هو، مثل وكيل السحابة"
-  },
-  "remoteCreateToken": {
-    "message": "إنشاء رمز"
-  },
-  "remoteTokenCreatedHint": {
-    "message": "انسخه الآن، فلن يظهر مرة أخرى. شغّل هذا الأمر لإضافته إلى Claude Code، أو أضِف JSON إلى إعدادات MCP لوكيل آخر."
-  },
-  "remoteTokenCreatedAt": {
-    "message": "أُنشئ $1"
-  },
-  "remoteRevoke": {
-    "message": "إبطال"
-  },
   "remotePrivacy": {
     "message": "الوصول عن بُعد مفعَّل: تتصل هذه الإضافة أيضًا بـ $1، الذي ينقل طلبات الوكلاء وردود هذا المتصفح، بما في ذلك عناوين علامات التبويب وعناوين URL ومحتوى الصفحات."
   }

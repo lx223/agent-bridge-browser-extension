@@ -359,30 +359,6 @@
   "remoteStatusNoAddress": {
     "message": "Saisissez l'adresse du relais pour vous connecter."
   },
-  "remoteTokensHeading": {
-    "message": "Jetons d'accès des agents"
-  },
-  "remoteTokensHint": {
-    "message": "Chaque agent a besoin de son propre jeton. Toute personne disposant d'un jeton peut contrôler ce navigateur : ne donnez des jetons qu'à des agents de confiance et révoquez-les quand vous ne les utilisez plus."
-  },
-  "remoteNoTokens": {
-    "message": "Aucun jeton pour l'instant."
-  },
-  "remoteTokenNamePlaceholder": {
-    "message": "Pour qui, par exemple Agent cloud"
-  },
-  "remoteCreateToken": {
-    "message": "Créer un jeton"
-  },
-  "remoteTokenCreatedHint": {
-    "message": "Copiez-le maintenant : il ne sera plus affiché. Exécutez ceci pour l'ajouter à Claude Code, ou ajoutez le JSON à la configuration MCP d'un autre agent."
-  },
-  "remoteTokenCreatedAt": {
-    "message": "Créé $1"
-  },
-  "remoteRevoke": {
-    "message": "Révoquer"
-  },
   "remotePrivacy": {
     "message": "L'accès à distance est activé : cette extension se connecte aussi à $1, qui transmet les requêtes de vos agents et les réponses de ce navigateur, y compris les titres et URL des onglets et le contenu des pages."
   }

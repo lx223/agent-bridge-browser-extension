@@ -359,30 +359,6 @@
   "remoteStatusNoAddress": {
     "message": "Unesite adresu relejnog poslužitelja za povezivanje."
   },
-  "remoteTokensHeading": {
-    "message": "Pristupni tokeni agenata"
-  },
-  "remoteTokensHint": {
-    "message": "Svakom agentu treba vlastiti token. Svatko s tokenom može upravljati ovim preglednikom, stoga tokene dajte samo agentima kojima vjerujete i opozovite ih kada ih prestanete koristiti."
-  },
-  "remoteNoTokens": {
-    "message": "Još nema tokena."
-  },
-  "remoteTokenNamePlaceholder": {
-    "message": "Za koga je, npr. Agent u oblaku"
-  },
-  "remoteCreateToken": {
-    "message": "Izradi token"
-  },
-  "remoteTokenCreatedHint": {
-    "message": "Kopirajte ga sada jer se više neće prikazati. Pokrenite ovo da biste ga dodali u Claude Code ili dodajte JSON u MCP konfiguraciju drugog agenta."
-  },
-  "remoteTokenCreatedAt": {
-    "message": "Izrađen $1"
-  },
-  "remoteRevoke": {
-    "message": "Opozovi"
-  },
   "remotePrivacy": {
     "message": "Udaljeni pristup je uključen: ovo proširenje povezuje se i s $1, koji prosljeđuje zahtjeve vaših agenata i odgovore ovog preglednika, uključujući naslove i URL-ove kartica te sadržaj stranica."
   }

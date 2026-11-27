@@ -347,30 +347,6 @@
   "remoteStatusNoAddress": {
     "message": "Voer het relayadres in om verbinding te maken."
   },
-  "remoteTokensHeading": {
-    "message": "Toegangstokens voor agents"
-  },
-  "remoteTokensHint": {
-    "message": "Elke agent heeft een eigen token nodig. Iedereen met een token kan deze browser bedienen, dus geef tokens alleen aan agents die je vertrouwt en trek ze in als je ze niet meer gebruikt."
-  },
-  "remoteNoTokens": {
-    "message": "Nog geen tokens."
-  },
-  "remoteTokenNamePlaceholder": {
-    "message": "Voor wie, bijvoorbeeld Cloudagent"
-  },
-  "remoteCreateToken": {
-    "message": "Token maken"
-  },
-  "remoteTokenCreatedHint": {
-    "message": "Kopieer het nu; het wordt niet opnieuw getoond. Voer dit uit om het aan Claude Code toe te voegen, of voeg de JSON toe aan de MCP-configuratie van een andere agent."
-  },
-  "remoteTokenCreatedAt": {
-    "message": "Gemaakt $1"
-  },
-  "remoteRevoke": {
-    "message": "Intrekken"
-  },
   "remotePrivacy": {
     "message": "Externe toegang staat aan: deze extensie maakt ook verbinding met $1, dat de verzoeken van je agents en de antwoorden van deze browser doorstuurt, inclusief titels en URL's van tabbladen en pagina-inhoud."
   }

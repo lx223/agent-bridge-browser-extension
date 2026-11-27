@@ -371,30 +371,6 @@
   "remoteStatusNoAddress": {
     "message": "Įveskite perdavimo serverio adresą, kad prisijungtumėte."
   },
-  "remoteTokensHeading": {
-    "message": "Agentų prieigos raktai"
-  },
-  "remoteTokensHint": {
-    "message": "Kiekvienam agentui reikia atskiro rakto. Bet kas, turintis raktą, gali valdyti šią naršyklę, todėl raktus duokite tik patikimiems agentams ir atšaukite juos, kai nustosite naudoti."
-  },
-  "remoteNoTokens": {
-    "message": "Raktų dar nėra."
-  },
-  "remoteTokenNamePlaceholder": {
-    "message": "Kam skirtas, pvz., Debesies agentas"
-  },
-  "remoteCreateToken": {
-    "message": "Sukurti raktą"
-  },
-  "remoteTokenCreatedHint": {
-    "message": "Nukopijuokite jį dabar – jis daugiau nebus rodomas. Paleiskite tai, kad pridėtumėte jį prie Claude Code, arba pridėkite JSON prie kito agento MCP konfigūracijos."
-  },
-  "remoteTokenCreatedAt": {
-    "message": "Sukurta $1"
-  },
-  "remoteRevoke": {
-    "message": "Atšaukti"
-  },
   "remotePrivacy": {
     "message": "Nuotolinė prieiga įjungta: šis plėtinys taip pat jungiasi prie $1, kuris perduoda jūsų agentų užklausas ir šios naršyklės atsakymus, įskaitant skirtukų pavadinimus, URL ir puslapių turinį."
   }

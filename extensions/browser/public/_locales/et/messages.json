@@ -347,30 +347,6 @@
   "remoteStatusNoAddress": {
     "message": "Ühendamiseks sisestage vahendusserveri aadress."
   },
-  "remoteTokensHeading": {
-    "message": "Agentide pääsuload"
-  },
-  "remoteTokensHint": {
-    "message": "Iga agent vajab oma pääsuluba. Igaüks, kellel on pääsuluba, saab seda brauserit juhtida, seega andke pääsuload ainult agentidele, keda usaldate, ja tühistage need, kui te neid enam ei kasuta."
-  },
-  "remoteNoTokens": {
-    "message": "Pääsulube veel pole."
-  },
-  "remoteTokenNamePlaceholder": {
-    "message": "Kellele, nt Pilveagent"
-  },
-  "remoteCreateToken": {
-    "message": "Loo pääsuluba"
-  },
-  "remoteTokenCreatedHint": {
-    "message": "Kopeerige see kohe, sest seda ei näidata uuesti. Käivitage see käsk, et lisada pääsuluba Claude Code'i, või lisage JSON mõne teise agendi MCP konfiguratsiooni."
-  },
-  "remoteTokenCreatedAt": {
-    "message": "Loodud $1"
-  },
-  "remoteRevoke": {
-    "message": "Tühista"
-  },
   "remotePrivacy": {
     "message": "Kaugjuurdepääs on sees: see laiendus ühendub ka aadressiga $1, mis edastab teie agentide päringud ja selle brauseri vastused, sealhulgas vahelehtede pealkirjad, URL-id ja lehtede sisu."
   }
