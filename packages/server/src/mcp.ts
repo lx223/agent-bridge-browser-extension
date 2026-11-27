@@ -131,7 +131,7 @@ export function createMcpServer(bridge: ExtensionBridge, version: string, { prog
           annotations: {
             readOnlyHint: def.readOnly,
             destructiveHint: 'destructive' in def ? def.destructive : false,
-            openWorldHint: method.startsWith('page.') || method.startsWith('cdp.') || opensPages.has(method),
+            openWorldHint: method.startsWith('page.') || method.startsWith('cdp.') || method.startsWith('scripting.') || opensPages.has(method),
           },
         },
         async ({ instance, ...params }: { instance?: string }, extra: ToolExtra) => {

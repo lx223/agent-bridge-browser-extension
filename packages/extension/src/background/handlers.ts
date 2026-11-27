@@ -23,6 +23,7 @@ import {
   waitFor,
 } from './page.ts';
 import { callPageTool, listPageTools } from './pageTools.ts';
+import { executeScript } from './scripting.ts';
 import { applyPlan, undoLastPlan } from './plan.ts';
 import { serializeDevice, serializeGroup, serializeSession, serializeTab, serializeWindow, serializeWindowWithTabs } from './serialize.ts';
 import { waitForTab } from './tabWait.ts';
@@ -204,6 +205,7 @@ export const handlers: Handlers = {
   'page.evaluate': evaluateHandler,
   'page.listTools': listPageTools,
   'page.callTool': callPageTool,
+  'scripting.executeScript': executeScript,
   'cdp.send': cdpSend,
   'cdp.detach': cdpDetach,
 };

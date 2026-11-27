@@ -95,7 +95,7 @@ The debugger permission enables Chrome DevTools Protocol access to tabs for brow
 
 ## Remote Code
 
-Extension scripts and dependencies are bundled in the package. PostHog is used for event ingestion, not to download executable code. Page-control tools can evaluate agent-supplied JavaScript in a target page and invoke page-provided WebMCP tools; disclose this distinction if the reviewer asks about dynamic execution.
+Extension scripts and dependencies are bundled in the package. PostHog is used for event ingestion, not to download executable code. Page-control and scripting tools can evaluate agent-supplied JavaScript in a target page and invoke page-provided WebMCP tools; disclose this distinction if the reviewer asks about dynamic execution.
 
 ## Data Usage Disclosures
 
@@ -140,6 +140,10 @@ No extension account is required. Use Chrome 116 or later and Node.js 20 or late
 
 Page control cannot operate on chrome:// pages, extension pages, DevTools or the Chrome Web Store. WebMCP tools require a page that registers them and a Chrome build with WebMCP enabled; they are not required for ordinary page inspection or clicks.
 
+### scripting and host permissions (<all_urls>)
+
+Run JavaScript the user's agent sends in a tab, through chrome.scripting instead of the debugger. Chrome refuses the debugger in a tab while another extension, such as a password manager, has a frame in the page, and this lets the agent still read or change that page. Host permissions are needed because the agent works on whatever site the user asks about. They add no new install warning, because the debugger permission already shows "Read and change all your data on all websites".
+
 ## Permission Audit
 
 | Permission | Active use | Why narrower access is insufficient |
@@ -158,3 +162,4 @@ Page control cannot operate on chrome:// pages, extension pages, DevTools or the
 | sidePanel | Shows the chat panel for talking to the connected agent. | A tab or popup would cover the page the user is working on, or close as soon as they click it. |
 | alarms | Wakes the service worker periodically to reconnect the local bridge. | Ordinary worker timers do not survive suspension. |
 | debugger | Attaches the DevTools Protocol for page snapshots, screenshots, interactions, evaluation, navigation fallback and WebMCP tools. | tabs and tabGroups APIs cannot inspect or operate page contents. |
+| scripting, <all_urls> | Runs agent-supplied JavaScript in a tab without the debugger. | Chrome refuses the debugger in tabs that hold another extension's frame, and activeTab needs a user gesture the agent cannot give. |
