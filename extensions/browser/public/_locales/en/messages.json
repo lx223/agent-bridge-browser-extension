@@ -463,40 +463,40 @@
     "message": "Enter the relay address to connect.",
     "description": "Setup page: remote access status when remote access is on but no relay address is set."
   },
-  "remoteTokensHeading": {
-    "message": "Agent access tokens",
-    "description": "Setup page: heading of the list of tokens that let agents use this browser through the relay."
-  },
-  "remoteTokensHint": {
-    "message": "Each agent needs its own token. Anyone with a token can control this browser, so give tokens only to agents you trust and revoke them when you stop using them.",
-    "description": "Setup page: explanation above the list of access tokens."
-  },
-  "remoteNoTokens": {
-    "message": "No tokens yet.",
-    "description": "Setup page: shown in place of the token list when no access token exists."
-  },
-  "remoteTokenNamePlaceholder": {
-    "message": "Who it's for, such as Cloud agent",
-    "description": "Setup page: placeholder in the field for the name of a new access token. Cloud agent is an example name."
-  },
-  "remoteCreateToken": {
-    "message": "Create token",
-    "description": "Setup page: button that creates a new access token."
-  },
-  "remoteTokenCreatedHint": {
-    "message": "Copy it now; it isn't shown again. Run this to add it to Claude Code, or add the JSON to another agent's MCP configuration.",
-    "description": "Setup page: shown with a newly created access token. Claude Code, JSON and MCP stay in English."
-  },
-  "remoteTokenCreatedAt": {
-    "message": "Created $1",
-    "description": "Setup page: when an access token was created. $1 is a relative time, such as 5 minutes ago."
-  },
-  "remoteRevoke": {
-    "message": "Revoke",
-    "description": "Setup page: button that deletes an access token so agents using it lose access."
-  },
   "remotePrivacy": {
     "message": "Remote access is on: this extension also connects to $1, which passes your agents' requests and this browser's answers, including tab titles, URLs and page contents.",
     "description": "Setup page, privacy section, while remote access is on. $1 is the relay server's address, such as relay.example.com."
+  },
+  "remoteBrowserTokenLabel": {
+    "message": "Browser token",
+    "description": "Setup page: label of the field for the relay's browser token, a long secret the user copies from the relay server's settings."
+  },
+  "remoteBrowserTokenHint": {
+    "message": "The relay's browser token, set as $1 where it runs. It stays in this browser profile: the extension proves it knows the token without sending it.",
+    "description": "Setup page: explanation under the browser token field. $1 is the name of a setting on the relay server, AGENT_BROWSER_BRIDGE_BROWSER_TOKEN, shown as code."
+  },
+  "remoteBrowserTokenInvalid": {
+    "message": "The token must be at least 32 characters long, with no spaces at the start or end.",
+    "description": "Setup page: error shown when the browser token is too short or has spaces around it."
+  },
+  "remoteStatusNoToken": {
+    "message": "Enter the browser token to connect.",
+    "description": "Setup page: remote access status when remote access is on but no browser token is set."
+  },
+  "remoteStatusRejected": {
+    "message": "The relay didn't accept this browser token. Check that it matches the relay's browser token.",
+    "description": "Setup page: remote access status when the relay server refuses the browser token."
+  },
+  "remoteStatusUntrusted": {
+    "message": "This relay couldn't prove it knows the browser token. Check the address: it may not be your relay.",
+    "description": "Setup page: remote access status when the server at the relay address fails to prove it knows the secret token, which suggests it is not the user's relay."
+  },
+  "remoteAgentsHeading": {
+    "message": "Connect an agent",
+    "description": "Setup page: heading above the instructions for adding the relay to an AI agent."
+  },
+  "remoteAgentsHint": {
+    "message": "Give agents the relay's agent token, never the browser token. Set it as $1 where the agent runs, then run this to add the relay to Claude Code, or add the JSON to another agent's MCP configuration.",
+    "description": "Setup page: instructions for connecting an agent through the relay. $1 is the name of an environment variable, AGENT_BROWSER_BRIDGE_AGENT_TOKEN, shown as code. Claude Code, JSON and MCP stay in English."
   }
 }
