@@ -41,7 +41,7 @@ Older servers send no `agentSessionId`. Their conversations are keyed by the bri
 
 ## Appearance
 
-The chat panel and the setup page follow the system's light or dark setting, which Chrome also passes to its side panel. They share one set of colours, defined in `packages/extension/src/theme.css`.
+The chat panel and the setup page follow the system's light or dark setting, which Chrome also passes to its side panel. They share one set of colours, defined in `extensions/browser/src/theme.css`.
 
 ## How the agent hears you
 

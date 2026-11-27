@@ -1,0 +1,389 @@
+{
+  "locale": {
+    "message": "hr"
+  },
+  "extDescription": {
+    "message": "Upravljajte svojim preglednikom pomoću bilo kojeg AI agenta: organizirajte kartice i radite na web-stranicama putem MCP-a."
+  },
+  "actionTitle": {
+    "message": "Agent Browser Bridge: postavljanje i status"
+  },
+  "actionTitleDisconnected": {
+    "message": "Agent Browser Bridge: nijedan agent nije povezan"
+  },
+  "actionTitleConnected": {
+    "message": "Agent Browser Bridge: agent je povezan"
+  },
+  "actionTitleConnectedTo": {
+    "message": "Agent Browser Bridge: povezano ($1)"
+  },
+  "notificationReply": {
+    "message": "Za odgovor kliknite gumb Agent Browser Bridge na alatnoj traci"
+  },
+  "statusChecking": {
+    "message": "Provjera veze…"
+  },
+  "statusLooking": {
+    "message": "Traženje vašeg agenta…"
+  },
+  "welcomeLede": {
+    "message": "Neka vaš AI agent organizira vaše kartice i radi na web-stranicama."
+  },
+  "welcomeLedeSafari": {
+    "message": "Neka vaš AI agent pronalazi, otvara, premješta i zatvara vaše kartice u Safariju."
+  },
+  "profileLabel": {
+    "message": "Ovaj profil"
+  },
+  "profilePlaceholder": {
+    "message": "Dajte mu naziv"
+  },
+  "profileHint": {
+    "message": "Agenti prema ovom nazivu razlikuju vaše preglednike i profile pa možete zatražiti, primjerice, preglednik Posao."
+  },
+  "profileSaved": {
+    "message": "Spremljeno"
+  },
+  "profileNameRemoved": {
+    "message": "Naziv je uklonjen"
+  },
+  "statusNotConnected": {
+    "message": "Još nije povezano"
+  },
+  "statusSetUpHint": {
+    "message": "Povežite svog agenta u nastavku, a zatim u njemu pokrenite novu sesiju."
+  },
+  "statusConnected": {
+    "message": "Povezano"
+  },
+  "statusConnectedMany_one": {
+    "message": "Povezana je $1 sesija agenta"
+  },
+  "statusConnectedMany_few": {
+    "message": "Povezane su $1 sesije agenta"
+  },
+  "statusConnectedMany_other": {
+    "message": "Povezano je $1 sesija agenta"
+  },
+  "statusConnectedHint": {
+    "message": "Vaš agent može koristiti ovaj preglednik. Isprobajte neki od upita u nastavku."
+  },
+  "welcomeStepConnect": {
+    "message": "Povežite svog agenta"
+  },
+  "stepDone": {
+    "message": "Gotovo"
+  },
+  "welcomePickAgent": {
+    "message": "Odaberite agenta kojeg koristite."
+  },
+  "welcomeAgentTabs": {
+    "message": "Vaš agent"
+  },
+  "welcomeTabOther": {
+    "message": "Ostalo"
+  },
+  "welcomeClaudeCodeSteps": {
+    "message": "Pokrenite ovo jednom u terminalu, a zatim započnite novu sesiju u aplikaciji Claude Code."
+  },
+  "welcomeClaudeDesktopSteps": {
+    "message": "Preuzmite proširenje i otvorite datoteku. Claude Desktop instalira ga umjesto vas, Node.js nije potreban."
+  },
+  "welcomeOpensToConfirm": {
+    "message": "Otvara se $1 i traži da potvrdite."
+  },
+  "welcomeOtherAgentsSteps": {
+    "message": "Dodajte ovo u MCP konfiguraciju agenta, a zatim ga ponovno pokrenite."
+  },
+  "welcomeAgentSetupHint": {
+    "message": "Zalijepite ovaj upit u agenta koji može pokretati naredbe, primjerice Claude Code, Cursor ili Codex. On provjerava je li instaliran Node.js i dodaje poslužitelj."
+  },
+  "showPrompt": {
+    "message": "Prikaži upit"
+  },
+  "welcomeServerFootnote": {
+    "message": "Vaš agent pokreće mali lokalni poslužitelj, $1, s kojim se ovo proširenje povezuje."
+  },
+  "welcomeStepAsk": {
+    "message": "Pitajte ga nešto"
+  },
+  "welcomeUndoFootnote": {
+    "message": "Predomislili ste se? Promjene napravljene alatom $1 možete poništiti tako da zamolite agenta da ih poništi."
+  },
+  "welcomeSafariFootnote": {
+    "message": "U Safariju agent može otvarati, razmještati i zatvarati prozore te otvarati kartice, kretati se u njima, prebacivati se između njih, prikvačivati ih, isključivati im zvuk, duplicirati, premještati i zatvarati ih. Grupe kartica, povijest, oznake i upravljanje stranicama dostupni su u Chromeu. Ako nedostaju naslovi i adrese kartica, dajte proširenju pristup web-mjestima u Safariju u odjeljku Postavke > Proširenja."
+  },
+  "welcomeAnalyticsHint": {
+    "message": "Koje se značajke upotrebljavaju i verzija proširenja, radi poboljšanja proširenja."
+  },
+  "instanceId": {
+    "message": "ID instance: $1"
+  },
+  "welcomeAgentSetupTitle": {
+    "message": "Neka ga agent postavi"
+  },
+  "copyPrompt": {
+    "message": "Kopiraj upit"
+  },
+  "copy": {
+    "message": "Kopiraj"
+  },
+  "copied": {
+    "message": "Kopirano"
+  },
+  "welcomeAddTo": {
+    "message": "Dodaj u $1"
+  },
+  "welcomeDownloadFor": {
+    "message": "Preuzmi za $1"
+  },
+  "welcomeTryIntro": {
+    "message": "Dok je Chrome otvoren, napišite agentu:"
+  },
+  "welcomeTryTabs": {
+    "message": "Organiziraj moje otvorene kartice u grupe po temama. Prvo mi pokaži plan."
+  },
+  "welcomeTryPage": {
+    "message": "Otvori napomene uz izdanje Chromea i sažmi što se promijenilo u najnovijoj verziji."
+  },
+  "welcomeTryIntroSafari": {
+    "message": "Dok je Safari otvoren, napišite agentu:"
+  },
+  "welcomeTryDuplicatesSafari": {
+    "message": "Koje kartice imam otvorene u Safariju? Zatvori duplikate, ali me prvo pitaj."
+  },
+  "welcomeTrySortSafari": {
+    "message": "Poredaj moje kartice u Safariju po web-mjestu."
+  },
+  "welcomePrivacyHeading": {
+    "message": "Privatnost"
+  },
+  "welcomePrivacy": {
+    "message": "Vaši podaci o pregledavanju ostaju na vašem računalu: proširenje komunicira samo s adresom $1. Vaš agent može čitati naslove i URL-ove kartica, preslagivati, grupirati ili zatvarati kartice te čitati web-stranice i raditi na njima kada to zatražite. Dok agent radi na stranici, Chrome prikazuje natpis o otklanjanju pogrešaka. Ovo proširenje nikamo drugamo ne šalje naslove kartica, URL-ove ni sadržaj stranica."
+  },
+  "welcomePrivacySafari": {
+    "message": "Vaši podaci o pregledavanju ostaju na vašem računalu: proširenje komunicira samo s adresom $1. Vaš agent može čitati naslove i URL-ove kartica te otvarati, razmještati ili zatvarati prozore i kartice kada to zatražite. U Safariju ne može čitati web-stranice niti raditi na njima. Ovo proširenje nikamo drugamo ne šalje naslove kartica ni URL-ove."
+  },
+  "analyticsTitle": {
+    "message": "Dijeli anonimne statistike upotrebe"
+  },
+  "privacyPolicy": {
+    "message": "Pravila o privatnosti"
+  },
+  "agentStartingUp": {
+    "message": "Agent se pokreće"
+  },
+  "sessionInProject": {
+    "message": "$1 u projektu $2"
+  },
+  "sessionStarted": {
+    "message": "Pokrenuto $1"
+  },
+  "sessionLastUsed_one": {
+    "message": "Zadnje korišteno $2 $3, $1 poziv"
+  },
+  "sessionLastUsed_few": {
+    "message": "Zadnje korišteno $2 $3, $1 poziva"
+  },
+  "sessionLastUsed_other": {
+    "message": "Zadnje korišteno $2 $3, $1 poziva"
+  },
+  "sessionUnused": {
+    "message": "Još nije koristio preglednik"
+  },
+  "sessionId": {
+    "message": "Sesija $1"
+  },
+  "serverVersion": {
+    "message": "poslužitelj $1"
+  },
+  "instanceThisBrowser": {
+    "message": "$1, ovaj preglednik"
+  },
+  "justNow": {
+    "message": "upravo sada"
+  },
+  "chatTitle": {
+    "message": "Chat s agentom"
+  },
+  "chatSetup": {
+    "message": "Postavljanje"
+  },
+  "chatConversation": {
+    "message": "Razgovor"
+  },
+  "chatOpenChats": {
+    "message": "Otvoreni razgovori"
+  },
+  "chatPastChats": {
+    "message": "Prošli razgovori"
+  },
+  "chatEmptyHeading": {
+    "message": "Razgovarajte s agentom ovdje"
+  },
+  "chatEmptyBody": {
+    "message": "Zamolite agenta da nastavi u pregledniku ili pokrenite njegov upit $1. Njegove poruke prikazuju se ovdje, a vaši odgovori idu izravno njemu."
+  },
+  "chatEmptyHint": {
+    "message": "Svaka sesija agenta dobiva vlastiti razgovor."
+  },
+  "chatInput": {
+    "message": "Poruka agentu"
+  },
+  "chatEnd": {
+    "message": "Završi chat"
+  },
+  "chatRemove": {
+    "message": "Ukloni"
+  },
+  "chatSend": {
+    "message": "Pošalji"
+  },
+  "chatError": {
+    "message": "Nešto nije u redu."
+  },
+  "chatUnseen_one": {
+    "message": "$2 ($1 nova)"
+  },
+  "chatUnseen_few": {
+    "message": "$2 ($1 nove)"
+  },
+  "chatUnseen_other": {
+    "message": "$2 ($1 novih)"
+  },
+  "chatStatusWaiting": {
+    "message": "Čeka vaš odgovor"
+  },
+  "chatStatusWorking": {
+    "message": "Radi"
+  },
+  "chatStatusWorkingTool": {
+    "message": "Radi: upotrijebio je $1 $2"
+  },
+  "chatStatusDisconnected": {
+    "message": "Agent je prekinuo vezu"
+  },
+  "chatStatusReconnecting": {
+    "message": "Agent se ponovno povezuje"
+  },
+  "chatStatusEnded": {
+    "message": "Chat je završen"
+  },
+  "chatHintWaiting": {
+    "message": "Enter za slanje, Shift+Enter za novi redak."
+  },
+  "chatHintWorking": {
+    "message": "Agent će pročitati vašu poruku kad sljedeći put provjeri chat."
+  },
+  "chatHintDisconnected": {
+    "message": "Ova sesija agenta je zatvorena."
+  },
+  "chatHintReconnecting": {
+    "message": "Veza s agentom je prekinuta. Vaše poruke čekaju ovdje dok se ponovno ne poveže."
+  },
+  "chatHintEnded": {
+    "message": "Da biste ponovno razgovarali, zamolite agenta da nastavi u pregledniku."
+  },
+  "chatReadByAgent": {
+    "message": "agent je pročitao"
+  },
+  "chatNotReadYet": {
+    "message": "još nije pročitano"
+  },
+  "chatEndedNotice": {
+    "message": "Završili ste chat."
+  },
+  "chatConversationGone": {
+    "message": "Ovaj razgovor više ne postoji."
+  },
+  "chatEndedError": {
+    "message": "Ovaj chat je završen. Da biste ga ponovno pokrenuli, zamolite agenta da nastavi u pregledniku."
+  },
+  "chatTooLong_one": {
+    "message": "Poruka može imati najviše $1 znak."
+  },
+  "chatTooLong_few": {
+    "message": "Poruka može imati najviše $1 znaka."
+  },
+  "chatTooLong_other": {
+    "message": "Poruka može imati najviše $1 znakova."
+  },
+  "askYourAgent": {
+    "message": "Vaš agent"
+  },
+  "askFrom": {
+    "message": "$1 pita"
+  },
+  "askConfirm": {
+    "message": "Potvrdi"
+  },
+  "askCancel": {
+    "message": "Odustani"
+  },
+  "askConfirmed": {
+    "message": "Potvrđeno. $1 nastavlja."
+  },
+  "askCancelled": {
+    "message": "Otkazano. $1 neće nastaviti."
+  },
+  "askDragHint": {
+    "message": "Povucite za premještanje"
+  },
+  "askNotificationTitle": {
+    "message": "$1 treba vaš odgovor"
+  },
+  "remoteHeading": {
+    "message": "Udaljeni pristup"
+  },
+  "remoteToggle": {
+    "message": "Dopusti agentima pristup ovom pregledniku putem relejnog poslužitelja"
+  },
+  "remoteToggleHint": {
+    "message": "Za agente na drugom računalu ili u oblaku. Relejni poslužitelj prosljeđuje njihove zahtjeve ovom pregledniku i odgovore natrag, uključujući naslove i URL-ove kartica te sadržaj stranica, pa koristite samo relejni poslužitelj kojem vjerujete."
+  },
+  "remoteAddressLabel": {
+    "message": "Adresa relejnog poslužitelja"
+  },
+  "remoteAddressInvalid": {
+    "message": "Unesite adresu koja počinje s https://"
+  },
+  "remoteStatusConnected": {
+    "message": "Povezano s relejnim poslužiteljem"
+  },
+  "remoteStatusConnecting": {
+    "message": "Povezivanje s relejnim poslužiteljem…"
+  },
+  "remoteStatusOffline": {
+    "message": "Relejni poslužitelj nije dostupan. Ponovni pokušaj…"
+  },
+  "remoteStatusNoAddress": {
+    "message": "Unesite adresu relejnog poslužitelja za povezivanje."
+  },
+  "remotePrivacy": {
+    "message": "Udaljeni pristup je uključen: ovo proširenje povezuje se i s $1, koji prosljeđuje zahtjeve vaših agenata i odgovore ovog preglednika, uključujući naslove i URL-ove kartica te sadržaj stranica."
+  },
+  "remoteBrowserTokenLabel": {
+    "message": "Token preglednika"
+  },
+  "remoteBrowserTokenHint": {
+    "message": "Token preglednika relejnog poslužitelja, postavljen kao $1 ondje gdje poslužitelj radi. Ostaje u ovom profilu preglednika: proširenje dokazuje da zna token, a da ga ne šalje."
+  },
+  "remoteBrowserTokenInvalid": {
+    "message": "Token mora imati najmanje 32 znaka, bez razmaka na početku ili kraju."
+  },
+  "remoteStatusNoToken": {
+    "message": "Unesite token preglednika za povezivanje."
+  },
+  "remoteStatusRejected": {
+    "message": "Relejni poslužitelj nije prihvatio ovaj token preglednika. Provjerite podudara li se s tokenom preglednika relejnog poslužitelja."
+  },
+  "remoteStatusUntrusted": {
+    "message": "Ovaj relejni poslužitelj nije mogao dokazati da zna token preglednika. Provjerite adresu: možda to nije vaš relejni poslužitelj."
+  },
+  "remoteAgentsHeading": {
+    "message": "Povežite agenta"
+  },
+  "remoteAgentsHint": {
+    "message": "Agentima dajte token agenta relejnog poslužitelja, nikad token preglednika. Postavite ga kao $1 ondje gdje agent radi, a zatim pokrenite ovo da biste dodali relejni poslužitelj u Claude Code ili dodajte JSON u MCP konfiguraciju drugog agenta."
+  }
+}

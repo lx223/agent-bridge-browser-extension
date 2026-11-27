@@ -13,12 +13,12 @@ The app is managed in [App Store Connect](https://appstoreconnect.apple.com/apps
 
 ## How the app is built
 
-`npm run build:safari -w agent-browser-bridge-extension` builds the extension and turns it into an Xcode project with Apple's `safari-web-extension-converter`. The project is generated on every build and not committed. `packages/extension/scripts/build-safari.mjs` then changes what the converter gets wrong for the App Store:
+`npm run build:safari -w agent-browser-bridge-extension` builds the extension and turns it into an Xcode project with Apple's `safari-web-extension-converter`. The project is generated on every build and not committed. `extensions/browser/scripts/build-safari.mjs` then changes what the converter gets wrong for the App Store:
 
 | Setting | Value | Why |
 | --- | --- | --- |
 | App bundle identifier | `dev.agentbrowserbridge.app` | The extension's identifier must start with the app's |
-| Version (`MARKETING_VERSION`) | `version` in `packages/extension/package.json` | The App Store version matches the Chrome release |
+| Version (`MARKETING_VERSION`) | `version` in `extensions/browser/package.json` | The App Store version matches the Chrome release |
 | Build number (`CURRENT_PROJECT_VERSION`) | `--build-number`, default 1 | Every upload needs a new, higher build number |
 | Minimum macOS (`MACOSX_DEPLOYMENT_TARGET`) | 14.0 | The converter uses the installed SDK's version, which would hide the app from older Macs |
 | `LSApplicationCategoryType` | `public.app-category.developer-tools` | Required for App Store uploads |
@@ -29,14 +29,14 @@ The script understands both project formats the converter writes: `project.pbxpr
 
 The Safari app is released from a Mac, because signing it for the App Store needs an Apple account. Nothing is built or published by CI for it, and no Apple credential is stored on GitHub.
 
-`npm run release:safari -w agent-browser-bridge-extension -- --team EV27867DV2` (`packages/extension/scripts/release-safari.mjs`):
+`npm run release:safari -w agent-browser-bridge-extension -- --team EV27867DV2` (`extensions/browser/scripts/release-safari.mjs`):
 
 1. builds the extension with the release analytics keys, the same ones the **Publish Release** workflow uses for the Chrome ZIP,
 2. generates the Xcode project with a build number made from the current UTC time, such as `202611211235`, so every upload has a higher one; `--build-number` overrides it,
 3. archives a Release build signed ad hoc,
 4. signs the archive for the App Store with the Apple account signed in to Xcode and uploads it. The first time, Xcode creates an Apple Distribution certificate and the provisioning profiles.
 
-Add `--no-upload` to write the signed package to `packages/extension/safari-release/` instead. Setting `APP_STORE_CONNECT_KEY_ID`, `APP_STORE_CONNECT_ISSUER_ID` and `APP_STORE_CONNECT_KEY_PATH` signs with an App Store Connect API key instead of the Xcode account.
+Add `--no-upload` to write the signed package to `extensions/browser/safari-release/` instead. Setting `APP_STORE_CONNECT_KEY_ID`, `APP_STORE_CONNECT_ISSUER_ID` and `APP_STORE_CONNECT_KEY_PATH` signs with an App Store Connect API key instead of the Xcode account.
 
 ## One-time setup
 
@@ -50,7 +50,7 @@ Add `--no-upload` to write the signed package to `packages/extension/safari-rele
 2. On that main commit, run `npm run release:safari -w agent-browser-bridge-extension -- --team EV27867DV2`.
 3. Wait for App Store Connect to finish processing the build, which shows under TestFlight. Optionally install it through TestFlight on a Mac and check it once more.
 4. If the release changes what the extension looks like or does, run `npm run store:assets -- --store safari` and upload the new screenshots and app preview; see [Screenshots and app preview](../store/safari/submission.md#screenshots-and-app-preview).
-5. In App Store Connect, add a macOS version with the same version number as `packages/extension/package.json`, choose the build, add the screenshots, app preview and What's New text, and check the rest against the [submission copy](../store/safari/submission.md).
+5. In App Store Connect, add a macOS version with the same version number as `extensions/browser/package.json`, choose the build, add the screenshots, app preview and What's New text, and check the rest against the [submission copy](../store/safari/submission.md).
 6. Submit for review. Choose manual release if the Chrome and Safari releases should go out together.
 7. Once the app is live, update the Safari install steps in the [README](../README.md#safari) to link to it.
 8. Once both the Chrome and Safari versions are live, publish the MCP server; see [Release order](npm-publishing.md#release-order).

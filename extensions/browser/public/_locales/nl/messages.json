@@ -1,0 +1,377 @@
+{
+  "locale": {
+    "message": "nl"
+  },
+  "extDescription": {
+    "message": "Bedien je eigen browser met elke AI-agent die je wilt: organiseer tabbladen en werk met webpagina's via MCP."
+  },
+  "actionTitle": {
+    "message": "Agent Browser Bridge: instellen en status"
+  },
+  "actionTitleDisconnected": {
+    "message": "Agent Browser Bridge: geen agent verbonden"
+  },
+  "actionTitleConnected": {
+    "message": "Agent Browser Bridge: agent verbonden"
+  },
+  "actionTitleConnectedTo": {
+    "message": "Agent Browser Bridge: verbonden met $1"
+  },
+  "notificationReply": {
+    "message": "Klik op de knop Agent Browser Bridge in de werkbalk om te antwoorden"
+  },
+  "statusChecking": {
+    "message": "Verbinding controleren…"
+  },
+  "statusLooking": {
+    "message": "Je agent zoeken…"
+  },
+  "welcomeLede": {
+    "message": "Laat je AI-agent je tabbladen organiseren en webpagina's bedienen."
+  },
+  "welcomeLedeSafari": {
+    "message": "Laat je AI-agent je Safari-tabbladen vinden, openen, verplaatsen en sluiten."
+  },
+  "profileLabel": {
+    "message": "Dit profiel"
+  },
+  "profilePlaceholder": {
+    "message": "Geef het een naam"
+  },
+  "profileHint": {
+    "message": "Agents gebruiken deze naam om je browsers en profielen uit elkaar te houden, zodat je naar je browser Werk kunt vragen."
+  },
+  "profileSaved": {
+    "message": "Opgeslagen"
+  },
+  "profileNameRemoved": {
+    "message": "Naam verwijderd"
+  },
+  "statusNotConnected": {
+    "message": "Nog niet verbonden"
+  },
+  "statusSetUpHint": {
+    "message": "Verbind hieronder je agent en start daarin een nieuwe sessie."
+  },
+  "statusConnected": {
+    "message": "Verbonden"
+  },
+  "statusConnectedMany_one": {
+    "message": "Verbonden met $1 agentsessie"
+  },
+  "statusConnectedMany_other": {
+    "message": "Verbonden met $1 agentsessies"
+  },
+  "statusConnectedHint": {
+    "message": "Je agent kan deze browser gebruiken. Probeer een van de prompts hieronder."
+  },
+  "welcomeStepConnect": {
+    "message": "Verbind je agent"
+  },
+  "stepDone": {
+    "message": "Klaar"
+  },
+  "welcomePickAgent": {
+    "message": "Kies de agent die je gebruikt."
+  },
+  "welcomeAgentTabs": {
+    "message": "Je agent"
+  },
+  "welcomeTabOther": {
+    "message": "Overig"
+  },
+  "welcomeClaudeCodeSteps": {
+    "message": "Voer dit één keer uit in een terminal en start daarna een nieuwe Claude Code-sessie."
+  },
+  "welcomeClaudeDesktopSteps": {
+    "message": "Download de extensie en open het bestand. Claude Desktop installeert hem voor je, Node.js is niet nodig."
+  },
+  "welcomeOpensToConfirm": {
+    "message": "$1 wordt geopend en vraagt je om te bevestigen."
+  },
+  "welcomeOtherAgentsSteps": {
+    "message": "Voeg dit toe aan de MCP-configuratie van de agent en start de agent daarna opnieuw."
+  },
+  "welcomeAgentSetupHint": {
+    "message": "Plak deze prompt in een agent die opdrachten kan uitvoeren, zoals Claude Code, Cursor of Codex. Hij controleert of Node.js aanwezig is en voegt de server toe."
+  },
+  "showPrompt": {
+    "message": "Prompt tonen"
+  },
+  "welcomeServerFootnote": {
+    "message": "Je agent draait een kleine lokale server, $1, waarmee deze extensie verbinding maakt."
+  },
+  "welcomeStepAsk": {
+    "message": "Vraag je agent iets"
+  },
+  "welcomeUndoFootnote": {
+    "message": "Van gedachten veranderd? Wijzigingen die met $1 zijn gemaakt, kun je terugdraaien door de agent te vragen ze ongedaan te maken."
+  },
+  "welcomeSafariFootnote": {
+    "message": "In Safari kan je agent vensters openen, ordenen en sluiten, en tabbladen openen, er pagina's in laden, ertussen wisselen en ze vastzetten, dempen, dupliceren, verplaatsen en sluiten. Tabbladgroepen, geschiedenis, bookmarks en paginabediening zijn beschikbaar in Chrome. Ontbreken de titels en adressen van tabbladen? Geef de extensie dan in Safari toegang tot websites via Instellingen > Extensies."
+  },
+  "welcomeAnalyticsHint": {
+    "message": "Welke functies worden gebruikt en de versie van de extensie, om de extensie te helpen verbeteren."
+  },
+  "instanceId": {
+    "message": "Instantie-ID: $1"
+  },
+  "welcomeAgentSetupTitle": {
+    "message": "Laat je agent het instellen"
+  },
+  "copyPrompt": {
+    "message": "Prompt kopiëren"
+  },
+  "copy": {
+    "message": "Kopiëren"
+  },
+  "copied": {
+    "message": "Gekopieerd"
+  },
+  "welcomeAddTo": {
+    "message": "Toevoegen aan $1"
+  },
+  "welcomeDownloadFor": {
+    "message": "Downloaden voor $1"
+  },
+  "welcomeTryIntro": {
+    "message": "Open Chrome en vraag je agent:"
+  },
+  "welcomeTryTabs": {
+    "message": "Orden mijn open tabbladen in groepen per onderwerp. Laat me eerst het plan zien."
+  },
+  "welcomeTryPage": {
+    "message": "Open de releaseopmerkingen van Chrome en vat samen wat er in de nieuwste versie is veranderd."
+  },
+  "welcomeTryIntroSafari": {
+    "message": "Open Safari en vraag je agent:"
+  },
+  "welcomeTryDuplicatesSafari": {
+    "message": "Welke tabbladen heb ik open in Safari? Sluit de dubbele, maar vraag het me eerst."
+  },
+  "welcomeTrySortSafari": {
+    "message": "Sorteer mijn Safari-tabbladen op website."
+  },
+  "welcomePrivacyHeading": {
+    "message": "Privacy"
+  },
+  "welcomePrivacy": {
+    "message": "Je browsegegevens blijven op je computer: de extensie communiceert alleen met $1. Je agent kan titels en URL's van tabbladen lezen, tabbladen herschikken, groeperen of sluiten, en webpagina's lezen en ermee werken als je daarom vraagt. Chrome toont een foutopsporingsbanner terwijl de agent in een pagina werkt. Deze extensie stuurt titels van tabbladen, URL's en pagina-inhoud nooit ergens anders naartoe."
+  },
+  "welcomePrivacySafari": {
+    "message": "Je browsegegevens blijven op je computer: de extensie communiceert alleen met $1. Je agent kan titels en URL's van tabbladen lezen, en vensters en tabbladen openen, ordenen of sluiten als je daarom vraagt. In Safari kan hij webpagina's niet lezen en er niet mee werken. Deze extensie stuurt titels van tabbladen en URL's nooit ergens anders naartoe."
+  },
+  "analyticsTitle": {
+    "message": "Anonieme gebruiksstatistieken delen"
+  },
+  "privacyPolicy": {
+    "message": "Privacybeleid"
+  },
+  "agentStartingUp": {
+    "message": "Agent wordt gestart"
+  },
+  "sessionInProject": {
+    "message": "$1 in $2"
+  },
+  "sessionStarted": {
+    "message": "Gestart $1"
+  },
+  "sessionLastUsed_one": {
+    "message": "Laatst gebruikt: $2 $3, $1 aanroep"
+  },
+  "sessionLastUsed_other": {
+    "message": "Laatst gebruikt: $2 $3, $1 aanroepen"
+  },
+  "sessionUnused": {
+    "message": "Heeft nog geen browser gebruikt"
+  },
+  "sessionId": {
+    "message": "Sessie $1"
+  },
+  "serverVersion": {
+    "message": "server $1"
+  },
+  "instanceThisBrowser": {
+    "message": "$1, deze browser"
+  },
+  "justNow": {
+    "message": "zojuist"
+  },
+  "chatTitle": {
+    "message": "Agentchat"
+  },
+  "chatSetup": {
+    "message": "Instellen"
+  },
+  "chatConversation": {
+    "message": "Gesprek"
+  },
+  "chatOpenChats": {
+    "message": "Open chats"
+  },
+  "chatPastChats": {
+    "message": "Eerdere chats"
+  },
+  "chatEmptyHeading": {
+    "message": "Praat hier met je agent"
+  },
+  "chatEmptyBody": {
+    "message": "Vraag je agent om verder te gaan in de browser, of voer zijn prompt $1 uit. Zijn berichten verschijnen hier en je antwoorden gaan direct naar hem terug."
+  },
+  "chatEmptyHint": {
+    "message": "Elke agentsessie krijgt een eigen gesprek."
+  },
+  "chatInput": {
+    "message": "Bericht aan de agent"
+  },
+  "chatEnd": {
+    "message": "Chat beëindigen"
+  },
+  "chatRemove": {
+    "message": "Verwijderen"
+  },
+  "chatSend": {
+    "message": "Verzenden"
+  },
+  "chatError": {
+    "message": "Er is iets misgegaan."
+  },
+  "chatUnseen_one": {
+    "message": "$2 ($1 nieuw)"
+  },
+  "chatUnseen_other": {
+    "message": "$2 ($1 nieuw)"
+  },
+  "chatStatusWaiting": {
+    "message": "Wacht op je antwoord"
+  },
+  "chatStatusWorking": {
+    "message": "Bezig"
+  },
+  "chatStatusWorkingTool": {
+    "message": "Bezig: $1 gebruikt $2"
+  },
+  "chatStatusDisconnected": {
+    "message": "Verbinding met agent verbroken"
+  },
+  "chatStatusReconnecting": {
+    "message": "Agent maakt opnieuw verbinding"
+  },
+  "chatStatusEnded": {
+    "message": "Chat beëindigd"
+  },
+  "chatHintWaiting": {
+    "message": "Enter om te verzenden, Shift+Enter voor een nieuwe regel."
+  },
+  "chatHintWorking": {
+    "message": "De agent leest je bericht wanneer hij de chat weer controleert."
+  },
+  "chatHintDisconnected": {
+    "message": "Deze agentsessie is gesloten."
+  },
+  "chatHintReconnecting": {
+    "message": "De verbinding met de agent is weggevallen. Je berichten wachten hier tot hij weer verbonden is."
+  },
+  "chatHintEnded": {
+    "message": "Vraag de agent om verder te gaan in de browser om weer te chatten."
+  },
+  "chatReadByAgent": {
+    "message": "gelezen door de agent"
+  },
+  "chatNotReadYet": {
+    "message": "nog niet gelezen"
+  },
+  "chatEndedNotice": {
+    "message": "Je hebt de chat beëindigd."
+  },
+  "chatConversationGone": {
+    "message": "Dit gesprek bestaat niet meer."
+  },
+  "chatEndedError": {
+    "message": "Deze chat is beëindigd. Vraag de agent om verder te gaan in de browser om hem opnieuw te starten."
+  },
+  "chatTooLong_one": {
+    "message": "Berichten mogen maximaal $1 teken lang zijn."
+  },
+  "chatTooLong_other": {
+    "message": "Berichten mogen maximaal $1 tekens lang zijn."
+  },
+  "askYourAgent": {
+    "message": "Je agent"
+  },
+  "askFrom": {
+    "message": "$1 vraagt"
+  },
+  "askConfirm": {
+    "message": "Bevestigen"
+  },
+  "askCancel": {
+    "message": "Annuleren"
+  },
+  "askConfirmed": {
+    "message": "Bevestigd. $1 gaat verder."
+  },
+  "askCancelled": {
+    "message": "Geannuleerd. $1 gaat niet verder."
+  },
+  "askDragHint": {
+    "message": "Sleep om te verplaatsen"
+  },
+  "askNotificationTitle": {
+    "message": "$1 wacht op je antwoord"
+  },
+  "remoteHeading": {
+    "message": "Externe toegang"
+  },
+  "remoteToggle": {
+    "message": "Agents via een relay toegang geven tot deze browser"
+  },
+  "remoteToggleHint": {
+    "message": "Voor agents op een andere computer of in de cloud. De relay stuurt hun verzoeken door naar deze browser en de antwoorden terug, inclusief titels en URL's van tabbladen en pagina-inhoud. Gebruik dus alleen een relay die je vertrouwt."
+  },
+  "remoteAddressLabel": {
+    "message": "Relayadres"
+  },
+  "remoteAddressInvalid": {
+    "message": "Voer een adres in dat begint met https://"
+  },
+  "remoteStatusConnected": {
+    "message": "Verbonden met de relay"
+  },
+  "remoteStatusConnecting": {
+    "message": "Verbinden met de relay…"
+  },
+  "remoteStatusOffline": {
+    "message": "Relay niet bereikbaar. Opnieuw proberen…"
+  },
+  "remoteStatusNoAddress": {
+    "message": "Voer het relayadres in om verbinding te maken."
+  },
+  "remotePrivacy": {
+    "message": "Externe toegang staat aan: deze extensie maakt ook verbinding met $1, dat de verzoeken van je agents en de antwoorden van deze browser doorstuurt, inclusief titels en URL's van tabbladen en pagina-inhoud."
+  },
+  "remoteBrowserTokenLabel": {
+    "message": "Browsertoken"
+  },
+  "remoteBrowserTokenHint": {
+    "message": "Het browsertoken van de relay, ingesteld als $1 waar de relay draait. Het blijft in dit browserprofiel: de extensie bewijst dat ze het token kent zonder het te verzenden."
+  },
+  "remoteBrowserTokenInvalid": {
+    "message": "Het token moet minstens 32 tekens lang zijn, zonder spaties aan het begin of eind."
+  },
+  "remoteStatusNoToken": {
+    "message": "Voer het browsertoken in om verbinding te maken."
+  },
+  "remoteStatusRejected": {
+    "message": "De relay heeft dit browsertoken niet geaccepteerd. Controleer of het overeenkomt met het browsertoken van de relay."
+  },
+  "remoteStatusUntrusted": {
+    "message": "Deze relay kon niet bewijzen dat hij het browsertoken kent. Controleer het adres: het is misschien niet jouw relay."
+  },
+  "remoteAgentsHeading": {
+    "message": "Een agent verbinden"
+  },
+  "remoteAgentsHint": {
+    "message": "Geef agents het agenttoken van de relay, nooit het browsertoken. Stel het in als $1 waar de agent draait en voer dan dit uit om de relay aan Claude Code toe te voegen, of voeg de JSON toe aan de MCP-configuratie van een andere agent."
+  }
+}

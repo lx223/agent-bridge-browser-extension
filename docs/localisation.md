@@ -6,7 +6,7 @@ Tool results, errors returned to the agent, and the prompt the setup page gives 
 
 ## Where the text lives
 
-Each language has one file, `packages/extension/public/_locales/<code>/messages.json`, in Chrome's [message format](https://developer.chrome.com/docs/extensions/reference/api/i18n). The build copies the folder into the package as is. Safari reads the same files.
+Each language has one file, `extensions/browser/public/_locales/<code>/messages.json`, in Chrome's [message format](https://developer.chrome.com/docs/extensions/reference/api/i18n). The build copies the folder into the package as is. Safari reads the same files.
 
 `en/messages.json` is the reference. Its `description` fields tell translators where each message appears; the other files hold only `message`.
 
@@ -14,9 +14,9 @@ Each language has one file, `packages/extension/public/_locales/<code>/messages.
 | --- | --- |
 | `manifest.json` | `__MSG_extDescription__` and `__MSG_actionTitle__`. `default_locale` is `en`. The name, Agent Browser Bridge, is not translated. |
 | HTML pages | `data-i18n="key"` replaces the element's text. `data-i18n-placeholder`, `data-i18n-aria-label` and `data-i18n-title` set those attributes. `data-i18n-arg` passes one fixed value as `$1`, such as an app name. |
-| TypeScript | `t(key, ...values)` and `plural(base, count, ...values)` from `packages/extension/src/i18n/messages.ts`. Keys are checked against `en/messages.json` at compile time. |
+| TypeScript | `t(key, ...values)` and `plural(base, count, ...values)` from `extensions/browser/src/i18n/messages.ts`. Keys are checked against `en/messages.json` at compile time. |
 
-`localizePage()` in `packages/extension/src/i18n/page.ts` runs first on each page. It also sets `lang` and `dir` from the language of the messages, so Arabic, Hebrew and Persian lay out from right to left. Chrome's own `@@bidi_dir` follows Chrome's interface language instead, which can differ, so the extension keeps its own list of right-to-left languages in `messages.ts`. Add to it when adding another right-to-left language.
+`localizePage()` in `extensions/browser/src/i18n/page.ts` runs first on each page. It also sets `lang` and `dir` from the language of the messages, so Arabic, Hebrew and Persian lay out from right to left. Chrome's own `@@bidi_dir` follows Chrome's interface language instead, which can differ, so the extension keeps its own list of right-to-left languages in `messages.ts`. Add to it when adding another right-to-left language.
 
 ### Elements inside a message
 
@@ -40,7 +40,7 @@ When you change the meaning of an English message, update the translations too, 
 
 ## Checks
 
-`packages/extension/src/i18n/locales.test.ts` runs with `npm test`. For each language it checks that:
+`extensions/browser/src/i18n/locales.test.ts` runs with `npm test`. For each language it checks that:
 
 - the folder name is a locale Chrome supports, and the `locale` message matches it,
 - every English key is present and not empty,
@@ -65,4 +65,5 @@ Open questions from the translation:
 - Safari's names for Settings > Extensions come from memory and are least certain in `ms`, `uk` and `ar`. Where macOS has no interface in the language (`fa`, `fil`, `sw`, `am`, `et`, `lv`, `lt`, `sr`, `sl`), the path stays in English. The Indian languages other than `hi` translate it, which may not match what Safari shows.
 - Register: `de` uses Sie and `zh_CN` uses 您, while the store screenshot captions in `store/screenshots/locales/` use du and 你. The example prompts on the setup page use the informal form people type to an agent.
 - `bn` and `mr` number the setup steps with their own digits, while the other Indian languages use 1 and 2.
+- Remote access: "relay" has no settled term. It is kept as a loanword in some languages (`de`, `it`, `nl`, `ja`, `ko`) and translated as a relay or forwarding server in others (`es`, `pt_BR`, `ru`, `zh_CN`), which makes some switch labels long. "Token" is least certain in `ca`, `fi`, `et`, `lv`, `lt` and `el`; the browser token and the agent token must stay clearly different words.
 - Words with no settled Chrome term, chosen from memory: "agent" (`zh_CN` 智能体, `tr` ajan) and "extension" or "tab" in `kn`, `ml` and `ta`. In the Indian languages the example profile name "Work" is rendered as "Office".

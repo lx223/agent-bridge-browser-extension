@@ -103,7 +103,7 @@ export async function buildSite(repoRoot: string, outDir: string, options: Build
     written.push(relativePath);
   };
 
-  const extensionPackage = JSON.parse(await readFile(path.join(repoRoot, 'packages/extension/package.json'), 'utf8'));
+  const extensionPackage = JSON.parse(await readFile(path.join(repoRoot, 'extensions/browser/package.json'), 'utf8'));
   const version: string = extensionPackage.version;
 
   const pages: BuiltPage[] = [];
@@ -137,7 +137,7 @@ export async function buildSite(repoRoot: string, outDir: string, options: Build
   written.push('style.css');
   await copyFile(path.join(repoRoot, 'site/site.js'), path.join(outDir, 'site.js'));
   written.push('site.js');
-  await copyFile(path.join(repoRoot, 'packages/extension/icons/icon.svg'), path.join(outDir, 'icon.svg'));
+  await copyFile(path.join(repoRoot, 'extensions/browser/icons/icon.svg'), path.join(outDir, 'icon.svg'));
   written.push('icon.svg');
 
   return written;

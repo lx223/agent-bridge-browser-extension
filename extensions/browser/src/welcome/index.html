@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Agent Browser Bridge</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main>
+      <header class="masthead">
+        <img class="logo" src="/icons/icon-48.png" alt="" width="40" height="40" />
+        <div>
+          <div class="title">
+            <h1>Agent Browser Bridge</h1>
+            <span id="extension-version" class="version"></span>
+          </div>
+          <p class="lede" data-browser="chrome" data-i18n="welcomeLede">Let your AI agent organise your tabs and operate web pages.</p>
+          <p class="lede" data-browser="safari" data-i18n="welcomeLedeSafari" hidden>Let your AI agent find, open, move and close your Safari tabs.</p>
+        </div>
+      </header>
+
+      <section class="connection">
+        <div class="profile">
+          <span id="profile-avatar" class="profile-avatar" aria-hidden="true"></span>
+          <div class="profile-main">
+            <label class="profile-label" for="instance-name" data-i18n="profileLabel">This profile</label>
+            <div class="profile-row">
+              <div class="profile-field">
+                <input id="instance-name" type="text" placeholder="Give it a name" data-i18n-placeholder="profilePlaceholder" autocomplete="off" spellcheck="false" enterkeyhint="done" aria-describedby="profile-hint" />
+                <label class="profile-edit" for="instance-name" aria-hidden="true">
+                  <svg viewBox="0 0 16 16" width="14" height="14"><path d="M11.5 2.5l2 2L6 12l-2.75.75L4 10z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" /></svg>
+                </label>
+              </div>
+              <span id="profile-saved" class="profile-saved" role="status"></span>
+            </div>
+            <p id="profile-hint" class="hint" data-i18n="profileHint">Agents use this name to tell your browsers and profiles apart, so you can ask for your Work browser.</p>
+          </div>
+          <span id="instance-id" class="instance-id"></span>
+        </div>
+        <div id="status" class="status" data-state="disconnected" aria-live="polite">
+          <span class="dot" aria-hidden="true"></span>
+          <div>
+            <strong id="status-text" data-i18n="statusChecking">Checking connection…</strong>
+            <p id="status-hint" class="hint"></p>
+          </div>
+        </div>
+        <ul id="agents" class="agents" hidden></ul>
+      </section>
+
+      <details id="setup" class="step" open>
+        <summary>
+          <span class="step-number" aria-hidden="true">1</span>
+          <h2 data-i18n="welcomeStepConnect">Connect your agent</h2>
+          <span class="step-done" data-i18n="stepDone">Done</span>
+        </summary>
+        <div class="step-body">
+          <p class="hint" data-i18n="welcomePickAgent">Pick the agent you use.</p>
+          <div class="tabs" role="tablist" aria-label="Your agent" data-i18n-aria-label="welcomeAgentTabs">
+            <button role="tab" id="tab-claude-code" aria-controls="panel-claude-code" data-agent="claude-code">Claude Code</button>
+            <button role="tab" id="tab-claude-desktop" aria-controls="panel-claude-desktop" data-agent="claude-desktop">Claude Desktop</button>
+            <button role="tab" id="tab-cursor" aria-controls="panel-cursor" data-agent="cursor">Cursor</button>
+            <button role="tab" id="tab-vscode" aria-controls="panel-vscode" data-agent="vscode">VS Code</button>
+            <button role="tab" id="tab-other" aria-controls="panel-other" data-agent="other" data-i18n="welcomeTabOther">Other</button>
+          </div>
+
+          <div class="panel" role="tabpanel" id="panel-claude-code" aria-labelledby="tab-claude-code">
+            <p data-i18n="welcomeClaudeCodeSteps">Run this once in a terminal, then start a new Claude Code session.</p>
+            <div class="snippet"><code id="claude-code-cmd"></code><button class="secondary" data-copy="claude-code-cmd" data-i18n="copy">Copy</button></div>
+          </div>
+
+          <div class="panel" role="tabpanel" id="panel-claude-desktop" aria-labelledby="tab-claude-desktop" hidden>
+            <p data-i18n="welcomeClaudeDesktopSteps">Download the extension and open the file. Claude Desktop installs it for you, no Node.js needed.</p>
+            <a id="claude-desktop-link" class="button" data-i18n="welcomeDownloadFor" data-i18n-arg="Claude Desktop">Download for Claude Desktop</a>
+          </div>
+
+          <div class="panel" role="tabpanel" id="panel-cursor" aria-labelledby="tab-cursor" hidden>
+            <p data-i18n="welcomeOpensToConfirm" data-i18n-arg="Cursor">Cursor opens and asks you to confirm.</p>
+            <a id="cursor-link" class="button" data-i18n="welcomeAddTo" data-i18n-arg="Cursor">Add to Cursor</a>
+          </div>
+
+          <div class="panel" role="tabpanel" id="panel-vscode" aria-labelledby="tab-vscode" hidden>
+            <p data-i18n="welcomeOpensToConfirm" data-i18n-arg="VS Code">VS Code opens and asks you to confirm.</p>
+            <a id="vscode-link" class="button" data-i18n="welcomeAddTo" data-i18n-arg="VS Code">Add to VS Code</a>
+          </div>
+
+          <div class="panel" role="tabpanel" id="panel-other" aria-labelledby="tab-other" hidden>
+            <p data-i18n="welcomeOtherAgentsSteps">Add this to your agent's MCP config, then restart it.</p>
+            <div class="snippet block"><pre id="json-config"></pre><button class="secondary" data-copy="json-config" data-i18n="copy">Copy</button></div>
+          </div>
+
+          <div class="assist">
+            <div>
+              <strong data-i18n="welcomeAgentSetupTitle">Let your agent set itself up</strong>
+              <p class="hint" data-i18n="welcomeAgentSetupHint">Paste this prompt into an agent that can run commands, such as Claude Code, Cursor or Codex. It checks for Node.js and adds the server.</p>
+              <details class="preview">
+                <summary data-i18n="showPrompt">Show prompt</summary>
+                <pre id="agent-prompt"></pre>
+              </details>
+            </div>
+            <button class="secondary" data-copy="agent-prompt" data-i18n="copyPrompt">Copy prompt</button>
+          </div>
+
+          <p class="footnote" data-i18n="welcomeServerFootnote">Your agent runs a small local server, <code>npx -y <span data-pkg></span></code>, that this extension connects to.</p>
+        </div>
+      </details>
+
+      <section class="step">
+        <div class="step-head">
+          <span class="step-number" aria-hidden="true">2</span>
+          <h2 data-i18n="welcomeStepAsk">Ask it something</h2>
+        </div>
+        <div class="step-body" data-browser="chrome">
+          <p data-i18n="welcomeTryIntro">With Chrome open, ask your agent:</p>
+          <ul class="prompts">
+            <li><span id="try-chrome-tabs" data-i18n="welcomeTryTabs">Organise my open tabs into groups by topic. Show me the plan first.</span><button class="ghost" data-copy="try-chrome-tabs" data-i18n="copy">Copy</button></li>
+            <li><span id="try-chrome-page" data-i18n="welcomeTryPage">Open the Chrome release notes and summarise what changed in the latest version.</span><button class="ghost" data-copy="try-chrome-page" data-i18n="copy">Copy</button></li>
+          </ul>
+          <p class="footnote" data-i18n="welcomeUndoFootnote">Changed your mind? Changes made with <code>chrome_plan_apply</code> can be reverted by asking the agent to undo.</p>
+        </div>
+        <div class="step-body" data-browser="safari" hidden>
+          <p data-i18n="welcomeTryIntroSafari">With Safari open, ask your agent:</p>
+          <ul class="prompts">
+            <li><span id="try-safari-duplicates" data-i18n="welcomeTryDuplicatesSafari">Which tabs do I have open in Safari? Close the duplicates, but ask me first.</span><button class="ghost" data-copy="try-safari-duplicates" data-i18n="copy">Copy</button></li>
+            <li><span id="try-safari-order" data-i18n="welcomeTrySortSafari">Put my Safari tabs in order by site.</span><button class="ghost" data-copy="try-safari-order" data-i18n="copy">Copy</button></li>
+          </ul>
+          <p class="footnote" data-i18n="welcomeSafariFootnote">
+            In Safari your agent can open, arrange and close windows, and open, navigate, switch, pin, mute, duplicate, move and close tabs.
+            Tab groups, history, bookmarks and page control are available in Chrome. If tab titles and addresses are missing, give the extension
+            website access in Safari under Settings &gt; Extensions.
+          </p>
+        </div>
+      </section>
+
+      <section id="remote" class="settings">
+        <h2 data-i18n="remoteHeading">Remote access</h2>
+        <label class="setting toggle">
+          <input type="checkbox" id="remote-enabled" />
+          <span>
+            <strong data-i18n="remoteToggle">Let agents reach this browser through a relay</strong>
+            <span class="hint" data-i18n="remoteToggleHint">For agents on another computer or in the cloud. The relay passes their requests to this browser and the answers back, including tab titles, URLs and page contents, so only use a relay you trust.</span>
+          </span>
+        </label>
+        <div id="remote-body" class="remote" hidden>
+          <label class="field">
+            <span data-i18n="remoteAddressLabel">Relay address</span>
+            <input id="remote-address" type="url" placeholder="https://relay.example.com" autocomplete="off" spellcheck="false" aria-describedby="remote-address-error" />
+          </label>
+          <p id="remote-address-error" class="error" role="alert" data-i18n="remoteAddressInvalid" hidden>Enter an address that starts with https://</p>
+          <label class="field">
+            <span data-i18n="remoteBrowserTokenLabel">Browser token</span>
+            <input id="remote-browser-token" type="password" autocomplete="off" spellcheck="false" aria-describedby="remote-browser-token-hint remote-browser-token-error" />
+          </label>
+          <p id="remote-browser-token-error" class="error" role="alert" data-i18n="remoteBrowserTokenInvalid" hidden>The token must be at least 32 characters long, with no spaces at the start or end.</p>
+          <p id="remote-browser-token-hint" class="hint" data-i18n="remoteBrowserTokenHint">The relay's browser token, set as <code>AGENT_BROWSER_BRIDGE_BROWSER_TOKEN</code> where it runs. It stays in this browser profile: the extension proves it knows the token without sending it.</p>
+          <div id="remote-status" class="status compact" data-state="disconnected" aria-live="polite">
+            <span class="dot" aria-hidden="true"></span>
+            <strong id="remote-status-text"></strong>
+          </div>
+          <ul id="remote-agents" class="agents" hidden></ul>
+
+          <h3 data-i18n="remoteAgentsHeading">Connect an agent</h3>
+          <p class="hint" data-i18n="remoteAgentsHint">Give agents the relay's agent token, never the browser token. Set it as <code>AGENT_BROWSER_BRIDGE_AGENT_TOKEN</code> where the agent runs, then run this to add the relay to Claude Code, or add the JSON to another agent's MCP configuration.</p>
+          <div class="snippet"><code id="remote-claude-code"></code><button class="secondary" data-copy="remote-claude-code" data-i18n="copy">Copy</button></div>
+          <div class="snippet block"><pre id="remote-json"></pre><button class="secondary" data-copy="remote-json" data-i18n="copy">Copy</button></div>
+        </div>
+      </section>
+
+      <section class="settings">
+        <h2 data-i18n="welcomePrivacyHeading">Privacy</h2>
+        <label id="analytics-setting" class="setting toggle">
+          <input type="checkbox" id="analytics-enabled" checked />
+          <span>
+            <strong data-i18n="analyticsTitle">Share anonymous usage statistics</strong>
+            <span class="hint" data-i18n="welcomeAnalyticsHint">Which features are used and the extension version, to help improve the extension.</span>
+          </span>
+        </label>
+        <div id="privacy" class="setting privacy">
+          <p class="hint" data-browser="chrome" data-i18n="welcomePrivacy">
+            Your browsing data stays on your computer: the extension only talks to <code>127.0.0.1</code>. Your agent can read tab titles and URLs,
+            rearrange, group or close tabs, and read and act in web pages when you ask it to. Chrome shows a debugging banner while it works in a page.
+            Tab titles, URLs and page contents are never sent anywhere else by this extension.
+          </p>
+          <p class="hint" data-browser="safari" data-i18n="welcomePrivacySafari" hidden>
+            Your browsing data stays on your computer: the extension only talks to <code>127.0.0.1</code>. Your agent can read tab titles and URLs,
+            and open, arrange or close windows and tabs when you ask it to. It cannot read or act in web pages in Safari. Tab titles and URLs are never
+            sent anywhere else by this extension.
+          </p>
+          <p id="remote-privacy" class="hint" hidden></p>
+          <p class="hint"><a id="privacy-link" target="_blank" rel="noopener" data-i18n="privacyPolicy">Privacy policy</a></p>
+        </div>
+      </section>
+    </main>
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>

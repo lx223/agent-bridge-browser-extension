@@ -1,0 +1,389 @@
+{
+  "locale": {
+    "message": "pt_BR"
+  },
+  "extDescription": {
+    "message": "Controle seu navegador com o agente de IA que preferir: organize guias e opere páginas da web via MCP."
+  },
+  "actionTitle": {
+    "message": "Agent Browser Bridge: configuração e status"
+  },
+  "actionTitleDisconnected": {
+    "message": "Agent Browser Bridge: nenhum agente conectado"
+  },
+  "actionTitleConnected": {
+    "message": "Agent Browser Bridge: agente conectado"
+  },
+  "actionTitleConnectedTo": {
+    "message": "Agent Browser Bridge: conectado a $1"
+  },
+  "notificationReply": {
+    "message": "Clique no botão do Agent Browser Bridge na barra de ferramentas para responder"
+  },
+  "statusChecking": {
+    "message": "Verificando a conexão…"
+  },
+  "statusLooking": {
+    "message": "Procurando seu agente…"
+  },
+  "welcomeLede": {
+    "message": "Deixe seu agente de IA organizar suas guias e operar páginas da web."
+  },
+  "welcomeLedeSafari": {
+    "message": "Deixe seu agente de IA encontrar, abrir, mover e fechar suas guias do Safari."
+  },
+  "profileLabel": {
+    "message": "Este perfil"
+  },
+  "profilePlaceholder": {
+    "message": "Dê um nome"
+  },
+  "profileHint": {
+    "message": "Os agentes usam esse nome para diferenciar seus navegadores e perfis, então você pode pedir o navegador \"Trabalho\"."
+  },
+  "profileSaved": {
+    "message": "Salvo"
+  },
+  "profileNameRemoved": {
+    "message": "Nome removido"
+  },
+  "statusNotConnected": {
+    "message": "Ainda não conectado"
+  },
+  "statusSetUpHint": {
+    "message": "Conecte seu agente abaixo e depois inicie uma nova sessão nele."
+  },
+  "statusConnected": {
+    "message": "Conectado"
+  },
+  "statusConnectedMany_one": {
+    "message": "Conectado a $1 sessão de agente"
+  },
+  "statusConnectedMany_many": {
+    "message": "Conectado a $1 sessões de agente"
+  },
+  "statusConnectedMany_other": {
+    "message": "Conectado a $1 sessões de agente"
+  },
+  "statusConnectedHint": {
+    "message": "Seu agente pode usar este navegador. Experimente um dos prompts abaixo."
+  },
+  "welcomeStepConnect": {
+    "message": "Conecte seu agente"
+  },
+  "stepDone": {
+    "message": "Concluído"
+  },
+  "welcomePickAgent": {
+    "message": "Escolha o agente que você usa."
+  },
+  "welcomeAgentTabs": {
+    "message": "Seu agente"
+  },
+  "welcomeTabOther": {
+    "message": "Outro"
+  },
+  "welcomeClaudeCodeSteps": {
+    "message": "Execute isto uma vez em um terminal e depois inicie uma nova sessão do Claude Code."
+  },
+  "welcomeClaudeDesktopSteps": {
+    "message": "Baixe a extensão e abra o arquivo. O Claude Desktop a instala para você, sem precisar do Node.js."
+  },
+  "welcomeOpensToConfirm": {
+    "message": "O $1 abre e pede sua confirmação."
+  },
+  "welcomeOtherAgentsSteps": {
+    "message": "Adicione isto à configuração MCP do agente e reinicie-o."
+  },
+  "welcomeAgentSetupHint": {
+    "message": "Cole este prompt em um agente que possa executar comandos, como Claude Code, Cursor ou Codex. Ele verifica se o Node.js está instalado e adiciona o servidor."
+  },
+  "showPrompt": {
+    "message": "Mostrar prompt"
+  },
+  "welcomeServerFootnote": {
+    "message": "Seu agente executa um pequeno servidor local, $1, ao qual esta extensão se conecta."
+  },
+  "welcomeStepAsk": {
+    "message": "Peça algo a ele"
+  },
+  "welcomeUndoFootnote": {
+    "message": "Mudou de ideia? As mudanças feitas com $1 podem ser revertidas pedindo ao agente para desfazê-las."
+  },
+  "welcomeSafariFootnote": {
+    "message": "No Safari, seu agente pode abrir, organizar e fechar janelas, além de abrir guias, navegar nelas, alternar entre elas, fixá-las, silenciá-las, duplicá-las, movê-las e fechá-las. Grupos de guias, histórico, favoritos e controle de páginas estão disponíveis no Chrome. Se os títulos e endereços das guias não aparecerem, dê à extensão acesso aos sites no Safari, em Ajustes > Extensões."
+  },
+  "welcomeAnalyticsHint": {
+    "message": "Quais recursos são usados e a versão da extensão, para ajudar a melhorar a extensão."
+  },
+  "instanceId": {
+    "message": "ID da instância: $1"
+  },
+  "welcomeAgentSetupTitle": {
+    "message": "Deixe seu agente configurar"
+  },
+  "copyPrompt": {
+    "message": "Copiar prompt"
+  },
+  "copy": {
+    "message": "Copiar"
+  },
+  "copied": {
+    "message": "Copiado"
+  },
+  "welcomeAddTo": {
+    "message": "Adicionar ao $1"
+  },
+  "welcomeDownloadFor": {
+    "message": "Baixar para $1"
+  },
+  "welcomeTryIntro": {
+    "message": "Com o Chrome aberto, peça ao seu agente:"
+  },
+  "welcomeTryTabs": {
+    "message": "Organize minhas guias abertas em grupos por assunto. Me mostre o plano antes."
+  },
+  "welcomeTryPage": {
+    "message": "Abra as notas da versão do Chrome e resuma o que mudou na versão mais recente."
+  },
+  "welcomeTryIntroSafari": {
+    "message": "Com o Safari aberto, peça ao seu agente:"
+  },
+  "welcomeTryDuplicatesSafari": {
+    "message": "Quais guias eu tenho abertas no Safari? Feche as duplicadas, mas me pergunte antes."
+  },
+  "welcomeTrySortSafari": {
+    "message": "Ordene minhas guias do Safari por site."
+  },
+  "welcomePrivacyHeading": {
+    "message": "Privacidade"
+  },
+  "welcomePrivacy": {
+    "message": "Seus dados de navegação ficam no seu computador: a extensão só se comunica com $1. Seu agente pode ler os títulos e URLs das guias, reorganizar, agrupar ou fechar guias, além de ler e agir em páginas da web quando você pedir. O Chrome mostra um aviso de depuração enquanto o agente trabalha em uma página. Esta extensão nunca envia títulos de guias, URLs ou conteúdo de páginas para nenhum outro lugar."
+  },
+  "welcomePrivacySafari": {
+    "message": "Seus dados de navegação ficam no seu computador: a extensão só se comunica com $1. Seu agente pode ler os títulos e URLs das guias, além de abrir, organizar ou fechar janelas e guias quando você pedir. No Safari, ele não pode ler nem agir em páginas da web. Esta extensão nunca envia títulos de guias ou URLs para nenhum outro lugar."
+  },
+  "analyticsTitle": {
+    "message": "Compartilhar estatísticas de uso anônimas"
+  },
+  "privacyPolicy": {
+    "message": "Política de Privacidade"
+  },
+  "agentStartingUp": {
+    "message": "Agente iniciando"
+  },
+  "sessionInProject": {
+    "message": "$1 em $2"
+  },
+  "sessionStarted": {
+    "message": "Iniciada $1"
+  },
+  "sessionLastUsed_one": {
+    "message": "Último uso: $2 $3, $1 chamada"
+  },
+  "sessionLastUsed_many": {
+    "message": "Último uso: $2 $3, $1 chamadas"
+  },
+  "sessionLastUsed_other": {
+    "message": "Último uso: $2 $3, $1 chamadas"
+  },
+  "sessionUnused": {
+    "message": "Ainda não usou nenhum navegador"
+  },
+  "sessionId": {
+    "message": "Sessão $1"
+  },
+  "serverVersion": {
+    "message": "servidor $1"
+  },
+  "instanceThisBrowser": {
+    "message": "$1, este navegador"
+  },
+  "justNow": {
+    "message": "agora mesmo"
+  },
+  "chatTitle": {
+    "message": "Chat com o agente"
+  },
+  "chatSetup": {
+    "message": "Configuração"
+  },
+  "chatConversation": {
+    "message": "Conversa"
+  },
+  "chatOpenChats": {
+    "message": "Chats abertos"
+  },
+  "chatPastChats": {
+    "message": "Chats anteriores"
+  },
+  "chatEmptyHeading": {
+    "message": "Fale com seu agente por aqui"
+  },
+  "chatEmptyBody": {
+    "message": "Peça ao seu agente para continuar no navegador ou execute o prompt $1 dele. As mensagens dele aparecem aqui, e suas respostas vão direto para ele."
+  },
+  "chatEmptyHint": {
+    "message": "Cada sessão de agente tem sua própria conversa."
+  },
+  "chatInput": {
+    "message": "Envie uma mensagem ao agente"
+  },
+  "chatEnd": {
+    "message": "Encerrar chat"
+  },
+  "chatRemove": {
+    "message": "Remover"
+  },
+  "chatSend": {
+    "message": "Enviar"
+  },
+  "chatError": {
+    "message": "Algo deu errado."
+  },
+  "chatUnseen_one": {
+    "message": "$2 ($1 nova)"
+  },
+  "chatUnseen_many": {
+    "message": "$2 ($1 novas)"
+  },
+  "chatUnseen_other": {
+    "message": "$2 ($1 novas)"
+  },
+  "chatStatusWaiting": {
+    "message": "Aguardando sua resposta"
+  },
+  "chatStatusWorking": {
+    "message": "Trabalhando"
+  },
+  "chatStatusWorkingTool": {
+    "message": "Trabalhando: último uso de $1 $2"
+  },
+  "chatStatusDisconnected": {
+    "message": "Agente desconectado"
+  },
+  "chatStatusReconnecting": {
+    "message": "Reconectando o agente"
+  },
+  "chatStatusEnded": {
+    "message": "Chat encerrado"
+  },
+  "chatHintWaiting": {
+    "message": "Enter para enviar, Shift+Enter para uma nova linha."
+  },
+  "chatHintWorking": {
+    "message": "O agente vai ler sua mensagem na próxima vez que verificar o chat."
+  },
+  "chatHintDisconnected": {
+    "message": "Esta sessão de agente foi encerrada."
+  },
+  "chatHintReconnecting": {
+    "message": "A conexão com o agente caiu. Suas mensagens ficam aqui até ele se reconectar."
+  },
+  "chatHintEnded": {
+    "message": "Peça ao agente para continuar no navegador para conversar de novo."
+  },
+  "chatReadByAgent": {
+    "message": "lida pelo agente"
+  },
+  "chatNotReadYet": {
+    "message": "ainda não lida"
+  },
+  "chatEndedNotice": {
+    "message": "Você encerrou o chat."
+  },
+  "chatConversationGone": {
+    "message": "Esta conversa não existe mais."
+  },
+  "chatEndedError": {
+    "message": "Este chat foi encerrado. Peça ao agente para continuar no navegador para retomá-lo."
+  },
+  "chatTooLong_one": {
+    "message": "As mensagens podem ter no máximo $1 caractere."
+  },
+  "chatTooLong_many": {
+    "message": "As mensagens podem ter no máximo $1 caracteres."
+  },
+  "chatTooLong_other": {
+    "message": "As mensagens podem ter no máximo $1 caracteres."
+  },
+  "askYourAgent": {
+    "message": "Seu agente"
+  },
+  "askFrom": {
+    "message": "$1 pergunta"
+  },
+  "askConfirm": {
+    "message": "Confirmar"
+  },
+  "askCancel": {
+    "message": "Cancelar"
+  },
+  "askConfirmed": {
+    "message": "Confirmado. $1 vai continuar."
+  },
+  "askCancelled": {
+    "message": "Cancelado. $1 não vai continuar."
+  },
+  "askDragHint": {
+    "message": "Arraste para mover"
+  },
+  "askNotificationTitle": {
+    "message": "$1 precisa da sua resposta"
+  },
+  "remoteHeading": {
+    "message": "Acesso remoto"
+  },
+  "remoteToggle": {
+    "message": "Permitir que agentes acessem este navegador por um servidor de retransmissão"
+  },
+  "remoteToggleHint": {
+    "message": "Para agentes em outro computador ou na nuvem. O servidor de retransmissão envia as solicitações deles a este navegador e devolve as respostas, incluindo títulos e URLs das guias e conteúdo das páginas, então use apenas um em que você confia."
+  },
+  "remoteAddressLabel": {
+    "message": "Endereço do servidor de retransmissão"
+  },
+  "remoteAddressInvalid": {
+    "message": "Insira um endereço que comece com https://"
+  },
+  "remoteStatusConnected": {
+    "message": "Conectado ao servidor de retransmissão"
+  },
+  "remoteStatusConnecting": {
+    "message": "Conectando ao servidor de retransmissão…"
+  },
+  "remoteStatusOffline": {
+    "message": "Não foi possível acessar o servidor de retransmissão. Tentando novamente…"
+  },
+  "remoteStatusNoAddress": {
+    "message": "Insira o endereço do servidor de retransmissão para conectar."
+  },
+  "remotePrivacy": {
+    "message": "O acesso remoto está ativado: esta extensão também se conecta a $1, que transmite as solicitações dos seus agentes e as respostas deste navegador, incluindo títulos e URLs das guias e conteúdo das páginas."
+  },
+  "remoteBrowserTokenLabel": {
+    "message": "Token do navegador"
+  },
+  "remoteBrowserTokenHint": {
+    "message": "O token do navegador do servidor de retransmissão, definido como $1 onde ele é executado. Ele fica neste perfil do navegador: a extensão prova que conhece o token sem enviá-lo."
+  },
+  "remoteBrowserTokenInvalid": {
+    "message": "O token precisa ter pelo menos 32 caracteres, sem espaços no início ou no fim."
+  },
+  "remoteStatusNoToken": {
+    "message": "Insira o token do navegador para conectar."
+  },
+  "remoteStatusRejected": {
+    "message": "O servidor de retransmissão não aceitou este token do navegador. Verifique se ele corresponde ao token do navegador do servidor de retransmissão."
+  },
+  "remoteStatusUntrusted": {
+    "message": "Este servidor de retransmissão não conseguiu provar que conhece o token do navegador. Verifique o endereço: talvez ele não seja o seu servidor de retransmissão."
+  },
+  "remoteAgentsHeading": {
+    "message": "Conectar um agente"
+  },
+  "remoteAgentsHint": {
+    "message": "Dê aos agentes o token de agente do servidor de retransmissão, nunca o token do navegador. Defina-o como $1 onde o agente é executado e depois execute isto para adicionar o servidor de retransmissão ao Claude Code ou adicione o JSON à configuração MCP de outro agente."
+  }
+}

@@ -10,7 +10,7 @@ import {
   STATUS_TOOL,
   type HelloMessage,
 } from '@agent-browser-bridge/protocol';
-import type { ExtensionBridge } from './bridge.ts';
+import type { BrowserBridge } from './bridge.ts';
 import { findInstance } from './instances.ts';
 
 interface ListedTab {
@@ -91,7 +91,7 @@ const promptText = (focus?: string) =>
     .filter(Boolean)
     .join('\n');
 
-export function registerNamingTools(server: McpServer, bridge: ExtensionBridge, connected: () => HelloMessage[]) {
+export function registerNamingTools(server: McpServer, bridge: BrowserBridge, connected: () => HelloMessage[]) {
   server.registerTool(
     IDENTIFY_INSTANCES_TOOL,
     {
@@ -157,7 +157,7 @@ export function registerNamingTools(server: McpServer, bridge: ExtensionBridge, 
   );
 }
 
-async function identify(bridge: ExtensionBridge, hello: HelloMessage, size: number): Promise<InstanceSample> {
+async function identify(bridge: BrowserBridge, hello: HelloMessage, size: number): Promise<InstanceSample> {
   const base = {
     browser: hello.browser,
     label: hello.label ?? hello.browser,

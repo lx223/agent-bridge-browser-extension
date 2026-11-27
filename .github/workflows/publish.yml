@@ -1,7 +1,7 @@
 name: Publish Release
 
 # Manually triggered. Releases the extension zip to GitHub using the version in
-# packages/extension/package.json, together with the Claude Desktop extension
+# extensions/browser/package.json, together with the Claude Desktop extension
 # bundle. The MCP server is published to npm by publish-npm.yml.
 on:
   workflow_dispatch:
@@ -26,12 +26,12 @@ jobs:
       - name: Read versions
         id: version
         run: |
-          EXT=$(node -p "require('./packages/extension/package.json').version")
+          EXT=$(node -p "require('./extensions/browser/package.json').version")
           SRV=$(node -p "require('./packages/server/package.json').version")
           echo "extension=$EXT" >> "$GITHUB_OUTPUT"
           echo "server=$SRV" >> "$GITHUB_OUTPUT"
           if git ls-remote --exit-code --tags origin "refs/tags/v$EXT" >/dev/null; then
-            echo "Tag v$EXT already exists; bump packages/extension/package.json" && exit 1
+            echo "Tag v$EXT already exists; bump extensions/browser/package.json" && exit 1
           fi
 
       - run: npm run typecheck
@@ -46,7 +46,7 @@ jobs:
         run: npm run pack:mcpb -w agent-browser-bridge-mcp -- "$GITHUB_WORKSPACE/agent-browser-bridge.mcpb"
 
       - name: Zip extension
-        run: cp LICENSE packages/extension/dist/ && cd packages/extension/dist && zip -r "$GITHUB_WORKSPACE/agent-browser-bridge-${{ steps.version.outputs.extension }}.zip" .
+        run: cp LICENSE extensions/browser/dist/ && cd extensions/browser/dist && zip -r "$GITHUB_WORKSPACE/agent-browser-bridge-${{ steps.version.outputs.extension }}.zip" .
 
       - uses: softprops/action-gh-release@v2
         with:

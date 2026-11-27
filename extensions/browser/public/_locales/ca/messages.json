@@ -1,0 +1,389 @@
+{
+  "locale": {
+    "message": "ca"
+  },
+  "extDescription": {
+    "message": "Controla el teu navegador amb l'agent d'IA que vulguis: organitza les pestanyes i actua en pàgines web mitjançant MCP."
+  },
+  "actionTitle": {
+    "message": "Agent Browser Bridge: configuració i estat"
+  },
+  "actionTitleDisconnected": {
+    "message": "Agent Browser Bridge: cap agent connectat"
+  },
+  "actionTitleConnected": {
+    "message": "Agent Browser Bridge: agent connectat"
+  },
+  "actionTitleConnectedTo": {
+    "message": "Agent Browser Bridge: connectat a $1"
+  },
+  "notificationReply": {
+    "message": "Fes clic al botó d'Agent Browser Bridge de la barra d'eines per respondre"
+  },
+  "statusChecking": {
+    "message": "S'està comprovant la connexió…"
+  },
+  "statusLooking": {
+    "message": "S'està cercant el teu agent…"
+  },
+  "welcomeLede": {
+    "message": "Deixa que el teu agent d'IA organitzi les pestanyes i actuï en pàgines web."
+  },
+  "welcomeLedeSafari": {
+    "message": "Deixa que el teu agent d'IA trobi, obri, mogui i tanqui les teves pestanyes de Safari."
+  },
+  "profileLabel": {
+    "message": "Aquest perfil"
+  },
+  "profilePlaceholder": {
+    "message": "Posa-li un nom"
+  },
+  "profileHint": {
+    "message": "Els agents fan servir aquest nom per distingir els teus navegadors i perfils, així pots demanar el navegador «Feina»."
+  },
+  "profileSaved": {
+    "message": "Desat"
+  },
+  "profileNameRemoved": {
+    "message": "Nom suprimit"
+  },
+  "statusNotConnected": {
+    "message": "Encara no connectat"
+  },
+  "statusSetUpHint": {
+    "message": "Connecta el teu agent a continuació i, després, inicia-hi una sessió nova."
+  },
+  "statusConnected": {
+    "message": "Connectat"
+  },
+  "statusConnectedMany_one": {
+    "message": "Connectat a $1 sessió d'agent"
+  },
+  "statusConnectedMany_many": {
+    "message": "Connectat a $1 sessions d'agent"
+  },
+  "statusConnectedMany_other": {
+    "message": "Connectat a $1 sessions d'agent"
+  },
+  "statusConnectedHint": {
+    "message": "El teu agent pot utilitzar aquest navegador. Prova una de les indicacions de més avall."
+  },
+  "welcomeStepConnect": {
+    "message": "Connecta el teu agent"
+  },
+  "stepDone": {
+    "message": "Fet"
+  },
+  "welcomePickAgent": {
+    "message": "Tria l'agent que fas servir."
+  },
+  "welcomeAgentTabs": {
+    "message": "El teu agent"
+  },
+  "welcomeTabOther": {
+    "message": "Altres"
+  },
+  "welcomeClaudeCodeSteps": {
+    "message": "Executa-ho una vegada en un terminal i, després, inicia una sessió nova de Claude Code."
+  },
+  "welcomeClaudeDesktopSteps": {
+    "message": "Baixa l'extensió i obre el fitxer. Claude Desktop la instal·la per tu, sense necessitat de Node.js."
+  },
+  "welcomeOpensToConfirm": {
+    "message": "$1 s'obre i et demana que ho confirmis."
+  },
+  "welcomeOtherAgentsSteps": {
+    "message": "Afegeix això a la configuració MCP de l'agent i, després, reinicia'l."
+  },
+  "welcomeAgentSetupHint": {
+    "message": "Enganxa aquesta indicació en un agent que pugui executar ordres, com ara Claude Code, Cursor o Codex. Comprova si hi ha Node.js i afegeix el servidor."
+  },
+  "showPrompt": {
+    "message": "Mostra la indicació"
+  },
+  "welcomeServerFootnote": {
+    "message": "El teu agent executa un petit servidor local, $1, al qual es connecta aquesta extensió."
+  },
+  "welcomeStepAsk": {
+    "message": "Demana-li alguna cosa"
+  },
+  "welcomeUndoFootnote": {
+    "message": "Has canviat d'opinió? Els canvis fets amb $1 es poden revertir demanant a l'agent que els desfaci."
+  },
+  "welcomeSafariFootnote": {
+    "message": "A Safari, el teu agent pot obrir, organitzar i tancar finestres, i també obrir pestanyes, navegar-hi, canviar entre elles, fixar-les, silenciar-les, duplicar-les, moure-les i tancar-les. Els grups de pestanyes, l'historial, les adreces d'interès i el control de pàgines estan disponibles a Chrome. Si falten els títols i les adreces de les pestanyes, dona a l'extensió accés als llocs web a Safari, a Configuració > Extensions."
+  },
+  "welcomeAnalyticsHint": {
+    "message": "Quines funcions es fan servir i la versió de l'extensió, per ajudar a millorar l'extensió."
+  },
+  "instanceId": {
+    "message": "ID de la instància: $1"
+  },
+  "welcomeAgentSetupTitle": {
+    "message": "Deixa que el teu agent ho configuri"
+  },
+  "copyPrompt": {
+    "message": "Copia la indicació"
+  },
+  "copy": {
+    "message": "Copia"
+  },
+  "copied": {
+    "message": "Copiat"
+  },
+  "welcomeAddTo": {
+    "message": "Afegeix a $1"
+  },
+  "welcomeDownloadFor": {
+    "message": "Baixa per a $1"
+  },
+  "welcomeTryIntro": {
+    "message": "Amb Chrome obert, demana al teu agent:"
+  },
+  "welcomeTryTabs": {
+    "message": "Organitza les meves pestanyes obertes en grups per tema. Primer mostra'm el pla."
+  },
+  "welcomeTryPage": {
+    "message": "Obre les notes de la versió de Chrome i resumeix què ha canviat a la darrera versió."
+  },
+  "welcomeTryIntroSafari": {
+    "message": "Amb Safari obert, demana al teu agent:"
+  },
+  "welcomeTryDuplicatesSafari": {
+    "message": "Quines pestanyes tinc obertes a Safari? Tanca les duplicades, però pregunta-m'ho abans."
+  },
+  "welcomeTrySortSafari": {
+    "message": "Ordena les meves pestanyes de Safari per lloc web."
+  },
+  "welcomePrivacyHeading": {
+    "message": "Privadesa"
+  },
+  "welcomePrivacy": {
+    "message": "Les teves dades de navegació es queden a l'ordinador: l'extensió només es comunica amb $1. El teu agent pot llegir els títols i els URL de les pestanyes; reorganitzar, agrupar o tancar pestanyes, i llegir pàgines web i actuar-hi quan li ho demanis. Chrome mostra un avís de depuració mentre l'agent treballa en una pàgina. Aquesta extensió no envia mai enlloc més els títols de les pestanyes, els URL ni el contingut de les pàgines."
+  },
+  "welcomePrivacySafari": {
+    "message": "Les teves dades de navegació es queden a l'ordinador: l'extensió només es comunica amb $1. El teu agent pot llegir els títols i els URL de les pestanyes, i obrir, organitzar o tancar finestres i pestanyes quan li ho demanis. A Safari no pot llegir pàgines web ni actuar-hi. Aquesta extensió no envia mai enlloc més els títols ni els URL de les pestanyes."
+  },
+  "analyticsTitle": {
+    "message": "Comparteix estadístiques d'ús anònimes"
+  },
+  "privacyPolicy": {
+    "message": "Política de privadesa"
+  },
+  "agentStartingUp": {
+    "message": "L'agent s'està iniciant"
+  },
+  "sessionInProject": {
+    "message": "$1 a $2"
+  },
+  "sessionStarted": {
+    "message": "Iniciada $1"
+  },
+  "sessionLastUsed_one": {
+    "message": "Darrer ús: $2 $3, $1 crida"
+  },
+  "sessionLastUsed_many": {
+    "message": "Darrer ús: $2 $3, $1 crides"
+  },
+  "sessionLastUsed_other": {
+    "message": "Darrer ús: $2 $3, $1 crides"
+  },
+  "sessionUnused": {
+    "message": "Encara no ha utilitzat cap navegador"
+  },
+  "sessionId": {
+    "message": "Sessió $1"
+  },
+  "serverVersion": {
+    "message": "servidor $1"
+  },
+  "instanceThisBrowser": {
+    "message": "$1, aquest navegador"
+  },
+  "justNow": {
+    "message": "fa un moment"
+  },
+  "chatTitle": {
+    "message": "Xat amb l'agent"
+  },
+  "chatSetup": {
+    "message": "Configuració"
+  },
+  "chatConversation": {
+    "message": "Conversa"
+  },
+  "chatOpenChats": {
+    "message": "Xats oberts"
+  },
+  "chatPastChats": {
+    "message": "Xats anteriors"
+  },
+  "chatEmptyHeading": {
+    "message": "Parla amb el teu agent des d'aquí"
+  },
+  "chatEmptyBody": {
+    "message": "Demana al teu agent que continuï al navegador o executa la seva indicació $1. Els seus missatges apareixen aquí i les teves respostes li arriben directament."
+  },
+  "chatEmptyHint": {
+    "message": "Cada sessió d'agent té la seva pròpia conversa."
+  },
+  "chatInput": {
+    "message": "Escriu a l'agent"
+  },
+  "chatEnd": {
+    "message": "Finalitza el xat"
+  },
+  "chatRemove": {
+    "message": "Elimina"
+  },
+  "chatSend": {
+    "message": "Envia"
+  },
+  "chatError": {
+    "message": "S'ha produït un error."
+  },
+  "chatUnseen_one": {
+    "message": "$2 ($1 nou)"
+  },
+  "chatUnseen_many": {
+    "message": "$2 ($1 nous)"
+  },
+  "chatUnseen_other": {
+    "message": "$2 ($1 nous)"
+  },
+  "chatStatusWaiting": {
+    "message": "S'està esperant la teva resposta"
+  },
+  "chatStatusWorking": {
+    "message": "Treballant"
+  },
+  "chatStatusWorkingTool": {
+    "message": "Treballant: darrer ús de $1 $2"
+  },
+  "chatStatusDisconnected": {
+    "message": "Agent desconnectat"
+  },
+  "chatStatusReconnecting": {
+    "message": "L'agent s'està tornant a connectar"
+  },
+  "chatStatusEnded": {
+    "message": "Xat finalitzat"
+  },
+  "chatHintWaiting": {
+    "message": "Retorn per enviar, Maj+Retorn per a una línia nova."
+  },
+  "chatHintWorking": {
+    "message": "L'agent llegirà el teu missatge la propera vegada que consulti el xat."
+  },
+  "chatHintDisconnected": {
+    "message": "Aquesta sessió d'agent s'ha tancat."
+  },
+  "chatHintReconnecting": {
+    "message": "La connexió de l'agent s'ha interromput. Els teus missatges esperen aquí fins que es torni a connectar."
+  },
+  "chatHintEnded": {
+    "message": "Demana a l'agent que continuï al navegador per tornar a xatejar."
+  },
+  "chatReadByAgent": {
+    "message": "llegit per l'agent"
+  },
+  "chatNotReadYet": {
+    "message": "encara no llegit"
+  },
+  "chatEndedNotice": {
+    "message": "Has finalitzat el xat."
+  },
+  "chatConversationGone": {
+    "message": "Aquesta conversa ja no existeix."
+  },
+  "chatEndedError": {
+    "message": "Aquest xat ha finalitzat. Demana a l'agent que continuï al navegador per reprendre'l."
+  },
+  "chatTooLong_one": {
+    "message": "Els missatges poden tenir com a màxim $1 caràcter."
+  },
+  "chatTooLong_many": {
+    "message": "Els missatges poden tenir com a màxim $1 caràcters."
+  },
+  "chatTooLong_other": {
+    "message": "Els missatges poden tenir com a màxim $1 caràcters."
+  },
+  "askYourAgent": {
+    "message": "El teu agent"
+  },
+  "askFrom": {
+    "message": "$1 pregunta"
+  },
+  "askConfirm": {
+    "message": "Confirma"
+  },
+  "askCancel": {
+    "message": "Cancel·la"
+  },
+  "askConfirmed": {
+    "message": "Confirmat. $1 continuarà."
+  },
+  "askCancelled": {
+    "message": "Cancel·lat. $1 no continuarà."
+  },
+  "askDragHint": {
+    "message": "Arrossega per moure"
+  },
+  "askNotificationTitle": {
+    "message": "$1 necessita la teva resposta"
+  },
+  "remoteHeading": {
+    "message": "Accés remot"
+  },
+  "remoteToggle": {
+    "message": "Permet als agents accedir a aquest navegador mitjançant un servidor de retransmissió"
+  },
+  "remoteToggleHint": {
+    "message": "Per a agents en un altre ordinador o al núvol. El servidor de retransmissió envia les seves sol·licituds a aquest navegador i en retorna les respostes, inclosos els títols i els URL de les pestanyes i el contingut de les pàgines, així que utilitza només un servidor de confiança."
+  },
+  "remoteAddressLabel": {
+    "message": "Adreça del servidor de retransmissió"
+  },
+  "remoteAddressInvalid": {
+    "message": "Introdueix una adreça que comenci per https://"
+  },
+  "remoteStatusConnected": {
+    "message": "Connectat al servidor de retransmissió"
+  },
+  "remoteStatusConnecting": {
+    "message": "S'està connectant al servidor de retransmissió…"
+  },
+  "remoteStatusOffline": {
+    "message": "No es pot accedir al servidor de retransmissió. S'està tornant a provar…"
+  },
+  "remoteStatusNoAddress": {
+    "message": "Introdueix l'adreça del servidor de retransmissió per connectar-te."
+  },
+  "remotePrivacy": {
+    "message": "L'accés remot està activat: aquesta extensió també es connecta a $1, que transmet les sol·licituds dels teus agents i les respostes d'aquest navegador, inclosos els títols i els URL de les pestanyes i el contingut de les pàgines."
+  },
+  "remoteBrowserTokenLabel": {
+    "message": "Testimoni del navegador"
+  },
+  "remoteBrowserTokenHint": {
+    "message": "El testimoni del navegador del servidor de retransmissió, definit com a $1 on s'executa. Es queda en aquest perfil del navegador: l'extensió demostra que el coneix sense enviar-lo."
+  },
+  "remoteBrowserTokenInvalid": {
+    "message": "El testimoni ha de tenir com a mínim 32 caràcters, sense espais al principi ni al final."
+  },
+  "remoteStatusNoToken": {
+    "message": "Introdueix el testimoni del navegador per connectar-te."
+  },
+  "remoteStatusRejected": {
+    "message": "El servidor de retransmissió no ha acceptat aquest testimoni del navegador. Comprova que coincideixi amb el testimoni del navegador del servidor de retransmissió."
+  },
+  "remoteStatusUntrusted": {
+    "message": "Aquest servidor de retransmissió no ha pogut demostrar que coneix el testimoni del navegador. Comprova l'adreça: potser no és el teu servidor de retransmissió."
+  },
+  "remoteAgentsHeading": {
+    "message": "Connecta un agent"
+  },
+  "remoteAgentsHint": {
+    "message": "Dona als agents el testimoni d'agent del servidor de retransmissió, mai el testimoni del navegador. Defineix-lo com a $1 on s'executa l'agent i, després, executa això per afegir el servidor de retransmissió a Claude Code o afegeix el JSON a la configuració MCP d'un altre agent."
+  }
+}

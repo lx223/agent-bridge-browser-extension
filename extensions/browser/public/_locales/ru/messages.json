@@ -1,0 +1,401 @@
+{
+  "locale": {
+    "message": "ru"
+  },
+  "extDescription": {
+    "message": "Управляйте своим браузером с помощью любого ИИ-агента: упорядочивайте вкладки и работайте с веб-страницами через MCP."
+  },
+  "actionTitle": {
+    "message": "Agent Browser Bridge: настройка и статус"
+  },
+  "actionTitleDisconnected": {
+    "message": "Agent Browser Bridge: агент не подключен"
+  },
+  "actionTitleConnected": {
+    "message": "Agent Browser Bridge: агент подключен"
+  },
+  "actionTitleConnectedTo": {
+    "message": "Agent Browser Bridge, подключено: $1"
+  },
+  "notificationReply": {
+    "message": "Чтобы ответить, нажмите кнопку Agent Browser Bridge на панели инструментов"
+  },
+  "statusChecking": {
+    "message": "Проверка подключения…"
+  },
+  "statusLooking": {
+    "message": "Поиск агента…"
+  },
+  "welcomeLede": {
+    "message": "Пусть ИИ-агент упорядочивает ваши вкладки и работает с веб-страницами."
+  },
+  "welcomeLedeSafari": {
+    "message": "Пусть ИИ-агент находит, открывает, перемещает и закрывает ваши вкладки Safari."
+  },
+  "profileLabel": {
+    "message": "Этот профиль"
+  },
+  "profilePlaceholder": {
+    "message": "Дайте ему имя"
+  },
+  "profileHint": {
+    "message": "По этому имени агенты различают ваши браузеры и профили, поэтому можно попросить, например, браузер «Работа»."
+  },
+  "profileSaved": {
+    "message": "Сохранено"
+  },
+  "profileNameRemoved": {
+    "message": "Имя удалено"
+  },
+  "statusNotConnected": {
+    "message": "Пока не подключено"
+  },
+  "statusSetUpHint": {
+    "message": "Подключите своего агента ниже, а затем начните в нём новый сеанс."
+  },
+  "statusConnected": {
+    "message": "Подключено"
+  },
+  "statusConnectedMany_one": {
+    "message": "Подключен $1 сеанс агента"
+  },
+  "statusConnectedMany_few": {
+    "message": "Подключено $1 сеанса агента"
+  },
+  "statusConnectedMany_many": {
+    "message": "Подключено $1 сеансов агента"
+  },
+  "statusConnectedMany_other": {
+    "message": "Подключено $1 сеанса агента"
+  },
+  "statusConnectedHint": {
+    "message": "Ваш агент может использовать этот браузер. Попробуйте один из промптов ниже."
+  },
+  "welcomeStepConnect": {
+    "message": "Подключите своего агента"
+  },
+  "stepDone": {
+    "message": "Готово"
+  },
+  "welcomePickAgent": {
+    "message": "Выберите агента, которым пользуетесь."
+  },
+  "welcomeAgentTabs": {
+    "message": "Ваш агент"
+  },
+  "welcomeTabOther": {
+    "message": "Другой"
+  },
+  "welcomeClaudeCodeSteps": {
+    "message": "Выполните один раз в терминале, а затем начните новый сеанс Claude Code."
+  },
+  "welcomeClaudeDesktopSteps": {
+    "message": "Скачайте расширение и откройте файл. Claude Desktop установит его сам, Node.js не нужен."
+  },
+  "welcomeOpensToConfirm": {
+    "message": "$1 откроется и попросит подтверждения."
+  },
+  "welcomeOtherAgentsSteps": {
+    "message": "Добавьте это в конфигурацию MCP агента, а затем перезапустите его."
+  },
+  "welcomeAgentSetupHint": {
+    "message": "Вставьте этот промпт в агента, который умеет выполнять команды, например Claude Code, Cursor или Codex. Он проверит наличие Node.js, а затем добавит сервер."
+  },
+  "showPrompt": {
+    "message": "Показать промпт"
+  },
+  "welcomeServerFootnote": {
+    "message": "Ваш агент запускает небольшой локальный сервер $1, к которому подключается это расширение."
+  },
+  "welcomeStepAsk": {
+    "message": "Попросите его о чём-нибудь"
+  },
+  "welcomeUndoFootnote": {
+    "message": "Передумали? Изменения, сделанные с помощью $1, можно отменить — просто попросите агента."
+  },
+  "welcomeSafariFootnote": {
+    "message": "В Safari агент может открывать, упорядочивать и закрывать окна, а также открывать, переключать, закреплять, дублировать, перемещать и закрывать вкладки, открывать в них адреса и отключать в них звук. Группы вкладок, история, закладки и управление страницами доступны в Chrome. Если названия и адреса вкладок не видны, разрешите расширению доступ к веб-сайтам в Safari: «Настройки» > «Расширения»."
+  },
+  "welcomeAnalyticsHint": {
+    "message": "Какие функции используются и версия расширения — это помогает улучшать расширение."
+  },
+  "instanceId": {
+    "message": "ID экземпляра: $1"
+  },
+  "welcomeAgentSetupTitle": {
+    "message": "Поручите настройку агенту"
+  },
+  "copyPrompt": {
+    "message": "Копировать промпт"
+  },
+  "copy": {
+    "message": "Копировать"
+  },
+  "copied": {
+    "message": "Скопировано"
+  },
+  "welcomeAddTo": {
+    "message": "Добавить в $1"
+  },
+  "welcomeDownloadFor": {
+    "message": "Скачать для $1"
+  },
+  "welcomeTryIntro": {
+    "message": "Откройте Chrome и попросите агента:"
+  },
+  "welcomeTryTabs": {
+    "message": "Разбей мои открытые вкладки на группы по темам. Сначала покажи план."
+  },
+  "welcomeTryPage": {
+    "message": "Открой заметки о выпуске Chrome и кратко расскажи, что изменилось в последней версии."
+  },
+  "welcomeTryIntroSafari": {
+    "message": "Откройте Safari и попросите агента:"
+  },
+  "welcomeTryDuplicatesSafari": {
+    "message": "Какие вкладки у меня открыты в Safari? Закрой дубликаты, но сначала спроси меня."
+  },
+  "welcomeTrySortSafari": {
+    "message": "Упорядочи мои вкладки Safari по сайтам."
+  },
+  "welcomePrivacyHeading": {
+    "message": "Конфиденциальность"
+  },
+  "welcomePrivacy": {
+    "message": "Данные о просмотре остаются на вашем компьютере: расширение обменивается данными только с $1. Агент может читать названия и URL вкладок, менять их порядок, группировать и закрывать вкладки, а также читать веб-страницы и выполнять на них действия, когда вы его об этом просите. Пока агент работает на странице, Chrome показывает баннер отладки. Это расширение никуда больше не отправляет названия вкладок, URL и содержимое страниц."
+  },
+  "welcomePrivacySafari": {
+    "message": "Данные о просмотре остаются на вашем компьютере: расширение обменивается данными только с $1. Агент может читать названия и URL вкладок, а также открывать, упорядочивать и закрывать окна и вкладки, когда вы его об этом просите. В Safari он не может читать веб-страницы и выполнять на них действия. Это расширение никуда больше не отправляет названия и URL вкладок."
+  },
+  "analyticsTitle": {
+    "message": "Отправлять анонимную статистику использования"
+  },
+  "privacyPolicy": {
+    "message": "Политика конфиденциальности"
+  },
+  "agentStartingUp": {
+    "message": "Агент запускается"
+  },
+  "sessionInProject": {
+    "message": "$1 в $2"
+  },
+  "sessionStarted": {
+    "message": "Запущен $1"
+  },
+  "sessionLastUsed_one": {
+    "message": "Последний вызов: $2 $3, всего $1 вызов"
+  },
+  "sessionLastUsed_few": {
+    "message": "Последний вызов: $2 $3, всего $1 вызова"
+  },
+  "sessionLastUsed_many": {
+    "message": "Последний вызов: $2 $3, всего $1 вызовов"
+  },
+  "sessionLastUsed_other": {
+    "message": "Последний вызов: $2 $3, всего $1 вызова"
+  },
+  "sessionUnused": {
+    "message": "Браузер ещё не использовался"
+  },
+  "sessionId": {
+    "message": "Сеанс $1"
+  },
+  "serverVersion": {
+    "message": "сервер $1"
+  },
+  "instanceThisBrowser": {
+    "message": "$1, этот браузер"
+  },
+  "justNow": {
+    "message": "только что"
+  },
+  "chatTitle": {
+    "message": "Чат с агентом"
+  },
+  "chatSetup": {
+    "message": "Настройка"
+  },
+  "chatConversation": {
+    "message": "Разговор"
+  },
+  "chatOpenChats": {
+    "message": "Открытые чаты"
+  },
+  "chatPastChats": {
+    "message": "Прошлые чаты"
+  },
+  "chatEmptyHeading": {
+    "message": "Общайтесь с агентом прямо здесь"
+  },
+  "chatEmptyBody": {
+    "message": "Попросите агента продолжить в браузере или запустите его промпт $1. Его сообщения появятся здесь, а ваши ответы сразу уйдут к нему."
+  },
+  "chatEmptyHint": {
+    "message": "У каждого сеанса агента свой разговор."
+  },
+  "chatInput": {
+    "message": "Сообщение агенту"
+  },
+  "chatEnd": {
+    "message": "Завершить чат"
+  },
+  "chatRemove": {
+    "message": "Удалить"
+  },
+  "chatSend": {
+    "message": "Отправить"
+  },
+  "chatError": {
+    "message": "Что-то пошло не так."
+  },
+  "chatUnseen_one": {
+    "message": "$2 (новых: $1)"
+  },
+  "chatUnseen_few": {
+    "message": "$2 (новых: $1)"
+  },
+  "chatUnseen_many": {
+    "message": "$2 (новых: $1)"
+  },
+  "chatUnseen_other": {
+    "message": "$2 (новых: $1)"
+  },
+  "chatStatusWaiting": {
+    "message": "Ждёт вашего ответа"
+  },
+  "chatStatusWorking": {
+    "message": "Работает"
+  },
+  "chatStatusWorkingTool": {
+    "message": "Работает: вызвал $1 $2"
+  },
+  "chatStatusDisconnected": {
+    "message": "Агент отключился"
+  },
+  "chatStatusReconnecting": {
+    "message": "Агент переподключается"
+  },
+  "chatStatusEnded": {
+    "message": "Чат завершён"
+  },
+  "chatHintWaiting": {
+    "message": "Enter — отправить, Shift+Enter — новая строка."
+  },
+  "chatHintWorking": {
+    "message": "Агент прочитает ваше сообщение, когда в следующий раз проверит чат."
+  },
+  "chatHintDisconnected": {
+    "message": "Этот сеанс агента закрыт."
+  },
+  "chatHintReconnecting": {
+    "message": "Соединение с агентом прервалось. Ваши сообщения будут ждать здесь, пока он не переподключится."
+  },
+  "chatHintEnded": {
+    "message": "Чтобы снова пообщаться, попросите агента продолжить в браузере."
+  },
+  "chatReadByAgent": {
+    "message": "прочитано агентом"
+  },
+  "chatNotReadYet": {
+    "message": "ещё не прочитано"
+  },
+  "chatEndedNotice": {
+    "message": "Вы завершили чат."
+  },
+  "chatConversationGone": {
+    "message": "Этого разговора больше нет."
+  },
+  "chatEndedError": {
+    "message": "Этот чат завершён. Чтобы начать его снова, попросите агента продолжить в браузере."
+  },
+  "chatTooLong_one": {
+    "message": "Сообщение может содержать не более $1 символа."
+  },
+  "chatTooLong_few": {
+    "message": "Сообщение может содержать не более $1 символов."
+  },
+  "chatTooLong_many": {
+    "message": "Сообщение может содержать не более $1 символов."
+  },
+  "chatTooLong_other": {
+    "message": "Сообщение может содержать не более $1 символа."
+  },
+  "askYourAgent": {
+    "message": "Ваш агент"
+  },
+  "askFrom": {
+    "message": "$1 спрашивает"
+  },
+  "askConfirm": {
+    "message": "Подтвердить"
+  },
+  "askCancel": {
+    "message": "Отмена"
+  },
+  "askConfirmed": {
+    "message": "Подтверждено. $1 продолжит."
+  },
+  "askCancelled": {
+    "message": "Отменено. $1 не будет продолжать."
+  },
+  "askDragHint": {
+    "message": "Перетащите, чтобы переместить"
+  },
+  "askNotificationTitle": {
+    "message": "$1 ждёт вашего ответа"
+  },
+  "remoteHeading": {
+    "message": "Удалённый доступ"
+  },
+  "remoteToggle": {
+    "message": "Разрешить агентам доступ к этому браузеру через ретранслятор"
+  },
+  "remoteToggleHint": {
+    "message": "Для агентов на другом компьютере или в облаке. Ретранслятор передаёт их запросы этому браузеру, а ответы обратно, включая названия и URL вкладок и содержимое страниц, поэтому используйте только ретранслятор, которому доверяете."
+  },
+  "remoteAddressLabel": {
+    "message": "Адрес ретранслятора"
+  },
+  "remoteAddressInvalid": {
+    "message": "Введите адрес, начинающийся с https://"
+  },
+  "remoteStatusConnected": {
+    "message": "Подключено к ретранслятору"
+  },
+  "remoteStatusConnecting": {
+    "message": "Подключение к ретранслятору…"
+  },
+  "remoteStatusOffline": {
+    "message": "Ретранслятор недоступен. Повторная попытка…"
+  },
+  "remoteStatusNoAddress": {
+    "message": "Введите адрес ретранслятора, чтобы подключиться."
+  },
+  "remotePrivacy": {
+    "message": "Удалённый доступ включён: это расширение также подключается к $1, который передаёт запросы ваших агентов и ответы этого браузера, включая названия и URL вкладок и содержимое страниц."
+  },
+  "remoteBrowserTokenLabel": {
+    "message": "Токен браузера"
+  },
+  "remoteBrowserTokenHint": {
+    "message": "Токен браузера ретранслятора, заданный как $1 там, где работает ретранслятор. Он остаётся в этом профиле браузера: расширение доказывает, что знает токен, не отправляя его."
+  },
+  "remoteBrowserTokenInvalid": {
+    "message": "Токен должен содержать не менее 32 символов и не должен начинаться или заканчиваться пробелом."
+  },
+  "remoteStatusNoToken": {
+    "message": "Введите токен браузера, чтобы подключиться."
+  },
+  "remoteStatusRejected": {
+    "message": "Ретранслятор не принял этот токен браузера. Проверьте, что он совпадает с токеном браузера ретранслятора."
+  },
+  "remoteStatusUntrusted": {
+    "message": "Этот ретранслятор не смог доказать, что знает токен браузера. Проверьте адрес: возможно, это не ваш ретранслятор."
+  },
+  "remoteAgentsHeading": {
+    "message": "Подключение агента"
+  },
+  "remoteAgentsHint": {
+    "message": "Передавайте агентам токен агента ретранслятора, но никогда не токен браузера. Задайте его как $1 там, где работает агент, затем выполните эту команду, чтобы добавить ретранслятор в Claude Code, или добавьте JSON в конфигурацию MCP другого агента."
+  }
+}

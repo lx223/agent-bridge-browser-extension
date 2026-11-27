@@ -10,7 +10,7 @@ import { build } from 'vite';
 import { DEFAULT_PORT, STATUS_TOOL } from '@agent-browser-bridge/protocol';
 
 const ROOT = resolve(import.meta.dirname, '../..');
-const EXTENSION_ROOT = join(ROOT, 'packages/extension');
+const EXTENSION_ROOT = join(ROOT, 'extensions/browser');
 export const EXTENSION_DIST = join(EXTENSION_ROOT, 'dist');
 const SERVER_ENTRY = resolve(ROOT, process.env.E2E_SERVER_ENTRY ?? 'packages/server/dist/index.js');
 export const SERVER_RUNS_LAUNCHER = process.env.E2E_SERVER_ENTRY === undefined;
@@ -18,7 +18,7 @@ const FIXTURES = join(import.meta.dirname, 'fixtures');
 const CONNECT_TIMEOUT_MS = 30_000;
 export const LOCAL_ONLY = '--host-resolver-rules=MAP * ~NOTFOUND, EXCLUDE 127.0.0.1';
 
-export const EXTENSION_VERSION: string = JSON.parse(readFileSync(join(ROOT, 'packages/extension/package.json'), 'utf-8')).version;
+export const EXTENSION_VERSION: string = JSON.parse(readFileSync(join(ROOT, 'extensions/browser/package.json'), 'utf-8')).version;
 
 interface ToolContent {
   type: string;

@@ -20,7 +20,7 @@ import {
   type ChatInbox,
   type HelloMessage,
 } from '@agent-browser-bridge/protocol';
-import type { ExtensionBridge } from './bridge.ts';
+import type { BrowserBridge } from './bridge.ts';
 import type { InstanceSelector } from './instances.ts';
 
 export const DEFAULT_CHAT_WAIT_SECONDS = 50;
@@ -113,7 +113,7 @@ export class BrowserChat {
   private latest?: string;
 
   constructor(
-    private readonly bridge: ExtensionBridge,
+    private readonly bridge: BrowserBridge,
     private readonly selector: InstanceSelector,
     private readonly connected: () => HelloMessage[],
   ) {}

@@ -1,0 +1,377 @@
+{
+  "locale": {
+    "message": "vi"
+  },
+  "extDescription": {
+    "message": "Điều khiển trình duyệt của bạn bằng bất kỳ tác nhân AI nào bạn thích: sắp xếp thẻ và thao tác trên trang web qua MCP."
+  },
+  "actionTitle": {
+    "message": "Agent Browser Bridge: thiết lập và trạng thái"
+  },
+  "actionTitleDisconnected": {
+    "message": "Agent Browser Bridge: chưa có tác nhân nào kết nối"
+  },
+  "actionTitleConnected": {
+    "message": "Agent Browser Bridge: tác nhân đã kết nối"
+  },
+  "actionTitleConnectedTo": {
+    "message": "Agent Browser Bridge: đã kết nối với $1"
+  },
+  "notificationReply": {
+    "message": "Nhấp vào nút Agent Browser Bridge trên thanh công cụ để trả lời"
+  },
+  "statusChecking": {
+    "message": "Đang kiểm tra kết nối…"
+  },
+  "statusLooking": {
+    "message": "Đang tìm tác nhân của bạn…"
+  },
+  "welcomeLede": {
+    "message": "Để tác nhân AI của bạn sắp xếp thẻ và thao tác trên trang web."
+  },
+  "welcomeLedeSafari": {
+    "message": "Để tác nhân AI của bạn tìm, mở, di chuyển và đóng thẻ Safari."
+  },
+  "profileLabel": {
+    "message": "Hồ sơ này"
+  },
+  "profilePlaceholder": {
+    "message": "Đặt tên"
+  },
+  "profileHint": {
+    "message": "Tác nhân dùng tên này để phân biệt các trình duyệt và hồ sơ của bạn, nhờ đó bạn có thể yêu cầu dùng trình duyệt Công việc."
+  },
+  "profileSaved": {
+    "message": "Đã lưu"
+  },
+  "profileNameRemoved": {
+    "message": "Đã xóa tên"
+  },
+  "statusNotConnected": {
+    "message": "Chưa kết nối"
+  },
+  "statusSetUpHint": {
+    "message": "Kết nối tác nhân của bạn bên dưới, rồi bắt đầu một phiên mới trong tác nhân đó."
+  },
+  "statusConnected": {
+    "message": "Đã kết nối"
+  },
+  "statusConnectedMany_one": {
+    "message": "Đã kết nối với $1 phiên tác nhân"
+  },
+  "statusConnectedMany_other": {
+    "message": "Đã kết nối với $1 phiên tác nhân"
+  },
+  "statusConnectedHint": {
+    "message": "Tác nhân của bạn có thể sử dụng trình duyệt này. Hãy thử một trong các câu lệnh bên dưới."
+  },
+  "welcomeStepConnect": {
+    "message": "Kết nối tác nhân của bạn"
+  },
+  "stepDone": {
+    "message": "Xong"
+  },
+  "welcomePickAgent": {
+    "message": "Chọn tác nhân bạn dùng."
+  },
+  "welcomeAgentTabs": {
+    "message": "Tác nhân của bạn"
+  },
+  "welcomeTabOther": {
+    "message": "Khác"
+  },
+  "welcomeClaudeCodeSteps": {
+    "message": "Chạy lệnh này một lần trong cửa sổ dòng lệnh, rồi bắt đầu một phiên Claude Code mới."
+  },
+  "welcomeClaudeDesktopSteps": {
+    "message": "Tải tiện ích xuống và mở tệp. Claude Desktop sẽ cài đặt giúp bạn, không cần Node.js."
+  },
+  "welcomeOpensToConfirm": {
+    "message": "$1 sẽ mở ra và yêu cầu bạn xác nhận."
+  },
+  "welcomeOtherAgentsSteps": {
+    "message": "Thêm đoạn này vào cấu hình MCP của tác nhân, rồi khởi động lại tác nhân."
+  },
+  "welcomeAgentSetupHint": {
+    "message": "Dán câu lệnh này vào một tác nhân có thể chạy lệnh, chẳng hạn như Claude Code, Cursor hoặc Codex. Tác nhân sẽ kiểm tra Node.js, rồi thêm máy chủ."
+  },
+  "showPrompt": {
+    "message": "Hiện câu lệnh"
+  },
+  "welcomeServerFootnote": {
+    "message": "Tác nhân của bạn chạy một máy chủ cục bộ nhỏ, $1, để tiện ích này kết nối."
+  },
+  "welcomeStepAsk": {
+    "message": "Hỏi thử tác nhân"
+  },
+  "welcomeUndoFootnote": {
+    "message": "Đổi ý? Bạn có thể hoàn tác các thay đổi được thực hiện bằng $1 bằng cách yêu cầu tác nhân hoàn tác."
+  },
+  "welcomeSafariFootnote": {
+    "message": "Trong Safari, tác nhân của bạn có thể mở, sắp xếp và đóng cửa sổ, cũng như mở, điều hướng, chuyển đổi, ghim, tắt tiếng, nhân bản, di chuyển và đóng thẻ. Nhóm thẻ, lịch sử, dấu trang và điều khiển trang có trong Chrome. Nếu thiếu tiêu đề và địa chỉ của thẻ, hãy cấp cho tiện ích quyền truy cập trang web trong Safari tại Cài đặt > Tiện ích mở rộng."
+  },
+  "welcomeAnalyticsHint": {
+    "message": "Tính năng nào được dùng và phiên bản tiện ích, để giúp cải thiện tiện ích."
+  },
+  "instanceId": {
+    "message": "Mã phiên bản: $1"
+  },
+  "welcomeAgentSetupTitle": {
+    "message": "Để tác nhân tự thiết lập"
+  },
+  "copyPrompt": {
+    "message": "Sao chép câu lệnh"
+  },
+  "copy": {
+    "message": "Sao chép"
+  },
+  "copied": {
+    "message": "Đã sao chép"
+  },
+  "welcomeAddTo": {
+    "message": "Thêm vào $1"
+  },
+  "welcomeDownloadFor": {
+    "message": "Tải xuống cho $1"
+  },
+  "welcomeTryIntro": {
+    "message": "Khi Chrome đang mở, hãy yêu cầu tác nhân:"
+  },
+  "welcomeTryTabs": {
+    "message": "Sắp xếp các thẻ đang mở thành nhóm theo chủ đề. Cho tôi xem kế hoạch trước."
+  },
+  "welcomeTryPage": {
+    "message": "Mở ghi chú phát hành của Chrome và tóm tắt những thay đổi trong phiên bản mới nhất."
+  },
+  "welcomeTryIntroSafari": {
+    "message": "Khi Safari đang mở, hãy yêu cầu tác nhân:"
+  },
+  "welcomeTryDuplicatesSafari": {
+    "message": "Tôi đang mở những thẻ nào trong Safari? Đóng các thẻ trùng lặp, nhưng hỏi tôi trước."
+  },
+  "welcomeTrySortSafari": {
+    "message": "Sắp xếp các thẻ Safari của tôi theo trang web."
+  },
+  "welcomePrivacyHeading": {
+    "message": "Quyền riêng tư"
+  },
+  "welcomePrivacy": {
+    "message": "Dữ liệu duyệt web của bạn vẫn ở trên máy tính của bạn: tiện ích chỉ giao tiếp với $1. Tác nhân có thể đọc tiêu đề và URL của thẻ, sắp xếp lại, nhóm hoặc đóng thẻ, cũng như đọc và thao tác trên trang web khi bạn yêu cầu. Chrome hiển thị biểu ngữ gỡ lỗi khi tác nhân thao tác trên một trang. Tiện ích này không bao giờ gửi tiêu đề thẻ, URL hay nội dung trang đến bất kỳ nơi nào khác."
+  },
+  "welcomePrivacySafari": {
+    "message": "Dữ liệu duyệt web của bạn vẫn ở trên máy tính của bạn: tiện ích chỉ giao tiếp với $1. Tác nhân có thể đọc tiêu đề và URL của thẻ, cũng như mở, sắp xếp hoặc đóng cửa sổ và thẻ khi bạn yêu cầu. Tác nhân không thể đọc hoặc thao tác trên trang web trong Safari. Tiện ích này không bao giờ gửi tiêu đề thẻ hay URL đến bất kỳ nơi nào khác."
+  },
+  "analyticsTitle": {
+    "message": "Chia sẻ số liệu thống kê sử dụng ẩn danh"
+  },
+  "privacyPolicy": {
+    "message": "Chính sách quyền riêng tư"
+  },
+  "agentStartingUp": {
+    "message": "Tác nhân đang khởi động"
+  },
+  "sessionInProject": {
+    "message": "$1 trong $2"
+  },
+  "sessionStarted": {
+    "message": "Bắt đầu $1"
+  },
+  "sessionLastUsed_one": {
+    "message": "Dùng $2 lần cuối $3, $1 lệnh gọi"
+  },
+  "sessionLastUsed_other": {
+    "message": "Dùng $2 lần cuối $3, $1 lệnh gọi"
+  },
+  "sessionUnused": {
+    "message": "Chưa dùng trình duyệt"
+  },
+  "sessionId": {
+    "message": "Phiên $1"
+  },
+  "serverVersion": {
+    "message": "máy chủ $1"
+  },
+  "instanceThisBrowser": {
+    "message": "$1, trình duyệt này"
+  },
+  "justNow": {
+    "message": "vừa xong"
+  },
+  "chatTitle": {
+    "message": "Trò chuyện với tác nhân"
+  },
+  "chatSetup": {
+    "message": "Thiết lập"
+  },
+  "chatConversation": {
+    "message": "Cuộc trò chuyện"
+  },
+  "chatOpenChats": {
+    "message": "Cuộc trò chuyện đang mở"
+  },
+  "chatPastChats": {
+    "message": "Cuộc trò chuyện trước đây"
+  },
+  "chatEmptyHeading": {
+    "message": "Trò chuyện với tác nhân của bạn tại đây"
+  },
+  "chatEmptyBody": {
+    "message": "Yêu cầu tác nhân tiếp tục trong trình duyệt hoặc chạy câu lệnh $1 của tác nhân. Tin nhắn của tác nhân sẽ xuất hiện ở đây và câu trả lời của bạn sẽ được gửi thẳng lại cho tác nhân."
+  },
+  "chatEmptyHint": {
+    "message": "Mỗi phiên tác nhân có cuộc trò chuyện riêng."
+  },
+  "chatInput": {
+    "message": "Nhắn tin cho tác nhân"
+  },
+  "chatEnd": {
+    "message": "Kết thúc trò chuyện"
+  },
+  "chatRemove": {
+    "message": "Xóa"
+  },
+  "chatSend": {
+    "message": "Gửi"
+  },
+  "chatError": {
+    "message": "Đã xảy ra lỗi."
+  },
+  "chatUnseen_one": {
+    "message": "$2 ($1 tin mới)"
+  },
+  "chatUnseen_other": {
+    "message": "$2 ($1 tin mới)"
+  },
+  "chatStatusWaiting": {
+    "message": "Đang chờ bạn trả lời"
+  },
+  "chatStatusWorking": {
+    "message": "Đang làm việc"
+  },
+  "chatStatusWorkingTool": {
+    "message": "Đang làm việc: đã dùng $1 $2"
+  },
+  "chatStatusDisconnected": {
+    "message": "Tác nhân đã ngắt kết nối"
+  },
+  "chatStatusReconnecting": {
+    "message": "Tác nhân đang kết nối lại"
+  },
+  "chatStatusEnded": {
+    "message": "Đã kết thúc trò chuyện"
+  },
+  "chatHintWaiting": {
+    "message": "Nhấn Enter để gửi, Shift+Enter để xuống dòng."
+  },
+  "chatHintWorking": {
+    "message": "Tác nhân sẽ đọc tin nhắn của bạn vào lần kiểm tra cuộc trò chuyện tiếp theo."
+  },
+  "chatHintDisconnected": {
+    "message": "Phiên tác nhân này đã đóng."
+  },
+  "chatHintReconnecting": {
+    "message": "Kết nối với tác nhân bị gián đoạn. Tin nhắn của bạn sẽ chờ ở đây cho đến khi tác nhân kết nối lại."
+  },
+  "chatHintEnded": {
+    "message": "Yêu cầu tác nhân tiếp tục trong trình duyệt để trò chuyện lại."
+  },
+  "chatReadByAgent": {
+    "message": "tác nhân đã đọc"
+  },
+  "chatNotReadYet": {
+    "message": "chưa đọc"
+  },
+  "chatEndedNotice": {
+    "message": "Bạn đã kết thúc cuộc trò chuyện."
+  },
+  "chatConversationGone": {
+    "message": "Cuộc trò chuyện này không còn nữa."
+  },
+  "chatEndedError": {
+    "message": "Cuộc trò chuyện này đã kết thúc. Hãy yêu cầu tác nhân tiếp tục trong trình duyệt để bắt đầu lại."
+  },
+  "chatTooLong_one": {
+    "message": "Tin nhắn chỉ được dài tối đa $1 ký tự."
+  },
+  "chatTooLong_other": {
+    "message": "Tin nhắn chỉ được dài tối đa $1 ký tự."
+  },
+  "askYourAgent": {
+    "message": "Tác nhân của bạn"
+  },
+  "askFrom": {
+    "message": "$1 hỏi"
+  },
+  "askConfirm": {
+    "message": "Xác nhận"
+  },
+  "askCancel": {
+    "message": "Hủy"
+  },
+  "askConfirmed": {
+    "message": "Đã xác nhận. $1 sẽ tiếp tục."
+  },
+  "askCancelled": {
+    "message": "Đã hủy. $1 sẽ không tiếp tục."
+  },
+  "askDragHint": {
+    "message": "Kéo để di chuyển"
+  },
+  "askNotificationTitle": {
+    "message": "$1 cần câu trả lời của bạn"
+  },
+  "remoteHeading": {
+    "message": "Truy cập từ xa"
+  },
+  "remoteToggle": {
+    "message": "Cho phép tác nhân truy cập trình duyệt này qua máy chủ chuyển tiếp"
+  },
+  "remoteToggleHint": {
+    "message": "Dành cho tác nhân trên máy tính khác hoặc trên đám mây. Máy chủ chuyển tiếp chuyển yêu cầu của chúng đến trình duyệt này và gửi phản hồi trở lại, bao gồm tiêu đề và URL của thẻ cũng như nội dung trang, vì vậy chỉ dùng máy chủ chuyển tiếp mà bạn tin tưởng."
+  },
+  "remoteAddressLabel": {
+    "message": "Địa chỉ máy chủ chuyển tiếp"
+  },
+  "remoteAddressInvalid": {
+    "message": "Nhập địa chỉ bắt đầu bằng https://"
+  },
+  "remoteStatusConnected": {
+    "message": "Đã kết nối với máy chủ chuyển tiếp"
+  },
+  "remoteStatusConnecting": {
+    "message": "Đang kết nối với máy chủ chuyển tiếp…"
+  },
+  "remoteStatusOffline": {
+    "message": "Không thể kết nối với máy chủ chuyển tiếp. Đang thử lại…"
+  },
+  "remoteStatusNoAddress": {
+    "message": "Nhập địa chỉ máy chủ chuyển tiếp để kết nối."
+  },
+  "remotePrivacy": {
+    "message": "Truy cập từ xa đang bật: tiện ích này cũng kết nối với $1, nơi chuyển tiếp yêu cầu của tác nhân và phản hồi của trình duyệt này, bao gồm tiêu đề và URL của thẻ cũng như nội dung trang."
+  },
+  "remoteBrowserTokenLabel": {
+    "message": "Mã trình duyệt"
+  },
+  "remoteBrowserTokenHint": {
+    "message": "Mã trình duyệt của máy chủ chuyển tiếp, được đặt làm $1 ở nơi máy chủ chạy. Mã này chỉ nằm trong hồ sơ trình duyệt này: tiện ích chứng minh rằng mình biết mã mà không cần gửi mã đi."
+  },
+  "remoteBrowserTokenInvalid": {
+    "message": "Mã phải dài ít nhất 32 ký tự và không có khoảng trắng ở đầu hoặc cuối."
+  },
+  "remoteStatusNoToken": {
+    "message": "Nhập mã trình duyệt để kết nối."
+  },
+  "remoteStatusRejected": {
+    "message": "Máy chủ chuyển tiếp không chấp nhận mã trình duyệt này. Hãy kiểm tra xem mã có khớp với mã trình duyệt của máy chủ chuyển tiếp không."
+  },
+  "remoteStatusUntrusted": {
+    "message": "Máy chủ chuyển tiếp này không chứng minh được rằng nó biết mã trình duyệt. Hãy kiểm tra địa chỉ: đây có thể không phải máy chủ chuyển tiếp của bạn."
+  },
+  "remoteAgentsHeading": {
+    "message": "Kết nối tác nhân"
+  },
+  "remoteAgentsHint": {
+    "message": "Hãy cung cấp cho tác nhân mã tác nhân của máy chủ chuyển tiếp, tuyệt đối không dùng mã trình duyệt. Đặt mã làm $1 ở nơi tác nhân chạy, rồi chạy lệnh này để thêm máy chủ chuyển tiếp vào Claude Code, hoặc thêm JSON vào cấu hình MCP của tác nhân khác."
+  }
+}

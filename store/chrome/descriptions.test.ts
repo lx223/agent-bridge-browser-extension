@@ -3,7 +3,7 @@ import { basename, join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 
 const DESCRIPTIONS_DIR = join(import.meta.dirname, 'descriptions');
-const EXTENSION_LOCALES_DIR = join(import.meta.dirname, '../../packages/extension/public/_locales');
+const EXTENSION_LOCALES_DIR = join(import.meta.dirname, '../../extensions/browser/public/_locales');
 const DEFAULT_LOCALE = 'en';
 const MAX_DESCRIPTION_LENGTH = 16_000;
 

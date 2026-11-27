@@ -1,0 +1,401 @@
+{
+  "locale": {
+    "message": "sk"
+  },
+  "extDescription": {
+    "message": "Ovládajte svoj prehliadač ľubovoľným AI agentom: usporiadajte karty a pracujte s webovými stránkami cez MCP."
+  },
+  "actionTitle": {
+    "message": "Agent Browser Bridge: nastavenie a stav"
+  },
+  "actionTitleDisconnected": {
+    "message": "Agent Browser Bridge: nie je pripojený žiadny agent"
+  },
+  "actionTitleConnected": {
+    "message": "Agent Browser Bridge: agent je pripojený"
+  },
+  "actionTitleConnectedTo": {
+    "message": "Agent Browser Bridge, pripojené: $1"
+  },
+  "notificationReply": {
+    "message": "Ak chcete odpovedať, kliknite na tlačidlo Agent Browser Bridge na paneli s nástrojmi"
+  },
+  "statusChecking": {
+    "message": "Kontroluje sa pripojenie…"
+  },
+  "statusLooking": {
+    "message": "Hľadá sa agent…"
+  },
+  "welcomeLede": {
+    "message": "Nechajte AI agenta usporiadať vaše karty a pracovať s webovými stránkami."
+  },
+  "welcomeLedeSafari": {
+    "message": "Nechajte AI agenta vyhľadávať, otvárať, presúvať a zatvárať vaše karty v Safari."
+  },
+  "profileLabel": {
+    "message": "Tento profil"
+  },
+  "profilePlaceholder": {
+    "message": "Pomenujte ho"
+  },
+  "profileHint": {
+    "message": "Podľa tohto názvu agenti rozlišujú vaše prehliadače a profily, takže môžete požiadať o prehliadač „Práca“."
+  },
+  "profileSaved": {
+    "message": "Uložené"
+  },
+  "profileNameRemoved": {
+    "message": "Názov odstránený"
+  },
+  "statusNotConnected": {
+    "message": "Zatiaľ nepripojené"
+  },
+  "statusSetUpHint": {
+    "message": "Nižšie pripojte svojho agenta a potom v ňom spustite novú reláciu."
+  },
+  "statusConnected": {
+    "message": "Pripojené"
+  },
+  "statusConnectedMany_one": {
+    "message": "Pripojená $1 relácia agenta"
+  },
+  "statusConnectedMany_few": {
+    "message": "Pripojené $1 relácie agenta"
+  },
+  "statusConnectedMany_many": {
+    "message": "Pripojené $1 relácie agenta"
+  },
+  "statusConnectedMany_other": {
+    "message": "Pripojených $1 relácií agenta"
+  },
+  "statusConnectedHint": {
+    "message": "Váš agent môže používať tento prehliadač. Vyskúšajte niektorý z promptov nižšie."
+  },
+  "welcomeStepConnect": {
+    "message": "Pripojte svojho agenta"
+  },
+  "stepDone": {
+    "message": "Hotovo"
+  },
+  "welcomePickAgent": {
+    "message": "Vyberte agenta, ktorého používate."
+  },
+  "welcomeAgentTabs": {
+    "message": "Váš agent"
+  },
+  "welcomeTabOther": {
+    "message": "Iný"
+  },
+  "welcomeClaudeCodeSteps": {
+    "message": "Raz spustite v termináli a potom začnite novú reláciu Claude Code."
+  },
+  "welcomeClaudeDesktopSteps": {
+    "message": "Stiahnite si rozšírenie a otvorte súbor. Claude Desktop ho nainštaluje za vás, Node.js nie je potrebný."
+  },
+  "welcomeOpensToConfirm": {
+    "message": "$1 sa otvorí a požiada vás o potvrdenie."
+  },
+  "welcomeOtherAgentsSteps": {
+    "message": "Pridajte toto do konfigurácie MCP agenta a potom ho reštartujte."
+  },
+  "welcomeAgentSetupHint": {
+    "message": "Vložte tento prompt do agenta, ktorý vie spúšťať príkazy, napríklad Claude Code, Cursor alebo Codex. Skontroluje Node.js a potom pridá server."
+  },
+  "showPrompt": {
+    "message": "Zobraziť prompt"
+  },
+  "welcomeServerFootnote": {
+    "message": "Váš agent spúšťa malý lokálny server $1, ku ktorému sa toto rozšírenie pripojí."
+  },
+  "welcomeStepAsk": {
+    "message": "Požiadajte ho o niečo"
+  },
+  "welcomeUndoFootnote": {
+    "message": "Rozmysleli ste si to? Zmeny vykonané pomocou $1 môžete vrátiť – stačí o to agenta požiadať."
+  },
+  "welcomeSafariFootnote": {
+    "message": "V Safari môže agent otvárať, usporiadať a zatvárať okná a tiež otvárať, prepínať, pripínať, stlmovať, duplikovať, presúvať a zatvárať karty a otvárať v nich adresy. Skupiny kariet, história, záložky a ovládanie stránok sú k dispozícii v Chrome. Ak chýbajú názvy a adresy kariet, udeľte rozšíreniu prístup k webom v Safari v časti Nastavenia > Rozšírenia."
+  },
+  "welcomeAnalyticsHint": {
+    "message": "Ktoré funkcie sa používajú a verzia rozšírenia – pomáha to zlepšovať rozšírenie."
+  },
+  "instanceId": {
+    "message": "ID inštancie: $1"
+  },
+  "welcomeAgentSetupTitle": {
+    "message": "Nechajte nastavenie na agentovi"
+  },
+  "copyPrompt": {
+    "message": "Kopírovať prompt"
+  },
+  "copy": {
+    "message": "Kopírovať"
+  },
+  "copied": {
+    "message": "Skopírované"
+  },
+  "welcomeAddTo": {
+    "message": "Pridať do $1"
+  },
+  "welcomeDownloadFor": {
+    "message": "Stiahnuť pre $1"
+  },
+  "welcomeTryIntro": {
+    "message": "Majte otvorený Chrome a požiadajte agenta:"
+  },
+  "welcomeTryTabs": {
+    "message": "Rozdeľ moje otvorené karty do skupín podľa tém. Najprv mi ukáž plán."
+  },
+  "welcomeTryPage": {
+    "message": "Otvor poznámky k vydaniu Chromu a zhrň, čo sa zmenilo v najnovšej verzii."
+  },
+  "welcomeTryIntroSafari": {
+    "message": "Majte otvorené Safari a požiadajte agenta:"
+  },
+  "welcomeTryDuplicatesSafari": {
+    "message": "Aké karty mám otvorené v Safari? Zatvor duplikáty, ale najprv sa ma opýtaj."
+  },
+  "welcomeTrySortSafari": {
+    "message": "Zoraď moje karty v Safari podľa webov."
+  },
+  "welcomePrivacyHeading": {
+    "message": "Ochrana súkromia"
+  },
+  "welcomePrivacy": {
+    "message": "Údaje o prehliadaní zostávajú vo vašom počítači: rozšírenie komunikuje iba s $1. Agent môže čítať názvy a webové adresy kariet, meniť ich poradie, zoskupovať alebo zatvárať karty a tiež čítať webové stránky a vykonávať v nich akcie, keď ho o to požiadate. Kým agent pracuje na stránke, Chrome zobrazuje banner ladenia. Toto rozšírenie nikdy nikam inam neodosiela názvy kariet, webové adresy ani obsah stránok."
+  },
+  "welcomePrivacySafari": {
+    "message": "Údaje o prehliadaní zostávajú vo vašom počítači: rozšírenie komunikuje iba s $1. Agent môže čítať názvy a webové adresy kariet a tiež otvárať, usporiadať alebo zatvárať okná a karty, keď ho o to požiadate. V Safari nemôže čítať webové stránky ani v nich vykonávať akcie. Toto rozšírenie nikdy nikam inam neodosiela názvy kariet ani webové adresy."
+  },
+  "analyticsTitle": {
+    "message": "Zdieľať anonymné štatistiky používania"
+  },
+  "privacyPolicy": {
+    "message": "Pravidlá ochrany súkromia"
+  },
+  "agentStartingUp": {
+    "message": "Agent sa spúšťa"
+  },
+  "sessionInProject": {
+    "message": "$1 v $2"
+  },
+  "sessionStarted": {
+    "message": "Spustená $1"
+  },
+  "sessionLastUsed_one": {
+    "message": "Naposledy použité $2 $3, $1 volanie"
+  },
+  "sessionLastUsed_few": {
+    "message": "Naposledy použité $2 $3, $1 volania"
+  },
+  "sessionLastUsed_many": {
+    "message": "Naposledy použité $2 $3, $1 volania"
+  },
+  "sessionLastUsed_other": {
+    "message": "Naposledy použité $2 $3, $1 volaní"
+  },
+  "sessionUnused": {
+    "message": "Prehliadač zatiaľ nepoužila"
+  },
+  "sessionId": {
+    "message": "Relácia $1"
+  },
+  "serverVersion": {
+    "message": "server $1"
+  },
+  "instanceThisBrowser": {
+    "message": "$1, tento prehliadač"
+  },
+  "justNow": {
+    "message": "práve teraz"
+  },
+  "chatTitle": {
+    "message": "Čet s agentom"
+  },
+  "chatSetup": {
+    "message": "Nastavenie"
+  },
+  "chatConversation": {
+    "message": "Konverzácia"
+  },
+  "chatOpenChats": {
+    "message": "Otvorené čety"
+  },
+  "chatPastChats": {
+    "message": "Predchádzajúce čety"
+  },
+  "chatEmptyHeading": {
+    "message": "Rozprávajte sa s agentom priamo tu"
+  },
+  "chatEmptyBody": {
+    "message": "Požiadajte agenta, aby pokračoval v prehliadači, alebo spustite jeho prompt $1. Jeho správy sa zobrazia tu a vaše odpovede pôjdu priamo k nemu."
+  },
+  "chatEmptyHint": {
+    "message": "Každá relácia agenta má vlastnú konverzáciu."
+  },
+  "chatInput": {
+    "message": "Napíšte agentovi"
+  },
+  "chatEnd": {
+    "message": "Ukončiť čet"
+  },
+  "chatRemove": {
+    "message": "Odstrániť"
+  },
+  "chatSend": {
+    "message": "Odoslať"
+  },
+  "chatError": {
+    "message": "Niečo sa pokazilo."
+  },
+  "chatUnseen_one": {
+    "message": "$2 (nové: $1)"
+  },
+  "chatUnseen_few": {
+    "message": "$2 (nové: $1)"
+  },
+  "chatUnseen_many": {
+    "message": "$2 (nové: $1)"
+  },
+  "chatUnseen_other": {
+    "message": "$2 (nové: $1)"
+  },
+  "chatStatusWaiting": {
+    "message": "Čaká na vašu odpoveď"
+  },
+  "chatStatusWorking": {
+    "message": "Pracuje"
+  },
+  "chatStatusWorkingTool": {
+    "message": "Pracuje: použil $1 $2"
+  },
+  "chatStatusDisconnected": {
+    "message": "Agent je odpojený"
+  },
+  "chatStatusReconnecting": {
+    "message": "Agent sa znova pripája"
+  },
+  "chatStatusEnded": {
+    "message": "Čet bol ukončený"
+  },
+  "chatHintWaiting": {
+    "message": "Enter odošle správu, Shift+Enter vloží nový riadok."
+  },
+  "chatHintWorking": {
+    "message": "Agent si vašu správu prečíta, keď nabudúce skontroluje čet."
+  },
+  "chatHintDisconnected": {
+    "message": "Táto relácia agenta bola ukončená."
+  },
+  "chatHintReconnecting": {
+    "message": "Spojenie s agentom sa prerušilo. Vaše správy tu počkajú, kým sa znova nepripojí."
+  },
+  "chatHintEnded": {
+    "message": "Ak chcete znova četovať, požiadajte agenta, aby pokračoval v prehliadači."
+  },
+  "chatReadByAgent": {
+    "message": "prečítané agentom"
+  },
+  "chatNotReadYet": {
+    "message": "zatiaľ neprečítané"
+  },
+  "chatEndedNotice": {
+    "message": "Ukončili ste čet."
+  },
+  "chatConversationGone": {
+    "message": "Táto konverzácia už neexistuje."
+  },
+  "chatEndedError": {
+    "message": "Tento čet bol ukončený. Ak ho chcete znova začať, požiadajte agenta, aby pokračoval v prehliadači."
+  },
+  "chatTooLong_one": {
+    "message": "Správa môže mať najviac $1 znak."
+  },
+  "chatTooLong_few": {
+    "message": "Správa môže mať najviac $1 znaky."
+  },
+  "chatTooLong_many": {
+    "message": "Správa môže mať najviac $1 znaku."
+  },
+  "chatTooLong_other": {
+    "message": "Správa môže mať najviac $1 znakov."
+  },
+  "askYourAgent": {
+    "message": "Váš agent"
+  },
+  "askFrom": {
+    "message": "$1 sa pýta"
+  },
+  "askConfirm": {
+    "message": "Potvrdiť"
+  },
+  "askCancel": {
+    "message": "Zrušiť"
+  },
+  "askConfirmed": {
+    "message": "Potvrdené. $1 bude pokračovať."
+  },
+  "askCancelled": {
+    "message": "Zrušené. $1 nebude pokračovať."
+  },
+  "askDragHint": {
+    "message": "Presuňte potiahnutím"
+  },
+  "askNotificationTitle": {
+    "message": "$1 čaká na vašu odpoveď"
+  },
+  "remoteHeading": {
+    "message": "Vzdialený prístup"
+  },
+  "remoteToggle": {
+    "message": "Povoliť agentom prístup k tomuto prehliadaču cez prenosový server"
+  },
+  "remoteToggleHint": {
+    "message": "Pre agentov na inom počítači alebo v cloude. Prenosový server odovzdáva ich požiadavky tomuto prehliadaču a odpovede späť vrátane názvov a webových adries kariet a obsahu stránok, preto používajte iba server, ktorému dôverujete."
+  },
+  "remoteAddressLabel": {
+    "message": "Adresa prenosového servera"
+  },
+  "remoteAddressInvalid": {
+    "message": "Zadajte adresu, ktorá začína na https://"
+  },
+  "remoteStatusConnected": {
+    "message": "Pripojené k prenosovému serveru"
+  },
+  "remoteStatusConnecting": {
+    "message": "Pripája sa k prenosovému serveru…"
+  },
+  "remoteStatusOffline": {
+    "message": "Prenosový server je nedostupný. Skúša sa znova…"
+  },
+  "remoteStatusNoAddress": {
+    "message": "Na pripojenie zadajte adresu prenosového servera."
+  },
+  "remotePrivacy": {
+    "message": "Vzdialený prístup je zapnutý: toto rozšírenie sa pripája aj k $1, ktorý odovzdáva požiadavky vašich agentov a odpovede tohto prehliadača vrátane názvov a webových adries kariet a obsahu stránok."
+  },
+  "remoteBrowserTokenLabel": {
+    "message": "Token prehliadača"
+  },
+  "remoteBrowserTokenHint": {
+    "message": "Token prehliadača prenosového servera, nastavený ako $1 tam, kde server beží. Zostáva v tomto profile prehliadača: rozšírenie dokazuje, že token pozná, bez toho, aby ho odoslalo."
+  },
+  "remoteBrowserTokenInvalid": {
+    "message": "Token musí mať aspoň 32 znakov a nesmie začínať ani končiť medzerou."
+  },
+  "remoteStatusNoToken": {
+    "message": "Na pripojenie zadajte token prehliadača."
+  },
+  "remoteStatusRejected": {
+    "message": "Prenosový server tento token prehliadača neprijal. Skontrolujte, či sa zhoduje s tokenom prehliadača prenosového servera."
+  },
+  "remoteStatusUntrusted": {
+    "message": "Tento prenosový server nedokázal preukázať, že pozná token prehliadača. Skontrolujte adresu: nemusí ísť o váš prenosový server."
+  },
+  "remoteAgentsHeading": {
+    "message": "Pripojiť agenta"
+  },
+  "remoteAgentsHint": {
+    "message": "Agentom dávajte token agenta prenosového servera, nikdy nie token prehliadača. Nastavte ho ako $1 tam, kde agent beží, a potom spustite toto, aby ste prenosový server pridali do Claude Code, alebo pridajte JSON do konfigurácie MCP iného agenta."
+  }
+}

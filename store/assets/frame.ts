@@ -28,7 +28,7 @@ export const scaled = (size: Size, factor: number): Size => ({ width: Math.round
 
 export const PRODUCT_NAME = 'Agent Browser Bridge';
 
-const ICON = readFileSync(join(import.meta.dirname, '../../packages/extension/icons/icon.svg'));
+const ICON = readFileSync(join(import.meta.dirname, '../../extensions/browser/icons/icon.svg'));
 export const ICON_URI = `data:image/svg+xml;base64,${ICON.toString('base64')}`;
 
 export const GROUP_COLORS: Record<string, string> = {

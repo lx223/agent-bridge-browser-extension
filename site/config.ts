@@ -32,6 +32,7 @@ export const PAGES: PageConfig[] = [
   { source: 'docs/sessions.md', slug: 'docs/sessions/', label: 'Agent sessions' },
   { source: 'docs/profiles.md', slug: 'docs/profiles/', label: 'Browsers and profiles' },
   { source: 'docs/waiting.md', slug: 'docs/waiting/', label: 'Waiting for the user' },
+  { source: 'docs/remote.md', slug: 'docs/remote/', label: 'Remote access' },
   { source: 'docs/updates.md', slug: 'docs/updates/', label: 'Updates without restarts' },
   { source: 'docs/localisation.md', slug: 'docs/localisation/', label: 'Languages' },
   {
