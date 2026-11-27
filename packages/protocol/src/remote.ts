@@ -6,32 +6,28 @@ export const REMOTE_MCP_PATH = '/mcp';
 export const REMOTE_SERVER_NAME = `${SERVER_NAME}-remote`;
 export const REMOTE_UNAUTHORIZED_CLOSE_CODE = 4003;
 export const REMOTE_FULL_CLOSE_CODE = 4004;
-export const MAX_REMOTE_TOKENS = 50;
+export const MIN_REMOTE_TOKEN_LENGTH = 32;
+export const MAX_REMOTE_TOKEN_LENGTH = 512;
+export const AGENT_TOKEN_ENV = 'AGENT_BROWSER_BRIDGE_AGENT_TOKEN';
+export const BROWSER_TOKEN_ENV = 'AGENT_BROWSER_BRIDGE_BROWSER_TOKEN';
 
-const REMOTE_TOKEN_PREFIX = 'abb_';
-const SPACE_ID_LENGTH = 22;
-const SECRET_BYTES = 32;
-const SPACE_CONTEXT = 'agent-browser-bridge-space:';
+const NONCE_BYTES = 32;
+const TOKEN_BYTES = 32;
+const LOCAL_HOSTS = new Set(['localhost', '127.0.0.1', '[::1]']);
 
-const tokenHash = z.string().regex(/^[0-9a-f]{64}$/);
-export const remoteKey = z.string().regex(/^[A-Za-z0-9_-]{43}$/);
+const nonce = z.string().regex(/^[A-Za-z0-9_-]{43}$/);
+const proof = z.string().regex(/^[0-9a-f]{64}$/);
 
-export const remoteAuthMessage = z.object({
-  type: z.literal('remoteAuth'),
-  key: remoteKey,
-  tokens: z.array(tokenHash).max(MAX_REMOTE_TOKENS),
-});
+export const remoteChallengeMessage = z.object({ type: z.literal('remoteChallenge'), nonce });
+export const remoteAuthMessage = z.object({ type: z.literal('remoteAuth'), nonce, proof });
+export const remoteWelcomeMessage = z.object({ type: z.literal('remoteWelcome'), proof });
 
-export const remoteTokensMessage = z.object({
-  type: z.literal('remoteTokens'),
-  tokens: z.array(tokenHash).max(MAX_REMOTE_TOKENS),
-});
-
-export const extensionToRemote = z.union([remoteAuthMessage, remoteTokensMessage]);
-
+export type RemoteChallengeMessage = z.infer<typeof remoteChallengeMessage>;
 export type RemoteAuthMessage = z.infer<typeof remoteAuthMessage>;
-export type RemoteTokensMessage = z.infer<typeof remoteTokensMessage>;
-export type ExtensionToRemote = z.infer<typeof extensionToRemote>;
+export type RemoteWelcomeMessage = z.infer<typeof remoteWelcomeMessage>;
+export type ExtensionToRemote = RemoteAuthMessage;
+
+export type RemoteRole = 'browser' | 'relay';
 
 const base64url = (bytes: Uint8Array) => {
   let binary = '';
@@ -41,38 +37,60 @@ const base64url = (bytes: Uint8Array) => {
 
 const hex = (bytes: Uint8Array) => Array.from(bytes, (byte) => byte.toString(16).padStart(2, '0')).join('');
 
-const sha256 = async (text: string) => new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text)));
+const randomText = (size: number) => base64url(crypto.getRandomValues(new Uint8Array(size)));
 
-const randomSecret = () => base64url(crypto.getRandomValues(new Uint8Array(SECRET_BYTES)));
+export const newRemoteNonce = () => randomText(NONCE_BYTES);
 
-export const newRemoteKey = randomSecret;
+export const newRemoteToken = () => randomText(TOKEN_BYTES);
 
-export async function remoteSpaceId(key: string): Promise<string> {
-  return base64url(await sha256(`${SPACE_CONTEXT}${key}`)).slice(0, SPACE_ID_LENGTH);
+export interface ProofInput {
+  role: RemoteRole;
+  relayHost: string;
+  relayNonce: string;
+  browserNonce: string;
 }
 
-export const newRemoteToken = (spaceId: string) => `${REMOTE_TOKEN_PREFIX}${spaceId}_${randomSecret()}`;
+export const normalizeRelayHost = (host: string) => host.trim().toLowerCase();
 
-const tokenPattern = new RegExp(`^${REMOTE_TOKEN_PREFIX}([A-Za-z0-9_-]{${SPACE_ID_LENGTH}})_[A-Za-z0-9_-]{43}$`);
+export async function remoteProof(token: string, { role, relayHost, relayNonce, browserNonce }: ProofInput): Promise<string> {
+  const encoder = new TextEncoder();
+  const key = await crypto.subtle.importKey('raw', encoder.encode(token), { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']);
+  const text = `agent-browser-bridge/${role}\n${normalizeRelayHost(relayHost)}\n${relayNonce}\n${browserNonce}`;
+  return hex(new Uint8Array(await crypto.subtle.sign('HMAC', key, encoder.encode(text))));
+}
 
-export const spaceOfToken = (token: string): string | undefined => tokenPattern.exec(token)?.[1];
+export function sameProof(a: string, b: string): boolean {
+  if (a.length !== b.length) return false;
+  let difference = 0;
+  for (let index = 0; index < a.length; index++) difference |= a.charCodeAt(index) ^ b.charCodeAt(index);
+  return difference === 0;
+}
 
-export async function remoteTokenHash(token: string): Promise<string> {
-  return hex(await sha256(token));
+export function remoteTokenProblem(token: string | undefined): string | undefined {
+  if (!token) return 'is not set';
+  if (token !== token.trim()) return 'has spaces at the start or end';
+  if (token.length < MIN_REMOTE_TOKEN_LENGTH) return `is shorter than ${MIN_REMOTE_TOKEN_LENGTH} characters`;
+  if (token.length > MAX_REMOTE_TOKEN_LENGTH) return `is longer than ${MAX_REMOTE_TOKEN_LENGTH} characters`;
+  return undefined;
 }
 
 export interface RemoteUrls {
   base: string;
+  host: string;
   extension: string;
   mcp: string;
 }
 
+export const isLocalHost = (hostname: string) => LOCAL_HOSTS.has(hostname);
+
 export function remoteUrls(address: string): RemoteUrls {
   const url = new URL(address.trim());
-  if (url.protocol !== 'https:' && url.protocol !== 'http:') throw new Error('The relay address must start with https://');
+  if (url.protocol !== 'https:' && !(url.protocol === 'http:' && isLocalHost(url.hostname))) {
+    throw new Error('The relay address must start with https://');
+  }
   if (url.username || url.password || url.search || url.hash) throw new Error('The relay address must not contain a user name, query or fragment');
   const path = url.pathname.replace(/\/+$/, '');
   const base = `${url.protocol}//${url.host}${path}`;
   const socket = `${url.protocol === 'https:' ? 'wss:' : 'ws:'}//${url.host}${path}`;
-  return { base, extension: `${socket}${REMOTE_EXTENSION_PATH}`, mcp: `${base}${REMOTE_MCP_PATH}` };
+  return { base, host: normalizeRelayHost(url.host), extension: `${socket}${REMOTE_EXTENSION_PATH}`, mcp: `${base}${REMOTE_MCP_PATH}` };
 }

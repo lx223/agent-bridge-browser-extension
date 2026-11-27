@@ -1,6 +1,6 @@
 # Agent Browser Bridge privacy policy
 
-Last updated: 23 November 2026
+Last updated: 27 November 2026
 
 Agent Browser Bridge connects your browser's tabs, tab groups and web pages to an MCP-compatible agent through a bridge server running on your computer. It runs in Chrome, in other Chromium browsers such as Edge and Brave, and in Safari. Safari offers fewer tools, so less information is used there; see [Safari](#safari).
 
@@ -36,9 +36,9 @@ The local MCP server passes tool results to the agent you connect. Your chosen a
 
 ### Remote access
 
-Remote access is off by default. When you turn it on in the setup page, the extension also opens a WebSocket connection to the relay server address you enter. It sends the relay a random key it generated, the SHA-256 hashes of the access tokens you created (not the tokens themselves), and the same handshake as the local bridge. Agents that present one of your tokens to the relay can then use every tool described above, and the relay passes their requests and the browser's answers, including tab titles, URLs, history, bookmarks, page contents and screenshots, between them. The relay also tells the extension which agent sessions are connected through it, with the name and version each agent reports.
+Remote access is off by default. When you turn it on in the setup page, the extension also opens a WebSocket connection to the relay server address you enter, which must use HTTPS. The extension proves it knows the browser token you entered without sending the token, checks that the relay can prove the same, and then sends the relay the same handshake as the local bridge. Agents that present the relay's agent token can then use every tool described above, and the relay passes their requests and the browser's answers, including tab titles, URLs, history, bookmarks, page contents and screenshots, between them. The relay also tells the extension which agent sessions are connected through it, with the name and version each agent reports.
 
-Whoever runs the relay can see that traffic. The relay in this project keeps it in memory only while passing it on and does not store it, but only use a relay you run yourself or trust. Revoke a token on the setup page to cut off the agents using it, and switch remote access off to close the connection. The key and token hashes stay in the extension's local storage on this computer.
+Whoever runs the relay can see that traffic. The relay in this project keeps it in memory only while passing it on and does not store it, but only use a relay you run yourself. Switch remote access off to close the connection. The relay address and browser token stay in the extension's local storage in this browser profile and are not synced.
 
 ## Usage analytics
 

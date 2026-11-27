@@ -180,11 +180,11 @@ button[data-copied='true'] { color: var(--ok); }
 h3 { font-size: 15px; margin: 8px 0 0; }
 .remote { display: flex; flex-direction: column; gap: 10px; padding-bottom: 8px; }
 .field { display: flex; flex-direction: column; gap: 4px; font-size: 14px; font-weight: 500; }
-.field input, .new-token input {
+.field input {
   font: inherit; font-weight: 400; color: var(--fg); background: var(--surface);
   border: 1px solid var(--border); border-radius: 7px; padding: 6px 10px;
 }
-.field input:focus, .new-token input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 20%, transparent); }
+.field input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 20%, transparent); }
 .field input[aria-invalid='true'] { border-color: var(--danger, #d93025); }
 .error { color: var(--danger, #d93025); font-size: 13px; }
 .status.compact { padding: 10px 14px; border-radius: 8px; align-items: center; }
@@ -193,11 +193,6 @@ h3 { font-size: 15px; margin: 8px 0 0; }
 .status[data-state='offline'] .dot { background: var(--faint); box-shadow: none; animation: none; }
 #remote-agents { border: 1px solid var(--border); border-radius: 8px; }
 #remote-agents .session:first-child { border-top: 0; }
-.tokens { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
-.token { display: flex; align-items: center; gap: 12px; padding: 8px 0; border-top: 1px solid var(--border); }
-.token:last-child { border-bottom: 1px solid var(--border); }
-.token > div { flex: 1; min-width: 0; display: flex; flex-direction: column; }
-.new-token { display: flex; gap: 8px; }
-.new-token input { flex: 1; min-width: 0; }
-.created { display: flex; flex-direction: column; gap: 8px; padding: 12px; border: 1px dashed var(--accent); border-radius: 10px; }
 .privacy.remote-on > p[data-browser] { display: none !important; }
+.status[data-state='problem'] { background: color-mix(in srgb, var(--danger, #d93025) 12%, transparent); }
+.status[data-state='problem'] .dot { background: var(--danger, #d93025); box-shadow: none; animation: none; }

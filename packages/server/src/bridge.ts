@@ -307,10 +307,6 @@ export class ExtensionBridge {
     this.agentChanged();
   }
 
-  connectedInstances(): HelloMessage[] {
-    return this.connectedBrowsers().map(([, hello]) => hello);
-  }
-
   agents(): AgentSession[] {
     const own = this.opts.agentInfo?.();
     const relayed = [...this.relays.values()].filter((agent): agent is AgentInfo => agent !== undefined);

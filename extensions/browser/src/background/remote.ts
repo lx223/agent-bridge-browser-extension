@@ -1,31 +1,23 @@
 import {
-  MAX_REMOTE_TOKENS,
-  newRemoteKey,
-  newRemoteToken,
-  remoteKey,
-  remoteSpaceId,
-  remoteTokenHash,
+  AGENT_TOKEN_ENV,
+  MAX_REMOTE_TOKEN_LENGTH,
+  newRemoteNonce,
+  remoteChallengeMessage,
+  remoteProof,
+  remoteTokenProblem,
   remoteUrls,
+  remoteWelcomeMessage,
+  sameProof,
   type AgentInfo,
-  type ExtensionToRemote,
 } from '@agent-browser-bridge/protocol';
-import { BridgeClient, type ConnectionStatus } from './bridgeClient.ts';
+import { BridgeClient, UntrustedRelayError, type ConnectionStatus, type HandshakeIO } from './bridgeClient.ts';
 
 export const REMOTE_SETTINGS_KEY = 'remoteAccess';
-export const MAX_TOKEN_NAME_LENGTH = 40;
-
-export interface RemoteToken {
-  id: string;
-  name: string;
-  hash: string;
-  createdAt: number;
-}
 
 export interface RemoteSettings {
   enabled: boolean;
   address: string;
-  key: string;
-  tokens: RemoteToken[];
+  browserToken: string;
 }
 
 export interface Storage {
@@ -33,24 +25,13 @@ export interface Storage {
   set(items: Record<string, unknown>): Promise<void>;
 }
 
-const isToken = (value: unknown): value is RemoteToken => {
-  const token = value as Partial<RemoteToken> | null;
-  return (
-    typeof token?.id === 'string' &&
-    typeof token.name === 'string' &&
-    typeof token.hash === 'string' &&
-    /^[0-9a-f]{64}$/.test(token.hash) &&
-    typeof token.createdAt === 'number'
-  );
-};
-
 export function readRemoteSettings(value: unknown, defaultAddress = ''): RemoteSettings {
   const stored = (value ?? {}) as Partial<RemoteSettings>;
+  const token = typeof stored.browserToken === 'string' ? stored.browserToken : '';
   return {
     enabled: stored.enabled === true,
     address: typeof stored.address === 'string' ? stored.address : defaultAddress,
-    key: typeof stored.key === 'string' && remoteKey.safeParse(stored.key).success ? stored.key : '',
-    tokens: Array.isArray(stored.tokens) ? stored.tokens.filter(isToken).slice(0, MAX_REMOTE_TOKENS) : [],
+    browserToken: token.length <= MAX_REMOTE_TOKEN_LENGTH ? token : '',
   };
 }
 
@@ -73,9 +54,11 @@ export const isValidAddress = (address: string) => {
   }
 };
 
+export const isValidBrowserToken = (token: string) => remoteTokenProblem(token) === undefined;
+
 export async function setRemoteEnabled(storage: Storage, enabled: boolean, defaultAddress = ''): Promise<RemoteSettings> {
   const settings = await loadRemoteSettings(storage, defaultAddress);
-  return save(storage, { ...settings, enabled, key: settings.key || newRemoteKey() });
+  return save(storage, { ...settings, enabled });
 }
 
 export async function setRemoteAddress(storage: Storage, address: string, defaultAddress = ''): Promise<RemoteSettings> {
@@ -85,34 +68,32 @@ export async function setRemoteAddress(storage: Storage, address: string, defaul
   return save(storage, { ...settings, address: trimmed && remoteUrls(trimmed).base });
 }
 
-export interface CreatedToken {
-  token: string;
-  settings: RemoteSettings;
-}
-
-export async function createRemoteToken(storage: Storage, name: string, now = Date.now(), defaultAddress = ''): Promise<CreatedToken> {
+export async function setBrowserToken(storage: Storage, token: string, defaultAddress = ''): Promise<RemoteSettings> {
+  const trimmed = token.trim();
+  if (trimmed && !isValidBrowserToken(trimmed)) throw new Error('Invalid browser token');
   const settings = await loadRemoteSettings(storage, defaultAddress);
-  if (settings.tokens.length >= MAX_REMOTE_TOKENS) throw new Error('Too many tokens');
-  const key = settings.key || newRemoteKey();
-  const token = newRemoteToken(await remoteSpaceId(key));
-  const entry: RemoteToken = {
-    id: crypto.randomUUID(),
-    name: name.trim().slice(0, MAX_TOKEN_NAME_LENGTH),
-    hash: await remoteTokenHash(token),
-    createdAt: now,
-  };
-  return { token, settings: await save(storage, { ...settings, key, tokens: [...settings.tokens, entry] }) };
+  return save(storage, { ...settings, browserToken: trimmed });
 }
 
-export async function revokeRemoteToken(storage: Storage, id: string, defaultAddress = ''): Promise<RemoteSettings> {
-  const settings = await loadRemoteSettings(storage, defaultAddress);
-  return save(storage, { ...settings, tokens: settings.tokens.filter((token) => token.id !== id) });
-}
-
-export function remoteAgentConfig(mcpUrl: string, token: string, name: string) {
-  const claudeCode = `claude mcp add --transport http ${name} ${mcpUrl} --header "Authorization: Bearer ${token}"`;
-  const json = JSON.stringify({ mcpServers: { [name]: { type: 'http', url: mcpUrl, headers: { Authorization: `Bearer ${token}` } } } }, null, 2);
+export function remoteAgentConfig(mcpUrl: string, name: string) {
+  const claudeCode = `claude mcp add --transport http ${name} ${mcpUrl} --header "Authorization: Bearer $${AGENT_TOKEN_ENV}"`;
+  const bearer = `Bearer \${${AGENT_TOKEN_ENV}}`;
+  const json = JSON.stringify({ mcpServers: { [name]: { type: 'http', url: mcpUrl, headers: { Authorization: bearer } } } }, null, 2);
   return { claudeCode, json };
+}
+
+export function relayHandshake(token: string, relayHost: string, nonce: () => string = newRemoteNonce) {
+  return async (io: HandshakeIO) => {
+    const challenge = remoteChallengeMessage.safeParse(await io.next());
+    if (!challenge.success) throw new UntrustedRelayError('The relay did not send a challenge');
+    const input = { relayHost, relayNonce: challenge.data.nonce, browserNonce: nonce() };
+    if (input.browserNonce === input.relayNonce) throw new UntrustedRelayError('The relay repeated our nonce');
+    io.send({ type: 'remoteAuth', nonce: input.browserNonce, proof: await remoteProof(token, { role: 'browser', ...input }) });
+    const welcome = remoteWelcomeMessage.safeParse(await io.next());
+    if (!welcome.success || !sameProof(welcome.data.proof, await remoteProof(token, { role: 'relay', ...input }))) {
+      throw new UntrustedRelayError('The relay could not prove it knows the browser token');
+    }
+  };
 }
 
 type Dispatch = (method: string, params: unknown, agent: AgentInfo | null) => Promise<unknown>;
@@ -121,20 +102,19 @@ export type ClientFactory = (
   url: string,
   dispatch: Dispatch,
   onStatus: (status: ConnectionStatus) => void,
-  authenticate: () => Promise<ExtensionToRemote>,
-) => Pick<BridgeClient, 'connect' | 'close' | 'sendTokens' | 'status' | 'whenIdle' | 'announceReload' | 'reintroduce'>;
+  handshake: (io: HandshakeIO) => Promise<void>,
+) => Pick<BridgeClient, 'connect' | 'close' | 'status' | 'whenIdle' | 'announceReload' | 'reintroduce'>;
 
-const defaultFactory: ClientFactory = (url, dispatch, onStatus, authenticate) => new BridgeClient(url, dispatch, onStatus, { authenticate });
+const defaultFactory: ClientFactory = (url, dispatch, onStatus, handshake) => new BridgeClient(url, dispatch, onStatus, { handshake });
 
 const configOf = (settings: RemoteSettings) => {
-  if (!settings.enabled || !settings.key || !isValidAddress(settings.address)) return undefined;
-  return `${remoteUrls(settings.address).extension} ${settings.key}`;
+  if (!settings.enabled || !isValidBrowserToken(settings.browserToken) || !isValidAddress(settings.address)) return undefined;
+  return JSON.stringify([remoteUrls(settings.address).extension, settings.browserToken]);
 };
 
 export class RemoteConnection {
   private client?: ReturnType<ClientFactory>;
   private config?: string;
-  private settings?: RemoteSettings;
 
   constructor(
     private readonly dispatch: Dispatch,
@@ -147,12 +127,8 @@ export class RemoteConnection {
   }
 
   apply(settings: RemoteSettings) {
-    this.settings = settings;
     const config = configOf(settings);
-    if (config === this.config) {
-      this.client?.sendTokens(this.tokenHashes());
-      return;
-    }
+    if (config === this.config) return;
     this.config = config;
     this.client?.close();
     this.client = undefined;
@@ -160,8 +136,8 @@ export class RemoteConnection {
       this.onStatus(undefined);
       return;
     }
-    const authenticate = async (): Promise<ExtensionToRemote> => ({ type: 'remoteAuth', key: settings.key, tokens: this.tokenHashes() });
-    this.client = this.factory(remoteUrls(settings.address).extension, this.dispatch, (status) => this.onStatus(status), authenticate);
+    const urls = remoteUrls(settings.address);
+    this.client = this.factory(urls.extension, this.dispatch, (status) => this.onStatus(status), relayHandshake(settings.browserToken, urls.host));
     this.client.connect();
   }
 
@@ -179,9 +155,5 @@ export class RemoteConnection {
 
   announceReload(): Promise<void> {
     return this.client?.announceReload() ?? Promise.resolve();
-  }
-
-  private tokenHashes() {
-    return (this.settings?.tokens ?? []).map((token) => token.hash);
   }
 }

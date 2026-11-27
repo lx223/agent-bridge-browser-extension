@@ -14,6 +14,9 @@ if (env.AGENT_BROWSER_BRIDGE_WORKER === '1') {
     stderr.write(`${err instanceof Error ? err.message : String(err)}\n`);
     exit(2);
   }
+} else if (command === 'tokens') {
+  const { tokensOutput } = await import('./remote.ts');
+  stdout.write(tokensOutput());
 } else if (command === '--help' || command === '-h') {
   const { cliUsage } = await import('./remote.ts');
   stdout.write(`${cliUsage}\n`);

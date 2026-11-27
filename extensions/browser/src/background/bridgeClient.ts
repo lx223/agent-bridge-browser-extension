@@ -1,5 +1,6 @@
 import {
   PROTOCOL_VERSION,
+  REMOTE_UNAUTHORIZED_CLOSE_CODE,
   REPLACED_CLOSE_CODE,
   serverToExtension,
   type AgentInfo,
@@ -11,20 +12,38 @@ import { browserLabel, detectBrowser, instanceId, instanceName, newInstanceId, s
 
 export type ConnectionState = 'connecting' | 'connected' | 'disconnected';
 
+export type ConnectionProblem = 'rejected' | 'untrusted';
+
 export interface ConnectionStatus {
   state: ConnectionState;
   url: string;
   since: number;
   agents: AgentSession[];
   instanceId?: string;
+  problem?: ConnectionProblem;
 }
 
 const KEEPALIVE_MS = 20_000; // < 30s idle limit for MV3 service workers
 const MAX_BACKOFF_MS = 10_000;
 const RELOAD_ANNOUNCE_WAIT_MS = 500;
 
+export class UntrustedRelayError extends Error {}
+
+export interface HandshakeIO {
+  next(): Promise<unknown>;
+  send(message: ExtensionToRemote): void;
+}
+
 export interface BridgeClientOptions {
-  authenticate?: () => Promise<ExtensionToRemote>;
+  handshake?: (io: HandshakeIO) => Promise<void>;
+  handshakeTimeoutMs?: number;
+}
+
+const HANDSHAKE_TIMEOUT_MS = 15_000;
+
+interface Inbox {
+  messages: unknown[];
+  waiters: ((message: unknown) => void)[];
 }
 
 /**
@@ -40,6 +59,8 @@ export class BridgeClient {
   private idleWaiters: (() => void)[] = [];
   private instance?: string;
   private closed = false;
+  private inbox?: Inbox;
+  private problem?: ConnectionProblem;
   private _status: ConnectionStatus;
 
   constructor(
@@ -79,18 +100,21 @@ export class BridgeClient {
     this.ws = ws;
 
     ws.onopen = () => {
-      this.backoff = 1000;
-      void this.introduce();
-      this.keepalive = setInterval(() => this.send({ type: 'ping' }), KEEPALIVE_MS);
-      this.setState('connected');
+      if (this.options.handshake) void this.runHandshake(ws, this.options.handshake);
+      else this.ready();
     };
 
-    ws.onmessage = (event) => void this.handle(event.data);
+    ws.onmessage = (event) => {
+      if (this.inbox) this.deliver(this.inbox, event.data);
+      else void this.handle(event.data);
+    };
 
     ws.onclose = (event) => {
       clearInterval(this.keepalive);
       if (this.ws !== ws) return;
       if (event.code === REPLACED_CLOSE_CODE) this.takeNewInstanceId();
+      if (event.code === REMOTE_UNAUTHORIZED_CLOSE_CODE) this.problem = 'rejected';
+      this.inbox = undefined;
       this.ws = undefined;
       this.setState('disconnected');
       if (this.closed) return;
@@ -103,10 +127,6 @@ export class BridgeClient {
     if (this.ws?.readyState === WebSocket.OPEN) void this.sendHello();
   }
 
-  sendTokens(tokens: string[]) {
-    this.send({ type: 'remoteTokens', tokens });
-  }
-
   close() {
     this.closed = true;
     clearTimeout(this.retry);
@@ -117,16 +137,52 @@ export class BridgeClient {
     this.setState('disconnected');
   }
 
-  private async introduce() {
-    if (this.options.authenticate) {
-      try {
-        this.send(await this.options.authenticate());
-      } catch {
-        this.ws?.close();
-        return;
-      }
+  private ready() {
+    this.backoff = 1000;
+    this.problem = undefined;
+    void this.sendHello();
+    this.keepalive = setInterval(() => this.send({ type: 'ping' }), KEEPALIVE_MS);
+    this.setState('connected');
+  }
+
+  private deliver(inbox: Inbox, raw: unknown) {
+    let message: unknown;
+    try {
+      message = JSON.parse(String(raw));
+    } catch {
+      message = undefined;
     }
-    await this.sendHello();
+    const waiter = inbox.waiters.shift();
+    if (waiter) waiter(message);
+    else inbox.messages.push(message);
+  }
+
+  private async runHandshake(ws: WebSocket, handshake: NonNullable<BridgeClientOptions['handshake']>) {
+    const inbox: Inbox = { messages: [], waiters: [] };
+    this.inbox = inbox;
+    const io: HandshakeIO = {
+      next: () => (inbox.messages.length ? Promise.resolve(inbox.messages.shift()) : new Promise((resolve) => inbox.waiters.push(resolve))),
+      send: (message) => {
+        if (this.ws === ws) this.send(message);
+      },
+    };
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    const timeout = new Promise<never>((_, reject) => {
+      timer = setTimeout(() => reject(new Error('The relay did not finish the handshake in time')), this.options.handshakeTimeoutMs ?? HANDSHAKE_TIMEOUT_MS);
+    });
+    try {
+      await Promise.race([handshake(io), timeout]);
+    } catch (error) {
+      if (this.ws !== ws) return;
+      if (error instanceof UntrustedRelayError) this.problem = 'untrusted';
+      ws.close();
+      return;
+    } finally {
+      clearTimeout(timer);
+    }
+    if (this.ws !== ws || this.inbox !== inbox) return;
+    this.inbox = undefined;
+    this.ready();
   }
 
   private async sendHello() {
@@ -180,7 +236,7 @@ export class BridgeClient {
 
   private setState(state: ConnectionState) {
     if (this._status.state === state) return;
-    this._status = { state, url: this.url, since: Date.now(), agents: [] };
+    this._status = { state, url: this.url, since: Date.now(), agents: [], ...(state !== 'connected' && this.problem && { problem: this.problem }) };
     this.onStatus(this.status);
   }
 }

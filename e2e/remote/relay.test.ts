@@ -4,28 +4,32 @@ import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 import { StreamableHTTPClientTransport } from '@modelcontextprotocol/sdk/client/streamableHttp.js';
 import type { Page } from 'playwright';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
-import { STATUS_TOOL } from '@agent-browser-bridge/protocol';
+import { AGENT_TOKEN_ENV, BROWSER_TOKEN_ENV, newRemoteToken, STATUS_TOOL } from '@agent-browser-bridge/protocol';
 import { startHarness, type BridgeStatus, type Harness, type Tab } from '../support/harness.ts';
 
 const RELAY_ENTRY = resolve(import.meta.dirname, '../../packages/server/dist/index.js');
+const AGENT_TOKEN = newRemoteToken();
+const BROWSER_TOKEN = newRemoteToken();
 
 let harness: Harness;
 let relay: ChildProcess;
 let relayUrl: string;
+let relayLog = '';
 let page: Page;
-let firstToken: string;
 const agents: Client[] = [];
 
 function startRelay(): Promise<{ process: ChildProcess; url: string }> {
-  const child = spawn(process.execPath, [RELAY_ENTRY, 'http', '--port', '0'], { stdio: ['ignore', 'ignore', 'pipe'] });
+  const child = spawn(process.execPath, [RELAY_ENTRY, 'http', '--port', '0'], {
+    stdio: ['ignore', 'ignore', 'pipe'],
+    env: { ...process.env, [AGENT_TOKEN_ENV]: AGENT_TOKEN, [BROWSER_TOKEN_ENV]: BROWSER_TOKEN },
+  });
   return new Promise((done, fail) => {
-    let output = '';
     child.stderr!.on('data', (chunk: Buffer) => {
-      output += chunk.toString();
-      const match = /Relay listening on (http:\/\/[\d.]+:\d+)/.exec(output);
+      relayLog += chunk.toString();
+      const match = /Relay listening on (http:\/\/[\d.]+:\d+)/.exec(relayLog);
       if (match) done({ process: child, url: match[1]! });
     });
-    child.once('exit', (code) => fail(new Error(`Relay exited with ${code}: ${output}`)));
+    child.once('exit', (code) => fail(new Error(`Relay exited with ${code}: ${relayLog}`)));
   });
 }
 
@@ -42,14 +46,9 @@ async function connectRemoteAgent(token: string) {
   return { client, call };
 }
 
-async function createToken(name: string) {
-  await page.fill('#remote-token-name', name);
-  await page.click('#remote-new-token button[type="submit"]');
-  await page.waitForSelector('#remote-created:not([hidden])');
-  const command = await page.textContent('#remote-claude-code');
-  const token = /Bearer (abb_\S+)"/.exec(command ?? '')?.[1];
-  if (!token) throw new Error(`No token in ${command}`);
-  return { token, command: command! };
+async function enterToken(token: string) {
+  await page.fill('#remote-browser-token', token);
+  await page.press('#remote-browser-token', 'Tab');
 }
 
 beforeAll(async () => {
@@ -68,23 +67,48 @@ afterAll(async () => {
 });
 
 describe('remote access through a relay', () => {
-  it('connects the browser to the relay from the setup page', async () => {
+  it('refuses to start the relay without two strong, different tokens', async () => {
+    const child = spawn(process.execPath, [RELAY_ENTRY, 'http', '--port', '0'], {
+      stdio: ['ignore', 'ignore', 'pipe'],
+      env: { ...process.env, [AGENT_TOKEN_ENV]: AGENT_TOKEN, [BROWSER_TOKEN_ENV]: AGENT_TOKEN },
+    });
+    let output = '';
+    child.stderr!.on('data', (chunk: Buffer) => (output += chunk.toString()));
+    const code = await new Promise((done) => child.once('exit', done));
+    expect(code).toBe(2);
+    expect(output).toContain('must be different');
+  });
+
+  it('shows that the relay rejects a wrong browser token', async () => {
     await page.check('#remote-enabled');
     await page.fill('#remote-address', relayUrl);
     await page.press('#remote-address', 'Tab');
-    await page.waitForSelector('#remote-status[data-state="connected"]');
-    expect(await page.textContent('#remote-status-text')).toBe('Connected to the relay');
-    expect(await page.isVisible('#remote-privacy')).toBe(true);
-    expect(await page.textContent('#remote-privacy')).toContain(new URL(relayUrl).host);
+    expect(await page.textContent('#remote-status-text')).toBe('Enter the browser token to connect.');
+    await enterToken(newRemoteToken());
+    await page.waitForSelector('#remote-status[data-state="problem"]');
+    expect(await page.textContent('#remote-status-text')).toMatch(/didn't accept this browser token/);
   });
 
-  it('lets an agent with a new token use this browser', async () => {
-    const { token, command } = await createToken('Cloud agent');
-    firstToken = token;
-    expect(command).toContain(`--transport http agent-browser-bridge-remote ${relayUrl}/mcp`);
-    const opened = await harness.openFixture('second.html');
+  it('connects with the right browser token without sending it', async () => {
+    await enterToken(BROWSER_TOKEN);
+    await page.waitForSelector('#remote-status[data-state="connected"]');
+    expect(await page.textContent('#remote-status-text')).toBe('Connected to the relay');
+    expect(await page.getAttribute('#remote-browser-token', 'type')).toBe('password');
+    expect(await page.isVisible('#remote-privacy')).toBe(true);
+    expect(await page.textContent('#remote-privacy')).toContain(new URL(relayUrl).host);
+    expect(relayLog).not.toContain(BROWSER_TOKEN);
+  });
 
-    const agent = await connectRemoteAgent(token);
+  it('shows how to add the relay to an agent without either token', async () => {
+    const command = await page.textContent('#remote-claude-code');
+    expect(command).toContain(`--transport http agent-browser-bridge-remote ${relayUrl}/mcp`);
+    expect(command).toContain('$AGENT_BROWSER_BRIDGE_AGENT_TOKEN');
+    expect(await page.content()).not.toContain(AGENT_TOKEN);
+  });
+
+  it('lets an agent with the agent token use this browser', async () => {
+    const opened = await harness.openFixture('second.html');
+    const agent = await connectRemoteAgent(AGENT_TOKEN);
     const status = await agent.call<BridgeStatus>(STATUS_TOOL);
     expect(status.browsers).toHaveLength(1);
     const tabs = await agent.call<Tab[]>('chrome_tabs_list');
@@ -92,25 +116,20 @@ describe('remote access through a relay', () => {
 
     await page.waitForSelector('#remote-agents:not([hidden]) .session');
     expect(await page.textContent('#remote-agents')).toContain('e2e-remote');
-    expect(await page.textContent('#remote-tokens')).toContain('Cloud agent');
   });
 
-  it('cuts the agent off when its token is revoked', async () => {
-    const { token } = await createToken('Short lived');
-    const agent = await connectRemoteAgent(token);
-    await agent.call(STATUS_TOOL);
-
-    await page.click('#remote-tokens .token:has-text("Short lived") button');
-    await expect.poll(() => page.textContent('#remote-tokens')).not.toContain('Short lived');
-    await expect(agent.call('chrome_tabs_list')).rejects.toThrow();
-    await expect(connectRemoteAgent(token)).rejects.toThrow();
+  it('turns away agents with the browser token or a wrong token', async () => {
+    await expect(connectRemoteAgent(BROWSER_TOKEN)).rejects.toThrow();
+    await expect(connectRemoteAgent(newRemoteToken())).rejects.toThrow();
+    expect(relayLog).toMatch(/Rejected an agent/);
+    expect(relayLog).not.toContain(AGENT_TOKEN);
   });
 
   it('disconnects from the relay when switched off', async () => {
     await page.uncheck('#remote-enabled');
     expect(await page.isHidden('#remote-body')).toBe(true);
     expect(await page.isHidden('#remote-privacy')).toBe(true);
-    const agent = await connectRemoteAgent(firstToken);
+    const agent = await connectRemoteAgent(AGENT_TOKEN);
     await expect.poll(async () => (await agent.call<BridgeStatus>(STATUS_TOOL)).browsers).toEqual([]);
   });
 });

@@ -147,25 +147,22 @@
             <input id="remote-address" type="url" placeholder="https://relay.example.com" autocomplete="off" spellcheck="false" aria-describedby="remote-address-error" />
           </label>
           <p id="remote-address-error" class="error" role="alert" data-i18n="remoteAddressInvalid" hidden>Enter an address that starts with https://</p>
+          <label class="field">
+            <span data-i18n="remoteBrowserTokenLabel">Browser token</span>
+            <input id="remote-browser-token" type="password" autocomplete="off" spellcheck="false" aria-describedby="remote-browser-token-hint remote-browser-token-error" />
+          </label>
+          <p id="remote-browser-token-error" class="error" role="alert" data-i18n="remoteBrowserTokenInvalid" hidden>The token must be at least 32 characters long, with no spaces at the start or end.</p>
+          <p id="remote-browser-token-hint" class="hint" data-i18n="remoteBrowserTokenHint">The relay's browser token, set as <code>AGENT_BROWSER_BRIDGE_BROWSER_TOKEN</code> where it runs. It stays in this browser profile: the extension proves it knows the token without sending it.</p>
           <div id="remote-status" class="status compact" data-state="disconnected" aria-live="polite">
             <span class="dot" aria-hidden="true"></span>
             <strong id="remote-status-text"></strong>
           </div>
           <ul id="remote-agents" class="agents" hidden></ul>
 
-          <h3 data-i18n="remoteTokensHeading">Agent access tokens</h3>
-          <p class="hint" data-i18n="remoteTokensHint">Each agent needs its own token. Anyone with a token can control this browser, so give tokens only to agents you trust and revoke them when you stop using them.</p>
-          <ul id="remote-tokens" class="tokens"></ul>
-          <p id="remote-no-tokens" class="hint" data-i18n="remoteNoTokens">No tokens yet.</p>
-          <form id="remote-new-token" class="new-token">
-            <input id="remote-token-name" type="text" required maxlength="40" autocomplete="off" placeholder="Who it's for, such as Cloud agent" data-i18n-placeholder="remoteTokenNamePlaceholder" />
-            <button type="submit" data-i18n="remoteCreateToken">Create token</button>
-          </form>
-          <div id="remote-created" class="created" hidden>
-            <p class="hint" data-i18n="remoteTokenCreatedHint">Copy it now; it isn't shown again. Run this to add it to Claude Code, or add the JSON to another agent's MCP configuration.</p>
-            <div class="snippet"><code id="remote-claude-code"></code><button class="secondary" data-copy="remote-claude-code" data-i18n="copy">Copy</button></div>
-            <div class="snippet block"><pre id="remote-json"></pre><button class="secondary" data-copy="remote-json" data-i18n="copy">Copy</button></div>
-          </div>
+          <h3 data-i18n="remoteAgentsHeading">Connect an agent</h3>
+          <p class="hint" data-i18n="remoteAgentsHint">Give agents the relay's agent token, never the browser token. Set it as <code>AGENT_BROWSER_BRIDGE_AGENT_TOKEN</code> where the agent runs, then run this to add the relay to Claude Code, or add the JSON to another agent's MCP configuration.</p>
+          <div class="snippet"><code id="remote-claude-code"></code><button class="secondary" data-copy="remote-claude-code" data-i18n="copy">Copy</button></div>
+          <div class="snippet block"><pre id="remote-json"></pre><button class="secondary" data-copy="remote-json" data-i18n="copy">Copy</button></div>
         </div>
       </section>
 

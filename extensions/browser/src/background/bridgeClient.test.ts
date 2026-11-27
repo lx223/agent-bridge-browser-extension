@@ -1,7 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import WebSocketClient, { WebSocketServer, type WebSocket as ServerSocket } from 'ws';
-import { PROTOCOL_VERSION, REPLACED_CLOSE_CODE } from '@agent-browser-bridge/protocol';
-import { BridgeClient, type ConnectionState } from './bridgeClient.ts';
+import { PROTOCOL_VERSION, REMOTE_UNAUTHORIZED_CLOSE_CODE, REPLACED_CLOSE_CODE } from '@agent-browser-bridge/protocol';
+import { BridgeClient, UntrustedRelayError, type ConnectionState, type ConnectionStatus } from './bridgeClient.ts';
 
 type Dispatch = ConstructorParameters<typeof BridgeClient>[1];
 type Message = Record<string, unknown>;
@@ -354,34 +354,100 @@ describe('BridgeClient', () => {
     expect(peer.received[0]).not.toHaveProperty('name');
   });
 
-  it('authenticates before introducing itself when asked to', async () => {
-    const port = await listen();
-    const auth = { type: 'remoteAuth' as const, key: 'k'.repeat(43), tokens: [] };
-    const client = new BridgeClient(`ws://127.0.0.1:${port}`, async () => null, () => {}, { authenticate: async () => auth });
-    clients.push(client);
-    client.connect();
-    await until(() => peers.length === 1 && peers[0]!.received.length === 2);
-    expect(peers[0]!.received[0]).toEqual(auth);
-    expect(peers[0]!.received[1]).toMatchObject({ type: 'hello' });
-  });
-
-  it('drops the connection when it cannot authenticate', async () => {
+  it('completes the handshake before it introduces itself or counts as connected', async () => {
     const port = await listen();
     const states: ConnectionState[] = [];
+    const seen: unknown[] = [];
     const client = new BridgeClient(`ws://127.0.0.1:${port}`, async () => null, (status) => states.push(status.state), {
-      authenticate: async () => Promise.reject(new Error('no key')),
+      handshake: async (io) => {
+        seen.push(await io.next());
+        io.send({ type: 'remoteAuth', nonce: 'n'.repeat(43), proof: 'a'.repeat(64) });
+        seen.push(await io.next());
+      },
     });
     clients.push(client);
     client.connect();
-    await until(() => states.at(-1) === 'disconnected' && states.includes('connected'));
-    expect(peers[0]?.received ?? []).toEqual([]);
+    await until(() => peers.length === 1);
+    const peer = peers[0]!;
+    peer.socket.send(JSON.stringify({ type: 'remoteChallenge', nonce: 'c'.repeat(43) }));
+    await until(() => peer.received.length === 1);
+    expect(peer.received[0]).toMatchObject({ type: 'remoteAuth' });
+    expect(states).toEqual(['connecting']);
+    peer.socket.send(JSON.stringify({ type: 'remoteWelcome', proof: 'b'.repeat(64) }));
+    await until(() => peer.received.length === 2);
+    expect(peer.received[1]).toMatchObject({ type: 'hello' });
+    expect(states).toEqual(['connecting', 'connected']);
+    expect(seen).toEqual([{ type: 'remoteChallenge', nonce: 'c'.repeat(43) }, { type: 'remoteWelcome', proof: 'b'.repeat(64) }]);
+    expect(client.status.problem).toBeUndefined();
   });
 
-  it('sends token updates', async () => {
-    const { client, peer } = await connected();
-    client.sendTokens(['b'.repeat(64)]);
-    await until(() => peer.received.length === 2);
-    expect(peer.received[1]).toEqual({ type: 'remoteTokens', tokens: ['b'.repeat(64)] });
+  it('does not answer requests that arrive before the handshake finishes', async () => {
+    const port = await listen();
+    const dispatch = vi.fn(async () => null);
+    const client = new BridgeClient(`ws://127.0.0.1:${port}`, dispatch, () => {}, {
+      handshake: async (io) => {
+        await io.next();
+        await io.next();
+        throw new UntrustedRelayError('no');
+      },
+    });
+    clients.push(client);
+    client.connect();
+    await until(() => peers.length === 1);
+    request(peers[0]!, 'early', 'tabs.list');
+    request(peers[0]!, 'early-2', 'tabs.list');
+    await until(() => client.status.state === 'disconnected');
+    expect(dispatch).not.toHaveBeenCalled();
+    expect(peers[0]!.received).toEqual([]);
+  });
+
+  it('reports a relay that cannot prove the token and keeps reporting it while retrying', async () => {
+    const port = await listen();
+    const statuses: ConnectionStatus[] = [];
+    const client = new BridgeClient(`ws://127.0.0.1:${port}`, async () => null, (status) => statuses.push(status), {
+      handshake: async () => {
+        throw new UntrustedRelayError('no proof');
+      },
+    });
+    clients.push(client);
+    client.connect();
+    await until(() => statuses.at(-1)?.state === 'disconnected');
+    expect(statuses.at(-1)?.problem).toBe('untrusted');
+    await vi.advanceTimersByTimeAsync(1000);
+    await until(() => statuses.at(-1)?.state === 'connecting');
+    expect(statuses.at(-1)?.problem).toBe('untrusted');
+  });
+
+  it('reports a relay that rejects the token', async () => {
+    const port = await listen();
+    const statuses: ConnectionStatus[] = [];
+    const client = new BridgeClient(`ws://127.0.0.1:${port}`, async () => null, (status) => statuses.push(status), {
+      handshake: async (io) => {
+        await io.next();
+      },
+    });
+    clients.push(client);
+    client.connect();
+    await until(() => peers.length === 1);
+    peers[0]!.socket.close(REMOTE_UNAUTHORIZED_CLOSE_CODE, 'Wrong browser token');
+    await until(() => statuses.at(-1)?.state === 'disconnected');
+    expect(statuses.at(-1)?.problem).toBe('rejected');
+  });
+
+  it('gives up on a handshake that takes too long', async () => {
+    const port = await listen();
+    const states: ConnectionState[] = [];
+    const client = new BridgeClient(`ws://127.0.0.1:${port}`, async () => null, (status) => states.push(status.state), {
+      handshake: (io) => io.next().then(() => undefined),
+      handshakeTimeoutMs: 5_000,
+    });
+    clients.push(client);
+    client.connect();
+    await until(() => peers.length === 1);
+    await vi.advanceTimersByTimeAsync(5_000);
+    await until(() => states.at(-1) === 'disconnected');
+    expect(states).toEqual(['connecting', 'disconnected']);
+    expect(client.status.problem).toBeUndefined();
   });
 
   it('stays closed once closed', async () => {
