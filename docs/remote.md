@@ -75,6 +75,36 @@ docker run -d --restart unless-stopped --env-file relay.env -e AGENT_BROWSER_BRI
 
 Publishing the port on `127.0.0.1` keeps it reachable only through the HTTPS proxy on the same machine.
 
+### Fly.io
+
+`fly.toml` at the repository root runs the relay on [Fly.io](https://fly.io) in Frankfurt (`fra`) on one `shared-cpu-1x` machine with 256 MB, built from `packages/server/Dockerfile`. Fly terminates HTTPS and forwards WebSockets, so no other proxy is needed. The machine stays running, because browsers keep a connection open to it.
+
+Create the app, store the tokens and the public host as secrets, and deploy one machine. Pick your own app name, since names are global:
+
+```bash
+fly apps create my-relay
+```
+
+```bash
+npx -y agent-browser-bridge-mcp@latest tokens > relay.env
+```
+
+```bash
+echo "AGENT_BROWSER_BRIDGE_PUBLIC_HOST=my-relay.fly.dev" >> relay.env
+```
+
+```bash
+fly secrets import --stage -a my-relay < relay.env
+```
+
+```bash
+fly deploy -a my-relay --ha=false
+```
+
+`--ha=false` keeps it to one machine, which the relay needs because one process holds every browser connection. The relay address is then `https://my-relay.fly.dev`. To use another region, change `primary_region` in `fly.toml`.
+
+Behind Fly's proxy every connection comes from the proxy's address, so failed attempts from everyone are counted together, as described under [Failed attempts](#failed-attempts).
+
 ### HTTPS
 
 Browsers and agents must reach the relay over HTTPS. The extension refuses relay addresses that are not `https://`, except `localhost`, `127.0.0.1` and `[::1]` for testing. Put the relay behind something that terminates TLS and forwards WebSockets:
