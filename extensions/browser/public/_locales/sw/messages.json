@@ -349,5 +349,29 @@
   },
   "remotePrivacy": {
     "message": "Ufikiaji wa mbali umewashwa: kiendelezi hiki pia huunganisha na $1, ambayo hupitisha maombi ya mawakala wako na majibu ya kivinjari hiki, ikiwa ni pamoja na majina na URL za vichupo na maudhui ya kurasa."
+  },
+  "remoteBrowserTokenLabel": {
+    "message": "Tokeni ya kivinjari"
+  },
+  "remoteBrowserTokenHint": {
+    "message": "Tokeni ya kivinjari ya seva ya upeanaji, iliyowekwa kama $1 mahali seva inapoendeshwa. Inabaki katika wasifu huu wa kivinjari: kiendelezi huthibitisha kuwa kinaijua tokeni bila kuituma."
+  },
+  "remoteBrowserTokenInvalid": {
+    "message": "Tokeni lazima iwe na angalau herufi 32, bila nafasi mwanzoni au mwishoni."
+  },
+  "remoteStatusNoToken": {
+    "message": "Weka tokeni ya kivinjari ili uunganishe."
+  },
+  "remoteStatusRejected": {
+    "message": "Seva ya upeanaji haikukubali tokeni hii ya kivinjari. Hakikisha inalingana na tokeni ya kivinjari ya seva ya upeanaji."
+  },
+  "remoteStatusUntrusted": {
+    "message": "Seva hii ya upeanaji haikuweza kuthibitisha kuwa inaijua tokeni ya kivinjari. Kagua anwani: huenda isiwe seva yako ya upeanaji."
+  },
+  "remoteAgentsHeading": {
+    "message": "Unganisha wakala"
+  },
+  "remoteAgentsHint": {
+    "message": "Wape mawakala tokeni ya wakala ya seva ya upeanaji, kamwe si tokeni ya kivinjari. Iweke kama $1 mahali wakala anapoendeshwa, kisha tekeleza hii ili uongeze seva ya upeanaji kwenye Claude Code, au ongeza JSON kwenye mipangilio ya MCP ya wakala mwingine."
   }
 }

@@ -349,5 +349,29 @@
   },
   "remotePrivacy": {
     "message": "원격 액세스가 켜져 있습니다. 이 확장 프로그램은 $1에도 연결하며, 이 서버를 통해 에이전트의 요청과 이 브라우저의 응답(탭 제목, URL, 페이지 콘텐츠 포함)이 전달됩니다."
+  },
+  "remoteBrowserTokenLabel": {
+    "message": "브라우저 토큰"
+  },
+  "remoteBrowserTokenHint": {
+    "message": "릴레이가 실행되는 곳의 $1에 설정된 릴레이의 브라우저 토큰입니다. 이 토큰은 이 브라우저 프로필에만 저장되며, 확장 프로그램은 토큰을 보내지 않고도 토큰을 알고 있음을 증명합니다."
+  },
+  "remoteBrowserTokenInvalid": {
+    "message": "토큰은 32자 이상이어야 하며 앞뒤에 공백이 없어야 합니다."
+  },
+  "remoteStatusNoToken": {
+    "message": "연결하려면 브라우저 토큰을 입력하세요."
+  },
+  "remoteStatusRejected": {
+    "message": "릴레이가 이 브라우저 토큰을 수락하지 않았습니다. 릴레이의 브라우저 토큰과 일치하는지 확인하세요."
+  },
+  "remoteStatusUntrusted": {
+    "message": "이 릴레이가 브라우저 토큰을 알고 있음을 증명하지 못했습니다. 주소를 확인하세요. 내 릴레이가 아닐 수 있습니다."
+  },
+  "remoteAgentsHeading": {
+    "message": "에이전트 연결"
+  },
+  "remoteAgentsHint": {
+    "message": "에이전트에게는 릴레이의 에이전트 토큰을 제공하고, 브라우저 토큰은 절대 제공하지 마세요. 에이전트가 실행되는 곳의 $1에 설정한 다음, 이 명령을 실행해 릴레이를 Claude Code에 추가하고, 다른 에이전트라면 JSON을 MCP 구성에 추가하세요."
   }
 }

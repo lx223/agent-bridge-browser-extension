@@ -349,5 +349,29 @@
   },
   "remotePrivacy": {
     "message": "A távoli hozzáférés be van kapcsolva: ez a bővítmény a következőhöz is csatlakozik: $1. Ez továbbítja az ügynökei kéréseit és a böngésző válaszait, beleértve a lapok címét és URL-jét, valamint az oldalak tartalmát."
+  },
+  "remoteBrowserTokenLabel": {
+    "message": "Böngészőtoken"
+  },
+  "remoteBrowserTokenHint": {
+    "message": "A továbbítószerver böngészőtokenje, amely a szerveren $1 néven van beállítva. Ebben a böngészőprofilban marad: a bővítmény úgy igazolja, hogy ismeri a tokent, hogy nem küldi el."
+  },
+  "remoteBrowserTokenInvalid": {
+    "message": "A tokennek legalább 32 karakter hosszúnak kell lennie, az elején és a végén szóköz nélkül."
+  },
+  "remoteStatusNoToken": {
+    "message": "A csatlakozáshoz adja meg a böngészőtokent."
+  },
+  "remoteStatusRejected": {
+    "message": "A továbbítószerver nem fogadta el ezt a böngészőtokent. Ellenőrizze, hogy egyezik-e a továbbítószerver böngészőtokenjével."
+  },
+  "remoteStatusUntrusted": {
+    "message": "Ez a továbbítószerver nem tudta igazolni, hogy ismeri a böngészőtokent. Ellenőrizze a címet: lehet, hogy nem az Ön továbbítószervere."
+  },
+  "remoteAgentsHeading": {
+    "message": "Ügynök csatlakoztatása"
+  },
+  "remoteAgentsHint": {
+    "message": "Az ügynököknek a továbbítószerver ügynöktokenjét adja meg, soha ne a böngészőtokent. Állítsa be $1 néven ott, ahol az ügynök fut, majd futtassa ezt a továbbítószerver Claude Code-hoz való hozzáadásához, vagy adja hozzá a JSON-t egy másik ügynök MCP-konfigurációjához."
   }
 }

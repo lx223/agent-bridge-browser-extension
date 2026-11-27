@@ -349,5 +349,29 @@
   },
   "remotePrivacy": {
     "message": "Ekstern tilgang er på: Denne utvidelsen kobler seg også til $1, som videresender agentenes forespørsler og denne nettleserens svar, inkludert fanetitler, nettadresser og sideinnhold."
+  },
+  "remoteBrowserTokenLabel": {
+    "message": "Nettlesertoken"
+  },
+  "remoteBrowserTokenHint": {
+    "message": "Reléets nettlesertoken, angitt som $1 der reléet kjører. Det blir værende i denne nettleserprofilen: Utvidelsen beviser at den kjenner tokenet, uten å sende det."
+  },
+  "remoteBrowserTokenInvalid": {
+    "message": "Tokenet må være minst 32 tegn langt, uten mellomrom i starten eller slutten."
+  },
+  "remoteStatusNoToken": {
+    "message": "Skriv inn nettlesertokenet for å koble til."
+  },
+  "remoteStatusRejected": {
+    "message": "Reléet godtok ikke dette nettlesertokenet. Sjekk at det samsvarer med reléets nettlesertoken."
+  },
+  "remoteStatusUntrusted": {
+    "message": "Reléet kunne ikke bevise at det kjenner nettlesertokenet. Sjekk adressen: Det er kanskje ikke ditt relé."
+  },
+  "remoteAgentsHeading": {
+    "message": "Koble til en agent"
+  },
+  "remoteAgentsHint": {
+    "message": "Gi agenter reléets agenttoken, aldri nettlesertokenet. Angi det som $1 der agenten kjører, og kjør deretter dette for å legge til reléet i Claude Code, eller legg til JSON-koden i en annen agents MCP-konfigurasjon."
   }
 }

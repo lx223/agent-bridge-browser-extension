@@ -361,5 +361,29 @@
   },
   "remotePrivacy": {
     "message": "Attālā piekļuve ir ieslēgta: šis paplašinājums savienojas arī ar $1, kas nodod jūsu aģentu pieprasījumus un šīs pārlūkprogrammas atbildes, tostarp ciļņu nosaukumus, URL un lapu saturu."
+  },
+  "remoteBrowserTokenLabel": {
+    "message": "Pārlūkprogrammas marķieris"
+  },
+  "remoteBrowserTokenHint": {
+    "message": "Retranslācijas servera pārlūkprogrammas marķieris, kas ir iestatīts kā $1 tur, kur darbojas serveris. Tas paliek šajā pārlūkprogrammas profilā: paplašinājums pierāda, ka zina marķieri, to nenosūtot."
+  },
+  "remoteBrowserTokenInvalid": {
+    "message": "Marķierim jābūt vismaz 32 rakstzīmes garam, bez atstarpēm sākumā vai beigās."
+  },
+  "remoteStatusNoToken": {
+    "message": "Lai izveidotu savienojumu, ievadiet pārlūkprogrammas marķieri."
+  },
+  "remoteStatusRejected": {
+    "message": "Retranslācijas serveris nepieņēma šo pārlūkprogrammas marķieri. Pārbaudiet, vai tas atbilst retranslācijas servera pārlūkprogrammas marķierim."
+  },
+  "remoteStatusUntrusted": {
+    "message": "Šis retranslācijas serveris nevarēja pierādīt, ka zina pārlūkprogrammas marķieri. Pārbaudiet adresi: iespējams, tas nav jūsu retranslācijas serveris."
+  },
+  "remoteAgentsHeading": {
+    "message": "Aģenta pievienošana"
+  },
+  "remoteAgentsHint": {
+    "message": "Aģentiem dodiet retranslācijas servera aģenta marķieri, nekad ne pārlūkprogrammas marķieri. Iestatiet to kā $1 tur, kur darbojas aģents, pēc tam palaidiet šo, lai pievienotu retranslācijas serveri Claude Code, vai pievienojiet JSON cita aģenta MCP konfigurācijai."
   }
 }

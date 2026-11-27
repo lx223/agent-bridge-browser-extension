@@ -349,5 +349,29 @@
   },
   "remotePrivacy": {
     "message": "Fjärråtkomst är på: tillägget ansluter också till $1, som förmedlar dina agenters förfrågningar och den här webbläsarens svar, inklusive fliktitlar, webbadresser och sidinnehåll."
+  },
+  "remoteBrowserTokenLabel": {
+    "message": "Webbläsartoken"
+  },
+  "remoteBrowserTokenHint": {
+    "message": "Reläets webbläsartoken, angiven som $1 där reläet körs. Den stannar i den här webbläsarprofilen: tillägget bevisar att det känner till token utan att skicka den."
+  },
+  "remoteBrowserTokenInvalid": {
+    "message": "Token måste vara minst 32 tecken lång, utan mellanslag i början eller slutet."
+  },
+  "remoteStatusNoToken": {
+    "message": "Ange webbläsartoken för att ansluta."
+  },
+  "remoteStatusRejected": {
+    "message": "Reläet godkände inte den här webbläsartoken. Kontrollera att den matchar reläets webbläsartoken."
+  },
+  "remoteStatusUntrusted": {
+    "message": "Reläet kunde inte bevisa att det känner till webbläsartoken. Kontrollera adressen: det kanske inte är ditt relä."
+  },
+  "remoteAgentsHeading": {
+    "message": "Anslut en agent"
+  },
+  "remoteAgentsHint": {
+    "message": "Ge agenter reläets agenttoken, aldrig webbläsartoken. Ange den som $1 där agenten körs och kör sedan det här för att lägga till reläet i Claude Code, eller lägg till JSON-koden i en annan agents MCP-konfiguration."
   }
 }

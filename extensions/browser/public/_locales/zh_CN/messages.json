@@ -349,5 +349,29 @@
   },
   "remotePrivacy": {
     "message": "远程访问已开启：此扩展程序还会连接到 $1，由它转发您的智能体发出的请求和此浏览器的响应，其中包括标签页标题、网址和网页内容。"
+  },
+  "remoteBrowserTokenLabel": {
+    "message": "浏览器令牌"
+  },
+  "remoteBrowserTokenHint": {
+    "message": "中继服务器的浏览器令牌，在中继服务器运行的环境中设置为 $1。它只保存在此浏览器配置文件中：扩展程序无需发送令牌即可证明自己知道它。"
+  },
+  "remoteBrowserTokenInvalid": {
+    "message": "令牌长度至少为 32 个字符，且开头和结尾不能有空格。"
+  },
+  "remoteStatusNoToken": {
+    "message": "请输入浏览器令牌以连接。"
+  },
+  "remoteStatusRejected": {
+    "message": "中继服务器未接受此浏览器令牌。请检查它是否与中继服务器的浏览器令牌一致。"
+  },
+  "remoteStatusUntrusted": {
+    "message": "此中继服务器无法证明它知道浏览器令牌。请检查地址：它可能不是您的中继服务器。"
+  },
+  "remoteAgentsHeading": {
+    "message": "连接智能体"
+  },
+  "remoteAgentsHint": {
+    "message": "请向智能体提供中继服务器的智能体令牌，切勿提供浏览器令牌。在智能体运行的环境中将其设置为 $1，然后运行此命令将中继服务器添加到 Claude Code，或将 JSON 添加到其他智能体的 MCP 配置中。"
   }
 }

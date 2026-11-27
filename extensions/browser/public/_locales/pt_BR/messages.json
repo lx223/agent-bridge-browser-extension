@@ -361,5 +361,29 @@
   },
   "remotePrivacy": {
     "message": "O acesso remoto está ativado: esta extensão também se conecta a $1, que transmite as solicitações dos seus agentes e as respostas deste navegador, incluindo títulos e URLs das guias e conteúdo das páginas."
+  },
+  "remoteBrowserTokenLabel": {
+    "message": "Token do navegador"
+  },
+  "remoteBrowserTokenHint": {
+    "message": "O token do navegador do servidor de retransmissão, definido como $1 onde ele é executado. Ele fica neste perfil do navegador: a extensão prova que conhece o token sem enviá-lo."
+  },
+  "remoteBrowserTokenInvalid": {
+    "message": "O token precisa ter pelo menos 32 caracteres, sem espaços no início ou no fim."
+  },
+  "remoteStatusNoToken": {
+    "message": "Insira o token do navegador para conectar."
+  },
+  "remoteStatusRejected": {
+    "message": "O servidor de retransmissão não aceitou este token do navegador. Verifique se ele corresponde ao token do navegador do servidor de retransmissão."
+  },
+  "remoteStatusUntrusted": {
+    "message": "Este servidor de retransmissão não conseguiu provar que conhece o token do navegador. Verifique o endereço: talvez ele não seja o seu servidor de retransmissão."
+  },
+  "remoteAgentsHeading": {
+    "message": "Conectar um agente"
+  },
+  "remoteAgentsHint": {
+    "message": "Dê aos agentes o token de agente do servidor de retransmissão, nunca o token do navegador. Defina-o como $1 onde o agente é executado e depois execute isto para adicionar o servidor de retransmissão ao Claude Code ou adicione o JSON à configuração MCP de outro agente."
   }
 }

@@ -361,5 +361,29 @@
   },
   "remotePrivacy": {
     "message": "Accesul la distanță este activat: această extensie se conectează și la $1, care transmite solicitările agenților dvs. și răspunsurile acestui browser, inclusiv titlurile și adresele URL ale filelor și conținutul paginilor."
+  },
+  "remoteBrowserTokenLabel": {
+    "message": "Token pentru browser"
+  },
+  "remoteBrowserTokenHint": {
+    "message": "Tokenul pentru browser al serverului releu, setat ca $1 acolo unde rulează serverul. Rămâne în acest profil de browser: extensia dovedește că știe tokenul fără să-l trimită."
+  },
+  "remoteBrowserTokenInvalid": {
+    "message": "Tokenul trebuie să aibă cel puțin 32 de caractere, fără spații la început sau la sfârșit."
+  },
+  "remoteStatusNoToken": {
+    "message": "Introduceți tokenul pentru browser ca să vă conectați."
+  },
+  "remoteStatusRejected": {
+    "message": "Serverul releu nu a acceptat acest token pentru browser. Verificați dacă se potrivește cu tokenul pentru browser al serverului releu."
+  },
+  "remoteStatusUntrusted": {
+    "message": "Acest server releu nu a putut dovedi că știe tokenul pentru browser. Verificați adresa: este posibil să nu fie serverul dvs. releu."
+  },
+  "remoteAgentsHeading": {
+    "message": "Conectați un agent"
+  },
+  "remoteAgentsHint": {
+    "message": "Dați agenților tokenul pentru agenți al serverului releu, niciodată tokenul pentru browser. Setați-l ca $1 acolo unde rulează agentul, apoi rulați această comandă pentru a adăuga serverul releu în Claude Code sau adăugați JSON-ul în configurația MCP a altui agent."
   }
 }

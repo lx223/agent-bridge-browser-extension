@@ -349,5 +349,29 @@
   },
   "remotePrivacy": {
     "message": "遠端存取已開啟：這個擴充功能也會連線至 $1，由它轉送你的代理程式發出的要求和這個瀏覽器的回應，其中包括分頁標題、網址和網頁內容。"
+  },
+  "remoteBrowserTokenLabel": {
+    "message": "瀏覽器權杖"
+  },
+  "remoteBrowserTokenHint": {
+    "message": "中繼伺服器的瀏覽器權杖，在中繼伺服器執行的環境中設為 $1。它只會保存在這個瀏覽器設定檔中：擴充功能不必傳送權杖，就能證明自己知道它。"
+  },
+  "remoteBrowserTokenInvalid": {
+    "message": "權杖長度至少須為 32 個字元，且開頭和結尾不得有空格。"
+  },
+  "remoteStatusNoToken": {
+    "message": "請輸入瀏覽器權杖以連線。"
+  },
+  "remoteStatusRejected": {
+    "message": "中繼伺服器未接受這個瀏覽器權杖。請確認它與中繼伺服器的瀏覽器權杖相符。"
+  },
+  "remoteStatusUntrusted": {
+    "message": "這個中繼伺服器無法證明它知道瀏覽器權杖。請檢查位址：它可能不是你的中繼伺服器。"
+  },
+  "remoteAgentsHeading": {
+    "message": "連線代理程式"
+  },
+  "remoteAgentsHint": {
+    "message": "請將中繼伺服器的代理程式權杖提供給代理程式，切勿提供瀏覽器權杖。在代理程式執行的環境中將它設為 $1，然後執行這段指令，將中繼伺服器加入 Claude Code，或將 JSON 加入其他代理程式的 MCP 設定。"
   }
 }

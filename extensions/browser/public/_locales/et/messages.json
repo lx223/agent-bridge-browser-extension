@@ -349,5 +349,29 @@
   },
   "remotePrivacy": {
     "message": "Kaugjuurdepääs on sees: see laiendus ühendub ka aadressiga $1, mis edastab teie agentide päringud ja selle brauseri vastused, sealhulgas vahelehtede pealkirjad, URL-id ja lehtede sisu."
+  },
+  "remoteBrowserTokenLabel": {
+    "message": "Brauseri pääsuluba"
+  },
+  "remoteBrowserTokenHint": {
+    "message": "Vahendusserveri brauseri pääsuluba, mis on serveris määratud kui $1. See jääb sellesse brauseriprofiili: laiendus tõendab, et teab pääsuluba, ilma seda saatmata."
+  },
+  "remoteBrowserTokenInvalid": {
+    "message": "Pääsuluba peab olema vähemalt 32 märki pikk ning selle alguses ega lõpus ei tohi olla tühikuid."
+  },
+  "remoteStatusNoToken": {
+    "message": "Ühendamiseks sisestage brauseri pääsuluba."
+  },
+  "remoteStatusRejected": {
+    "message": "Vahendusserver ei aktsepteerinud seda brauseri pääsuluba. Kontrollige, kas see ühtib vahendusserveri brauseri pääsuloaga."
+  },
+  "remoteStatusUntrusted": {
+    "message": "See vahendusserver ei suutnud tõendada, et teab brauseri pääsuluba. Kontrollige aadressi: see ei pruugi olla teie vahendusserver."
+  },
+  "remoteAgentsHeading": {
+    "message": "Agendi ühendamine"
+  },
+  "remoteAgentsHint": {
+    "message": "Andke agentidele vahendusserveri agendi pääsuluba, mitte kunagi brauseri pääsuluba. Määrake see kui $1 seal, kus agent töötab, seejärel käivitage see käsk, et lisada vahendusserver Claude Code'i, või lisage JSON mõne teise agendi MCP konfiguratsiooni."
   }
 }

@@ -373,5 +373,29 @@
   },
   "remotePrivacy": {
     "message": "Dostęp zdalny jest włączony: to rozszerzenie łączy się też z $1, który przekazuje żądania Twoich agentów i odpowiedzi tej przeglądarki, w tym tytuły i adresy URL kart oraz zawartość stron."
+  },
+  "remoteBrowserTokenLabel": {
+    "message": "Token przeglądarki"
+  },
+  "remoteBrowserTokenHint": {
+    "message": "Token przeglądarki serwera przekaźnikowego, ustawiony jako $1 tam, gdzie działa serwer. Pozostaje w tym profilu przeglądarki: rozszerzenie udowadnia, że zna token, nie wysyłając go."
+  },
+  "remoteBrowserTokenInvalid": {
+    "message": "Token musi mieć co najmniej 32 znaki i nie może zaczynać się ani kończyć spacją."
+  },
+  "remoteStatusNoToken": {
+    "message": "Wpisz token przeglądarki, aby się połączyć."
+  },
+  "remoteStatusRejected": {
+    "message": "Serwer przekaźnikowy nie zaakceptował tego tokena przeglądarki. Sprawdź, czy zgadza się z tokenem przeglądarki serwera przekaźnikowego."
+  },
+  "remoteStatusUntrusted": {
+    "message": "Ten serwer przekaźnikowy nie udowodnił, że zna token przeglądarki. Sprawdź adres: to może nie być Twój serwer przekaźnikowy."
+  },
+  "remoteAgentsHeading": {
+    "message": "Połącz agenta"
+  },
+  "remoteAgentsHint": {
+    "message": "Przekaż agentom token agenta serwera przekaźnikowego, nigdy token przeglądarki. Ustaw go jako $1 tam, gdzie działa agent, a następnie uruchom to, aby dodać serwer przekaźnikowy do Claude Code, lub dodaj JSON do konfiguracji MCP innego agenta."
   }
 }

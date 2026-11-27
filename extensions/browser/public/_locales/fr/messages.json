@@ -361,5 +361,29 @@
   },
   "remotePrivacy": {
     "message": "L'accès à distance est activé : cette extension se connecte aussi à $1, qui transmet les requêtes de vos agents et les réponses de ce navigateur, y compris les titres et URL des onglets et le contenu des pages."
+  },
+  "remoteBrowserTokenLabel": {
+    "message": "Jeton du navigateur"
+  },
+  "remoteBrowserTokenHint": {
+    "message": "Le jeton du navigateur du relais, défini dans $1 là où le relais s'exécute. Il reste dans ce profil de navigateur : l'extension prouve qu'elle connaît le jeton sans l'envoyer."
+  },
+  "remoteBrowserTokenInvalid": {
+    "message": "Le jeton doit comporter au moins 32 caractères, sans espace au début ni à la fin."
+  },
+  "remoteStatusNoToken": {
+    "message": "Saisissez le jeton du navigateur pour vous connecter."
+  },
+  "remoteStatusRejected": {
+    "message": "Le relais n'a pas accepté ce jeton du navigateur. Vérifiez qu'il correspond au jeton du navigateur du relais."
+  },
+  "remoteStatusUntrusted": {
+    "message": "Ce relais n'a pas pu prouver qu'il connaît le jeton du navigateur. Vérifiez l'adresse : il ne s'agit peut-être pas de votre relais."
+  },
+  "remoteAgentsHeading": {
+    "message": "Connecter un agent"
+  },
+  "remoteAgentsHint": {
+    "message": "Donnez aux agents le jeton d'agent du relais, jamais le jeton du navigateur. Définissez-le dans $1 là où l'agent s'exécute, puis exécutez ceci pour ajouter le relais à Claude Code, ou ajoutez le JSON à la configuration MCP d'un autre agent."
   }
 }

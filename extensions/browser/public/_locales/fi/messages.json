@@ -349,5 +349,29 @@
   },
   "remotePrivacy": {
     "message": "Etäkäyttö on päällä: tämä laajennus muodostaa yhteyden myös osoitteeseen $1, joka välittää agenttiesi pyynnöt ja tämän selaimen vastaukset, mukaan lukien välilehtien otsikot ja URL-osoitteet sekä sivujen sisällön."
+  },
+  "remoteBrowserTokenLabel": {
+    "message": "Selaintunnus"
+  },
+  "remoteBrowserTokenHint": {
+    "message": "Välityspalvelimen selaintunnus, joka on määritetty palvelimella nimellä $1. Se pysyy tässä selainprofiilissa: laajennus todistaa tuntevansa tunnuksen lähettämättä sitä."
+  },
+  "remoteBrowserTokenInvalid": {
+    "message": "Tunnuksen on oltava vähintään 32 merkkiä pitkä, eikä sen alussa tai lopussa saa olla välilyöntejä."
+  },
+  "remoteStatusNoToken": {
+    "message": "Yhdistä antamalla selaintunnus."
+  },
+  "remoteStatusRejected": {
+    "message": "Välityspalvelin ei hyväksynyt tätä selaintunnusta. Tarkista, että se vastaa välityspalvelimen selaintunnusta."
+  },
+  "remoteStatusUntrusted": {
+    "message": "Tämä välityspalvelin ei pystynyt todistamaan tuntevansa selaintunnusta. Tarkista osoite: se ei ehkä ole sinun välityspalvelimesi."
+  },
+  "remoteAgentsHeading": {
+    "message": "Yhdistä agentti"
+  },
+  "remoteAgentsHint": {
+    "message": "Anna agenteille välityspalvelimen agenttitunnus, älä koskaan selaintunnusta. Määritä se nimellä $1 siellä, missä agentti toimii, ja lisää sitten välityspalvelin Claude Codeen suorittamalla tämä tai lisää JSON toisen agentin MCP-määrityksiin."
   }
 }

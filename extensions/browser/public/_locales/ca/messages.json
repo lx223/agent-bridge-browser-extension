@@ -361,5 +361,29 @@
   },
   "remotePrivacy": {
     "message": "L'accés remot està activat: aquesta extensió també es connecta a $1, que transmet les sol·licituds dels teus agents i les respostes d'aquest navegador, inclosos els títols i els URL de les pestanyes i el contingut de les pàgines."
+  },
+  "remoteBrowserTokenLabel": {
+    "message": "Testimoni del navegador"
+  },
+  "remoteBrowserTokenHint": {
+    "message": "El testimoni del navegador del servidor de retransmissió, definit com a $1 on s'executa. Es queda en aquest perfil del navegador: l'extensió demostra que el coneix sense enviar-lo."
+  },
+  "remoteBrowserTokenInvalid": {
+    "message": "El testimoni ha de tenir com a mínim 32 caràcters, sense espais al principi ni al final."
+  },
+  "remoteStatusNoToken": {
+    "message": "Introdueix el testimoni del navegador per connectar-te."
+  },
+  "remoteStatusRejected": {
+    "message": "El servidor de retransmissió no ha acceptat aquest testimoni del navegador. Comprova que coincideixi amb el testimoni del navegador del servidor de retransmissió."
+  },
+  "remoteStatusUntrusted": {
+    "message": "Aquest servidor de retransmissió no ha pogut demostrar que coneix el testimoni del navegador. Comprova l'adreça: potser no és el teu servidor de retransmissió."
+  },
+  "remoteAgentsHeading": {
+    "message": "Connecta un agent"
+  },
+  "remoteAgentsHint": {
+    "message": "Dona als agents el testimoni d'agent del servidor de retransmissió, mai el testimoni del navegador. Defineix-lo com a $1 on s'executa l'agent i, després, executa això per afegir el servidor de retransmissió a Claude Code o afegeix el JSON a la configuració MCP d'un altre agent."
   }
 }

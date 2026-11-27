@@ -349,5 +349,29 @@
   },
   "remotePrivacy": {
     "message": "Fjernadgang er slået til: Udvidelsen forbinder også til $1, som videresender dine agenters anmodninger og denne browsers svar, herunder fanetitler, webadresser og sideindhold."
+  },
+  "remoteBrowserTokenLabel": {
+    "message": "Browsertoken"
+  },
+  "remoteBrowserTokenHint": {
+    "message": "Relæets browsertoken, angivet som $1 der, hvor relæet kører. Det bliver i denne browserprofil: Udvidelsen beviser, at den kender tokenet, uden at sende det."
+  },
+  "remoteBrowserTokenInvalid": {
+    "message": "Tokenet skal være på mindst 32 tegn uden mellemrum i starten eller slutningen."
+  },
+  "remoteStatusNoToken": {
+    "message": "Angiv browsertokenet for at oprette forbindelse."
+  },
+  "remoteStatusRejected": {
+    "message": "Relæet accepterede ikke dette browsertoken. Tjek, at det svarer til relæets browsertoken."
+  },
+  "remoteStatusUntrusted": {
+    "message": "Relæet kunne ikke bevise, at det kender browsertokenet. Tjek adressen: Det er måske ikke dit relæ."
+  },
+  "remoteAgentsHeading": {
+    "message": "Forbind en agent"
+  },
+  "remoteAgentsHint": {
+    "message": "Giv agenter relæets agenttoken, aldrig browsertokenet. Angiv det som $1 der, hvor agenten kører, og kør derefter dette for at føje relæet til Claude Code, eller føj JSON-koden til en anden agents MCP-konfiguration."
   }
 }

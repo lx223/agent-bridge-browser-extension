@@ -349,5 +349,29 @@
   },
   "remotePrivacy": {
     "message": "Akses jarak jauh aktif: ekstensi ini juga terhubung ke $1, yang meneruskan permintaan agen Anda dan jawaban browser ini, termasuk judul dan URL tab serta konten halaman."
+  },
+  "remoteBrowserTokenLabel": {
+    "message": "Token browser"
+  },
+  "remoteBrowserTokenHint": {
+    "message": "Token browser milik server relay, yang ditetapkan sebagai $1 di tempat server berjalan. Token ini tetap berada di profil browser ini: ekstensi membuktikan bahwa ia mengetahui token tanpa mengirimkannya."
+  },
+  "remoteBrowserTokenInvalid": {
+    "message": "Token harus terdiri dari minimal 32 karakter, tanpa spasi di awal atau akhir."
+  },
+  "remoteStatusNoToken": {
+    "message": "Masukkan token browser untuk terhubung."
+  },
+  "remoteStatusRejected": {
+    "message": "Server relay tidak menerima token browser ini. Pastikan token ini cocok dengan token browser server relay."
+  },
+  "remoteStatusUntrusted": {
+    "message": "Server relay ini tidak dapat membuktikan bahwa ia mengetahui token browser. Periksa alamatnya: mungkin ini bukan server relay Anda."
+  },
+  "remoteAgentsHeading": {
+    "message": "Hubungkan agen"
+  },
+  "remoteAgentsHint": {
+    "message": "Berikan token agen milik server relay kepada agen, jangan pernah token browser. Tetapkan sebagai $1 di tempat agen berjalan, lalu jalankan ini untuk menambahkan server relay ke Claude Code, atau tambahkan JSON ke konfigurasi MCP agen lain."
   }
 }

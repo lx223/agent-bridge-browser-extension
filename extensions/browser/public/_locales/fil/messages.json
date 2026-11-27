@@ -349,5 +349,29 @@
   },
   "remotePrivacy": {
     "message": "Naka-on ang remote na access: kumokonekta rin ang extension na ito sa $1, na nagpapasa ng mga request ng iyong mga agent at ng mga sagot ng browser na ito, kasama ang mga pamagat at URL ng tab at nilalaman ng page."
+  },
+  "remoteBrowserTokenLabel": {
+    "message": "Browser token"
+  },
+  "remoteBrowserTokenHint": {
+    "message": "Ang browser token ng relay, na naka-set bilang $1 kung saan ito tumatakbo. Nananatili ito sa browser profile na ito: pinapatunayan ng extension na alam nito ang token nang hindi ito ipinapadala."
+  },
+  "remoteBrowserTokenInvalid": {
+    "message": "Dapat ay hindi bababa sa 32 character ang token, at walang space sa simula o dulo."
+  },
+  "remoteStatusNoToken": {
+    "message": "Ilagay ang browser token para kumonekta."
+  },
+  "remoteStatusRejected": {
+    "message": "Hindi tinanggap ng relay ang browser token na ito. Tingnan kung tugma ito sa browser token ng relay."
+  },
+  "remoteStatusUntrusted": {
+    "message": "Hindi napatunayan ng relay na ito na alam nito ang browser token. Tingnan ang address: maaaring hindi ito ang iyong relay."
+  },
+  "remoteAgentsHeading": {
+    "message": "Magkonekta ng agent"
+  },
+  "remoteAgentsHint": {
+    "message": "Ibigay sa mga agent ang agent token ng relay, hindi kailanman ang browser token. I-set ito bilang $1 kung saan tumatakbo ang agent, pagkatapos ay patakbuhin ito para idagdag ang relay sa Claude Code, o idagdag ang JSON sa MCP config ng ibang agent."
   }
 }

@@ -361,5 +361,29 @@
   },
   "remotePrivacy": {
     "message": "L'accesso remoto è attivo: questa estensione si connette anche a $1, che inoltra le richieste dei tuoi agenti e le risposte di questo browser, inclusi titoli e URL delle schede e contenuti delle pagine."
+  },
+  "remoteBrowserTokenLabel": {
+    "message": "Token del browser"
+  },
+  "remoteBrowserTokenHint": {
+    "message": "Il token del browser del relay, impostato come $1 dove il relay è in esecuzione. Resta in questo profilo del browser: l'estensione dimostra di conoscere il token senza inviarlo."
+  },
+  "remoteBrowserTokenInvalid": {
+    "message": "Il token deve contenere almeno 32 caratteri, senza spazi all'inizio o alla fine."
+  },
+  "remoteStatusNoToken": {
+    "message": "Inserisci il token del browser per connetterti."
+  },
+  "remoteStatusRejected": {
+    "message": "Il relay non ha accettato questo token del browser. Verifica che corrisponda al token del browser del relay."
+  },
+  "remoteStatusUntrusted": {
+    "message": "Questo relay non è riuscito a dimostrare di conoscere il token del browser. Controlla l'indirizzo: potrebbe non essere il tuo relay."
+  },
+  "remoteAgentsHeading": {
+    "message": "Connetti un agente"
+  },
+  "remoteAgentsHint": {
+    "message": "Dai agli agenti il token degli agenti del relay, mai il token del browser. Impostalo come $1 dove è in esecuzione l'agente, poi esegui questo comando per aggiungere il relay a Claude Code, oppure aggiungi il JSON alla configurazione MCP di un altro agente."
   }
 }

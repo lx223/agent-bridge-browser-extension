@@ -361,5 +361,29 @@
   },
   "remotePrivacy": {
     "message": "Udaljeni pristup je uključen: ovo proširenje povezuje se i s $1, koji prosljeđuje zahtjeve vaših agenata i odgovore ovog preglednika, uključujući naslove i URL-ove kartica te sadržaj stranica."
+  },
+  "remoteBrowserTokenLabel": {
+    "message": "Token preglednika"
+  },
+  "remoteBrowserTokenHint": {
+    "message": "Token preglednika relejnog poslužitelja, postavljen kao $1 ondje gdje poslužitelj radi. Ostaje u ovom profilu preglednika: proširenje dokazuje da zna token, a da ga ne šalje."
+  },
+  "remoteBrowserTokenInvalid": {
+    "message": "Token mora imati najmanje 32 znaka, bez razmaka na početku ili kraju."
+  },
+  "remoteStatusNoToken": {
+    "message": "Unesite token preglednika za povezivanje."
+  },
+  "remoteStatusRejected": {
+    "message": "Relejni poslužitelj nije prihvatio ovaj token preglednika. Provjerite podudara li se s tokenom preglednika relejnog poslužitelja."
+  },
+  "remoteStatusUntrusted": {
+    "message": "Ovaj relejni poslužitelj nije mogao dokazati da zna token preglednika. Provjerite adresu: možda to nije vaš relejni poslužitelj."
+  },
+  "remoteAgentsHeading": {
+    "message": "Povežite agenta"
+  },
+  "remoteAgentsHint": {
+    "message": "Agentima dajte token agenta relejnog poslužitelja, nikad token preglednika. Postavite ga kao $1 ondje gdje agent radi, a zatim pokrenite ovo da biste dodali relejni poslužitelj u Claude Code ili dodajte JSON u MCP konfiguraciju drugog agenta."
   }
 }

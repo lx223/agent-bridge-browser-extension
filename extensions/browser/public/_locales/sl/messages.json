@@ -373,5 +373,29 @@
   },
   "remotePrivacy": {
     "message": "Oddaljeni dostop je vklopljen: ta razširitev se poveže tudi z naslovom $1, ki posreduje zahteve vaših agentov in odgovore tega brskalnika, vključno z naslovi in URL-ji zavihkov ter vsebino strani."
+  },
+  "remoteBrowserTokenLabel": {
+    "message": "Žeton brskalnika"
+  },
+  "remoteBrowserTokenHint": {
+    "message": "Žeton brskalnika posredniškega strežnika, nastavljen kot $1 tam, kjer strežnik deluje. Ostane v tem profilu brskalnika: razširitev dokaže, da pozna žeton, ne da bi ga poslala."
+  },
+  "remoteBrowserTokenInvalid": {
+    "message": "Žeton mora imeti vsaj 32 znakov, brez presledkov na začetku ali koncu."
+  },
+  "remoteStatusNoToken": {
+    "message": "Za povezavo vnesite žeton brskalnika."
+  },
+  "remoteStatusRejected": {
+    "message": "Posredniški strežnik ni sprejel tega žetona brskalnika. Preverite, ali se ujema z žetonom brskalnika posredniškega strežnika."
+  },
+  "remoteStatusUntrusted": {
+    "message": "Ta posredniški strežnik ni mogel dokazati, da pozna žeton brskalnika. Preverite naslov: morda to ni vaš posredniški strežnik."
+  },
+  "remoteAgentsHeading": {
+    "message": "Povežite agenta"
+  },
+  "remoteAgentsHint": {
+    "message": "Agentom dajte žeton agenta posredniškega strežnika, nikoli žetona brskalnika. Nastavite ga kot $1 tam, kjer agent deluje, nato zaženite to, da posredniški strežnik dodate v Claude Code, ali dodajte JSON v konfiguracijo MCP drugega agenta."
   }
 }

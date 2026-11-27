@@ -349,5 +349,29 @@
   },
   "remotePrivacy": {
     "message": "Fernzugriff ist aktiv: Diese Erweiterung verbindet sich außerdem mit $1. Darüber laufen die Anfragen Ihrer Agenten und die Antworten dieses Browsers, einschließlich Tab-Titeln, URLs und Seiteninhalten."
+  },
+  "remoteBrowserTokenLabel": {
+    "message": "Browser-Token"
+  },
+  "remoteBrowserTokenHint": {
+    "message": "Das Browser-Token des Relays, dort als $1 festgelegt, wo das Relay läuft. Es bleibt in diesem Browserprofil: Die Erweiterung weist nach, dass sie das Token kennt, ohne es zu senden."
+  },
+  "remoteBrowserTokenInvalid": {
+    "message": "Das Token muss mindestens 32 Zeichen lang sein und darf nicht mit Leerzeichen beginnen oder enden."
+  },
+  "remoteStatusNoToken": {
+    "message": "Geben Sie das Browser-Token ein, um eine Verbindung herzustellen."
+  },
+  "remoteStatusRejected": {
+    "message": "Das Relay hat dieses Browser-Token nicht akzeptiert. Prüfen Sie, ob es mit dem Browser-Token des Relays übereinstimmt."
+  },
+  "remoteStatusUntrusted": {
+    "message": "Dieses Relay konnte nicht nachweisen, dass es das Browser-Token kennt. Prüfen Sie die Adresse: Möglicherweise ist es nicht Ihr Relay."
+  },
+  "remoteAgentsHeading": {
+    "message": "Agenten verbinden"
+  },
+  "remoteAgentsHint": {
+    "message": "Geben Sie Agenten das Agent-Token des Relays, niemals das Browser-Token. Legen Sie es dort als $1 fest, wo der Agent läuft, und führen Sie dann dies aus, um das Relay Claude Code hinzuzufügen, oder fügen Sie das JSON der MCP-Konfiguration eines anderen Agenten hinzu."
   }
 }

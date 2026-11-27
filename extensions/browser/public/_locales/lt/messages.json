@@ -373,5 +373,29 @@
   },
   "remotePrivacy": {
     "message": "Nuotolinė prieiga įjungta: šis plėtinys taip pat jungiasi prie $1, kuris perduoda jūsų agentų užklausas ir šios naršyklės atsakymus, įskaitant skirtukų pavadinimus, URL ir puslapių turinį."
+  },
+  "remoteBrowserTokenLabel": {
+    "message": "Naršyklės raktas"
+  },
+  "remoteBrowserTokenHint": {
+    "message": "Perdavimo serverio naršyklės raktas, nustatytas kaip $1 ten, kur veikia serveris. Jis lieka šiame naršyklės profilyje: plėtinys įrodo, kad žino raktą, jo nesiųsdamas."
+  },
+  "remoteBrowserTokenInvalid": {
+    "message": "Raktą turi sudaryti bent 32 simboliai, be tarpų pradžioje ar pabaigoje."
+  },
+  "remoteStatusNoToken": {
+    "message": "Įveskite naršyklės raktą, kad prisijungtumėte."
+  },
+  "remoteStatusRejected": {
+    "message": "Perdavimo serveris nepriėmė šio naršyklės rakto. Patikrinkite, ar jis sutampa su perdavimo serverio naršyklės raktu."
+  },
+  "remoteStatusUntrusted": {
+    "message": "Šis perdavimo serveris negalėjo įrodyti, kad žino naršyklės raktą. Patikrinkite adresą: tai gali būti ne jūsų perdavimo serveris."
+  },
+  "remoteAgentsHeading": {
+    "message": "Prijunkite agentą"
+  },
+  "remoteAgentsHint": {
+    "message": "Agentams duokite perdavimo serverio agento raktą, niekada ne naršyklės raktą. Nustatykite jį kaip $1 ten, kur veikia agentas, tada paleiskite tai, kad pridėtumėte perdavimo serverį prie Claude Code, arba pridėkite JSON prie kito agento MCP konfigūracijos."
   }
 }

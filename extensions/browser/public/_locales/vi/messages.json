@@ -349,5 +349,29 @@
   },
   "remotePrivacy": {
     "message": "Truy cập từ xa đang bật: tiện ích này cũng kết nối với $1, nơi chuyển tiếp yêu cầu của tác nhân và phản hồi của trình duyệt này, bao gồm tiêu đề và URL của thẻ cũng như nội dung trang."
+  },
+  "remoteBrowserTokenLabel": {
+    "message": "Mã trình duyệt"
+  },
+  "remoteBrowserTokenHint": {
+    "message": "Mã trình duyệt của máy chủ chuyển tiếp, được đặt làm $1 ở nơi máy chủ chạy. Mã này chỉ nằm trong hồ sơ trình duyệt này: tiện ích chứng minh rằng mình biết mã mà không cần gửi mã đi."
+  },
+  "remoteBrowserTokenInvalid": {
+    "message": "Mã phải dài ít nhất 32 ký tự và không có khoảng trắng ở đầu hoặc cuối."
+  },
+  "remoteStatusNoToken": {
+    "message": "Nhập mã trình duyệt để kết nối."
+  },
+  "remoteStatusRejected": {
+    "message": "Máy chủ chuyển tiếp không chấp nhận mã trình duyệt này. Hãy kiểm tra xem mã có khớp với mã trình duyệt của máy chủ chuyển tiếp không."
+  },
+  "remoteStatusUntrusted": {
+    "message": "Máy chủ chuyển tiếp này không chứng minh được rằng nó biết mã trình duyệt. Hãy kiểm tra địa chỉ: đây có thể không phải máy chủ chuyển tiếp của bạn."
+  },
+  "remoteAgentsHeading": {
+    "message": "Kết nối tác nhân"
+  },
+  "remoteAgentsHint": {
+    "message": "Hãy cung cấp cho tác nhân mã tác nhân của máy chủ chuyển tiếp, tuyệt đối không dùng mã trình duyệt. Đặt mã làm $1 ở nơi tác nhân chạy, rồi chạy lệnh này để thêm máy chủ chuyển tiếp vào Claude Code, hoặc thêm JSON vào cấu hình MCP của tác nhân khác."
   }
 }

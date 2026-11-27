@@ -349,5 +349,29 @@
   },
   "remotePrivacy": {
     "message": "Akses jauh dihidupkan: sambungan ini juga berhubung dengan $1, yang menghantar permintaan ejen anda dan jawapan penyemak imbas ini, termasuk tajuk dan URL tab serta kandungan halaman."
+  },
+  "remoteBrowserTokenLabel": {
+    "message": "Token penyemak imbas"
+  },
+  "remoteBrowserTokenHint": {
+    "message": "Token penyemak imbas pelayan geganti, ditetapkan sebagai $1 di tempat pelayan itu berjalan. Token ini kekal dalam profil penyemak imbas ini: sambungan membuktikan bahawa ia mengetahui token itu tanpa menghantarnya."
+  },
+  "remoteBrowserTokenInvalid": {
+    "message": "Token mestilah sekurang-kurangnya 32 aksara, tanpa ruang di awal atau di hujung."
+  },
+  "remoteStatusNoToken": {
+    "message": "Masukkan token penyemak imbas untuk menyambung."
+  },
+  "remoteStatusRejected": {
+    "message": "Pelayan geganti tidak menerima token penyemak imbas ini. Pastikan token ini sepadan dengan token penyemak imbas pelayan geganti."
+  },
+  "remoteStatusUntrusted": {
+    "message": "Pelayan geganti ini tidak dapat membuktikan bahawa ia mengetahui token penyemak imbas. Semak alamat: ini mungkin bukan pelayan geganti anda."
+  },
+  "remoteAgentsHeading": {
+    "message": "Sambungkan ejen"
+  },
+  "remoteAgentsHint": {
+    "message": "Berikan ejen token ejen pelayan geganti, jangan sekali-kali token penyemak imbas. Tetapkannya sebagai $1 di tempat ejen berjalan, kemudian jalankan ini untuk menambahkan pelayan geganti pada Claude Code, atau tambahkan JSON pada konfigurasi MCP ejen lain."
   }
 }

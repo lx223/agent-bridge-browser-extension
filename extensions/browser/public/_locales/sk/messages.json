@@ -373,5 +373,29 @@
   },
   "remotePrivacy": {
     "message": "Vzdialený prístup je zapnutý: toto rozšírenie sa pripája aj k $1, ktorý odovzdáva požiadavky vašich agentov a odpovede tohto prehliadača vrátane názvov a webových adries kariet a obsahu stránok."
+  },
+  "remoteBrowserTokenLabel": {
+    "message": "Token prehliadača"
+  },
+  "remoteBrowserTokenHint": {
+    "message": "Token prehliadača prenosového servera, nastavený ako $1 tam, kde server beží. Zostáva v tomto profile prehliadača: rozšírenie dokazuje, že token pozná, bez toho, aby ho odoslalo."
+  },
+  "remoteBrowserTokenInvalid": {
+    "message": "Token musí mať aspoň 32 znakov a nesmie začínať ani končiť medzerou."
+  },
+  "remoteStatusNoToken": {
+    "message": "Na pripojenie zadajte token prehliadača."
+  },
+  "remoteStatusRejected": {
+    "message": "Prenosový server tento token prehliadača neprijal. Skontrolujte, či sa zhoduje s tokenom prehliadača prenosového servera."
+  },
+  "remoteStatusUntrusted": {
+    "message": "Tento prenosový server nedokázal preukázať, že pozná token prehliadača. Skontrolujte adresu: nemusí ísť o váš prenosový server."
+  },
+  "remoteAgentsHeading": {
+    "message": "Pripojiť agenta"
+  },
+  "remoteAgentsHint": {
+    "message": "Agentom dávajte token agenta prenosového servera, nikdy nie token prehliadača. Nastavte ho ako $1 tam, kde agent beží, a potom spustite toto, aby ste prenosový server pridali do Claude Code, alebo pridajte JSON do konfigurácie MCP iného agenta."
   }
 }

@@ -349,5 +349,29 @@
   },
   "remotePrivacy": {
     "message": "Uzaktan erişim açık: Bu uzantı ayrıca $1 adresine bağlanır. Bu sunucu, ajanlarınızın isteklerini ve bu tarayıcının yanıtlarını iletir; buna sekme başlıkları, URL'ler ve sayfa içerikleri dahildir."
+  },
+  "remoteBrowserTokenLabel": {
+    "message": "Tarayıcı belirteci"
+  },
+  "remoteBrowserTokenHint": {
+    "message": "Aktarma sunucusunun tarayıcı belirteci; sunucunun çalıştığı yerde $1 olarak ayarlanır. Bu tarayıcı profilinde kalır: Uzantı, belirteci göndermeden onu bildiğini kanıtlar."
+  },
+  "remoteBrowserTokenInvalid": {
+    "message": "Belirteç en az 32 karakter uzunluğunda olmalı ve başında veya sonunda boşluk bulunmamalıdır."
+  },
+  "remoteStatusNoToken": {
+    "message": "Bağlanmak için tarayıcı belirtecini girin."
+  },
+  "remoteStatusRejected": {
+    "message": "Aktarma sunucusu bu tarayıcı belirtecini kabul etmedi. Aktarma sunucusunun tarayıcı belirteciyle eşleştiğini kontrol edin."
+  },
+  "remoteStatusUntrusted": {
+    "message": "Bu aktarma sunucusu tarayıcı belirtecini bildiğini kanıtlayamadı. Adresi kontrol edin: Sizin aktarma sunucunuz olmayabilir."
+  },
+  "remoteAgentsHeading": {
+    "message": "Ajan bağlama"
+  },
+  "remoteAgentsHint": {
+    "message": "Ajanlara aktarma sunucusunun ajan belirtecini verin, asla tarayıcı belirtecini vermeyin. Ajanın çalıştığı yerde bunu $1 olarak ayarlayın, ardından aktarma sunucusunu Claude Code'a eklemek için bunu çalıştırın veya JSON'u başka bir ajanın MCP yapılandırmasına ekleyin."
   }
 }

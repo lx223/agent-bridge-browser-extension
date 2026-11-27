@@ -349,5 +349,29 @@
   },
   "remotePrivacy": {
     "message": "Externe toegang staat aan: deze extensie maakt ook verbinding met $1, dat de verzoeken van je agents en de antwoorden van deze browser doorstuurt, inclusief titels en URL's van tabbladen en pagina-inhoud."
+  },
+  "remoteBrowserTokenLabel": {
+    "message": "Browsertoken"
+  },
+  "remoteBrowserTokenHint": {
+    "message": "Het browsertoken van de relay, ingesteld als $1 waar de relay draait. Het blijft in dit browserprofiel: de extensie bewijst dat ze het token kent zonder het te verzenden."
+  },
+  "remoteBrowserTokenInvalid": {
+    "message": "Het token moet minstens 32 tekens lang zijn, zonder spaties aan het begin of eind."
+  },
+  "remoteStatusNoToken": {
+    "message": "Voer het browsertoken in om verbinding te maken."
+  },
+  "remoteStatusRejected": {
+    "message": "De relay heeft dit browsertoken niet geaccepteerd. Controleer of het overeenkomt met het browsertoken van de relay."
+  },
+  "remoteStatusUntrusted": {
+    "message": "Deze relay kon niet bewijzen dat hij het browsertoken kent. Controleer het adres: het is misschien niet jouw relay."
+  },
+  "remoteAgentsHeading": {
+    "message": "Een agent verbinden"
+  },
+  "remoteAgentsHint": {
+    "message": "Geef agents het agenttoken van de relay, nooit het browsertoken. Stel het in als $1 waar de agent draait en voer dan dit uit om de relay aan Claude Code toe te voegen, of voeg de JSON toe aan de MCP-configuratie van een andere agent."
   }
 }
