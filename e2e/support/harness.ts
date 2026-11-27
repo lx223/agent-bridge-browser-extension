@@ -15,6 +15,7 @@ export const EXTENSION_DIST = join(EXTENSION_ROOT, 'dist');
 const SERVER_ENTRY = resolve(ROOT, process.env.E2E_SERVER_ENTRY ?? 'packages/server/dist/index.js');
 export const SERVER_RUNS_LAUNCHER = process.env.E2E_SERVER_ENTRY === undefined;
 const FIXTURES = join(import.meta.dirname, 'fixtures');
+export const OTHER_EXTENSION = join(import.meta.dirname, 'otherExtension');
 const CONNECT_TIMEOUT_MS = 30_000;
 export const LOCAL_ONLY = '--host-resolver-rules=MAP * ~NOTFOUND, EXCLUDE 127.0.0.1';
 
@@ -230,6 +231,7 @@ export interface Harness {
 export interface HarnessOptions {
   locale?: string;
   deviceScaleFactor?: number;
+  otherExtensions?: string[];
   colorScheme?: 'light' | 'dark';
   agentName?: string;
   agentVersion?: string;
@@ -238,6 +240,7 @@ export interface HarnessOptions {
 const removeProfile = (profile: string) => rmSync(profile, { recursive: true, force: true, maxRetries: 10, retryDelay: 200 });
 
 async function launchProfile(extensionDir: string, options: HarnessOptions): Promise<BrowserProfile> {
+  const extensions = [extensionDir, ...(options.otherExtensions ?? [])].join(',');
   const profile = mkdtempSync(join(tmpdir(), 'agent-browser-bridge-e2e-'));
   try {
     const context = await chromium.launchPersistentContext(profile, {
@@ -247,8 +250,8 @@ async function launchProfile(extensionDir: string, options: HarnessOptions): Pro
       deviceScaleFactor: options.deviceScaleFactor,
       colorScheme: options.colorScheme,
       args: [
-        `--disable-extensions-except=${extensionDir}`,
-        `--load-extension=${extensionDir}`,
+        `--disable-extensions-except=${extensions}`,
+        `--load-extension=${extensions}`,
         LOCAL_ONLY,
         '--enable-features=WebMCP',
         ...(options.locale ? [`--lang=${options.locale}`] : []),

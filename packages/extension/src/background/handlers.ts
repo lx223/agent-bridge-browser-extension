@@ -9,6 +9,7 @@ import {
 import { instanceId, saveInstanceName } from './browser.ts';
 import { toChromeColor } from './color.ts';
 import { navigateTab, normalizeUrl, openTab } from './navigation.ts';
+import { puttingBackOtherExtensionFrames } from './otherExtensionFrames.ts';
 import {
   cdpDetach,
   cdpSend,
@@ -193,18 +194,18 @@ export const handlers: Handlers = {
   'tabs.create': openTab,
   'tabs.navigate': navigateTab,
   'tabs.waitFor': waitForTab,
-  'page.snapshot': snapshot,
-  'page.click': click,
-  'page.hover': hover,
-  'page.type': typeText,
-  'page.pressKey': pressKeyHandler,
-  'page.scroll': scroll,
-  'page.screenshot': screenshot,
-  'page.waitFor': waitFor,
-  'page.evaluate': evaluateHandler,
+  'page.snapshot': puttingBackOtherExtensionFrames(snapshot),
+  'page.click': puttingBackOtherExtensionFrames(click),
+  'page.hover': puttingBackOtherExtensionFrames(hover),
+  'page.type': puttingBackOtherExtensionFrames(typeText),
+  'page.pressKey': puttingBackOtherExtensionFrames(pressKeyHandler),
+  'page.scroll': puttingBackOtherExtensionFrames(scroll),
+  'page.screenshot': puttingBackOtherExtensionFrames(screenshot),
+  'page.waitFor': puttingBackOtherExtensionFrames(waitFor),
+  'page.evaluate': puttingBackOtherExtensionFrames(evaluateHandler),
   'page.listTools': listPageTools,
   'page.callTool': callPageTool,
-  'cdp.send': cdpSend,
+  'cdp.send': puttingBackOtherExtensionFrames(cdpSend),
   'cdp.detach': cdpDetach,
 };
 

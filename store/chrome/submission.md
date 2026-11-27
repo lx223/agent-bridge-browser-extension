@@ -140,6 +140,10 @@ No extension account is required. Use Chrome 116 or later and Node.js 20 or late
 
 Page control cannot operate on chrome:// pages, extension pages, DevTools or the Chrome Web Store. WebMCP tools require a page that registers them and a Chrome build with WebMCP enabled; they are not required for ordinary page inspection or clicks.
 
+### scripting and host permissions (<all_urls>)
+
+Some extensions, such as password managers, put their own frames into web pages. While such a frame is in a tab, Chrome refuses every debugger command for that tab, so page snapshots, screenshots and clicks fail. The extension uses scripting to set those frames aside for the length of a page tool call the user's agent makes, and puts them back right after. Host permissions are needed because page tools work on whatever site the user asks about. They add no new install warning, because the debugger permission already shows "Read and change all your data on all websites".
+
 ## Permission Audit
 
 | Permission | Active use | Why narrower access is insufficient |
@@ -158,3 +162,4 @@ Page control cannot operate on chrome:// pages, extension pages, DevTools or the
 | sidePanel | Shows the chat panel for talking to the connected agent. | A tab or popup would cover the page the user is working on, or close as soon as they click it. |
 | alarms | Wakes the service worker periodically to reconnect the local bridge. | Ordinary worker timers do not survive suspension. |
 | debugger | Attaches the DevTools Protocol for page snapshots, screenshots, interactions, evaluation, navigation fallback and WebMCP tools. | tabs and tabGroups APIs cannot inspect or operate page contents. |
+| scripting, <all_urls> | Sets aside frames other extensions put into a page while a page tool runs, so Chrome lets the debugger work, then puts them back. | Chrome refuses the debugger for the whole tab while another extension's frame is in it, and activeTab needs a user gesture the agent cannot give. |
