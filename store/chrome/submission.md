@@ -95,7 +95,7 @@ The debugger permission enables Chrome DevTools Protocol access to tabs for brow
 
 ## Remote Code
 
-Extension scripts and dependencies are bundled in the package. PostHog is used for event ingestion, not to download executable code. Page-control tools can evaluate agent-supplied JavaScript in a target page and invoke page-provided WebMCP tools; disclose this distinction if the reviewer asks about dynamic execution.
+Extension scripts and dependencies are bundled in the package. PostHog is used for event ingestion, not to download executable code. Page-control and scripting tools can evaluate agent-supplied JavaScript in a target page and invoke page-provided WebMCP tools; disclose this distinction if the reviewer asks about dynamic execution.
 
 ## Data Usage Disclosures
 
@@ -142,7 +142,7 @@ Page control cannot operate on chrome:// pages, extension pages, DevTools or the
 
 ### scripting and host permissions (<all_urls>)
 
-Some extensions, such as password managers, put their own frames into web pages. While such a frame is in a tab, Chrome refuses every debugger command for that tab, so page snapshots, screenshots and clicks fail. The extension uses scripting to set those frames aside for the length of a page tool call the user's agent makes, and puts them back right after. Host permissions are needed because page tools work on whatever site the user asks about. They add no new install warning, because the debugger permission already shows "Read and change all your data on all websites".
+Run JavaScript the user's agent sends in a tab, through chrome.scripting instead of the debugger. Chrome refuses the debugger in a tab while another extension, such as a password manager, has a frame in the page, and this lets the agent still read or change that page. Host permissions are needed because the agent works on whatever site the user asks about. They add no new install warning, because the debugger permission already shows "Read and change all your data on all websites".
 
 ## Permission Audit
 
@@ -162,4 +162,4 @@ Some extensions, such as password managers, put their own frames into web pages.
 | sidePanel | Shows the chat panel for talking to the connected agent. | A tab or popup would cover the page the user is working on, or close as soon as they click it. |
 | alarms | Wakes the service worker periodically to reconnect the local bridge. | Ordinary worker timers do not survive suspension. |
 | debugger | Attaches the DevTools Protocol for page snapshots, screenshots, interactions, evaluation, navigation fallback and WebMCP tools. | tabs and tabGroups APIs cannot inspect or operate page contents. |
-| scripting, <all_urls> | Sets aside frames other extensions put into a page while a page tool runs, so Chrome lets the debugger work, then puts them back. | Chrome refuses the debugger for the whole tab while another extension's frame is in it, and activeTab needs a user gesture the agent cannot give. |
+| scripting, <all_urls> | Runs agent-supplied JavaScript in a tab without the debugger. | Chrome refuses the debugger in tabs that hold another extension's frame, and activeTab needs a user gesture the agent cannot give. |

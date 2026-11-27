@@ -479,6 +479,17 @@ export const toolDefinitions = {
     readOnly: false,
     destructive: true,
   },
+  'scripting.executeScript': {
+    description:
+      'Run JavaScript in a tab with chrome.scripting instead of the debugger, in the page\'s main world, and return the value of its last expression from each frame as [{frameId, result}], or [{frameId, error}] when the code throws. Promises are awaited and results must be JSON-serialisable. It runs with the page\'s privileges and fails where the page\'s Content Security Policy forbids eval. It works in tabs where Chrome refuses the debugger, such as when another extension has put a frame in the page.',
+    params: z.object({
+      tabId,
+      code: z.string().min(1),
+      allFrames: z.boolean().default(false).describe('Run in every frame the extension can access instead of only the top frame.'),
+    }),
+    readOnly: false,
+    destructive: true,
+  },
   'cdp.send': {
     description:
       'Send a raw Chrome DevTools Protocol command to a tab, e.g. method "Network.getCookies". Use only when no other tool fits.',

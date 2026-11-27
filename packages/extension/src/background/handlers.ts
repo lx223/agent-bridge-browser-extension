@@ -9,7 +9,6 @@ import {
 import { instanceId, saveInstanceName } from './browser.ts';
 import { toChromeColor } from './color.ts';
 import { navigateTab, normalizeUrl, openTab } from './navigation.ts';
-import { puttingBackOtherExtensionFrames } from './otherExtensionFrames.ts';
 import {
   cdpDetach,
   cdpSend,
@@ -24,6 +23,7 @@ import {
   waitFor,
 } from './page.ts';
 import { callPageTool, listPageTools } from './pageTools.ts';
+import { executeScript } from './scripting.ts';
 import { applyPlan, undoLastPlan } from './plan.ts';
 import { serializeDevice, serializeGroup, serializeSession, serializeTab, serializeWindow, serializeWindowWithTabs } from './serialize.ts';
 import { waitForTab } from './tabWait.ts';
@@ -194,18 +194,19 @@ export const handlers: Handlers = {
   'tabs.create': openTab,
   'tabs.navigate': navigateTab,
   'tabs.waitFor': waitForTab,
-  'page.snapshot': puttingBackOtherExtensionFrames(snapshot),
-  'page.click': puttingBackOtherExtensionFrames(click),
-  'page.hover': puttingBackOtherExtensionFrames(hover),
-  'page.type': puttingBackOtherExtensionFrames(typeText),
-  'page.pressKey': puttingBackOtherExtensionFrames(pressKeyHandler),
-  'page.scroll': puttingBackOtherExtensionFrames(scroll),
-  'page.screenshot': puttingBackOtherExtensionFrames(screenshot),
-  'page.waitFor': puttingBackOtherExtensionFrames(waitFor),
-  'page.evaluate': puttingBackOtherExtensionFrames(evaluateHandler),
+  'page.snapshot': snapshot,
+  'page.click': click,
+  'page.hover': hover,
+  'page.type': typeText,
+  'page.pressKey': pressKeyHandler,
+  'page.scroll': scroll,
+  'page.screenshot': screenshot,
+  'page.waitFor': waitFor,
+  'page.evaluate': evaluateHandler,
   'page.listTools': listPageTools,
   'page.callTool': callPageTool,
-  'cdp.send': puttingBackOtherExtensionFrames(cdpSend),
+  'scripting.executeScript': executeScript,
+  'cdp.send': cdpSend,
   'cdp.detach': cdpDetach,
 };
 
